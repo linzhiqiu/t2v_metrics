@@ -24,7 +24,7 @@ pip install torch torchvision torchaudio
 pip install -e .
 ```
 
-Run `pip install t2i_metrics`. The following Python code is all you need. 
+(not yet implemented) Run `pip install t2i_metrics`. The following Python code is all you need. 
 
 ```python
 import t2i_metrics
