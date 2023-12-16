@@ -15,13 +15,13 @@ TODO:
 
 ### Quick start
 
-**I haven't set up the pip package yet!! Please follow the steps below first to install environment**:
+**I haven't push the pip package to public yet!! Please follow the steps below first to install environment in local development mode**:
 ```
 conda create -n t2i python=3.10 -y
 conda activate t2i
 conda install pip -y
 pip install torch torchvision torchaudio
-pip install -r requirements.txt
+pip install -e .
 ```
 
 Run `pip install t2i_metrics`. The following Python code is all you need. 
