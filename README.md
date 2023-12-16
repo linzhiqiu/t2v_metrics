@@ -28,20 +28,20 @@ Run `pip install t2i_metrics`. The following Python code is all you need.
 
 ```python
 import t2i_metrics
-score_func_clip_flant5 = t2i_metrics.VQAScore(model='clip-flant5-xxl') # CLIP-FlanT5 is our best scoring metric
-score_func_llava = t2i_metrics.VQAScore(model='llava-v1.5-13b') # LLaVA-1.5 is the second best
-score_func_clip = t2i_metrics.CLIPScore(model='openai:ViT-L-14') # we include clipscore for easier ablation
+clip_flant5_score = t2i_metrics.VQAScore(model='clip-flant5-xxl') # CLIP-FlanT5 is our best scoring metric
+llava_score = t2i_metrics.VQAScore(model='llava-v1.5-13b') # LLaVA-1.5 is the second best
+clip_score = t2i_metrics.CLIPScore(model='openai:ViT-L-14') # we include clipscore for easier ablation
 
 # For a single (image, text) pair
 image = "images/test0.jpg" # an image path in string format
 text = "a young person kisses an old person"
-score = score_func_clip_flant5(images=[image], texts=[text])
+score = clip_flant5_score(images=[image], texts=[text])
 
 # Alternatively, if you want to calculate the pairwise similarity scores 
 # between M images and N texts, run the following to return a M x N score tensor.
 images = ["images/test0.jpg", "images/test1.jpg"]
 texts = ["an old person kisses a young person", "a young person kisses an old person"]
-scores = score_func_clip_flant5(images=images, texts=texts) # scores[i][j] is the score between image i and text j
+scores = clip_flant5_score(images=images, texts=texts) # scores[i][j] is the score between image i and text j
 ```
 
 ### Notes on GPU and cache
@@ -58,7 +58,7 @@ pip install -e .
 While the above script can be applied to most scenarios, if you have a large dataset of M images x N texts, then you can optionally speed up inference using the following batch processing script. 
 ```python
 import t2i_metrics
-score_func_clip_flant5 = t2i_metrics.VQAScore(model='clip-flant5-xxl')
+clip_flant5_score = t2i_metrics.VQAScore(model='clip-flant5-xxl')
 
 # Each dictionary must have the same number of images and texts
 dataset = [
@@ -66,7 +66,7 @@ dataset = [
   {'images': ["images/test0.jpg", "images/test1.jpg"], 'texts': ["an old person kissing a young person", "a young person kissing an old person"]},
   #...
 ]
-scores = score_func_clip_flant5.batch_forward(dataset=dataset, batch_size=16) # will return n_data x 2 x 2 score tensor
+scores = clip_flant5_score.batch_forward(dataset=dataset, batch_size=16) # will return n_data x 2 x 2 score tensor
 
 # Each dictionary must have the same number of images and texts
 dataset = [
@@ -74,7 +74,7 @@ dataset = [
   {'images': ["images/sdxl_1.jpg", "images/dalle3_1.jpg", "images/deepfloyd_1.jpg", "images/imagen2_1.jpg"], 'texts': ["a young person kissing an old person"]},
   #...
 ]
-scores = score_func_clip_flant5.batch_forward(dataset=dataset, batch_size=16) # will return n_data x 4 x 1 score tensor
+scores = clip_flant5_score.batch_forward(dataset=dataset, batch_size=16) # will return n_data x 4 x 1 score tensor
 ```
 
 ### Advanced usage: Specifying your own question and answer 
@@ -95,7 +95,7 @@ answer_template = "Yes"
 
 images = ["images/test0.jpg", "images/test1.jpg"]
 texts = ["an old person kisses a young person", "a young person kisses an old person"]
-scores = score_func_clip_flant5(images=images, texts=texts,
+scores = clip_flant5_score(images=images, texts=texts,
                                 question_template=question_template,
                                 answer_template=answer_template)
 
@@ -108,7 +108,7 @@ dataset = [
   {'images': ["images/sdxl_1.jpg", "images/dalle3_1.jpg", "images/deepfloyd_1.jpg", "images/imagen2_1.jpg"], 'texts': ["a young person kissing an old person"]},
   #...
 ]
-scores = score_func_clip_flant5.batch_forward(dataset=dataset,
+scores = clip_flant5_score.batch_forward(dataset=dataset,
                                               batch_size=16,
                                               question_template=vgpt_question_template,
                                               answer_template=vgpt_answer_template)
