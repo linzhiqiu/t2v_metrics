@@ -1,10 +1,10 @@
 [build-system]
-requires = ["setuptools>=61.0", "wheel"]
+requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "t2i_metric"
-version = "0.0.0"
+version = "1.0"
 description = "Automatic Text-To-Image Faithfulness Evaluation."
 authors = [
     {name="Zhiqiu Lin", email="zl279@cornell.edu"},
@@ -16,23 +16,25 @@ classifiers = [
     "License :: OSI Approved :: Apache Software License",
 ]
 dependencies = [
-    "torch==2.0.1", "torchvision==0.15.2",
-    "transformers==4.31.0", "tokenizers>=0.12.1,<0.14", "sentencepiece==0.1.99", "shortuuid",
-    "accelerate==0.21.0", "peft==0.4.0", "bitsandbytes==0.41.0",
-    "pydantic<2,>=1", "markdown2[all]", "numpy", "scikit-learn==1.2.2",
-    "gradio==3.35.2", "gradio_client==0.2.9",
-    "requests", "httpx==0.24.0", "uvicorn", "fastapi",
-    "einops==0.6.1", "einops-exts==0.0.4", "timm==0.6.13",
+    "ftfy>=6.1.1",
+    "tqdm>=4.64.1",
+    "gdown>=4.7.1",
+    "huggingface-hub>=0.19.4",
+    "matplotlib>=3.6.2",
+    "numpy>=1.26.2",
+    "open-clip-torch>=2.23.0",
+    "openai>=1.4.0",
+    "opencv-python>=4.6.0.66",
+    "opencv-python-headless>=4.8.1.78",
+    "pandas>=2.1.4",
+    "scipy>=1.11.4",
+    "sentencepiece>=0.1.99",
+    "transformers>=4.36.1",
+    "datasets>=2.15.0",
 ]
-
-[project.optional-dependencies]
-train = ["deepspeed==0.9.5", "ninja", "wandb"]
-
-[project.urls]
-Home = "https://linzhiqiu.github.io/vqascore"
 
 [tool.setuptools]
-packages = ["t2i_metric"]
-install_requires = [
-    # list your package dependencies here
-]
+packages = ["t2i_metrics"]
+
+[project.urls]
+Home = "https://linzhiqiu.github.io/papers/vqascore"
