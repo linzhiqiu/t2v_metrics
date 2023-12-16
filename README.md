@@ -81,6 +81,7 @@ scores = score_func_clip_flant5.batch_forward(dataset=dataset, batch_size=16) # 
 For VQAScore, the question and answer can affect the final performance. We provide a simple default template for each model by default. For example, CLIP-FlanT5 and LLaVA-1.5 uses the below template which can be found at [t2i_metrics/models/vqascore_models/clip_t5_model.py](t2i_metrics/models/vqascore_models/clip_t5_model.py) (we ignored the prepended system message for simplicity):
 
 ```python
+# {} will be replaced by the caption
 default_question_template = "Is the image showing '{}'? Please answer yes or no."
 default_answer_template = "Yes"
 ```
