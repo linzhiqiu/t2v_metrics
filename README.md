@@ -1,10 +1,11 @@
 
-## Perceptual Similarity Metric and Dataset [[Project Page]](http://richzhang.github.io/PerceptualSimilarity/)
+## **VQAScore for Text-to-Image Evaluation**  [[Project Page]](https://linzhiqiu.github.io/papers/vqascore/)
 
-
-1. show vqa score usage
-2. show how to use it to evaluate on downstream tasks
-3. (advanced) how to add your own models
+TODO:
+1. pip install
+2. evaluate on Winoground
+3. advanced tutorial on how to add your own models
+4. pick better teaser images because VQAScore still fail on first Winoground sample
 
 
 ## **VQAScore for Text-to-Image Evaluation**  
@@ -14,8 +15,7 @@
 
 ### Quick start
 
-Run `pip install t2i_metrics`. The following Python code is all you need. **I haven't set up the pip package yet!! Please follow the steps below first to install environment**:
-
+**I haven't set up the pip package yet!! Please follow the steps below first to install environment**:
 ```
 conda create -n t2i python=3.10 -y
 conda activate t2i
@@ -23,6 +23,8 @@ conda install pip -y
 pip install torch torchvision torchaudio
 pip install -r requirements.txt
 ```
+
+Run `pip install t2i_metrics`. The following Python code is all you need. 
 
 ```python
 import t2i_metrics
@@ -51,6 +53,65 @@ scores = score_func_clip_flant5(images=images, texts=texts) # scores[i][j] is th
 pip install -e .
 ```
 
+
+### Batch processing for massive image-text pairs
+While the above script can be applied to most scenarios, if you have a large dataset of M images x N texts, then you can optionally speed up inference using the following batch processing script. 
+```python
+import t2i_metrics
+score_func_clip_flant5 = t2i_metrics.VQAScore(model='clip-flant5-xxl')
+
+# Each dictionary must have the same number of images and texts
+dataset = [
+  {'images': ["images/test0.jpg", "images/test1.jpg"], 'texts': ["an old person kisses a young person", "a young person kisses an old person"]},
+  {'images': ["images/test0.jpg", "images/test1.jpg"], 'texts': ["an old person kissing a young person", "a young person kissing an old person"]},
+  #...
+]
+scores = score_func_clip_flant5.batch_forward(dataset=dataset, batch_size=16) # will return n_data x 2 x 2 score tensor
+
+# Each dictionary must have the same number of images and texts
+dataset = [
+  {'images': ["images/sdxl_0.jpg", "images/dalle3_0.jpg", "images/deepfloyd_0.jpg", "images/imagen2_0.jpg"], 'texts': ["an old person kisses a young person"]},
+  {'images': ["images/sdxl_1.jpg", "images/dalle3_1.jpg", "images/deepfloyd_1.jpg", "images/imagen2_1.jpg"], 'texts': ["a young person kissing an old person"]},
+  #...
+]
+scores = score_func_clip_flant5.batch_forward(dataset=dataset, batch_size=16) # will return n_data x 4 x 1 score tensor
+```
+
+### Advanced usage: Specifying your own question and answer 
+For VQAScore, the question and answer can affect the final performance. We provide a simple default template for each model by default. For example, CLIP-FlanT5 and LLaVA-1.5 uses the below template which can be found at [t2i_metrics/models/vqascore_models/clip_t5_model.py](t2i_metrics/models/vqascore_models/clip_t5_model.py) (we ignored the prepended system message for simplicity):
+
+```python
+default_question_template = "Is the image showing '{}'? Please answer yes or no."
+default_answer_template = "Yes"
+```
+
+You can specify your own template by passing in `question_template` and `answer_template` to `forward()` or `batch_forward()` function:
+
+```python
+# An alternative template for VQAScore
+question_template = "Does the image show '{}'? Please answer yes or no."
+answer_template = "Yes"
+
+images = ["images/test0.jpg", "images/test1.jpg"]
+texts = ["an old person kisses a young person", "a young person kisses an old person"]
+scores = score_func_clip_flant5(images=images, texts=texts,
+                                question_template=question_template,
+                                answer_template=answer_template)
+
+# If you want to instead compute P(caption|image) (VisualGPTScore), then you can use the below template
+vgpt_question_template = "" # no question
+vgpt_answer_template = "{}" # simply calculate the P(caption)
+
+dataset = [
+  {'images': ["images/sdxl_0.jpg", "images/dalle3_0.jpg", "images/deepfloyd_0.jpg", "images/imagen2_0.jpg"], 'texts': ["an old person kisses a young person"]},
+  {'images': ["images/sdxl_1.jpg", "images/dalle3_1.jpg", "images/deepfloyd_1.jpg", "images/imagen2_1.jpg"], 'texts': ["a young person kissing an old person"]},
+  #...
+]
+scores = score_func_clip_flant5.batch_forward(dataset=dataset,
+                                              batch_size=16,
+                                              question_template=vgpt_question_template,
+                                              answer_template=vgpt_answer_template)
+```
 
 # TODO: Update below
 More thorough information about variants is below. This repository contains our **perceptual metric (LPIPS)** and **dataset (BAPPS)**. It can also be used as a "perceptual loss". This uses PyTorch; a Tensorflow alternative is [here](https://github.com/alexlee-gk/lpips-tensorflow).

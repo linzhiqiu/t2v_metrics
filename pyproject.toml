@@ -31,8 +31,8 @@ train = ["deepspeed==0.9.5", "ninja", "wandb"]
 [project.urls]
 Home = "https://linzhiqiu.github.io/vqascore"
 
-[tool.setuptools.packages.find]
-exclude = ["assets*", "benchmark*", "docs", "dist*", "playground*", "scripts*", "tests*"]
-
-[tool.wheel]
-exclude = ["assets*", "benchmark*", "docs", "dist*", "playground*", "scripts*", "tests*"]
+[tool.setuptools]
+packages = ["t2i_metric"]
+install_requires = [
+    # list your package dependencies here
+]
