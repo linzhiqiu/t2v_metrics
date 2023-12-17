@@ -1,0 +1,4002 @@
+{
+    "coco_669925_mini_dalle": {
+        "text_id": "coco_669925",
+        "image_path": "coco_669925_mini_dalle.jpg",
+        "text": "A Christmas tree with lights and teddy bear"
+    },
+    "coco_669925_stable_diffusion_v1_1": {
+        "text_id": "coco_669925",
+        "image_path": "coco_669925_stable_diffusion_v1_1.jpg",
+        "text": "A Christmas tree with lights and teddy bear"
+    },
+    "coco_669925_stable_diffusion_v1_5": {
+        "text_id": "coco_669925",
+        "image_path": "coco_669925_stable_diffusion_v1_5.jpg",
+        "text": "A Christmas tree with lights and teddy bear"
+    },
+    "coco_669925_stable_diffusion_v2_1": {
+        "text_id": "coco_669925",
+        "image_path": "coco_669925_stable_diffusion_v2_1.jpg",
+        "text": "A Christmas tree with lights and teddy bear"
+    },
+    "coco_669925_vq_diffusion": {
+        "text_id": "coco_669925",
+        "image_path": "coco_669925_vq_diffusion.jpg",
+        "text": "A Christmas tree with lights and teddy bear"
+    },
+    "coco_325049_mini_dalle": {
+        "text_id": "coco_325049",
+        "image_path": "coco_325049_mini_dalle.jpg",
+        "text": "A group of planes near a large wall of windows."
+    },
+    "coco_325049_stable_diffusion_v1_1": {
+        "text_id": "coco_325049",
+        "image_path": "coco_325049_stable_diffusion_v1_1.jpg",
+        "text": "A group of planes near a large wall of windows."
+    },
+    "coco_325049_stable_diffusion_v1_5": {
+        "text_id": "coco_325049",
+        "image_path": "coco_325049_stable_diffusion_v1_5.jpg",
+        "text": "A group of planes near a large wall of windows."
+    },
+    "coco_325049_stable_diffusion_v2_1": {
+        "text_id": "coco_325049",
+        "image_path": "coco_325049_stable_diffusion_v2_1.jpg",
+        "text": "A group of planes near a large wall of windows."
+    },
+    "coco_325049_vq_diffusion": {
+        "text_id": "coco_325049",
+        "image_path": "coco_325049_vq_diffusion.jpg",
+        "text": "A group of planes near a large wall of windows."
+    },
+    "coco_549140_mini_dalle": {
+        "text_id": "coco_549140",
+        "image_path": "coco_549140_mini_dalle.jpg",
+        "text": "A brown bear walking across a forest surrounded by trees.."
+    },
+    "coco_549140_stable_diffusion_v1_1": {
+        "text_id": "coco_549140",
+        "image_path": "coco_549140_stable_diffusion_v1_1.jpg",
+        "text": "A brown bear walking across a forest surrounded by trees.."
+    },
+    "coco_549140_stable_diffusion_v1_5": {
+        "text_id": "coco_549140",
+        "image_path": "coco_549140_stable_diffusion_v1_5.jpg",
+        "text": "A brown bear walking across a forest surrounded by trees.."
+    },
+    "coco_549140_stable_diffusion_v2_1": {
+        "text_id": "coco_549140",
+        "image_path": "coco_549140_stable_diffusion_v2_1.jpg",
+        "text": "A brown bear walking across a forest surrounded by trees.."
+    },
+    "coco_549140_vq_diffusion": {
+        "text_id": "coco_549140",
+        "image_path": "coco_549140_vq_diffusion.jpg",
+        "text": "A brown bear walking across a forest surrounded by trees.."
+    },
+    "coco_483317_mini_dalle": {
+        "text_id": "coco_483317",
+        "image_path": "coco_483317_mini_dalle.jpg",
+        "text": "A large motorcycle that is sitting outside of a building."
+    },
+    "coco_483317_stable_diffusion_v1_1": {
+        "text_id": "coco_483317",
+        "image_path": "coco_483317_stable_diffusion_v1_1.jpg",
+        "text": "A large motorcycle that is sitting outside of a building."
+    },
+    "coco_483317_stable_diffusion_v1_5": {
+        "text_id": "coco_483317",
+        "image_path": "coco_483317_stable_diffusion_v1_5.jpg",
+        "text": "A large motorcycle that is sitting outside of a building."
+    },
+    "coco_483317_stable_diffusion_v2_1": {
+        "text_id": "coco_483317",
+        "image_path": "coco_483317_stable_diffusion_v2_1.jpg",
+        "text": "A large motorcycle that is sitting outside of a building."
+    },
+    "coco_483317_vq_diffusion": {
+        "text_id": "coco_483317",
+        "image_path": "coco_483317_vq_diffusion.jpg",
+        "text": "A large motorcycle that is sitting outside of a building."
+    },
+    "coco_361740_mini_dalle": {
+        "text_id": "coco_361740",
+        "image_path": "coco_361740_mini_dalle.jpg",
+        "text": "A male skateboarder is trying to pull off a trick on the ramp."
+    },
+    "coco_361740_stable_diffusion_v1_1": {
+        "text_id": "coco_361740",
+        "image_path": "coco_361740_stable_diffusion_v1_1.jpg",
+        "text": "A male skateboarder is trying to pull off a trick on the ramp."
+    },
+    "coco_361740_stable_diffusion_v1_5": {
+        "text_id": "coco_361740",
+        "image_path": "coco_361740_stable_diffusion_v1_5.jpg",
+        "text": "A male skateboarder is trying to pull off a trick on the ramp."
+    },
+    "coco_361740_stable_diffusion_v2_1": {
+        "text_id": "coco_361740",
+        "image_path": "coco_361740_stable_diffusion_v2_1.jpg",
+        "text": "A male skateboarder is trying to pull off a trick on the ramp."
+    },
+    "coco_361740_vq_diffusion": {
+        "text_id": "coco_361740",
+        "image_path": "coco_361740_vq_diffusion.jpg",
+        "text": "A male skateboarder is trying to pull off a trick on the ramp."
+    },
+    "coco_152829_mini_dalle": {
+        "text_id": "coco_152829",
+        "image_path": "coco_152829_mini_dalle.jpg",
+        "text": "A woman is showing a watermelon slice to a woman on a scooter."
+    },
+    "coco_152829_stable_diffusion_v1_1": {
+        "text_id": "coco_152829",
+        "image_path": "coco_152829_stable_diffusion_v1_1.jpg",
+        "text": "A woman is showing a watermelon slice to a woman on a scooter."
+    },
+    "coco_152829_stable_diffusion_v1_5": {
+        "text_id": "coco_152829",
+        "image_path": "coco_152829_stable_diffusion_v1_5.jpg",
+        "text": "A woman is showing a watermelon slice to a woman on a scooter."
+    },
+    "coco_152829_stable_diffusion_v2_1": {
+        "text_id": "coco_152829",
+        "image_path": "coco_152829_stable_diffusion_v2_1.jpg",
+        "text": "A woman is showing a watermelon slice to a woman on a scooter."
+    },
+    "coco_152829_vq_diffusion": {
+        "text_id": "coco_152829",
+        "image_path": "coco_152829_vq_diffusion.jpg",
+        "text": "A woman is showing a watermelon slice to a woman on a scooter."
+    },
+    "coco_494732_mini_dalle": {
+        "text_id": "coco_494732",
+        "image_path": "coco_494732_mini_dalle.jpg",
+        "text": "A man in a green suiit leaning over a laptop"
+    },
+    "coco_494732_stable_diffusion_v1_1": {
+        "text_id": "coco_494732",
+        "image_path": "coco_494732_stable_diffusion_v1_1.jpg",
+        "text": "A man in a green suiit leaning over a laptop"
+    },
+    "coco_494732_stable_diffusion_v1_5": {
+        "text_id": "coco_494732",
+        "image_path": "coco_494732_stable_diffusion_v1_5.jpg",
+        "text": "A man in a green suiit leaning over a laptop"
+    },
+    "coco_494732_stable_diffusion_v2_1": {
+        "text_id": "coco_494732",
+        "image_path": "coco_494732_stable_diffusion_v2_1.jpg",
+        "text": "A man in a green suiit leaning over a laptop"
+    },
+    "coco_494732_vq_diffusion": {
+        "text_id": "coco_494732",
+        "image_path": "coco_494732_vq_diffusion.jpg",
+        "text": "A man in a green suiit leaning over a laptop"
+    },
+    "coco_492730_mini_dalle": {
+        "text_id": "coco_492730",
+        "image_path": "coco_492730_mini_dalle.jpg",
+        "text": "A woman holding a racquet on top of a tennis court."
+    },
+    "coco_492730_stable_diffusion_v1_1": {
+        "text_id": "coco_492730",
+        "image_path": "coco_492730_stable_diffusion_v1_1.jpg",
+        "text": "A woman holding a racquet on top of a tennis court."
+    },
+    "coco_492730_stable_diffusion_v1_5": {
+        "text_id": "coco_492730",
+        "image_path": "coco_492730_stable_diffusion_v1_5.jpg",
+        "text": "A woman holding a racquet on top of a tennis court."
+    },
+    "coco_492730_stable_diffusion_v2_1": {
+        "text_id": "coco_492730",
+        "image_path": "coco_492730_stable_diffusion_v2_1.jpg",
+        "text": "A woman holding a racquet on top of a tennis court."
+    },
+    "coco_492730_vq_diffusion": {
+        "text_id": "coco_492730",
+        "image_path": "coco_492730_vq_diffusion.jpg",
+        "text": "A woman holding a racquet on top of a tennis court."
+    },
+    "coco_322041_mini_dalle": {
+        "text_id": "coco_322041",
+        "image_path": "coco_322041_mini_dalle.jpg",
+        "text": "two laptops a mouse cords wires and a monitor"
+    },
+    "coco_322041_stable_diffusion_v1_1": {
+        "text_id": "coco_322041",
+        "image_path": "coco_322041_stable_diffusion_v1_1.jpg",
+        "text": "two laptops a mouse cords wires and a monitor"
+    },
+    "coco_322041_stable_diffusion_v1_5": {
+        "text_id": "coco_322041",
+        "image_path": "coco_322041_stable_diffusion_v1_5.jpg",
+        "text": "two laptops a mouse cords wires and a monitor"
+    },
+    "coco_322041_stable_diffusion_v2_1": {
+        "text_id": "coco_322041",
+        "image_path": "coco_322041_stable_diffusion_v2_1.jpg",
+        "text": "two laptops a mouse cords wires and a monitor"
+    },
+    "coco_322041_vq_diffusion": {
+        "text_id": "coco_322041",
+        "image_path": "coco_322041_vq_diffusion.jpg",
+        "text": "two laptops a mouse cords wires and a monitor"
+    },
+    "coco_98071_mini_dalle": {
+        "text_id": "coco_98071",
+        "image_path": "coco_98071_mini_dalle.jpg",
+        "text": "A young man in a suit and tie with a beer in his hand."
+    },
+    "coco_98071_stable_diffusion_v1_1": {
+        "text_id": "coco_98071",
+        "image_path": "coco_98071_stable_diffusion_v1_1.jpg",
+        "text": "A young man in a suit and tie with a beer in his hand."
+    },
+    "coco_98071_stable_diffusion_v1_5": {
+        "text_id": "coco_98071",
+        "image_path": "coco_98071_stable_diffusion_v1_5.jpg",
+        "text": "A young man in a suit and tie with a beer in his hand."
+    },
+    "coco_98071_stable_diffusion_v2_1": {
+        "text_id": "coco_98071",
+        "image_path": "coco_98071_stable_diffusion_v2_1.jpg",
+        "text": "A young man in a suit and tie with a beer in his hand."
+    },
+    "coco_98071_vq_diffusion": {
+        "text_id": "coco_98071",
+        "image_path": "coco_98071_vq_diffusion.jpg",
+        "text": "A young man in a suit and tie with a beer in his hand."
+    },
+    "coco_144234_mini_dalle": {
+        "text_id": "coco_144234",
+        "image_path": "coco_144234_mini_dalle.jpg",
+        "text": "A man is eating a loaded hot dog with people around him in a line."
+    },
+    "coco_144234_stable_diffusion_v1_1": {
+        "text_id": "coco_144234",
+        "image_path": "coco_144234_stable_diffusion_v1_1.jpg",
+        "text": "A man is eating a loaded hot dog with people around him in a line."
+    },
+    "coco_144234_stable_diffusion_v1_5": {
+        "text_id": "coco_144234",
+        "image_path": "coco_144234_stable_diffusion_v1_5.jpg",
+        "text": "A man is eating a loaded hot dog with people around him in a line."
+    },
+    "coco_144234_stable_diffusion_v2_1": {
+        "text_id": "coco_144234",
+        "image_path": "coco_144234_stable_diffusion_v2_1.jpg",
+        "text": "A man is eating a loaded hot dog with people around him in a line."
+    },
+    "coco_144234_vq_diffusion": {
+        "text_id": "coco_144234",
+        "image_path": "coco_144234_vq_diffusion.jpg",
+        "text": "A man is eating a loaded hot dog with people around him in a line."
+    },
+    "coco_680517_mini_dalle": {
+        "text_id": "coco_680517",
+        "image_path": "coco_680517_mini_dalle.jpg",
+        "text": "A man in a wet suit is surfing."
+    },
+    "coco_680517_stable_diffusion_v1_1": {
+        "text_id": "coco_680517",
+        "image_path": "coco_680517_stable_diffusion_v1_1.jpg",
+        "text": "A man in a wet suit is surfing."
+    },
+    "coco_680517_stable_diffusion_v1_5": {
+        "text_id": "coco_680517",
+        "image_path": "coco_680517_stable_diffusion_v1_5.jpg",
+        "text": "A man in a wet suit is surfing."
+    },
+    "coco_680517_stable_diffusion_v2_1": {
+        "text_id": "coco_680517",
+        "image_path": "coco_680517_stable_diffusion_v2_1.jpg",
+        "text": "A man in a wet suit is surfing."
+    },
+    "coco_680517_vq_diffusion": {
+        "text_id": "coco_680517",
+        "image_path": "coco_680517_vq_diffusion.jpg",
+        "text": "A man in a wet suit is surfing."
+    },
+    "coco_292534_mini_dalle": {
+        "text_id": "coco_292534",
+        "image_path": "coco_292534_mini_dalle.jpg",
+        "text": "A red motorcycle parked by paint chipped doors."
+    },
+    "coco_292534_stable_diffusion_v1_1": {
+        "text_id": "coco_292534",
+        "image_path": "coco_292534_stable_diffusion_v1_1.jpg",
+        "text": "A red motorcycle parked by paint chipped doors."
+    },
+    "coco_292534_stable_diffusion_v1_5": {
+        "text_id": "coco_292534",
+        "image_path": "coco_292534_stable_diffusion_v1_5.jpg",
+        "text": "A red motorcycle parked by paint chipped doors."
+    },
+    "coco_292534_stable_diffusion_v2_1": {
+        "text_id": "coco_292534",
+        "image_path": "coco_292534_stable_diffusion_v2_1.jpg",
+        "text": "A red motorcycle parked by paint chipped doors."
+    },
+    "coco_292534_vq_diffusion": {
+        "text_id": "coco_292534",
+        "image_path": "coco_292534_vq_diffusion.jpg",
+        "text": "A red motorcycle parked by paint chipped doors."
+    },
+    "coco_655658_mini_dalle": {
+        "text_id": "coco_655658",
+        "image_path": "coco_655658_mini_dalle.jpg",
+        "text": "A man in a black shirt plays on an ocean wave."
+    },
+    "coco_655658_stable_diffusion_v1_1": {
+        "text_id": "coco_655658",
+        "image_path": "coco_655658_stable_diffusion_v1_1.jpg",
+        "text": "A man in a black shirt plays on an ocean wave."
+    },
+    "coco_655658_stable_diffusion_v1_5": {
+        "text_id": "coco_655658",
+        "image_path": "coco_655658_stable_diffusion_v1_5.jpg",
+        "text": "A man in a black shirt plays on an ocean wave."
+    },
+    "coco_655658_stable_diffusion_v2_1": {
+        "text_id": "coco_655658",
+        "image_path": "coco_655658_stable_diffusion_v2_1.jpg",
+        "text": "A man in a black shirt plays on an ocean wave."
+    },
+    "coco_655658_vq_diffusion": {
+        "text_id": "coco_655658",
+        "image_path": "coco_655658_vq_diffusion.jpg",
+        "text": "A man in a black shirt plays on an ocean wave."
+    },
+    "coco_573015_mini_dalle": {
+        "text_id": "coco_573015",
+        "image_path": "coco_573015_mini_dalle.jpg",
+        "text": "The people are flying the kites in the sky."
+    },
+    "coco_573015_stable_diffusion_v1_1": {
+        "text_id": "coco_573015",
+        "image_path": "coco_573015_stable_diffusion_v1_1.jpg",
+        "text": "The people are flying the kites in the sky."
+    },
+    "coco_573015_stable_diffusion_v1_5": {
+        "text_id": "coco_573015",
+        "image_path": "coco_573015_stable_diffusion_v1_5.jpg",
+        "text": "The people are flying the kites in the sky."
+    },
+    "coco_573015_stable_diffusion_v2_1": {
+        "text_id": "coco_573015",
+        "image_path": "coco_573015_stable_diffusion_v2_1.jpg",
+        "text": "The people are flying the kites in the sky."
+    },
+    "coco_573015_vq_diffusion": {
+        "text_id": "coco_573015",
+        "image_path": "coco_573015_vq_diffusion.jpg",
+        "text": "The people are flying the kites in the sky."
+    },
+    "coco_632032_mini_dalle": {
+        "text_id": "coco_632032",
+        "image_path": "coco_632032_mini_dalle.jpg",
+        "text": "a large clock hangs from a building and reads 12:43"
+    },
+    "coco_632032_stable_diffusion_v1_1": {
+        "text_id": "coco_632032",
+        "image_path": "coco_632032_stable_diffusion_v1_1.jpg",
+        "text": "a large clock hangs from a building and reads 12:43"
+    },
+    "coco_632032_stable_diffusion_v1_5": {
+        "text_id": "coco_632032",
+        "image_path": "coco_632032_stable_diffusion_v1_5.jpg",
+        "text": "a large clock hangs from a building and reads 12:43"
+    },
+    "coco_632032_stable_diffusion_v2_1": {
+        "text_id": "coco_632032",
+        "image_path": "coco_632032_stable_diffusion_v2_1.jpg",
+        "text": "a large clock hangs from a building and reads 12:43"
+    },
+    "coco_632032_vq_diffusion": {
+        "text_id": "coco_632032",
+        "image_path": "coco_632032_vq_diffusion.jpg",
+        "text": "a large clock hangs from a building and reads 12:43"
+    },
+    "coco_226941_mini_dalle": {
+        "text_id": "coco_226941",
+        "image_path": "coco_226941_mini_dalle.jpg",
+        "text": "A sheep with short hair stands under a fence."
+    },
+    "coco_226941_stable_diffusion_v1_1": {
+        "text_id": "coco_226941",
+        "image_path": "coco_226941_stable_diffusion_v1_1.jpg",
+        "text": "A sheep with short hair stands under a fence."
+    },
+    "coco_226941_stable_diffusion_v1_5": {
+        "text_id": "coco_226941",
+        "image_path": "coco_226941_stable_diffusion_v1_5.jpg",
+        "text": "A sheep with short hair stands under a fence."
+    },
+    "coco_226941_stable_diffusion_v2_1": {
+        "text_id": "coco_226941",
+        "image_path": "coco_226941_stable_diffusion_v2_1.jpg",
+        "text": "A sheep with short hair stands under a fence."
+    },
+    "coco_226941_vq_diffusion": {
+        "text_id": "coco_226941",
+        "image_path": "coco_226941_vq_diffusion.jpg",
+        "text": "A sheep with short hair stands under a fence."
+    },
+    "coco_138003_mini_dalle": {
+        "text_id": "coco_138003",
+        "image_path": "coco_138003_mini_dalle.jpg",
+        "text": "A midsized horse in a field with her rider standing"
+    },
+    "coco_138003_stable_diffusion_v1_1": {
+        "text_id": "coco_138003",
+        "image_path": "coco_138003_stable_diffusion_v1_1.jpg",
+        "text": "A midsized horse in a field with her rider standing"
+    },
+    "coco_138003_stable_diffusion_v1_5": {
+        "text_id": "coco_138003",
+        "image_path": "coco_138003_stable_diffusion_v1_5.jpg",
+        "text": "A midsized horse in a field with her rider standing"
+    },
+    "coco_138003_stable_diffusion_v2_1": {
+        "text_id": "coco_138003",
+        "image_path": "coco_138003_stable_diffusion_v2_1.jpg",
+        "text": "A midsized horse in a field with her rider standing"
+    },
+    "coco_138003_vq_diffusion": {
+        "text_id": "coco_138003",
+        "image_path": "coco_138003_vq_diffusion.jpg",
+        "text": "A midsized horse in a field with her rider standing"
+    },
+    "coco_373633_mini_dalle": {
+        "text_id": "coco_373633",
+        "image_path": "coco_373633_mini_dalle.jpg",
+        "text": "Black and white photograph of a bed with a laptop on it."
+    },
+    "coco_373633_stable_diffusion_v1_1": {
+        "text_id": "coco_373633",
+        "image_path": "coco_373633_stable_diffusion_v1_1.jpg",
+        "text": "Black and white photograph of a bed with a laptop on it."
+    },
+    "coco_373633_stable_diffusion_v1_5": {
+        "text_id": "coco_373633",
+        "image_path": "coco_373633_stable_diffusion_v1_5.jpg",
+        "text": "Black and white photograph of a bed with a laptop on it."
+    },
+    "coco_373633_stable_diffusion_v2_1": {
+        "text_id": "coco_373633",
+        "image_path": "coco_373633_stable_diffusion_v2_1.jpg",
+        "text": "Black and white photograph of a bed with a laptop on it."
+    },
+    "coco_373633_vq_diffusion": {
+        "text_id": "coco_373633",
+        "image_path": "coco_373633_vq_diffusion.jpg",
+        "text": "Black and white photograph of a bed with a laptop on it."
+    },
+    "coco_120896_mini_dalle": {
+        "text_id": "coco_120896",
+        "image_path": "coco_120896_mini_dalle.jpg",
+        "text": "A boy standing in the door of a bus."
+    },
+    "coco_120896_stable_diffusion_v1_1": {
+        "text_id": "coco_120896",
+        "image_path": "coco_120896_stable_diffusion_v1_1.jpg",
+        "text": "A boy standing in the door of a bus."
+    },
+    "coco_120896_stable_diffusion_v1_5": {
+        "text_id": "coco_120896",
+        "image_path": "coco_120896_stable_diffusion_v1_5.jpg",
+        "text": "A boy standing in the door of a bus."
+    },
+    "coco_120896_stable_diffusion_v2_1": {
+        "text_id": "coco_120896",
+        "image_path": "coco_120896_stable_diffusion_v2_1.jpg",
+        "text": "A boy standing in the door of a bus."
+    },
+    "coco_120896_vq_diffusion": {
+        "text_id": "coco_120896",
+        "image_path": "coco_120896_vq_diffusion.jpg",
+        "text": "A boy standing in the door of a bus."
+    },
+    "paintskill_152_mini_dalle": {
+        "text_id": "paintskill_152",
+        "image_path": "paintskill_152_mini_dalle.jpg",
+        "text": "a photo of blue bear"
+    },
+    "paintskill_152_stable_diffusion_v1_1": {
+        "text_id": "paintskill_152",
+        "image_path": "paintskill_152_stable_diffusion_v1_1.jpg",
+        "text": "a photo of blue bear"
+    },
+    "paintskill_152_stable_diffusion_v1_5": {
+        "text_id": "paintskill_152",
+        "image_path": "paintskill_152_stable_diffusion_v1_5.jpg",
+        "text": "a photo of blue bear"
+    },
+    "paintskill_152_stable_diffusion_v2_1": {
+        "text_id": "paintskill_152",
+        "image_path": "paintskill_152_stable_diffusion_v2_1.jpg",
+        "text": "a photo of blue bear"
+    },
+    "paintskill_152_vq_diffusion": {
+        "text_id": "paintskill_152",
+        "image_path": "paintskill_152_vq_diffusion.jpg",
+        "text": "a photo of blue bear"
+    },
+    "partiprompt_1164_mini_dalle": {
+        "text_id": "partiprompt_1164",
+        "image_path": "partiprompt_1164_mini_dalle.jpg",
+        "text": "Portrait of a gecko wearing a train conductor\u2019s hat and holding a flag that has a yin-yang symbol on it. Comic."
+    },
+    "partiprompt_1164_stable_diffusion_v1_1": {
+        "text_id": "partiprompt_1164",
+        "image_path": "partiprompt_1164_stable_diffusion_v1_1.jpg",
+        "text": "Portrait of a gecko wearing a train conductor\u2019s hat and holding a flag that has a yin-yang symbol on it. Comic."
+    },
+    "partiprompt_1164_stable_diffusion_v1_5": {
+        "text_id": "partiprompt_1164",
+        "image_path": "partiprompt_1164_stable_diffusion_v1_5.jpg",
+        "text": "Portrait of a gecko wearing a train conductor\u2019s hat and holding a flag that has a yin-yang symbol on it. Comic."
+    },
+    "partiprompt_1164_stable_diffusion_v2_1": {
+        "text_id": "partiprompt_1164",
+        "image_path": "partiprompt_1164_stable_diffusion_v2_1.jpg",
+        "text": "Portrait of a gecko wearing a train conductor\u2019s hat and holding a flag that has a yin-yang symbol on it. Comic."
+    },
+    "partiprompt_1164_vq_diffusion": {
+        "text_id": "partiprompt_1164",
+        "image_path": "partiprompt_1164_vq_diffusion.jpg",
+        "text": "Portrait of a gecko wearing a train conductor\u2019s hat and holding a flag that has a yin-yang symbol on it. Comic."
+    },
+    "partiprompt_242_mini_dalle": {
+        "text_id": "partiprompt_242",
+        "image_path": "partiprompt_242_mini_dalle.jpg",
+        "text": "a dolphin in an astronaut suit on saturn"
+    },
+    "partiprompt_242_stable_diffusion_v1_1": {
+        "text_id": "partiprompt_242",
+        "image_path": "partiprompt_242_stable_diffusion_v1_1.jpg",
+        "text": "a dolphin in an astronaut suit on saturn"
+    },
+    "partiprompt_242_stable_diffusion_v1_5": {
+        "text_id": "partiprompt_242",
+        "image_path": "partiprompt_242_stable_diffusion_v1_5.jpg",
+        "text": "a dolphin in an astronaut suit on saturn"
+    },
+    "partiprompt_242_stable_diffusion_v2_1": {
+        "text_id": "partiprompt_242",
+        "image_path": "partiprompt_242_stable_diffusion_v2_1.jpg",
+        "text": "a dolphin in an astronaut suit on saturn"
+    },
+    "partiprompt_242_vq_diffusion": {
+        "text_id": "partiprompt_242",
+        "image_path": "partiprompt_242_vq_diffusion.jpg",
+        "text": "a dolphin in an astronaut suit on saturn"
+    },
+    "partiprompt_1412_mini_dalle": {
+        "text_id": "partiprompt_1412",
+        "image_path": "partiprompt_1412_mini_dalle.jpg",
+        "text": "the word 'START' on a blue t-shirt"
+    },
+    "partiprompt_1412_stable_diffusion_v1_1": {
+        "text_id": "partiprompt_1412",
+        "image_path": "partiprompt_1412_stable_diffusion_v1_1.jpg",
+        "text": "the word 'START' on a blue t-shirt"
+    },
+    "partiprompt_1412_stable_diffusion_v1_5": {
+        "text_id": "partiprompt_1412",
+        "image_path": "partiprompt_1412_stable_diffusion_v1_5.jpg",
+        "text": "the word 'START' on a blue t-shirt"
+    },
+    "partiprompt_1412_stable_diffusion_v2_1": {
+        "text_id": "partiprompt_1412",
+        "image_path": "partiprompt_1412_stable_diffusion_v2_1.jpg",
+        "text": "the word 'START' on a blue t-shirt"
+    },
+    "partiprompt_1412_vq_diffusion": {
+        "text_id": "partiprompt_1412",
+        "image_path": "partiprompt_1412_vq_diffusion.jpg",
+        "text": "the word 'START' on a blue t-shirt"
+    },
+    "partiprompt_1414_mini_dalle": {
+        "text_id": "partiprompt_1414",
+        "image_path": "partiprompt_1414_mini_dalle.jpg",
+        "text": "the word 'START' written in chalk on a sidewalk"
+    },
+    "partiprompt_1414_stable_diffusion_v1_1": {
+        "text_id": "partiprompt_1414",
+        "image_path": "partiprompt_1414_stable_diffusion_v1_1.jpg",
+        "text": "the word 'START' written in chalk on a sidewalk"
+    },
+    "partiprompt_1414_stable_diffusion_v1_5": {
+        "text_id": "partiprompt_1414",
+        "image_path": "partiprompt_1414_stable_diffusion_v1_5.jpg",
+        "text": "the word 'START' written in chalk on a sidewalk"
+    },
+    "partiprompt_1414_stable_diffusion_v2_1": {
+        "text_id": "partiprompt_1414",
+        "image_path": "partiprompt_1414_stable_diffusion_v2_1.jpg",
+        "text": "the word 'START' written in chalk on a sidewalk"
+    },
+    "partiprompt_1414_vq_diffusion": {
+        "text_id": "partiprompt_1414",
+        "image_path": "partiprompt_1414_vq_diffusion.jpg",
+        "text": "the word 'START' written in chalk on a sidewalk"
+    },
+    "drawbench_74_mini_dalle": {
+        "text_id": "drawbench_74",
+        "image_path": "drawbench_74_mini_dalle.jpg",
+        "text": "A vehicle composed of two wheels held in a frame one behind the other, propelled by pedals and steered with handlebars attached to the front wheel."
+    },
+    "drawbench_74_stable_diffusion_v1_1": {
+        "text_id": "drawbench_74",
+        "image_path": "drawbench_74_stable_diffusion_v1_1.jpg",
+        "text": "A vehicle composed of two wheels held in a frame one behind the other, propelled by pedals and steered with handlebars attached to the front wheel."
+    },
+    "drawbench_74_stable_diffusion_v1_5": {
+        "text_id": "drawbench_74",
+        "image_path": "drawbench_74_stable_diffusion_v1_5.jpg",
+        "text": "A vehicle composed of two wheels held in a frame one behind the other, propelled by pedals and steered with handlebars attached to the front wheel."
+    },
+    "drawbench_74_stable_diffusion_v2_1": {
+        "text_id": "drawbench_74",
+        "image_path": "drawbench_74_stable_diffusion_v2_1.jpg",
+        "text": "A vehicle composed of two wheels held in a frame one behind the other, propelled by pedals and steered with handlebars attached to the front wheel."
+    },
+    "drawbench_74_vq_diffusion": {
+        "text_id": "drawbench_74",
+        "image_path": "drawbench_74_vq_diffusion.jpg",
+        "text": "A vehicle composed of two wheels held in a frame one behind the other, propelled by pedals and steered with handlebars attached to the front wheel."
+    },
+    "partiprompt_1285_mini_dalle": {
+        "text_id": "partiprompt_1285",
+        "image_path": "partiprompt_1285_mini_dalle.jpg",
+        "text": "a sketch of a horse"
+    },
+    "partiprompt_1285_stable_diffusion_v1_1": {
+        "text_id": "partiprompt_1285",
+        "image_path": "partiprompt_1285_stable_diffusion_v1_1.jpg",
+        "text": "a sketch of a horse"
+    },
+    "partiprompt_1285_stable_diffusion_v1_5": {
+        "text_id": "partiprompt_1285",
+        "image_path": "partiprompt_1285_stable_diffusion_v1_5.jpg",
+        "text": "a sketch of a horse"
+    },
+    "partiprompt_1285_stable_diffusion_v2_1": {
+        "text_id": "partiprompt_1285",
+        "image_path": "partiprompt_1285_stable_diffusion_v2_1.jpg",
+        "text": "a sketch of a horse"
+    },
+    "partiprompt_1285_vq_diffusion": {
+        "text_id": "partiprompt_1285",
+        "image_path": "partiprompt_1285_vq_diffusion.jpg",
+        "text": "a sketch of a horse"
+    },
+    "partiprompt_1136_mini_dalle": {
+        "text_id": "partiprompt_1136",
+        "image_path": "partiprompt_1136_mini_dalle.jpg",
+        "text": "A section of the Great Wall in the mountains. detailed charcoal sketch."
+    },
+    "partiprompt_1136_stable_diffusion_v1_1": {
+        "text_id": "partiprompt_1136",
+        "image_path": "partiprompt_1136_stable_diffusion_v1_1.jpg",
+        "text": "A section of the Great Wall in the mountains. detailed charcoal sketch."
+    },
+    "partiprompt_1136_stable_diffusion_v1_5": {
+        "text_id": "partiprompt_1136",
+        "image_path": "partiprompt_1136_stable_diffusion_v1_5.jpg",
+        "text": "A section of the Great Wall in the mountains. detailed charcoal sketch."
+    },
+    "partiprompt_1136_stable_diffusion_v2_1": {
+        "text_id": "partiprompt_1136",
+        "image_path": "partiprompt_1136_stable_diffusion_v2_1.jpg",
+        "text": "A section of the Great Wall in the mountains. detailed charcoal sketch."
+    },
+    "partiprompt_1136_vq_diffusion": {
+        "text_id": "partiprompt_1136",
+        "image_path": "partiprompt_1136_vq_diffusion.jpg",
+        "text": "A section of the Great Wall in the mountains. detailed charcoal sketch."
+    },
+    "paintskill_275_mini_dalle": {
+        "text_id": "paintskill_275",
+        "image_path": "paintskill_275_mini_dalle.jpg",
+        "text": "a photo of bike and skateboard; skateboard is left to bike"
+    },
+    "paintskill_275_stable_diffusion_v1_1": {
+        "text_id": "paintskill_275",
+        "image_path": "paintskill_275_stable_diffusion_v1_1.jpg",
+        "text": "a photo of bike and skateboard; skateboard is left to bike"
+    },
+    "paintskill_275_stable_diffusion_v1_5": {
+        "text_id": "paintskill_275",
+        "image_path": "paintskill_275_stable_diffusion_v1_5.jpg",
+        "text": "a photo of bike and skateboard; skateboard is left to bike"
+    },
+    "paintskill_275_stable_diffusion_v2_1": {
+        "text_id": "paintskill_275",
+        "image_path": "paintskill_275_stable_diffusion_v2_1.jpg",
+        "text": "a photo of bike and skateboard; skateboard is left to bike"
+    },
+    "paintskill_275_vq_diffusion": {
+        "text_id": "paintskill_275",
+        "image_path": "paintskill_275_vq_diffusion.jpg",
+        "text": "a photo of bike and skateboard; skateboard is left to bike"
+    },
+    "paintskill_254_mini_dalle": {
+        "text_id": "paintskill_254",
+        "image_path": "paintskill_254_mini_dalle.jpg",
+        "text": "a photo of dog and stop sign; stop sign is left to dog"
+    },
+    "paintskill_254_stable_diffusion_v1_1": {
+        "text_id": "paintskill_254",
+        "image_path": "paintskill_254_stable_diffusion_v1_1.jpg",
+        "text": "a photo of dog and stop sign; stop sign is left to dog"
+    },
+    "paintskill_254_stable_diffusion_v1_5": {
+        "text_id": "paintskill_254",
+        "image_path": "paintskill_254_stable_diffusion_v1_5.jpg",
+        "text": "a photo of dog and stop sign; stop sign is left to dog"
+    },
+    "paintskill_254_stable_diffusion_v2_1": {
+        "text_id": "paintskill_254",
+        "image_path": "paintskill_254_stable_diffusion_v2_1.jpg",
+        "text": "a photo of dog and stop sign; stop sign is left to dog"
+    },
+    "paintskill_254_vq_diffusion": {
+        "text_id": "paintskill_254",
+        "image_path": "paintskill_254_vq_diffusion.jpg",
+        "text": "a photo of dog and stop sign; stop sign is left to dog"
+    },
+    "partiprompt_76_mini_dalle": {
+        "text_id": "partiprompt_76",
+        "image_path": "partiprompt_76_mini_dalle.jpg",
+        "text": "A dignified beaver wearing glasses, a vest, and colorful neck tie. He stands next to a tall stack of books in a library."
+    },
+    "partiprompt_76_stable_diffusion_v1_1": {
+        "text_id": "partiprompt_76",
+        "image_path": "partiprompt_76_stable_diffusion_v1_1.jpg",
+        "text": "A dignified beaver wearing glasses, a vest, and colorful neck tie. He stands next to a tall stack of books in a library."
+    },
+    "partiprompt_76_stable_diffusion_v1_5": {
+        "text_id": "partiprompt_76",
+        "image_path": "partiprompt_76_stable_diffusion_v1_5.jpg",
+        "text": "A dignified beaver wearing glasses, a vest, and colorful neck tie. He stands next to a tall stack of books in a library."
+    },
+    "partiprompt_76_stable_diffusion_v2_1": {
+        "text_id": "partiprompt_76",
+        "image_path": "partiprompt_76_stable_diffusion_v2_1.jpg",
+        "text": "A dignified beaver wearing glasses, a vest, and colorful neck tie. He stands next to a tall stack of books in a library."
+    },
+    "partiprompt_76_vq_diffusion": {
+        "text_id": "partiprompt_76",
+        "image_path": "partiprompt_76_vq_diffusion.jpg",
+        "text": "A dignified beaver wearing glasses, a vest, and colorful neck tie. He stands next to a tall stack of books in a library."
+    },
+    "partiprompt_1250_mini_dalle": {
+        "text_id": "partiprompt_1250",
+        "image_path": "partiprompt_1250_mini_dalle.jpg",
+        "text": "a map of Italy"
+    },
+    "partiprompt_1250_stable_diffusion_v1_1": {
+        "text_id": "partiprompt_1250",
+        "image_path": "partiprompt_1250_stable_diffusion_v1_1.jpg",
+        "text": "a map of Italy"
+    },
+    "partiprompt_1250_stable_diffusion_v1_5": {
+        "text_id": "partiprompt_1250",
+        "image_path": "partiprompt_1250_stable_diffusion_v1_5.jpg",
+        "text": "a map of Italy"
+    },
+    "partiprompt_1250_stable_diffusion_v2_1": {
+        "text_id": "partiprompt_1250",
+        "image_path": "partiprompt_1250_stable_diffusion_v2_1.jpg",
+        "text": "a map of Italy"
+    },
+    "partiprompt_1250_vq_diffusion": {
+        "text_id": "partiprompt_1250",
+        "image_path": "partiprompt_1250_vq_diffusion.jpg",
+        "text": "a map of Italy"
+    },
+    "partiprompt_1053_mini_dalle": {
+        "text_id": "partiprompt_1053",
+        "image_path": "partiprompt_1053_mini_dalle.jpg",
+        "text": "a pair of glasses under a computer monitor"
+    },
+    "partiprompt_1053_stable_diffusion_v1_1": {
+        "text_id": "partiprompt_1053",
+        "image_path": "partiprompt_1053_stable_diffusion_v1_1.jpg",
+        "text": "a pair of glasses under a computer monitor"
+    },
+    "partiprompt_1053_stable_diffusion_v1_5": {
+        "text_id": "partiprompt_1053",
+        "image_path": "partiprompt_1053_stable_diffusion_v1_5.jpg",
+        "text": "a pair of glasses under a computer monitor"
+    },
+    "partiprompt_1053_stable_diffusion_v2_1": {
+        "text_id": "partiprompt_1053",
+        "image_path": "partiprompt_1053_stable_diffusion_v2_1.jpg",
+        "text": "a pair of glasses under a computer monitor"
+    },
+    "partiprompt_1053_vq_diffusion": {
+        "text_id": "partiprompt_1053",
+        "image_path": "partiprompt_1053_vq_diffusion.jpg",
+        "text": "a pair of glasses under a computer monitor"
+    },
+    "partiprompt_1028_mini_dalle": {
+        "text_id": "partiprompt_1028",
+        "image_path": "partiprompt_1028_mini_dalle.jpg",
+        "text": "an ostrich standing on a couch"
+    },
+    "partiprompt_1028_stable_diffusion_v1_1": {
+        "text_id": "partiprompt_1028",
+        "image_path": "partiprompt_1028_stable_diffusion_v1_1.jpg",
+        "text": "an ostrich standing on a couch"
+    },
+    "partiprompt_1028_stable_diffusion_v1_5": {
+        "text_id": "partiprompt_1028",
+        "image_path": "partiprompt_1028_stable_diffusion_v1_5.jpg",
+        "text": "an ostrich standing on a couch"
+    },
+    "partiprompt_1028_stable_diffusion_v2_1": {
+        "text_id": "partiprompt_1028",
+        "image_path": "partiprompt_1028_stable_diffusion_v2_1.jpg",
+        "text": "an ostrich standing on a couch"
+    },
+    "partiprompt_1028_vq_diffusion": {
+        "text_id": "partiprompt_1028",
+        "image_path": "partiprompt_1028_vq_diffusion.jpg",
+        "text": "an ostrich standing on a couch"
+    },
+    "paintskill_110_mini_dalle": {
+        "text_id": "paintskill_110",
+        "image_path": "paintskill_110_mini_dalle.jpg",
+        "text": "a photo of bed and human; human is right to bed"
+    },
+    "paintskill_110_stable_diffusion_v1_1": {
+        "text_id": "paintskill_110",
+        "image_path": "paintskill_110_stable_diffusion_v1_1.jpg",
+        "text": "a photo of bed and human; human is right to bed"
+    },
+    "paintskill_110_stable_diffusion_v1_5": {
+        "text_id": "paintskill_110",
+        "image_path": "paintskill_110_stable_diffusion_v1_5.jpg",
+        "text": "a photo of bed and human; human is right to bed"
+    },
+    "paintskill_110_stable_diffusion_v2_1": {
+        "text_id": "paintskill_110",
+        "image_path": "paintskill_110_stable_diffusion_v2_1.jpg",
+        "text": "a photo of bed and human; human is right to bed"
+    },
+    "paintskill_110_vq_diffusion": {
+        "text_id": "paintskill_110",
+        "image_path": "paintskill_110_vq_diffusion.jpg",
+        "text": "a photo of bed and human; human is right to bed"
+    },
+    "drawbench_155_mini_dalle": {
+        "text_id": "drawbench_155",
+        "image_path": "drawbench_155_mini_dalle.jpg",
+        "text": "A car playing soccer, digital art."
+    },
+    "drawbench_155_stable_diffusion_v1_1": {
+        "text_id": "drawbench_155",
+        "image_path": "drawbench_155_stable_diffusion_v1_1.jpg",
+        "text": "A car playing soccer, digital art."
+    },
+    "drawbench_155_stable_diffusion_v1_5": {
+        "text_id": "drawbench_155",
+        "image_path": "drawbench_155_stable_diffusion_v1_5.jpg",
+        "text": "A car playing soccer, digital art."
+    },
+    "drawbench_155_stable_diffusion_v2_1": {
+        "text_id": "drawbench_155",
+        "image_path": "drawbench_155_stable_diffusion_v2_1.jpg",
+        "text": "A car playing soccer, digital art."
+    },
+    "drawbench_155_vq_diffusion": {
+        "text_id": "drawbench_155",
+        "image_path": "drawbench_155_vq_diffusion.jpg",
+        "text": "A car playing soccer, digital art."
+    },
+    "partiprompt_116_mini_dalle": {
+        "text_id": "partiprompt_116",
+        "image_path": "partiprompt_116_mini_dalle.jpg",
+        "text": "A penguin wearing aviator goggles and flying confidently next to a bemused eagle."
+    },
+    "partiprompt_116_stable_diffusion_v1_1": {
+        "text_id": "partiprompt_116",
+        "image_path": "partiprompt_116_stable_diffusion_v1_1.jpg",
+        "text": "A penguin wearing aviator goggles and flying confidently next to a bemused eagle."
+    },
+    "partiprompt_116_stable_diffusion_v1_5": {
+        "text_id": "partiprompt_116",
+        "image_path": "partiprompt_116_stable_diffusion_v1_5.jpg",
+        "text": "A penguin wearing aviator goggles and flying confidently next to a bemused eagle."
+    },
+    "partiprompt_116_stable_diffusion_v2_1": {
+        "text_id": "partiprompt_116",
+        "image_path": "partiprompt_116_stable_diffusion_v2_1.jpg",
+        "text": "A penguin wearing aviator goggles and flying confidently next to a bemused eagle."
+    },
+    "partiprompt_116_vq_diffusion": {
+        "text_id": "partiprompt_116",
+        "image_path": "partiprompt_116_vq_diffusion.jpg",
+        "text": "A penguin wearing aviator goggles and flying confidently next to a bemused eagle."
+    },
+    "partiprompt_555_mini_dalle": {
+        "text_id": "partiprompt_555",
+        "image_path": "partiprompt_555_mini_dalle.jpg",
+        "text": "an espresso machine that makes coffee from human souls"
+    },
+    "partiprompt_555_stable_diffusion_v1_1": {
+        "text_id": "partiprompt_555",
+        "image_path": "partiprompt_555_stable_diffusion_v1_1.jpg",
+        "text": "an espresso machine that makes coffee from human souls"
+    },
+    "partiprompt_555_stable_diffusion_v1_5": {
+        "text_id": "partiprompt_555",
+        "image_path": "partiprompt_555_stable_diffusion_v1_5.jpg",
+        "text": "an espresso machine that makes coffee from human souls"
+    },
+    "partiprompt_555_stable_diffusion_v2_1": {
+        "text_id": "partiprompt_555",
+        "image_path": "partiprompt_555_stable_diffusion_v2_1.jpg",
+        "text": "an espresso machine that makes coffee from human souls"
+    },
+    "partiprompt_555_vq_diffusion": {
+        "text_id": "partiprompt_555",
+        "image_path": "partiprompt_555_vq_diffusion.jpg",
+        "text": "an espresso machine that makes coffee from human souls"
+    },
+    "partiprompt_504_mini_dalle": {
+        "text_id": "partiprompt_504",
+        "image_path": "partiprompt_504_mini_dalle.jpg",
+        "text": "A tornado made of tigers crashing into a skyscraper. painting in the style of Hokusai."
+    },
+    "partiprompt_504_stable_diffusion_v1_1": {
+        "text_id": "partiprompt_504",
+        "image_path": "partiprompt_504_stable_diffusion_v1_1.jpg",
+        "text": "A tornado made of tigers crashing into a skyscraper. painting in the style of Hokusai."
+    },
+    "partiprompt_504_stable_diffusion_v1_5": {
+        "text_id": "partiprompt_504",
+        "image_path": "partiprompt_504_stable_diffusion_v1_5.jpg",
+        "text": "A tornado made of tigers crashing into a skyscraper. painting in the style of Hokusai."
+    },
+    "partiprompt_504_stable_diffusion_v2_1": {
+        "text_id": "partiprompt_504",
+        "image_path": "partiprompt_504_stable_diffusion_v2_1.jpg",
+        "text": "A tornado made of tigers crashing into a skyscraper. painting in the style of Hokusai."
+    },
+    "partiprompt_504_vq_diffusion": {
+        "text_id": "partiprompt_504",
+        "image_path": "partiprompt_504_vq_diffusion.jpg",
+        "text": "A tornado made of tigers crashing into a skyscraper. painting in the style of Hokusai."
+    },
+    "partiprompt_607_mini_dalle": {
+        "text_id": "partiprompt_607",
+        "image_path": "partiprompt_607_mini_dalle.jpg",
+        "text": "square red apples on a tree with circular green leaves"
+    },
+    "partiprompt_607_stable_diffusion_v1_1": {
+        "text_id": "partiprompt_607",
+        "image_path": "partiprompt_607_stable_diffusion_v1_1.jpg",
+        "text": "square red apples on a tree with circular green leaves"
+    },
+    "partiprompt_607_stable_diffusion_v1_5": {
+        "text_id": "partiprompt_607",
+        "image_path": "partiprompt_607_stable_diffusion_v1_5.jpg",
+        "text": "square red apples on a tree with circular green leaves"
+    },
+    "partiprompt_607_stable_diffusion_v2_1": {
+        "text_id": "partiprompt_607",
+        "image_path": "partiprompt_607_stable_diffusion_v2_1.jpg",
+        "text": "square red apples on a tree with circular green leaves"
+    },
+    "partiprompt_607_vq_diffusion": {
+        "text_id": "partiprompt_607",
+        "image_path": "partiprompt_607_vq_diffusion.jpg",
+        "text": "square red apples on a tree with circular green leaves"
+    },
+    "coco_290223_mini_dalle": {
+        "text_id": "coco_290223",
+        "image_path": "coco_290223_mini_dalle.jpg",
+        "text": "An assortment of fruits and vegetable all set together"
+    },
+    "coco_290223_stable_diffusion_v1_1": {
+        "text_id": "coco_290223",
+        "image_path": "coco_290223_stable_diffusion_v1_1.jpg",
+        "text": "An assortment of fruits and vegetable all set together"
+    },
+    "coco_290223_stable_diffusion_v1_5": {
+        "text_id": "coco_290223",
+        "image_path": "coco_290223_stable_diffusion_v1_5.jpg",
+        "text": "An assortment of fruits and vegetable all set together"
+    },
+    "coco_290223_stable_diffusion_v2_1": {
+        "text_id": "coco_290223",
+        "image_path": "coco_290223_stable_diffusion_v2_1.jpg",
+        "text": "An assortment of fruits and vegetable all set together"
+    },
+    "coco_290223_vq_diffusion": {
+        "text_id": "coco_290223",
+        "image_path": "coco_290223_vq_diffusion.jpg",
+        "text": "An assortment of fruits and vegetable all set together"
+    },
+    "coco_366619_mini_dalle": {
+        "text_id": "coco_366619",
+        "image_path": "coco_366619_mini_dalle.jpg",
+        "text": "People walking down a city sidewalk showing one with headphones."
+    },
+    "coco_366619_stable_diffusion_v1_1": {
+        "text_id": "coco_366619",
+        "image_path": "coco_366619_stable_diffusion_v1_1.jpg",
+        "text": "People walking down a city sidewalk showing one with headphones."
+    },
+    "coco_366619_stable_diffusion_v1_5": {
+        "text_id": "coco_366619",
+        "image_path": "coco_366619_stable_diffusion_v1_5.jpg",
+        "text": "People walking down a city sidewalk showing one with headphones."
+    },
+    "coco_366619_stable_diffusion_v2_1": {
+        "text_id": "coco_366619",
+        "image_path": "coco_366619_stable_diffusion_v2_1.jpg",
+        "text": "People walking down a city sidewalk showing one with headphones."
+    },
+    "coco_366619_vq_diffusion": {
+        "text_id": "coco_366619",
+        "image_path": "coco_366619_vq_diffusion.jpg",
+        "text": "People walking down a city sidewalk showing one with headphones."
+    },
+    "coco_666114_mini_dalle": {
+        "text_id": "coco_666114",
+        "image_path": "coco_666114_mini_dalle.jpg",
+        "text": "A little boy grips a soccer ball in his arms surrounded by other youth soccer players."
+    },
+    "coco_666114_stable_diffusion_v1_1": {
+        "text_id": "coco_666114",
+        "image_path": "coco_666114_stable_diffusion_v1_1.jpg",
+        "text": "A little boy grips a soccer ball in his arms surrounded by other youth soccer players."
+    },
+    "coco_666114_stable_diffusion_v1_5": {
+        "text_id": "coco_666114",
+        "image_path": "coco_666114_stable_diffusion_v1_5.jpg",
+        "text": "A little boy grips a soccer ball in his arms surrounded by other youth soccer players."
+    },
+    "coco_666114_stable_diffusion_v2_1": {
+        "text_id": "coco_666114",
+        "image_path": "coco_666114_stable_diffusion_v2_1.jpg",
+        "text": "A little boy grips a soccer ball in his arms surrounded by other youth soccer players."
+    },
+    "coco_666114_vq_diffusion": {
+        "text_id": "coco_666114",
+        "image_path": "coco_666114_vq_diffusion.jpg",
+        "text": "A little boy grips a soccer ball in his arms surrounded by other youth soccer players."
+    },
+    "coco_694975_mini_dalle": {
+        "text_id": "coco_694975",
+        "image_path": "coco_694975_mini_dalle.jpg",
+        "text": "man with a tennis racket waits for the ball"
+    },
+    "coco_694975_stable_diffusion_v1_1": {
+        "text_id": "coco_694975",
+        "image_path": "coco_694975_stable_diffusion_v1_1.jpg",
+        "text": "man with a tennis racket waits for the ball"
+    },
+    "coco_694975_stable_diffusion_v1_5": {
+        "text_id": "coco_694975",
+        "image_path": "coco_694975_stable_diffusion_v1_5.jpg",
+        "text": "man with a tennis racket waits for the ball"
+    },
+    "coco_694975_stable_diffusion_v2_1": {
+        "text_id": "coco_694975",
+        "image_path": "coco_694975_stable_diffusion_v2_1.jpg",
+        "text": "man with a tennis racket waits for the ball"
+    },
+    "coco_694975_vq_diffusion": {
+        "text_id": "coco_694975",
+        "image_path": "coco_694975_vq_diffusion.jpg",
+        "text": "man with a tennis racket waits for the ball"
+    },
+    "coco_817577_mini_dalle": {
+        "text_id": "coco_817577",
+        "image_path": "coco_817577_mini_dalle.jpg",
+        "text": "A baseball player running to a base during a game at night."
+    },
+    "coco_817577_stable_diffusion_v1_1": {
+        "text_id": "coco_817577",
+        "image_path": "coco_817577_stable_diffusion_v1_1.jpg",
+        "text": "A baseball player running to a base during a game at night."
+    },
+    "coco_817577_stable_diffusion_v1_5": {
+        "text_id": "coco_817577",
+        "image_path": "coco_817577_stable_diffusion_v1_5.jpg",
+        "text": "A baseball player running to a base during a game at night."
+    },
+    "coco_817577_stable_diffusion_v2_1": {
+        "text_id": "coco_817577",
+        "image_path": "coco_817577_stable_diffusion_v2_1.jpg",
+        "text": "A baseball player running to a base during a game at night."
+    },
+    "coco_817577_vq_diffusion": {
+        "text_id": "coco_817577",
+        "image_path": "coco_817577_vq_diffusion.jpg",
+        "text": "A baseball player running to a base during a game at night."
+    },
+    "coco_393304_mini_dalle": {
+        "text_id": "coco_393304",
+        "image_path": "coco_393304_mini_dalle.jpg",
+        "text": "a group of beginner snow skiers having class"
+    },
+    "coco_393304_stable_diffusion_v1_1": {
+        "text_id": "coco_393304",
+        "image_path": "coco_393304_stable_diffusion_v1_1.jpg",
+        "text": "a group of beginner snow skiers having class"
+    },
+    "coco_393304_stable_diffusion_v1_5": {
+        "text_id": "coco_393304",
+        "image_path": "coco_393304_stable_diffusion_v1_5.jpg",
+        "text": "a group of beginner snow skiers having class"
+    },
+    "coco_393304_stable_diffusion_v2_1": {
+        "text_id": "coco_393304",
+        "image_path": "coco_393304_stable_diffusion_v2_1.jpg",
+        "text": "a group of beginner snow skiers having class"
+    },
+    "coco_393304_vq_diffusion": {
+        "text_id": "coco_393304",
+        "image_path": "coco_393304_vq_diffusion.jpg",
+        "text": "a group of beginner snow skiers having class"
+    },
+    "coco_54581_mini_dalle": {
+        "text_id": "coco_54581",
+        "image_path": "coco_54581_mini_dalle.jpg",
+        "text": "A group of surfers are carrying their surf boards into the ocean."
+    },
+    "coco_54581_stable_diffusion_v1_1": {
+        "text_id": "coco_54581",
+        "image_path": "coco_54581_stable_diffusion_v1_1.jpg",
+        "text": "A group of surfers are carrying their surf boards into the ocean."
+    },
+    "coco_54581_stable_diffusion_v1_5": {
+        "text_id": "coco_54581",
+        "image_path": "coco_54581_stable_diffusion_v1_5.jpg",
+        "text": "A group of surfers are carrying their surf boards into the ocean."
+    },
+    "coco_54581_stable_diffusion_v2_1": {
+        "text_id": "coco_54581",
+        "image_path": "coco_54581_stable_diffusion_v2_1.jpg",
+        "text": "A group of surfers are carrying their surf boards into the ocean."
+    },
+    "coco_54581_vq_diffusion": {
+        "text_id": "coco_54581",
+        "image_path": "coco_54581_vq_diffusion.jpg",
+        "text": "A group of surfers are carrying their surf boards into the ocean."
+    },
+    "coco_555553_mini_dalle": {
+        "text_id": "coco_555553",
+        "image_path": "coco_555553_mini_dalle.jpg",
+        "text": "Three zebras eat hay in black and white."
+    },
+    "coco_555553_stable_diffusion_v1_1": {
+        "text_id": "coco_555553",
+        "image_path": "coco_555553_stable_diffusion_v1_1.jpg",
+        "text": "Three zebras eat hay in black and white."
+    },
+    "coco_555553_stable_diffusion_v1_5": {
+        "text_id": "coco_555553",
+        "image_path": "coco_555553_stable_diffusion_v1_5.jpg",
+        "text": "Three zebras eat hay in black and white."
+    },
+    "coco_555553_stable_diffusion_v2_1": {
+        "text_id": "coco_555553",
+        "image_path": "coco_555553_stable_diffusion_v2_1.jpg",
+        "text": "Three zebras eat hay in black and white."
+    },
+    "coco_555553_vq_diffusion": {
+        "text_id": "coco_555553",
+        "image_path": "coco_555553_vq_diffusion.jpg",
+        "text": "Three zebras eat hay in black and white."
+    },
+    "coco_544405_mini_dalle": {
+        "text_id": "coco_544405",
+        "image_path": "coco_544405_mini_dalle.jpg",
+        "text": "a woman in a black jacket and a pizza"
+    },
+    "coco_544405_stable_diffusion_v1_1": {
+        "text_id": "coco_544405",
+        "image_path": "coco_544405_stable_diffusion_v1_1.jpg",
+        "text": "a woman in a black jacket and a pizza"
+    },
+    "coco_544405_stable_diffusion_v1_5": {
+        "text_id": "coco_544405",
+        "image_path": "coco_544405_stable_diffusion_v1_5.jpg",
+        "text": "a woman in a black jacket and a pizza"
+    },
+    "coco_544405_stable_diffusion_v2_1": {
+        "text_id": "coco_544405",
+        "image_path": "coco_544405_stable_diffusion_v2_1.jpg",
+        "text": "a woman in a black jacket and a pizza"
+    },
+    "coco_544405_vq_diffusion": {
+        "text_id": "coco_544405",
+        "image_path": "coco_544405_vq_diffusion.jpg",
+        "text": "a woman in a black jacket and a pizza"
+    },
+    "coco_800322_mini_dalle": {
+        "text_id": "coco_800322",
+        "image_path": "coco_800322_mini_dalle.jpg",
+        "text": "a dog is laying with a remote controller"
+    },
+    "coco_800322_stable_diffusion_v1_1": {
+        "text_id": "coco_800322",
+        "image_path": "coco_800322_stable_diffusion_v1_1.jpg",
+        "text": "a dog is laying with a remote controller"
+    },
+    "coco_800322_stable_diffusion_v1_5": {
+        "text_id": "coco_800322",
+        "image_path": "coco_800322_stable_diffusion_v1_5.jpg",
+        "text": "a dog is laying with a remote controller"
+    },
+    "coco_800322_stable_diffusion_v2_1": {
+        "text_id": "coco_800322",
+        "image_path": "coco_800322_stable_diffusion_v2_1.jpg",
+        "text": "a dog is laying with a remote controller"
+    },
+    "coco_800322_vq_diffusion": {
+        "text_id": "coco_800322",
+        "image_path": "coco_800322_vq_diffusion.jpg",
+        "text": "a dog is laying with a remote controller"
+    },
+    "coco_479450_mini_dalle": {
+        "text_id": "coco_479450",
+        "image_path": "coco_479450_mini_dalle.jpg",
+        "text": "A red plate topped with broccoli, meat and veggies."
+    },
+    "coco_479450_stable_diffusion_v1_1": {
+        "text_id": "coco_479450",
+        "image_path": "coco_479450_stable_diffusion_v1_1.jpg",
+        "text": "A red plate topped with broccoli, meat and veggies."
+    },
+    "coco_479450_stable_diffusion_v1_5": {
+        "text_id": "coco_479450",
+        "image_path": "coco_479450_stable_diffusion_v1_5.jpg",
+        "text": "A red plate topped with broccoli, meat and veggies."
+    },
+    "coco_479450_stable_diffusion_v2_1": {
+        "text_id": "coco_479450",
+        "image_path": "coco_479450_stable_diffusion_v2_1.jpg",
+        "text": "A red plate topped with broccoli, meat and veggies."
+    },
+    "coco_479450_vq_diffusion": {
+        "text_id": "coco_479450",
+        "image_path": "coco_479450_vq_diffusion.jpg",
+        "text": "A red plate topped with broccoli, meat and veggies."
+    },
+    "coco_494204_mini_dalle": {
+        "text_id": "coco_494204",
+        "image_path": "coco_494204_mini_dalle.jpg",
+        "text": "The woman is on the court playing a game of tennis."
+    },
+    "coco_494204_stable_diffusion_v1_1": {
+        "text_id": "coco_494204",
+        "image_path": "coco_494204_stable_diffusion_v1_1.jpg",
+        "text": "The woman is on the court playing a game of tennis."
+    },
+    "coco_494204_stable_diffusion_v1_5": {
+        "text_id": "coco_494204",
+        "image_path": "coco_494204_stable_diffusion_v1_5.jpg",
+        "text": "The woman is on the court playing a game of tennis."
+    },
+    "coco_494204_stable_diffusion_v2_1": {
+        "text_id": "coco_494204",
+        "image_path": "coco_494204_stable_diffusion_v2_1.jpg",
+        "text": "The woman is on the court playing a game of tennis."
+    },
+    "coco_494204_vq_diffusion": {
+        "text_id": "coco_494204",
+        "image_path": "coco_494204_vq_diffusion.jpg",
+        "text": "The woman is on the court playing a game of tennis."
+    },
+    "coco_816278_mini_dalle": {
+        "text_id": "coco_816278",
+        "image_path": "coco_816278_mini_dalle.jpg",
+        "text": "A row of motorcycles parked on the side of a road."
+    },
+    "coco_816278_stable_diffusion_v1_1": {
+        "text_id": "coco_816278",
+        "image_path": "coco_816278_stable_diffusion_v1_1.jpg",
+        "text": "A row of motorcycles parked on the side of a road."
+    },
+    "coco_816278_stable_diffusion_v1_5": {
+        "text_id": "coco_816278",
+        "image_path": "coco_816278_stable_diffusion_v1_5.jpg",
+        "text": "A row of motorcycles parked on the side of a road."
+    },
+    "coco_816278_stable_diffusion_v2_1": {
+        "text_id": "coco_816278",
+        "image_path": "coco_816278_stable_diffusion_v2_1.jpg",
+        "text": "A row of motorcycles parked on the side of a road."
+    },
+    "coco_816278_vq_diffusion": {
+        "text_id": "coco_816278",
+        "image_path": "coco_816278_vq_diffusion.jpg",
+        "text": "A row of motorcycles parked on the side of a road."
+    },
+    "coco_764251_mini_dalle": {
+        "text_id": "coco_764251",
+        "image_path": "coco_764251_mini_dalle.jpg",
+        "text": "Young kitten along windowpane watching the rain tap on the glass."
+    },
+    "coco_764251_stable_diffusion_v1_1": {
+        "text_id": "coco_764251",
+        "image_path": "coco_764251_stable_diffusion_v1_1.jpg",
+        "text": "Young kitten along windowpane watching the rain tap on the glass."
+    },
+    "coco_764251_stable_diffusion_v1_5": {
+        "text_id": "coco_764251",
+        "image_path": "coco_764251_stable_diffusion_v1_5.jpg",
+        "text": "Young kitten along windowpane watching the rain tap on the glass."
+    },
+    "coco_764251_stable_diffusion_v2_1": {
+        "text_id": "coco_764251",
+        "image_path": "coco_764251_stable_diffusion_v2_1.jpg",
+        "text": "Young kitten along windowpane watching the rain tap on the glass."
+    },
+    "coco_764251_vq_diffusion": {
+        "text_id": "coco_764251",
+        "image_path": "coco_764251_vq_diffusion.jpg",
+        "text": "Young kitten along windowpane watching the rain tap on the glass."
+    },
+    "coco_352431_mini_dalle": {
+        "text_id": "coco_352431",
+        "image_path": "coco_352431_mini_dalle.jpg",
+        "text": "A woman sitting on a couch in front of a laptop."
+    },
+    "coco_352431_stable_diffusion_v1_1": {
+        "text_id": "coco_352431",
+        "image_path": "coco_352431_stable_diffusion_v1_1.jpg",
+        "text": "A woman sitting on a couch in front of a laptop."
+    },
+    "coco_352431_stable_diffusion_v1_5": {
+        "text_id": "coco_352431",
+        "image_path": "coco_352431_stable_diffusion_v1_5.jpg",
+        "text": "A woman sitting on a couch in front of a laptop."
+    },
+    "coco_352431_stable_diffusion_v2_1": {
+        "text_id": "coco_352431",
+        "image_path": "coco_352431_stable_diffusion_v2_1.jpg",
+        "text": "A woman sitting on a couch in front of a laptop."
+    },
+    "coco_352431_vq_diffusion": {
+        "text_id": "coco_352431",
+        "image_path": "coco_352431_vq_diffusion.jpg",
+        "text": "A woman sitting on a couch in front of a laptop."
+    },
+    "coco_413279_mini_dalle": {
+        "text_id": "coco_413279",
+        "image_path": "coco_413279_mini_dalle.jpg",
+        "text": "Small white toilet with seashells sitting on top of it."
+    },
+    "coco_413279_stable_diffusion_v1_1": {
+        "text_id": "coco_413279",
+        "image_path": "coco_413279_stable_diffusion_v1_1.jpg",
+        "text": "Small white toilet with seashells sitting on top of it."
+    },
+    "coco_413279_stable_diffusion_v1_5": {
+        "text_id": "coco_413279",
+        "image_path": "coco_413279_stable_diffusion_v1_5.jpg",
+        "text": "Small white toilet with seashells sitting on top of it."
+    },
+    "coco_413279_stable_diffusion_v2_1": {
+        "text_id": "coco_413279",
+        "image_path": "coco_413279_stable_diffusion_v2_1.jpg",
+        "text": "Small white toilet with seashells sitting on top of it."
+    },
+    "coco_413279_vq_diffusion": {
+        "text_id": "coco_413279",
+        "image_path": "coco_413279_vq_diffusion.jpg",
+        "text": "Small white toilet with seashells sitting on top of it."
+    },
+    "coco_602469_mini_dalle": {
+        "text_id": "coco_602469",
+        "image_path": "coco_602469_mini_dalle.jpg",
+        "text": "A teddy bear store is decorated with signs and bears."
+    },
+    "coco_602469_stable_diffusion_v1_1": {
+        "text_id": "coco_602469",
+        "image_path": "coco_602469_stable_diffusion_v1_1.jpg",
+        "text": "A teddy bear store is decorated with signs and bears."
+    },
+    "coco_602469_stable_diffusion_v1_5": {
+        "text_id": "coco_602469",
+        "image_path": "coco_602469_stable_diffusion_v1_5.jpg",
+        "text": "A teddy bear store is decorated with signs and bears."
+    },
+    "coco_602469_stable_diffusion_v2_1": {
+        "text_id": "coco_602469",
+        "image_path": "coco_602469_stable_diffusion_v2_1.jpg",
+        "text": "A teddy bear store is decorated with signs and bears."
+    },
+    "coco_602469_vq_diffusion": {
+        "text_id": "coco_602469",
+        "image_path": "coco_602469_vq_diffusion.jpg",
+        "text": "A teddy bear store is decorated with signs and bears."
+    },
+    "coco_558559_mini_dalle": {
+        "text_id": "coco_558559",
+        "image_path": "coco_558559_mini_dalle.jpg",
+        "text": "Guy sitting down and using his cell during the party"
+    },
+    "coco_558559_stable_diffusion_v1_1": {
+        "text_id": "coco_558559",
+        "image_path": "coco_558559_stable_diffusion_v1_1.jpg",
+        "text": "Guy sitting down and using his cell during the party"
+    },
+    "coco_558559_stable_diffusion_v1_5": {
+        "text_id": "coco_558559",
+        "image_path": "coco_558559_stable_diffusion_v1_5.jpg",
+        "text": "Guy sitting down and using his cell during the party"
+    },
+    "coco_558559_stable_diffusion_v2_1": {
+        "text_id": "coco_558559",
+        "image_path": "coco_558559_stable_diffusion_v2_1.jpg",
+        "text": "Guy sitting down and using his cell during the party"
+    },
+    "coco_558559_vq_diffusion": {
+        "text_id": "coco_558559",
+        "image_path": "coco_558559_vq_diffusion.jpg",
+        "text": "Guy sitting down and using his cell during the party"
+    },
+    "coco_99268_mini_dalle": {
+        "text_id": "coco_99268",
+        "image_path": "coco_99268_mini_dalle.jpg",
+        "text": "a skateboarder in a blue jacket is doing a trick"
+    },
+    "coco_99268_stable_diffusion_v1_1": {
+        "text_id": "coco_99268",
+        "image_path": "coco_99268_stable_diffusion_v1_1.jpg",
+        "text": "a skateboarder in a blue jacket is doing a trick"
+    },
+    "coco_99268_stable_diffusion_v1_5": {
+        "text_id": "coco_99268",
+        "image_path": "coco_99268_stable_diffusion_v1_5.jpg",
+        "text": "a skateboarder in a blue jacket is doing a trick"
+    },
+    "coco_99268_stable_diffusion_v2_1": {
+        "text_id": "coco_99268",
+        "image_path": "coco_99268_stable_diffusion_v2_1.jpg",
+        "text": "a skateboarder in a blue jacket is doing a trick"
+    },
+    "coco_99268_vq_diffusion": {
+        "text_id": "coco_99268",
+        "image_path": "coco_99268_vq_diffusion.jpg",
+        "text": "a skateboarder in a blue jacket is doing a trick"
+    },
+    "coco_552592_mini_dalle": {
+        "text_id": "coco_552592",
+        "image_path": "coco_552592_mini_dalle.jpg",
+        "text": "A group of children sitting in the grass with two of them holding a Frisbee ."
+    },
+    "coco_552592_stable_diffusion_v1_1": {
+        "text_id": "coco_552592",
+        "image_path": "coco_552592_stable_diffusion_v1_1.jpg",
+        "text": "A group of children sitting in the grass with two of them holding a Frisbee ."
+    },
+    "coco_552592_stable_diffusion_v1_5": {
+        "text_id": "coco_552592",
+        "image_path": "coco_552592_stable_diffusion_v1_5.jpg",
+        "text": "A group of children sitting in the grass with two of them holding a Frisbee ."
+    },
+    "coco_552592_stable_diffusion_v2_1": {
+        "text_id": "coco_552592",
+        "image_path": "coco_552592_stable_diffusion_v2_1.jpg",
+        "text": "A group of children sitting in the grass with two of them holding a Frisbee ."
+    },
+    "coco_552592_vq_diffusion": {
+        "text_id": "coco_552592",
+        "image_path": "coco_552592_vq_diffusion.jpg",
+        "text": "A group of children sitting in the grass with two of them holding a Frisbee ."
+    },
+    "coco_661609_mini_dalle": {
+        "text_id": "coco_661609",
+        "image_path": "coco_661609_mini_dalle.jpg",
+        "text": "A grey motorcycle on dirt road next to a building."
+    },
+    "coco_661609_stable_diffusion_v1_1": {
+        "text_id": "coco_661609",
+        "image_path": "coco_661609_stable_diffusion_v1_1.jpg",
+        "text": "A grey motorcycle on dirt road next to a building."
+    },
+    "coco_661609_stable_diffusion_v1_5": {
+        "text_id": "coco_661609",
+        "image_path": "coco_661609_stable_diffusion_v1_5.jpg",
+        "text": "A grey motorcycle on dirt road next to a building."
+    },
+    "coco_661609_stable_diffusion_v2_1": {
+        "text_id": "coco_661609",
+        "image_path": "coco_661609_stable_diffusion_v2_1.jpg",
+        "text": "A grey motorcycle on dirt road next to a building."
+    },
+    "coco_661609_vq_diffusion": {
+        "text_id": "coco_661609",
+        "image_path": "coco_661609_vq_diffusion.jpg",
+        "text": "A grey motorcycle on dirt road next to a building."
+    },
+    "coco_828568_mini_dalle": {
+        "text_id": "coco_828568",
+        "image_path": "coco_828568_mini_dalle.jpg",
+        "text": "A red bike with white handles is locked to a black pole on a sidewalk."
+    },
+    "coco_828568_stable_diffusion_v1_1": {
+        "text_id": "coco_828568",
+        "image_path": "coco_828568_stable_diffusion_v1_1.jpg",
+        "text": "A red bike with white handles is locked to a black pole on a sidewalk."
+    },
+    "coco_828568_stable_diffusion_v1_5": {
+        "text_id": "coco_828568",
+        "image_path": "coco_828568_stable_diffusion_v1_5.jpg",
+        "text": "A red bike with white handles is locked to a black pole on a sidewalk."
+    },
+    "coco_828568_stable_diffusion_v2_1": {
+        "text_id": "coco_828568",
+        "image_path": "coco_828568_stable_diffusion_v2_1.jpg",
+        "text": "A red bike with white handles is locked to a black pole on a sidewalk."
+    },
+    "coco_828568_vq_diffusion": {
+        "text_id": "coco_828568",
+        "image_path": "coco_828568_vq_diffusion.jpg",
+        "text": "A red bike with white handles is locked to a black pole on a sidewalk."
+    },
+    "coco_224178_mini_dalle": {
+        "text_id": "coco_224178",
+        "image_path": "coco_224178_mini_dalle.jpg",
+        "text": "A table topped with bags of luggage and purses."
+    },
+    "coco_224178_stable_diffusion_v1_1": {
+        "text_id": "coco_224178",
+        "image_path": "coco_224178_stable_diffusion_v1_1.jpg",
+        "text": "A table topped with bags of luggage and purses."
+    },
+    "coco_224178_stable_diffusion_v1_5": {
+        "text_id": "coco_224178",
+        "image_path": "coco_224178_stable_diffusion_v1_5.jpg",
+        "text": "A table topped with bags of luggage and purses."
+    },
+    "coco_224178_stable_diffusion_v2_1": {
+        "text_id": "coco_224178",
+        "image_path": "coco_224178_stable_diffusion_v2_1.jpg",
+        "text": "A table topped with bags of luggage and purses."
+    },
+    "coco_224178_vq_diffusion": {
+        "text_id": "coco_224178",
+        "image_path": "coco_224178_vq_diffusion.jpg",
+        "text": "A table topped with bags of luggage and purses."
+    },
+    "coco_62896_mini_dalle": {
+        "text_id": "coco_62896",
+        "image_path": "coco_62896_mini_dalle.jpg",
+        "text": "A traffic light and a signpost at a crossroads intersection near a waterway."
+    },
+    "coco_62896_stable_diffusion_v1_1": {
+        "text_id": "coco_62896",
+        "image_path": "coco_62896_stable_diffusion_v1_1.jpg",
+        "text": "A traffic light and a signpost at a crossroads intersection near a waterway."
+    },
+    "coco_62896_stable_diffusion_v1_5": {
+        "text_id": "coco_62896",
+        "image_path": "coco_62896_stable_diffusion_v1_5.jpg",
+        "text": "A traffic light and a signpost at a crossroads intersection near a waterway."
+    },
+    "coco_62896_stable_diffusion_v2_1": {
+        "text_id": "coco_62896",
+        "image_path": "coco_62896_stable_diffusion_v2_1.jpg",
+        "text": "A traffic light and a signpost at a crossroads intersection near a waterway."
+    },
+    "coco_62896_vq_diffusion": {
+        "text_id": "coco_62896",
+        "image_path": "coco_62896_vq_diffusion.jpg",
+        "text": "A traffic light and a signpost at a crossroads intersection near a waterway."
+    },
+    "coco_559555_mini_dalle": {
+        "text_id": "coco_559555",
+        "image_path": "coco_559555_mini_dalle.jpg",
+        "text": "A large giraffe looks at a smaller giraffe looking over a fence."
+    },
+    "coco_559555_stable_diffusion_v1_1": {
+        "text_id": "coco_559555",
+        "image_path": "coco_559555_stable_diffusion_v1_1.jpg",
+        "text": "A large giraffe looks at a smaller giraffe looking over a fence."
+    },
+    "coco_559555_stable_diffusion_v1_5": {
+        "text_id": "coco_559555",
+        "image_path": "coco_559555_stable_diffusion_v1_5.jpg",
+        "text": "A large giraffe looks at a smaller giraffe looking over a fence."
+    },
+    "coco_559555_stable_diffusion_v2_1": {
+        "text_id": "coco_559555",
+        "image_path": "coco_559555_stable_diffusion_v2_1.jpg",
+        "text": "A large giraffe looks at a smaller giraffe looking over a fence."
+    },
+    "coco_559555_vq_diffusion": {
+        "text_id": "coco_559555",
+        "image_path": "coco_559555_vq_diffusion.jpg",
+        "text": "A large giraffe looks at a smaller giraffe looking over a fence."
+    },
+    "coco_318578_mini_dalle": {
+        "text_id": "coco_318578",
+        "image_path": "coco_318578_mini_dalle.jpg",
+        "text": "A group of stuffed animals sitting next to each other in bed."
+    },
+    "coco_318578_stable_diffusion_v1_1": {
+        "text_id": "coco_318578",
+        "image_path": "coco_318578_stable_diffusion_v1_1.jpg",
+        "text": "A group of stuffed animals sitting next to each other in bed."
+    },
+    "coco_318578_stable_diffusion_v1_5": {
+        "text_id": "coco_318578",
+        "image_path": "coco_318578_stable_diffusion_v1_5.jpg",
+        "text": "A group of stuffed animals sitting next to each other in bed."
+    },
+    "coco_318578_stable_diffusion_v2_1": {
+        "text_id": "coco_318578",
+        "image_path": "coco_318578_stable_diffusion_v2_1.jpg",
+        "text": "A group of stuffed animals sitting next to each other in bed."
+    },
+    "coco_318578_vq_diffusion": {
+        "text_id": "coco_318578",
+        "image_path": "coco_318578_vq_diffusion.jpg",
+        "text": "A group of stuffed animals sitting next to each other in bed."
+    },
+    "coco_90398_mini_dalle": {
+        "text_id": "coco_90398",
+        "image_path": "coco_90398_mini_dalle.jpg",
+        "text": "The caramel-colored kitten is  lying on the small blanket on top of the unmade bed."
+    },
+    "coco_90398_stable_diffusion_v1_1": {
+        "text_id": "coco_90398",
+        "image_path": "coco_90398_stable_diffusion_v1_1.jpg",
+        "text": "The caramel-colored kitten is  lying on the small blanket on top of the unmade bed."
+    },
+    "coco_90398_stable_diffusion_v1_5": {
+        "text_id": "coco_90398",
+        "image_path": "coco_90398_stable_diffusion_v1_5.jpg",
+        "text": "The caramel-colored kitten is  lying on the small blanket on top of the unmade bed."
+    },
+    "coco_90398_stable_diffusion_v2_1": {
+        "text_id": "coco_90398",
+        "image_path": "coco_90398_stable_diffusion_v2_1.jpg",
+        "text": "The caramel-colored kitten is  lying on the small blanket on top of the unmade bed."
+    },
+    "coco_90398_vq_diffusion": {
+        "text_id": "coco_90398",
+        "image_path": "coco_90398_vq_diffusion.jpg",
+        "text": "The caramel-colored kitten is  lying on the small blanket on top of the unmade bed."
+    },
+    "coco_100240_mini_dalle": {
+        "text_id": "coco_100240",
+        "image_path": "coco_100240_mini_dalle.jpg",
+        "text": "A barefoot woman eating food outside from a plate on her lap."
+    },
+    "coco_100240_stable_diffusion_v1_1": {
+        "text_id": "coco_100240",
+        "image_path": "coco_100240_stable_diffusion_v1_1.jpg",
+        "text": "A barefoot woman eating food outside from a plate on her lap."
+    },
+    "coco_100240_stable_diffusion_v1_5": {
+        "text_id": "coco_100240",
+        "image_path": "coco_100240_stable_diffusion_v1_5.jpg",
+        "text": "A barefoot woman eating food outside from a plate on her lap."
+    },
+    "coco_100240_stable_diffusion_v2_1": {
+        "text_id": "coco_100240",
+        "image_path": "coco_100240_stable_diffusion_v2_1.jpg",
+        "text": "A barefoot woman eating food outside from a plate on her lap."
+    },
+    "coco_100240_vq_diffusion": {
+        "text_id": "coco_100240",
+        "image_path": "coco_100240_vq_diffusion.jpg",
+        "text": "A barefoot woman eating food outside from a plate on her lap."
+    },
+    "coco_663825_mini_dalle": {
+        "text_id": "coco_663825",
+        "image_path": "coco_663825_mini_dalle.jpg",
+        "text": "a train on a track near many trees"
+    },
+    "coco_663825_stable_diffusion_v1_1": {
+        "text_id": "coco_663825",
+        "image_path": "coco_663825_stable_diffusion_v1_1.jpg",
+        "text": "a train on a track near many trees"
+    },
+    "coco_663825_stable_diffusion_v1_5": {
+        "text_id": "coco_663825",
+        "image_path": "coco_663825_stable_diffusion_v1_5.jpg",
+        "text": "a train on a track near many trees"
+    },
+    "coco_663825_stable_diffusion_v2_1": {
+        "text_id": "coco_663825",
+        "image_path": "coco_663825_stable_diffusion_v2_1.jpg",
+        "text": "a train on a track near many trees"
+    },
+    "coco_663825_vq_diffusion": {
+        "text_id": "coco_663825",
+        "image_path": "coco_663825_vq_diffusion.jpg",
+        "text": "a train on a track near many trees"
+    },
+    "coco_463732_mini_dalle": {
+        "text_id": "coco_463732",
+        "image_path": "coco_463732_mini_dalle.jpg",
+        "text": "A young woman is playing a video game on a couch."
+    },
+    "coco_463732_stable_diffusion_v1_1": {
+        "text_id": "coco_463732",
+        "image_path": "coco_463732_stable_diffusion_v1_1.jpg",
+        "text": "A young woman is playing a video game on a couch."
+    },
+    "coco_463732_stable_diffusion_v1_5": {
+        "text_id": "coco_463732",
+        "image_path": "coco_463732_stable_diffusion_v1_5.jpg",
+        "text": "A young woman is playing a video game on a couch."
+    },
+    "coco_463732_stable_diffusion_v2_1": {
+        "text_id": "coco_463732",
+        "image_path": "coco_463732_stable_diffusion_v2_1.jpg",
+        "text": "A young woman is playing a video game on a couch."
+    },
+    "coco_463732_vq_diffusion": {
+        "text_id": "coco_463732",
+        "image_path": "coco_463732_vq_diffusion.jpg",
+        "text": "A young woman is playing a video game on a couch."
+    },
+    "coco_247543_mini_dalle": {
+        "text_id": "coco_247543",
+        "image_path": "coco_247543_mini_dalle.jpg",
+        "text": "Multiple skiers travelling across a vast expanse of snow covered land towards a mountain."
+    },
+    "coco_247543_stable_diffusion_v1_1": {
+        "text_id": "coco_247543",
+        "image_path": "coco_247543_stable_diffusion_v1_1.jpg",
+        "text": "Multiple skiers travelling across a vast expanse of snow covered land towards a mountain."
+    },
+    "coco_247543_stable_diffusion_v1_5": {
+        "text_id": "coco_247543",
+        "image_path": "coco_247543_stable_diffusion_v1_5.jpg",
+        "text": "Multiple skiers travelling across a vast expanse of snow covered land towards a mountain."
+    },
+    "coco_247543_stable_diffusion_v2_1": {
+        "text_id": "coco_247543",
+        "image_path": "coco_247543_stable_diffusion_v2_1.jpg",
+        "text": "Multiple skiers travelling across a vast expanse of snow covered land towards a mountain."
+    },
+    "coco_247543_vq_diffusion": {
+        "text_id": "coco_247543",
+        "image_path": "coco_247543_vq_diffusion.jpg",
+        "text": "Multiple skiers travelling across a vast expanse of snow covered land towards a mountain."
+    },
+    "coco_544211_mini_dalle": {
+        "text_id": "coco_544211",
+        "image_path": "coco_544211_mini_dalle.jpg",
+        "text": "The beach is crowded red and white beach umbrellas."
+    },
+    "coco_544211_stable_diffusion_v1_1": {
+        "text_id": "coco_544211",
+        "image_path": "coco_544211_stable_diffusion_v1_1.jpg",
+        "text": "The beach is crowded red and white beach umbrellas."
+    },
+    "coco_544211_stable_diffusion_v1_5": {
+        "text_id": "coco_544211",
+        "image_path": "coco_544211_stable_diffusion_v1_5.jpg",
+        "text": "The beach is crowded red and white beach umbrellas."
+    },
+    "coco_544211_stable_diffusion_v2_1": {
+        "text_id": "coco_544211",
+        "image_path": "coco_544211_stable_diffusion_v2_1.jpg",
+        "text": "The beach is crowded red and white beach umbrellas."
+    },
+    "coco_544211_vq_diffusion": {
+        "text_id": "coco_544211",
+        "image_path": "coco_544211_vq_diffusion.jpg",
+        "text": "The beach is crowded red and white beach umbrellas."
+    },
+    "coco_758774_mini_dalle": {
+        "text_id": "coco_758774",
+        "image_path": "coco_758774_mini_dalle.jpg",
+        "text": "A lady wearing red playing tennis on a blue and green court."
+    },
+    "coco_758774_stable_diffusion_v1_1": {
+        "text_id": "coco_758774",
+        "image_path": "coco_758774_stable_diffusion_v1_1.jpg",
+        "text": "A lady wearing red playing tennis on a blue and green court."
+    },
+    "coco_758774_stable_diffusion_v1_5": {
+        "text_id": "coco_758774",
+        "image_path": "coco_758774_stable_diffusion_v1_5.jpg",
+        "text": "A lady wearing red playing tennis on a blue and green court."
+    },
+    "coco_758774_stable_diffusion_v2_1": {
+        "text_id": "coco_758774",
+        "image_path": "coco_758774_stable_diffusion_v2_1.jpg",
+        "text": "A lady wearing red playing tennis on a blue and green court."
+    },
+    "coco_758774_vq_diffusion": {
+        "text_id": "coco_758774",
+        "image_path": "coco_758774_vq_diffusion.jpg",
+        "text": "A lady wearing red playing tennis on a blue and green court."
+    },
+    "coco_464482_mini_dalle": {
+        "text_id": "coco_464482",
+        "image_path": "coco_464482_mini_dalle.jpg",
+        "text": "A sign laying on a lush green field near a body of water."
+    },
+    "coco_464482_stable_diffusion_v1_1": {
+        "text_id": "coco_464482",
+        "image_path": "coco_464482_stable_diffusion_v1_1.jpg",
+        "text": "A sign laying on a lush green field near a body of water."
+    },
+    "coco_464482_stable_diffusion_v1_5": {
+        "text_id": "coco_464482",
+        "image_path": "coco_464482_stable_diffusion_v1_5.jpg",
+        "text": "A sign laying on a lush green field near a body of water."
+    },
+    "coco_464482_stable_diffusion_v2_1": {
+        "text_id": "coco_464482",
+        "image_path": "coco_464482_stable_diffusion_v2_1.jpg",
+        "text": "A sign laying on a lush green field near a body of water."
+    },
+    "coco_464482_vq_diffusion": {
+        "text_id": "coco_464482",
+        "image_path": "coco_464482_vq_diffusion.jpg",
+        "text": "A sign laying on a lush green field near a body of water."
+    },
+    "coco_29031_mini_dalle": {
+        "text_id": "coco_29031",
+        "image_path": "coco_29031_mini_dalle.jpg",
+        "text": "A cat lying a top on the desk on a laptop."
+    },
+    "coco_29031_stable_diffusion_v1_1": {
+        "text_id": "coco_29031",
+        "image_path": "coco_29031_stable_diffusion_v1_1.jpg",
+        "text": "A cat lying a top on the desk on a laptop."
+    },
+    "coco_29031_stable_diffusion_v1_5": {
+        "text_id": "coco_29031",
+        "image_path": "coco_29031_stable_diffusion_v1_5.jpg",
+        "text": "A cat lying a top on the desk on a laptop."
+    },
+    "coco_29031_stable_diffusion_v2_1": {
+        "text_id": "coco_29031",
+        "image_path": "coco_29031_stable_diffusion_v2_1.jpg",
+        "text": "A cat lying a top on the desk on a laptop."
+    },
+    "coco_29031_vq_diffusion": {
+        "text_id": "coco_29031",
+        "image_path": "coco_29031_vq_diffusion.jpg",
+        "text": "A cat lying a top on the desk on a laptop."
+    },
+    "coco_435097_mini_dalle": {
+        "text_id": "coco_435097",
+        "image_path": "coco_435097_mini_dalle.jpg",
+        "text": "Some very big furry brown bears in a big grass field."
+    },
+    "coco_435097_stable_diffusion_v1_1": {
+        "text_id": "coco_435097",
+        "image_path": "coco_435097_stable_diffusion_v1_1.jpg",
+        "text": "Some very big furry brown bears in a big grass field."
+    },
+    "coco_435097_stable_diffusion_v1_5": {
+        "text_id": "coco_435097",
+        "image_path": "coco_435097_stable_diffusion_v1_5.jpg",
+        "text": "Some very big furry brown bears in a big grass field."
+    },
+    "coco_435097_stable_diffusion_v2_1": {
+        "text_id": "coco_435097",
+        "image_path": "coco_435097_stable_diffusion_v2_1.jpg",
+        "text": "Some very big furry brown bears in a big grass field."
+    },
+    "coco_435097_vq_diffusion": {
+        "text_id": "coco_435097",
+        "image_path": "coco_435097_vq_diffusion.jpg",
+        "text": "Some very big furry brown bears in a big grass field."
+    },
+    "coco_178484_mini_dalle": {
+        "text_id": "coco_178484",
+        "image_path": "coco_178484_mini_dalle.jpg",
+        "text": "Shot of a person in a wooden boat on the shore of a beach."
+    },
+    "coco_178484_stable_diffusion_v1_1": {
+        "text_id": "coco_178484",
+        "image_path": "coco_178484_stable_diffusion_v1_1.jpg",
+        "text": "Shot of a person in a wooden boat on the shore of a beach."
+    },
+    "coco_178484_stable_diffusion_v1_5": {
+        "text_id": "coco_178484",
+        "image_path": "coco_178484_stable_diffusion_v1_5.jpg",
+        "text": "Shot of a person in a wooden boat on the shore of a beach."
+    },
+    "coco_178484_stable_diffusion_v2_1": {
+        "text_id": "coco_178484",
+        "image_path": "coco_178484_stable_diffusion_v2_1.jpg",
+        "text": "Shot of a person in a wooden boat on the shore of a beach."
+    },
+    "coco_178484_vq_diffusion": {
+        "text_id": "coco_178484",
+        "image_path": "coco_178484_vq_diffusion.jpg",
+        "text": "Shot of a person in a wooden boat on the shore of a beach."
+    },
+    "coco_511363_mini_dalle": {
+        "text_id": "coco_511363",
+        "image_path": "coco_511363_mini_dalle.jpg",
+        "text": "A woman is bent over next to a small refrigerator."
+    },
+    "coco_511363_stable_diffusion_v1_1": {
+        "text_id": "coco_511363",
+        "image_path": "coco_511363_stable_diffusion_v1_1.jpg",
+        "text": "A woman is bent over next to a small refrigerator."
+    },
+    "coco_511363_stable_diffusion_v1_5": {
+        "text_id": "coco_511363",
+        "image_path": "coco_511363_stable_diffusion_v1_5.jpg",
+        "text": "A woman is bent over next to a small refrigerator."
+    },
+    "coco_511363_stable_diffusion_v2_1": {
+        "text_id": "coco_511363",
+        "image_path": "coco_511363_stable_diffusion_v2_1.jpg",
+        "text": "A woman is bent over next to a small refrigerator."
+    },
+    "coco_511363_vq_diffusion": {
+        "text_id": "coco_511363",
+        "image_path": "coco_511363_vq_diffusion.jpg",
+        "text": "A woman is bent over next to a small refrigerator."
+    },
+    "coco_482435_mini_dalle": {
+        "text_id": "coco_482435",
+        "image_path": "coco_482435_mini_dalle.jpg",
+        "text": "Woman with blue dress sitting in modern chair next to vase in empty room."
+    },
+    "coco_482435_stable_diffusion_v1_1": {
+        "text_id": "coco_482435",
+        "image_path": "coco_482435_stable_diffusion_v1_1.jpg",
+        "text": "Woman with blue dress sitting in modern chair next to vase in empty room."
+    },
+    "coco_482435_stable_diffusion_v1_5": {
+        "text_id": "coco_482435",
+        "image_path": "coco_482435_stable_diffusion_v1_5.jpg",
+        "text": "Woman with blue dress sitting in modern chair next to vase in empty room."
+    },
+    "coco_482435_stable_diffusion_v2_1": {
+        "text_id": "coco_482435",
+        "image_path": "coco_482435_stable_diffusion_v2_1.jpg",
+        "text": "Woman with blue dress sitting in modern chair next to vase in empty room."
+    },
+    "coco_482435_vq_diffusion": {
+        "text_id": "coco_482435",
+        "image_path": "coco_482435_vq_diffusion.jpg",
+        "text": "Woman with blue dress sitting in modern chair next to vase in empty room."
+    },
+    "coco_488166_mini_dalle": {
+        "text_id": "coco_488166",
+        "image_path": "coco_488166_mini_dalle.jpg",
+        "text": "Three people standing next to an elephant along a river."
+    },
+    "coco_488166_stable_diffusion_v1_1": {
+        "text_id": "coco_488166",
+        "image_path": "coco_488166_stable_diffusion_v1_1.jpg",
+        "text": "Three people standing next to an elephant along a river."
+    },
+    "coco_488166_stable_diffusion_v1_5": {
+        "text_id": "coco_488166",
+        "image_path": "coco_488166_stable_diffusion_v1_5.jpg",
+        "text": "Three people standing next to an elephant along a river."
+    },
+    "coco_488166_stable_diffusion_v2_1": {
+        "text_id": "coco_488166",
+        "image_path": "coco_488166_stable_diffusion_v2_1.jpg",
+        "text": "Three people standing next to an elephant along a river."
+    },
+    "coco_488166_vq_diffusion": {
+        "text_id": "coco_488166",
+        "image_path": "coco_488166_vq_diffusion.jpg",
+        "text": "Three people standing next to an elephant along a river."
+    },
+    "coco_653095_mini_dalle": {
+        "text_id": "coco_653095",
+        "image_path": "coco_653095_mini_dalle.jpg",
+        "text": "A group of giraffes are gathered together in their enclosure"
+    },
+    "coco_653095_stable_diffusion_v1_1": {
+        "text_id": "coco_653095",
+        "image_path": "coco_653095_stable_diffusion_v1_1.jpg",
+        "text": "A group of giraffes are gathered together in their enclosure"
+    },
+    "coco_653095_stable_diffusion_v1_5": {
+        "text_id": "coco_653095",
+        "image_path": "coco_653095_stable_diffusion_v1_5.jpg",
+        "text": "A group of giraffes are gathered together in their enclosure"
+    },
+    "coco_653095_stable_diffusion_v2_1": {
+        "text_id": "coco_653095",
+        "image_path": "coco_653095_stable_diffusion_v2_1.jpg",
+        "text": "A group of giraffes are gathered together in their enclosure"
+    },
+    "coco_653095_vq_diffusion": {
+        "text_id": "coco_653095",
+        "image_path": "coco_653095_vq_diffusion.jpg",
+        "text": "A group of giraffes are gathered together in their enclosure"
+    },
+    "coco_71258_mini_dalle": {
+        "text_id": "coco_71258",
+        "image_path": "coco_71258_mini_dalle.jpg",
+        "text": "A house where you can see the bedroom and relaxing room."
+    },
+    "coco_71258_stable_diffusion_v1_1": {
+        "text_id": "coco_71258",
+        "image_path": "coco_71258_stable_diffusion_v1_1.jpg",
+        "text": "A house where you can see the bedroom and relaxing room."
+    },
+    "coco_71258_stable_diffusion_v1_5": {
+        "text_id": "coco_71258",
+        "image_path": "coco_71258_stable_diffusion_v1_5.jpg",
+        "text": "A house where you can see the bedroom and relaxing room."
+    },
+    "coco_71258_stable_diffusion_v2_1": {
+        "text_id": "coco_71258",
+        "image_path": "coco_71258_stable_diffusion_v2_1.jpg",
+        "text": "A house where you can see the bedroom and relaxing room."
+    },
+    "coco_71258_vq_diffusion": {
+        "text_id": "coco_71258",
+        "image_path": "coco_71258_vq_diffusion.jpg",
+        "text": "A house where you can see the bedroom and relaxing room."
+    },
+    "coco_339729_mini_dalle": {
+        "text_id": "coco_339729",
+        "image_path": "coco_339729_mini_dalle.jpg",
+        "text": "A boy wearing a green shirt posing with some fruit."
+    },
+    "coco_339729_stable_diffusion_v1_1": {
+        "text_id": "coco_339729",
+        "image_path": "coco_339729_stable_diffusion_v1_1.jpg",
+        "text": "A boy wearing a green shirt posing with some fruit."
+    },
+    "coco_339729_stable_diffusion_v1_5": {
+        "text_id": "coco_339729",
+        "image_path": "coco_339729_stable_diffusion_v1_5.jpg",
+        "text": "A boy wearing a green shirt posing with some fruit."
+    },
+    "coco_339729_stable_diffusion_v2_1": {
+        "text_id": "coco_339729",
+        "image_path": "coco_339729_stable_diffusion_v2_1.jpg",
+        "text": "A boy wearing a green shirt posing with some fruit."
+    },
+    "coco_339729_vq_diffusion": {
+        "text_id": "coco_339729",
+        "image_path": "coco_339729_vq_diffusion.jpg",
+        "text": "A boy wearing a green shirt posing with some fruit."
+    },
+    "coco_179805_mini_dalle": {
+        "text_id": "coco_179805",
+        "image_path": "coco_179805_mini_dalle.jpg",
+        "text": "Some people posting in front of a camera for a picture."
+    },
+    "coco_179805_stable_diffusion_v1_1": {
+        "text_id": "coco_179805",
+        "image_path": "coco_179805_stable_diffusion_v1_1.jpg",
+        "text": "Some people posting in front of a camera for a picture."
+    },
+    "coco_179805_stable_diffusion_v1_5": {
+        "text_id": "coco_179805",
+        "image_path": "coco_179805_stable_diffusion_v1_5.jpg",
+        "text": "Some people posting in front of a camera for a picture."
+    },
+    "coco_179805_stable_diffusion_v2_1": {
+        "text_id": "coco_179805",
+        "image_path": "coco_179805_stable_diffusion_v2_1.jpg",
+        "text": "Some people posting in front of a camera for a picture."
+    },
+    "coco_179805_vq_diffusion": {
+        "text_id": "coco_179805",
+        "image_path": "coco_179805_vq_diffusion.jpg",
+        "text": "Some people posting in front of a camera for a picture."
+    },
+    "coco_130602_mini_dalle": {
+        "text_id": "coco_130602",
+        "image_path": "coco_130602_mini_dalle.jpg",
+        "text": "Woman dressed in black, smiling and brushing her teeth"
+    },
+    "coco_130602_stable_diffusion_v1_1": {
+        "text_id": "coco_130602",
+        "image_path": "coco_130602_stable_diffusion_v1_1.jpg",
+        "text": "Woman dressed in black, smiling and brushing her teeth"
+    },
+    "coco_130602_stable_diffusion_v1_5": {
+        "text_id": "coco_130602",
+        "image_path": "coco_130602_stable_diffusion_v1_5.jpg",
+        "text": "Woman dressed in black, smiling and brushing her teeth"
+    },
+    "coco_130602_stable_diffusion_v2_1": {
+        "text_id": "coco_130602",
+        "image_path": "coco_130602_stable_diffusion_v2_1.jpg",
+        "text": "Woman dressed in black, smiling and brushing her teeth"
+    },
+    "coco_130602_vq_diffusion": {
+        "text_id": "coco_130602",
+        "image_path": "coco_130602_vq_diffusion.jpg",
+        "text": "Woman dressed in black, smiling and brushing her teeth"
+    },
+    "coco_111485_mini_dalle": {
+        "text_id": "coco_111485",
+        "image_path": "coco_111485_mini_dalle.jpg",
+        "text": "GUY WITH UMBRELLA HAT SITTING A TABLE WITH ANOTHER PERSON"
+    },
+    "coco_111485_stable_diffusion_v1_1": {
+        "text_id": "coco_111485",
+        "image_path": "coco_111485_stable_diffusion_v1_1.jpg",
+        "text": "GUY WITH UMBRELLA HAT SITTING A TABLE WITH ANOTHER PERSON"
+    },
+    "coco_111485_stable_diffusion_v1_5": {
+        "text_id": "coco_111485",
+        "image_path": "coco_111485_stable_diffusion_v1_5.jpg",
+        "text": "GUY WITH UMBRELLA HAT SITTING A TABLE WITH ANOTHER PERSON"
+    },
+    "coco_111485_stable_diffusion_v2_1": {
+        "text_id": "coco_111485",
+        "image_path": "coco_111485_stable_diffusion_v2_1.jpg",
+        "text": "GUY WITH UMBRELLA HAT SITTING A TABLE WITH ANOTHER PERSON"
+    },
+    "coco_111485_vq_diffusion": {
+        "text_id": "coco_111485",
+        "image_path": "coco_111485_vq_diffusion.jpg",
+        "text": "GUY WITH UMBRELLA HAT SITTING A TABLE WITH ANOTHER PERSON"
+    },
+    "coco_103653_mini_dalle": {
+        "text_id": "coco_103653",
+        "image_path": "coco_103653_mini_dalle.jpg",
+        "text": "Two men in neon yellow safety jackets sharing a meal next to a food car."
+    },
+    "coco_103653_stable_diffusion_v1_1": {
+        "text_id": "coco_103653",
+        "image_path": "coco_103653_stable_diffusion_v1_1.jpg",
+        "text": "Two men in neon yellow safety jackets sharing a meal next to a food car."
+    },
+    "coco_103653_stable_diffusion_v1_5": {
+        "text_id": "coco_103653",
+        "image_path": "coco_103653_stable_diffusion_v1_5.jpg",
+        "text": "Two men in neon yellow safety jackets sharing a meal next to a food car."
+    },
+    "coco_103653_stable_diffusion_v2_1": {
+        "text_id": "coco_103653",
+        "image_path": "coco_103653_stable_diffusion_v2_1.jpg",
+        "text": "Two men in neon yellow safety jackets sharing a meal next to a food car."
+    },
+    "coco_103653_vq_diffusion": {
+        "text_id": "coco_103653",
+        "image_path": "coco_103653_vq_diffusion.jpg",
+        "text": "Two men in neon yellow safety jackets sharing a meal next to a food car."
+    },
+    "coco_744388_mini_dalle": {
+        "text_id": "coco_744388",
+        "image_path": "coco_744388_mini_dalle.jpg",
+        "text": "Closeup picture of the front of a clean motorcycle."
+    },
+    "coco_744388_stable_diffusion_v1_1": {
+        "text_id": "coco_744388",
+        "image_path": "coco_744388_stable_diffusion_v1_1.jpg",
+        "text": "Closeup picture of the front of a clean motorcycle."
+    },
+    "coco_744388_stable_diffusion_v1_5": {
+        "text_id": "coco_744388",
+        "image_path": "coco_744388_stable_diffusion_v1_5.jpg",
+        "text": "Closeup picture of the front of a clean motorcycle."
+    },
+    "coco_744388_stable_diffusion_v2_1": {
+        "text_id": "coco_744388",
+        "image_path": "coco_744388_stable_diffusion_v2_1.jpg",
+        "text": "Closeup picture of the front of a clean motorcycle."
+    },
+    "coco_744388_vq_diffusion": {
+        "text_id": "coco_744388",
+        "image_path": "coco_744388_vq_diffusion.jpg",
+        "text": "Closeup picture of the front of a clean motorcycle."
+    },
+    "coco_397109_mini_dalle": {
+        "text_id": "coco_397109",
+        "image_path": "coco_397109_mini_dalle.jpg",
+        "text": "A commercial airplane with propellers flying through the air."
+    },
+    "coco_397109_stable_diffusion_v1_1": {
+        "text_id": "coco_397109",
+        "image_path": "coco_397109_stable_diffusion_v1_1.jpg",
+        "text": "A commercial airplane with propellers flying through the air."
+    },
+    "coco_397109_stable_diffusion_v1_5": {
+        "text_id": "coco_397109",
+        "image_path": "coco_397109_stable_diffusion_v1_5.jpg",
+        "text": "A commercial airplane with propellers flying through the air."
+    },
+    "coco_397109_stable_diffusion_v2_1": {
+        "text_id": "coco_397109",
+        "image_path": "coco_397109_stable_diffusion_v2_1.jpg",
+        "text": "A commercial airplane with propellers flying through the air."
+    },
+    "coco_397109_vq_diffusion": {
+        "text_id": "coco_397109",
+        "image_path": "coco_397109_vq_diffusion.jpg",
+        "text": "A commercial airplane with propellers flying through the air."
+    },
+    "coco_20046_mini_dalle": {
+        "text_id": "coco_20046",
+        "image_path": "coco_20046_mini_dalle.jpg",
+        "text": "An elevated subway train in a major city on a sunny day."
+    },
+    "coco_20046_stable_diffusion_v1_1": {
+        "text_id": "coco_20046",
+        "image_path": "coco_20046_stable_diffusion_v1_1.jpg",
+        "text": "An elevated subway train in a major city on a sunny day."
+    },
+    "coco_20046_stable_diffusion_v1_5": {
+        "text_id": "coco_20046",
+        "image_path": "coco_20046_stable_diffusion_v1_5.jpg",
+        "text": "An elevated subway train in a major city on a sunny day."
+    },
+    "coco_20046_stable_diffusion_v2_1": {
+        "text_id": "coco_20046",
+        "image_path": "coco_20046_stable_diffusion_v2_1.jpg",
+        "text": "An elevated subway train in a major city on a sunny day."
+    },
+    "coco_20046_vq_diffusion": {
+        "text_id": "coco_20046",
+        "image_path": "coco_20046_vq_diffusion.jpg",
+        "text": "An elevated subway train in a major city on a sunny day."
+    },
+    "coco_627537_mini_dalle": {
+        "text_id": "coco_627537",
+        "image_path": "coco_627537_mini_dalle.jpg",
+        "text": "A pear, orange, and two bananas in a wooden bowl."
+    },
+    "coco_627537_stable_diffusion_v1_1": {
+        "text_id": "coco_627537",
+        "image_path": "coco_627537_stable_diffusion_v1_1.jpg",
+        "text": "A pear, orange, and two bananas in a wooden bowl."
+    },
+    "coco_627537_stable_diffusion_v1_5": {
+        "text_id": "coco_627537",
+        "image_path": "coco_627537_stable_diffusion_v1_5.jpg",
+        "text": "A pear, orange, and two bananas in a wooden bowl."
+    },
+    "coco_627537_stable_diffusion_v2_1": {
+        "text_id": "coco_627537",
+        "image_path": "coco_627537_stable_diffusion_v2_1.jpg",
+        "text": "A pear, orange, and two bananas in a wooden bowl."
+    },
+    "coco_627537_vq_diffusion": {
+        "text_id": "coco_627537",
+        "image_path": "coco_627537_vq_diffusion.jpg",
+        "text": "A pear, orange, and two bananas in a wooden bowl."
+    },
+    "coco_321596_mini_dalle": {
+        "text_id": "coco_321596",
+        "image_path": "coco_321596_mini_dalle.jpg",
+        "text": "A chair in the corner on a boat."
+    },
+    "coco_321596_stable_diffusion_v1_1": {
+        "text_id": "coco_321596",
+        "image_path": "coco_321596_stable_diffusion_v1_1.jpg",
+        "text": "A chair in the corner on a boat."
+    },
+    "coco_321596_stable_diffusion_v1_5": {
+        "text_id": "coco_321596",
+        "image_path": "coco_321596_stable_diffusion_v1_5.jpg",
+        "text": "A chair in the corner on a boat."
+    },
+    "coco_321596_stable_diffusion_v2_1": {
+        "text_id": "coco_321596",
+        "image_path": "coco_321596_stable_diffusion_v2_1.jpg",
+        "text": "A chair in the corner on a boat."
+    },
+    "coco_321596_vq_diffusion": {
+        "text_id": "coco_321596",
+        "image_path": "coco_321596_vq_diffusion.jpg",
+        "text": "A chair in the corner on a boat."
+    },
+    "coco_668102_mini_dalle": {
+        "text_id": "coco_668102",
+        "image_path": "coco_668102_mini_dalle.jpg",
+        "text": "A man sitting on a motorcycle smoking a cigarette."
+    },
+    "coco_668102_stable_diffusion_v1_1": {
+        "text_id": "coco_668102",
+        "image_path": "coco_668102_stable_diffusion_v1_1.jpg",
+        "text": "A man sitting on a motorcycle smoking a cigarette."
+    },
+    "coco_668102_stable_diffusion_v1_5": {
+        "text_id": "coco_668102",
+        "image_path": "coco_668102_stable_diffusion_v1_5.jpg",
+        "text": "A man sitting on a motorcycle smoking a cigarette."
+    },
+    "coco_668102_stable_diffusion_v2_1": {
+        "text_id": "coco_668102",
+        "image_path": "coco_668102_stable_diffusion_v2_1.jpg",
+        "text": "A man sitting on a motorcycle smoking a cigarette."
+    },
+    "coco_668102_vq_diffusion": {
+        "text_id": "coco_668102",
+        "image_path": "coco_668102_vq_diffusion.jpg",
+        "text": "A man sitting on a motorcycle smoking a cigarette."
+    },
+    "coco_67370_mini_dalle": {
+        "text_id": "coco_67370",
+        "image_path": "coco_67370_mini_dalle.jpg",
+        "text": "A car and a truck sitting a red light."
+    },
+    "coco_67370_stable_diffusion_v1_1": {
+        "text_id": "coco_67370",
+        "image_path": "coco_67370_stable_diffusion_v1_1.jpg",
+        "text": "A car and a truck sitting a red light."
+    },
+    "coco_67370_stable_diffusion_v1_5": {
+        "text_id": "coco_67370",
+        "image_path": "coco_67370_stable_diffusion_v1_5.jpg",
+        "text": "A car and a truck sitting a red light."
+    },
+    "coco_67370_stable_diffusion_v2_1": {
+        "text_id": "coco_67370",
+        "image_path": "coco_67370_stable_diffusion_v2_1.jpg",
+        "text": "A car and a truck sitting a red light."
+    },
+    "coco_67370_vq_diffusion": {
+        "text_id": "coco_67370",
+        "image_path": "coco_67370_vq_diffusion.jpg",
+        "text": "A car and a truck sitting a red light."
+    },
+    "coco_426642_mini_dalle": {
+        "text_id": "coco_426642",
+        "image_path": "coco_426642_mini_dalle.jpg",
+        "text": "A man at a food truck viewing the menu."
+    },
+    "coco_426642_stable_diffusion_v1_1": {
+        "text_id": "coco_426642",
+        "image_path": "coco_426642_stable_diffusion_v1_1.jpg",
+        "text": "A man at a food truck viewing the menu."
+    },
+    "coco_426642_stable_diffusion_v1_5": {
+        "text_id": "coco_426642",
+        "image_path": "coco_426642_stable_diffusion_v1_5.jpg",
+        "text": "A man at a food truck viewing the menu."
+    },
+    "coco_426642_stable_diffusion_v2_1": {
+        "text_id": "coco_426642",
+        "image_path": "coco_426642_stable_diffusion_v2_1.jpg",
+        "text": "A man at a food truck viewing the menu."
+    },
+    "coco_426642_vq_diffusion": {
+        "text_id": "coco_426642",
+        "image_path": "coco_426642_vq_diffusion.jpg",
+        "text": "A man at a food truck viewing the menu."
+    },
+    "coco_685662_mini_dalle": {
+        "text_id": "coco_685662",
+        "image_path": "coco_685662_mini_dalle.jpg",
+        "text": "A man and a woman posing in front of a motorcycle.\r\n"
+    },
+    "coco_685662_stable_diffusion_v1_1": {
+        "text_id": "coco_685662",
+        "image_path": "coco_685662_stable_diffusion_v1_1.jpg",
+        "text": "A man and a woman posing in front of a motorcycle.\r\n"
+    },
+    "coco_685662_stable_diffusion_v1_5": {
+        "text_id": "coco_685662",
+        "image_path": "coco_685662_stable_diffusion_v1_5.jpg",
+        "text": "A man and a woman posing in front of a motorcycle.\r\n"
+    },
+    "coco_685662_stable_diffusion_v2_1": {
+        "text_id": "coco_685662",
+        "image_path": "coco_685662_stable_diffusion_v2_1.jpg",
+        "text": "A man and a woman posing in front of a motorcycle.\r\n"
+    },
+    "coco_685662_vq_diffusion": {
+        "text_id": "coco_685662",
+        "image_path": "coco_685662_vq_diffusion.jpg",
+        "text": "A man and a woman posing in front of a motorcycle.\r\n"
+    },
+    "coco_751840_mini_dalle": {
+        "text_id": "coco_751840",
+        "image_path": "coco_751840_mini_dalle.jpg",
+        "text": "A man in a black suit surfing a large wave"
+    },
+    "coco_751840_stable_diffusion_v1_1": {
+        "text_id": "coco_751840",
+        "image_path": "coco_751840_stable_diffusion_v1_1.jpg",
+        "text": "A man in a black suit surfing a large wave"
+    },
+    "coco_751840_stable_diffusion_v1_5": {
+        "text_id": "coco_751840",
+        "image_path": "coco_751840_stable_diffusion_v1_5.jpg",
+        "text": "A man in a black suit surfing a large wave"
+    },
+    "coco_751840_stable_diffusion_v2_1": {
+        "text_id": "coco_751840",
+        "image_path": "coco_751840_stable_diffusion_v2_1.jpg",
+        "text": "A man in a black suit surfing a large wave"
+    },
+    "coco_751840_vq_diffusion": {
+        "text_id": "coco_751840",
+        "image_path": "coco_751840_vq_diffusion.jpg",
+        "text": "A man in a black suit surfing a large wave"
+    },
+    "coco_251210_mini_dalle": {
+        "text_id": "coco_251210",
+        "image_path": "coco_251210_mini_dalle.jpg",
+        "text": "A man standing by an oven with the door open."
+    },
+    "coco_251210_stable_diffusion_v1_1": {
+        "text_id": "coco_251210",
+        "image_path": "coco_251210_stable_diffusion_v1_1.jpg",
+        "text": "A man standing by an oven with the door open."
+    },
+    "coco_251210_stable_diffusion_v1_5": {
+        "text_id": "coco_251210",
+        "image_path": "coco_251210_stable_diffusion_v1_5.jpg",
+        "text": "A man standing by an oven with the door open."
+    },
+    "coco_251210_stable_diffusion_v2_1": {
+        "text_id": "coco_251210",
+        "image_path": "coco_251210_stable_diffusion_v2_1.jpg",
+        "text": "A man standing by an oven with the door open."
+    },
+    "coco_251210_vq_diffusion": {
+        "text_id": "coco_251210",
+        "image_path": "coco_251210_vq_diffusion.jpg",
+        "text": "A man standing by an oven with the door open."
+    },
+    "coco_625027_mini_dalle": {
+        "text_id": "coco_625027",
+        "image_path": "coco_625027_mini_dalle.jpg",
+        "text": "A white slope covers the background, while the foreground features a grassy slope with several rams grazing and one measly and underdeveloped evergreen in the foreground.  "
+    },
+    "coco_625027_stable_diffusion_v1_1": {
+        "text_id": "coco_625027",
+        "image_path": "coco_625027_stable_diffusion_v1_1.jpg",
+        "text": "A white slope covers the background, while the foreground features a grassy slope with several rams grazing and one measly and underdeveloped evergreen in the foreground.  "
+    },
+    "coco_625027_stable_diffusion_v1_5": {
+        "text_id": "coco_625027",
+        "image_path": "coco_625027_stable_diffusion_v1_5.jpg",
+        "text": "A white slope covers the background, while the foreground features a grassy slope with several rams grazing and one measly and underdeveloped evergreen in the foreground.  "
+    },
+    "coco_625027_stable_diffusion_v2_1": {
+        "text_id": "coco_625027",
+        "image_path": "coco_625027_stable_diffusion_v2_1.jpg",
+        "text": "A white slope covers the background, while the foreground features a grassy slope with several rams grazing and one measly and underdeveloped evergreen in the foreground.  "
+    },
+    "coco_625027_vq_diffusion": {
+        "text_id": "coco_625027",
+        "image_path": "coco_625027_vq_diffusion.jpg",
+        "text": "A white slope covers the background, while the foreground features a grassy slope with several rams grazing and one measly and underdeveloped evergreen in the foreground.  "
+    },
+    "coco_827653_mini_dalle": {
+        "text_id": "coco_827653",
+        "image_path": "coco_827653_mini_dalle.jpg",
+        "text": "People are wearing helmets standing next to bikes in the woods."
+    },
+    "coco_827653_stable_diffusion_v1_1": {
+        "text_id": "coco_827653",
+        "image_path": "coco_827653_stable_diffusion_v1_1.jpg",
+        "text": "People are wearing helmets standing next to bikes in the woods."
+    },
+    "coco_827653_stable_diffusion_v1_5": {
+        "text_id": "coco_827653",
+        "image_path": "coco_827653_stable_diffusion_v1_5.jpg",
+        "text": "People are wearing helmets standing next to bikes in the woods."
+    },
+    "coco_827653_stable_diffusion_v2_1": {
+        "text_id": "coco_827653",
+        "image_path": "coco_827653_stable_diffusion_v2_1.jpg",
+        "text": "People are wearing helmets standing next to bikes in the woods."
+    },
+    "coco_827653_vq_diffusion": {
+        "text_id": "coco_827653",
+        "image_path": "coco_827653_vq_diffusion.jpg",
+        "text": "People are wearing helmets standing next to bikes in the woods."
+    },
+    "coco_645405_mini_dalle": {
+        "text_id": "coco_645405",
+        "image_path": "coco_645405_mini_dalle.jpg",
+        "text": "A teddy bear under some furniture that appears to be turned on it's side."
+    },
+    "coco_645405_stable_diffusion_v1_1": {
+        "text_id": "coco_645405",
+        "image_path": "coco_645405_stable_diffusion_v1_1.jpg",
+        "text": "A teddy bear under some furniture that appears to be turned on it's side."
+    },
+    "coco_645405_stable_diffusion_v1_5": {
+        "text_id": "coco_645405",
+        "image_path": "coco_645405_stable_diffusion_v1_5.jpg",
+        "text": "A teddy bear under some furniture that appears to be turned on it's side."
+    },
+    "coco_645405_stable_diffusion_v2_1": {
+        "text_id": "coco_645405",
+        "image_path": "coco_645405_stable_diffusion_v2_1.jpg",
+        "text": "A teddy bear under some furniture that appears to be turned on it's side."
+    },
+    "coco_645405_vq_diffusion": {
+        "text_id": "coco_645405",
+        "image_path": "coco_645405_vq_diffusion.jpg",
+        "text": "A teddy bear under some furniture that appears to be turned on it's side."
+    },
+    "coco_720267_mini_dalle": {
+        "text_id": "coco_720267",
+        "image_path": "coco_720267_mini_dalle.jpg",
+        "text": "three men riding horses through a grassy field"
+    },
+    "coco_720267_stable_diffusion_v1_1": {
+        "text_id": "coco_720267",
+        "image_path": "coco_720267_stable_diffusion_v1_1.jpg",
+        "text": "three men riding horses through a grassy field"
+    },
+    "coco_720267_stable_diffusion_v1_5": {
+        "text_id": "coco_720267",
+        "image_path": "coco_720267_stable_diffusion_v1_5.jpg",
+        "text": "three men riding horses through a grassy field"
+    },
+    "coco_720267_stable_diffusion_v2_1": {
+        "text_id": "coco_720267",
+        "image_path": "coco_720267_stable_diffusion_v2_1.jpg",
+        "text": "three men riding horses through a grassy field"
+    },
+    "coco_720267_vq_diffusion": {
+        "text_id": "coco_720267",
+        "image_path": "coco_720267_vq_diffusion.jpg",
+        "text": "three men riding horses through a grassy field"
+    },
+    "coco_323167_mini_dalle": {
+        "text_id": "coco_323167",
+        "image_path": "coco_323167_mini_dalle.jpg",
+        "text": "A laptop with external keyboard, mouse, phone and photo on a desk."
+    },
+    "coco_323167_stable_diffusion_v1_1": {
+        "text_id": "coco_323167",
+        "image_path": "coco_323167_stable_diffusion_v1_1.jpg",
+        "text": "A laptop with external keyboard, mouse, phone and photo on a desk."
+    },
+    "coco_323167_stable_diffusion_v1_5": {
+        "text_id": "coco_323167",
+        "image_path": "coco_323167_stable_diffusion_v1_5.jpg",
+        "text": "A laptop with external keyboard, mouse, phone and photo on a desk."
+    },
+    "coco_323167_stable_diffusion_v2_1": {
+        "text_id": "coco_323167",
+        "image_path": "coco_323167_stable_diffusion_v2_1.jpg",
+        "text": "A laptop with external keyboard, mouse, phone and photo on a desk."
+    },
+    "coco_323167_vq_diffusion": {
+        "text_id": "coco_323167",
+        "image_path": "coco_323167_vq_diffusion.jpg",
+        "text": "A laptop with external keyboard, mouse, phone and photo on a desk."
+    },
+    "coco_572796_mini_dalle": {
+        "text_id": "coco_572796",
+        "image_path": "coco_572796_mini_dalle.jpg",
+        "text": "A young woman with green eyes and piercings all over her face."
+    },
+    "coco_572796_stable_diffusion_v1_1": {
+        "text_id": "coco_572796",
+        "image_path": "coco_572796_stable_diffusion_v1_1.jpg",
+        "text": "A young woman with green eyes and piercings all over her face."
+    },
+    "coco_572796_stable_diffusion_v1_5": {
+        "text_id": "coco_572796",
+        "image_path": "coco_572796_stable_diffusion_v1_5.jpg",
+        "text": "A young woman with green eyes and piercings all over her face."
+    },
+    "coco_572796_stable_diffusion_v2_1": {
+        "text_id": "coco_572796",
+        "image_path": "coco_572796_stable_diffusion_v2_1.jpg",
+        "text": "A young woman with green eyes and piercings all over her face."
+    },
+    "coco_572796_vq_diffusion": {
+        "text_id": "coco_572796",
+        "image_path": "coco_572796_vq_diffusion.jpg",
+        "text": "A young woman with green eyes and piercings all over her face."
+    },
+    "drawbench_138_mini_dalle": {
+        "text_id": "drawbench_138",
+        "image_path": "drawbench_138_mini_dalle.jpg",
+        "text": "Greek statue of a man tripping over a cat."
+    },
+    "drawbench_138_stable_diffusion_v1_1": {
+        "text_id": "drawbench_138",
+        "image_path": "drawbench_138_stable_diffusion_v1_1.jpg",
+        "text": "Greek statue of a man tripping over a cat."
+    },
+    "drawbench_138_stable_diffusion_v1_5": {
+        "text_id": "drawbench_138",
+        "image_path": "drawbench_138_stable_diffusion_v1_5.jpg",
+        "text": "Greek statue of a man tripping over a cat."
+    },
+    "drawbench_138_stable_diffusion_v2_1": {
+        "text_id": "drawbench_138",
+        "image_path": "drawbench_138_stable_diffusion_v2_1.jpg",
+        "text": "Greek statue of a man tripping over a cat."
+    },
+    "drawbench_138_vq_diffusion": {
+        "text_id": "drawbench_138",
+        "image_path": "drawbench_138_vq_diffusion.jpg",
+        "text": "Greek statue of a man tripping over a cat."
+    },
+    "partiprompt_436_mini_dalle": {
+        "text_id": "partiprompt_436",
+        "image_path": "partiprompt_436_mini_dalle.jpg",
+        "text": "a flock of geese in front of The Alamo"
+    },
+    "partiprompt_436_stable_diffusion_v1_1": {
+        "text_id": "partiprompt_436",
+        "image_path": "partiprompt_436_stable_diffusion_v1_1.jpg",
+        "text": "a flock of geese in front of The Alamo"
+    },
+    "partiprompt_436_stable_diffusion_v1_5": {
+        "text_id": "partiprompt_436",
+        "image_path": "partiprompt_436_stable_diffusion_v1_5.jpg",
+        "text": "a flock of geese in front of The Alamo"
+    },
+    "partiprompt_436_stable_diffusion_v2_1": {
+        "text_id": "partiprompt_436",
+        "image_path": "partiprompt_436_stable_diffusion_v2_1.jpg",
+        "text": "a flock of geese in front of The Alamo"
+    },
+    "partiprompt_436_vq_diffusion": {
+        "text_id": "partiprompt_436",
+        "image_path": "partiprompt_436_vq_diffusion.jpg",
+        "text": "a flock of geese in front of The Alamo"
+    },
+    "paintskill_31_mini_dalle": {
+        "text_id": "paintskill_31",
+        "image_path": "paintskill_31_mini_dalle.jpg",
+        "text": "a photo of blue fire hydrant"
+    },
+    "paintskill_31_stable_diffusion_v1_1": {
+        "text_id": "paintskill_31",
+        "image_path": "paintskill_31_stable_diffusion_v1_1.jpg",
+        "text": "a photo of blue fire hydrant"
+    },
+    "paintskill_31_stable_diffusion_v1_5": {
+        "text_id": "paintskill_31",
+        "image_path": "paintskill_31_stable_diffusion_v1_5.jpg",
+        "text": "a photo of blue fire hydrant"
+    },
+    "paintskill_31_stable_diffusion_v2_1": {
+        "text_id": "paintskill_31",
+        "image_path": "paintskill_31_stable_diffusion_v2_1.jpg",
+        "text": "a photo of blue fire hydrant"
+    },
+    "paintskill_31_vq_diffusion": {
+        "text_id": "paintskill_31",
+        "image_path": "paintskill_31_vq_diffusion.jpg",
+        "text": "a photo of blue fire hydrant"
+    },
+    "partiprompt_1261_mini_dalle": {
+        "text_id": "partiprompt_1261",
+        "image_path": "partiprompt_1261_mini_dalle.jpg",
+        "text": "an abstract painting of three squares in blue, yellow and red"
+    },
+    "partiprompt_1261_stable_diffusion_v1_1": {
+        "text_id": "partiprompt_1261",
+        "image_path": "partiprompt_1261_stable_diffusion_v1_1.jpg",
+        "text": "an abstract painting of three squares in blue, yellow and red"
+    },
+    "partiprompt_1261_stable_diffusion_v1_5": {
+        "text_id": "partiprompt_1261",
+        "image_path": "partiprompt_1261_stable_diffusion_v1_5.jpg",
+        "text": "an abstract painting of three squares in blue, yellow and red"
+    },
+    "partiprompt_1261_stable_diffusion_v2_1": {
+        "text_id": "partiprompt_1261",
+        "image_path": "partiprompt_1261_stable_diffusion_v2_1.jpg",
+        "text": "an abstract painting of three squares in blue, yellow and red"
+    },
+    "partiprompt_1261_vq_diffusion": {
+        "text_id": "partiprompt_1261",
+        "image_path": "partiprompt_1261_vq_diffusion.jpg",
+        "text": "an abstract painting of three squares in blue, yellow and red"
+    },
+    "partiprompt_1192_mini_dalle": {
+        "text_id": "partiprompt_1192",
+        "image_path": "partiprompt_1192_mini_dalle.jpg",
+        "text": "a stained glass window depicting a calm tyrannosaurus rex"
+    },
+    "partiprompt_1192_stable_diffusion_v1_1": {
+        "text_id": "partiprompt_1192",
+        "image_path": "partiprompt_1192_stable_diffusion_v1_1.jpg",
+        "text": "a stained glass window depicting a calm tyrannosaurus rex"
+    },
+    "partiprompt_1192_stable_diffusion_v1_5": {
+        "text_id": "partiprompt_1192",
+        "image_path": "partiprompt_1192_stable_diffusion_v1_5.jpg",
+        "text": "a stained glass window depicting a calm tyrannosaurus rex"
+    },
+    "partiprompt_1192_stable_diffusion_v2_1": {
+        "text_id": "partiprompt_1192",
+        "image_path": "partiprompt_1192_stable_diffusion_v2_1.jpg",
+        "text": "a stained glass window depicting a calm tyrannosaurus rex"
+    },
+    "partiprompt_1192_vq_diffusion": {
+        "text_id": "partiprompt_1192",
+        "image_path": "partiprompt_1192_vq_diffusion.jpg",
+        "text": "a stained glass window depicting a calm tyrannosaurus rex"
+    },
+    "paintskill_13_mini_dalle": {
+        "text_id": "paintskill_13",
+        "image_path": "paintskill_13_mini_dalle.jpg",
+        "text": "a photo of suitcase and bench; bench is left to suitcase"
+    },
+    "paintskill_13_stable_diffusion_v1_1": {
+        "text_id": "paintskill_13",
+        "image_path": "paintskill_13_stable_diffusion_v1_1.jpg",
+        "text": "a photo of suitcase and bench; bench is left to suitcase"
+    },
+    "paintskill_13_stable_diffusion_v1_5": {
+        "text_id": "paintskill_13",
+        "image_path": "paintskill_13_stable_diffusion_v1_5.jpg",
+        "text": "a photo of suitcase and bench; bench is left to suitcase"
+    },
+    "paintskill_13_stable_diffusion_v2_1": {
+        "text_id": "paintskill_13",
+        "image_path": "paintskill_13_stable_diffusion_v2_1.jpg",
+        "text": "a photo of suitcase and bench; bench is left to suitcase"
+    },
+    "paintskill_13_vq_diffusion": {
+        "text_id": "paintskill_13",
+        "image_path": "paintskill_13_vq_diffusion.jpg",
+        "text": "a photo of suitcase and bench; bench is left to suitcase"
+    },
+    "partiprompt_1179_mini_dalle": {
+        "text_id": "partiprompt_1179",
+        "image_path": "partiprompt_1179_mini_dalle.jpg",
+        "text": "A photo of an Athenian vase with a painting of toucans playing tennis in the style of Egyptian hieroglyphics"
+    },
+    "partiprompt_1179_stable_diffusion_v1_1": {
+        "text_id": "partiprompt_1179",
+        "image_path": "partiprompt_1179_stable_diffusion_v1_1.jpg",
+        "text": "A photo of an Athenian vase with a painting of toucans playing tennis in the style of Egyptian hieroglyphics"
+    },
+    "partiprompt_1179_stable_diffusion_v1_5": {
+        "text_id": "partiprompt_1179",
+        "image_path": "partiprompt_1179_stable_diffusion_v1_5.jpg",
+        "text": "A photo of an Athenian vase with a painting of toucans playing tennis in the style of Egyptian hieroglyphics"
+    },
+    "partiprompt_1179_stable_diffusion_v2_1": {
+        "text_id": "partiprompt_1179",
+        "image_path": "partiprompt_1179_stable_diffusion_v2_1.jpg",
+        "text": "A photo of an Athenian vase with a painting of toucans playing tennis in the style of Egyptian hieroglyphics"
+    },
+    "partiprompt_1179_vq_diffusion": {
+        "text_id": "partiprompt_1179",
+        "image_path": "partiprompt_1179_vq_diffusion.jpg",
+        "text": "A photo of an Athenian vase with a painting of toucans playing tennis in the style of Egyptian hieroglyphics"
+    },
+    "drawbench_149_mini_dalle": {
+        "text_id": "drawbench_149",
+        "image_path": "drawbench_149_mini_dalle.jpg",
+        "text": "Photo of a mega Lego space station inside a kid's bedroom."
+    },
+    "drawbench_149_stable_diffusion_v1_1": {
+        "text_id": "drawbench_149",
+        "image_path": "drawbench_149_stable_diffusion_v1_1.jpg",
+        "text": "Photo of a mega Lego space station inside a kid's bedroom."
+    },
+    "drawbench_149_stable_diffusion_v1_5": {
+        "text_id": "drawbench_149",
+        "image_path": "drawbench_149_stable_diffusion_v1_5.jpg",
+        "text": "Photo of a mega Lego space station inside a kid's bedroom."
+    },
+    "drawbench_149_stable_diffusion_v2_1": {
+        "text_id": "drawbench_149",
+        "image_path": "drawbench_149_stable_diffusion_v2_1.jpg",
+        "text": "Photo of a mega Lego space station inside a kid's bedroom."
+    },
+    "drawbench_149_vq_diffusion": {
+        "text_id": "drawbench_149",
+        "image_path": "drawbench_149_vq_diffusion.jpg",
+        "text": "Photo of a mega Lego space station inside a kid's bedroom."
+    },
+    "partiprompt_274_mini_dalle": {
+        "text_id": "partiprompt_274",
+        "image_path": "partiprompt_274_mini_dalle.jpg",
+        "text": "the skyline of New York City"
+    },
+    "partiprompt_274_stable_diffusion_v1_1": {
+        "text_id": "partiprompt_274",
+        "image_path": "partiprompt_274_stable_diffusion_v1_1.jpg",
+        "text": "the skyline of New York City"
+    },
+    "partiprompt_274_stable_diffusion_v1_5": {
+        "text_id": "partiprompt_274",
+        "image_path": "partiprompt_274_stable_diffusion_v1_5.jpg",
+        "text": "the skyline of New York City"
+    },
+    "partiprompt_274_stable_diffusion_v2_1": {
+        "text_id": "partiprompt_274",
+        "image_path": "partiprompt_274_stable_diffusion_v2_1.jpg",
+        "text": "the skyline of New York City"
+    },
+    "partiprompt_274_vq_diffusion": {
+        "text_id": "partiprompt_274",
+        "image_path": "partiprompt_274_vq_diffusion.jpg",
+        "text": "the skyline of New York City"
+    },
+    "paintskill_409_mini_dalle": {
+        "text_id": "paintskill_409",
+        "image_path": "paintskill_409_mini_dalle.jpg",
+        "text": "a photo of chair and dining table; dining table is left to chair"
+    },
+    "paintskill_409_stable_diffusion_v1_1": {
+        "text_id": "paintskill_409",
+        "image_path": "paintskill_409_stable_diffusion_v1_1.jpg",
+        "text": "a photo of chair and dining table; dining table is left to chair"
+    },
+    "paintskill_409_stable_diffusion_v1_5": {
+        "text_id": "paintskill_409",
+        "image_path": "paintskill_409_stable_diffusion_v1_5.jpg",
+        "text": "a photo of chair and dining table; dining table is left to chair"
+    },
+    "paintskill_409_stable_diffusion_v2_1": {
+        "text_id": "paintskill_409",
+        "image_path": "paintskill_409_stable_diffusion_v2_1.jpg",
+        "text": "a photo of chair and dining table; dining table is left to chair"
+    },
+    "paintskill_409_vq_diffusion": {
+        "text_id": "paintskill_409",
+        "image_path": "paintskill_409_vq_diffusion.jpg",
+        "text": "a photo of chair and dining table; dining table is left to chair"
+    },
+    "partiprompt_598_mini_dalle": {
+        "text_id": "partiprompt_598",
+        "image_path": "partiprompt_598_mini_dalle.jpg",
+        "text": "a zebra with alternating blue and red stripes"
+    },
+    "partiprompt_598_stable_diffusion_v1_1": {
+        "text_id": "partiprompt_598",
+        "image_path": "partiprompt_598_stable_diffusion_v1_1.jpg",
+        "text": "a zebra with alternating blue and red stripes"
+    },
+    "partiprompt_598_stable_diffusion_v1_5": {
+        "text_id": "partiprompt_598",
+        "image_path": "partiprompt_598_stable_diffusion_v1_5.jpg",
+        "text": "a zebra with alternating blue and red stripes"
+    },
+    "partiprompt_598_stable_diffusion_v2_1": {
+        "text_id": "partiprompt_598",
+        "image_path": "partiprompt_598_stable_diffusion_v2_1.jpg",
+        "text": "a zebra with alternating blue and red stripes"
+    },
+    "partiprompt_598_vq_diffusion": {
+        "text_id": "partiprompt_598",
+        "image_path": "partiprompt_598_vq_diffusion.jpg",
+        "text": "a zebra with alternating blue and red stripes"
+    },
+    "paintskill_156_mini_dalle": {
+        "text_id": "paintskill_156",
+        "image_path": "paintskill_156_mini_dalle.jpg",
+        "text": "a photo of bed and stop sign; stop sign is above bed"
+    },
+    "paintskill_156_stable_diffusion_v1_1": {
+        "text_id": "paintskill_156",
+        "image_path": "paintskill_156_stable_diffusion_v1_1.jpg",
+        "text": "a photo of bed and stop sign; stop sign is above bed"
+    },
+    "paintskill_156_stable_diffusion_v1_5": {
+        "text_id": "paintskill_156",
+        "image_path": "paintskill_156_stable_diffusion_v1_5.jpg",
+        "text": "a photo of bed and stop sign; stop sign is above bed"
+    },
+    "paintskill_156_stable_diffusion_v2_1": {
+        "text_id": "paintskill_156",
+        "image_path": "paintskill_156_stable_diffusion_v2_1.jpg",
+        "text": "a photo of bed and stop sign; stop sign is above bed"
+    },
+    "paintskill_156_vq_diffusion": {
+        "text_id": "paintskill_156",
+        "image_path": "paintskill_156_vq_diffusion.jpg",
+        "text": "a photo of bed and stop sign; stop sign is above bed"
+    },
+    "partiprompt_325_mini_dalle": {
+        "text_id": "partiprompt_325",
+        "image_path": "partiprompt_325_mini_dalle.jpg",
+        "text": "view of a clock tower on a cloudy day"
+    },
+    "partiprompt_325_stable_diffusion_v1_1": {
+        "text_id": "partiprompt_325",
+        "image_path": "partiprompt_325_stable_diffusion_v1_1.jpg",
+        "text": "view of a clock tower on a cloudy day"
+    },
+    "partiprompt_325_stable_diffusion_v1_5": {
+        "text_id": "partiprompt_325",
+        "image_path": "partiprompt_325_stable_diffusion_v1_5.jpg",
+        "text": "view of a clock tower on a cloudy day"
+    },
+    "partiprompt_325_stable_diffusion_v2_1": {
+        "text_id": "partiprompt_325",
+        "image_path": "partiprompt_325_stable_diffusion_v2_1.jpg",
+        "text": "view of a clock tower on a cloudy day"
+    },
+    "partiprompt_325_vq_diffusion": {
+        "text_id": "partiprompt_325",
+        "image_path": "partiprompt_325_vq_diffusion.jpg",
+        "text": "view of a clock tower on a cloudy day"
+    },
+    "drawbench_68_mini_dalle": {
+        "text_id": "drawbench_68",
+        "image_path": "drawbench_68_mini_dalle.jpg",
+        "text": "A stack of 3 books. A green book is on the top, sitting on a red book. The red book is in the middle, sitting on a blue book. The blue book is on the bottom."
+    },
+    "drawbench_68_stable_diffusion_v1_1": {
+        "text_id": "drawbench_68",
+        "image_path": "drawbench_68_stable_diffusion_v1_1.jpg",
+        "text": "A stack of 3 books. A green book is on the top, sitting on a red book. The red book is in the middle, sitting on a blue book. The blue book is on the bottom."
+    },
+    "drawbench_68_stable_diffusion_v1_5": {
+        "text_id": "drawbench_68",
+        "image_path": "drawbench_68_stable_diffusion_v1_5.jpg",
+        "text": "A stack of 3 books. A green book is on the top, sitting on a red book. The red book is in the middle, sitting on a blue book. The blue book is on the bottom."
+    },
+    "drawbench_68_stable_diffusion_v2_1": {
+        "text_id": "drawbench_68",
+        "image_path": "drawbench_68_stable_diffusion_v2_1.jpg",
+        "text": "A stack of 3 books. A green book is on the top, sitting on a red book. The red book is in the middle, sitting on a blue book. The blue book is on the bottom."
+    },
+    "drawbench_68_vq_diffusion": {
+        "text_id": "drawbench_68",
+        "image_path": "drawbench_68_vq_diffusion.jpg",
+        "text": "A stack of 3 books. A green book is on the top, sitting on a red book. The red book is in the middle, sitting on a blue book. The blue book is on the bottom."
+    },
+    "partiprompt_1070_mini_dalle": {
+        "text_id": "partiprompt_1070",
+        "image_path": "partiprompt_1070_mini_dalle.jpg",
+        "text": "Times Square during the day"
+    },
+    "partiprompt_1070_stable_diffusion_v1_1": {
+        "text_id": "partiprompt_1070",
+        "image_path": "partiprompt_1070_stable_diffusion_v1_1.jpg",
+        "text": "Times Square during the day"
+    },
+    "partiprompt_1070_stable_diffusion_v1_5": {
+        "text_id": "partiprompt_1070",
+        "image_path": "partiprompt_1070_stable_diffusion_v1_5.jpg",
+        "text": "Times Square during the day"
+    },
+    "partiprompt_1070_stable_diffusion_v2_1": {
+        "text_id": "partiprompt_1070",
+        "image_path": "partiprompt_1070_stable_diffusion_v2_1.jpg",
+        "text": "Times Square during the day"
+    },
+    "partiprompt_1070_vq_diffusion": {
+        "text_id": "partiprompt_1070",
+        "image_path": "partiprompt_1070_vq_diffusion.jpg",
+        "text": "Times Square during the day"
+    },
+    "partiprompt_726_mini_dalle": {
+        "text_id": "partiprompt_726",
+        "image_path": "partiprompt_726_mini_dalle.jpg",
+        "text": "Aerial view of downtown Manhattan, but with Millennium Wheel next to the Statue of Liberty. The Great Pyramid is on a sandy island near the buildings."
+    },
+    "partiprompt_726_stable_diffusion_v1_1": {
+        "text_id": "partiprompt_726",
+        "image_path": "partiprompt_726_stable_diffusion_v1_1.jpg",
+        "text": "Aerial view of downtown Manhattan, but with Millennium Wheel next to the Statue of Liberty. The Great Pyramid is on a sandy island near the buildings."
+    },
+    "partiprompt_726_stable_diffusion_v1_5": {
+        "text_id": "partiprompt_726",
+        "image_path": "partiprompt_726_stable_diffusion_v1_5.jpg",
+        "text": "Aerial view of downtown Manhattan, but with Millennium Wheel next to the Statue of Liberty. The Great Pyramid is on a sandy island near the buildings."
+    },
+    "partiprompt_726_stable_diffusion_v2_1": {
+        "text_id": "partiprompt_726",
+        "image_path": "partiprompt_726_stable_diffusion_v2_1.jpg",
+        "text": "Aerial view of downtown Manhattan, but with Millennium Wheel next to the Statue of Liberty. The Great Pyramid is on a sandy island near the buildings."
+    },
+    "partiprompt_726_vq_diffusion": {
+        "text_id": "partiprompt_726",
+        "image_path": "partiprompt_726_vq_diffusion.jpg",
+        "text": "Aerial view of downtown Manhattan, but with Millennium Wheel next to the Statue of Liberty. The Great Pyramid is on a sandy island near the buildings."
+    },
+    "paintskill_374_mini_dalle": {
+        "text_id": "paintskill_374",
+        "image_path": "paintskill_374_mini_dalle.jpg",
+        "text": "a photo of bear and dining table; dining table is below bear"
+    },
+    "paintskill_374_stable_diffusion_v1_1": {
+        "text_id": "paintskill_374",
+        "image_path": "paintskill_374_stable_diffusion_v1_1.jpg",
+        "text": "a photo of bear and dining table; dining table is below bear"
+    },
+    "paintskill_374_stable_diffusion_v1_5": {
+        "text_id": "paintskill_374",
+        "image_path": "paintskill_374_stable_diffusion_v1_5.jpg",
+        "text": "a photo of bear and dining table; dining table is below bear"
+    },
+    "paintskill_374_stable_diffusion_v2_1": {
+        "text_id": "paintskill_374",
+        "image_path": "paintskill_374_stable_diffusion_v2_1.jpg",
+        "text": "a photo of bear and dining table; dining table is below bear"
+    },
+    "paintskill_374_vq_diffusion": {
+        "text_id": "paintskill_374",
+        "image_path": "paintskill_374_vq_diffusion.jpg",
+        "text": "a photo of bear and dining table; dining table is below bear"
+    },
+    "partiprompt_754_mini_dalle": {
+        "text_id": "partiprompt_754",
+        "image_path": "partiprompt_754_mini_dalle.jpg",
+        "text": "an aerial photo of a sandy island in the ocean"
+    },
+    "partiprompt_754_stable_diffusion_v1_1": {
+        "text_id": "partiprompt_754",
+        "image_path": "partiprompt_754_stable_diffusion_v1_1.jpg",
+        "text": "an aerial photo of a sandy island in the ocean"
+    },
+    "partiprompt_754_stable_diffusion_v1_5": {
+        "text_id": "partiprompt_754",
+        "image_path": "partiprompt_754_stable_diffusion_v1_5.jpg",
+        "text": "an aerial photo of a sandy island in the ocean"
+    },
+    "partiprompt_754_stable_diffusion_v2_1": {
+        "text_id": "partiprompt_754",
+        "image_path": "partiprompt_754_stable_diffusion_v2_1.jpg",
+        "text": "an aerial photo of a sandy island in the ocean"
+    },
+    "partiprompt_754_vq_diffusion": {
+        "text_id": "partiprompt_754",
+        "image_path": "partiprompt_754_vq_diffusion.jpg",
+        "text": "an aerial photo of a sandy island in the ocean"
+    },
+    "partiprompt_611_mini_dalle": {
+        "text_id": "partiprompt_611",
+        "image_path": "partiprompt_611_mini_dalle.jpg",
+        "text": "a panda bear with aviator glasses on its head"
+    },
+    "partiprompt_611_stable_diffusion_v1_1": {
+        "text_id": "partiprompt_611",
+        "image_path": "partiprompt_611_stable_diffusion_v1_1.jpg",
+        "text": "a panda bear with aviator glasses on its head"
+    },
+    "partiprompt_611_stable_diffusion_v1_5": {
+        "text_id": "partiprompt_611",
+        "image_path": "partiprompt_611_stable_diffusion_v1_5.jpg",
+        "text": "a panda bear with aviator glasses on its head"
+    },
+    "partiprompt_611_stable_diffusion_v2_1": {
+        "text_id": "partiprompt_611",
+        "image_path": "partiprompt_611_stable_diffusion_v2_1.jpg",
+        "text": "a panda bear with aviator glasses on its head"
+    },
+    "partiprompt_611_vq_diffusion": {
+        "text_id": "partiprompt_611",
+        "image_path": "partiprompt_611_vq_diffusion.jpg",
+        "text": "a panda bear with aviator glasses on its head"
+    },
+    "drawbench_107_mini_dalle": {
+        "text_id": "drawbench_107",
+        "image_path": "drawbench_107_mini_dalle.jpg",
+        "text": "An umbrella on top of a spoon."
+    },
+    "drawbench_107_stable_diffusion_v1_1": {
+        "text_id": "drawbench_107",
+        "image_path": "drawbench_107_stable_diffusion_v1_1.jpg",
+        "text": "An umbrella on top of a spoon."
+    },
+    "drawbench_107_stable_diffusion_v1_5": {
+        "text_id": "drawbench_107",
+        "image_path": "drawbench_107_stable_diffusion_v1_5.jpg",
+        "text": "An umbrella on top of a spoon."
+    },
+    "drawbench_107_stable_diffusion_v2_1": {
+        "text_id": "drawbench_107",
+        "image_path": "drawbench_107_stable_diffusion_v2_1.jpg",
+        "text": "An umbrella on top of a spoon."
+    },
+    "drawbench_107_vq_diffusion": {
+        "text_id": "drawbench_107",
+        "image_path": "drawbench_107_vq_diffusion.jpg",
+        "text": "An umbrella on top of a spoon."
+    },
+    "paintskill_241_mini_dalle": {
+        "text_id": "paintskill_241",
+        "image_path": "paintskill_241_mini_dalle.jpg",
+        "text": "a photo of backpack and airplane; airplane is left to backpack"
+    },
+    "paintskill_241_stable_diffusion_v1_1": {
+        "text_id": "paintskill_241",
+        "image_path": "paintskill_241_stable_diffusion_v1_1.jpg",
+        "text": "a photo of backpack and airplane; airplane is left to backpack"
+    },
+    "paintskill_241_stable_diffusion_v1_5": {
+        "text_id": "paintskill_241",
+        "image_path": "paintskill_241_stable_diffusion_v1_5.jpg",
+        "text": "a photo of backpack and airplane; airplane is left to backpack"
+    },
+    "paintskill_241_stable_diffusion_v2_1": {
+        "text_id": "paintskill_241",
+        "image_path": "paintskill_241_stable_diffusion_v2_1.jpg",
+        "text": "a photo of backpack and airplane; airplane is left to backpack"
+    },
+    "paintskill_241_vq_diffusion": {
+        "text_id": "paintskill_241",
+        "image_path": "paintskill_241_vq_diffusion.jpg",
+        "text": "a photo of backpack and airplane; airplane is left to backpack"
+    },
+    "partiprompt_1138_mini_dalle": {
+        "text_id": "partiprompt_1138",
+        "image_path": "partiprompt_1138_mini_dalle.jpg",
+        "text": "A Mesoamerican pyramid surrounded by jungle. detailed charcoal sketch."
+    },
+    "partiprompt_1138_stable_diffusion_v1_1": {
+        "text_id": "partiprompt_1138",
+        "image_path": "partiprompt_1138_stable_diffusion_v1_1.jpg",
+        "text": "A Mesoamerican pyramid surrounded by jungle. detailed charcoal sketch."
+    },
+    "partiprompt_1138_stable_diffusion_v1_5": {
+        "text_id": "partiprompt_1138",
+        "image_path": "partiprompt_1138_stable_diffusion_v1_5.jpg",
+        "text": "A Mesoamerican pyramid surrounded by jungle. detailed charcoal sketch."
+    },
+    "partiprompt_1138_stable_diffusion_v2_1": {
+        "text_id": "partiprompt_1138",
+        "image_path": "partiprompt_1138_stable_diffusion_v2_1.jpg",
+        "text": "A Mesoamerican pyramid surrounded by jungle. detailed charcoal sketch."
+    },
+    "partiprompt_1138_vq_diffusion": {
+        "text_id": "partiprompt_1138",
+        "image_path": "partiprompt_1138_vq_diffusion.jpg",
+        "text": "A Mesoamerican pyramid surrounded by jungle. detailed charcoal sketch."
+    },
+    "drawbench_57_mini_dalle": {
+        "text_id": "drawbench_57",
+        "image_path": "drawbench_57_mini_dalle.jpg",
+        "text": "A cube made of denim. A cube with the texture of denim."
+    },
+    "drawbench_57_stable_diffusion_v1_1": {
+        "text_id": "drawbench_57",
+        "image_path": "drawbench_57_stable_diffusion_v1_1.jpg",
+        "text": "A cube made of denim. A cube with the texture of denim."
+    },
+    "drawbench_57_stable_diffusion_v1_5": {
+        "text_id": "drawbench_57",
+        "image_path": "drawbench_57_stable_diffusion_v1_5.jpg",
+        "text": "A cube made of denim. A cube with the texture of denim."
+    },
+    "drawbench_57_stable_diffusion_v2_1": {
+        "text_id": "drawbench_57",
+        "image_path": "drawbench_57_stable_diffusion_v2_1.jpg",
+        "text": "A cube made of denim. A cube with the texture of denim."
+    },
+    "drawbench_57_vq_diffusion": {
+        "text_id": "drawbench_57",
+        "image_path": "drawbench_57_vq_diffusion.jpg",
+        "text": "A cube made of denim. A cube with the texture of denim."
+    },
+    "paintskill_119_mini_dalle": {
+        "text_id": "paintskill_119",
+        "image_path": "paintskill_119_mini_dalle.jpg",
+        "text": "a photo of bike and stop sign; stop sign is below bike"
+    },
+    "paintskill_119_stable_diffusion_v1_1": {
+        "text_id": "paintskill_119",
+        "image_path": "paintskill_119_stable_diffusion_v1_1.jpg",
+        "text": "a photo of bike and stop sign; stop sign is below bike"
+    },
+    "paintskill_119_stable_diffusion_v1_5": {
+        "text_id": "paintskill_119",
+        "image_path": "paintskill_119_stable_diffusion_v1_5.jpg",
+        "text": "a photo of bike and stop sign; stop sign is below bike"
+    },
+    "paintskill_119_stable_diffusion_v2_1": {
+        "text_id": "paintskill_119",
+        "image_path": "paintskill_119_stable_diffusion_v2_1.jpg",
+        "text": "a photo of bike and stop sign; stop sign is below bike"
+    },
+    "paintskill_119_vq_diffusion": {
+        "text_id": "paintskill_119",
+        "image_path": "paintskill_119_vq_diffusion.jpg",
+        "text": "a photo of bike and stop sign; stop sign is below bike"
+    },
+    "partiprompt_869_mini_dalle": {
+        "text_id": "partiprompt_869",
+        "image_path": "partiprompt_869_mini_dalle.jpg",
+        "text": "two red flowers and three white flowers"
+    },
+    "partiprompt_869_stable_diffusion_v1_1": {
+        "text_id": "partiprompt_869",
+        "image_path": "partiprompt_869_stable_diffusion_v1_1.jpg",
+        "text": "two red flowers and three white flowers"
+    },
+    "partiprompt_869_stable_diffusion_v1_5": {
+        "text_id": "partiprompt_869",
+        "image_path": "partiprompt_869_stable_diffusion_v1_5.jpg",
+        "text": "two red flowers and three white flowers"
+    },
+    "partiprompt_869_stable_diffusion_v2_1": {
+        "text_id": "partiprompt_869",
+        "image_path": "partiprompt_869_stable_diffusion_v2_1.jpg",
+        "text": "two red flowers and three white flowers"
+    },
+    "partiprompt_869_vq_diffusion": {
+        "text_id": "partiprompt_869",
+        "image_path": "partiprompt_869_vq_diffusion.jpg",
+        "text": "two red flowers and three white flowers"
+    },
+    "paintskill_235_mini_dalle": {
+        "text_id": "paintskill_235",
+        "image_path": "paintskill_235_mini_dalle.jpg",
+        "text": "a photo of dining table and traffic light; traffic light is below dining table"
+    },
+    "paintskill_235_stable_diffusion_v1_1": {
+        "text_id": "paintskill_235",
+        "image_path": "paintskill_235_stable_diffusion_v1_1.jpg",
+        "text": "a photo of dining table and traffic light; traffic light is below dining table"
+    },
+    "paintskill_235_stable_diffusion_v1_5": {
+        "text_id": "paintskill_235",
+        "image_path": "paintskill_235_stable_diffusion_v1_5.jpg",
+        "text": "a photo of dining table and traffic light; traffic light is below dining table"
+    },
+    "paintskill_235_stable_diffusion_v2_1": {
+        "text_id": "paintskill_235",
+        "image_path": "paintskill_235_stable_diffusion_v2_1.jpg",
+        "text": "a photo of dining table and traffic light; traffic light is below dining table"
+    },
+    "paintskill_235_vq_diffusion": {
+        "text_id": "paintskill_235",
+        "image_path": "paintskill_235_vq_diffusion.jpg",
+        "text": "a photo of dining table and traffic light; traffic light is below dining table"
+    },
+    "partiprompt_356_mini_dalle": {
+        "text_id": "partiprompt_356",
+        "image_path": "partiprompt_356_mini_dalle.jpg",
+        "text": "a dolphin jumping over a rowboat"
+    },
+    "partiprompt_356_stable_diffusion_v1_1": {
+        "text_id": "partiprompt_356",
+        "image_path": "partiprompt_356_stable_diffusion_v1_1.jpg",
+        "text": "a dolphin jumping over a rowboat"
+    },
+    "partiprompt_356_stable_diffusion_v1_5": {
+        "text_id": "partiprompt_356",
+        "image_path": "partiprompt_356_stable_diffusion_v1_5.jpg",
+        "text": "a dolphin jumping over a rowboat"
+    },
+    "partiprompt_356_stable_diffusion_v2_1": {
+        "text_id": "partiprompt_356",
+        "image_path": "partiprompt_356_stable_diffusion_v2_1.jpg",
+        "text": "a dolphin jumping over a rowboat"
+    },
+    "partiprompt_356_vq_diffusion": {
+        "text_id": "partiprompt_356",
+        "image_path": "partiprompt_356_vq_diffusion.jpg",
+        "text": "a dolphin jumping over a rowboat"
+    },
+    "partiprompt_830_mini_dalle": {
+        "text_id": "partiprompt_830",
+        "image_path": "partiprompt_830_mini_dalle.jpg",
+        "text": "an owl family"
+    },
+    "partiprompt_830_stable_diffusion_v1_1": {
+        "text_id": "partiprompt_830",
+        "image_path": "partiprompt_830_stable_diffusion_v1_1.jpg",
+        "text": "an owl family"
+    },
+    "partiprompt_830_stable_diffusion_v1_5": {
+        "text_id": "partiprompt_830",
+        "image_path": "partiprompt_830_stable_diffusion_v1_5.jpg",
+        "text": "an owl family"
+    },
+    "partiprompt_830_stable_diffusion_v2_1": {
+        "text_id": "partiprompt_830",
+        "image_path": "partiprompt_830_stable_diffusion_v2_1.jpg",
+        "text": "an owl family"
+    },
+    "partiprompt_830_vq_diffusion": {
+        "text_id": "partiprompt_830",
+        "image_path": "partiprompt_830_vq_diffusion.jpg",
+        "text": "an owl family"
+    },
+    "partiprompt_893_mini_dalle": {
+        "text_id": "partiprompt_893",
+        "image_path": "partiprompt_893_mini_dalle.jpg",
+        "text": "a four-piece band on a stage in front of a small crowd"
+    },
+    "partiprompt_893_stable_diffusion_v1_1": {
+        "text_id": "partiprompt_893",
+        "image_path": "partiprompt_893_stable_diffusion_v1_1.jpg",
+        "text": "a four-piece band on a stage in front of a small crowd"
+    },
+    "partiprompt_893_stable_diffusion_v1_5": {
+        "text_id": "partiprompt_893",
+        "image_path": "partiprompt_893_stable_diffusion_v1_5.jpg",
+        "text": "a four-piece band on a stage in front of a small crowd"
+    },
+    "partiprompt_893_stable_diffusion_v2_1": {
+        "text_id": "partiprompt_893",
+        "image_path": "partiprompt_893_stable_diffusion_v2_1.jpg",
+        "text": "a four-piece band on a stage in front of a small crowd"
+    },
+    "partiprompt_893_vq_diffusion": {
+        "text_id": "partiprompt_893",
+        "image_path": "partiprompt_893_vq_diffusion.jpg",
+        "text": "a four-piece band on a stage in front of a small crowd"
+    },
+    "drawbench_123_mini_dalle": {
+        "text_id": "drawbench_123",
+        "image_path": "drawbench_123_mini_dalle.jpg",
+        "text": "A zebra to the right of a fire hydrant."
+    },
+    "drawbench_123_stable_diffusion_v1_1": {
+        "text_id": "drawbench_123",
+        "image_path": "drawbench_123_stable_diffusion_v1_1.jpg",
+        "text": "A zebra to the right of a fire hydrant."
+    },
+    "drawbench_123_stable_diffusion_v1_5": {
+        "text_id": "drawbench_123",
+        "image_path": "drawbench_123_stable_diffusion_v1_5.jpg",
+        "text": "A zebra to the right of a fire hydrant."
+    },
+    "drawbench_123_stable_diffusion_v2_1": {
+        "text_id": "drawbench_123",
+        "image_path": "drawbench_123_stable_diffusion_v2_1.jpg",
+        "text": "A zebra to the right of a fire hydrant."
+    },
+    "drawbench_123_vq_diffusion": {
+        "text_id": "drawbench_123",
+        "image_path": "drawbench_123_vq_diffusion.jpg",
+        "text": "A zebra to the right of a fire hydrant."
+    },
+    "partiprompt_86_mini_dalle": {
+        "text_id": "partiprompt_86",
+        "image_path": "partiprompt_86_mini_dalle.jpg",
+        "text": "A set of 2x2 emoji icons with happy, angry, surprised and sobbing faces. The emoji icons look like pigs. All of the pigs are wearing crowns."
+    },
+    "partiprompt_86_stable_diffusion_v1_1": {
+        "text_id": "partiprompt_86",
+        "image_path": "partiprompt_86_stable_diffusion_v1_1.jpg",
+        "text": "A set of 2x2 emoji icons with happy, angry, surprised and sobbing faces. The emoji icons look like pigs. All of the pigs are wearing crowns."
+    },
+    "partiprompt_86_stable_diffusion_v1_5": {
+        "text_id": "partiprompt_86",
+        "image_path": "partiprompt_86_stable_diffusion_v1_5.jpg",
+        "text": "A set of 2x2 emoji icons with happy, angry, surprised and sobbing faces. The emoji icons look like pigs. All of the pigs are wearing crowns."
+    },
+    "partiprompt_86_stable_diffusion_v2_1": {
+        "text_id": "partiprompt_86",
+        "image_path": "partiprompt_86_stable_diffusion_v2_1.jpg",
+        "text": "A set of 2x2 emoji icons with happy, angry, surprised and sobbing faces. The emoji icons look like pigs. All of the pigs are wearing crowns."
+    },
+    "partiprompt_86_vq_diffusion": {
+        "text_id": "partiprompt_86",
+        "image_path": "partiprompt_86_vq_diffusion.jpg",
+        "text": "A set of 2x2 emoji icons with happy, angry, surprised and sobbing faces. The emoji icons look like pigs. All of the pigs are wearing crowns."
+    },
+    "partiprompt_153_mini_dalle": {
+        "text_id": "partiprompt_153",
+        "image_path": "partiprompt_153_mini_dalle.jpg",
+        "text": "a basketball to the left of two soccer balls on a gravel driveway"
+    },
+    "partiprompt_153_stable_diffusion_v1_1": {
+        "text_id": "partiprompt_153",
+        "image_path": "partiprompt_153_stable_diffusion_v1_1.jpg",
+        "text": "a basketball to the left of two soccer balls on a gravel driveway"
+    },
+    "partiprompt_153_stable_diffusion_v1_5": {
+        "text_id": "partiprompt_153",
+        "image_path": "partiprompt_153_stable_diffusion_v1_5.jpg",
+        "text": "a basketball to the left of two soccer balls on a gravel driveway"
+    },
+    "partiprompt_153_stable_diffusion_v2_1": {
+        "text_id": "partiprompt_153",
+        "image_path": "partiprompt_153_stable_diffusion_v2_1.jpg",
+        "text": "a basketball to the left of two soccer balls on a gravel driveway"
+    },
+    "partiprompt_153_vq_diffusion": {
+        "text_id": "partiprompt_153",
+        "image_path": "partiprompt_153_vq_diffusion.jpg",
+        "text": "a basketball to the left of two soccer balls on a gravel driveway"
+    },
+    "partiprompt_632_mini_dalle": {
+        "text_id": "partiprompt_632",
+        "image_path": "partiprompt_632_mini_dalle.jpg",
+        "text": "a piano tumbling down a hill"
+    },
+    "partiprompt_632_stable_diffusion_v1_1": {
+        "text_id": "partiprompt_632",
+        "image_path": "partiprompt_632_stable_diffusion_v1_1.jpg",
+        "text": "a piano tumbling down a hill"
+    },
+    "partiprompt_632_stable_diffusion_v1_5": {
+        "text_id": "partiprompt_632",
+        "image_path": "partiprompt_632_stable_diffusion_v1_5.jpg",
+        "text": "a piano tumbling down a hill"
+    },
+    "partiprompt_632_stable_diffusion_v2_1": {
+        "text_id": "partiprompt_632",
+        "image_path": "partiprompt_632_stable_diffusion_v2_1.jpg",
+        "text": "a piano tumbling down a hill"
+    },
+    "partiprompt_632_vq_diffusion": {
+        "text_id": "partiprompt_632",
+        "image_path": "partiprompt_632_vq_diffusion.jpg",
+        "text": "a piano tumbling down a hill"
+    },
+    "partiprompt_1175_mini_dalle": {
+        "text_id": "partiprompt_1175",
+        "image_path": "partiprompt_1175_mini_dalle.jpg",
+        "text": "A photo of an Athenian vase with a painting of pangolins playing soccer in the style of Egyptian hieroglyphics"
+    },
+    "partiprompt_1175_stable_diffusion_v1_1": {
+        "text_id": "partiprompt_1175",
+        "image_path": "partiprompt_1175_stable_diffusion_v1_1.jpg",
+        "text": "A photo of an Athenian vase with a painting of pangolins playing soccer in the style of Egyptian hieroglyphics"
+    },
+    "partiprompt_1175_stable_diffusion_v1_5": {
+        "text_id": "partiprompt_1175",
+        "image_path": "partiprompt_1175_stable_diffusion_v1_5.jpg",
+        "text": "A photo of an Athenian vase with a painting of pangolins playing soccer in the style of Egyptian hieroglyphics"
+    },
+    "partiprompt_1175_stable_diffusion_v2_1": {
+        "text_id": "partiprompt_1175",
+        "image_path": "partiprompt_1175_stable_diffusion_v2_1.jpg",
+        "text": "A photo of an Athenian vase with a painting of pangolins playing soccer in the style of Egyptian hieroglyphics"
+    },
+    "partiprompt_1175_vq_diffusion": {
+        "text_id": "partiprompt_1175",
+        "image_path": "partiprompt_1175_vq_diffusion.jpg",
+        "text": "A photo of an Athenian vase with a painting of pangolins playing soccer in the style of Egyptian hieroglyphics"
+    },
+    "partiprompt_532_mini_dalle": {
+        "text_id": "partiprompt_532",
+        "image_path": "partiprompt_532_mini_dalle.jpg",
+        "text": "A high resolution photo of a chicken working out in a gym."
+    },
+    "partiprompt_532_stable_diffusion_v1_1": {
+        "text_id": "partiprompt_532",
+        "image_path": "partiprompt_532_stable_diffusion_v1_1.jpg",
+        "text": "A high resolution photo of a chicken working out in a gym."
+    },
+    "partiprompt_532_stable_diffusion_v1_5": {
+        "text_id": "partiprompt_532",
+        "image_path": "partiprompt_532_stable_diffusion_v1_5.jpg",
+        "text": "A high resolution photo of a chicken working out in a gym."
+    },
+    "partiprompt_532_stable_diffusion_v2_1": {
+        "text_id": "partiprompt_532",
+        "image_path": "partiprompt_532_stable_diffusion_v2_1.jpg",
+        "text": "A high resolution photo of a chicken working out in a gym."
+    },
+    "partiprompt_532_vq_diffusion": {
+        "text_id": "partiprompt_532",
+        "image_path": "partiprompt_532_vq_diffusion.jpg",
+        "text": "A high resolution photo of a chicken working out in a gym."
+    },
+    "partiprompt_194_mini_dalle": {
+        "text_id": "partiprompt_194",
+        "image_path": "partiprompt_194_mini_dalle.jpg",
+        "text": "A punk rock squirrel in a studded leather jacket shouting into a microphone while standing on a lily pad"
+    },
+    "partiprompt_194_stable_diffusion_v1_1": {
+        "text_id": "partiprompt_194",
+        "image_path": "partiprompt_194_stable_diffusion_v1_1.jpg",
+        "text": "A punk rock squirrel in a studded leather jacket shouting into a microphone while standing on a lily pad"
+    },
+    "partiprompt_194_stable_diffusion_v1_5": {
+        "text_id": "partiprompt_194",
+        "image_path": "partiprompt_194_stable_diffusion_v1_5.jpg",
+        "text": "A punk rock squirrel in a studded leather jacket shouting into a microphone while standing on a lily pad"
+    },
+    "partiprompt_194_stable_diffusion_v2_1": {
+        "text_id": "partiprompt_194",
+        "image_path": "partiprompt_194_stable_diffusion_v2_1.jpg",
+        "text": "A punk rock squirrel in a studded leather jacket shouting into a microphone while standing on a lily pad"
+    },
+    "partiprompt_194_vq_diffusion": {
+        "text_id": "partiprompt_194",
+        "image_path": "partiprompt_194_vq_diffusion.jpg",
+        "text": "A punk rock squirrel in a studded leather jacket shouting into a microphone while standing on a lily pad"
+    },
+    "partiprompt_260_mini_dalle": {
+        "text_id": "partiprompt_260",
+        "image_path": "partiprompt_260_mini_dalle.jpg",
+        "text": "a white cat with black ears and markings"
+    },
+    "partiprompt_260_stable_diffusion_v1_1": {
+        "text_id": "partiprompt_260",
+        "image_path": "partiprompt_260_stable_diffusion_v1_1.jpg",
+        "text": "a white cat with black ears and markings"
+    },
+    "partiprompt_260_stable_diffusion_v1_5": {
+        "text_id": "partiprompt_260",
+        "image_path": "partiprompt_260_stable_diffusion_v1_5.jpg",
+        "text": "a white cat with black ears and markings"
+    },
+    "partiprompt_260_stable_diffusion_v2_1": {
+        "text_id": "partiprompt_260",
+        "image_path": "partiprompt_260_stable_diffusion_v2_1.jpg",
+        "text": "a white cat with black ears and markings"
+    },
+    "partiprompt_260_vq_diffusion": {
+        "text_id": "partiprompt_260",
+        "image_path": "partiprompt_260_vq_diffusion.jpg",
+        "text": "a white cat with black ears and markings"
+    },
+    "partiprompt_1012_mini_dalle": {
+        "text_id": "partiprompt_1012",
+        "image_path": "partiprompt_1012_mini_dalle.jpg",
+        "text": "a mountain with a cloud hanging over it"
+    },
+    "partiprompt_1012_stable_diffusion_v1_1": {
+        "text_id": "partiprompt_1012",
+        "image_path": "partiprompt_1012_stable_diffusion_v1_1.jpg",
+        "text": "a mountain with a cloud hanging over it"
+    },
+    "partiprompt_1012_stable_diffusion_v1_5": {
+        "text_id": "partiprompt_1012",
+        "image_path": "partiprompt_1012_stable_diffusion_v1_5.jpg",
+        "text": "a mountain with a cloud hanging over it"
+    },
+    "partiprompt_1012_stable_diffusion_v2_1": {
+        "text_id": "partiprompt_1012",
+        "image_path": "partiprompt_1012_stable_diffusion_v2_1.jpg",
+        "text": "a mountain with a cloud hanging over it"
+    },
+    "partiprompt_1012_vq_diffusion": {
+        "text_id": "partiprompt_1012",
+        "image_path": "partiprompt_1012_vq_diffusion.jpg",
+        "text": "a mountain with a cloud hanging over it"
+    },
+    "drawbench_159_mini_dalle": {
+        "text_id": "drawbench_159",
+        "image_path": "drawbench_159_mini_dalle.jpg",
+        "text": "A realistic photo of a Pomeranian dressed up like a 1980s professional wrestler with neon green and neon orange face paint and bright green wrestling tights with bright orange boots."
+    },
+    "drawbench_159_stable_diffusion_v1_1": {
+        "text_id": "drawbench_159",
+        "image_path": "drawbench_159_stable_diffusion_v1_1.jpg",
+        "text": "A realistic photo of a Pomeranian dressed up like a 1980s professional wrestler with neon green and neon orange face paint and bright green wrestling tights with bright orange boots."
+    },
+    "drawbench_159_stable_diffusion_v1_5": {
+        "text_id": "drawbench_159",
+        "image_path": "drawbench_159_stable_diffusion_v1_5.jpg",
+        "text": "A realistic photo of a Pomeranian dressed up like a 1980s professional wrestler with neon green and neon orange face paint and bright green wrestling tights with bright orange boots."
+    },
+    "drawbench_159_stable_diffusion_v2_1": {
+        "text_id": "drawbench_159",
+        "image_path": "drawbench_159_stable_diffusion_v2_1.jpg",
+        "text": "A realistic photo of a Pomeranian dressed up like a 1980s professional wrestler with neon green and neon orange face paint and bright green wrestling tights with bright orange boots."
+    },
+    "drawbench_159_vq_diffusion": {
+        "text_id": "drawbench_159",
+        "image_path": "drawbench_159_vq_diffusion.jpg",
+        "text": "A realistic photo of a Pomeranian dressed up like a 1980s professional wrestler with neon green and neon orange face paint and bright green wrestling tights with bright orange boots."
+    },
+    "partiprompt_366_mini_dalle": {
+        "text_id": "partiprompt_366",
+        "image_path": "partiprompt_366_mini_dalle.jpg",
+        "text": "a hot air balloon landing in a corn field"
+    },
+    "partiprompt_366_stable_diffusion_v1_1": {
+        "text_id": "partiprompt_366",
+        "image_path": "partiprompt_366_stable_diffusion_v1_1.jpg",
+        "text": "a hot air balloon landing in a corn field"
+    },
+    "partiprompt_366_stable_diffusion_v1_5": {
+        "text_id": "partiprompt_366",
+        "image_path": "partiprompt_366_stable_diffusion_v1_5.jpg",
+        "text": "a hot air balloon landing in a corn field"
+    },
+    "partiprompt_366_stable_diffusion_v2_1": {
+        "text_id": "partiprompt_366",
+        "image_path": "partiprompt_366_stable_diffusion_v2_1.jpg",
+        "text": "a hot air balloon landing in a corn field"
+    },
+    "partiprompt_366_vq_diffusion": {
+        "text_id": "partiprompt_366",
+        "image_path": "partiprompt_366_vq_diffusion.jpg",
+        "text": "a hot air balloon landing in a corn field"
+    },
+    "partiprompt_358_mini_dalle": {
+        "text_id": "partiprompt_358",
+        "image_path": "partiprompt_358_mini_dalle.jpg",
+        "text": "a drop-top sports car coming around a bend in the road"
+    },
+    "partiprompt_358_stable_diffusion_v1_1": {
+        "text_id": "partiprompt_358",
+        "image_path": "partiprompt_358_stable_diffusion_v1_1.jpg",
+        "text": "a drop-top sports car coming around a bend in the road"
+    },
+    "partiprompt_358_stable_diffusion_v1_5": {
+        "text_id": "partiprompt_358",
+        "image_path": "partiprompt_358_stable_diffusion_v1_5.jpg",
+        "text": "a drop-top sports car coming around a bend in the road"
+    },
+    "partiprompt_358_stable_diffusion_v2_1": {
+        "text_id": "partiprompt_358",
+        "image_path": "partiprompt_358_stable_diffusion_v2_1.jpg",
+        "text": "a drop-top sports car coming around a bend in the road"
+    },
+    "partiprompt_358_vq_diffusion": {
+        "text_id": "partiprompt_358",
+        "image_path": "partiprompt_358_vq_diffusion.jpg",
+        "text": "a drop-top sports car coming around a bend in the road"
+    },
+    "partiprompt_931_mini_dalle": {
+        "text_id": "partiprompt_931",
+        "image_path": "partiprompt_931_mini_dalle.jpg",
+        "text": "a cat jumping in the air to get onto a table"
+    },
+    "partiprompt_931_stable_diffusion_v1_1": {
+        "text_id": "partiprompt_931",
+        "image_path": "partiprompt_931_stable_diffusion_v1_1.jpg",
+        "text": "a cat jumping in the air to get onto a table"
+    },
+    "partiprompt_931_stable_diffusion_v1_5": {
+        "text_id": "partiprompt_931",
+        "image_path": "partiprompt_931_stable_diffusion_v1_5.jpg",
+        "text": "a cat jumping in the air to get onto a table"
+    },
+    "partiprompt_931_stable_diffusion_v2_1": {
+        "text_id": "partiprompt_931",
+        "image_path": "partiprompt_931_stable_diffusion_v2_1.jpg",
+        "text": "a cat jumping in the air to get onto a table"
+    },
+    "partiprompt_931_vq_diffusion": {
+        "text_id": "partiprompt_931",
+        "image_path": "partiprompt_931_vq_diffusion.jpg",
+        "text": "a cat jumping in the air to get onto a table"
+    },
+    "partiprompt_202_mini_dalle": {
+        "text_id": "partiprompt_202",
+        "image_path": "partiprompt_202_mini_dalle.jpg",
+        "text": "A map of the United States made out sushi. It is on a table next to a glass of red wine."
+    },
+    "partiprompt_202_stable_diffusion_v1_1": {
+        "text_id": "partiprompt_202",
+        "image_path": "partiprompt_202_stable_diffusion_v1_1.jpg",
+        "text": "A map of the United States made out sushi. It is on a table next to a glass of red wine."
+    },
+    "partiprompt_202_stable_diffusion_v1_5": {
+        "text_id": "partiprompt_202",
+        "image_path": "partiprompt_202_stable_diffusion_v1_5.jpg",
+        "text": "A map of the United States made out sushi. It is on a table next to a glass of red wine."
+    },
+    "partiprompt_202_stable_diffusion_v2_1": {
+        "text_id": "partiprompt_202",
+        "image_path": "partiprompt_202_stable_diffusion_v2_1.jpg",
+        "text": "A map of the United States made out sushi. It is on a table next to a glass of red wine."
+    },
+    "partiprompt_202_vq_diffusion": {
+        "text_id": "partiprompt_202",
+        "image_path": "partiprompt_202_vq_diffusion.jpg",
+        "text": "A map of the United States made out sushi. It is on a table next to a glass of red wine."
+    },
+    "partiprompt_1086_mini_dalle": {
+        "text_id": "partiprompt_1086",
+        "image_path": "partiprompt_1086_mini_dalle.jpg",
+        "text": "a grand piano with a white bench"
+    },
+    "partiprompt_1086_stable_diffusion_v1_1": {
+        "text_id": "partiprompt_1086",
+        "image_path": "partiprompt_1086_stable_diffusion_v1_1.jpg",
+        "text": "a grand piano with a white bench"
+    },
+    "partiprompt_1086_stable_diffusion_v1_5": {
+        "text_id": "partiprompt_1086",
+        "image_path": "partiprompt_1086_stable_diffusion_v1_5.jpg",
+        "text": "a grand piano with a white bench"
+    },
+    "partiprompt_1086_stable_diffusion_v2_1": {
+        "text_id": "partiprompt_1086",
+        "image_path": "partiprompt_1086_stable_diffusion_v2_1.jpg",
+        "text": "a grand piano with a white bench"
+    },
+    "partiprompt_1086_vq_diffusion": {
+        "text_id": "partiprompt_1086",
+        "image_path": "partiprompt_1086_vq_diffusion.jpg",
+        "text": "a grand piano with a white bench"
+    },
+    "paintskill_286_mini_dalle": {
+        "text_id": "paintskill_286",
+        "image_path": "paintskill_286_mini_dalle.jpg",
+        "text": "a photo of bed and bench; bench is below bed"
+    },
+    "paintskill_286_stable_diffusion_v1_1": {
+        "text_id": "paintskill_286",
+        "image_path": "paintskill_286_stable_diffusion_v1_1.jpg",
+        "text": "a photo of bed and bench; bench is below bed"
+    },
+    "paintskill_286_stable_diffusion_v1_5": {
+        "text_id": "paintskill_286",
+        "image_path": "paintskill_286_stable_diffusion_v1_5.jpg",
+        "text": "a photo of bed and bench; bench is below bed"
+    },
+    "paintskill_286_stable_diffusion_v2_1": {
+        "text_id": "paintskill_286",
+        "image_path": "paintskill_286_stable_diffusion_v2_1.jpg",
+        "text": "a photo of bed and bench; bench is below bed"
+    },
+    "paintskill_286_vq_diffusion": {
+        "text_id": "paintskill_286",
+        "image_path": "paintskill_286_vq_diffusion.jpg",
+        "text": "a photo of bed and bench; bench is below bed"
+    },
+    "partiprompt_1115_mini_dalle": {
+        "text_id": "partiprompt_1115",
+        "image_path": "partiprompt_1115_mini_dalle.jpg",
+        "text": "a pumpkin on a man's head"
+    },
+    "partiprompt_1115_stable_diffusion_v1_1": {
+        "text_id": "partiprompt_1115",
+        "image_path": "partiprompt_1115_stable_diffusion_v1_1.jpg",
+        "text": "a pumpkin on a man's head"
+    },
+    "partiprompt_1115_stable_diffusion_v1_5": {
+        "text_id": "partiprompt_1115",
+        "image_path": "partiprompt_1115_stable_diffusion_v1_5.jpg",
+        "text": "a pumpkin on a man's head"
+    },
+    "partiprompt_1115_stable_diffusion_v2_1": {
+        "text_id": "partiprompt_1115",
+        "image_path": "partiprompt_1115_stable_diffusion_v2_1.jpg",
+        "text": "a pumpkin on a man's head"
+    },
+    "partiprompt_1115_vq_diffusion": {
+        "text_id": "partiprompt_1115",
+        "image_path": "partiprompt_1115_vq_diffusion.jpg",
+        "text": "a pumpkin on a man's head"
+    },
+    "partiprompt_1108_mini_dalle": {
+        "text_id": "partiprompt_1108",
+        "image_path": "partiprompt_1108_mini_dalle.jpg",
+        "text": "a sad man with green hair"
+    },
+    "partiprompt_1108_stable_diffusion_v1_1": {
+        "text_id": "partiprompt_1108",
+        "image_path": "partiprompt_1108_stable_diffusion_v1_1.jpg",
+        "text": "a sad man with green hair"
+    },
+    "partiprompt_1108_stable_diffusion_v1_5": {
+        "text_id": "partiprompt_1108",
+        "image_path": "partiprompt_1108_stable_diffusion_v1_5.jpg",
+        "text": "a sad man with green hair"
+    },
+    "partiprompt_1108_stable_diffusion_v2_1": {
+        "text_id": "partiprompt_1108",
+        "image_path": "partiprompt_1108_stable_diffusion_v2_1.jpg",
+        "text": "a sad man with green hair"
+    },
+    "partiprompt_1108_vq_diffusion": {
+        "text_id": "partiprompt_1108",
+        "image_path": "partiprompt_1108_vq_diffusion.jpg",
+        "text": "a sad man with green hair"
+    },
+    "paintskill_229_mini_dalle": {
+        "text_id": "paintskill_229",
+        "image_path": "paintskill_229_mini_dalle.jpg",
+        "text": "a photo of bear and bus; bus is above bear"
+    },
+    "paintskill_229_stable_diffusion_v1_1": {
+        "text_id": "paintskill_229",
+        "image_path": "paintskill_229_stable_diffusion_v1_1.jpg",
+        "text": "a photo of bear and bus; bus is above bear"
+    },
+    "paintskill_229_stable_diffusion_v1_5": {
+        "text_id": "paintskill_229",
+        "image_path": "paintskill_229_stable_diffusion_v1_5.jpg",
+        "text": "a photo of bear and bus; bus is above bear"
+    },
+    "paintskill_229_stable_diffusion_v2_1": {
+        "text_id": "paintskill_229",
+        "image_path": "paintskill_229_stable_diffusion_v2_1.jpg",
+        "text": "a photo of bear and bus; bus is above bear"
+    },
+    "paintskill_229_vq_diffusion": {
+        "text_id": "paintskill_229",
+        "image_path": "paintskill_229_vq_diffusion.jpg",
+        "text": "a photo of bear and bus; bus is above bear"
+    },
+    "partiprompt_254_mini_dalle": {
+        "text_id": "partiprompt_254",
+        "image_path": "partiprompt_254_mini_dalle.jpg",
+        "text": "a white country home with a wrap-around porch"
+    },
+    "partiprompt_254_stable_diffusion_v1_1": {
+        "text_id": "partiprompt_254",
+        "image_path": "partiprompt_254_stable_diffusion_v1_1.jpg",
+        "text": "a white country home with a wrap-around porch"
+    },
+    "partiprompt_254_stable_diffusion_v1_5": {
+        "text_id": "partiprompt_254",
+        "image_path": "partiprompt_254_stable_diffusion_v1_5.jpg",
+        "text": "a white country home with a wrap-around porch"
+    },
+    "partiprompt_254_stable_diffusion_v2_1": {
+        "text_id": "partiprompt_254",
+        "image_path": "partiprompt_254_stable_diffusion_v2_1.jpg",
+        "text": "a white country home with a wrap-around porch"
+    },
+    "partiprompt_254_vq_diffusion": {
+        "text_id": "partiprompt_254",
+        "image_path": "partiprompt_254_vq_diffusion.jpg",
+        "text": "a white country home with a wrap-around porch"
+    },
+    "partiprompt_1004_mini_dalle": {
+        "text_id": "partiprompt_1004",
+        "image_path": "partiprompt_1004_mini_dalle.jpg",
+        "text": "a wood treehouse in an oak tree"
+    },
+    "partiprompt_1004_stable_diffusion_v1_1": {
+        "text_id": "partiprompt_1004",
+        "image_path": "partiprompt_1004_stable_diffusion_v1_1.jpg",
+        "text": "a wood treehouse in an oak tree"
+    },
+    "partiprompt_1004_stable_diffusion_v1_5": {
+        "text_id": "partiprompt_1004",
+        "image_path": "partiprompt_1004_stable_diffusion_v1_5.jpg",
+        "text": "a wood treehouse in an oak tree"
+    },
+    "partiprompt_1004_stable_diffusion_v2_1": {
+        "text_id": "partiprompt_1004",
+        "image_path": "partiprompt_1004_stable_diffusion_v2_1.jpg",
+        "text": "a wood treehouse in an oak tree"
+    },
+    "partiprompt_1004_vq_diffusion": {
+        "text_id": "partiprompt_1004",
+        "image_path": "partiprompt_1004_vq_diffusion.jpg",
+        "text": "a wood treehouse in an oak tree"
+    },
+    "partiprompt_1083_mini_dalle": {
+        "text_id": "partiprompt_1083",
+        "image_path": "partiprompt_1083_mini_dalle.jpg",
+        "text": "a rusty fire hydrant surrounded by dirt"
+    },
+    "partiprompt_1083_stable_diffusion_v1_1": {
+        "text_id": "partiprompt_1083",
+        "image_path": "partiprompt_1083_stable_diffusion_v1_1.jpg",
+        "text": "a rusty fire hydrant surrounded by dirt"
+    },
+    "partiprompt_1083_stable_diffusion_v1_5": {
+        "text_id": "partiprompt_1083",
+        "image_path": "partiprompt_1083_stable_diffusion_v1_5.jpg",
+        "text": "a rusty fire hydrant surrounded by dirt"
+    },
+    "partiprompt_1083_stable_diffusion_v2_1": {
+        "text_id": "partiprompt_1083",
+        "image_path": "partiprompt_1083_stable_diffusion_v2_1.jpg",
+        "text": "a rusty fire hydrant surrounded by dirt"
+    },
+    "partiprompt_1083_vq_diffusion": {
+        "text_id": "partiprompt_1083",
+        "image_path": "partiprompt_1083_vq_diffusion.jpg",
+        "text": "a rusty fire hydrant surrounded by dirt"
+    },
+    "partiprompt_499_mini_dalle": {
+        "text_id": "partiprompt_499",
+        "image_path": "partiprompt_499_mini_dalle.jpg",
+        "text": "a library filled with kids reading books"
+    },
+    "partiprompt_499_stable_diffusion_v1_1": {
+        "text_id": "partiprompt_499",
+        "image_path": "partiprompt_499_stable_diffusion_v1_1.jpg",
+        "text": "a library filled with kids reading books"
+    },
+    "partiprompt_499_stable_diffusion_v1_5": {
+        "text_id": "partiprompt_499",
+        "image_path": "partiprompt_499_stable_diffusion_v1_5.jpg",
+        "text": "a library filled with kids reading books"
+    },
+    "partiprompt_499_stable_diffusion_v2_1": {
+        "text_id": "partiprompt_499",
+        "image_path": "partiprompt_499_stable_diffusion_v2_1.jpg",
+        "text": "a library filled with kids reading books"
+    },
+    "partiprompt_499_vq_diffusion": {
+        "text_id": "partiprompt_499",
+        "image_path": "partiprompt_499_vq_diffusion.jpg",
+        "text": "a library filled with kids reading books"
+    },
+    "partiprompt_753_mini_dalle": {
+        "text_id": "partiprompt_753",
+        "image_path": "partiprompt_753_mini_dalle.jpg",
+        "text": "an aerial photo of a baseball stadium"
+    },
+    "partiprompt_753_stable_diffusion_v1_1": {
+        "text_id": "partiprompt_753",
+        "image_path": "partiprompt_753_stable_diffusion_v1_1.jpg",
+        "text": "an aerial photo of a baseball stadium"
+    },
+    "partiprompt_753_stable_diffusion_v1_5": {
+        "text_id": "partiprompt_753",
+        "image_path": "partiprompt_753_stable_diffusion_v1_5.jpg",
+        "text": "an aerial photo of a baseball stadium"
+    },
+    "partiprompt_753_stable_diffusion_v2_1": {
+        "text_id": "partiprompt_753",
+        "image_path": "partiprompt_753_stable_diffusion_v2_1.jpg",
+        "text": "an aerial photo of a baseball stadium"
+    },
+    "partiprompt_753_vq_diffusion": {
+        "text_id": "partiprompt_753",
+        "image_path": "partiprompt_753_vq_diffusion.jpg",
+        "text": "an aerial photo of a baseball stadium"
+    },
+    "paintskill_270_mini_dalle": {
+        "text_id": "paintskill_270",
+        "image_path": "paintskill_270_mini_dalle.jpg",
+        "text": "a photo of bird and skateboard; skateboard is right to bird"
+    },
+    "paintskill_270_stable_diffusion_v1_1": {
+        "text_id": "paintskill_270",
+        "image_path": "paintskill_270_stable_diffusion_v1_1.jpg",
+        "text": "a photo of bird and skateboard; skateboard is right to bird"
+    },
+    "paintskill_270_stable_diffusion_v1_5": {
+        "text_id": "paintskill_270",
+        "image_path": "paintskill_270_stable_diffusion_v1_5.jpg",
+        "text": "a photo of bird and skateboard; skateboard is right to bird"
+    },
+    "paintskill_270_stable_diffusion_v2_1": {
+        "text_id": "paintskill_270",
+        "image_path": "paintskill_270_stable_diffusion_v2_1.jpg",
+        "text": "a photo of bird and skateboard; skateboard is right to bird"
+    },
+    "paintskill_270_vq_diffusion": {
+        "text_id": "paintskill_270",
+        "image_path": "paintskill_270_vq_diffusion.jpg",
+        "text": "a photo of bird and skateboard; skateboard is right to bird"
+    },
+    "drawbench_41_mini_dalle": {
+        "text_id": "drawbench_41",
+        "image_path": "drawbench_41_mini_dalle.jpg",
+        "text": "Two dogs on the street."
+    },
+    "drawbench_41_stable_diffusion_v1_1": {
+        "text_id": "drawbench_41",
+        "image_path": "drawbench_41_stable_diffusion_v1_1.jpg",
+        "text": "Two dogs on the street."
+    },
+    "drawbench_41_stable_diffusion_v1_5": {
+        "text_id": "drawbench_41",
+        "image_path": "drawbench_41_stable_diffusion_v1_5.jpg",
+        "text": "Two dogs on the street."
+    },
+    "drawbench_41_stable_diffusion_v2_1": {
+        "text_id": "drawbench_41",
+        "image_path": "drawbench_41_stable_diffusion_v2_1.jpg",
+        "text": "Two dogs on the street."
+    },
+    "drawbench_41_vq_diffusion": {
+        "text_id": "drawbench_41",
+        "image_path": "drawbench_41_vq_diffusion.jpg",
+        "text": "Two dogs on the street."
+    },
+    "partiprompt_1085_mini_dalle": {
+        "text_id": "partiprompt_1085",
+        "image_path": "partiprompt_1085_mini_dalle.jpg",
+        "text": "a snake curled around a wooden post"
+    },
+    "partiprompt_1085_stable_diffusion_v1_1": {
+        "text_id": "partiprompt_1085",
+        "image_path": "partiprompt_1085_stable_diffusion_v1_1.jpg",
+        "text": "a snake curled around a wooden post"
+    },
+    "partiprompt_1085_stable_diffusion_v1_5": {
+        "text_id": "partiprompt_1085",
+        "image_path": "partiprompt_1085_stable_diffusion_v1_5.jpg",
+        "text": "a snake curled around a wooden post"
+    },
+    "partiprompt_1085_stable_diffusion_v2_1": {
+        "text_id": "partiprompt_1085",
+        "image_path": "partiprompt_1085_stable_diffusion_v2_1.jpg",
+        "text": "a snake curled around a wooden post"
+    },
+    "partiprompt_1085_vq_diffusion": {
+        "text_id": "partiprompt_1085",
+        "image_path": "partiprompt_1085_vq_diffusion.jpg",
+        "text": "a snake curled around a wooden post"
+    }
+}

@@ -122,8 +122,24 @@ import t2i_metrics
 print("Below are vqascore models:")
 print(t2i_metrics.list_all_vqascore_models())
 print()
+print("Below are itmscore models:")
+print(t2i_metrics.list_all_itmscore_models())
+print()
 print("Below are clipscore models:")
 print(t2i_metrics.list_all_clipscore_models())
+```
+
+### Evaluating on Winoground/EqBen
+
+```python
+import t2i_metrics
+clip_flant5_score = t2i_metrics.VQAScore(model='clip-flant5-xxl')
+
+# llava_15_score = t2i_metrics.VQAScore(model='llava-v1.5-13b')
+
+# clip_score = t2i_metrics.ITCScore(model='openai:ViT-L-14')
+
+# blip2_itm_score = t2i_metrics.ITMScore(model='blip2-itm')
 ```
 
 # TODO: Update below
