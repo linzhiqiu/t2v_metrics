@@ -29,7 +29,6 @@ def main():
         Winoground,
         EqBen_Mini,
         TIFA160_DSG,
-        # SugarCrepe
     ]:
         dataset = dataset_cls(root_dir=args.root_dir)
         scores = score_func.batch_forward(dataset, batch_size=args.batch_size).cpu()

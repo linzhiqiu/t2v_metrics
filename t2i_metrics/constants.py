@@ -1,6 +1,5 @@
-# HF_CACHE_DIR = "~/.cache/" # TODO: change this to your own cache dir
-HF_CACHE_DIR = "/data3/zhiqiul/visual_gpt/hf_cache/"
-
+HF_CACHE_DIR = "./cache/" # TODO: change this to your own cache dir
+# HF_CACHE_DIR = "/data3/zhiqiul/visual_gpt/hf_cache/"
 
 
 # For CLIP-FlanT5 and LLaVA-1.5 (copied from llava)
