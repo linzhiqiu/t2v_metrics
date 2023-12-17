@@ -25,12 +25,16 @@ dependencies = [
     "open-clip-torch>=2.23.0",
     "openai>=1.4.0",
     "opencv-python>=4.6.0.66",
-    "opencv-python-headless>=4.8.1.78",
+    "opencv-python-headless",
     "pandas>=2.1.4",
     "scipy>=1.11.4",
     "sentencepiece>=0.1.99",
     "transformers>=4.36.1",
     "datasets>=2.15.0",
+    "tokenizers",
+    "omegaconf",
+    "iopath",
+    "fairscale",
 ]
 
 [tool.setuptools]

@@ -114,6 +114,18 @@ scores = clip_flant5_score.batch_forward(dataset=dataset,
                                               answer_template=vgpt_answer_template)
 ```
 
+### Check all supported models
+You can check all supported models by running the below commands:
+
+```python
+import t2i_metrics
+print("Below are vqascore models:")
+print(t2i_metrics.list_all_vqascore_models())
+print()
+print("Below are clipscore models:")
+print(t2i_metrics.list_all_clipscore_models())
+```
+
 # TODO: Update below
 More thorough information about variants is below. This repository contains our **perceptual metric (LPIPS)** and **dataset (BAPPS)**. It can also be used as a "perceptual loss". This uses PyTorch; a Tensorflow alternative is [here](https://github.com/alexlee-gk/lpips-tensorflow).
 
