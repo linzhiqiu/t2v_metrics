@@ -25,9 +25,14 @@ def main():
     score_func = t2i_metrics.get_score_model(model=args.model, device=args.device, cache_dir=args.cache_dir)
 
     print(f"Performance of {args.model}.")
-    for dataset_cls in [Winoground, EqBen_Mini, TIFA160_DSG, SugarCrepe]:
+    for dataset_cls in [
+        Winoground,
+        EqBen_Mini,
+        TIFA160_DSG,
+        # SugarCrepe
+    ]:
         dataset = dataset_cls(root_dir=args.root_dir)
-        scores = score_func.batch_forward(dataset, batch_size=args.batch_size)
+        scores = score_func.batch_forward(dataset, batch_size=args.batch_size).cpu()
         dataset.evaluate_scores(scores)
 
 if __name__ == "__main__":

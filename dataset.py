@@ -56,11 +56,11 @@ class Winoground(Dataset):
         self.root_dir = os.path.join(root_dir, "winoground")
         if not os.path.exists(self.root_dir):
             subprocess.call(
-                ["gdown", "--id", "1Lril_90vjsbL_2qOaxMu3I-aPpckCDiF", "--output",
+                ["gdown", "--no-cookies", "1Lril_90vjsbL_2qOaxMu3I-aPpckCDiF", "--output",
                  os.path.join(root_dir, "winoground.zip")]
             )
             subprocess.call(
-                ["unzip",  "winoground.zip"],
+                ["unzip", "-q", "winoground.zip"],
                 cwd=root_dir
             )
         csv_file = os.path.join(self.root_dir, 'metadata.csv')
@@ -158,44 +158,51 @@ class SugarCrepe(Dataset):
             os.makedirs(self.root_dir, exist_ok=True)
             import subprocess
             subprocess.call(['wget', 'http://images.cocodataset.org/zips/val2017.zip'], cwd=self.root_dir)
-            subprocess.call(['unzip', 'val2017.zip'], cwd=self.root_dir)
+            subprocess.call(['unzip', "-q", 'val2017.zip'], cwd=self.root_dir)
         self.root_dir = os.path.join(root_dir, 'coco2017', 'val2017')
         
         data_dict = {
-            'add_obj'    : f'sugar_crepe/add_obj.json',
-            'add_att'    : f'sugar_crepe/add_att.json',
-            'replace_obj': f'sugar_crepe/replace_obj.json',
-            'replace_att': f'sugar_crepe/replace_att.json',
-            'replace_rel': f'sugar_crepe/replace_rel.json',
-            'swap_obj'   : f'sugar_crepe/swap_obj.json',
-            'swap_att'   : f'sugar_crepe/swap_att.json',
+            'add_obj'    : f'datasets/sugar_crepe/add_obj.json',
+            'add_att'    : f'datasets/sugar_crepe/add_att.json',
+            'replace_obj': f'datasets/sugar_crepe/replace_obj.json',
+            'replace_att': f'datasets/sugar_crepe/replace_att.json',
+            'replace_rel': f'datasets/sugar_crepe/replace_rel.json',
+            'swap_obj'   : f'datasets/sugar_crepe/swap_obj.json',
+            'swap_att'   : f'datasets/sugar_crepe/swap_att.json',
         }
-        self.dataset = []
+        self.dataset = {}
         for hard_neg_type in data_dict:
-            self.dataset += json.load(open(data_dict[hard_neg_type], 'r', encoding='utf-8'))
+            self.dataset[hard_neg_type] = json.load(open(data_dict[hard_neg_type], 'r', encoding='utf-8'))
         
         self.image_preprocess = image_preprocess
-        self.items = list(self.dataset.keys())
+        self.items = []
+        self.hard_neg_type_to_indices = {hard_neg_type: [] for hard_neg_type in self.dataset}
+        ctr = 0
+        for hard_neg_type in self.dataset:
+            for idx in self.dataset[hard_neg_type]:
+                self.items.append([hard_neg_type, idx])
+                self.hard_neg_type_to_indices[hard_neg_type].append(ctr)
+                ctr += 1
         self.return_image_paths = return_image_paths
-    
 
     def __len__(self):
-        return len(self.dataset)
+        return len(self.items)
 
     def __getitem__(self, idx):
-        idx = str(idx)
-        image_path = os.path.join(self.root_dir, self.dataset[idx]['filename'])
+        hard_neg_type, idx = self.items[idx]
+        image_path = os.path.join(self.root_dir, self.dataset[hard_neg_type][idx]['filename'])
         if self.return_image_paths:
             image = image_path
         else:
             image = Image.open(image_path).convert('RGB')
             image = self.image_preprocess(image)
-        texts = [str(self.dataset[idx]['caption']), self.dataset[idx]['negative_caption']]
+        texts = [str(self.dataset[hard_neg_type][idx]['caption']), self.dataset[hard_neg_type][idx]['negative_caption']]
         item = {"images": [image], "texts": texts}
         return item
     
     def evaluate_scores(self, scores):
-        scores_i2t = scores
+        scores_i2t = scores.cpu().numpy()
+        results_by_type = {}
         
         preds = np.argmax(np.squeeze(scores_i2t, axis=1), axis=-1)
         correct_mask = (preds == 0)
@@ -203,6 +210,21 @@ class SugarCrepe(Dataset):
         df = pd.DataFrame(result_records)
         macro_accuracy = df['Precision@1'].mean()
         print(f"SugarCrepe Macro Accuracy: {macro_accuracy}")
+        for hard_neg_type in self.hard_neg_type_to_indices:
+            indices = self.hard_neg_type_to_indices[hard_neg_type]
+            correct_mask = (preds[indices] == 0)
+            result_records = [{"Precision@1": np.mean(correct_mask)}]
+            df = pd.DataFrame(result_records)
+            macro_accuracy = df['Precision@1'].mean()
+            results_by_type[hard_neg_type] = macro_accuracy
+            print(f"SugarCrepe {hard_neg_type} Macro Accuracy: {macro_accuracy}")
+        
+        add_accuracy = (results_by_type['add_obj'] + results_by_type['add_att']) / 2
+        replace_accuracy = (results_by_type['replace_obj'] + results_by_type['replace_att'] + results_by_type['replace_rel']) / 3
+        swap_accuracy = (results_by_type['swap_obj'] + results_by_type['swap_att']) / 2
+        print("SugarCrepe performance (by tag)")
+        print(f"{'Dataset': <70} {'Add': <10} {'Replace': <10} {'Swap': <10}")
+        print(f"{'SugarCrepe': <70} {add_accuracy: <10.2%} {replace_accuracy: <10.2%} {swap_accuracy: <10.2%}")
         return result_records, macro_accuracy
     
 
@@ -218,7 +240,7 @@ class TIFA160_DSG(Dataset):
                     ["gdown", "--no-cookies", "1hHVMeVDZlnJz1FFhy_BxiZGIz1tEMm0s", "--output",
                      image_zip_file]
                 )
-                subprocess.call(["unzip", "tifa160.zip"], cwd=root_dir)
+                subprocess.call(["unzip", "-q", "tifa160.zip"], cwd=root_dir)
         
         self.dataset = json.load(open(os.path.join("datasets", "tifa160.json"), 'r'))
         self.dsg_human_likert_scores = pd.read_csv(os.path.join("datasets", "dsg_tifa160_anns.csv"))
@@ -253,7 +275,6 @@ class TIFA160_DSG(Dataset):
             assert self.dsg_items[k]['text_id'] == self.dataset[k]['text_id']
             assert self.dsg_items[k]['text'] == self.dataset[k]['text']
             assert self.dsg_items[k]['image_path'] == self.dataset[k]['image_path']
-            del self.dataset[k]['human_avg']
         self.image_preprocess = image_preprocess
         self.items = list(self.dataset.keys())
         self.return_image_paths = return_image_paths
@@ -314,10 +335,10 @@ class EqBen_Mini(Dataset):
             # https://drive.google.com/file/d/11YUTf06uzRHtFV8rYi96z4vTPi8_GNEM/view?usp=sharing
             os.makedirs(self.root_dir, exist_ok=True)
             subprocess.call(
-                ["gdown", "--id", "11YUTf06uzRHtFV8rYi96z4vTPi8_GNEM", "--output", 
+                ["gdown", "--no-cookies", "11YUTf06uzRHtFV8rYi96z4vTPi8_GNEM", "--output", 
                  os.path.join(self.root_dir, "eqben_vllm.zip")]
             )
-            subprocess.call(["unzip", "eqben_vllm.zip"], cwd=self.root_dir)
+            subprocess.call(["unzip", "-q", "eqben_vllm.zip"], cwd=self.root_dir)
             
         self.root_dir = os.path.join(root_dir, "eqben_vllm", "images")
         self.subset_types = {

@@ -129,20 +129,17 @@ print("Below are clipscore models:")
 print(t2i_metrics.list_all_clipscore_models())
 ```
 
-### Evaluating on Winoground/EqBen
+### Evaluating on Winoground/EqBen/TIFA/SugarCrepe
 
-```python
-import t2i_metrics
-clip_flant5_score = t2i_metrics.VQAScore(model='clip-flant5-xxl')
-
-# llava_15_score = t2i_metrics.VQAScore(model='llava-v1.5-13b')
-
-# clip_score = t2i_metrics.ITCScore(model='openai:ViT-L-14')
-
-# blip2_itm_score = t2i_metrics.ITMScore(model='blip2-itm')
+You can easily reproduce the performance on compositionality benchmarks via running
+```bash
+python eval.py --model clip-flant5-xxl
+python eval.py --model llava-v1.5-13b
+python eval.py --model blip2-itm
+python eval.py --model openai:ViT-L-14
 ```
 
-# TODO: Update below
+# STOP here
 More thorough information about variants is below. This repository contains our **perceptual metric (LPIPS)** and **dataset (BAPPS)**. It can also be used as a "perceptual loss". This uses PyTorch; a Tensorflow alternative is [here](https://github.com/alexlee-gk/lpips-tensorflow).
 
 1. 

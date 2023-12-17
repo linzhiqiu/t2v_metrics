@@ -1,6 +1,7 @@
 # datasets
 datasets/*/
 datasets/*.zip
+!datasets/sugar_crepe/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
