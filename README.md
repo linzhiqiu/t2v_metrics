@@ -101,7 +101,7 @@ scores = clip_flant5_score(images=images,
 ```
 
 ### Check all supported models
-We currently support CLIP-FlanT5, LLaVA-1.5, and InstructBLIP for VQAScore. We also supports CLIPScore using CLIP, and ITMScore using BLIPv2:
+We currently support CLIP-FlanT5, LLaVA-1.5, and InstructBLIP for VQAScore. We also support CLIPScore using CLIP, and ITMScore using BLIPv2:
 ```python
 llava_score = t2i_metrics.VQAScore(model='llava-v1.5-13b') # LLaVA-1.5 is the second best
 clip_score = t2i_metrics.CLIPScore(model='openai:ViT-L-14-336')
