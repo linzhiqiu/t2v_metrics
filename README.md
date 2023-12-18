@@ -48,7 +48,7 @@ scores = clip_flant5_score(images=images, texts=texts) # scores[i][j] is the sco
 
 ### Notes on GPU and cache
 - **GPU usage**: The above scripts will by default use the first cuda device on your machine. We recommend using 40GB GPU for the largest VQA models such as `clip-flant5-xxl` and `llava-v1.5-13b`. If you have limited GPU memory, consider using smaller models such as `clip-flant5-xl` and `llava-v1.5-7b`.
-- **Cache directory**: You can change the cache folder (default is `./cache/`) by updating `HF_CACHE_DIR` in [t2i_metrics/constants.py](t2i_metrics/constants.py).
+- **Cache directory**: You can change the cache folder (default is `./hf_cache/`) by updating `HF_CACHE_DIR` in [t2i_metrics/constants.py](t2i_metrics/constants.py).
 
 
 ## **Advanced Usage**  
