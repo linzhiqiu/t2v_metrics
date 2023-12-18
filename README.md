@@ -124,10 +124,13 @@ python eval.py --model clip-flant5-xxl
 python eval.py --model llava-v1.5-13b
 python eval.py --model blip2-itm
 python eval.py --model openai:ViT-L-14
+
+# You can optionally specify question/answer template, for example:
+python eval.py --model clip-flant5-xxl --question "Question: Is the image showing '{}'?" --answer "Yes"
 ```
 
 ### Implement New Scoring Metrics
-You can easily implement your own scoring metric. For example, if you have a stronger VQA model, you can include it in [t2i_metrics/models/vqascore_models](t2i_metrics/models/vqascore_models/). Please check out our implementation for [LLaVA-1.5](t2i_metrics/models/vqascore_models/llava_model.py) and [InstructBLIP](t2i_metrics/models/vqascore_models/instructblip_model.py) for reference.
+You can easily implement your own scoring metric. For example, if you have a stronger VQA model, you can include it in [t2i_metrics/models/vqascore_models](t2i_metrics/models/vqascore_models/). Please check out our implementation for [LLaVA-1.5](t2i_metrics/models/vqascore_models/llava_model.py) and [InstructBLIP](t2i_metrics/models/vqascore_models/instructblip_model.py) as a starting point.
 
 <!-- **Table of Contents**<br>
 1. [Learned Perceptual Image Patch Similarity (LPIPS) metric](#1-learned-perceptual-image-patch-similarity-lpips-metric)<br>
