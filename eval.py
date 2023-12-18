@@ -36,11 +36,11 @@ def main():
     
     print(f"Performance of {args.model}.")
     for dataset_cls in [
-        Winoground,
-        EqBen_Mini,
-        # TIFA160_DSG,
-        # Flickr8K_Expert,
-        # Flickr8K_CF,
+        # Winoground,
+        # EqBen_Mini,
+        TIFA160_DSG,
+        Flickr8K_Expert,
+        Flickr8K_CF,
     ]:
         dataset = dataset_cls(root_dir=args.root_dir)
         scores = score_func.batch_forward(dataset, batch_size=args.batch_size, **kwargs).cpu()

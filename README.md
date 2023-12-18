@@ -30,9 +30,7 @@ The following Python code is all you need to evaluate the similiarity between an
 
 ```python
 import t2i_metrics
-clip_flant5_score = t2i_metrics.VQAScore(model='clip-flant5-xxl') # CLIP-FlanT5 is the best scoring metric
-llava_score = t2i_metrics.VQAScore(model='llava-v1.5-13b') # LLaVA-1.5 is the second best
-clip_score = t2i_metrics.CLIPScore(model='openai:ViT-L-14') # we include clipscore for ablation
+clip_flant5_score = t2i_metrics.VQAScore(model='clip-flant5-xxl') # our best scoring model
 
 # For a single (image, text) pair
 image = "images/test0.jpg" # an image path in string format
@@ -91,7 +89,7 @@ scores = clip_flant5_score(images=images,
                            answer_template=answer_template)
 ```
 
-You can also compute P(caption | image) ([VisualGPTScore](https://linzhiqiu.github.io/papers/visual_gpt_score)) instead pf P(answer | image, question):
+You can also compute P(caption | image) ([VisualGPTScore](https://linzhiqiu.github.io/papers/visual_gpt_score)) instead of P(answer | image, question):
 ```python
 vgpt_question_template = "" # no question
 vgpt_answer_template = "{}" # simply calculate the P(caption)
@@ -103,7 +101,15 @@ scores = clip_flant5_score(images=images,
 ```
 
 ### Check all supported models
-We currently support CLIP-FlanT5/LLaVA-1.5/CLIP/BLIP2. You can check all supported CLIPScore/ITMScore/VQAScore models by running the below commands:
+We currently support CLIP-FlanT5, LLaVA-1.5, and InstructBLIP for VQAScore. We also supports CLIPScore using CLIP, and ITMScore using BLIPv2:
+```python
+llava_score = t2i_metrics.VQAScore(model='llava-v1.5-13b') # LLaVA-1.5 is the second best
+clip_score = t2i_metrics.CLIPScore(model='openai:ViT-L-14-336')
+blip_itm_score = t2i_metrics.ITMScore(model='blip2-itm') 
+```
+
+
+You can check all supported models by running the below commands:
 
 ```python
 print("VQAScore models:")
