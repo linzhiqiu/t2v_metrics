@@ -80,6 +80,27 @@ LLAVA_MODELS = {
             'image_aspect_ratio': 'square',
         },
     },
+    # The following models are built on top of LLaVA-1.5 and integrate well with LLaVA-1.5 codebase
+    'ShareGPT4V-7B': {
+        'tokenizer' : {
+            'path': 'Lin-Chen/ShareGPT4V-7B',
+        },
+        'model': {
+            'path': 'Lin-Chen/ShareGPT4V-7B',
+            'conversation': 'chat',
+            'image_aspect_ratio': 'pad',
+        },
+    },
+    'ShareGPT4V-13B': {
+        'tokenizer' : {
+            'path': 'Lin-Chen/ShareGPT4V-13B',
+        },
+        'model': {
+            'path': 'Lin-Chen/ShareGPT4V-13B',
+            'conversation': 'chat',
+            'image_aspect_ratio': 'pad',
+        },
+    },
 }
 
 
