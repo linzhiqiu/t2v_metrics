@@ -252,9 +252,10 @@ class TIFA160_DSG(Dataset):
         return spearman, kendall, kendall_c
 
     
-class Flickr8K(Dataset):
-    def __init__(self, json_path="flickr8k.json", image_preprocess=None, root_dir="./", download=True, return_image_paths=True):
+class Flickr8K_CF(Dataset):
+    def __init__(self, image_preprocess=None, root_dir="./", download=True, return_image_paths=True):
         self.root_dir = root_dir
+        json_path="crowdflower_flickr8k.json"
         if not os.path.exists(os.path.join(root_dir, 'flickr8k')):
             if download:
                 os.makedirs(root_dir, exist_ok=True)
@@ -328,13 +329,6 @@ class Flickr8K(Dataset):
         return spearman, kendall, kendall_c
 
 
-class Flickr8K_Expert(Flickr8K):
-    def __init__(self, image_preprocess=None, root_dir="./", download=True, return_image_paths=True):
-        super().__init__(json_path="flickr8k.json", image_preprocess=image_preprocess, root_dir=root_dir, download=download, return_image_paths=return_image_paths)
-        
-class Flickr8K_CF(Flickr8K):
-    def __init__(self, image_preprocess=None, root_dir="./", download=True, return_image_paths=True):
-        super().__init__(json_path="crowdflower_flickr8k.json", image_preprocess=image_preprocess, root_dir=root_dir, download=download, return_image_paths=return_image_paths)
 
 class EqBen_Mini(Dataset):
     def __init__(self, image_preprocess=None, root_dir='./', return_image_paths=True):

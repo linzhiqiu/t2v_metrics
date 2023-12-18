@@ -3,7 +3,7 @@
 import argparse
 import os
 import t2i_metrics
-from dataset import Winoground, EqBen_Mini, TIFA160_DSG, Flickr8K_Expert, Flickr8K_CF
+from dataset import Winoground, EqBen_Mini, TIFA160_DSG, Flickr8K_CF
 
 
 def config():
@@ -36,10 +36,9 @@ def main():
     
     print(f"Performance of {args.model}.")
     for dataset_cls in [
-        # Winoground,
-        # EqBen_Mini,
+        Winoground,
+        EqBen_Mini,
         TIFA160_DSG,
-        Flickr8K_Expert,
         Flickr8K_CF,
     ]:
         dataset = dataset_cls(root_dir=args.root_dir)
