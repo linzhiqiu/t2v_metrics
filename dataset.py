@@ -233,21 +233,108 @@ class TIFA160_DSG(Dataset):
                 continue
             human_avg_scores_without_nan.append(human_avg_scores[idx])
             our_scores_without_nan.append(our_scores[idx])
-        spearman, kendall = self.compute_correlation(human_avg_scores_without_nan, our_scores_without_nan)
+        spearman, kendall, kendall_c = self.compute_correlation(human_avg_scores_without_nan, our_scores_without_nan)
         print(f"Spearman's Correlation (ours): ", spearman)
         print(f'Kendall Tau Score (ours): ', kendall)
-        return spearman, kendall
+        print(f'Kendall Tau-C Score (ours): ', kendall_c)
+        return spearman, kendall, kendall_c
     
     def get_metric_scores(self, metric):
         if metric == 'human_avg':
             return [self.dsg_items[k][metric] for k in self.items]
         return [self.dataset[k][metric] for k in self.items]
+
     
     def compute_correlation(self, metric1_scores, metric2_scores):
-        spearman = np.corrcoef(metric1_scores, metric2_scores)[0, 1]
+        spearman = 100*np.corrcoef(metric1_scores, metric2_scores)[0, 1]
         kendall = kendalltau(metric1_scores, metric2_scores)
-        return spearman, kendall
+        kendall_c = 100*kendalltau(metric1_scores, metric2_scores, variant='c')[0]
+        return spearman, kendall, kendall_c
 
+    
+class Flickr8K(Dataset):
+    def __init__(self, json_path="flickr8k.json", image_preprocess=None, root_dir="./", download=True, return_image_paths=True):
+        self.root_dir = root_dir
+        if not os.path.exists(os.path.join(root_dir, 'flickr8k')):
+            if download:
+                os.makedirs(root_dir, exist_ok=True)
+                import subprocess
+                image_zip_file = os.path.join(root_dir, "flickr8k.zip")
+                subprocess.call(
+                    ["gdown", "--no-cookies", "1WEg-xbUZ971P3Q0RDA8nVfKJrtpjTqCM", "--output",
+                     image_zip_file]
+                )
+                subprocess.call(["unzip", "-q", "flickr8k.zip"], cwd=root_dir)
+        
+        self.image_preprocess = image_preprocess
+        self.return_image_paths = return_image_paths
+        self.dataset = json.load(open(os.path.join(self.root_dir, "flickr8k", json_path), 'r'))
+        print('Loaded {} images'.format(len(self.dataset)))
+
+        self.images = []
+        self.refs = []
+        self.candidates = []
+        self.human_scores = []
+        for k, v in list(self.dataset.items()):
+            for human_judgement in v['human_judgement']:
+                if np.isnan(human_judgement['rating']):
+                    raise ValueError(f"Human judgement score is nan for {k}")
+                self.images.append(os.path.join(self.root_dir, "flickr8k", v['image_path']))
+                self.refs.append([' '.join(gt.split()) for gt in v['ground_truth']])
+                self.candidates.append(' '.join(human_judgement['caption'].split()))
+                self.human_scores.append(human_judgement['rating'])
+        
+    
+    def __len__(self):
+        return len(self.images)
+
+    def __getitem__(self, idx):
+        image_path = self.images[idx]
+        if self.return_image_paths:
+            image = image_path
+        else:
+            image = Image.open(image_path).convert('RGB')
+            image = self.image_preprocess(image)
+        # import pdb; pdb.set_trace()
+        texts = [self.candidates[idx]]
+        for i in range(len(texts)):
+            texts[i] = texts[i].strip(".").strip(" ")
+        item = {"images": [image], "texts": texts}
+        return item
+    
+    def evaluate_scores(self, scores):
+        scores_i2t = scores
+        human_avg_scores = self.human_scores
+        our_scores = [float(scores_i2t[idx][0][0]) for idx in range(len(self.images))]
+        import math
+        human_avg_scores_without_nan = []
+        our_scores_without_nan = []
+        for idx in range(len(self.images)):
+            if math.isnan(our_scores[idx]):
+                print(f"Warning: {self.images[idx]} has nan score! Skipping this for evaluation")
+                continue
+            human_avg_scores_without_nan.append(human_avg_scores[idx])
+            our_scores_without_nan.append(our_scores[idx])
+        spearman, kendall, kendall_c = self.compute_correlation(human_avg_scores_without_nan, our_scores_without_nan)
+        print(f"Spearman's Correlation (ours): ", spearman)
+        print(f'Kendall Tau Score (ours): ', kendall)
+        print(f'Kendall Tau-C Score (ours): ', kendall_c)
+        return spearman, kendall, kendall_c
+    
+    def compute_correlation(self, metric1_scores, metric2_scores):
+        spearman = 100*np.corrcoef(metric1_scores, metric2_scores)[0, 1]
+        kendall = kendalltau(metric1_scores, metric2_scores)
+        kendall_c = 100*kendalltau(metric1_scores, metric2_scores, variant='c')[0]
+        return spearman, kendall, kendall_c
+
+
+class Flickr8K_Expert(Flickr8K):
+    def __init__(self, image_preprocess=None, root_dir="./", download=True, return_image_paths=True):
+        super().__init__(json_path="flickr8k.json", image_preprocess=image_preprocess, root_dir=root_dir, download=download, return_image_paths=return_image_paths)
+        
+class Flickr8K_CF(Flickr8K):
+    def __init__(self, image_preprocess=None, root_dir="./", download=True, return_image_paths=True):
+        super().__init__(json_path="crowdflower_flickr8k.json", image_preprocess=image_preprocess, root_dir=root_dir, download=download, return_image_paths=return_image_paths)
 
 class EqBen_Mini(Dataset):
     def __init__(self, image_preprocess=None, root_dir='./', return_image_paths=True):

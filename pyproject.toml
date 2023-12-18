@@ -35,6 +35,9 @@ dependencies = [
     "omegaconf",
     "iopath",
     "fairscale",
+    # for clipscore
+    "scikit-learn",
+    "pycocoevalcap",
 ]
 
 [tool.setuptools]

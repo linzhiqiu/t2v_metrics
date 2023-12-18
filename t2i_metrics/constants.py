@@ -1,4 +1,4 @@
-HF_CACHE_DIR = "./cache/" # TODO: change this to your own cache dir
+HF_CACHE_DIR = "./hf_cache/" # TODO: change this to your own cache dir
 # HF_CACHE_DIR = "/data3/zhiqiul/visual_gpt/hf_cache/"
 
 
