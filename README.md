@@ -59,7 +59,8 @@ If you have a large dataset of M images x N texts, then you can optionally speed
 import t2i_metrics
 clip_flant5_score = t2i_metrics.VQAScore(model='clip-flant5-xxl')
 
-# The number of images and texts per dictionary can be consistent
+# The number of images and texts per dictionary must be consistent.
+# E.g., the below example shows how to evaluate 4 generated images per text
 dataset = [
   {'images': ["images/sdxl_0.jpg", "images/dalle3_0.jpg", "images/deepfloyd_0.jpg", "images/imagen2_0.jpg"], 'texts': ["an old person kisses a young person"]},
   {'images': ["images/sdxl_1.jpg", "images/dalle3_1.jpg", "images/deepfloyd_1.jpg", "images/imagen2_1.jpg"], 'texts': ["a young person kissing an old person"]},
