@@ -81,7 +81,7 @@ LLAVA_MODELS = {
         },
     },
     # The following models are built on top of LLaVA-1.5 and integrate well with LLaVA-1.5 codebase
-    'ShareGPT4V-7B': {
+    'sharegpt4v-7b': {
         'tokenizer' : {
             'path': 'Lin-Chen/ShareGPT4V-7B',
         },
@@ -91,7 +91,7 @@ LLAVA_MODELS = {
             'image_aspect_ratio': 'pad',
         },
     },
-    'ShareGPT4V-13B': {
+    'sharegpt4v-13b': {
         'tokenizer' : {
             'path': 'Lin-Chen/ShareGPT4V-13B',
         },
