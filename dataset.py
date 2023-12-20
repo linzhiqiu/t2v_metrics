@@ -192,12 +192,22 @@ class TIFA160_DSG(Dataset):
                     'text_id': self.source_ids[key_idx],
                 }
         
+        self.all_samples = {} # key is text_id, value is all indices (for each diffusion model) and human scores
         # compute 'human_avg'
-        for k in self.dsg_items:
+        for k_idx, k in enumerate(self.dsg_items):
             self.dsg_items[k]['human_avg'] = float(np.mean(self.dsg_items[k]['human_scores']))
             assert self.dsg_items[k]['text_id'] == self.dataset[k]['text_id']
             assert self.dsg_items[k]['text'] == self.dataset[k]['text']
             assert self.dsg_items[k]['image_path'] == self.dataset[k]['image_path']
+            text_id = self.dsg_items[k]['text_id']
+            if text_id not in self.all_samples:
+                self.all_samples[text_id] = {
+                    'text_id': text_id,
+                    'text': self.dsg_items[k]['text'],
+                    'indices': [k_idx],
+                }
+            else:
+                self.all_samples[text_id]['indices'].append(k_idx)
         self.image_preprocess = image_preprocess
         self.items = list(self.dataset.keys())
         self.return_image_paths = return_image_paths
@@ -237,6 +247,21 @@ class TIFA160_DSG(Dataset):
         print(f"Spearman's Correlation (ours): ", spearman)
         print(f'Kendall Tau Score (ours): ', kendall)
         print(f'Kendall Tau-C Score (ours): ', kendall_c)
+        
+        # check accuracy of the score picking the highest human score
+        acc_count = 0.
+        for text_id in self.all_samples:
+            # need to consider tie in human scores. 
+            # acc_count += 1. whenever one of the highest human score ones is picked
+            indices = self.all_samples[text_id]['indices']
+            max_human_score = max([human_avg_scores[idx] for idx in indices])
+            max_human_score_indices = [idx for idx in indices if human_avg_scores[idx] == max_human_score]
+            our_max_idx = np.argmax([our_scores[idx] for idx in indices])
+            if indices[our_max_idx] in max_human_score_indices:
+                acc_count += 1.
+            
+        acc = acc_count / len(self.all_samples)
+        print(f"Accuracy of selecting best human score image (ours): {acc}")
         return spearman, kendall, kendall_c
     
     def get_metric_scores(self, metric):
@@ -253,9 +278,8 @@ class TIFA160_DSG(Dataset):
 
     
 class Flickr8K_CF(Dataset):
-    def __init__(self, image_preprocess=None, root_dir="./", download=True, return_image_paths=True):
+    def __init__(self, image_preprocess=None, root_dir="./", download=True, return_image_paths=True, json_path="crowdflower_flickr8k.json"):
         self.root_dir = root_dir
-        json_path="crowdflower_flickr8k.json"
         if not os.path.exists(os.path.join(root_dir, 'flickr8k')):
             if download:
                 os.makedirs(root_dir, exist_ok=True)
@@ -276,6 +300,7 @@ class Flickr8K_CF(Dataset):
         self.refs = []
         self.candidates = []
         self.human_scores = []
+        self.all_samples = {} # key is image_id, value is all indices (for each generated caption) and human scores
         for k, v in list(self.dataset.items()):
             for human_judgement in v['human_judgement']:
                 if np.isnan(human_judgement['rating']):
@@ -284,6 +309,13 @@ class Flickr8K_CF(Dataset):
                 self.refs.append([' '.join(gt.split()) for gt in v['ground_truth']])
                 self.candidates.append(' '.join(human_judgement['caption'].split()))
                 self.human_scores.append(human_judgement['rating'])
+                if k not in self.all_samples:
+                    self.all_samples[k] = {
+                        'image_id': k,
+                        'indices': [len(self.images) - 1],
+                    }
+                else:
+                    self.all_samples[k]['indices'].append(len(self.images) - 1)
         
     
     def __len__(self):
@@ -320,6 +352,21 @@ class Flickr8K_CF(Dataset):
         print(f"Spearman's Correlation (ours): ", spearman)
         print(f'Kendall Tau Score (ours): ', kendall)
         print(f'Kendall Tau-C Score (ours): ', kendall_c)
+        
+        # check accuracy of the score picking the highest human score
+        acc_count = 0.
+        for image_id in self.all_samples:
+            # need to consider tie in human scores. 
+            # acc_count += 1. whenever one of the highest human score ones is picked
+            indices = self.all_samples[image_id]['indices']
+            max_human_score = max([human_avg_scores[idx] for idx in indices])
+            max_human_score_indices = [idx for idx in indices if human_avg_scores[idx] == max_human_score]
+            our_max_idx = np.argmax([our_scores[idx] for idx in indices])
+            if indices[our_max_idx] in max_human_score_indices:
+                acc_count += 1.
+            
+        acc = acc_count / len(self.all_samples)
+        print(f"Accuracy of selecting best human score text (ours): {acc}")
         return spearman, kendall, kendall_c
     
     def compute_correlation(self, metric1_scores, metric2_scores):
@@ -328,7 +375,9 @@ class Flickr8K_CF(Dataset):
         kendall_c = 100*kendalltau(metric1_scores, metric2_scores, variant='c')[0]
         return spearman, kendall, kendall_c
 
-
+class Flickr8K_Expert(Flickr8K_CF):
+    def __init__(self, image_preprocess=None, root_dir="./", download=True, return_image_paths=True, json_path="flickr8k.json"):
+        super().__init__(image_preprocess=image_preprocess, root_dir=root_dir, download=download, return_image_paths=return_image_paths, json_path=json_path)
 
 class EqBen_Mini(Dataset):
     def __init__(self, image_preprocess=None, root_dir='./', return_image_paths=True):

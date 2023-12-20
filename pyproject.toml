@@ -38,6 +38,9 @@ dependencies = [
     # for clipscore
     "scikit-learn",
     "pycocoevalcap",
+    "image-reward",
+    "clip@git+https://github.com/openai/CLIP",
+    "hpsv2",
 ]
 
 [tool.setuptools]

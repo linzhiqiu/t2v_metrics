@@ -3,7 +3,7 @@
 import argparse
 import os
 import t2i_metrics
-from dataset import Winoground, EqBen_Mini, TIFA160_DSG, Flickr8K_CF
+from dataset import Winoground, EqBen_Mini, TIFA160_DSG, Flickr8K_CF, Flickr8K_Expert
 
 
 def config():
@@ -39,6 +39,7 @@ def main():
         Winoground,
         EqBen_Mini,
         TIFA160_DSG,
+        Flickr8K_Expert,
         Flickr8K_CF,
     ]:
         dataset = dataset_cls(root_dir=args.root_dir)
