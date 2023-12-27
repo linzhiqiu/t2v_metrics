@@ -6,3 +6,4 @@ SYSTEM_MSG = "A chat between a curious user and an artificial intelligence assis
 IGNORE_INDEX = -100
 IMAGE_TOKEN_INDEX = -200
 DEFAULT_IMAGE_TOKEN = "<image>"
+END_OF_CHUNK = "<|endofchunk|>"
