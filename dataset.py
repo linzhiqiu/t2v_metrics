@@ -256,8 +256,15 @@ class TIFA160_DSG(Dataset):
             indices = self.all_samples[text_id]['indices']
             max_human_score = max([human_avg_scores[idx] for idx in indices])
             max_human_score_indices = [idx for idx in indices if human_avg_scores[idx] == max_human_score]
-            our_max_idx = np.argmax([our_scores[idx] for idx in indices])
-            if indices[our_max_idx] in max_human_score_indices:
+            max_our_score = max([our_scores[idx] for idx in indices])
+            max_our_score_indices = [idx for idx in indices if our_scores[idx] == max_our_score]
+            
+            overlap = False
+            for our_max_idx in max_our_score_indices:
+                if our_max_idx in max_human_score_indices:
+                    overlap = True
+                    break
+            if overlap:
                 acc_count += 1.
             
         acc = acc_count / len(self.all_samples)
@@ -361,8 +368,14 @@ class Flickr8K_CF(Dataset):
             indices = self.all_samples[image_id]['indices']
             max_human_score = max([human_avg_scores[idx] for idx in indices])
             max_human_score_indices = [idx for idx in indices if human_avg_scores[idx] == max_human_score]
-            our_max_idx = np.argmax([our_scores[idx] for idx in indices])
-            if indices[our_max_idx] in max_human_score_indices:
+            max_our_score = max([our_scores[idx] for idx in indices])
+            max_our_score_indices = [idx for idx in indices if our_scores[idx] == max_our_score]
+            overlap = False
+            for our_max_idx in max_our_score_indices:
+                if our_max_idx in max_human_score_indices:
+                    overlap = True
+                    break
+            if overlap:
                 acc_count += 1.
             
         acc = acc_count / len(self.all_samples)
