@@ -41,6 +41,7 @@ dependencies = [
     "image-reward",
     "clip@git+https://github.com/openai/CLIP",
     "hpsv2",
+    "fire==0.4.0",
 ]
 
 [tool.setuptools]
