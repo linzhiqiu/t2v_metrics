@@ -6,7 +6,7 @@ from .mm_utils import expand2square, load_pretrained_model, t5_tokenizer_image_t
 from ...constants import HF_CACHE_DIR, CONTEXT_LEN, SYSTEM_MSG, DEFAULT_IMAGE_TOKEN, IGNORE_INDEX
 from .clip_t5.model import CLIPT5ForConditionalGeneration, ModelArguments
 
-default_question_template = "Is the image showing '{}'? Please answer yes or no."
+default_question_template = "Does the image show '{}'? Please answer yes or no."
 default_answer_template = "Yes"
 
 def format_question(question, conversation_style='plain'):
