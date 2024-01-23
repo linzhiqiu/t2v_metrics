@@ -39,7 +39,8 @@ class Kosmos2Model(VQAScoreModel):
                          device=device,
                          cache_dir=cache_dir)
     def load_model(self):
-        # Load model and processor from HuggingFace or local if cached
+        """Load the model, tokenizer, and processor
+        """
         self.model = Kosmos2ForConditionalGeneration.from_pretrained(
             KOSMOS2_MODELS[self.model_name]['checkpoint_path'],
             cache_dir=self.cache_dir
