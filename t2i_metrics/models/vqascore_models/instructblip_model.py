@@ -8,7 +8,7 @@ from .vqa_model import VQAScoreModel
 from .lavis.models import load_model
 from ...constants import HF_CACHE_DIR
 
-default_question_template = "Is the image showing '{}'? Please answer yes or no."
+default_question_template = "Does the image show '{}'? Please answer yes or no."
 default_answer_template = "yes" # instruct-blip uses "yes" instead of "Yes"
 
 InstructBLIP_MODELS = {
