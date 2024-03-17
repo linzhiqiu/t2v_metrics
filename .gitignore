@@ -1,9 +1,23 @@
 # datasets
 datasets/*/
 datasets/*.zip
+datasets/GenAI-Video-All
+datasets/GenAI-Image-All
+datasets/flickr30k
 !datasets/sugar_crepe/
 !datasets/tifa160.json
+!datasets/SeeTRUE.csv
+!datasets/dsg_tifa160_anns.csv
+!datasets/t2vscore_alignment_score.json
+!datasets/t2vscore_quality_score.json
+!datasets/t2vscore_results.csv
+!datasets/stanfordt23d.json
 hf_cache
+winoground_results/
+stanfordt23d_results/
+seetrue/
+genai_image_results/
+genai_video_results/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

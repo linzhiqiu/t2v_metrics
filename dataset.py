@@ -3,13 +3,190 @@ import json
 import subprocess
 import numpy as np
 import pandas as pd
-import torchvision
-import torch
+from typing import Tuple
 
 from PIL import Image
-from tqdm import tqdm
 from torch.utils.data import Dataset
+import scipy
 from scipy.stats import kendalltau
+from sklearn.metrics import roc_auc_score
+import cv2
+
+def calc_pearson(metric1_scores, metric2_scores):
+    pearson = 100*np.corrcoef(metric1_scores, metric2_scores)[0, 1]
+    return pearson
+
+# The original Kendall-Tau is not robust against ties. 
+# We adopt the pairwise accuracy with tau optimization as proposed in EMNLP'23 Best paper
+# Code borrowed from: 
+# https://github.com/google-research/mt-metrics-eval/blob/main/mt_metrics_eval/ties_matter.ipynb
+
+def _MatrixSufficientStatistics(
+    x,
+    y,
+    epsilon: float,
+    ) -> Tuple[int, int, int, int, int]:
+    """Calculates tau sufficient statistics using matrices in NumPy.
+
+    An absolute difference less than `epsilon` in x pairs is considered to be
+    a tie.
+
+    Args:
+    x: Vector of numeric values.
+    y: Vector of numeric values.
+    epsilon: The threshold for which an absolute difference in x scores should
+        be considered a tie.
+
+    Returns:
+    The number of concordant pairs, discordant pairs, pairs tied only in x,
+    paired tied only in y, and pairs tied in both x and y.
+    """
+    x = np.asarray(x)
+    x1, x2 = np.meshgrid(x, x.T)
+    x_diffs = x1 - x2
+    # Introduce ties into x by setting the diffs to 0 if they are <= epsilon
+    x_is_tie = np.abs(x_diffs) <= epsilon
+    x_diffs[x_is_tie] = 0.0
+    
+    y1, y2 = np.meshgrid(y, y.T)
+    y_diffs = y1 - y2
+    y_is_tie = y_diffs == 0.0
+
+    n = len(y)
+    num_pairs = int(scipy.special.comb(n, 2))
+    # All of the counts are divided by 2 because each pair is double counted. The
+    # double counted data will always be an even number, so dividing by 2 will
+    # be an integer.
+    con = int(
+        ((x_diffs > 0) & (y_diffs > 0) | (x_diffs < 0) & (y_diffs < 0)).sum() / 2
+    )
+    t_x = int((x_is_tie & ~y_is_tie).sum() / 2)
+    t_y = int((~x_is_tie & y_is_tie).sum() / 2)
+    t_xy = int(((x_is_tie & y_is_tie).sum() - n) / 2)  # -n removes diagonal
+    dis = num_pairs - (con + t_x + t_y + t_xy)
+    return con, dis, t_x, t_y, t_xy
+
+
+def KendallVariants(
+    gold_scores,
+    metric_scores,
+    variant: str = 'acc23',
+    epsilon: float = 0.0,
+) -> Tuple[float, float]:
+    """Lightweight, optionally factored versions of variants on Kendall's Tau.
+
+    This function calculates the sufficient statistics for tau in two different
+    ways, either using a Fenwick Tree (`_FenwickTreeSufficientStatistics`) when
+    `epsilon` is 0 or NumPy matrices (`_MatrixSufficientStatistics`) otherwise.
+    Note that the latter implementation has an O(n^2) space requirement, which
+    can be significant for long vectors.
+
+    This implementation makes several changes to the SciPy implementation of
+    Kendall's tau:
+    1) For the Fenwick tree version, the cython function for computing discordant
+        pairs is replaced by inline python. This works up to 2x faster for small
+        vectors (< 50 elements), which can be advantageous when processing many
+        such vectors.
+    2) The p-value calculation and associated arguments are omitted.
+    3) The input vectors are assumed not to contain NaNs.
+
+    Args:
+    gold_scores: Vector of numeric values.
+    metric_scores: Vector of numeric values.
+    variant: Either 'b', 'c', '23', or 'acc23' to compute the respective tau
+        variant. See https://arxiv.org/abs/2305.14324 for details about the
+        '23' and 'acc23' variants.
+    epsilon: The threshold for which an absolute difference in metric scores
+        should be considered a tie.
+
+    Returns:
+    A tuple (k, 0) where the first element is the Kendall statistic and the
+    second is a dummy value for compatibility with `scipy.stats.kendalltau`.
+    """
+    if epsilon < 0:
+        raise ValueError('Epsilon must be non-negative.')
+    if epsilon > 0 and variant == 'c':
+        # It's not clear how to define minclasses with a non-zero epsilon.
+        raise ValueError('Non-zero epsilon with tau-c not supported.')
+
+    # The helper functions and tau_optimization expect metric_scores first, the
+    # reverse of the convention used for public methods in this module.
+    x, y = metric_scores, gold_scores
+
+    assert x is not None and y is not None
+    x = np.asarray(x)
+    y = np.asarray(y)
+    # assert no NaNs
+    assert not np.any(np.isnan(x)), f"NaN found in metric_scores: {x}"
+    assert not np.any(np.isnan(y)), f"NaN found in gold_scores: {y}"
+
+    # if epsilon > 0:
+    con, dis, xtie_only, ytie_only, tie_both = _MatrixSufficientStatistics(
+        x, y, epsilon
+    )
+
+    size = y.size
+    xtie = xtie_only + tie_both
+    ytie = ytie_only + tie_both
+    tot = con + dis + xtie_only + ytie_only + tie_both
+
+    if variant in ['b', 'c'] and (xtie == tot or ytie == tot):
+        return np.nan, 0
+
+    if variant == 'b':
+        tau = (con - dis) / np.sqrt(tot - xtie) / np.sqrt(tot - ytie)
+    elif variant == 'c':
+        minclasses = min(len(set(x)), len(set(y)))
+        tau = 2 * (con - dis) / (size**2 * (minclasses - 1) / minclasses)
+    elif variant == '23':
+        tau = (con + tie_both - dis - xtie_only - ytie_only) / tot
+    elif variant == 'acc23':
+        tau = (con + tie_both) / tot
+    else:
+        raise ValueError(
+            f'Unknown variant of the method chosen: {variant}. '
+            "variant must be 'b', 'c', '23', or 'acc23'.")
+
+    return tau, 0
+
+def calc_metric(gold_scores, metric_scores, variant: str="pairwise_acc_with_tie_optimization", sample_rate=1.0):
+    gold_scores = np.array(gold_scores)
+    metric_scores = np.array(metric_scores)
+    assert gold_scores.shape == metric_scores.shape
+    if gold_scores.ndim == 1:
+        # No grouping
+        gold_scores = gold_scores.reshape(1, -1)
+        metric_scores = metric_scores.reshape(1, -1)
+    else:
+        # Group by item (last dim is number of system)
+        pass
+    
+    # Calculate metric using KendallTau (including Pairwise Accuracy)
+    if variant == "pairwise_acc_with_tie_optimization":
+        import tau_optimization
+        result = tau_optimization.tau_optimization(metric_scores, gold_scores, tau_optimization.TauSufficientStats.acc_23, sample_rate=sample_rate)
+        return result.best_tau, result.best_threshold
+    elif variant == "pairwise_acc_ignore_tie":
+        import tau_optimization
+        result = tau_optimization.tau_optimization(metric_scores, gold_scores, tau_optimization.TauSufficientStats.acc_ignore_tie, sample_rate=sample_rate)
+        return result.taus[0], result.thresholds[0]
+    elif variant == 'tau_with_tie_optimization':
+        import tau_optimization
+        result = tau_optimization.tau_optimization(metric_scores, gold_scores, tau_optimization.TauSufficientStats.tau_23, sample_rate=sample_rate)
+        return result.best_tau, result.best_threshold
+    elif variant == "tau_b":
+        taus = []
+        for gold_score, metric_score in zip(gold_scores, metric_scores):
+            tau, _ = KendallVariants(gold_score, metric_score, variant="b")
+            taus.append(tau)
+    elif variant == "tau_c":
+        taus = []
+        for gold_score, metric_score in zip(gold_scores, metric_scores):
+            tau, _ = KendallVariants(gold_score, metric_score, variant="c")
+            taus.append(tau)
+    # average all non-Nan taus
+    taus = np.array(taus)
+    return np.nanmean(taus)    
 
 def get_winoground_scores(scores_i2t):
     ids = list(range(scores_i2t.shape[0]))
@@ -52,7 +229,10 @@ def get_winoground_acc(scores):
 
 
 class Winoground(Dataset):
-    def __init__(self, image_preprocess=None, root_dir='./', return_image_paths=True):
+    def __init__(self,
+                 image_preprocess=None,
+                 root_dir='./',
+                 return_image_paths=True):
         self.root_dir = os.path.join(root_dir, "winoground")
         if not os.path.exists(self.root_dir):
             subprocess.call(
@@ -148,11 +328,99 @@ class Winoground(Dataset):
             # print(f"Winoground {tag} text score: {results[tag]['text']}")
             # print(f"Winoground {tag} image score: {results[tag]['image']}")
             # print(f"Winoground {tag} group score: {results[tag]['group']}")
-        return results, acc['group']
+        return results
+
+
+class SeeTrue(Dataset):
+    def __init__(self,
+                 image_preprocess=None,
+                 root_dir="./",
+                 download=True,
+                 return_image_paths=True):
+        import pandas as pd
+        self.root_dir = os.path.join(root_dir, 'seetrue')
+        if not os.path.exists(self.root_dir):
+            if download:
+                os.makedirs(self.root_dir, exist_ok=True)
+                import subprocess
+                image_zip_file = os.path.join(root_dir, "images.zip")
+                subprocess.call(
+                    ["wget", "https://huggingface.co/datasets/yonatanbitton/SeeTRUE/resolve/main/images.zip",
+                     image_zip_file], cwd=self.root_dir
+                )
+                env = os.environ.copy()
+                env["UNZIP_DISABLE_ZIPBOMB_DETECTION"] = "TRUE"
+                
+                subprocess.call(["unzip", "images.zip"], cwd=self.root_dir, env=env)
+        
+        csv_path = os.path.join("datasets", "SeeTRUE.csv")
+        if not os.path.exists(csv_path):
+            subprocess.call(
+                ["wget", "https://huggingface.co/datasets/yonatanbitton/SeeTRUE/resolve/main/SeeTRUE.csv"],
+                cwd="datasets"
+            )
+        self.dataset = pd.read_csv(os.path.join("datasets", "SeeTRUE.csv"))
+        
+        self.image_preprocess = image_preprocess
+        self.return_image_paths = return_image_paths
+        
+        
+        
+    def __len__(self):
+        return len(self.dataset)
+
+    def __getitem__(self, idx):
+        image_path = self.dataset.image[idx]
+        
+        image_path = os.path.join(self.root_dir, 'images', image_path)
+        if self.return_image_paths:
+            image = image_path
+        else:
+            image = Image.open(image_path).convert('RGB')
+            image = self.image_preprocess(image)
+        
+        texts = [str(self.dataset.text[idx])]
+        item = {"images": [image], "texts": texts}
+        return item
+    
+    def evaluate_scores(self, scores):
+        scores_i2t = scores
+        human_avg_scores = self.dataset.label.to_list()
+        our_scores = [float(scores_i2t[idx][0][0]) for idx in range(len(self.dataset))]
+        import math
+        human_avg_scores_without_nan = []
+        our_scores_without_nan = []
+        for idx in range(len(self.dataset)):
+            if math.isnan(our_scores[idx]):
+                print(f"Warning: {idx} has nan score! Skipping this for evaluation")
+                import pdb; pdb.set_trace()
+                continue
+            human_avg_scores_without_nan.append(human_avg_scores[idx])
+            our_scores_without_nan.append(our_scores[idx])
+        
+        ''' Calc ROC_AUC score per dataset_source group '''
+        stats = []
+        for dataset_source, df_dataset in self.dataset.groupby('dataset_source'):
+            num_samples = len(df_dataset)
+            subset_indices = df_dataset.index
+            num_pos = df_dataset['label'][subset_indices].sum()
+            num_neg = num_samples - num_pos
+            roc_auc = roc_auc_score(df_dataset['label'][subset_indices], np.array(our_scores_without_nan)[subset_indices])
+            stats.append([dataset_source, num_samples, num_pos, num_neg, roc_auc])
+        df_stats = pd.DataFrame(stats, columns=['dataset_source', 'num_samples', 'num_pos', 'num_neg', 'roc_auc'])
+        print(df_stats)
+        results = {
+            'per_dataset_source': df_stats,
+        }
+        return results
 
 
 class TIFA160_DSG(Dataset):
-    def __init__(self, image_preprocess=None, root_dir="./", download=True, return_image_paths=True):
+    def __init__(self,
+                 image_preprocess=None,
+                 root_dir="./",
+                 download=True,
+                 return_image_paths=True):
         self.root_dir = os.path.join(root_dir, 'tifa160')
         if not os.path.exists(self.root_dir):
             if download:
@@ -167,7 +435,7 @@ class TIFA160_DSG(Dataset):
         
         self.dataset = json.load(open(os.path.join("datasets", "tifa160.json"), 'r'))
         self.dsg_human_likert_scores = pd.read_csv(os.path.join("datasets", "dsg_tifa160_anns.csv"))
-        self.model_type_to_names = {
+        self.model_type_to_names = { # map from dsg format to tifa format
             'mini-dalle': 'mini_dalle',
             'vq-diffusion': 'vq_diffusion',
             'sd1dot5': 'stable_diffusion_v1_5',
@@ -192,14 +460,18 @@ class TIFA160_DSG(Dataset):
                     'text_id': self.source_ids[key_idx],
                 }
         
+        self.image_preprocess = image_preprocess
+        self.items = list(self.dataset.keys())
+        self.return_image_paths = return_image_paths
         self.all_samples = {} # key is text_id, value is all indices (for each diffusion model) and human scores
         # compute 'human_avg'
-        for k_idx, k in enumerate(self.dsg_items):
+        for _, k in enumerate(self.dsg_items):
             self.dsg_items[k]['human_avg'] = float(np.mean(self.dsg_items[k]['human_scores']))
             assert self.dsg_items[k]['text_id'] == self.dataset[k]['text_id']
             assert self.dsg_items[k]['text'] == self.dataset[k]['text']
             assert self.dsg_items[k]['image_path'] == self.dataset[k]['image_path']
             text_id = self.dsg_items[k]['text_id']
+            k_idx = self.items.index(k)
             if text_id not in self.all_samples:
                 self.all_samples[text_id] = {
                     'text_id': text_id,
@@ -208,10 +480,7 @@ class TIFA160_DSG(Dataset):
                 }
             else:
                 self.all_samples[text_id]['indices'].append(k_idx)
-        self.image_preprocess = image_preprocess
-        self.items = list(self.dataset.keys())
-        self.return_image_paths = return_image_paths
-    
+        
     def __len__(self):
         return len(self.dataset)
 
@@ -243,33 +512,45 @@ class TIFA160_DSG(Dataset):
                 continue
             human_avg_scores_without_nan.append(human_avg_scores[idx])
             our_scores_without_nan.append(our_scores[idx])
-        spearman, kendall, kendall_c = self.compute_correlation(human_avg_scores_without_nan, our_scores_without_nan)
-        print(f"Spearman's Correlation (ours): ", spearman)
-        print(f'Kendall Tau Score (ours): ', kendall)
-        print(f'Kendall Tau-C Score (ours): ', kendall_c)
+        pearson_no_grouping = calc_pearson(human_avg_scores_without_nan, our_scores_without_nan)
+        print(f"Pearson's Correlation (no grouping): ", pearson_no_grouping)
+        
+        kendall_b_no_grouping = calc_metric(human_avg_scores_without_nan, our_scores_without_nan, variant="tau_b")
+        print(f'Kendall Tau-B Score (no grouping): ', kendall_b_no_grouping)
+        
+        pairwise_acc_no_grouping = calc_metric(human_avg_scores_without_nan, our_scores_without_nan, variant="pairwise_acc_with_tie_optimization")
+        print(f'Pairwise Accuracy Score (no grouping): ', pairwise_acc_no_grouping)
         
         # check accuracy of the score picking the highest human score
-        acc_count = 0.
-        for text_id in self.all_samples:
-            # need to consider tie in human scores. 
-            # acc_count += 1. whenever one of the highest human score ones is picked
-            indices = self.all_samples[text_id]['indices']
-            max_human_score = max([human_avg_scores[idx] for idx in indices])
-            max_human_score_indices = [idx for idx in indices if human_avg_scores[idx] == max_human_score]
-            max_our_score = max([our_scores[idx] for idx in indices])
-            max_our_score_indices = [idx for idx in indices if our_scores[idx] == max_our_score]
+        # human_scores_group_by_item = None
+        # our_scores_group_by_item = None
+        # for idx, text_id in enumerate(self.all_samples):
+        #     indices = self.all_samples[text_id]['indices']
+        #     if human_scores_group_by_item is None:
+        #         human_scores_group_by_item = np.zeros((len(self.all_samples), len(indices)))
+        #         our_scores_group_by_item = np.zeros((len(self.all_samples), len(indices)))
             
-            overlap = False
-            for our_max_idx in max_our_score_indices:
-                if our_max_idx in max_human_score_indices:
-                    overlap = True
-                    break
-            if overlap:
-                acc_count += 1.
+        #     human_scores_group_by_item[idx] = [human_avg_scores[idx] for idx in indices]
+        #     our_scores_group_by_item[idx] = [our_scores[idx] for idx in indices]
+
             
-        acc = acc_count / len(self.all_samples)
-        print(f"Accuracy of selecting best human score image (ours): {acc}")
-        return spearman, kendall, kendall_c
+        # kendall_b_group_by_item = calc_metric(human_scores_group_by_item, our_scores_group_by_item, variant="tau_b")
+        # print(f'Kendall Tau-B Score (group by item): ', kendall_b_group_by_item)
+        
+        # pairwise_acc_group_by_item = calc_metric(human_scores_group_by_item, our_scores_group_by_item, variant="pairwise_acc_with_tie_optimization")
+        # print(f'Pairwise Accuracy Score (group by item): ', pairwise_acc_group_by_item)
+        
+        # return pearson_no_grouping, kendall_b_no_grouping, kendall_c_no_grouping, kendall_no_grouping, pairwise_acc_no_grouping, kendall_b_group_by_item, kendall_c_group_by_item, kendall_group_by_item, pairwise_acc_group_by_item
+        # return a dictionary
+        results = {
+            'pearson_no_grouping': pearson_no_grouping,
+            'kendall_b_no_grouping': kendall_b_no_grouping,
+            'pairwise_acc_no_grouping': pairwise_acc_no_grouping,
+            # 'kendall_b_group_by_item': kendall_b_group_by_item,
+            # 'pairwise_acc_group_by_item': pairwise_acc_group_by_item,
+        }
+        return results
+
     
     def get_metric_scores(self, metric):
         if metric == 'human_avg':
@@ -277,15 +558,13 @@ class TIFA160_DSG(Dataset):
         return [self.dataset[k][metric] for k in self.items]
 
     
-    def compute_correlation(self, metric1_scores, metric2_scores):
-        spearman = 100*np.corrcoef(metric1_scores, metric2_scores)[0, 1]
-        kendall = kendalltau(metric1_scores, metric2_scores)
-        kendall_c = 100*kendalltau(metric1_scores, metric2_scores, variant='c')[0]
-        return spearman, kendall, kendall_c
-
-    
 class Flickr8K_CF(Dataset):
-    def __init__(self, image_preprocess=None, root_dir="./", download=True, return_image_paths=True, json_path="crowdflower_flickr8k.json"):
+    def __init__(self,
+                 image_preprocess=None,
+                 root_dir="./",
+                 download=True,
+                 return_image_paths=True,
+                 json_path="crowdflower_flickr8k.json"):
         self.root_dir = root_dir
         if not os.path.exists(os.path.join(root_dir, 'flickr8k')):
             if download:
@@ -335,7 +614,6 @@ class Flickr8K_CF(Dataset):
         else:
             image = Image.open(image_path).convert('RGB')
             image = self.image_preprocess(image)
-        # import pdb; pdb.set_trace()
         texts = [self.candidates[idx]]
         for i in range(len(texts)):
             texts[i] = texts[i].strip(".").strip(" ")
@@ -355,45 +633,28 @@ class Flickr8K_CF(Dataset):
                 continue
             human_avg_scores_without_nan.append(human_avg_scores[idx])
             our_scores_without_nan.append(our_scores[idx])
-        spearman, kendall, kendall_c = self.compute_correlation(human_avg_scores_without_nan, our_scores_without_nan)
-        print(f"Spearman's Correlation (ours): ", spearman)
-        print(f'Kendall Tau Score (ours): ', kendall)
-        print(f'Kendall Tau-C Score (ours): ', kendall_c)
+        pearson_no_grouping = calc_pearson(human_avg_scores_without_nan, our_scores_without_nan)
+        print(f"Pearson's Correlation (no grouping): ", pearson_no_grouping)
         
-        # check accuracy of the score picking the highest human score
-        acc_count = 0.
-        for image_id in self.all_samples:
-            # need to consider tie in human scores. 
-            # acc_count += 1. whenever one of the highest human score ones is picked
-            indices = self.all_samples[image_id]['indices']
-            max_human_score = max([human_avg_scores[idx] for idx in indices])
-            max_human_score_indices = [idx for idx in indices if human_avg_scores[idx] == max_human_score]
-            max_our_score = max([our_scores[idx] for idx in indices])
-            max_our_score_indices = [idx for idx in indices if our_scores[idx] == max_our_score]
-            overlap = False
-            for our_max_idx in max_our_score_indices:
-                if our_max_idx in max_human_score_indices:
-                    overlap = True
-                    break
-            if overlap:
-                acc_count += 1.
-            
-        acc = acc_count / len(self.all_samples)
-        print(f"Accuracy of selecting best human score text (ours): {acc}")
-        return spearman, kendall, kendall_c
-    
-    def compute_correlation(self, metric1_scores, metric2_scores):
-        spearman = 100*np.corrcoef(metric1_scores, metric2_scores)[0, 1]
-        kendall = kendalltau(metric1_scores, metric2_scores)
-        kendall_c = 100*kendalltau(metric1_scores, metric2_scores, variant='c')[0]
-        return spearman, kendall, kendall_c
+        kendall_b_no_grouping = calc_metric(human_avg_scores_without_nan, our_scores_without_nan, variant="tau_b")
+        print(f'Kendall Tau-B Score (no grouping): ', kendall_b_no_grouping)
+        
+        pairwise_acc_no_grouping = calc_metric(human_avg_scores_without_nan, our_scores_without_nan, variant="pairwise_acc_with_tie_optimization", sample_rate=0.1)
+        print(f'Pairwise Accuracy Score (no grouping): ', pairwise_acc_no_grouping)
+        
+        results = {
+            'pearson_no_grouping': pearson_no_grouping,
+            'kendall_b_no_grouping': kendall_b_no_grouping,
+            'pairwise_acc_no_grouping': pairwise_acc_no_grouping,
+        }
+        return results
 
-class Flickr8K_Expert(Flickr8K_CF):
-    def __init__(self, image_preprocess=None, root_dir="./", download=True, return_image_paths=True, json_path="flickr8k.json"):
-        super().__init__(image_preprocess=image_preprocess, root_dir=root_dir, download=download, return_image_paths=return_image_paths, json_path=json_path)
 
 class EqBen_Mini(Dataset):
-    def __init__(self, image_preprocess=None, root_dir='./', return_image_paths=True):
+    def __init__(self,
+                 image_preprocess=None,
+                 root_dir='./',
+                 return_image_paths=True):
         self.preprocess = image_preprocess
         
         self.root_dir = os.path.join(root_dir, "eqben_vllm")
@@ -461,4 +722,757 @@ class EqBen_Mini(Dataset):
             subset_acc = get_winoground_acc(subset_scores)
             print(f"{'EQBen_Mini ' + subset_type: <70} {subset_acc['text']: <10.2%} {subset_acc['image']: <10.2%} {subset_acc['group']: <10.2%}")
             results[subset_type] = subset_acc
-        return results, acc['group']
+        return results
+
+
+class T2VScore(Dataset):
+    def __init__(self,
+                 image_preprocess=None,
+                 root_dir="./",
+                 download=True,
+                 return_image_paths=True,
+                 image_save_dir="t2vscore_images",
+                 num_frames=36,
+                 eval_mode='avg_frames',
+                 extract_videos=False):
+        self.root_dir = os.path.join(root_dir, 't2vscore')
+        self.models = ['floor33', 'gen2', 'pika', 'modelscope', 'zeroscope']
+        self.eval_mode = eval_mode
+        self.download_links = {
+            'floor33': 'https://huggingface.co/datasets/RaphaelLiu/EvalCrafter_T2V_Dataset/resolve/main/floor33.tar.gz',
+            'gen2': 'https://huggingface.co/datasets/RaphaelLiu/EvalCrafter_T2V_Dataset/resolve/main/gen2_december.tar.gz',
+            'pika': 'https://huggingface.co/datasets/RaphaelLiu/EvalCrafter_T2V_Dataset/resolve/main/pika_v1_december.tar.gz',
+            'modelscope': 'https://huggingface.co/datasets/RaphaelLiu/EvalCrafter_T2V_Dataset/resolve/main/modelscope.tar.gz',
+            'zeroscope': 'https://huggingface.co/datasets/RaphaelLiu/EvalCrafter_T2V_Dataset/resolve/main/zeroscope.tar.gz',
+        }
+        if not os.path.exists(self.root_dir):
+            if download:
+                os.makedirs(self.root_dir, exist_ok=True)
+                import subprocess
+                for model in self.models:
+                    model_file_name = self.download_links[model].split('/')[-1]
+                    model_name = model_file_name.split('.tar.gz')[0]
+                    image_zip_file = os.path.join(self.root_dir, model_file_name)
+                    if not os.path.exists(image_zip_file):
+                        subprocess.call(
+                            ["wget", self.download_links[model], "-O", model_file_name], cwd=self.root_dir
+                        )
+                    model_dir = os.path.join(self.root_dir, model)
+                    if not os.path.exists(model_dir):
+                        subprocess.call(["tar", "-xvf", model_file_name], cwd=self.root_dir)
+                        if model_name != model:
+                            if model_name == 'pika_v1_december':
+                                model_name = 'pika_v1_december_1' # Because the naming is off
+                            subprocess.call(["mv", model_name, model], cwd=self.root_dir)
+        
+        self.image_preprocess = image_preprocess
+        self.return_image_paths = return_image_paths
+        if self.return_image_paths:
+            assert self.image_preprocess is None, "Cannot return image paths and apply transforms"
+        self.image_save_dir = os.path.join(root_dir, image_save_dir)
+        if not os.path.exists(self.image_save_dir):
+            os.makedirs(self.image_save_dir, exist_ok=True)
+                        
+        self.dataset = json.load(open(os.path.join("datasets", "t2vscore_alignment_score.json"), 'r'))
+        self.dataset_quality = json.load(open(os.path.join("datasets", "t2vscore_quality_score.json"), 'r'))
+        
+        t2v_videos_file = os.path.join(self.root_dir, "t2v_videos.json")
+        t2v_prompt_to_videos_file = os.path.join(self.root_dir, "t2v_prompt_to_videos.json")
+        if os.path.exists(t2v_videos_file) and os.path.exists(t2v_prompt_to_videos_file) and not extract_videos:
+            self.videos = json.load(open(t2v_videos_file, 'r'))
+            self.prompt_to_videos = json.load(open(t2v_prompt_to_videos_file, 'r'))
+            print(f"Load from pre-extracted folder (which converted videos into sequence of images)")
+            print(f"If you modify the dataset class, please re-extract the videos by setting extract_videos=True")
+            return
+
+        self.videos = [] # list of videos
+        self.prompt_to_videos = {}
+        for model in self.models:
+            model_dir = os.path.join(self.image_save_dir, model)
+            if not os.path.exists(model_dir):
+                os.makedirs(model_dir, exist_ok=True)
+                
+            for prompt_idx in self.dataset:
+                if not model in self.dataset[prompt_idx]['models']:
+                    continue
+                # ensure at least one human rating for all models, otherwise skip
+                if len(self.dataset[prompt_idx]['models'][model]) == 0:
+                    continue
+                else:
+                    for m in self.models:
+                        if m in self.dataset[prompt_idx]['models']:
+                            assert len(self.dataset[prompt_idx]['models'][m]) > 0
+                
+                video_path = os.path.join(self.root_dir, model, f"{int(prompt_idx):04d}.mp4")
+                cap = cv2.VideoCapture(video_path)
+                current_frames = []
+                while True:
+                    # Read a frame from the video
+                    ret, frame = cap.read()
+                    
+                    # If the frame was not retrieved, we've reached the end of the video
+                    if not ret:
+                        break
+                    
+                    # Convert the color space from BGR to RGB
+                    frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+                    
+                    # Convert the frame to a PIL Image
+                    img_pil = Image.fromarray(frame_rgb)
+                    
+                    output_path = os.path.join(model_dir, f"video_{int(prompt_idx):04d}_frame_{len(current_frames):04d}.jpg")
+                    if not os.path.exists(output_path):
+                        img_pil.save(output_path)
+                    
+                    # Append the PIL Image path to the list
+                    current_frames.append(output_path)
+                
+                if len(current_frames) < num_frames:
+                    current_frames = current_frames + [current_frames[-1]] * (num_frames - len(current_frames))
+                elif len(current_frames) > num_frames:
+                    current_frames = current_frames[:num_frames]
+                
+                # Sample 4 frames (including the first) uniformly from the video
+                sample_4_frames = [current_frames[0], current_frames[num_frames // 3], current_frames[num_frames // 3 * 2], current_frames[-1]]
+                if len(current_frames) < 4:
+                    raise ValueError(f"Video {video_path} has less than 4 frames")
+                
+                # Release the video capture object
+                cap.release()
+                self.videos.append({
+                    'prompt_idx': prompt_idx,
+                    'prompt': self.dataset[prompt_idx]['prompt'],
+                    'model': model,
+                    'video_path': video_path,
+                    'num_frames': len(current_frames),
+                    'frames': current_frames,
+                    'sample_4_frames': sample_4_frames,
+                    'human_alignment': self.dataset[prompt_idx]['models'][model],
+                    'human_quality': self.dataset_quality[prompt_idx]['models'][model],
+                })
+                if prompt_idx not in self.prompt_to_videos:
+                    self.prompt_to_videos[prompt_idx] = []
+                self.prompt_to_videos[prompt_idx].append(len(self.videos) - 1)
+        print(f"Number of frames: {num_frames}")
+        json.dump(self.videos, open(t2v_videos_file, 'w'))
+        json.dump(self.prompt_to_videos, open(t2v_prompt_to_videos_file, 'w'))
+                
+    def __len__(self):
+        return len(self.videos)
+
+    def __getitem__(self, idx):
+        item = self.videos[idx]
+        
+        image_paths = item['frames']
+        if self.eval_mode == 'avg_frames':
+            pass
+        elif self.eval_mode == 'first_frame':
+            image_paths = [image_paths[0]]
+        elif self.eval_mode == 'last_frame':
+            image_paths = [image_paths[-1]]
+        elif self.eval_mode == 'sample_4_frame':
+            image_paths = item['sample_4_frames']
+        else:
+            raise ValueError(f"Invalid eval_mode: {self.eval_mode}")
+            
+        if self.return_image_paths:
+            image = image_paths
+        else:
+            image = [Image.open(image_path).convert('RGB') for image_path in image_paths]
+            image = [self.image_preprocess(img) for img in image]
+        
+        texts = [str(item['prompt'])]
+        item = {"images": image, "texts": texts}
+        return item
+    
+    def get_scores_from_author(self, model='CLIP Score'):
+        score_file = "datasets/t2vscore_results.csv"
+        scores_file = pd.read_csv(score_file).to_dict(orient='records')
+        scores_dict = {}
+        for _, item in enumerate(scores_file):
+            video_id = str(item['video_id'])
+            model_name = item['model_name']
+            prompt = item['prompt']
+            if not video_id in scores_dict:
+                scores_dict[video_id] = {'prompt': prompt, 'models': {}}
+            scores_dict[video_id]['models'][model_name] = item[model]
+        scores = []
+        for item in self.videos:
+            scores.append(scores_dict[item['prompt_idx']]['models'][item['model']])
+        return np.array(scores).reshape(-1, 1, 1)
+    
+    def correlation(self, our_scores, human_scores):
+        pearson = calc_pearson(human_scores, our_scores)
+        print(f"Pearson's Correlation (no grouping): ", pearson)
+        
+        kendall_b = calc_metric(human_scores, our_scores, variant="tau_b")
+        print(f'Kendall Tau-B Score (no grouping): ', kendall_b)
+        
+        pairwise_acc = calc_metric(human_scores, our_scores, variant="pairwise_acc_with_tie_optimization")
+        print(f'Pairwise Accuracy Score (no grouping): ', pairwise_acc)
+        
+        results = {
+            'pearson': pearson,
+            'kendall_b': kendall_b,
+            'pairwise_acc': pairwise_acc,
+        }
+        return results
+    
+    def evaluate_scores(self, scores):
+        scores_i2t = scores
+        # take average of all frames
+        human_avg_scores_alignment = [np.array(self.videos[idx]['human_alignment']).mean() for idx in range(len(self.videos))]
+        # human_avg_scores_quality = [np.array(self.videos[idx]['human_quality']).mean() for idx in range(len(self.videos))]
+        our_scores = scores_i2t.mean(axis=1)
+        our_scores = [float(our_scores[idx][0]) for idx in range(len(self.videos))]
+        alignment_correlation = self.correlation(our_scores, human_avg_scores_alignment)
+        # quality_correlation = self.correlation(our_scores, human_avg_scores_quality)
+        results = {
+            'alignment': alignment_correlation,
+            # 'quality': quality_correlation,
+        }
+        return results
+
+
+class StanfordT23D(Dataset):
+    def __init__(self,
+                 image_preprocess=None,
+                 root_dir="./",
+                 download=True,
+                 return_image_paths=True,
+                 image_save_dir="stanfordt23d_images",
+                 num_views=120,
+                 eval_mode='rgb_views',
+                 extract_images=False):
+        self.root_dir = os.path.join(root_dir, 'stanfordt23d')
+        self.models = ['dreamfusion', 'instant3d', 'latent-nerf', 'magic3d', 'mvdream',' shap-e']
+        self.views_four = [5, 35, 65, 95]
+        self.views_nine = [2, 15, 28, 41, 54, 67, 80, 93, 106]
+        self.eval_mode = eval_mode
+        
+        self.image_preprocess = image_preprocess
+        self.return_image_paths = return_image_paths
+        if self.return_image_paths:
+            assert self.image_preprocess is None, "Cannot return image paths and apply transforms"
+        self.image_save_dir = os.path.join(root_dir, image_save_dir)
+        if not os.path.exists(self.image_save_dir):
+            os.makedirs(self.image_save_dir, exist_ok=True)
+        
+        if not os.path.exists(self.root_dir):
+            if download:
+                import subprocess
+                download_link = "https://huggingface.co/datasets/zhiqiulin/vqascore_ablation/resolve/main/stanfordt23d.zip"
+                model_file_name = download_link.split('/')[-1]
+                image_zip_file = os.path.join(self.root_dir, model_file_name)
+                if not os.path.exists(image_zip_file):
+                    subprocess.call(
+                        ["wget", download_link, "-O", model_file_name], cwd=root_dir
+                    )
+                subprocess.call(["unzip", "-q", model_file_name], cwd=root_dir)
+                        
+        self.dataset = json.load(open(os.path.join("datasets", "stanfordt23d.json"), 'r'))
+        self.num_views = num_views
+        stanford_t23d_file = os.path.join(self.root_dir, "stanfordt23d_images.json")
+        stanford_t23d_prompt_to_images_file = os.path.join(self.root_dir, "stanfordt23d_prompt_to_images.json")
+        if os.path.exists(stanford_t23d_file) and os.path.exists(stanford_t23d_prompt_to_images_file) and not extract_images:
+            self.images = json.load(open(stanford_t23d_file, 'r'))
+            self.prompt_to_images = json.load(open(stanford_t23d_prompt_to_images_file, 'r'))
+            print(f"Load from pre-extracted folder (which converted grid images into individual 2d rgb/normal images)")
+            print(f"If you modify the dataset class, please re-extract the grid images by setting extract_images=True")
+            return
+
+        self.images = [] # list of videos
+        self.prompt_to_images = {}
+        for model in self.models:
+            model_dir = os.path.join(self.image_save_dir, model)
+            if not os.path.exists(model_dir):
+                os.makedirs(model_dir, exist_ok=True)
+                
+            for prompt_idx in self.dataset:
+                if not model in self.dataset[prompt_idx]['models']:
+                    continue
+                # ensure at least one human rating for all models, otherwise skip
+                if len(self.dataset[prompt_idx]['models'][model]) == 0:
+                    continue
+                else:
+                    for m in self.models:
+                        if m in self.dataset[prompt_idx]['models']:
+                            assert len(self.dataset[prompt_idx]['models'][m]) > 0
+                
+                folder_path = os.path.join(self.root_dir, model, str(prompt_idx), "0")
+                rgb_views = []
+                normal_views = []
+                for view in range(num_views):
+                    rgb_view_path = os.path.join(folder_path, f"rgb_{view}.jpg")
+                    rgb_views.append(rgb_view_path)
+                    normal_view_path = os.path.join(folder_path, f"normal_{view}.jpg")
+                    normal_views.append(normal_view_path)
+                    assert os.path.exists(rgb_view_path)
+                    assert os.path.exists(normal_view_path)
+                    
+                sample_4_rgb_views = [rgb_views[view] for view in self.views_four]
+                sample_9_rgb_views = [rgb_views[view] for view in self.views_nine]
+                sample_4_normal_views = [normal_views[view] for view in self.views_four]
+                sample_9_normal_views = [normal_views[view] for view in self.views_nine]
+                
+                img_pil = Image.open(sample_4_rgb_views[0]).convert('RGB')
+                image_width, image_height = img_pil.size
+                
+                for grid_size, sample_rgb_views, sample_normal_views in [
+                    (2, sample_4_rgb_views, sample_4_normal_views),
+                    (3, sample_9_rgb_views, sample_9_normal_views)
+                    ]:
+                    new_image_rgb = Image.new('RGB', (image_width * grid_size, image_height * grid_size))
+                    new_image_normal = Image.new('RGB', (image_width * grid_size, image_height * grid_size))
+                    for grid_frame_i in range(grid_size * grid_size):
+                        frame_grid_rgb = Image.open(sample_rgb_views[grid_frame_i]).convert('RGB')
+                        new_image_rgb.paste(frame_grid_rgb, (image_width * (grid_frame_i % grid_size), image_height * (grid_frame_i // grid_size)))
+                        frame_grid_normal = Image.open(sample_normal_views[grid_frame_i]).convert('RGB')
+                        new_image_normal.paste(frame_grid_normal, (image_width * (grid_frame_i % grid_size), image_height * (grid_frame_i // grid_size)))
+                    grid_image_path_rgb = os.path.join(model_dir, f"rgb_{int(prompt_idx)}_grid_{grid_size}x{grid_size}.jpg")
+                    grid_image_path_normal = os.path.join(model_dir, f"normal_{int(prompt_idx)}_grid_{grid_size}x{grid_size}.jpg")
+                    if not os.path.exists(grid_image_path_rgb):
+                        new_image_rgb.save(grid_image_path_rgb)
+                    if not os.path.exists(grid_image_path_normal):
+                        new_image_normal.save(grid_image_path_normal)
+                        
+                self.images.append({
+                    'prompt_idx': prompt_idx,
+                    'prompt': self.dataset[prompt_idx]['prompt'],
+                    'model': model,
+                    'folder_path': folder_path,
+                    'num_views': len(rgb_views),
+                    'rgb_views': rgb_views,
+                    'normal_views': normal_views,
+                    'sample_4_rgb_views': sample_4_rgb_views,
+                    'sample_9_rgb_views': sample_9_rgb_views,
+                    'sample_4_normal_views': sample_4_normal_views,
+                    'sample_9_normal_views': sample_9_normal_views,
+                    'rgb_grid_2_x_2': [os.path.join(model_dir, f"rgb_{int(prompt_idx)}_grid_2x2.jpg")],
+                    'normal_grid_2_x_2': [os.path.join(model_dir, f"normal_{int(prompt_idx)}_grid_2x2.jpg")],
+                    'rgb_grid_3_x_3': [os.path.join(model_dir, f"rgb_{int(prompt_idx)}_grid_3x3.jpg")],
+                    'normal_grid_3_x_3': [os.path.join(model_dir, f"normal_{int(prompt_idx)}_grid_3x3.jpg")],
+                    'human_alignment': self.dataset[prompt_idx]['models'][model],
+                })
+                if prompt_idx not in self.prompt_to_images:
+                    self.prompt_to_images[prompt_idx] = []
+                self.prompt_to_images[prompt_idx].append(len(self.images) - 1)
+        print(f"Number of views: {num_views}")
+        json.dump(self.images, open(stanford_t23d_file, 'w'))
+        json.dump(self.prompt_to_images, open(stanford_t23d_prompt_to_images_file, 'w'))
+                
+    def __len__(self):
+        return len(self.images)
+
+    def __getitem__(self, idx):
+        item = self.images[idx]
+        
+        assert self.eval_mode in item, f"Invalid eval_mode: {self.eval_mode}"
+        image_paths = item[self.eval_mode]
+            
+        if self.return_image_paths:
+            image = image_paths
+        else:
+            image = [Image.open(image_path).convert('RGB') for image_path in image_paths]
+            image = [self.image_preprocess(img) for img in image]
+        
+        texts = [str(item['prompt'])]
+        item = {"images": image, "texts": texts}
+        return item
+    
+    def correlation(self, our_scores, human_scores):
+        pearson = calc_pearson(human_scores, our_scores)
+        print(f"Pearson's Correlation (no grouping): ", pearson)
+        
+        kendall_b = calc_metric(human_scores, our_scores, variant="tau_b")
+        print(f'Kendall Tau-B Score (no grouping): ', kendall_b)
+        
+        pairwise_acc = calc_metric(human_scores, our_scores, variant="pairwise_acc_with_tie_optimization")
+        print(f'Pairwise Accuracy Score (no grouping): ', pairwise_acc)
+        
+        results = {
+            'pearson': pearson,
+            'kendall_b': kendall_b,
+            'pairwise_acc': pairwise_acc,
+        }
+        return results
+    
+    def evaluate_scores(self, scores):
+        scores_i2t = scores
+        # take average of all frames
+        human_avg_scores_alignment = [np.array(self.images[idx]['human_alignment']).mean() for idx in range(len(self.images))]
+        our_scores = scores_i2t.mean(axis=1)
+        our_scores = [float(our_scores[idx][0]) for idx in range(len(self.images))]
+        alignment_correlation = self.correlation(our_scores, human_avg_scores_alignment)
+        results = {
+            'alignment': alignment_correlation,
+        }
+        return results
+
+
+class Pickapic_v1(Dataset):
+    def __init__(self,
+                 image_preprocess=None,
+                 root_dir='./',
+                 return_image_paths=True,
+                 download=True):
+        self.root_dir = os.path.join(root_dir, "pickapic_v1")
+        
+        if not os.path.exists(self.root_dir):
+            if download:
+                import subprocess
+                download_link = "https://huggingface.co/datasets/zhiqiulin/vqascore_ablation/resolve/main/pickapic_v1.zip"
+                model_file_name = download_link.split('/')[-1]
+                image_zip_file = os.path.join(self.root_dir, model_file_name)
+                if not os.path.exists(image_zip_file):
+                    subprocess.call(
+                        ["wget", download_link, "-O", model_file_name], cwd=root_dir
+                    )
+                subprocess.call(["unzip", "-q", model_file_name], cwd=root_dir)
+                        
+        self.data_path = os.path.join(self.root_dir, "test_captions.json")
+
+        with open(self.data_path, 'r') as f:
+            self.all_data = json.load(f)
+
+        self.selected_idxs = [1, 9, 385, 14, 138, 5, 31, 33, 39, 352, 21, 417, 399, 17, 82, 412, 78, 
+            53, 54, 59, 60, 308, 76, 142, 98, 259, 317, 110, 113, 118, 112, 119, 144, 148, 149, 153, 
+            159, 162, 172, 111, 124, 196, 197, 220, 35, 141, 252, 475, 368,
+            214, 150, 43, 221, 163, 228, 236, 57, 326, 257, 266, 268, 62, 274, 277, 278, 281, 105, 285,
+            286, 301, 419, 91, 312, 316, 318, 319, 334, 335, 339, 340, 347, 350, 367,
+            374, 375, 382, 376, 387, 345, 405, 411, 478, 441, 444, 99, 384, 472, 479, 490, 493]
+        self.dataset = []
+        for new_id, seleted_id in enumerate(self.selected_idxs):
+            assert seleted_id == self.all_data[seleted_id]['id']
+            item = {
+                'id': new_id,
+                "caption": self.all_data[seleted_id]["caption"],
+                "label_0": self.all_data[seleted_id]["label_0"],
+                "label_1": self.all_data[seleted_id]["label_1"],
+                "image_0": self.all_data[seleted_id]["image_0"],
+                "image_1": self.all_data[seleted_id]["image_1"]
+            }
+            self.dataset.append(item)
+
+        self.return_image_paths = return_image_paths
+        self.preprocess = image_preprocess
+        
+
+    def open_image(self, image):
+        image = Image.open(image)
+        image = image.convert("RGB")
+        return image                 
+
+    def __len__(self):
+        return len(self.dataset)
+
+    def __getitem__(self, idx):
+
+        image_0_path = os.path.join(self.root_dir, self.dataset[idx]['image_0'])
+        image_1_path = os.path.join(self.root_dir, self.dataset[idx]['image_1'])
+
+        caption = self.dataset[idx]['caption']
+
+        if self.return_image_paths:
+            image_0 = image_0_path
+            image_1 = image_1_path
+        else:
+            image_0 = self.open_image(image_0_path)
+            image_1 = self.open_image(image_1_path)
+            if self.preprocess:
+                image_0 = self.preprocess(image_0)
+                image_1 = self.preprocess(image_1)
+        item ={
+            "images":[image_0, image_1],
+            "texts":[caption]
+        }
+        return item
+    
+    def calc_acc(self, probs, ds):
+ 
+        def get_label(example):
+            if example["label_0"] == 1:
+                label = "0"
+            else:
+                label = "1"
+            return label
+        
+        def get_pred(prob_0, prob_1):
+            if prob_0 >= prob_1:
+                pred = "0"
+            else:
+                pred = "1"
+            return pred        
+        
+        res = []
+        for example, (prob_0, prob_1) in zip(ds, probs):
+            label = get_label(example)
+            pred = get_pred(prob_0, prob_1)
+            if pred == label:
+                res.append(1)
+            else:
+                res.append(0)
+        return sum(res) / len(res)
+    
+    def evaluate_scores(self, scores):
+        scores = scores.transpose(1, 2).cpu().tolist()
+        probs = []
+        for idx in range(len(scores)):
+            probs.append((scores[idx][0][0],scores[idx][0][1]))
+        acc = self.calc_acc(probs, self.dataset)
+        print("ACC:", acc)
+        return acc, probs
+
+
+class GenAIBench_Image(Dataset):
+    def __init__(self,
+                 image_preprocess=None,
+                 root_dir="./",
+                 download=True,
+                 return_image_paths=True):
+        # self.root_dir = os.path.join(root_dir, 'GenAI-Image')
+        self.root_dir = os.path.join(root_dir, 'GenAI-Image-527')
+        self.models = ['DALLE_3', 'SDXL_Turbo', 'DeepFloyd_I_XL_v1', 'Midjourney_6', 'SDXL_2_1', 'SDXL_Base']
+        
+        self.image_preprocess = image_preprocess
+        self.return_image_paths = return_image_paths
+        if self.return_image_paths:
+            assert self.image_preprocess is None, "Cannot return image paths and apply transforms"
+        
+        if not os.path.exists(self.root_dir):
+            if download:
+                import pdb; pdb.set_trace() # TODO
+        
+        filename = 'genai_image'
+        self.dataset = json.load(open(os.path.join(self.root_dir, f"genai_image.json"), 'r'))
+        print(f"Loaded dataset: {filename}.json")
+        
+        self.images = [] # list of images
+        self.prompt_to_images = {}
+        for model in self.models:
+            for prompt_idx in self.dataset:
+                if not model in self.dataset[prompt_idx]['models']:
+                    continue
+                
+                self.images.append({
+                    'prompt_idx': prompt_idx,
+                    'prompt': self.dataset[prompt_idx]['prompt'],
+                    'model': model,
+                    'image': os.path.join(self.root_dir, model, f"{prompt_idx}.jpeg"),
+                    'human_alignment': self.dataset[prompt_idx]['models'][model],
+                })
+                if prompt_idx not in self.prompt_to_images:
+                    self.prompt_to_images[prompt_idx] = []
+                self.prompt_to_images[prompt_idx].append(len(self.images) - 1)
+                
+    def __len__(self):
+        return len(self.images)
+
+    def __getitem__(self, idx):
+        item = self.images[idx]
+        
+        image_paths = [item['image']]
+            
+        if self.return_image_paths:
+            image = image_paths
+        else:
+            image = [Image.open(image_path).convert('RGB') for image_path in image_paths]
+            image = [self.image_preprocess(img) for img in image]
+        
+        texts = [str(item['prompt'])]
+        item = {"images": image, "texts": texts}
+        return item
+    
+    def correlation(self, our_scores, human_scores):
+        pearson = calc_pearson(human_scores, our_scores)
+        print(f"Pearson's Correlation (no grouping): ", pearson)
+        
+        kendall_b = calc_metric(human_scores, our_scores, variant="tau_b")
+        print(f'Kendall Tau-B Score (no grouping): ', kendall_b)
+        
+        pairwise_acc = calc_metric(human_scores, our_scores, variant="pairwise_acc_with_tie_optimization")
+        print(f'Pairwise Accuracy Score (no grouping): ', pairwise_acc)
+        
+        results = {
+            'pearson': pearson,
+            'kendall_b': kendall_b,
+            'pairwise_acc': pairwise_acc,
+        }
+        return results
+    
+    def evaluate_scores(self, scores):
+        scores_i2t = scores
+        human_avg_scores_alignment = [np.array(self.images[idx]['human_alignment']).mean() for idx in range(len(self.images))]
+        our_scores = scores_i2t.mean(axis=1)
+        our_scores = [float(our_scores[idx][0]) for idx in range(len(self.images))]
+        alignment_correlation = self.correlation(our_scores, human_avg_scores_alignment)
+        results = {
+            'alignment': alignment_correlation,
+        }
+        return results
+
+
+class GenAIBench_Video(Dataset):
+    def __init__(self,
+                 image_preprocess=None,
+                 root_dir="./",
+                 download=True,
+                 return_image_paths=True,
+                 image_save_dir="genai_video_to_images_527",
+                 num_frames=36,
+                 eval_mode='avg_frames',
+                 filename='genai_video',
+                 extract_videos=False):
+        self.root_dir = os.path.join(root_dir, 'GenAI-Video-527')
+        self.models = [
+                        'Floor33', 'Gen2', 'Pika_v1', 'Modelscope'
+                       ]
+        self.eval_mode = eval_mode
+        
+        self.image_preprocess = image_preprocess
+        self.return_image_paths = return_image_paths
+        if self.return_image_paths:
+            assert self.image_preprocess is None, "Cannot return image paths and apply transforms"
+        self.image_save_dir = os.path.join(root_dir, image_save_dir)
+        if not os.path.exists(self.image_save_dir):
+            os.makedirs(self.image_save_dir, exist_ok=True)
+            
+        
+        if not os.path.exists(self.root_dir):
+            if download:
+                import pdb; pdb.set_trace()
+                        
+        self.dataset = json.load(open(os.path.join(self.root_dir, f"{filename}.json"), 'r'))
+        genai_videos_file = os.path.join(self.root_dir, f"genai_videos_{filename}.json")
+        genai_prompt_to_videos_file = os.path.join(self.root_dir, f"genai_prompt_to_videos_{filename}.json")
+        if os.path.exists(genai_videos_file) and os.path.exists(genai_prompt_to_videos_file) and not extract_videos:
+            self.videos = json.load(open(genai_videos_file, 'r'))
+            self.prompt_to_videos = json.load(open(genai_prompt_to_videos_file, 'r'))
+            print(f"Load from pre-extracted folder (which converted videos into sequence of images)")
+            print(f"If you modify the dataset class, please re-extract the videos by setting extract_videos=True")
+            return
+
+        self.videos = [] # list of videos
+        self.prompt_to_videos = {}
+        for model in self.models:
+            model_dir = os.path.join(self.image_save_dir, model)
+            if not os.path.exists(model_dir):
+                os.makedirs(model_dir, exist_ok=True)
+
+            for prompt_idx in self.dataset:
+                if not model in self.dataset[prompt_idx]['models']:
+                    continue
+                
+                video_path = os.path.join(self.root_dir, model, f"{prompt_idx}.mp4")
+                cap = cv2.VideoCapture(video_path)
+                current_frames = []
+                while True:
+                    # Read a frame from the video
+                    ret, frame = cap.read()
+                    
+                    # If the frame was not retrieved, we've reached the end of the video
+                    if not ret:
+                        break
+                    
+                    # Convert the color space from BGR to RGB
+                    frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+                    
+                    # Convert the frame to a PIL Image
+                    img_pil = Image.fromarray(frame_rgb)
+                    
+                    output_path = os.path.join(model_dir, f"video_{prompt_idx}_frame_{len(current_frames):04d}.jpg")
+                    img_pil.save(output_path)
+                    
+                    # Append the PIL Image path to the list
+                    current_frames.append(output_path)
+                
+                if len(current_frames) == 0:
+                    print(f"Skipping video: {video_path}")
+                    import pdb; pdb.set_trace()
+                if len(current_frames) < num_frames:
+                    current_frames = current_frames + [current_frames[-1]] * (num_frames - len(current_frames))
+                elif len(current_frames) > num_frames:
+                    current_frames = current_frames[:num_frames]
+                
+                # Release the video capture object
+                cap.release()
+                self.videos.append({
+                    'prompt_idx': prompt_idx,
+                    'prompt': self.dataset[prompt_idx]['prompt'],
+                    'model': model,
+                    'video_path': video_path,
+                    'num_frames': len(current_frames),
+                    'frames': current_frames,
+                    'human_alignment': self.dataset[prompt_idx]['models'][model],
+                })
+                if prompt_idx not in self.prompt_to_videos:
+                    self.prompt_to_videos[prompt_idx] = []
+                self.prompt_to_videos[prompt_idx].append(len(self.videos) - 1)
+        print(f"Number of frames: {num_frames}")
+        json.dump(self.videos, open(genai_videos_file, 'w'))
+        json.dump(self.prompt_to_videos, open(genai_prompt_to_videos_file, 'w'))
+        
+                
+    def __len__(self):
+        return len(self.videos)
+
+    def __getitem__(self, idx):
+        item = self.videos[idx]
+        
+        image_paths = item['frames']
+        if self.eval_mode == 'avg_frames':
+            pass
+        elif self.eval_mode == 'sample_4_frame':
+            image_paths = [image_paths[0], image_paths[8], image_paths[16], image_paths[24]]
+        elif self.eval_mode == 'sample_9_frame':
+            image_paths = [image_paths[0], image_paths[4], image_paths[8], image_paths[12], image_paths[16], image_paths[20], image_paths[24], image_paths[28], image_paths[32]]
+        else:
+            raise ValueError(f"Invalid eval_mode: {self.eval_mode}")
+            
+        if self.return_image_paths:
+            image = image_paths
+        else:
+            image = [Image.open(image_path).convert('RGB') for image_path in image_paths]
+            image = [self.image_preprocess(img) for img in image]
+        
+        texts = [str(item['prompt'])]
+        item = {"images": image, "texts": texts}
+        return item
+    
+    def correlation(self, our_scores, human_scores):
+        pearson = calc_pearson(human_scores, our_scores)
+        print(f"Pearson's Correlation (no grouping): ", pearson)
+        
+        kendall_b = calc_metric(human_scores, our_scores, variant="tau_b")
+        print(f'Kendall Tau-B Score (no grouping): ', kendall_b)
+        
+        pairwise_acc = calc_metric(human_scores, our_scores, variant="pairwise_acc_with_tie_optimization")
+        print(f'Pairwise Accuracy Score (no grouping): ', pairwise_acc)
+        
+        results = {
+            'pearson': pearson,
+            'kendall_b': kendall_b,
+            'pairwise_acc': pairwise_acc,
+        }
+        return results
+    
+    def evaluate_scores(self, scores, skipped_models=['Zeroscope']):
+        scores_i2t = scores
+        if len(skipped_models) == 0:
+            video_indices = list(range(len(self.videos)))
+        else:
+            print(f"Skipping models: {skipped_models}")
+            video_indices = [idx for idx in range(len(self.videos)) if self.videos[idx]['model'] not in skipped_models]
+        # take average of all frames
+        human_alignment_scores = []
+        for model in self.models:
+            for prompt_idx in self.dataset:
+                human_alignment_scores.append(self.dataset[prompt_idx]['models'][model])
+        human_avg_scores_alignment = [np.array(human_alignment_scores[idx]).mean() for idx in video_indices]
+        our_scores = scores_i2t.mean(axis=1)
+        our_scores = [float(our_scores[idx][0]) for idx in video_indices]
+        alignment_correlation = self.correlation(our_scores, human_avg_scores_alignment)
+        results = {
+            'alignment': alignment_correlation,
+        }
+        return results

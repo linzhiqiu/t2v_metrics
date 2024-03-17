@@ -1,9 +1,9 @@
 # Evaluate on all dataset using a specific score
-
+# python t2vscore_eval.py --model "CLIP Score"
 import argparse
 import os
 import t2i_metrics
-from dataset import Winoground, EqBen_Mini, StanfordT23D, TIFA160_DSG, Flickr8K_CF, SeeTrue, Pickapic_v1
+from dataset import T2VScore
 
 
 def config():
@@ -24,6 +24,12 @@ def main():
     if not os.path.exists(args.root_dir):
         os.makedirs(args.root_dir)
     
+    if args.model in ["CLIP Score","X-CLIP Score","BLIP-BLEU","T2VScore-A (GPT-4V)"]:
+        print(f"Evaluating {args.model} on {T2VScore.__name__}")
+        dataset = T2VScore(root_dir=args.root_dir)
+        scores = dataset.get_scores_from_author(model=args.model)
+        results = dataset.evaluate_scores(scores)
+        return
     score_func = t2i_metrics.get_score_model(model=args.model, device=args.device, cache_dir=args.cache_dir)
 
     kwargs = {}
@@ -34,21 +40,26 @@ def main():
         print(f"Using answer template: {args.answer}")
         kwargs['answer_template'] = args.answer
     
+    os.makedirs("t2vscore_results", exist_ok=True)
+    
+    
     print(f"Performance of {args.model}.")
-    for dataset_cls in [
-        Winoground,
-        EqBen_Mini,
-        StanfordT23D,
-        Pickapic_v1,
-        SeeTrue,
-        TIFA160_DSG,
-        Flickr8K_CF,
-    ]:
-        
-        dataset = dataset_cls(root_dir=args.root_dir)
-        scores = score_func.batch_forward(dataset, batch_size=args.batch_size, **kwargs).cpu()
-        results = dataset.evaluate_scores(scores)
+    for eval_mode in [
+                    #   'first_frame',
+                    #   'last_frame',
+                    #   'sample_4_frame',
+                      'grid_2_x_2',
+                    #   'avg_frames'
+                      ]:
+        for dataset_cls in [
+            T2VScore
+        ]:  
+            print(f"Evaluating {eval_mode} on {dataset_cls.__name__}")
+            dataset = dataset_cls(root_dir=args.root_dir, eval_mode=eval_mode)
+            scores = score_func.batch_forward(dataset, batch_size=args.batch_size, **kwargs).cpu()
+            results = dataset.evaluate_scores(scores)
+            # dataset.save_results(scores, save_path=f"t2vscore_results/{args.model}_{eval_mode}.json")
+            
 
 if __name__ == "__main__":
     main()
-

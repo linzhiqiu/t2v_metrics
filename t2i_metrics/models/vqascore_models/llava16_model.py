@@ -5,9 +5,11 @@ import copy
 from .vqa_model import VQAScoreModel
 from .mm_utils import expand2square, load_pretrained_model, tokenizer_image_token
 from ...constants import HF_CACHE_DIR, CONTEXT_LEN, SYSTEM_MSG, DEFAULT_IMAGE_TOKEN, IGNORE_INDEX
-from .llava.model import LlavaLlamaForCausalLM, ModelArguments
+from .llava_16.model import LlavaLlamaForCausalLM
+from .llava.model import ModelArguments
 
-default_question_template = 'Does this figure show "{}"? Please answer yes or no.'
+# default_question_template = "Does the image show '{}'? Please answer yes or no."
+default_question_template = "Is this figure showing '{}'? Please answer yes or no."
 default_answer_template = "Yes"
 
 def format_question(question, conversation_style='chat'):
@@ -15,12 +17,6 @@ def format_question(question, conversation_style='chat'):
         question = DEFAULT_IMAGE_TOKEN + question
     elif conversation_style == 'chat': # for 2nd stage model
         question = SYSTEM_MSG + " USER: " + DEFAULT_IMAGE_TOKEN + "\n" + question + " ASSISTANT: "
-    elif conversation_style == 'chat_no_system': # for 2nd stage model
-        question = "USER: " + DEFAULT_IMAGE_TOKEN + "\n" + question + " ASSISTANT: "
-    elif conversation_style == 'chat_ood_system': # for 2nd stage model
-        question = SYSTEM_MSG + " HUMAN: " + DEFAULT_IMAGE_TOKEN + "\n" + question + " GPT: "
-    elif conversation_style == 'chat_swap_image_question': # for 2nd stage model
-        question = SYSTEM_MSG + " HUMAN: " + question + "\n" + DEFAULT_IMAGE_TOKEN + " GPT: "
     else:
         raise NotImplementedError()
     return question
@@ -30,122 +26,18 @@ def format_answer(answer, conversation_style='chat'):
         answer = answer + "\n"
     elif conversation_style == 'chat': # for 2nd stage model
         answer = answer + "</s>"
-    elif conversation_style in ['chat_no_system', 'chat_ood_system', 'chat_swap_image_question']: # for 2nd stage model
-        answer = answer + "</s>"
     else:
         raise NotImplementedError()
     return answer
 
-LLAVA_MODELS = {
+LLAVA16_MODELS = {
     # llava-v1.6
-    # 'llava-v1.6-13b': {
-    #     'tokenizer' : {
-    #         'path': 'liuhaotian/llava-v1.6-vicuna-13b',
-    #     },
-    #     'model': {
-    #         'path': 'liuhaotian/llava-v1.6-vicuna-13b',
-    #         'conversation': 'chat',
-    #         'image_aspect_ratio': 'pad',
-    #     },
-    # },
-    # We recommend using 'llava-v1.5-13b' for maximal performance.
-    # If you want to use a smaller model, we recommend using 'llava-v1.5-7b'.
-    'llava-v1.5-13b': {
+    'llava-v1.6-13b': {
         'tokenizer' : {
-            'path': 'liuhaotian/llava-v1.5-13b',
+            'path': 'liuhaotian/llava-v1.6-vicuna-13b',
         },
         'model': {
-            'path': 'liuhaotian/llava-v1.5-13b',
-            'conversation': 'chat',
-            'image_aspect_ratio': 'pad',
-        },
-    },
-    'llava-v1.5-13b-no-system': {
-        'tokenizer' : {
-            'path': 'liuhaotian/llava-v1.5-13b',
-        },
-        'model': {
-            'path': 'liuhaotian/llava-v1.5-13b',
-            'conversation': 'chat_no_system',
-            'image_aspect_ratio': 'pad',
-        },
-    },
-    'llava-v1.5-13b-ood-system': {
-        'tokenizer' : {
-            'path': 'liuhaotian/llava-v1.5-13b',
-        },
-        'model': {
-            'path': 'liuhaotian/llava-v1.5-13b',
-            'conversation': 'chat_ood_system',
-            'image_aspect_ratio': 'pad',
-        },
-    },
-    'llava-v1.5-13b-swap': {
-        'tokenizer' : {
-            'path': 'liuhaotian/llava-v1.5-13b',
-        },
-        'model': {
-            'path': 'liuhaotian/llava-v1.5-13b',
-            'conversation': 'chat_swap_image_question',
-            'image_aspect_ratio': 'pad',
-        },
-    },
-    'llava-v1.5-7b': {
-        'tokenizer' : {
-            'path': 'liuhaotian/llava-v1.5-7b',
-        },
-        'model': {
-            'path': 'liuhaotian/llava-v1.5-7b',
-            'conversation': 'chat',
-            'image_aspect_ratio': 'pad',
-        },
-    },
-    # The following models are suboptimal, but are included for completeness.
-    'llava-v1.5-13b-stage-1': {
-        'tokenizer' : {
-            'path': 'lmsys/vicuna-13b-v1.5',
-            'model_max_length': CONTEXT_LEN,
-            'padding_side': 'right',
-        },
-        'model': {
-            'path': 'lmsys/vicuna-13b-v1.5',
-            'mmprojector_repo': 'liuhaotian/llava-v1.5-mlp2x-336px-pretrain-vicuna-13b-v1.5',
-            'mmprojector_name': 'mm_projector.bin',
-            'conversation': "plain",
-            'image_aspect_ratio': 'square',
-        },
-    },
-    'llava-v1.5-7b-stage-1': {
-        'tokenizer' : {
-            'path': 'lmsys/vicuna-7b-v1.5',
-            'model_max_length': CONTEXT_LEN,
-            'padding_side': 'right',
-        },
-        'model': {
-            'path': 'lmsys/vicuna-7b-v1.5',
-            'mmprojector_repo': 'liuhaotian/llava-v1.5-mlp2x-336px-pretrain-vicuna-7b-v1.5',
-            'mmprojector_name': 'mm_projector.bin',
-            'conversation': "plain",
-            'image_aspect_ratio': 'square',
-        },
-    },
-    # The following models are built on top of LLaVA-1.5 and integrate well with LLaVA-1.5 codebase
-    'sharegpt4v-7b': {
-        'tokenizer' : {
-            'path': 'Lin-Chen/ShareGPT4V-7B',
-        },
-        'model': {
-            'path': 'Lin-Chen/ShareGPT4V-7B',
-            'conversation': 'chat',
-            'image_aspect_ratio': 'pad',
-        },
-    },
-    'sharegpt4v-13b': {
-        'tokenizer' : {
-            'path': 'Lin-Chen/ShareGPT4V-13B',
-        },
-        'model': {
-            'path': 'Lin-Chen/ShareGPT4V-13B',
+            'path': 'liuhaotian/llava-v1.6-vicuna-13b',
             'conversation': 'chat',
             'image_aspect_ratio': 'pad',
         },
@@ -153,13 +45,13 @@ LLAVA_MODELS = {
 }
 
 
-class LLaVAModel(VQAScoreModel):
-    """A wrapper for the LLaVA-1.5 models"""
+class LLaVA16Model(VQAScoreModel):
+    """A wrapper for the LLaVA-1.6 models"""
     def __init__(self,
-                 model_name='llava-v1.5-13b',
+                 model_name='llava-v1.6-13b',
                  device='cuda',
                  cache_dir=HF_CACHE_DIR):
-        assert model_name in LLAVA_MODELS
+        assert model_name in LLAVA16_MODELS
         super().__init__(model_name=model_name,
                          device=device,
                          cache_dir=cache_dir)
@@ -168,29 +60,29 @@ class LLaVAModel(VQAScoreModel):
         """Load the model, tokenizer, image transform
         """
         model_args = ModelArguments()
-        model_max_length = LLAVA_MODELS[self.model_name]['tokenizer']['model_max_length'] \
-            if 'model_max_length' in LLAVA_MODELS[self.model_name]['tokenizer'] else None
-        padding_side = LLAVA_MODELS[self.model_name]['tokenizer']['padding_side'] \
-            if 'padding_side' in LLAVA_MODELS[self.model_name]['tokenizer'] else None
-        mmprojector_repo = LLAVA_MODELS[self.model_name]['model']['mmprojector_repo'] \
-            if 'mmprojector_repo' in LLAVA_MODELS[self.model_name]['model'] else None
-        mmprojector_name = LLAVA_MODELS[self.model_name]['model']['mmprojector_name'] \
-            if 'mmprojector_name' in LLAVA_MODELS[self.model_name]['model'] else None
+        model_max_length = LLAVA16_MODELS[self.model_name]['tokenizer']['model_max_length'] \
+            if 'model_max_length' in LLAVA16_MODELS[self.model_name]['tokenizer'] else None
+        padding_side = LLAVA16_MODELS[self.model_name]['tokenizer']['padding_side'] \
+            if 'padding_side' in LLAVA16_MODELS[self.model_name]['tokenizer'] else None
+        mmprojector_repo = LLAVA16_MODELS[self.model_name]['model']['mmprojector_repo'] \
+            if 'mmprojector_repo' in LLAVA16_MODELS[self.model_name]['model'] else None
+        mmprojector_name = LLAVA16_MODELS[self.model_name]['model']['mmprojector_name'] \
+            if 'mmprojector_name' in LLAVA16_MODELS[self.model_name]['model'] else None
         
         # default is 'pad' (llava-1.5 says this reduces hallucination)
         # stage-1 models use 'square'
-        self.image_aspect_ratio = LLAVA_MODELS[self.model_name]['model']['image_aspect_ratio'] \
-            if 'image_aspect_ratio' in LLAVA_MODELS[self.model_name]['model'] else 'pad'
+        self.image_aspect_ratio = LLAVA16_MODELS[self.model_name]['model']['image_aspect_ratio'] \
+            if 'image_aspect_ratio' in LLAVA16_MODELS[self.model_name]['model'] else 'pad'
         
-        self.conversational_style = LLAVA_MODELS[self.model_name]['model']['conversation']
+        self.conversational_style = LLAVA16_MODELS[self.model_name]['model']['conversation']
         
         self.context_len = CONTEXT_LEN
         
         self.tokenizer, self.model, self.image_processor = load_pretrained_model(
             LlavaLlamaForCausalLM,
             model_args,
-            model_path=LLAVA_MODELS[self.model_name]['model']['path'],
-            tokenizer_path=LLAVA_MODELS[self.model_name]['tokenizer']['path'],
+            model_path=LLAVA16_MODELS[self.model_name]['model']['path'],
+            tokenizer_path=LLAVA16_MODELS[self.model_name]['tokenizer']['path'],
             model_max_length=model_max_length,
             padding_side=padding_side,
             image_aspect_ratio=self.image_aspect_ratio,
@@ -256,18 +148,21 @@ class LLaVAModel(VQAScoreModel):
             
         attention_mask = input_ids.ne(self.tokenizer.pad_token_id)
         input_ids, attention_mask, labels = input_ids.to(self.device), attention_mask.to(self.device), labels.to(self.device)
-        input_ids, attention_mask, past_key_values, inputs_embeds, labels = self.model.prepare_inputs_labels_for_multimodal(
+        input_ids, position_ids, attention_mask, past_key_values, inputs_embeds, labels = self.model.prepare_inputs_labels_for_multimodal(
             input_ids,
+            None,
             attention_mask,
             None,
             labels,
-            images
+            images,
+            image_sizes=None,
         )
         
         assert input_ids is None, "input_ids should be None for LLaVA-1.5"
         assert past_key_values is None, "past_key_values should be None for LLaVA-1.5"
         model_input_kwargs = {
             'input_ids': input_ids, # None for LLaVA-1.5
+            'position_ids': position_ids,
             'attention_mask': attention_mask,
             'past_key_values': past_key_values,
             'inputs_embeds': inputs_embeds,

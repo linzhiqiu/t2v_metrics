@@ -1,0 +1,2102 @@
+{
+    "0": {
+        "prompt": "A torn hat",
+        "models": {
+            "dreamfusion": [
+                2,
+                2,
+                2
+            ],
+            "instant3d": [
+                5,
+                5,
+                5
+            ],
+            "latent-nerf": [
+                2,
+                2,
+                2
+            ],
+            "magic3d": [
+                3,
+                4,
+                2
+            ],
+            "mvdream": [
+                2,
+                3,
+                2
+            ],
+            "shap-e": [
+                2,
+                5,
+                3
+            ]
+        }
+    },
+    "1": {
+        "prompt": "A soft sofa",
+        "models": {
+            "dreamfusion": [
+                2,
+                5,
+                3
+            ],
+            "instant3d": [
+                4,
+                5,
+                5
+            ],
+            "latent-nerf": [
+                4,
+                5,
+                5
+            ],
+            "magic3d": [
+                2,
+                4,
+                3
+            ],
+            "mvdream": [
+                3,
+                4,
+                3
+            ],
+            "shap-e": [
+                1,
+                5,
+                3
+            ]
+        }
+    },
+    "2": {
+        "prompt": "A rusty boat",
+        "models": {
+            "dreamfusion": [
+                2,
+                2,
+                3
+            ],
+            "instant3d": [
+                4,
+                5,
+                5
+            ],
+            "latent-nerf": [
+                4,
+                5,
+                3
+            ],
+            "magic3d": [
+                2,
+                5,
+                5
+            ],
+            "mvdream": [
+                3,
+                5,
+                5
+            ],
+            "shap-e": [
+                1,
+                2,
+                3
+            ]
+        }
+    },
+    "3": {
+        "prompt": "A rough rock",
+        "models": {
+            "dreamfusion": [
+                2,
+                5,
+                2
+            ],
+            "instant3d": [
+                3,
+                5,
+                5
+            ],
+            "latent-nerf": [
+                3,
+                5,
+                2
+            ],
+            "magic3d": [
+                3,
+                5,
+                3
+            ],
+            "mvdream": [
+                5,
+                5,
+                3
+            ],
+            "shap-e": [
+                1,
+                5,
+                3
+            ]
+        }
+    },
+    "4": {
+        "prompt": "A thorny rose",
+        "models": {
+            "dreamfusion": [
+                2,
+                2,
+                2
+            ],
+            "instant3d": [
+                4,
+                5,
+                5
+            ],
+            "latent-nerf": [
+                3,
+                2,
+                2
+            ],
+            "magic3d": [
+                3,
+                2,
+                2
+            ],
+            "mvdream": [
+                4,
+                5,
+                4
+            ],
+            "shap-e": [
+                4,
+                4,
+                2
+            ]
+        }
+    },
+    "5": {
+        "prompt": "A brick house",
+        "models": {
+            "dreamfusion": [
+                4,
+                3,
+                3
+            ],
+            "instant3d": [
+                4,
+                5,
+                4
+            ],
+            "latent-nerf": [
+                4,
+                4,
+                3
+            ],
+            "magic3d": [
+                4,
+                5,
+                5
+            ],
+            "mvdream": [
+                5,
+                5,
+                4
+            ],
+            "shap-e": [
+                1,
+                2,
+                2
+            ]
+        }
+    },
+    "7": {
+        "prompt": "A sleeping cat",
+        "models": {
+            "dreamfusion": [
+                2,
+                3,
+                4
+            ],
+            "instant3d": [
+                2,
+                3,
+                3
+            ],
+            "latent-nerf": [
+                3,
+                5,
+                3
+            ],
+            "magic3d": [
+                3,
+                4,
+                3
+            ],
+            "mvdream": [
+                5,
+                5,
+                5
+            ],
+            "shap-e": [
+                1,
+                1,
+                1
+            ]
+        }
+    },
+    "8": {
+        "prompt": "A twisted tower",
+        "models": {
+            "dreamfusion": [
+                2,
+                4,
+                4
+            ],
+            "instant3d": [
+                3,
+                5,
+                5
+            ],
+            "latent-nerf": [
+                4,
+                5,
+                4
+            ],
+            "magic3d": [
+                3,
+                4,
+                4
+            ],
+            "mvdream": [
+                3,
+                2,
+                5
+            ],
+            "shap-e": [
+                1,
+                2,
+                2
+            ]
+        }
+    },
+    "11": {
+        "prompt": "A wooden bicycle",
+        "models": {
+            "dreamfusion": [
+                3,
+                1,
+                2
+            ],
+            "instant3d": [
+                4,
+                5,
+                3
+            ],
+            "latent-nerf": [
+                5,
+                5,
+                5
+            ],
+            "magic3d": [
+                3,
+                4,
+                3
+            ],
+            "mvdream": [
+                3,
+                3,
+                3
+            ],
+            "shap-e": [
+                2,
+                2,
+                2
+            ]
+        }
+    },
+    "12": {
+        "prompt": "A dancing elephant",
+        "models": {
+            "dreamfusion": [
+                2,
+                2,
+                2
+            ],
+            "instant3d": [
+                5,
+                5,
+                5
+            ],
+            "latent-nerf": [
+                4,
+                4,
+                3
+            ],
+            "magic3d": [
+                4,
+                4,
+                4
+            ],
+            "mvdream": [
+                5,
+                5,
+                4
+            ],
+            "shap-e": [
+                2,
+                1,
+                2
+            ]
+        }
+    },
+    "14": {
+        "prompt": "A pair of worn-out shoes",
+        "models": {
+            "dreamfusion": [
+                2,
+                2,
+                2
+            ],
+            "instant3d": [
+                4,
+                5,
+                4
+            ],
+            "latent-nerf": [
+                3,
+                5,
+                2
+            ],
+            "magic3d": [
+                4,
+                5,
+                4
+            ],
+            "mvdream": [
+                4,
+                4,
+                3
+            ],
+            "shap-e": [
+                2,
+                2,
+                2
+            ]
+        }
+    },
+    "15": {
+        "prompt": "A lamp casting a warm glow",
+        "models": {
+            "dreamfusion": [
+                4,
+                4,
+                5
+            ],
+            "instant3d": [
+                4,
+                4,
+                5
+            ],
+            "latent-nerf": [
+                4,
+                5,
+                5
+            ],
+            "magic3d": [
+                3,
+                4,
+                3
+            ],
+            "mvdream": [
+                5,
+                5,
+                4
+            ],
+            "shap-e": [
+                3,
+                2,
+                2
+            ]
+        }
+    },
+    "16": {
+        "prompt": "A book with a leather cover",
+        "models": {
+            "dreamfusion": [
+                4,
+                4,
+                4
+            ],
+            "instant3d": [
+                5,
+                5,
+                5
+            ],
+            "latent-nerf": [
+                5,
+                5,
+                5
+            ],
+            "magic3d": [
+                3,
+                4,
+                5
+            ],
+            "mvdream": [
+                4,
+                5,
+                5
+            ],
+            "shap-e": [
+                4,
+                2,
+                3
+            ]
+        }
+    },
+    "18": {
+        "prompt": "A book left on a park bench",
+        "models": {
+            "dreamfusion": [
+                2,
+                2,
+                2
+            ],
+            "instant3d": [
+                1,
+                3,
+                3
+            ],
+            "latent-nerf": [
+                2,
+                2,
+                2
+            ],
+            "magic3d": [
+                1,
+                2,
+                2
+            ],
+            "mvdream": [
+                5,
+                5,
+                5
+            ],
+            "shap-e": [
+                1,
+                1,
+                2
+            ]
+        }
+    },
+    "24": {
+        "prompt": "A mug filled with steaming coffee",
+        "models": {
+            "dreamfusion": [
+                2,
+                2,
+                2
+            ],
+            "instant3d": [
+                3,
+                3,
+                2
+            ],
+            "latent-nerf": [
+                5,
+                5,
+                5
+            ],
+            "magic3d": [
+                3,
+                3,
+                2
+            ],
+            "mvdream": [
+                2,
+                3,
+                2
+            ],
+            "shap-e": [
+                2,
+                2,
+                2
+            ]
+        }
+    },
+    "26": {
+        "prompt": "A dog creating sand art on a beach",
+        "models": {
+            "dreamfusion": [
+                2,
+                2,
+                2
+            ],
+            "instant3d": [
+                4,
+                2,
+                2
+            ],
+            "latent-nerf": [
+                4,
+                5,
+                5
+            ],
+            "magic3d": [
+                3,
+                4,
+                2
+            ],
+            "mvdream": [
+                4,
+                5,
+                5
+            ],
+            "shap-e": [
+                2,
+                1,
+                1
+            ]
+        }
+    },
+    "28": {
+        "prompt": "A cat with two different colored eyes",
+        "models": {
+            "dreamfusion": [
+                2,
+                4,
+                4
+            ],
+            "instant3d": [
+                2,
+                2,
+                2
+            ],
+            "latent-nerf": [
+                1,
+                1,
+                1
+            ],
+            "magic3d": [
+                4,
+                5,
+                5
+            ],
+            "mvdream": [
+                3,
+                2,
+                2
+            ],
+            "shap-e": [
+                3,
+                1,
+                1
+            ]
+        }
+    },
+    "30": {
+        "prompt": "A quartet of mugs that sing in harmony",
+        "models": {
+            "dreamfusion": [
+                4,
+                5,
+                4
+            ],
+            "instant3d": [
+                3,
+                2,
+                2
+            ],
+            "latent-nerf": [
+                4,
+                2,
+                3
+            ],
+            "magic3d": [
+                4,
+                5,
+                3
+            ],
+            "mvdream": [
+                2,
+                2,
+                2
+            ],
+            "shap-e": [
+                1,
+                1,
+                1
+            ]
+        }
+    },
+    "40": {
+        "prompt": "Spotted ladybug crawling on a green leaf",
+        "models": {
+            "dreamfusion": [
+                5,
+                5,
+                3
+            ],
+            "instant3d": [
+                5,
+                5,
+                5
+            ],
+            "latent-nerf": [
+                5,
+                5,
+                5
+            ],
+            "magic3d": [
+                4,
+                4,
+                2
+            ],
+            "mvdream": [
+                5,
+                5,
+                5
+            ],
+            "shap-e": [
+                1,
+                1,
+                1
+            ]
+        }
+    },
+    "42": {
+        "prompt": "A teddy bear, fur matted, one eye missing",
+        "models": {
+            "dreamfusion": [
+                4,
+                3,
+                2
+            ],
+            "instant3d": [
+                3,
+                3,
+                3
+            ],
+            "latent-nerf": [
+                4,
+                3,
+                2
+            ],
+            "magic3d": [
+                4,
+                3,
+                2
+            ],
+            "mvdream": [
+                3,
+                3,
+                2
+            ],
+            "shap-e": [
+                2,
+                2,
+                2
+            ]
+        }
+    },
+    "43": {
+        "prompt": "A golden retriever plush toy, floppy-eare",
+        "models": {
+            "dreamfusion": [
+                5,
+                5,
+                5
+            ],
+            "instant3d": [
+                5,
+                5,
+                4
+            ],
+            "latent-nerf": [
+                5,
+                5,
+                4
+            ],
+            "magic3d": [
+                3,
+                4,
+                3
+            ],
+            "mvdream": [
+                3,
+                2,
+                3
+            ],
+            "shap-e": [
+                1,
+                1,
+                2
+            ]
+        }
+    },
+    "44": {
+        "prompt": "A carved wooden bear with a salmon in mouth",
+        "models": {
+            "dreamfusion": [
+                2,
+                2,
+                2
+            ],
+            "instant3d": [
+                3,
+                3,
+                2
+            ],
+            "latent-nerf": [
+                3,
+                3,
+                2
+            ],
+            "magic3d": [
+                3,
+                2,
+                3
+            ],
+            "mvdream": [
+                3,
+                3,
+                3
+            ],
+            "shap-e": [
+                1,
+                2,
+                1
+            ]
+        }
+    },
+    "45": {
+        "prompt": "A cat pondering the mysteries of the universe",
+        "models": {
+            "dreamfusion": [
+                3,
+                2,
+                2
+            ],
+            "instant3d": [
+                4,
+                2,
+                3
+            ],
+            "latent-nerf": [
+                5,
+                5,
+                3
+            ],
+            "magic3d": [
+                3,
+                2,
+                2
+            ],
+            "mvdream": [
+                4,
+                5,
+                5
+            ],
+            "shap-e": [
+                1,
+                2,
+                1
+            ]
+        }
+    },
+    "46": {
+        "prompt": "A lamp casting shadows on an old, forgotten map",
+        "models": {
+            "dreamfusion": [
+                3,
+                4,
+                3
+            ],
+            "instant3d": [
+                1,
+                5,
+                2
+            ],
+            "latent-nerf": [
+                2,
+                2,
+                2
+            ],
+            "magic3d": [
+                1,
+                3,
+                2
+            ],
+            "mvdream": [
+                4,
+                2,
+                2
+            ],
+            "shap-e": [
+                1,
+                1,
+                1
+            ]
+        }
+    },
+    "47": {
+        "prompt": "Orange monarch butterfly resting on a dandelion",
+        "models": {
+            "dreamfusion": [
+                4,
+                3,
+                3
+            ],
+            "instant3d": [
+                5,
+                5,
+                3
+            ],
+            "latent-nerf": [
+                5,
+                5,
+                5
+            ],
+            "magic3d": [
+                2,
+                4,
+                3
+            ],
+            "mvdream": [
+                5,
+                5,
+                5
+            ],
+            "shap-e": [
+                1,
+                1,
+                1
+            ]
+        }
+    },
+    "50": {
+        "prompt": "A quill pen, feather shifts through rainbow hues",
+        "models": {
+            "dreamfusion": [
+                4,
+                4,
+                3
+            ],
+            "instant3d": [
+                3,
+                3,
+                3
+            ],
+            "latent-nerf": [
+                2,
+                2,
+                3
+            ],
+            "magic3d": [
+                4,
+                4,
+                3
+            ],
+            "mvdream": [
+                5,
+                5,
+                3
+            ],
+            "shap-e": [
+                1,
+                1,
+                1
+            ]
+        }
+    },
+    "51": {
+        "prompt": "Green tree frog clinging to a rain-soaked window",
+        "models": {
+            "dreamfusion": [
+                3,
+                2,
+                2
+            ],
+            "instant3d": [
+                4,
+                5,
+                5
+            ],
+            "latent-nerf": [
+                3,
+                4,
+                3
+            ],
+            "magic3d": [
+                3,
+                2,
+                2
+            ],
+            "mvdream": [
+                3,
+                2,
+                2
+            ],
+            "shap-e": [
+                1,
+                1,
+                2
+            ]
+        }
+    },
+    "52": {
+        "prompt": "An old-fashioned rotary phone with a tangled cord",
+        "models": {
+            "dreamfusion": [
+                3,
+                4,
+                2
+            ],
+            "instant3d": [
+                5,
+                5,
+                5
+            ],
+            "latent-nerf": [
+                4,
+                5,
+                4
+            ],
+            "magic3d": [
+                3,
+                4,
+                3
+            ],
+            "mvdream": [
+                5,
+                5,
+                4
+            ],
+            "shap-e": [
+                1,
+                2,
+                1
+            ]
+        }
+    },
+    "53": {
+        "prompt": "Tortoise with a shell that looks like stained glass",
+        "models": {
+            "dreamfusion": [
+                4,
+                3,
+                3
+            ],
+            "instant3d": [
+                5,
+                5,
+                5
+            ],
+            "latent-nerf": [
+                4,
+                3,
+                4
+            ],
+            "magic3d": [
+                3,
+                3,
+                3
+            ],
+            "mvdream": [
+                5,
+                5,
+                4
+            ],
+            "shap-e": [
+                2,
+                1,
+                1
+            ]
+        }
+    },
+    "54": {
+        "prompt": "A plush octopus whose arms are gently waving pencils",
+        "models": {
+            "dreamfusion": [
+                3,
+                2,
+                3
+            ],
+            "instant3d": [
+                2,
+                2,
+                2
+            ],
+            "latent-nerf": [
+                4,
+                2,
+                3
+            ],
+            "magic3d": [
+                3,
+                5,
+                4
+            ],
+            "mvdream": [
+                3,
+                5,
+                3
+            ],
+            "shap-e": [
+                2,
+                1,
+                1
+            ]
+        }
+    },
+    "55": {
+        "prompt": "An assortment of vintage, fragrant perfumes on display",
+        "models": {
+            "dreamfusion": [
+                3,
+                4,
+                3
+            ],
+            "instant3d": [
+                3,
+                3,
+                3
+            ],
+            "latent-nerf": [
+                5,
+                5,
+                4
+            ],
+            "magic3d": [
+                3,
+                4,
+                4
+            ],
+            "mvdream": [
+                1,
+                1,
+                1
+            ],
+            "shap-e": [
+                1,
+                1,
+                1
+            ]
+        }
+    },
+    "57": {
+        "prompt": "Swan with feathers resembling soft, white origami folds",
+        "models": {
+            "dreamfusion": [
+                2,
+                2,
+                3
+            ],
+            "instant3d": [
+                3,
+                3,
+                3
+            ],
+            "latent-nerf": [
+                5,
+                5,
+                4
+            ],
+            "magic3d": [
+                3,
+                5,
+                4
+            ],
+            "mvdream": [
+                5,
+                5,
+                4
+            ],
+            "shap-e": [
+                2,
+                2,
+                1
+            ]
+        }
+    },
+    "58": {
+        "prompt": "A quaint, little house nestled at the end of a winding path",
+        "models": {
+            "dreamfusion": [
+                3,
+                4,
+                3
+            ],
+            "instant3d": [
+                3,
+                4,
+                3
+            ],
+            "latent-nerf": [
+                5,
+                5,
+                4
+            ],
+            "magic3d": [
+                4,
+                4,
+                4
+            ],
+            "mvdream": [
+                3,
+                3,
+                3
+            ],
+            "shap-e": [
+                1,
+                1,
+                1
+            ]
+        }
+    },
+    "59": {
+        "prompt": "Flamingo balancing on a sphere instead of standing in water",
+        "models": {
+            "dreamfusion": [
+                4,
+                5,
+                4
+            ],
+            "instant3d": [
+                3,
+                3,
+                3
+            ],
+            "latent-nerf": [
+                4,
+                5,
+                5
+            ],
+            "magic3d": [
+                1,
+                1,
+                2
+            ],
+            "mvdream": [
+                3,
+                3,
+                3
+            ],
+            "shap-e": [
+                1,
+                1,
+                1
+            ]
+        }
+    },
+    "60": {
+        "prompt": "A bright yellow rubber duck gently floats in a sudsy bathtub",
+        "models": {
+            "dreamfusion": [
+                3,
+                2,
+                2
+            ],
+            "instant3d": [
+                5,
+                5,
+                3
+            ],
+            "latent-nerf": [
+                3,
+                4,
+                3
+            ],
+            "magic3d": [
+                3,
+                2,
+                2
+            ],
+            "mvdream": [
+                1,
+                2,
+                2
+            ],
+            "shap-e": [
+                1,
+                1,
+                1
+            ]
+        }
+    },
+    "61": {
+        "prompt": "A collection of fresh vegetables arranged in a wicker basket",
+        "models": {
+            "dreamfusion": [
+                4,
+                5,
+                4
+            ],
+            "instant3d": [
+                5,
+                5,
+                5
+            ],
+            "latent-nerf": [
+                5,
+                5,
+                5
+            ],
+            "magic3d": [
+                5,
+                5,
+                4
+            ],
+            "mvdream": [
+                5,
+                5,
+                5
+            ],
+            "shap-e": [
+                2,
+                1,
+                1
+            ]
+        }
+    },
+    "68": {
+        "prompt": "A small, intricately carved antique wooden box filled with mystery",
+        "models": {
+            "dreamfusion": [
+                5,
+                3,
+                3
+            ],
+            "instant3d": [
+                4,
+                5,
+                4
+            ],
+            "latent-nerf": [
+                5,
+                5,
+                4
+            ],
+            "magic3d": [
+                5,
+                5,
+                4
+            ],
+            "mvdream": [
+                5,
+                4,
+                2
+            ],
+            "shap-e": [
+                1,
+                1,
+                1
+            ]
+        }
+    },
+    "69": {
+        "prompt": "Frog with a translucent skin displaying a mechanical heart beating",
+        "models": {
+            "dreamfusion": [
+                2,
+                2,
+                2
+            ],
+            "instant3d": [
+                4,
+                2,
+                2
+            ],
+            "latent-nerf": [
+                4,
+                2,
+                2
+            ],
+            "magic3d": [
+                2,
+                4,
+                2
+            ],
+            "mvdream": [
+                4,
+                3,
+                2
+            ],
+            "shap-e": [
+                1,
+                1,
+                1
+            ]
+        }
+    },
+    "70": {
+        "prompt": "A small, rustic cabin sits alone in a peaceful, snow-covered forest",
+        "models": {
+            "dreamfusion": [
+                2,
+                3,
+                2
+            ],
+            "instant3d": [
+                2,
+                4,
+                4
+            ],
+            "latent-nerf": [
+                2,
+                4,
+                3
+            ],
+            "magic3d": [
+                2,
+                2,
+                3
+            ],
+            "mvdream": [
+                1,
+                5,
+                2
+            ],
+            "shap-e": [
+                1,
+                1,
+                1
+            ]
+        }
+    },
+    "71": {
+        "prompt": "Jellyfish with bioluminescent tentacles shaped like lightning bolts",
+        "models": {
+            "dreamfusion": [
+                2,
+                3,
+                3
+            ],
+            "instant3d": [
+                4,
+                5,
+                4
+            ],
+            "latent-nerf": [
+                3,
+                5,
+                4
+            ],
+            "magic3d": [
+                3,
+                3,
+                5
+            ],
+            "mvdream": [
+                4,
+                5,
+                2
+            ],
+            "shap-e": [
+                1,
+                1,
+                2
+            ]
+        }
+    },
+    "72": {
+        "prompt": "A floating teapot, pouring a stream of endless, steaming jasmine tea",
+        "models": {
+            "dreamfusion": [
+                3,
+                2,
+                2
+            ],
+            "instant3d": [
+                1,
+                2,
+                2
+            ],
+            "latent-nerf": [
+                4,
+                5,
+                3
+            ],
+            "magic3d": [
+                2,
+                2,
+                2
+            ],
+            "mvdream": [
+                2,
+                2,
+                2
+            ],
+            "shap-e": [
+                2,
+                2,
+                1
+            ]
+        }
+    },
+    "73": {
+        "prompt": "A smoldering campfire under a clear starry night, embers glowing softly",
+        "models": {
+            "dreamfusion": [
+                2,
+                4,
+                3
+            ],
+            "instant3d": [
+                3,
+                2,
+                3
+            ],
+            "latent-nerf": [
+                4,
+                4,
+                5
+            ],
+            "magic3d": [
+                3,
+                2,
+                2
+            ],
+            "mvdream": [
+                3,
+                2,
+                2
+            ],
+            "shap-e": [
+                1,
+                1,
+                1
+            ]
+        }
+    },
+    "74": {
+        "prompt": "A smartphone with a cracked screen lying on a coffee-stained office desk",
+        "models": {
+            "dreamfusion": [
+                2,
+                2,
+                1
+            ],
+            "instant3d": [
+                2,
+                2,
+                2
+            ],
+            "latent-nerf": [
+                3,
+                3,
+                2
+            ],
+            "magic3d": [
+                2,
+                3,
+                2
+            ],
+            "mvdream": [
+                3,
+                4,
+                3
+            ],
+            "shap-e": [
+                1,
+                1,
+                1
+            ]
+        }
+    },
+    "75": {
+        "prompt": "An ice cream scoop that serves up scoops of cloud fluff instead of ice cream",
+        "models": {
+            "dreamfusion": [
+                2,
+                2,
+                5
+            ],
+            "instant3d": [
+                3,
+                4,
+                1
+            ],
+            "latent-nerf": [
+                2,
+                4,
+                1
+            ],
+            "magic3d": [
+                4,
+                5,
+                1
+            ],
+            "mvdream": [
+                2,
+                5,
+                1
+            ],
+            "shap-e": [
+                2,
+                2,
+                5
+            ]
+        }
+    },
+    "79": {
+        "prompt": "A sleek red sports car with chrome finishes parked by a bustling city sidewalk",
+        "models": {
+            "dreamfusion": [
+                3,
+                3,
+                2
+            ],
+            "instant3d": [
+                2,
+                3,
+                2
+            ],
+            "latent-nerf": [
+                4,
+                5,
+                3
+            ],
+            "magic3d": [
+                3,
+                3,
+                2
+            ],
+            "mvdream": [
+                3,
+                3,
+                2
+            ],
+            "shap-e": [
+                2,
+                2,
+                2
+            ]
+        }
+    },
+    "80": {
+        "prompt": "An ensemble of jellyfish-like hanging lamps, pulsing with soft bioluminescence",
+        "models": {
+            "dreamfusion": [
+                3,
+                2,
+                5
+            ],
+            "instant3d": [
+                3,
+                2,
+                3
+            ],
+            "latent-nerf": [
+                5,
+                5,
+                5
+            ],
+            "magic3d": [
+                4,
+                3,
+                4
+            ],
+            "mvdream": [
+                5,
+                4,
+                4
+            ],
+            "shap-e": [
+                1,
+                1,
+                1
+            ]
+        }
+    },
+    "81": {
+        "prompt": "A cluster of tents pitched near a forest, campfire smoke curling into the evening sky",
+        "models": {
+            "dreamfusion": [
+                2,
+                3,
+                2
+            ],
+            "instant3d": [
+                2,
+                2,
+                2
+            ],
+            "latent-nerf": [
+                5,
+                5,
+                5
+            ],
+            "magic3d": [
+                1,
+                1,
+                1
+            ],
+            "mvdream": [
+                4,
+                5,
+                4
+            ],
+            "shap-e": [
+                1,
+                1,
+                1
+            ]
+        }
+    },
+    "82": {
+        "prompt": "A colorful kite tangled in the branches of an oak tree, fabric fluttering in the wind",
+        "models": {
+            "dreamfusion": [
+                2,
+                2,
+                2
+            ],
+            "instant3d": [
+                1,
+                1,
+                1
+            ],
+            "latent-nerf": [
+                5,
+                5,
+                5
+            ],
+            "magic3d": [
+                2,
+                1,
+                2
+            ],
+            "mvdream": [
+                1,
+                1,
+                1
+            ],
+            "shap-e": [
+                1,
+                1,
+                1
+            ]
+        }
+    },
+    "85": {
+        "prompt": "A sequence of street lamps, casting pools of light on cobblestone paths as twilight descends",
+        "models": {
+            "dreamfusion": [
+                1,
+                1,
+                2
+            ],
+            "instant3d": [
+                1,
+                4,
+                2
+            ],
+            "latent-nerf": [
+                1,
+                2,
+                4
+            ],
+            "magic3d": [
+                2,
+                2,
+                2
+            ],
+            "mvdream": [
+                4,
+                5,
+                3
+            ],
+            "shap-e": [
+                1,
+                1,
+                1
+            ]
+        }
+    },
+    "86": {
+        "prompt": "A bouquet of metallic flowers that bloom in response to moonlight, shimmering silver at night",
+        "models": {
+            "dreamfusion": [
+                1,
+                2,
+                2
+            ],
+            "instant3d": [
+                2,
+                2,
+                2
+            ],
+            "latent-nerf": [
+                4,
+                4,
+                4
+            ],
+            "magic3d": [
+                3,
+                4,
+                2
+            ],
+            "mvdream": [
+                3,
+                3,
+                2
+            ],
+            "shap-e": [
+                1,
+                1,
+                2
+            ]
+        }
+    },
+    "87": {
+        "prompt": "An array of small, solid, symmetrical, pastel-colored eggs, each revealing a miniature, enchanted forest scene when cracked open",
+        "models": {
+            "dreamfusion": [
+                2,
+                2,
+                2
+            ],
+            "instant3d": [
+                3,
+                5,
+                2
+            ],
+            "latent-nerf": [
+                2,
+                2,
+                2
+            ],
+            "magic3d": [
+                3,
+                4,
+                3
+            ],
+            "mvdream": [
+                2,
+                4,
+                3
+            ],
+            "shap-e": [
+                1,
+                1,
+                1
+            ]
+        }
+    },
+    "89": {
+        "prompt": "Various hollow, asymmetrical, textured seashells, collected in a sand-filled, clear glass jar with a twine-tied neck, displayed on a windowsill",
+        "models": {
+            "dreamfusion": [
+                1,
+                1,
+                1
+            ],
+            "instant3d": [
+                2,
+                4,
+                2
+            ],
+            "latent-nerf": [
+                3,
+                4,
+                3
+            ],
+            "magic3d": [
+                2,
+                2,
+                3
+            ],
+            "mvdream": [
+                1,
+                1,
+                1
+            ],
+            "shap-e": [
+                1,
+                1,
+                1
+            ]
+        }
+    },
+    "90": {
+        "prompt": "An old, solid, asymmetrical bronze bell, its contours irregular from centuries of use, with a green patina, sitting silent in an abandoned temple",
+        "models": {
+            "dreamfusion": [
+                2,
+                2,
+                2
+            ],
+            "instant3d": [
+                3,
+                4,
+                2
+            ],
+            "latent-nerf": [
+                4,
+                5,
+                4
+            ],
+            "magic3d": [
+                3,
+                4,
+                3
+            ],
+            "mvdream": [
+                3,
+                4,
+                2
+            ],
+            "shap-e": [
+                1,
+                1,
+                2
+            ]
+        }
+    },
+    "97": {
+        "prompt": "A collection of solid, irregularly shaped hand tools, with wooden handles and metal ends, well-used and slightly rusty, hanging on a pegboard in a workshop",
+        "models": {
+            "dreamfusion": [
+                2,
+                2,
+                2
+            ],
+            "instant3d": [
+                4,
+                5,
+                5
+            ],
+            "latent-nerf": [
+                4,
+                5,
+                4
+            ],
+            "magic3d": [
+                3,
+                3,
+                3
+            ],
+            "mvdream": [
+                2,
+                2,
+                2
+            ],
+            "shap-e": [
+                1,
+                1,
+                1
+            ]
+        }
+    },
+    "98": {
+        "prompt": "Several solid, spherical, weathered cannonballs, with a rough cast-iron texture, lying beside a rusted cannon in a historical fort overlooking a serene bay",
+        "models": {
+            "dreamfusion": [
+                2,
+                2,
+                2
+            ],
+            "instant3d": [
+                2,
+                2,
+                2
+            ],
+            "latent-nerf": [
+                5,
+                5,
+                3
+            ],
+            "magic3d": [
+                3,
+                4,
+                2
+            ],
+            "mvdream": [
+                2,
+                2,
+                2
+            ],
+            "shap-e": [
+                1,
+                1,
+                1
+            ]
+        }
+    },
+    "99": {
+        "prompt": "A small, solid, geometrically spherical, metallic orb, with a glossy ruby finish, nestled in a nest of black velvet, untouched and gleaming under a spotlight",
+        "models": {
+            "dreamfusion": [
+                2,
+                5,
+                2
+            ],
+            "instant3d": [
+                4,
+                3,
+                2
+            ],
+            "latent-nerf": [
+                3,
+                3,
+                2
+            ],
+            "magic3d": [
+                2,
+                5,
+                1
+            ],
+            "mvdream": [
+                1,
+                1,
+                1
+            ],
+            "shap-e": [
+                1,
+                1,
+                1
+            ]
+        }
+    },
+    "100": {
+        "prompt": "An intricately carved, solid, wooden figurine, with jagged contours depicting an ancient deity, the wood grain visible under a matte finish, on a stone altar",
+        "models": {
+            "dreamfusion": [
+                3,
+                4,
+                4
+            ],
+            "instant3d": [
+                4,
+                2,
+                3
+            ],
+            "latent-nerf": [
+                5,
+                5,
+                5
+            ],
+            "magic3d": [
+                3,
+                4,
+                3
+            ],
+            "mvdream": [
+                2,
+                5,
+                2
+            ],
+            "shap-e": [
+                2,
+                1,
+                1
+            ]
+        }
+    },
+    "101": {
+        "prompt": "A large, multi-layered, symmetrical wedding cake, with smooth fondant, delicate piping, and lifelike sugar flowers in full bloom, displayed on a silver stand",
+        "models": {
+            "dreamfusion": [
+                4,
+                3,
+                4
+            ],
+            "instant3d": [
+                3,
+                5,
+                3
+            ],
+            "latent-nerf": [
+                4,
+                4,
+                4
+            ],
+            "magic3d": [
+                4,
+                2,
+                3
+            ],
+            "mvdream": [
+                4,
+                4,
+                4
+            ],
+            "shap-e": [
+                4,
+                2,
+                3
+            ]
+        }
+    },
+    "108": {
+        "prompt": "A small, solid, radially symmetrical, iridescent abalone shell, with jagged contours, hosting a miniature, tranquil Zen garden complete with tiny, raked sand and micro bonsai",
+        "models": {
+            "dreamfusion": [
+                2,
+                2,
+                1
+            ],
+            "instant3d": [
+                3,
+                4,
+                2
+            ],
+            "latent-nerf": [
+                3,
+                2,
+                3
+            ],
+            "magic3d": [
+                2,
+                2,
+                2
+            ],
+            "mvdream": [
+                5,
+                5,
+                3
+            ],
+            "shap-e": [
+                1,
+                1,
+                1
+            ]
+        }
+    },
+    "109": {
+        "prompt": "A solid, symmetrical, smooth stone fountain, with water cascading over its edges into a clear, circular pond surrounded by blooming lilies, in the center of a sunlit courtyard",
+        "models": {
+            "dreamfusion": [
+                3,
+                3,
+                2
+            ],
+            "instant3d": [
+                2,
+                2,
+                2
+            ],
+            "latent-nerf": [
+                4,
+                5,
+                4
+            ],
+            "magic3d": [
+                2,
+                2,
+                1
+            ],
+            "mvdream": [
+                2,
+                2,
+                4
+            ],
+            "shap-e": [
+                3,
+                1,
+                3
+            ]
+        }
+    }
+}

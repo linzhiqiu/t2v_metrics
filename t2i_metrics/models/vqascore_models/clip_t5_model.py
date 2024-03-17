@@ -6,7 +6,7 @@ from .mm_utils import expand2square, load_pretrained_model, t5_tokenizer_image_t
 from ...constants import HF_CACHE_DIR, CONTEXT_LEN, SYSTEM_MSG, DEFAULT_IMAGE_TOKEN, IGNORE_INDEX
 from .clip_t5.model import CLIPT5ForConditionalGeneration, ModelArguments
 
-default_question_template = "Does the image show '{}'? Please answer yes or no."
+default_question_template = 'Does this figure show "{}"? Please answer yes or no.'
 default_answer_template = "Yes"
 
 def format_question(question, conversation_style='plain'):
@@ -14,6 +14,12 @@ def format_question(question, conversation_style='plain'):
         question = DEFAULT_IMAGE_TOKEN + question
     elif conversation_style == 't5_chat': # for 2nd stage t5 model
         question = SYSTEM_MSG + " USER: " + DEFAULT_IMAGE_TOKEN + "\n" + question + " ASSISTANT: "
+    elif conversation_style == 't5_chat_ood_system': # for 2nd stage t5 model
+        question = SYSTEM_MSG + " HUMAN: " + DEFAULT_IMAGE_TOKEN + "\n" + question + " GPT: "
+    elif conversation_style == 't5_chat_no_system': # for 2nd stage t5 model
+        question = "USER: " + DEFAULT_IMAGE_TOKEN + "\n" + question + " ASSISTANT: "
+    elif conversation_style == 't5_chat_no_system_no_user': # for 2nd stage t5 model
+        question = "" + DEFAULT_IMAGE_TOKEN + "\n" + question + " : "
     else:
         raise NotImplementedError()
     return question
@@ -32,6 +38,39 @@ CLIP_T5_MODELS = {
         'model': {
             'path': 'zhiqiulin/clip-flant5-xxl',
             'conversation': 't5_chat',
+            'image_aspect_ratio': 'pad',
+        },
+    },
+    'clip-flant5-xxl-no-system': {
+        'tokenizer' : {
+            'path': 'google/flan-t5-xxl',
+            'model_max_length': CONTEXT_LEN,
+        },
+        'model': {
+            'path': 'zhiqiulin/clip-flant5-xxl',
+            'conversation': 't5_chat_no_system',
+            'image_aspect_ratio': 'pad',
+        },
+    },
+    'clip-flant5-xxl-no-system-no-user': {
+        'tokenizer' : {
+            'path': 'google/flan-t5-xxl',
+            'model_max_length': CONTEXT_LEN,
+        },
+        'model': {
+            'path': 'zhiqiulin/clip-flant5-xxl',
+            'conversation': 't5_chat_no_system_no_user',
+            'image_aspect_ratio': 'pad',
+        },
+    },
+    'clip-flant5-xxl-ood-system': {
+        'tokenizer' : {
+            'path': 'google/flan-t5-xxl',
+            'model_max_length': CONTEXT_LEN,
+        },
+        'model': {
+            'path': 'zhiqiulin/clip-flant5-xxl',
+            'conversation': 't5_chat_ood_system',
             'image_aspect_ratio': 'pad',
         },
     },
