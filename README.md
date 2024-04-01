@@ -5,7 +5,7 @@ VQAScore allows researchers to automatically evaluate text-to-image/video/3D mod
 
 <img src="images/example.png" width=600> 
 
-VQAScore significantly outperforms prior art (e.g., CLIPScore, TIFA, Davidsonian, VPEval, VIEScore)  on  compositional text prompts and is simpler than prior art relying on proprietary models such as GPT-4Vision. Check out the paper for more details!
+VQAScore significantly outperforms previous metrics such as CLIPScore and PickScore on compositional text prompts, and it is much simpler than prior art (e.g., ImageReward, HPSv2, TIFA, Davidsonian, VPEval, VIEScore) that make use of human feedback or proprietary models such as GPT-4Vision. 
 
 ## Quick start
 
@@ -20,11 +20,11 @@ conda install pip -y
 
 pip install torch torchvision torchaudio
 pip install git+https://github.com/openai/CLIP.git
-pip install -e .
+pip install -e . # local pip install
 ```
 
 <!-- (not yet implemented) Or simply run `pip install t2v_metrics`.  -->
-Optionally, you can install via `pip install t2v-metrics`.
+Or you can install via `pip install t2v-metrics`.
 
 Now, the following Python code is all you need to compute the VQAScore for image-text alignment (higher scores indicate greater similarity):
 
