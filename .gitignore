@@ -18,6 +18,8 @@ stanfordt23d_results/
 seetrue/
 genai_image_results/
 genai_video_results/
+genai_image_temp/
+genai_800_temp.py
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

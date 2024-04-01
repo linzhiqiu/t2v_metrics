@@ -14,12 +14,12 @@ def format_question(question, conversation_style='plain'):
         question = DEFAULT_IMAGE_TOKEN + question
     elif conversation_style == 't5_chat': # for 2nd stage t5 model
         question = SYSTEM_MSG + " USER: " + DEFAULT_IMAGE_TOKEN + "\n" + question + " ASSISTANT: "
-    elif conversation_style == 't5_chat_ood_system': # for 2nd stage t5 model
-        question = SYSTEM_MSG + " HUMAN: " + DEFAULT_IMAGE_TOKEN + "\n" + question + " GPT: "
     elif conversation_style == 't5_chat_no_system': # for 2nd stage t5 model
         question = "USER: " + DEFAULT_IMAGE_TOKEN + "\n" + question + " ASSISTANT: "
     elif conversation_style == 't5_chat_no_system_no_user': # for 2nd stage t5 model
         question = "" + DEFAULT_IMAGE_TOKEN + "\n" + question + " : "
+    # elif conversation_style == 't5_chat_ood_system': # for 2nd stage t5 model
+    #     question = SYSTEM_MSG + " HUMAN: " + DEFAULT_IMAGE_TOKEN + "\n" + question + " GPT: "
     else:
         raise NotImplementedError()
     return question
@@ -41,6 +41,95 @@ CLIP_T5_MODELS = {
             'image_aspect_ratio': 'pad',
         },
     },
+    'clip-flant5-xl': {
+        'tokenizer' : {
+            'path': 'google/flan-t5-xl',
+            'model_max_length': CONTEXT_LEN,
+        },
+        'model': {
+            'path': 'zhiqiulin/clip-flant5-xl',
+            'conversation': 't5_chat',
+            'image_aspect_ratio': 'pad',
+        },
+    },
+    # The following models are suboptimal, but are included for completeness.
+    # 'clip-flant5-xxl-stage-1': {
+    #     'tokenizer' : {
+    #         'path': 'google/flan-t5-xxl',
+    #         'model_max_length': CONTEXT_LEN,
+    #     },
+    #     'model': {
+    #         'path': 'google/flan-t5-xxl',
+    #         'mmprojector_repo': 'zhiqiulin/clip-flant5-xxl-stage-1',
+    #         'mmprojector_name': 'mm_projector.bin',
+    #         'conversation': "t5_plain",
+    #         'image_aspect_ratio': 'square',
+    #     },
+    # },
+    # 'clip-flant5-xxl-no-split-text': {
+    #     'tokenizer' : {
+    #         'path': 'google/flan-t5-xxl',
+    #         'model_max_length': CONTEXT_LEN,
+    #     },
+    #     'model': {
+    #         'path': 'zhiqiulin/clip-flant5-xxl-no-split-text',
+    #         'conversation': 't5_chat',
+    #         'image_aspect_ratio': 'pad',
+    #     },
+    # },
+    # 'clip-flant5-xxl-stage-1-no-split-text': {
+    #     'tokenizer' : {
+    #         'path': 'google/flan-t5-xxl',
+    #         'model_max_length': CONTEXT_LEN,
+    #     },
+    #     'model': {
+    #         'path': 'google/flan-t5-xxl',
+    #         'mmprojector_repo': 'zhiqiulin/clip-flant5-xxl-stage-1-no-split-text',
+    #         'mmprojector_name': 'mm_projector.bin',
+    #         'conversation': "t5_plain",
+    #         'image_aspect_ratio': 'square',
+    #     },
+    # },
+    # 'clip-t5-xxl': {
+    #     'tokenizer' : {
+    #         'path': 't5-11b',
+    #         'model_max_length': CONTEXT_LEN,
+    #     },
+    #     'model': {
+    #         'path': 'zhiqiulin/clip-t5-xxl',
+    #         'conversation': 't5_chat',
+    #         'image_aspect_ratio': 'pad',
+    #     },
+    # },
+    # 'clip-t5-xxl-stage-1': {
+    #     'tokenizer' : {
+    #         'path': 't5-11b',
+    #         'model_max_length': CONTEXT_LEN,
+    #     },
+    #     'model': {
+    #         'path': 't5-11b',
+    #         'mmprojector_repo': 'zhiqiulin/clip-t5-xxl-stage-1',
+    #         'mmprojector_name': 'mm_projector.bin',
+    #         'conversation': "t5_plain",
+    #         'image_aspect_ratio': 'square',
+    #     },
+    # },
+    # 'clip-flant5-xl-stage-1': {
+    #     'tokenizer' : {
+    #         'path': 'google/flan-t5-xl',
+    #         'model_max_length': CONTEXT_LEN,
+    #         'padding_side': 'right',
+    #     },
+    #     'model': {
+    #         'path': 'google/flan-t5-xl',
+    #         'mmprojector_repo': 'zhiqiulin/clip-flant5-xl-stage-1',
+    #         'mmprojector_name': 'mm_projector.bin',
+    #         'conversation': "t5_plain",
+    #         'image_aspect_ratio': 'square',
+    #     },
+    # },
+    
+    ## for prompting ablation
     'clip-flant5-xxl-no-system': {
         'tokenizer' : {
             'path': 'google/flan-t5-xxl',
@@ -61,104 +150,6 @@ CLIP_T5_MODELS = {
             'path': 'zhiqiulin/clip-flant5-xxl',
             'conversation': 't5_chat_no_system_no_user',
             'image_aspect_ratio': 'pad',
-        },
-    },
-    'clip-flant5-xxl-ood-system': {
-        'tokenizer' : {
-            'path': 'google/flan-t5-xxl',
-            'model_max_length': CONTEXT_LEN,
-        },
-        'model': {
-            'path': 'zhiqiulin/clip-flant5-xxl',
-            'conversation': 't5_chat_ood_system',
-            'image_aspect_ratio': 'pad',
-        },
-    },
-    'clip-flant5-xl': {
-        'tokenizer' : {
-            'path': 'google/flan-t5-xl',
-            'model_max_length': CONTEXT_LEN,
-        },
-        'model': {
-            'path': 'zhiqiulin/clip-flant5-xl',
-            'conversation': 't5_chat',
-            'image_aspect_ratio': 'pad',
-        },
-    },
-    # The following models are suboptimal, but are included for completeness.
-    'clip-flant5-xxl-stage-1': {
-        'tokenizer' : {
-            'path': 'google/flan-t5-xxl',
-            'model_max_length': CONTEXT_LEN,
-        },
-        'model': {
-            'path': 'google/flan-t5-xxl',
-            'mmprojector_repo': 'zhiqiulin/clip-flant5-xxl-stage-1',
-            'mmprojector_name': 'mm_projector.bin',
-            'conversation': "t5_plain",
-            'image_aspect_ratio': 'square',
-        },
-    },
-    'clip-flant5-xxl-no-split-text': {
-        'tokenizer' : {
-            'path': 'google/flan-t5-xxl',
-            'model_max_length': CONTEXT_LEN,
-        },
-        'model': {
-            'path': 'zhiqiulin/clip-flant5-xxl-no-split-text',
-            'conversation': 't5_chat',
-            'image_aspect_ratio': 'pad',
-        },
-    },
-    'clip-flant5-xxl-stage-1-no-split-text': {
-        'tokenizer' : {
-            'path': 'google/flan-t5-xxl',
-            'model_max_length': CONTEXT_LEN,
-        },
-        'model': {
-            'path': 'google/flan-t5-xxl',
-            'mmprojector_repo': 'zhiqiulin/clip-flant5-xxl-stage-1-no-split-text',
-            'mmprojector_name': 'mm_projector.bin',
-            'conversation': "t5_plain",
-            'image_aspect_ratio': 'square',
-        },
-    },
-    # 'clip-t5-xxl': {
-    #     'tokenizer' : {
-    #         'path': 't5-11b',
-    #         'model_max_length': CONTEXT_LEN,
-    #     },
-    #     'model': {
-    #         'path': 'zhiqiulin/clip-t5-xxl',
-    #         'conversation': 't5_chat',
-    #         'image_aspect_ratio': 'pad',
-    #     },
-    # },
-    'clip-t5-xxl-stage-1': {
-        'tokenizer' : {
-            'path': 't5-11b',
-            'model_max_length': CONTEXT_LEN,
-        },
-        'model': {
-            'path': 't5-11b',
-            'mmprojector_repo': 'zhiqiulin/clip-t5-xxl-stage-1',
-            'mmprojector_name': 'mm_projector.bin',
-            'conversation': "t5_plain",
-            'image_aspect_ratio': 'square',
-        },
-    },
-    'clip-flant5-xl-stage-1': {
-        'tokenizer' : {
-            'path': 'google/flan-t5-xl',
-            'model_max_length': CONTEXT_LEN,
-            'padding_side': 'right',
-        },
-        'model': {
-            'path': 'google/flan-t5-xl',
-            'mmprojector_repo': 'zhiqiulin/clip-flant5-xl-stage-1',
-            'mmprojector_name': 'mm_projector.bin',
-            'conversation': "t5_plain",
-            'image_aspect_ratio': 'square',
         },
     },
 }

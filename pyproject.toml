@@ -3,9 +3,9 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "t2i_metrics"
+name = "t2v_metrics"
 version = "1.0"
-description = "Automatic Text-To-Image Faithfulness Evaluation."
+description = "Evaluating Text-to-Visual Generation with Image-to-Text Generation."
 authors = [
     {name="Zhiqiu Lin", email="zl279@cornell.edu"},
 ]
@@ -39,13 +39,12 @@ dependencies = [
     "scikit-learn",
     "pycocoevalcap",
     "image-reward",
-    "clip@git+https://github.com/openai/CLIP",
     "hpsv2",
     "fire==0.4.0",
 ]
 
 [tool.setuptools]
-packages = ["t2i_metrics"]
+packages = ["t2v_metrics"]
 
 [project.urls]
 Home = "https://linzhiqiu.github.io/papers/vqascore"

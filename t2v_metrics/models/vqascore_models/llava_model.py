@@ -15,12 +15,12 @@ def format_question(question, conversation_style='chat'):
         question = DEFAULT_IMAGE_TOKEN + question
     elif conversation_style == 'chat': # for 2nd stage model
         question = SYSTEM_MSG + " USER: " + DEFAULT_IMAGE_TOKEN + "\n" + question + " ASSISTANT: "
-    elif conversation_style == 'chat_no_system': # for 2nd stage model
-        question = "USER: " + DEFAULT_IMAGE_TOKEN + "\n" + question + " ASSISTANT: "
-    elif conversation_style == 'chat_ood_system': # for 2nd stage model
-        question = SYSTEM_MSG + " HUMAN: " + DEFAULT_IMAGE_TOKEN + "\n" + question + " GPT: "
-    elif conversation_style == 'chat_swap_image_question': # for 2nd stage model
-        question = SYSTEM_MSG + " HUMAN: " + question + "\n" + DEFAULT_IMAGE_TOKEN + " GPT: "
+    # elif conversation_style == 'chat_no_system': # for 2nd stage model
+    #     question = "USER: " + DEFAULT_IMAGE_TOKEN + "\n" + question + " ASSISTANT: "
+    # elif conversation_style == 'chat_ood_system': # for 2nd stage model
+    #     question = SYSTEM_MSG + " HUMAN: " + DEFAULT_IMAGE_TOKEN + "\n" + question + " GPT: "
+    # elif conversation_style == 'chat_swap_image_question': # for 2nd stage model
+    #     question = SYSTEM_MSG + " HUMAN: " + question + "\n" + DEFAULT_IMAGE_TOKEN + " GPT: "
     else:
         raise NotImplementedError()
     return question
@@ -30,8 +30,8 @@ def format_answer(answer, conversation_style='chat'):
         answer = answer + "\n"
     elif conversation_style == 'chat': # for 2nd stage model
         answer = answer + "</s>"
-    elif conversation_style in ['chat_no_system', 'chat_ood_system', 'chat_swap_image_question']: # for 2nd stage model
-        answer = answer + "</s>"
+    # elif conversation_style in ['chat_no_system', 'chat_ood_system', 'chat_swap_image_question']: # for 2nd stage model
+    #     answer = answer + "</s>"
     else:
         raise NotImplementedError()
     return answer
@@ -60,36 +60,6 @@ LLAVA_MODELS = {
             'image_aspect_ratio': 'pad',
         },
     },
-    'llava-v1.5-13b-no-system': {
-        'tokenizer' : {
-            'path': 'liuhaotian/llava-v1.5-13b',
-        },
-        'model': {
-            'path': 'liuhaotian/llava-v1.5-13b',
-            'conversation': 'chat_no_system',
-            'image_aspect_ratio': 'pad',
-        },
-    },
-    'llava-v1.5-13b-ood-system': {
-        'tokenizer' : {
-            'path': 'liuhaotian/llava-v1.5-13b',
-        },
-        'model': {
-            'path': 'liuhaotian/llava-v1.5-13b',
-            'conversation': 'chat_ood_system',
-            'image_aspect_ratio': 'pad',
-        },
-    },
-    'llava-v1.5-13b-swap': {
-        'tokenizer' : {
-            'path': 'liuhaotian/llava-v1.5-13b',
-        },
-        'model': {
-            'path': 'liuhaotian/llava-v1.5-13b',
-            'conversation': 'chat_swap_image_question',
-            'image_aspect_ratio': 'pad',
-        },
-    },
     'llava-v1.5-7b': {
         'tokenizer' : {
             'path': 'liuhaotian/llava-v1.5-7b',
@@ -101,34 +71,64 @@ LLAVA_MODELS = {
         },
     },
     # The following models are suboptimal, but are included for completeness.
-    'llava-v1.5-13b-stage-1': {
-        'tokenizer' : {
-            'path': 'lmsys/vicuna-13b-v1.5',
-            'model_max_length': CONTEXT_LEN,
-            'padding_side': 'right',
-        },
-        'model': {
-            'path': 'lmsys/vicuna-13b-v1.5',
-            'mmprojector_repo': 'liuhaotian/llava-v1.5-mlp2x-336px-pretrain-vicuna-13b-v1.5',
-            'mmprojector_name': 'mm_projector.bin',
-            'conversation': "plain",
-            'image_aspect_ratio': 'square',
-        },
-    },
-    'llava-v1.5-7b-stage-1': {
-        'tokenizer' : {
-            'path': 'lmsys/vicuna-7b-v1.5',
-            'model_max_length': CONTEXT_LEN,
-            'padding_side': 'right',
-        },
-        'model': {
-            'path': 'lmsys/vicuna-7b-v1.5',
-            'mmprojector_repo': 'liuhaotian/llava-v1.5-mlp2x-336px-pretrain-vicuna-7b-v1.5',
-            'mmprojector_name': 'mm_projector.bin',
-            'conversation': "plain",
-            'image_aspect_ratio': 'square',
-        },
-    },
+    # 'llava-v1.5-13b-no-system': {
+    #     'tokenizer' : {
+    #         'path': 'liuhaotian/llava-v1.5-13b',
+    #     },
+    #     'model': {
+    #         'path': 'liuhaotian/llava-v1.5-13b',
+    #         'conversation': 'chat_no_system',
+    #         'image_aspect_ratio': 'pad',
+    #     },
+    # },
+    # 'llava-v1.5-13b-ood-system': {
+    #     'tokenizer' : {
+    #         'path': 'liuhaotian/llava-v1.5-13b',
+    #     },
+    #     'model': {
+    #         'path': 'liuhaotian/llava-v1.5-13b',
+    #         'conversation': 'chat_ood_system',
+    #         'image_aspect_ratio': 'pad',
+    #     },
+    # },
+    # 'llava-v1.5-13b-swap': {
+    #     'tokenizer' : {
+    #         'path': 'liuhaotian/llava-v1.5-13b',
+    #     },
+    #     'model': {
+    #         'path': 'liuhaotian/llava-v1.5-13b',
+    #         'conversation': 'chat_swap_image_question',
+    #         'image_aspect_ratio': 'pad',
+    #     },
+    # },
+    # 'llava-v1.5-13b-stage-1': {
+    #     'tokenizer' : {
+    #         'path': 'lmsys/vicuna-13b-v1.5',
+    #         'model_max_length': CONTEXT_LEN,
+    #         'padding_side': 'right',
+    #     },
+    #     'model': {
+    #         'path': 'lmsys/vicuna-13b-v1.5',
+    #         'mmprojector_repo': 'liuhaotian/llava-v1.5-mlp2x-336px-pretrain-vicuna-13b-v1.5',
+    #         'mmprojector_name': 'mm_projector.bin',
+    #         'conversation': "plain",
+    #         'image_aspect_ratio': 'square',
+    #     },
+    # },
+    # 'llava-v1.5-7b-stage-1': {
+    #     'tokenizer' : {
+    #         'path': 'lmsys/vicuna-7b-v1.5',
+    #         'model_max_length': CONTEXT_LEN,
+    #         'padding_side': 'right',
+    #     },
+    #     'model': {
+    #         'path': 'lmsys/vicuna-7b-v1.5',
+    #         'mmprojector_repo': 'liuhaotian/llava-v1.5-mlp2x-336px-pretrain-vicuna-7b-v1.5',
+    #         'mmprojector_name': 'mm_projector.bin',
+    #         'conversation': "plain",
+    #         'image_aspect_ratio': 'square',
+    #     },
+    # },
     # The following models are built on top of LLaVA-1.5 and integrate well with LLaVA-1.5 codebase
     'sharegpt4v-7b': {
         'tokenizer' : {

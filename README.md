@@ -1,290 +1,151 @@
+## **VQAScore: Evaluating Text-to-Visual Generation with Image-to-Text Generation [[Project Page]](https://linzhiqiu.github.io/papers/vqascore/)**  
+[Zhiqiu Lin](https://linzhiqiu.github.io/), [Deepak Pathak](https://www.cs.cmu.edu/~dpathak/), Baiqi Li, Jiayao Li, [Xide Xia](https://scholar.google.com/citations?user=FHLTntIAAAAJ&hl=en), [Graham Neubig](https://www.phontron.com/), [Pengchuan Zhang](https://scholar.google.com/citations?user=3VZ_E64AAAAJ&hl=en), [Deva Ramanan](https://www.cs.cmu.edu/~deva/). In [Arxiv](https://linzhiqiu.github.io/papers/vqascore/), 2024.
 
-## **VQAScore for Text-to-Image Evaluation**  [[Project Page]](https://linzhiqiu.github.io/papers/vqascore/)
+VQAScore allows researchers to automatically evaluate text-to-image/video/3D models using one-line of Python code!
 
-TODO:
-Pick better teaser images because VQAScore still fail on current Winoground sample
+<img src="images/example.png" width=600> 
 
-## **VQAScore for Text-to-Image Evaluation**  
-<!-- [Richard Zhang](https://richzhang.github.io/), [Phillip Isola](http://web.mit.edu/phillipi/), [Alexei A. Efros](http://www.eecs.berkeley.edu/~efros/), [Eli Shechtman](https://research.adobe.com/person/eli-shechtman/), [Oliver Wang](http://www.oliverwang.info/). In [CVPR](https://arxiv.org/abs/1801.03924), 2018.
+VQAScore significantly outperforms prior art (e.g., CLIPScore, TIFA, Davidsonian, VPEval, VIEScore)  on  compositional text prompts and is simpler than prior art relying on proprietary models such as GPT-4Vision. Check out the paper for more details!
 
-<img src='https://richzhang.github.io/PerceptualSimilarity/index_files/fig1_v2.jpg' width=1200> -->
-
-### Quick start
+## Quick start
 
 Install the package via:
 ```bash
-git clone https://github.com/linzhiqiu/t2i_metrics
-cd t2i_metrics
+git clone https://github.com/linzhiqiu/t2v_metrics
+cd t2v_metrics
 
-conda create -n t2i python=3.10 -y
-conda activate t2i
+conda create -n t2v python=3.10 -y
+conda activate t2v
 conda install pip -y
 
 pip install torch torchvision torchaudio
+pip install git+https://github.com/openai/CLIP.git
 pip install -e .
 ```
 
-(not yet implemented) Or simply run `pip install t2i_metrics`. 
+<!-- (not yet implemented) Or simply run `pip install t2v_metrics`.  -->
+Optionally, you can install via `pip install t2v-metrics`.
 
-The following Python code is all you need to evaluate the similiarity between an image and a text (higher means semantically closer). 
+Now, the following Python code is all you need to compute the VQAScore for image-text alignment (higher scores indicate greater similarity):
 
 ```python
-import t2i_metrics
-clip_flant5_score = t2i_metrics.VQAScore(model='clip-flant5-xxl') # our best scoring model
+import t2v_metrics
+clip_flant5_score = t2v_metrics.VQAScore(model='clip-flant5-xxl') # our recommended scoring model
 
-# For a single (image, text) pair
-image = "images/test0.jpg" # an image path in string format
-text = "a young person kisses an old person"
+### For a single (image, text) pair
+image = "images/0.png" # an image path in string format
+text = "someone talks on the phone angrily while another person sits happily"
 score = clip_flant5_score(images=[image], texts=[text])
 
-# Alternatively, if you want to calculate the pairwise similarity scores 
-# between M images and N texts, run the following to return a M x N score tensor.
-images = ["images/test0.jpg", "images/test1.jpg"]
-texts = ["an old person kisses a young person", "a young person kisses an old person"]
+### Alternatively, if you want to calculate the pairwise similarity scores 
+### between M images and N texts, run the following to return a M x N score tensor.
+images = ["images/0.png", "images/1.png"]
+texts = ["someone talks on the phone angrily while another person sits happily",
+         "someone talks on the phone happily while another person sits angrily"]
 scores = clip_flant5_score(images=images, texts=texts) # scores[i][j] is the score between image i and text j
 ```
 
 ### Notes on GPU and cache
-- **GPU usage**: The above scripts will by default use the first cuda device on your machine. We recommend using 40GB GPU for the largest VQA models such as `clip-flant5-xxl` and `llava-v1.5-13b`. If you have limited GPU memory, consider using smaller models such as `clip-flant5-xl` and `llava-v1.5-7b`.
-- **Cache directory**: You can change the cache folder (default is `./hf_cache/`) by updating `HF_CACHE_DIR` in [t2i_metrics/constants.py](t2i_metrics/constants.py).
+- **GPU usage**: By default, this code uses the first cuda device on your machine. We recommend 40GB GPUs for the largest VQAScore models such as `clip-flant5-xxl` and `llava-v1.5-13b`. If you have limited GPU memory, consider smaller models such as `clip-flant5-xl` and `llava-v1.5-7b`.
+- **Cache directory**: You can change the cache folder which saves all model checkpoints (default is `./hf_cache/`) by updating `HF_CACHE_DIR` in [t2v_metrics/constants.py](t2v_metrics/constants.py).
 
 
 ## **Advanced Usage**  
 
 ### Batch processing for more image-text pairs
-If you have a large dataset of M images x N texts, then you can optionally speed up inference using the following batch processing script. 
+With a large batch of M images x N texts, you can speed up using the ``batch_forward()`` function. 
 ```python
-import t2i_metrics
-clip_flant5_score = t2i_metrics.VQAScore(model='clip-flant5-xxl')
+import t2v_metrics
+clip_flant5_score = t2v_metrics.VQAScore(model='clip-flant5-xxl')
 
 # The number of images and texts per dictionary must be consistent.
 # E.g., the below example shows how to evaluate 4 generated images per text
 dataset = [
-  {'images': ["images/sdxl_0.jpg", "images/dalle3_0.jpg", "images/deepfloyd_0.jpg", "images/imagen2_0.jpg"], 'texts': ["an old person kisses a young person"]},
-  {'images': ["images/sdxl_1.jpg", "images/dalle3_1.jpg", "images/deepfloyd_1.jpg", "images/imagen2_1.jpg"], 'texts': ["a young person kissing an old person"]},
+  {'images': ["images/0/DALLE3.png", "images/0/Midjourney.jpg", "images/0/SDXL.jpg", "images/0/DeepFloyd.jpg"], 'texts': ["The brown dog chases the black dog around the tree."]},
+  {'images': ["images/1/DALLE3.png", "images/1/Midjourney.jpg", "images/1/SDXL.jpg", "images/1/DeepFloyd.jpg"], 'texts': ["Two cats sit at the window, the blue one intently watching the rain, the red one curled up asleep."]},
   #...
 ]
 scores = clip_flant5_score.batch_forward(dataset=dataset, batch_size=16) # (n_sample, 4, 1) tensor
 ```
 
-### Specifying your own question and answer template for VQAScore
-For VQAScore, the question and answer can affect the final performance. We provide a simple default template for each model by default. For example, CLIP-FlanT5 and LLaVA-1.5 uses the below template which can be found at [t2i_metrics/models/vqascore_models/clip_t5_model.py](t2i_metrics/models/vqascore_models/clip_t5_model.py) (we ignored the prepended system message for simplicity):
-
-```python
-# {} will be replaced by the caption
-default_question_template = "Is the image showing '{}'? Please answer yes or no."
-default_answer_template = "Yes"
-```
-
-You can specify your own template by passing in `question_template` and `answer_template` to `forward()` or `batch_forward()` function:
-
-```python
-# An alternative template for VQAScore
-question_template = "Does the image show '{}'? Please answer yes or no."
-answer_template = "Yes"
-
-scores = clip_flant5_score(images=images,
-                           texts=texts,
-                           question_template=question_template,
-                           answer_template=answer_template)
-```
-
-You can also compute P(caption | image) ([VisualGPTScore](https://linzhiqiu.github.io/papers/visual_gpt_score)) instead of P(answer | image, question):
-```python
-vgpt_question_template = "" # no question
-vgpt_answer_template = "{}" # simply calculate the P(caption)
-
-scores = clip_flant5_score(images=images,
-                           texts=texts,
-                           question_template=vgpt_question_template,
-                           answer_template=vgpt_answer_template)
-```
-
 ### Check all supported models
-We currently support CLIP-FlanT5, LLaVA-1.5, and InstructBLIP for VQAScore. We also support CLIPScore using CLIP, and ITMScore using BLIPv2:
+We currently support running VQAScore with CLIP-FlanT5, LLaVA-1.5, and InstructBLIP. For ablation, we also include CLIPScore, BLIPv2Score, PickScore, HPSv2Score, and ImageReward:
 ```python
-llava_score = t2i_metrics.VQAScore(model='llava-v1.5-13b') # LLaVA-1.5 is the second best
-clip_score = t2i_metrics.CLIPScore(model='openai:ViT-L-14-336')
-blip_itm_score = t2i_metrics.ITMScore(model='blip2-itm') 
+llava_score = t2v_metrics.VQAScore(model='llava-v1.5-13b')
+instructblip_score = t2v_metrics.VQAScore(model='instructblip-flant5-xxl')
+clip_score = t2v_metrics.CLIPScore(model='openai:ViT-L-14-336')
+blip_itm_score = t2v_metrics.ITMScore(model='blip2-itm') 
+pick_score = t2v_metrics.CLIPScore(model='pickscore-v1')
+hpsv2_score = t2v_metrics.CLIPScore(model='hpsv2') 
+image_reward_score = t2v_metrics.ITMScore(model='image-reward-v1') 
 ```
-
-
 You can check all supported models by running the below commands:
 
 ```python
 print("VQAScore models:")
-print(t2i_metrics.list_all_vqascore_models())
-print()
+t2v_metrics.list_all_vqascore_models()
+
 print("ITMScore models:")
-print(t2i_metrics.list_all_itmscore_models())
-print()
+t2v_metrics.list_all_itmscore_models()
+
 print("CLIPScore models:")
-print(t2i_metrics.list_all_clipscore_models())
+t2v_metrics.list_all_clipscore_models()
 ```
 
-### Evaluating on Winoground/EqBen/TIFA
+### Customizing the question and answer template (for VQAScore)
+The question and answer slightly affect the final score. We provide a simple default template for each model. For example, CLIP-FlanT5 and LLaVA-1.5 use the following template, which can be found at [t2v_metrics/models/vqascore_models/clip_t5_model.py](t2v_metrics/models/vqascore_models/clip_t5_model.py):
 
-You can easily test on these vision-langauage benchmarks via running
+```python
+# {} will be replaced by the caption
+default_question_template = 'Does this figure show "{}"? Please answer yes or no.'
+default_answer_template = 'Yes'
+```
+
+You can customize the template by passing the `question_template` and `answer_template` parameters into the `forward()` or `batch_forward()` functions:
+
+```python
+# Use a different question for VQAScore
+scores = clip_flant5_score(images=images,
+                           texts=texts,
+                           question_template='Is this figure showing "{}"? Please answer yes or no.',
+                           answer_template='Yes')
+```
+
+You may also compute P(caption | image) ([VisualGPTScore](https://linzhiqiu.github.io/papers/visual_gpt_score)) instead of P(answer | image, question):
+```python
+scores = clip_flant5_score(images=images,
+                           texts=texts,
+                           question_template="", # no question
+                           answer_template="{}") # this computes P(caption | image)
+```
+
+### Reproducing paper results
+
+Our [eval.py](eval.py) allows you to easily run 10 image/vision/3D alignment benchmarks (e.g., Winoground/TIFA160/SeeTrue/StanfordT23D/T2VScore):
 ```bash
-python eval.py --model clip-flant5-xxl
-python eval.py --model llava-v1.5-13b
-python eval.py --model blip2-itm
-python eval.py --model openai:ViT-L-14
+python eval.py --model clip-flant5-xxl # for VQAScore
+python eval.py --model openai:ViT-L-14 # for CLIPScore
 
 # You can optionally specify question/answer template, for example:
-python eval.py --model clip-flant5-xxl --question "Question: Is the image showing '{}'?" --answer "Yes"
+python eval.py --model clip-flant5-xxl --question "Is the figure showing '{}'?" --answer "Yes"
 ```
 
 ### Implement New Scoring Metrics
-You can easily implement your own scoring metric. For example, if you have a stronger VQA model, you can include it in [t2i_metrics/models/vqascore_models](t2i_metrics/models/vqascore_models/). Please check out our implementation for [LLaVA-1.5](t2i_metrics/models/vqascore_models/llava_model.py) and [InstructBLIP](t2i_metrics/models/vqascore_models/instructblip_model.py) as a starting point.
-
-<!-- **Table of Contents**<br>
-1. [Learned Perceptual Image Patch Similarity (LPIPS) metric](#1-learned-perceptual-image-patch-similarity-lpips-metric)<br>
-   a. [Basic Usage](#a-basic-usage) If you just want to run the metric through command line, this is all you need.<br>
-   b. ["Perceptual Loss" usage](#b-backpropping-through-the-metric)<br>
-   c. [About the metric](#c-about-the-metric)<br>
-2. [Berkeley-Adobe Perceptual Patch Similarity (BAPPS) dataset](#2-berkeley-adobe-perceptual-patch-similarity-bapps-dataset)<br>
-   a. [Download](#a-downloading-the-dataset)<br>
-   b. [Evaluation](#b-evaluating-a-perceptual-similarity-metric-on-a-dataset)<br>
-   c. [About the dataset](#c-about-the-dataset)<br>
-   d. [Train the metric using the dataset](#d-using-the-dataset-to-train-the-metric)<br> -->
-
-<!-- ## (1) Learned Perceptual Image Patch Similarity (LPIPS) metric
-
-Evaluate the distance between image patches. **Higher means further/more different. Lower means more similar.**
-
-### (A) Basic Usage
-
-#### (A.I) Line commands
-
-Example scripts to take the distance between 2 specific images, all corresponding pairs of images in 2 directories, or all pairs of images within a directory:
-
-```
-python lpips_2imgs.py -p0 imgs/ex_ref.png -p1 imgs/ex_p0.png --use_gpu
-python lpips_2dirs.py -d0 imgs/ex_dir0 -d1 imgs/ex_dir1 -o imgs/example_dists.txt --use_gpu
-python lpips_1dir_allpairs.py -d imgs/ex_dir_pair -o imgs/example_dists_pair.txt --use_gpu
-``` -->
-
-<!-- #### (A.II) Python code
-
-File [test_network.py](test_network.py) shows example usage. This snippet is all you really need.
-
-```python
-import lpips
-loss_fn = lpips.LPIPS(net='alex')
-d = loss_fn.forward(im0,im1)
-```
-
-Variables ```im0, im1``` is a PyTorch Tensor/Variable with shape ```Nx3xHxW``` (```N``` patches of size ```HxW```, RGB images scaled in `[-1,+1]`). This returns `d`, a length `N` Tensor/Variable.
-
-Run `python test_network.py` to take the distance between example reference image [`ex_ref.png`](imgs/ex_ref.png) to distorted images [`ex_p0.png`](./imgs/ex_p0.png) and [`ex_p1.png`](imgs/ex_p1.png). Before running it - which do you think *should* be closer?
-
-**Some Options** By default in `model.initialize`:
-- By default, `net='alex'`. Network `alex` is fastest, performs the best (as a forward metric), and is the default. For backpropping, `net='vgg'` loss is closer to the traditional "perceptual loss".
-- By default, `lpips=True`. This adds a linear calibration on top of intermediate features in the net. Set this to `lpips=False` to equally weight all the features.
-
-### (B) Backpropping through the metric
-
-File [`lpips_loss.py`](lpips_loss.py) shows how to iteratively optimize using the metric. Run `python lpips_loss.py` for a demo. The code can also be used to implement vanilla VGG loss, without our learned weights. -->
-
-<!-- ### (C) About the metric
-
-**Higher means further/more different. Lower means more similar.**
-
-We found that deep network activations work surprisingly well as a perceptual similarity metric. This was true across network architectures (SqueezeNet [2.8 MB], AlexNet [9.1 MB], and VGG [58.9 MB] provided similar scores) and supervisory signals (unsupervised, self-supervised, and supervised all perform strongly). We slightly improved scores by linearly "calibrating" networks - adding a linear layer on top of off-the-shelf classification networks. We provide 3 variants, using linear layers on top of the SqueezeNet, AlexNet (default), and VGG networks.
-
-If you use LPIPS in your publication, please specify which version you are using. The current version is 0.1. You can set `version='0.0'` for the initial release. -->
-
-<!-- ## (2) Berkeley Adobe Perceptual Patch Similarity (BAPPS) dataset
-
-### (A) Downloading the dataset
-
-Run `bash ./scripts/download_dataset.sh` to download and unzip the dataset into directory `./dataset`. It takes [6.6 GB] total. Alternatively, run `bash ./scripts/download_dataset_valonly.sh` to only download the validation set [1.3 GB].
-- 2AFC train [5.3 GB]
-- 2AFC val [1.1 GB]
-- JND val [0.2 GB]   -->
-
-<!-- ### (B) Evaluating a perceptual similarity metric on a dataset
-
-Script `test_dataset_model.py` evaluates a perceptual model on a subset of the dataset.
-
-**Dataset flags**
-- `--dataset_mode`: `2afc` or `jnd`, which type of perceptual judgment to evaluate
-- `--datasets`: list the datasets to evaluate
-    - if `--dataset_mode 2afc`: choices are [`train/traditional`, `train/cnn`, `val/traditional`, `val/cnn`, `val/superres`, `val/deblur`, `val/color`, `val/frameinterp`]
-    - if `--dataset_mode jnd`: choices are [`val/traditional`, `val/cnn`]
-    
-**Perceptual similarity model flags**
-- `--model`: perceptual similarity model to use
-    - `lpips` for our LPIPS learned similarity model (linear network on top of internal activations of pretrained network)
-    - `baseline` for a classification network (uncalibrated with all layers averaged)
-    - `l2` for Euclidean distance
-    - `ssim` for Structured Similarity Image Metric
-- `--net`: [`squeeze`,`alex`,`vgg`] for the `net-lin` and `net` models; ignored for `l2` and `ssim` models
-- `--colorspace`: choices are [`Lab`,`RGB`], used for the `l2` and `ssim` models; ignored for `net-lin` and `net` models
-
-**Misc flags**
-- `--batch_size`: evaluation batch size (will default to 1)
-- `--use_gpu`: turn on this flag for GPU usage
-
-An example usage is as follows: `python ./test_dataset_model.py --dataset_mode 2afc --datasets val/traditional val/cnn --model lpips --net alex --use_gpu --batch_size 50`. This would evaluate our model on the "traditional" and "cnn" validation datasets.
-
-### (C) About the dataset
-
-The dataset contains two types of perceptual judgements: **Two Alternative Forced Choice (2AFC)** and **Just Noticeable Differences (JND)**.
-
-**(1) 2AFC** Evaluators were given a patch triplet (1 reference + 2 distorted). They were asked to select which of the distorted was "closer" to the reference.
-
-Training sets contain 2 judgments/triplet.
-- `train/traditional` [56.6k triplets]
-- `train/cnn` [38.1k triplets]
-- `train/mix` [56.6k triplets]
-
-Validation sets contain 5 judgments/triplet.
-- `val/traditional` [4.7k triplets]
-- `val/cnn` [4.7k triplets]
-- `val/superres` [10.9k triplets]
-- `val/deblur` [9.4k triplets]
-- `val/color` [4.7k triplets]
-- `val/frameinterp` [1.9k triplets]
-
-Each 2AFC subdirectory contains the following folders:
-- `ref`: original reference patches
-- `p0,p1`: two distorted patches
-- `judge`: human judgments - 0 if all preferred p0, 1 if all humans preferred p1
-
-**(2) JND** Evaluators were presented with two patches - a reference and a distorted - for a limited time. They were asked if the patches were the same (identically) or different. 
-
-Each set contains 3 human evaluations/example.
-- `val/traditional` [4.8k pairs]
-- `val/cnn` [4.8k pairs]
-
-Each JND subdirectory contains the following folders:
-- `p0,p1`: two patches
-- `same`: human judgments: 0 if all humans thought patches were different, 1 if all humans thought patches were same
-
-### (D) Using the dataset to train the metric
-
-See script `train_test_metric.sh` for an example of training and testing the metric. The script will train a model on the full training set for 10 epochs, and then test the learned metric on all of the validation sets. The numbers should roughly match the **Alex - lin** row in Table 5 in the [paper](https://arxiv.org/abs/1801.03924). The code supports training a linear layer on top of an existing representation. Training will add a subdirectory in the `checkpoints` directory.
-
-You can also train "scratch" and "tune" versions by running `train_test_metric_scratch.sh` and `train_test_metric_tune.sh`, respectively. 
+You can easily implement your own scoring metric. For example, if you have a VQA model that you believe is more effective, you can incorporate it into the directory at [t2v_metrics/models/vqascore_models](t2v_metrics/models/vqascore_models/). For guidance, please refer to our example implementations of [LLaVA-1.5](t2v_metrics/models/vqascore_models/llava_model.py) and [InstructBLIP](t2v_metrics/models/vqascore_models/instructblip_model.py) as starting points.
 
 ## Citation
 
-If you find this repository useful for your research, please use the following.
+If you find this repository useful for your research, please use the following (TO UPDATE with ArXiv ID).
 
 ```
-@inproceedings{zhang2018perceptual,
-  title={The Unreasonable Effectiveness of Deep Features as a Perceptual Metric},
-  author={Zhang, Richard and Isola, Phillip and Efros, Alexei A and Shechtman, Eli and Wang, Oliver},
-  booktitle={CVPR},
-  year={2018}
+@inproceedings{lin2024vqascore,
+  title={Evaluating Text-to-Visual Generation with Image-to-Text Generation},
+  author={Lin, Zhiqiu and Pathak, Deepak and Li, Baiqi and Li, Jiayao and Xia, Xide and Neubig, Graham, and Zhang, Pengchuan and Ramanan, Deva},
+  eprint={????.?????},
+  archivePrefix={arXiv},
+  year={2024}
 }
 ```
 
 ## Acknowledgements
-
-This repository borrows partially from the [pytorch-CycleGAN-and-pix2pix](https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix) repository. The average precision (AP) code is borrowed from the [py-faster-rcnn](https://github.com/rbgirshick/py-faster-rcnn/blob/master/lib/datasets/voc_eval.py) repository. [Angjoo Kanazawa](https://github.com/akanazawa), [Connelly Barnes](http://www.connellybarnes.com/work/), [Gaurav Mittal](https://github.com/g1910), [wilhelmhb](https://github.com/wilhelmhb), [Filippo Mameli](https://github.com/mameli), [SuperShinyEyes](https://github.com/SuperShinyEyes), [Minyoung Huh](http://people.csail.mit.edu/minhuh/) helped to improve the codebase. -->
-
-## Acknowledgements
-This repository is inspired from the [Perceptual Metric (LPIPS)](https://github.com/richzhang/PerceptualSimilarity) repository by Richard Zhang for automatic evaluation of image-to-image similiarity.
+This repository is inspired from the [Perceptual Metric (LPIPS)](https://github.com/richzhang/PerceptualSimilarity) repository by Richard Zhang for automatic evaluation of image quality.
