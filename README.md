@@ -141,7 +141,7 @@ If you find this repository useful for your research, please use the following (
 @inproceedings{lin2024vqascore,
   title={Evaluating Text-to-Visual Generation with Image-to-Text Generation},
   author={Lin, Zhiqiu and Pathak, Deepak and Li, Baiqi and Li, Jiayao and Xia, Xide and Neubig, Graham, and Zhang, Pengchuan and Ramanan, Deva},
-  eprint={????.?????},
+  eprint={2404.01291},
   archivePrefix={arXiv},
   year={2024}
 }
