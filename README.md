@@ -138,11 +138,10 @@ You can easily implement your own scoring metric. For example, if you have a VQA
 If you find this repository useful for your research, please use the following (TO UPDATE with ArXiv ID).
 
 ```
-@inproceedings{lin2024evaluating,
+@article{lin2024evaluating,
   title={Evaluating Text-to-Visual Generation with Image-to-Text Generation},
   author={Lin, Zhiqiu and Pathak, Deepak and Li, Baiqi and Li, Jiayao and Xia, Xide and Neubig, Graham and Zhang, Pengchuan and Ramanan, Deva},
-  eprint={2404.01291},
-  archivePrefix={arXiv},
+  journal={arXiv preprint arXiv:2404.01291},
   year={2024}
 }
 ```
