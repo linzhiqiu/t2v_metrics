@@ -93,7 +93,7 @@ t2v_metrics.list_all_clipscore_models()
 ```
 
 ### Customizing the question and answer template (for VQAScore)
-The question and answer slightly affect the final score. We provide a simple default template for each model. For example, CLIP-FlanT5 and LLaVA-1.5 use the following template, which can be found at [t2v_metrics/models/vqascore_models/clip_t5_model.py](t2v_metrics/models/vqascore_models/clip_t5_model.py):
+The question and answer slightly affect the final score, as shown in the Appendix of our paper. We provide a simple default template for each model and do not recommend changing it for the sake of reproducibility. However, we do want to point out that the question and answer can be easily modified. For example, CLIP-FlanT5 and LLaVA-1.5 use the following template, which can be found at [t2v_metrics/models/vqascore_models/clip_t5_model.py](t2v_metrics/models/vqascore_models/clip_t5_model.py):
 
 ```python
 # {} will be replaced by the caption
