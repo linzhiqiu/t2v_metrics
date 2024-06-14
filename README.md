@@ -119,7 +119,7 @@ scores = clip_flant5_score(images=images,
                            answer_template="{}") # this computes P(caption | image)
 ```
 
-### Reproducing paper results
+### Reproducing VQAScore paper results
 
 Our [eval.py](eval.py) allows you to easily run 10 image/vision/3D alignment benchmarks (e.g., Winoground/TIFA160/SeeTrue/StanfordT23D/T2VScore):
 ```bash
@@ -130,8 +130,21 @@ python eval.py --model openai:ViT-L-14 # for CLIPScore
 python eval.py --model clip-flant5-xxl --question "Is the figure showing '{}'?" --answer "Yes"
 ```
 
+### Reproducing GenAI-Bench paper results
+
+Our [genai_image_eval.py](genai_image_eval.py) and [genai_video_eval.py](genai_video_eval.py) can reproduce the GenAI-Bench results. In additional [genai_image_ranking.py](genai_image_ranking.py) can reproduce the GenAI-Rank results:
+```bash
+# GenAI-Bench
+python genai_image_eval.py --model clip-flant5-xxl
+python genai_video_eval.py --model clip-flant5-xxl
+
+# GenAI-Rank
+python genai_image_ranking.py --model clip-flant5-xxl --gen_model DALLE_3
+python genai_image_ranking.py --model clip-flant5-xxl --gen_model SDXL_Base
+```
+
 ### Using GPT-4o for VQAScore!
-We implemented VQAScore using GPT-4o to achieve a new state-of-the-art performance. Please see [t2v_metrics/gpt4_eval.py](t2v_metrics/gpt4_eval.py) for an in-depth example. Here is how to use it in command line:
+We implemented VQAScore using GPT-4o to achieve a new state-of-the-art performance. Please see [t2v_metrics/gpt4_eval.py](t2v_metrics/gpt4_eval.py) for an example. Here is how to use it in command line:
 ```python
 openai_key = # Your OpenAI key
 score_func = t2v_metrics.get_score_model(model="gpt-4o", device="cuda", openai_key=openai_key, top_logprobs=20) # We find top_logprobs=20 to be sufficient for most (image, text) samples. Consider increase this number if you get errors (the API cost will not increase).
