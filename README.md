@@ -130,6 +130,13 @@ python eval.py --model openai:ViT-L-14 # for CLIPScore
 python eval.py --model clip-flant5-xxl --question "Is the figure showing '{}'?" --answer "Yes"
 ```
 
+### Using GPT-4o for VQAScore!
+We implemented VQAScore using GPT-4o to achieve a new state-of-the-art performance. Please see [t2v_metrics/gpt4_eval.py](t2v_metrics/gpt4_eval.py) for an in-depth example. Here is how to use it in command line:
+```python
+openai_key = # Your OpenAI key
+score_func = t2v_metrics.get_score_model(model="gpt-4o", device="cuda", openai_key=openai_key, top_logprobs=20) # We find top_logprobs=20 to be sufficient for most (image, text) samples. Consider increase this number if you get errors (the API cost will not increase).
+```
+
 ### Implementing your own scoring metric
 You can easily implement your own scoring metric. For example, if you have a VQA model that you believe is more effective, you can incorporate it into the directory at [t2v_metrics/models/vqascore_models](t2v_metrics/models/vqascore_models/). For guidance, please refer to our example implementations of [LLaVA-1.5](t2v_metrics/models/vqascore_models/llava_model.py) and [InstructBLIP](t2v_metrics/models/vqascore_models/instructblip_model.py) as starting points.
 

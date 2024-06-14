@@ -8,8 +8,7 @@ from ...constants import HF_CACHE_DIR, CONTEXT_LEN, SYSTEM_MSG, DEFAULT_IMAGE_TO
 from .llava_16.model import LlavaLlamaForCausalLM
 from .llava.model import ModelArguments
 
-# default_question_template = "Does the image show '{}'? Please answer yes or no."
-default_question_template = "Is this figure showing '{}'? Please answer yes or no."
+default_question_template = 'Does this figure show "{}"? Please answer yes or no.'
 default_answer_template = "Yes"
 
 def format_question(question, conversation_style='chat'):
@@ -115,7 +114,7 @@ class LLaVA16Model(VQAScoreModel):
         """
         assert len(images) == len(texts), "Number of images and texts must match"
         # Turn "a photo of a dog" into
-        # Q: "Is the image showing 'a photo of a dog'? Please answer yes or no."
+        # Q: "Does this figure show "a photo of a dog"? Please answer yes or no."
         # A: "Yes"
         questions = [question_template.format(text) for text in texts]
         answers = [answer_template.format(text) for text in texts]

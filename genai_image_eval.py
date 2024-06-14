@@ -2,9 +2,10 @@
 # Example scripts to run:
 # VQAScore: python genai_image_eval.py --model clip-flant5-xxl
 # CLIPScore: python genai_image_eval.py --model openai:ViT-L-14-336
+# GPT4o VQAScore: python genai_image_eval.py --model gpt-4o
 import argparse
 import os
-import t2i_metrics
+import t2v_metrics
 from dataset import GenAIBench_Image
 import json
 import torch
@@ -14,13 +15,17 @@ def config():
     parser = argparse.ArgumentParser()
     parser.add_argument("--root_dir", default="./datasets", type=str,
                         help='Root directory for saving datasets.')
-    parser.add_argument("--cache_dir", default=t2i_metrics.constants.HF_CACHE_DIR, type=str) 
+    parser.add_argument("--cache_dir", default=t2v_metrics.constants.HF_CACHE_DIR, type=str) 
     parser.add_argument("--device", default="cuda", type=str)
     parser.add_argument("--batch_size", default=16, type=int)
     parser.add_argument("--model", default="clip-flant5-xxl", type=str)
     parser.add_argument("--question", default=None, type=str)
     parser.add_argument("--answer", default=None, type=str)
     parser.add_argument("--result_dir", default="./genai_image_results", type=str)
+    parser.add_argument("--openai_key", default=None, type=str)
+    parser.add_argument("--openai_key_path", default='./_OPENAI_API_KEY.txt', type=str)
+    parser.add_argument("--top_logprobs", type=int, default=20)
+    parser.add_argument("--detail", type=str, default='auto', choices=['low', 'auto', 'high'])
     return parser.parse_args()
 
 
@@ -105,6 +110,7 @@ def main():
     if not os.path.exists(args.root_dir):
         os.makedirs(args.root_dir)
     
+    
     os.makedirs(args.result_dir, exist_ok=True)
     dataset = GenAIBench_Image(root_dir=args.root_dir)
     result_path = f"{args.result_dir}/{args.model}_527_prompts.pt"
@@ -112,7 +118,21 @@ def main():
         print(f"Result file {result_path} already exists. Skipping.")
         scores = torch.load(result_path)
     else:
-        score_func = t2i_metrics.get_score_model(model=args.model, device=args.device, cache_dir=args.cache_dir)
+        if args.model in ['gpt-4o', 'gpt-4-turbo']:
+            if args.openai_key is None:
+                args.openai_key = open(args.openai_key_path, 'r').read().strip()
+            assert not (args.openai_key is None and args.openai_key_path is None), "Please provide either openai_key or openai_key_path."
+        
+            score_func = t2v_metrics.get_score_model(
+                model=args.model, device=args.device, cache_dir=args.cache_dir, openai_key=args.openai_key, top_logprobs=args.top_logprobs)
+            for item in dataset:
+                images = item['images']
+                for image in images:
+                    assert os.path.getsize(image) < 15 * 1024 * 1024, f"File size of {image} is {os.path.getsize(image)/1048576} bytes, which is larger than 15mb."
+                    img_type = image.split('.')[-1]
+                    assert img_type in ['png', 'jpeg', 'jpg', 'gif', 'webp'], f"Image type {img_type} is not supported."
+        else:
+            score_func = t2v_metrics.get_score_model(model=args.model, device=args.device, cache_dir=args.cache_dir)
 
         kwargs = {}
         if args.question is not None:

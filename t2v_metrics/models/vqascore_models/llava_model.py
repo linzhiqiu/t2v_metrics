@@ -223,7 +223,7 @@ class LLaVAModel(VQAScoreModel):
         """
         assert len(images) == len(texts), "Number of images and texts must match"
         # Turn "a photo of a dog" into
-        # Q: "Is the image showing 'a photo of a dog'? Please answer yes or no."
+        # Q: "Does this figure show "a photo of a dog"? Please answer yes or no."
         # A: "Yes"
         questions = [question_template.format(text) for text in texts]
         answers = [answer_template.format(text) for text in texts]

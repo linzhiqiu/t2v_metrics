@@ -10,11 +10,13 @@ class VQAScore(Score):
     def prepare_scoremodel(self,
                            model='clip-flant5-xxl',
                            device='cuda',
-                           cache_dir=HF_CACHE_DIR):
+                           cache_dir=HF_CACHE_DIR,
+                           **kwargs):
         return get_vqascore_model(
             model,
             device=device,
-            cache_dir=cache_dir
+            cache_dir=cache_dir,
+            **kwargs
         )
             
     def list_all_models(self) -> List[str]:
