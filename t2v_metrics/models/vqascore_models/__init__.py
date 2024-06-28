@@ -2,6 +2,7 @@ from .clip_t5_model import CLIP_T5_MODELS, CLIPT5Model
 from .llava_model import LLAVA_MODELS, LLaVAModel
 from .llava16_model import LLAVA16_MODELS, LLaVA16Model
 from .instructblip_model import InstructBLIP_MODELS, InstructBLIPModel
+from .qwenvl_model import QwenVL_MODELS, QwenVLModel
 from ...constants import HF_CACHE_DIR
 
 ALL_VQA_MODELS = [
@@ -24,5 +25,7 @@ def get_vqascore_model(model_name, device='cuda', cache_dir=HF_CACHE_DIR):
         return LLaVA16Model(model_name, device=device, cache_dir=cache_dir)
     elif model_name in InstructBLIP_MODELS:
         return InstructBLIPModel(model_name, device=device, cache_dir=cache_dir)
+    elif model_name in QwenVL_MODELS:
+        return QwenVLModel(model_name, device=device, cache_dir=cache_dir)
     else:
         raise NotImplementedError()
