@@ -41,7 +41,7 @@ class QwenVLModel(VQAScoreModel):
 
         ckpt = QwenVL_MODELS[self.model_name]['ckpt']
         self.tokenizer = AutoTokenizer.from_pretrained(ckpt, trust_remote_code=True)
-
+        self.tokenizer.pad_token_id = self.tokenizer.eod_id
         # use bf16
         # model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-VL-Chat", device_map="auto", trust_remote_code=True, bf16=True).eval()
         # use fp16
@@ -49,7 +49,7 @@ class QwenVLModel(VQAScoreModel):
         # use cpu only
         # model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-VL-Chat", device_map="cpu", trust_remote_code=True).eval()
         # use cuda device
-        self.model = AutoModelForCausalLM.from_pretrained(ckpt, device_map="cuda", trust_remote_code=True).eval()
+        self.model = AutoModelForCausalLM.from_pretrained(ckpt, device_map="auto", trust_remote_code=True).eval()
 
         # Specify hyperparameters for generation
         self.model.generation_config = GenerationConfig.from_pretrained(ckpt, trust_remote_code=True)
@@ -79,14 +79,18 @@ class QwenVLModel(VQAScoreModel):
         # A: "Yes"
         questions = ["<img>" + img + "</img> " + question_template.format(text) for text, img in zip(texts, images)]
         tokenized_questions = self.tokenizer(questions, return_tensors='pt', padding='longest')
-        answers = [answer_template.format(text) for text in texts]
+        answers = [answer_template.format(text) + "<|endoftext|>" for text in texts]
         tokenized_answers = self.tokenizer(answers, return_tensors='pt', padding='longest')
+
         # print(f'Questions {questions} \n\n Answers {answers}')
         # exit()
         
+        print(answers)
+        print(tokenized_answers)
+        outputs = self.model(input_ids=tokenized_questions['input_ids'].to('cuda'), attention_mask=tokenized_questions['attention_mask'], labels=tokenized_answers['input_ids'])
         
-        
-        outputs = self.model(input_ids=tokenized_questions['input_ids'].to('cuda'), attention_mask=tokenized_questions['attention_mask'])
+
+        print(f'Model Loss {outputs.loss} Loss Shape {outputs.loss.shape}')
         logits = outputs.logits
         labels = tokenized_answers
 
