@@ -153,6 +153,17 @@ score_func = t2v_metrics.get_score_model(model="gpt-4o", device="cuda", openai_k
 ### Implementing your own scoring metric
 You can easily implement your own scoring metric. For example, if you have a VQA model that you believe is more effective, you can incorporate it into the directory at [t2v_metrics/models/vqascore_models](t2v_metrics/models/vqascore_models/). For guidance, please refer to our example implementations of [LLaVA-1.5](t2v_metrics/models/vqascore_models/llava_model.py) and [InstructBLIP](t2v_metrics/models/vqascore_models/instructblip_model.py) as starting points.
 
+### Text generation (VQA) using CLIP-FlanT5
+To generate texts (captioning or VQA tasks) using CLIP-FlanT5, please use the below code:
+```python
+import t2v_metrics
+clip_flant5_score = t2v_metrics.VQAScore(model='clip-flant5-xxl')
+
+images = ["images/0.png", "images/0.png"] # A list of images
+prompts = ["Please describe this image: ", "Does the image show 'someone talks on the phone angrily while another person sits happily'?"] # Corresponding prompts
+clip_flant5_score.model.generate(images=images, prompts=prompts)
+```
+
 ## Citation
 
 If you find this repository useful for your research, please use the following (TO UPDATE with ArXiv ID).
