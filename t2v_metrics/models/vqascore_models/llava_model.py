@@ -199,6 +199,7 @@ class LLaVAModel(VQAScoreModel):
             device=self.device,
             cache_dir=self.cache_dir
         )
+        self.tokenizer.pad_token = self.tokenizer.unk_token
 
     def load_images(self,
                     image: List[str]) -> torch.Tensor:
