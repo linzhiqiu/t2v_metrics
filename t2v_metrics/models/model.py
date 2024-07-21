@@ -8,7 +8,12 @@ from PIL import Image
 from ..constants import HF_CACHE_DIR
 
 def image_loader(image_path):
-    if image_path.split('.')[-1] == 'npy':
+    if isinstance(image_path, Image.Image):
+        if image_path.mode == 'RGB':
+            return image_path
+        else:
+            return image_path.convert("RGB")
+    elif image_path.split('.')[-1] == 'npy':
         return Image.fromarray(np.load(image_path)[:, :, [2, 1, 0]], 'RGB')
     else:
         return Image.open(image_path).convert("RGB")
