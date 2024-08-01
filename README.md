@@ -49,8 +49,16 @@ scores = clip_flant5_score(images=images, texts=texts) # scores[i][j] is the sco
 - **GPU usage**: By default, this code uses the first cuda device on your machine. We recommend 40GB GPUs for the largest VQAScore models such as `clip-flant5-xxl` and `llava-v1.5-13b`. If you have limited GPU memory, consider smaller models such as `clip-flant5-xl` and `llava-v1.5-7b`.
 - **Cache directory**: You can change the cache folder which saves all model checkpoints (default is `./hf_cache/`) by updating `HF_CACHE_DIR` in [t2v_metrics/constants.py](t2v_metrics/constants.py).
 
-
 ## **Advanced Usage**  
+
+- [Batch processing for more image-text pairs](#batch-processing-for-more-image-text-pairs)
+- [Check all supported models](#check-all-supported-models)
+- [Customizing the question and answer template (for VQAScore)](#customizing-the-question-and-answer-template-for-vqascore)
+- [Reproducing VQAScore paper results](#reproducing-vqascore-paper-results)
+- [Reproducing GenAI-Bench paper results](#reproducing-genai-bench-paper-results)
+- [Using GPT-4o for VQAScore](#using-gpt-4o-for-vqascore)
+- [Implementing your own scoring metric](#implementing-your-own-scoring-metric)
+- [Text generation (VQA) using CLIP-FlanT5](#text-generation-vqa-using-clip-flant5)
 
 ### Batch processing for more image-text pairs
 With a large batch of M images x N texts, you can speed up using the ``batch_forward()`` function. 
