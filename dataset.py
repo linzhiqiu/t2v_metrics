@@ -12,9 +12,6 @@ from scipy.stats import kendalltau
 from sklearn.metrics import roc_auc_score
 import cv2
 
-from datasets import load_dataset
-import io
-
 def calc_pearson(metric1_scores, metric2_scores):
     pearson = 100*np.corrcoef(metric1_scores, metric2_scores)[0, 1]
     return pearson
@@ -1226,127 +1223,7 @@ class Pickapic_v1(Dataset):
         print("ACC:", acc)
         return acc, probs
 
-class GenAI_Bench_Image_1600(Dataset):
-    # GenAIBench with 1600 prompts x 6 images (from 6 models)
-    def __init__(self,
-                 image_preprocess=None,
-                 root_dir="./",
-                 download=True,
-                 return_image_paths=False):
 
-        self.root_dir = os.path.join(root_dir, 'GenAI-Bench-1600')
-        self.models = ['DALLE_3', 'SDXL_Turbo', 'DeepFloyd_I_XL_v1', 'Midjourney_6', 'SDXL_2_1', 'SDXL_Base']
-        
-        self.image_preprocess = image_preprocess
-    
-        if self.image_preprocess is None:
-            print("Cannot apply image transforms")
-        
-        raw_data_path = os.path.join(self.root_dir, "raw_data")
-        os.makedirs(self.root_dir, exist_ok=True)
-        self.dataset = load_dataset("BaiqiL/GenAI-Bench-1600", cache_dir=raw_data_path)["train"]
-        
-        print(f"Loaded dataset: GenAI-Bench")
-
-        self.images = [] # list of images
-        self.prompt_to_images = {}
-        for model in self.models:
-            for data_idx in range(len(self.dataset)):
-                if not model in self.dataset[data_idx]:
-                    continue
-                
-                self.images.append({
-                    'prompt_idx': self.dataset[data_idx]["id"],
-                    'prompt': self.dataset[data_idx]['prompt'],
-                    'model': model,
-                    'image': self.dataset[data_idx][model],
-                    'human_alignment': self.dataset[data_idx][f"{model}_HumanRating"],
-                })
-
-                prompt_idx = self.dataset[data_idx]["id"]
-                if prompt_idx not in self.prompt_to_images:
-                    self.prompt_to_images[prompt_idx] = []
-                self.prompt_to_images[prompt_idx].append(len(self.images) - 1)
-        
-        genai_skills_path = os.path.join(self.root_dir, "genai_skills.json")
-        if not os.path.exists(genai_skills_path):
-            print(f"creating file: genai_skills.json")
-            self.create_genai_skills()
-
-    def create_genai_skills(self):
-        skill_keys = ["basic", "advanced", "attribute", "scene", "spatial relation", "action relation", "part relation",\
-                       "counting", "comparison", "differentiation", "negation", "universal"]
-        genai_skills = {}
-        for skill in skill_keys:
-            genai_skills[skill] = []
-        for i in range(len(self.dataset)):
-            item = self.dataset[i]
-            prompt_id = int(item["id"])
-            if len(item["advanced_skills"]) > 0:
-                if prompt_id not in genai_skills["advanced"]:
-                    genai_skills["advanced"].append(prompt_id)
-                for advanced_skill in item["advanced_skills"]:
-                    advanced_skill = advanced_skill.lower()
-                    if prompt_id not in genai_skills[advanced_skill]:
-                        genai_skills[advanced_skill].append(prompt_id)
-
-            elif len(item["basic_skills"]) > 0:
-                if prompt_id not in genai_skills["basic"]:
-                    genai_skills["basic"].append(prompt_id)
-                for basic_skill in item["basic_skills"]:
-                    basic_skill = basic_skill.lower()
-                    if prompt_id not in genai_skills[basic_skill]:
-                        genai_skills[basic_skill].append(prompt_id)
-
-        file_path = os.path.join(self.root_dir, "genai_skills.json")
-        with open(file_path, 'w', encoding='utf-8') as json_file:
-            json.dump(genai_skills, json_file, ensure_ascii=False, indent=4)
-        print(f"genai_skills has been written to {file_path}")                    
-            
-    def __len__(self):
-        return len(self.images)
-
-    def __getitem__(self, idx):
-        item = self.images[idx]
-        
-        images_binary_data = [item['image']]
-            
-        image = [io.BytesIO(image_binary_data) for image_binary_data in images_binary_data]
-        image = [Image.open(img).convert('RGB') for img in image]
-        if self.image_preprocess:
-            image = [self.image_preprocess(img) for img in image]
-
-        texts = [str(item['prompt'])]
-        item = {"images": image, "texts": texts}
-        return item
-    
-    def correlation(self, our_scores, human_scores):
-        pearson = calc_pearson(human_scores, our_scores)
-        print(f"Pearson's Correlation (no grouping): ", pearson)
-        
-        kendall_b = calc_metric(human_scores, our_scores, variant="tau_b")
-        print(f'Kendall Tau-B Score (no grouping): ', kendall_b)
-        
-        pairwise_acc = calc_metric(human_scores, our_scores, variant="pairwise_acc_with_tie_optimization")
-        print(f'Pairwise Accuracy Score (no grouping): ', pairwise_acc)
-        
-        results = {
-            'pearson': pearson,
-            'kendall_b': kendall_b,
-            'pairwise_acc': pairwise_acc,
-        }
-        return results
-    
-    def evaluate_scores(self, scores):
-        scores_i2t = scores
-        human_avg_scores_alignment = [np.array(self.images[idx]['human_alignment']).mean() for idx in range(len(self.images))]
-        our_scores = scores_i2t.mean(axis=1)
-        our_scores = [float(our_scores[idx][0]) for idx in range(len(self.images))]
-        alignment_correlation = self.correlation(our_scores, human_avg_scores_alignment)
-        results = {
-            'alignment': alignment_correlation,
-        }
-        return results
 class GenAI_Bench_Image_800(Dataset):
     # GenAIBench with 800 prompts x 6 images (from 6 models)
     def __init__(self,
