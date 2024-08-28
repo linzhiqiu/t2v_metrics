@@ -18,7 +18,7 @@ QwenVL_MODELS = {
 }
 
 class QwenVLModel(VQAScoreModel):
-    """A wrapper for the InstructBLIP (FlanT5-based) models"""
+    """A wrapper for the QwenVL models"""
     def __init__(self,
                  model_name='Qwen-VL',
                  device='cuda',
@@ -41,7 +41,8 @@ class QwenVLModel(VQAScoreModel):
 
         ckpt = QwenVL_MODELS[self.model_name]['ckpt']
         self.tokenizer = AutoTokenizer.from_pretrained(ckpt, trust_remote_code=True)
-
+        self.tokenizer.add_special_tokens({'pad_token': '<|endoftext|>'})
+  
         # use bf16
         # model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-VL-Chat", device_map="auto", trust_remote_code=True, bf16=True).eval()
         # use fp16
@@ -50,7 +51,7 @@ class QwenVLModel(VQAScoreModel):
         # model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-VL-Chat", device_map="cpu", trust_remote_code=True).eval()
         # use cuda device
         self.model = AutoModelForCausalLM.from_pretrained(ckpt, device_map="cuda", trust_remote_code=True).eval()
-
+        self.model.resize_token_embeddings(len(self.tokenizer))
         # Specify hyperparameters for generation
         self.model.generation_config = GenerationConfig.from_pretrained(ckpt, trust_remote_code=True)
 
@@ -78,20 +79,49 @@ class QwenVLModel(VQAScoreModel):
         # Q: "Is the image showing 'a photo of a dog'? Please answer yes or no."
         # A: "Yes"
         questions = ["<img>" + img + "</img> " + question_template.format(text) for text, img in zip(texts, images)]
-        tokenized_questions = self.tokenizer(questions, return_tensors='pt', padding='longest')
-        answers = [answer_template.format(text) for text in texts]
-        tokenized_answers = self.tokenizer(answers, return_tensors='pt', padding='longest')
+        tokenized_questions = self.tokenizer(questions, return_tensors='pt', padding='longest').to(self.device)
+        # unpadded_questions = self.tokenizer(questions[0], return_tensors='pt', padding='do_not_pad').to(self.device)
+        print(f'Padded Question {self.tokenizer.batch_decode(tokenized_questions["input_ids"])[0]} Attention Mask {tokenized_questions["attention_mask"][0]}')
+        answers = [answer_template.format(text) + '<|endoftext|>' for text in texts]
+        # print(questions)
+        tokenized_answers = self.tokenizer(answers, return_tensors='pt', padding='longest').to(self.device)
         # print(f'Questions {questions} \n\n Answers {answers}')
         # exit()
         
-        
-        
-        outputs = self.model(input_ids=tokenized_questions['input_ids'].to('cuda'), attention_mask=tokenized_questions['attention_mask'])
+        # print(tokenized_questions)
+        # print(len(self.tokenizer.batch_decode(tokenized_questions['input_ids'])[0]))
+        # input_lengths = [len(i) for i in tokenized_questions['input_ids']]
+        # print(input_lengths)
+        outputs = self.model(input_ids=tokenized_questions['input_ids'], attention_mask=tokenized_questions['attention_mask'])
+        # outputs = self.model.generate(input_ids=tokenized_questions['input_ids'], attention_mask=tokenized_questions['attention_mask'],
+        # pad_token_id=self.tokenizer.eod_id, eos_token_id=self.tokenizer.eod_id)
+
+
+        predicted_token_ids = torch.argmax(outputs.logits, dim=-1)
+        print(f'Logits {self.tokenizer.batch_decode(predicted_token_ids)[0]}')
+        # print(f'Outputs {self.tokenizer.batch_decode(outputs)[0]}')
         logits = outputs.logits
+        
+        last_non_padding_idx = tokenized_questions['attention_mask'].sum(dim=1) - 1
+        print(last_non_padding_idx)
         labels = tokenized_answers
 
+        # print(tokenized_questions)
+
+        #print(self.tokenizer.batch_decode(outputs)[0])
         loss_fct = torch.nn.CrossEntropyLoss(reduction='mean')
         lm_prob = torch.zeros(outputs.logits.shape[0])
-        for k in range(lm_prob.shape[0]):
-            lm_prob[k] = (-loss_fct(logits[k], labels[k])).exp()
+        for k in range(lm_prob.shape[0]): # which is just batch size
+            # input_len = input_lengths[k]
+            # print(self.tokenizer.batch_decode(tokenized_questions['input_ids']))
+            # print(lm_prob.shape)
+            # print(logits.shape)
+            # print(torch.flatten(labels['input_ids']).shape)
+            
+            # print(input_len)
+            print(labels['input_ids'].shape)
+            relevant_logits = logits[:, last_non_padding_idx[k]:last_non_padding_idx[k] + 2, :]
+            print(relevant_logits.shape)
+            lm_prob[k] = (-loss_fct(relevant_logits[k], labels['input_ids'][k])).exp()
         return lm_prob
+

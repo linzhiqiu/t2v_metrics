@@ -277,5 +277,7 @@ class CLIPT5Model(VQAScoreModel):
         lm_prob = torch.zeros(logits.shape[0])
         loss_fct = torch.nn.CrossEntropyLoss(reduction='mean')
         for k in range(lm_prob.shape[0]):
+            print(logits.shape)
+            print(labels.shape)
             lm_prob[k] = (-loss_fct(logits[k], labels[k])).exp() # exp to cancel the log and get raw prob between 0 and 1
         return lm_prob

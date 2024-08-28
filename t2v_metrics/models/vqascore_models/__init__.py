@@ -10,6 +10,7 @@ ALL_VQA_MODELS = [
     LLAVA_MODELS,
     LLAVA16_MODELS,
     InstructBLIP_MODELS,
+    QwenVL_MODELS
 ]
 
 def list_all_vqascore_models():
