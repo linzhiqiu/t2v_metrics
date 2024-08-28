@@ -78,7 +78,7 @@ def load_pretrained_model(model_cls,
     if padding_side:
         tokenizer_dict['padding_side'] = padding_side
     tokenizer = AutoTokenizer.from_pretrained(tokenizer_path, use_fast=False, **tokenizer_dict)
-    tokenizer.pad_token = tokenizer.unk_token # could be redundant
+    # tokenizer.pad_token = tokenizer.unk_token # could be redundant
 
     model = model_cls.from_pretrained(model_path, cache_dir=cache_dir)
     

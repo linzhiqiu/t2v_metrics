@@ -226,7 +226,7 @@ class CLIPT5Model(VQAScoreModel):
         """
         assert len(images) == len(texts), "Number of images and texts must match"
         # Turn "a photo of a dog" into
-        # Q: "Is the image showing 'a photo of a dog'? Please answer yes or no."
+        # Q: "Does this figure show "a photo of a dog"? Please answer yes or no."
         # A: "Yes"
         questions = [question_template.format(text) for text in texts]
         answers = [answer_template.format(text) for text in texts]
@@ -281,3 +281,50 @@ class CLIPT5Model(VQAScoreModel):
             print(labels.shape)
             lm_prob[k] = (-loss_fct(logits[k], labels[k])).exp() # exp to cancel the log and get raw prob between 0 and 1
         return lm_prob
+    
+    @torch.no_grad()
+    @torch.autocast(device_type='cuda', dtype=torch.bfloat16)
+    def generate(self,
+                 images: List[str],
+                 prompts: List[str],
+                 temperature: float=0.2,
+                 ):
+        """Forward pass of the model to return n strings for n (image, prompt) pairs
+        """
+        assert len(images) == len(prompts), "Number of images and texts must match"
+        
+        # Formatting for CLIP-FlanT5 desired input including system message and image tokens
+        questions = [format_question(prompt, conversation_style=self.conversational_style) for prompt in prompts]
+        images = self.load_images(images)
+        
+        input_ids = [t5_tokenizer_image_token(qs, self.tokenizer, return_tensors='pt') for qs in questions]
+        input_ids = torch.nn.utils.rnn.pad_sequence(
+            input_ids,
+            batch_first=True,
+            padding_value=self.tokenizer.pad_token_id)
+        input_ids = input_ids[:, :self.tokenizer.model_max_length]
+
+        attention_mask = input_ids.ne(self.tokenizer.pad_token_id)
+        
+        input_ids, attention_mask = input_ids.to(self.device), attention_mask.to(self.device)
+        model_input_kwargs = {
+            'inputs': input_ids,
+            'images': images,
+            'attention_mask': attention_mask,
+            "do_sample": True if temperature > 0 else False,
+            "temperature": temperature,
+            "top_p": None,
+            "num_beams": 1,
+            "max_new_token": 1024,
+            "use_cache": True,
+        }
+        
+        outputs = self.model.generate(
+            **model_input_kwargs
+        )
+        outputs = self.tokenizer.batch_decode(outputs, skip_special_tokens=True)
+        for i in range(len(outputs)):
+            if outputs[i].endswith(" "):
+                outputs[i] = outputs[i][:-1]
+            outputs[i] = outputs[i].strip()
+        return outputs

@@ -942,7 +942,7 @@ class StanfordT23D(Dataset):
                  return_image_paths=True,
                  image_save_dir="stanfordt23d_images",
                  num_views=120,
-                 eval_mode='rgb_views',
+                 eval_mode='rgb_grid_3_x_3',
                  extract_images=False):
         self.root_dir = os.path.join(root_dir, 'stanfordt23d')
         self.models = ['dreamfusion', 'instant3d', 'latent-nerf', 'magic3d', 'mvdream',' shap-e']
@@ -1258,7 +1258,7 @@ class GenAI_Bench_Image_800(Dataset):
                     if not os.path.exists(model_dir):
                         subprocess.call(["unzip", "-q", model_file_name], cwd=self.root_dir)
         
-        for filename in ['genai_image_2', 
+        for filename in ['genai_image', 
                         #  'genai_skills'
                          ]:
             path = os.path.join(self.root_dir, f"{filename}.json")
@@ -1272,7 +1272,7 @@ class GenAI_Bench_Image_800(Dataset):
                         ["wget", download_link, "-O", model_file_name], cwd=self.root_dir
                     )
         
-        self.dataset = json.load(open(os.path.join(self.root_dir, f"genai_image_2.json"), 'r'))
+        self.dataset = json.load(open(os.path.join(self.root_dir, f"genai_image.json"), 'r'))
         print(f"Loaded dataset: genai_image.json with {len(self.dataset)} prompts")
         
         self.images = [] # list of images
@@ -1460,11 +1460,13 @@ class GenAIBench_Video(Dataset):
                  root_dir="./",
                  download=True,
                  return_image_paths=True,
-                 image_save_dir="genai_video_527_extracted_images",
+                 image_save_dir="genai_video_{}_extracted_images",
+                 num_prompts=527, # Must be 527 (VQAScore paper) or 800 (GenAI-Bench paper)
                  num_frames=36,
                  eval_mode='avg_frames',
                  extract_videos=False):
-        self.root_dir = os.path.join(root_dir, 'GenAI-Video-527')
+        self.root_dir = os.path.join(root_dir, f'GenAI-Video-{num_prompts}')
+        print(f"Root dir: {self.root_dir}")
         self.models = [
                         'Floor33', 'Gen2', 'Pika_v1', 'Modelscope'
                        ]
@@ -1474,12 +1476,13 @@ class GenAIBench_Video(Dataset):
         self.return_image_paths = return_image_paths
         if self.return_image_paths:
             assert self.image_preprocess is None, "Cannot return image paths and apply transforms"
+        image_save_dir = image_save_dir.format(num_prompts)
         self.image_save_dir = os.path.join(root_dir, image_save_dir)
         if not os.path.exists(self.image_save_dir):
             os.makedirs(self.image_save_dir, exist_ok=True)
             
         self.download_links = {
-            model_name: f"https://huggingface.co/datasets/zhiqiulin/GenAI-Bench-527/resolve/main/{model_name}.zip" for model_name in self.models
+            model_name: f"https://huggingface.co/datasets/zhiqiulin/GenAI-Bench-{num_prompts}/resolve/main/{model_name}.zip" for model_name in self.models
         }
         if not os.path.exists(self.root_dir):
             if download:
@@ -1501,7 +1504,7 @@ class GenAIBench_Video(Dataset):
             if not os.path.exists(path):
                 if download:
                     import subprocess
-                    download_link = f"https://huggingface.co/datasets/zhiqiulin/GenAI-Bench-527/resolve/main/{filename}.json"
+                    download_link = f"https://huggingface.co/datasets/zhiqiulin/GenAI-Bench-{num_prompts}/resolve/main/{filename}.json"
                     model_file_name = download_link.split('/')[-1]
                     subprocess.call(
                         ["wget", download_link, "-O", model_file_name], cwd=self.root_dir
@@ -1636,4 +1639,159 @@ class GenAIBench_Video(Dataset):
         results = {
             'alignment': alignment_correlation,
         }
+        return results
+    
+    
+    
+
+class GenAIBench_Ranking(Dataset):
+    # GenAIBench with 800 prompts x 9 images by one generative modele
+    def __init__(self,
+                 gen_model='DALLE_3',
+                 image_preprocess=None,
+                 root_dir="./datasets", 
+                 download=True,
+                 return_image_paths=True):
+        assert gen_model in ['DALLE_3', 'SDXL_Base'], "Invalid gen_model"
+        self.gen_model = gen_model
+        self.root_dir = os.path.join(root_dir, 'GenAI-Image-Ranking-800')
+
+        self.image_preprocess = image_preprocess
+        self.return_image_paths = return_image_paths
+        if self.return_image_paths:
+            assert self.image_preprocess is None, "Cannot return image paths and apply transforms"
+            
+        self.download_links = {
+            gen_model: f"https://huggingface.co/datasets/zhiqiulin/GenAI-Image-Ranking-800/resolve/main/{gen_model}.zip"
+        }
+
+        model_dir = os.path.join(self.root_dir, self.gen_model)
+        if not os.path.exists(model_dir):
+            if download:
+                import subprocess
+                os.makedirs(model_dir, exist_ok=True)
+                model_file_name = self.download_links[self.gen_model].split('/')[-1]
+                image_zip_file = os.path.join(self.root_dir, model_file_name)
+                if not os.path.exists(image_zip_file):
+                    subprocess.call(
+                        ["wget", self.download_links[self.gen_model], "-O", model_file_name], cwd=self.root_dir
+                    )
+                subprocess.call(["unzip", "-q", model_file_name], cwd=self.root_dir)
+        
+        filenames = ['human_rating', 'genai_skills']
+        for filename in filenames:
+            path = os.path.join(self.root_dir, f"{filename}.json")
+            if not os.path.exists(path):
+                if download:
+                    import subprocess
+                    download_link = f"https://huggingface.co/datasets/zhiqiulin/GenAI-Image-Ranking-800/resolve/main/{filename}.json"
+                    model_file_name = download_link.split('/')[-1]
+                    subprocess.call(
+                        ["wget", download_link, "-O", model_file_name], cwd=self.root_dir
+                    )
+        
+        self.dataset = json.load(open(os.path.join(self.root_dir, f"human_rating.json"), 'r'))
+        print(f"Loaded dataset from: human_rating.json")
+        
+        self.images = [] # list of images
+        self.images_to_prompt_idx = []
+        
+        for prompt_idx in self.dataset:
+            assert prompt_idx == self.dataset[prompt_idx]["id"]
+            assert self.gen_model in self.dataset[prompt_idx]['models'], f"Prompt {prompt_idx} does not have model {self.gen_model}"
+            for img_idx in range(1, 10):    
+                self.images.append({
+                    'prompt_idx': prompt_idx,
+                    'img_idx': img_idx,
+                    'prompt': self.dataset[prompt_idx]['prompt'],
+                    'model': self.gen_model,
+                    'image': os.path.join(self.root_dir, self.gen_model, f"{'%05d'%int(prompt_idx)}_{'%02d'%img_idx}.jpeg"),
+                    'human_score': np.mean(self.dataset[prompt_idx]['models'][self.gen_model][str(img_idx)]),
+                })
+            self.images_to_prompt_idx.append(int(prompt_idx))
+
+                
+    def __len__(self):
+        return len(self.images)
+
+    def __getitem__(self, idx):
+        item = self.images[idx]
+        
+        image_paths = [item['image']]
+            
+        if self.return_image_paths:
+            image = image_paths
+        else:
+            image = [Image.open(image_path).convert('RGB') for image_path in image_paths]
+            image = [self.image_preprocess(img) for img in image]
+        
+        texts = [str(item['prompt'])]
+        item = {"images": image, "texts": texts}
+        return item
+    
+    def correlation(self, our_scores, human_scores):
+        pearson = calc_pearson(human_scores, our_scores)
+        print(f"Pearson's Correlation (no grouping): ", pearson)
+        
+        kendall_b = calc_metric(human_scores, our_scores, variant="tau_b")
+        print(f'Kendall Tau-B Score (no grouping): ', kendall_b)
+        
+        our_scores_per_prompt = np.array(our_scores).reshape(-1, 9)
+        human_scores_per_prompt = np.array(human_scores).reshape(-1, 9)
+        # Take the argmax and argmin of the human scores per prompt
+        argmax_human_idx = np.argmax(human_scores_per_prompt, axis=1)
+        argmin_human_idx = np.argmin(human_scores_per_prompt, axis=1)
+        # Check if our ranking is correct
+        ranking_accuracy_for_arg_max_and_min = our_scores_per_prompt[np.arange(len(our_scores_per_prompt)), argmax_human_idx] > our_scores_per_prompt[np.arange(len(our_scores_per_prompt)), argmin_human_idx]
+        print(f"Ranking accuracy for human argmax and argmin: {ranking_accuracy_for_arg_max_and_min.mean()}")
+        # Check all argmax human with 5.0 score
+        perfect_images_indices = np.where(human_scores_per_prompt[np.arange(len(human_scores_per_prompt)), argmax_human_idx] == 5.0)[0]
+        # print the accuracy for perfect and non-perfect images
+        print(f"Ranking accuracy for {len(perfect_images_indices)} pairs with 5.0 human score: {ranking_accuracy_for_arg_max_and_min[perfect_images_indices].mean()}")
+        print(f"Ranking accuracy for {len(human_scores_per_prompt)-len(perfect_images_indices)} pairs without 5.0 human score: {ranking_accuracy_for_arg_max_and_min[~perfect_images_indices].mean()}")
+        # pairwise_acc = calc_metric(human_scores, our_scores, variant="pairwise_acc_with_tie_optimization")
+        # print(f'Pairwise Accuracy Score (no grouping): ', pairwise_acc)
+        # Check score difference between max and min
+        score_diff = human_scores_per_prompt[np.arange(len(human_scores_per_prompt)), argmax_human_idx] - human_scores_per_prompt[np.arange(len(human_scores_per_prompt)), argmin_human_idx]
+        # Show various statistics
+        print(f"Argmax scores: mean={human_scores_per_prompt[np.arange(len(human_scores_per_prompt)), argmax_human_idx].mean():.2f}, std={human_scores_per_prompt[np.arange(len(human_scores_per_prompt)), argmax_human_idx].std():.2f}, min={human_scores_per_prompt[np.arange(len(human_scores_per_prompt)), argmax_human_idx].min():.2f}, max={human_scores_per_prompt[np.arange(len(human_scores_per_prompt)), argmax_human_idx].max():.2f}")
+        print(f"Argmin scores: mean={human_scores_per_prompt[np.arange(len(human_scores_per_prompt)), argmin_human_idx].mean():.2f}, std={human_scores_per_prompt[np.arange(len(human_scores_per_prompt)), argmin_human_idx].std():.2f}, min={human_scores_per_prompt[np.arange(len(human_scores_per_prompt)), argmin_human_idx].min():.2f}, max={human_scores_per_prompt[np.arange(len(human_scores_per_prompt)), argmin_human_idx].max():.2f}")
+        print(f"Score difference between max and min: mean={score_diff.mean():.2f}, std={score_diff.std():.2f}, min={score_diff.min():.2f}, max={score_diff.max():.2f}")
+        print(f"Score difference between max and min: 25th percentile={np.percentile(score_diff, 25):.2f}, 50th percentile={np.percentile(score_diff, 50):.2f}, 75th percentile={np.percentile(score_diff, 75):.2f}")
+        # Show for perfect images
+        score_diff_perfect = score_diff[perfect_images_indices]
+        print(f"Score difference between max and min for perfect images: mean={score_diff_perfect.mean():.2f}, std={score_diff_perfect.std():.2f}, min={score_diff_perfect.min():.2f}, max={score_diff_perfect.max():.2f}")
+        print(f"Score difference between max and min for perfect images: 25th percentile={np.percentile(score_diff_perfect, 25):.2f}, 50th percentile={np.percentile(score_diff_perfect, 50):.2f}, 75th percentile={np.percentile(score_diff_perfect, 75):.2f}")
+        # Show for non-perfect images
+        score_diff_non_perfect = score_diff[~perfect_images_indices]
+        print(f"Score difference between max and min for non-perfect images: mean={score_diff_non_perfect.mean():.2f}, std={score_diff_non_perfect.std():.2f}, min={score_diff_non_perfect.min():.2f}, max={score_diff_non_perfect.max():.2f}")
+        print(f"Score difference between max and min for non-perfect images: 25th percentile={np.percentile(score_diff_non_perfect, 25):.2f}, 50th percentile={np.percentile(score_diff_non_perfect, 50):.2f}, 75th percentile={np.percentile(score_diff_non_perfect, 75):.2f}")
+        
+        for low, high in [(0.0, 1.0), (1.0, 2.0), (2.0, 5.0)]:
+            indices = np.where((score_diff >= low) & (score_diff < high))[0]
+            print(f"Ranking accuracy for score_diff in ({low}, {high}) with {len(indices)} samples: {ranking_accuracy_for_arg_max_and_min[indices].mean():.2f}")
+            print(f"Average our score difference for score_diff in ({low}, {high}): {np.mean(our_scores_per_prompt[np.arange(len(our_scores_per_prompt)), argmax_human_idx][indices] - our_scores_per_prompt[np.arange(len(our_scores_per_prompt)), argmin_human_idx][indices]):.2f}")
+        # pairwise_acc_per_prompt = calc_metric(our_scores_per_prompt, human_scores_per_prompt, variant="pairwise_acc_with_tie_optimization")
+        # print(f'Pairwise Accuracy Score (grouping by prompt): ', pairwise_acc_per_prompt)
+        
+        # Show the average our scores for images with (1.0, 3.0), (3.0, 4.0), (4.0, 5.0) human score
+        for low, high in [(1.0, 2.0), (2.0, 3.0), (3.0, 4.0), (4.0, 5.0)]:
+            indices = np.where((human_scores_per_prompt >= low) & (human_scores_per_prompt < high))[0]
+            print(f"Average our scores for {len(indices)} of samples where human score in ({low}, {high}): {our_scores_per_prompt.mean(axis=1)[indices].mean():.2f}")
+        
+        results = {
+            'pearson': pearson,
+            'kendall_b': kendall_b,
+            'ranking_accuracy': ranking_accuracy_for_arg_max_and_min,
+            # 'pairwise_acc': pairwise_acc,
+            # 'pairwise_acc_per_prompt': pairwise_acc_per_prompt,
+        }
+        return results
+
+    def evaluate_scores(self, scores):
+        scores_i2t = scores
+        human_avg_scores_alignment = [np.array(self.images[idx]['human_score']).mean() for idx in range(len(self.images))]
+        our_scores = scores_i2t.mean(axis=1)
+        our_scores = [float(our_scores[idx][0]) for idx in range(len(self.images))]
+        results = self.correlation(our_scores, human_avg_scores_alignment)
         return results

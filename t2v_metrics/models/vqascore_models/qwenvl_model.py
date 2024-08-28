@@ -41,12 +41,7 @@ class QwenVLModel(VQAScoreModel):
 
         ckpt = QwenVL_MODELS[self.model_name]['ckpt']
         self.tokenizer = AutoTokenizer.from_pretrained(ckpt, trust_remote_code=True)
-<<<<<<< HEAD
-        self.tokenizer.add_special_tokens({'pad_token': '<|endoftext|>'})
-  
-=======
         self.tokenizer.pad_token_id = self.tokenizer.eod_id
->>>>>>> b79f41867c9f4525a66f7bb88b4895d9767c094c
         # use bf16
         # model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-VL-Chat", device_map="auto", trust_remote_code=True, bf16=True).eval()
         # use fp16
@@ -54,13 +49,8 @@ class QwenVLModel(VQAScoreModel):
         # use cpu only
         # model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-VL-Chat", device_map="cpu", trust_remote_code=True).eval()
         # use cuda device
-<<<<<<< HEAD
         self.model = AutoModelForCausalLM.from_pretrained(ckpt, device_map="cuda", trust_remote_code=True).eval()
         self.model.resize_token_embeddings(len(self.tokenizer))
-=======
-        self.model = AutoModelForCausalLM.from_pretrained(ckpt, device_map="auto", trust_remote_code=True).eval()
-
->>>>>>> b79f41867c9f4525a66f7bb88b4895d9767c094c
         # Specify hyperparameters for generation
         self.model.generation_config = GenerationConfig.from_pretrained(ckpt, trust_remote_code=True)
 
@@ -88,29 +78,6 @@ class QwenVLModel(VQAScoreModel):
         # Q: "Is the image showing 'a photo of a dog'? Please answer yes or no."
         # A: "Yes"
         questions = ["<img>" + img + "</img> " + question_template.format(text) for text, img in zip(texts, images)]
-<<<<<<< HEAD
-        tokenized_questions = self.tokenizer(questions, return_tensors='pt', padding='longest').to(self.device)
-        # unpadded_questions = self.tokenizer(questions[0], return_tensors='pt', padding='do_not_pad').to(self.device)
-        print(f'Padded Question {self.tokenizer.batch_decode(tokenized_questions["input_ids"])[0]} Attention Mask {tokenized_questions["attention_mask"][0]}')
-        answers = [answer_template.format(text) + '<|endoftext|>' for text in texts]
-        # print(questions)
-        tokenized_answers = self.tokenizer(answers, return_tensors='pt', padding='longest').to(self.device)
-        # print(f'Questions {questions} \n\n Answers {answers}')
-        # exit()
-        
-        # print(tokenized_questions)
-        # print(len(self.tokenizer.batch_decode(tokenized_questions['input_ids'])[0]))
-        # input_lengths = [len(i) for i in tokenized_questions['input_ids']]
-        # print(input_lengths)
-        outputs = self.model(input_ids=tokenized_questions['input_ids'], attention_mask=tokenized_questions['attention_mask'])
-        # outputs = self.model.generate(input_ids=tokenized_questions['input_ids'], attention_mask=tokenized_questions['attention_mask'],
-        # pad_token_id=self.tokenizer.eod_id, eos_token_id=self.tokenizer.eod_id)
-
-
-        predicted_token_ids = torch.argmax(outputs.logits, dim=-1)
-        print(f'Logits {self.tokenizer.batch_decode(predicted_token_ids)[0]}')
-        # print(f'Outputs {self.tokenizer.batch_decode(outputs)[0]}')
-=======
         tokenized_questions = self.tokenizer(questions, return_tensors='pt', padding='longest')
         answers = [answer_template.format(text) + "<|endoftext|>" for text in texts]
         tokenized_answers = self.tokenizer(answers, return_tensors='pt', padding='longest')
@@ -124,7 +91,6 @@ class QwenVLModel(VQAScoreModel):
         
 
         print(f'Model Loss {outputs.loss} Loss Shape {outputs.loss.shape}')
->>>>>>> b79f41867c9f4525a66f7bb88b4895d9767c094c
         logits = outputs.logits
         
         last_non_padding_idx = tokenized_questions['attention_mask'].sum(dim=1) - 1
