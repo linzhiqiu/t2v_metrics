@@ -33,7 +33,7 @@ class Idefics2Model(VQAScoreModel):
             torch_dtype=torch.float16,
             _attn_implementation="flash_attention_2",
             device_map="auto"
-        ).to(self.device)
+        )
         self.model.eval()
 
     def insert_image(self, text, image_list):
