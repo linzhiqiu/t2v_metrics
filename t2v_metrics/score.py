@@ -1,5 +1,5 @@
 from abc import abstractmethod
-from typing import List, TypedDict, Union
+from typing import List, TypedDict, Union, Optional
 from tqdm import tqdm
 import torch
 from torch.utils.data import DataLoader
@@ -23,6 +23,7 @@ class Score(nn.Module):
         assert model in self.list_all_models()
         self.device = device
         self.model = self.prepare_scoremodel(model, device, cache_dir, **kwargs)
+        self.model_name = model
     
     @abstractmethod
     def prepare_scoremodel(self,
@@ -41,21 +42,81 @@ class Score(nn.Module):
         pass
 
     def forward(self,
-                images: Union[str, List[str]],
-                texts: Union[str, List[str]],
+                videos: Optional[Union[str, List[str]]]=None,
+                num_frames: Optional[int]=None,
+                concatenate: Optional[str]=None,
+                images: Optional[Union[str, List[str]]]=None,
+                texts: Optional[Union[str, List[str]]]=None,
                 **kwargs) -> torch.Tensor:
-        """Return the similarity score(s) between the image(s) and the text(s)
-        If there are m images and n texts, return a m x n tensor
+        """Return the similarity score(s) between the image(s)/video(s) and the text(s)
+        If there are m images/videos and n texts, return a m x n tensor
         """
-        if type(images) == str:
+        if videos is not None:
+            if isinstance(videos, str):
+                videos = [videos]
+            
+            processed_images = []
+            for video in videos:
+                # Extract frames
+                output_dir = f"temp_{os.path.basename(video)}"
+                extract_frames(video, num_frames, output_dir)
+                
+                # Read extracted frames
+                frame_images = [cv2.imread(os.path.join(output_dir, f)) for f in os.listdir(output_dir) if f.endswith('.jpg')]
+                
+                # Concatenate frames
+                if concatenate == "horizontal":
+                    concat_image = concatenate_images_horizontal(frame_images, dist_images=10)
+                elif concatenate == "vertical":
+                    concat_image = concatenate_images_vertical(frame_images, dist_images=10)
+                elif concatenate == "grid":
+                    concat_image = concatenate_images_grid(frame_images, dist_images=10, output_size=(1024, 1024))
+                else:
+                    raise ValueError("Invalid concatenation method")
+                
+                # Save concatenated image
+                output_path = f"concat_{os.path.basename(video)}.jpg"
+                cv2.imwrite(output_path, concat_image)
+                processed_images.append(output_path)
+                
+                # Clean up temporary directory
+                for f in os.listdir(output_dir):
+                    os.remove(os.path.join(output_dir, f))
+                os.rmdir(output_dir)
+            
+            if any(name in self.model_name.lower() for name in ['clip', 'blip', 'llava']):
+                images = processed_images
+            else:
+                images = videos
+        
+        if isinstance(images, str):
             images = [images]
-        if type(texts) == str:
+        if isinstance(texts, str):
             texts = [texts]
         
         scores = torch.zeros(len(images), len(texts)).to(self.device)
         for i, image in enumerate(images):
             scores[i] = self.model.forward([image] * len(texts), texts, **kwargs)
         return scores
+    # def forward(self,
+    #             videos: Optional[Union[str, List[str]]],
+    #             num_frames: Optional[Union[str, List[str]]],
+    #             concatenate: Optional[str],
+    #             images: Optional[Union[str, List[str]]],
+    #             texts: Optional[Union[str, List[str]]],
+    #             **kwargs) -> torch.Tensor:
+    #     """Return the similarity score(s) between the image(s) and the text(s)
+    #     If there are m images and n texts, return a m x n tensor
+    #     """
+    #     if type(images) == str:
+    #         images = [images]
+    #     if type(texts) == str:
+    #         texts = [texts]
+        
+    #     scores = torch.zeros(len(images), len(texts)).to(self.device)
+    #     for i, image in enumerate(images):
+    #         scores[i] = self.model.forward([image] * len(texts), texts, **kwargs)
+    #     return scores
     
     def batch_forward(self,
                       dataset: List[ImageTextDict],
