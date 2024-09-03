@@ -13,7 +13,7 @@ MPLUG_OWL3_MODELS = {
             'path': 'mPLUG/mPLUG-Owl3-7B-240728',
         },
         'model': {
-            'path': 'mPLUG/mPLUG-Owl3-7B-240728',
+            'pretrained_model_name_or_path': 'mPLUG/mPLUG-Owl3-7B-240728',
             'attn_implementation': 'flash_attention_2',
             'trust_remote_code': True,
             'torch_dtype': torch.bfloat16,
@@ -34,11 +34,11 @@ class mPLUGOwl3Model(VQAScoreModel):
         self.load_model()
 
     def load_model(self):
-        model_path = self.model_info['model']['path']
+        # model_path = self.model_info['model']['path']
         tokenizer_path = self.model_info['tokenizer']['path']
         
         self.model = AutoModelForCausalLM.from_pretrained(
-            model_path, 
+            # model_path, 
             **self.model_info['model']
         ).to(self.device)
         
@@ -104,18 +104,37 @@ class mPLUGOwl3Model(VQAScoreModel):
                     {"role": "user", "content": f"<|image|>\n{question}"},
                     {"role": "assistant", "content": ""}
                 ]
-                inputs = self.processor(messages, images=data, videos=None)
+                inputs = self.processor(messages, images=[data], videos=None)
 
             inputs.to(self.device)
-            inputs.update({
-                'tokenizer': self.tokenizer,
-                'max_new_tokens': 1,
-                'do_sample': False,
-                'output_scores': True,
-                'return_dict_in_generate': True,
-            })
+            # inputs.update({
+            #     'tokenizer': self.tokenizer,
+            #     'max_new_tokens': 1,
+            #     'do_sample': False,
+            #     'output_scores': True,
+            #     'return_dict_in_generate': True,
+            # })
 
-            outputs = self.model.generate(**inputs)
+            # It seems the generate method will need to be reimplemented since mPLUGOwl assumes that the model would only be used for text generation and not checking logit probaility :(
+            # outputs = self.model.generate(**inputs)
+
+            with torch.inference_mode():
+                image_embeds = self.model.forward_image(inputs['pixel_values'])
+
+                terminators = [self.tokenizer.convert_tokens_to_ids(i) for i in self.model.terminators]
+
+                outputs = self.model.language_model.generate(
+                    input_ids=inputs['input_ids'],
+                    image_embeds=image_embeds,
+                    media_offset=inputs['media_offset'],
+                    pad_token_id=0,
+                    eos_token_id=terminators,
+                    attention_mask=None,
+                    max_new_tokens=1,
+                    do_sample=False,
+                    output_scores=True,
+                    return_dict_in_generate=True
+                )
             
             scores = outputs.scores[0]
             probs = torch.nn.functional.softmax(scores, dim=-1)

@@ -188,3 +188,8 @@ cython_debug/
 
 # Wheels
 *.whl
+
+# Videos
+*.mp4
+*.mov
+*.avi

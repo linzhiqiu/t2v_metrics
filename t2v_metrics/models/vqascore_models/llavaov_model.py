@@ -13,12 +13,12 @@ from llava.constants import IMAGE_TOKEN_INDEX, DEFAULT_IMAGE_TOKEN, IGNORE_INDEX
 from llava.conversation import conv_templates
 
 LLAVA_OV_MODELS = {
-    'llava-onevision-qwen2-0.5b-si': {
+    'llava-onevision-qwen2-7b-si': {
         'tokenizer': {
-            'path': 'lmms-lab/llava-onevision-qwen2-0.5b-si',
+            'path': 'lmms-lab/llava-onevision-qwen2-7b-si',
         },
         'model': {
-            'path': 'lmms-lab/llava-onevision-qwen2-0.5b-si',
+            'path': 'lmms-lab/llava-onevision-qwen2-7b-si',
             'conversation': 'qwen_1_5',
             'image_aspect_ratio': 'pad',
         },
