@@ -86,7 +86,7 @@ class LLaVAOneVisionModel(VQAScoreModel):
         total_frame_num = len(vr)
         uniform_sampled_frames = np.linspace(0, total_frame_num - 1, max_frames_num, dtype=int)
         frame_idx = uniform_sampled_frames.tolist()
-        spare_frames = vr.get_batch(frame_idx).asnumpy()
+        spare_frames = vr.get_batch(frame_idx).numpy()
         return spare_frames
 
     def forward(self,

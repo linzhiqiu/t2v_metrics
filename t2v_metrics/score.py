@@ -5,6 +5,9 @@ import torch
 from torch.utils.data import DataLoader
 import torch.nn as nn
 from .constants import HF_CACHE_DIR
+import os
+
+from .models.vqascore_models.mm_utils import *
 
 class ImageTextDict(TypedDict):
     images: List[str]
@@ -43,7 +46,7 @@ class Score(nn.Module):
 
     def forward(self,
                 videos: Optional[Union[str, List[str]]]=None,
-                num_frames: Optional[int]=None,
+                num_frames: Optional[int]=8,
                 concatenate: Optional[str]=None,
                 images: Optional[Union[str, List[str]]]=None,
                 texts: Optional[Union[str, List[str]]]=None,
@@ -55,36 +58,37 @@ class Score(nn.Module):
             if isinstance(videos, str):
                 videos = [videos]
             
-            processed_images = []
-            for video in videos:
-                # Extract frames
-                output_dir = f"temp_{os.path.basename(video)}"
-                extract_frames(video, num_frames, output_dir)
-                
-                # Read extracted frames
-                frame_images = [cv2.imread(os.path.join(output_dir, f)) for f in os.listdir(output_dir) if f.endswith('.jpg')]
-                
-                # Concatenate frames
-                if concatenate == "horizontal":
-                    concat_image = concatenate_images_horizontal(frame_images, dist_images=10)
-                elif concatenate == "vertical":
-                    concat_image = concatenate_images_vertical(frame_images, dist_images=10)
-                elif concatenate == "grid":
-                    concat_image = concatenate_images_grid(frame_images, dist_images=10, output_size=(1024, 1024))
-                else:
-                    raise ValueError("Invalid concatenation method")
-                
-                # Save concatenated image
-                output_path = f"concat_{os.path.basename(video)}.jpg"
-                cv2.imwrite(output_path, concat_image)
-                processed_images.append(output_path)
-                
-                # Clean up temporary directory
-                for f in os.listdir(output_dir):
-                    os.remove(os.path.join(output_dir, f))
-                os.rmdir(output_dir)
             
-            if any(name in self.model_name.lower() for name in ['clip', 'blip', 'llava']):
+            if any(name in self.model_name.lower() for name in ['clip', 'blip', 'llava-v1.5', 'llava-v1.6', 'hpsv2', 'pickscore', 'imag-reward']):
+                processed_images = []
+                for video in videos:
+                    # Extract frames
+                    output_dir = f"temp_{os.path.basename(video)}"
+                    extract_frames(video, num_frames, output_dir)
+                    
+                    # Read extracted frames
+                    frame_images = [cv2.imread(os.path.join(output_dir, f)) for f in os.listdir(output_dir) if f.endswith('.jpg')]
+                    
+                    # Concatenate frames
+                    if concatenate == "horizontal":
+                        concat_image = concatenate_images_horizontal(frame_images, dist_images=10)
+                    elif concatenate == "vertical":
+                        concat_image = concatenate_images_vertical(frame_images, dist_images=10)
+                    elif concatenate == "grid":
+                        concat_image = concatenate_images_grid(frame_images, dist_images=10, output_size=(1024, 1024))
+                    else:
+                        raise ValueError("Invalid concatenation method")
+                    
+                    # Save concatenated image
+                    output_path = f"concat_{os.path.basename(video)}.jpg"
+                    cv2.imwrite(output_path, concat_image)
+                    processed_images.append(output_path)
+                    
+                    # Clean up temporary directory
+                    for f in os.listdir(output_dir):
+                        os.remove(os.path.join(output_dir, f))
+                    os.rmdir(output_dir)
+                    
                 images = processed_images
             else:
                 images = videos

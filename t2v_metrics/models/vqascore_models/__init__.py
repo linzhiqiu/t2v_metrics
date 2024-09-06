@@ -18,15 +18,16 @@ ALL_VQA_MODELS = [
     LLAVA_MODELS,
     LLAVA16_MODELS,
     InstructBLIP_MODELS,
-    QwenVL_MODELS,
     GPT4V_MODELS,
     LLAVA_OV_MODELS,
     MPLUG_OWL3_MODELS,
     PALIGEMMA_MODELS,
     INTERNVL2_MODELS,
-    INTERNLMXCOMPOSER25_MODELS, 
-    INTERNVIDEO2_MODELS
 ]
+
+# INTERNLMXCOMPOSER25_MODELS, 
+# INTERNVIDEO2_MODELS,
+# QwenVL_MODELS,
 
 def list_all_vqascore_models():
     return [model for models in ALL_VQA_MODELS for model in models]
@@ -41,9 +42,6 @@ def get_vqascore_model(model_name, device='cuda', cache_dir=HF_CACHE_DIR, **kwar
         return LLaVA16Model(model_name, device=device, cache_dir=cache_dir, **kwargs)
     elif model_name in InstructBLIP_MODELS:
         return InstructBLIPModel(model_name, device=device, cache_dir=cache_dir)
-    elif model_name in QwenVL_MODELS:
-        return QwenVLModel(model_name, device=device, cache_dir=cache_dir)
-        # return InstructBLIPModel(model_name, device=device, cache_dir=cache_dir, **kwargs)
     elif model_name in GPT4V_MODELS:
         return GPT4VModel(model_name, device=device, cache_dir=cache_dir, **kwargs)
     elif model_name in LLAVA_OV_MODELS:
@@ -54,9 +52,11 @@ def get_vqascore_model(model_name, device='cuda', cache_dir=HF_CACHE_DIR, **kwar
         return PaliGemmaModel(model_name, device=device, cache_dir=cache_dir, **kwargs)
     elif model_name in INTERNVL2_MODELS:
         return InternVL2Model(model_name, device=device, cache_dir=cache_dir, **kwargs)
-    elif model_name in INTERNLMXCOMPOSER25_MODELS:
-        return InternLMXComposer25Model(model_name, device=device, cache_dir=cache_dir, **kwargs)
-    elif model_name in INTERNVIDEO2_MODELS:
-        return InternVideo2Model(model_name, device=device, cache_dir=cache_dir, **kwargs)
+    # elif model_name in INTERNLMXCOMPOSER25_MODELS:
+    #     return InternLMXComposer25Model(model_name, device=device, cache_dir=cache_dir, **kwargs)
+    # elif model_name in INTERNVIDEO2_MODELS:
+    #     return InternVideo2Model(model_name, device=device, cache_dir=cache_dir, **kwargs)
+    # elif model_name in QwenVL_MODELS:
+    #     return QwenVLModel(model_name, device=device, cache_dir=cache_dir)
     else:
         raise NotImplementedError()

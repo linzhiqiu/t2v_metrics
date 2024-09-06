@@ -88,15 +88,58 @@ class InternLMXComposer25Model(VQAScoreModel):
                 query = f"Here are some frames of a video. {question}"
             else:  # Image file
                 query = f"<ImageHere> {question}"
+            
+            use_meta = True
+            image = path
+            history = []
+            meta_instruction = 'You are an AI assistant whose name is InternLM-XComposer (浦语·灵笔).\n'
+            '- InternLM-XComposer (浦语·灵笔) is a multi-modality conversational language model that is developed by Shanghai AI Laboratory (上海人工智能实验室). It is designed to be helpful, honest, and harmless.\n'
+            '- InternLM-XComposer (浦语·灵笔) can understand and communicate fluently in the language chosen by the user such as English and 中文.\n'
+            '- InternLM-XComposer (浦语·灵笔) is capable of comprehending and articulating responses effectively based on the provided image.'
+            streamer = None
+            num_beams = 1
+            do_sample=False
+            infer_mode='base'
+            hd_num = 24
 
-            with torch.autocast(device_type='cuda', dtype=torch.float16):
-                response, _ = self.model.chat(self.tokenizer, query, [path], do_sample=False, num_beams=3, use_meta=True)
 
-            # Since we don't have direct access to logits, we'll use a simple heuristic
-            # to estimate the probability of a "Yes" answer
-            lm_prob = 1.0 if response.lower().startswith("yes") else 0.0
+
+            if not use_meta:
+                meta_instruction = ''
+            if image is None:
+                inputs = self.model.build_inputs(self.tokenizer, query, history, meta_instruction)
+                im_mask = torch.zeros(inputs['input_ids'].shape[:2]).cuda().bool()
+            else:
+                inputs, im_mask, _ = self.model.interleav_wrap_chat(query, image, history=history, meta_instruction=meta_instruction, hd_num=hd_num)
+            inputs = {
+                k: v.to(self.device)
+                for k, v in inputs.items() if torch.is_tensor(v)
+            }
+            # also add end-of-assistant token in eos token id to avoid unnecessary generation
+            eos_token_id = [
+                tokenizer.eos_token_id,
+                tokenizer.convert_tokens_to_ids(['[UNUSED_TOKEN_145]'])[0]
+            ]
+            outputs = self.model.generate(
+                **inputs,
+                streamer=streamer,
+                max_new_tokens=max_new_tokens,
+                num_beams=num_beams,
+                do_sample=do_sample,
+                eos_token_id=eos_token_id,
+                repetition_penalty=repetition_penalty,
+                im_mask=im_mask,
+                infer_mode=infer_mode,
+                output_scores=True, 
+                return_dict_in_generate=True
+            )
+            scores = outputs.scores[0]
+            probs = torch.nn.functional.softmax(scores, dim=-1)
+            yes_token_id = self.tokenizer.encode("Yes")[0]
+            lm_prob = probs[0, yes_token_id].item()
             lm_probs.append(lm_prob)
 
+        
             # If this is a temporary file, add it to the list for cleanup
             if path.startswith(tempfile.gettempdir()):
                 temp_files.append(path)

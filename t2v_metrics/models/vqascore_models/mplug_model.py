@@ -77,7 +77,7 @@ class mPLUGOwl3Model(VQAScoreModel):
         frame_idx = [i for i in range(0, len(vr), sample_fps)]
         if len(frame_idx) > max_frames_num:
             frame_idx = uniform_sample(frame_idx, max_frames_num)
-        frames = vr.get_batch(frame_idx).asnumpy()
+        frames = vr.get_batch(frame_idx).numpy()
         frames = [Image.fromarray(v.astype('uint8')) for v in frames]
         return frames
 

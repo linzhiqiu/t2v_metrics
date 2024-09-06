@@ -105,6 +105,7 @@ class GPT4VModel(VQAScoreModel):
             return torch.Tensor([0.0])
 
         for top_logprob in completion.choices[0].logprobs.content[0].top_logprobs:
+            print(answer)
             if top_logprob.token == answer:
                 return torch.Tensor([top_logprob.logprob]).exp()
         

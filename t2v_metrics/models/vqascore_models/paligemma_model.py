@@ -79,7 +79,7 @@ class PaliGemmaModel(VQAScoreModel):
         total_frames = len(vr)
         indices = np.linspace(0, total_frames - 1, num_frames, dtype=int)
         video_frames = vr.get_batch(indices)
-        return [torch.from_numpy(frame.asnumpy()).permute(2, 0, 1) for frame in video_frames]
+        return [torch.from_numpy(frame.numpy()).permute(2, 0, 1) for frame in video_frames]
 
     def forward(self,
                 paths: List[str],
