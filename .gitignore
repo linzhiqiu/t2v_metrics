@@ -24,6 +24,12 @@ genai_800_temp.py
 _OPENAI_API_KEY.txt
 temp*/
 temp*
+*.pt
+
+# Zhiqiu's temporary files
+genai_image_800_temp.py
+gpt4_eval.txt
+vqascore_ablation.py
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
