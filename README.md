@@ -57,6 +57,36 @@ texts = ["someone talks on the phone angrily while another person sits happily",
          "someone talks on the phone happily while another person sits angrily"]
 scores = clip_flant5_score(images=images, texts=texts) # scores[i][j] is the score between image i and text j
 ```
+## (Preview) NEW! - Video Inference:
+
+This is a preview version of a new feature for T2V: video inference! Note that this feature requires installation of `flash-attn`. Please do this in addition to the evironment setup above to align with your system environment. 
+
+For single-image and CLIP-like models, video frames are concatenated. For all other native interleaved-image/video models (we recommend LLaVA-OneVision at the time of writing), video frames are passed directly to the model.
+
+```python
+import t2v_metrics
+
+### For a single (video, text) pair on a single-image model:
+clip_flant5_score = t2v_metrics.VQAScore(model='clip-flant5-xxl') 
+video = "videos/yes.mp4" # an image path in string format
+text = "a baby crying"
+score = clip_flant5_score(videos=[image], texts=[text], concatenate='horizontal', num_frames=4) # For native interleaved-image/video LMM models (like LLaVA-OneVision), the 'concatenate' argument is unecessary.
+
+
+### For a single (video, text) pair on an interleaved-image/video model:
+clip_flant5_score = t2v_metrics.VQAScore(model='llava-onevision-qwen2-7b-ov') 
+video = "videos/yes.mp4" # an image path in string format
+text = "a baby crying"
+score = clip_flant5_score(videos=[image], texts=[text], num_frames=4) 
+
+### Alternatively, if you want to calculate the pairwise similarity scores 
+### between M videos and N texts, run the following to return a M x N score tensor.
+images = ["videos/football.mp4", "video/running.mp4"]
+texts = ["a quarterback throwing a football before being tackled",
+         "an athlete out of breath after finishing a race"]
+score = clip_flant5_score(videos=[image], texts=[text], num_frames=4) # scores[i][j] is the score between video i and text j
+```
+
 
 ### Notes on GPU and cache
 - **GPU usage**: By default, this code uses the first cuda device on your machine. We recommend 40GB GPUs for the largest VQAScore models such as `clip-flant5-xxl` and `llava-v1.5-13b`. If you have limited GPU memory, consider smaller models such as `clip-flant5-xl` and `llava-v1.5-7b`.
