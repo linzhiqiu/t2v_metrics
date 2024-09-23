@@ -36,6 +36,8 @@ pip install git+https://github.com/openai/CLIP.git
 pip install -e . # local pip install
 ```
 
+Note: For CLIP-FlanT5 usage only, version 4.36.1 of the `transformers` package is necessary (i.e.`pip install transformers==4.36.1`).
+
 <!-- (not yet implemented) Or simply run `pip install t2v_metrics`.  -->
 Or you can install via `pip install t2v-metrics`.
 
