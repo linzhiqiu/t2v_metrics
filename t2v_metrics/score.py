@@ -55,6 +55,7 @@ class Score(nn.Module):
         If there are m images/videos and n texts, return a m x n tensor
         """
         if videos is not None:
+            
             if isinstance(videos, str):
                 videos = [videos]
             
@@ -93,6 +94,8 @@ class Score(nn.Module):
                 images = processed_images
             else:
                 images = videos
+        else:
+            assert 'internvideo' not in self.model_name, 'InternVideo2 Only Supports Video Inference Right Now.'
         
         if isinstance(images, str):
             images = [images]
