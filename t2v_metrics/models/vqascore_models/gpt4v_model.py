@@ -99,19 +99,54 @@ class GPT4VModel(VQAScoreModel):
                 logprobs=True,
                 top_logprobs=self.top_logprobs,
             )
-        except Exception as e:
-            print(f"Warning: completion not generated for {data['path']} and question: {question}")
-            print(f"Error: {str(e)}")
-            return torch.Tensor([0.0])
 
+        except:
+            try: # Second try
+                if data['type'] == 'video':
+                    content = [
+                        {"type": "text", "text": question},
+                        *[{"type": "image_url", "image_url": {"url": f"data:image/jpg;base64,{frame}"}} for frame in data['frames']]
+                    ]
+                else:
+                    content = [
+                        {"type": "text", "text": question},
+                        {"type": "image_url", "image_url": {"url": f"data:image/{data['type']};base64,{data['base64']}"}}
+                    ]
+
+                completion = self.client.chat.completions.create(
+                    model=self.model_name,
+                    messages=[{"role": "user", "content": content}],
+                    logprobs=True,
+                    top_logprobs=self.top_logprobs,
+                )
+            except: # Old Error Handling
+                print(f"Failed image: {image['path']} and question: {question} and answer: {answer}")
+                return torch.Tensor([0.0])
+
+                
+        is_generated = False
         for top_logprob in completion.choices[0].logprobs.content[0].top_logprobs:
-            print(answer)
             if top_logprob.token == answer:
+                is_generated = True
                 return torch.Tensor([top_logprob.logprob]).exp()
+        if not is_generated:
+            print(f"Warning: answer not generated for image: {image['path']} and question: {question} and answer: {answer}")
+            print(completion.choices[0].logprobs.content[0].top_logprobs)
+            return torch.Tensor([0.0])
+        # except Exception as e:
+        #     print(f"Warning: completion not generated for {data['path']} and question: {question}")
+        #     print(f"Error: {str(e)}")
+        #     return torch.Tensor([0.0])
         
-        print(f"Warning: answer not generated for {data['path']} and question: {question}")
-        print(completion.choices[0].logprobs.content[0].top_logprobs)
-        return torch.Tensor([0.0])
+
+
+        # for top_logprob in completion.choices[0].logprobs.content[0].top_logprobs:
+        #     if top_logprob.token == answer:
+        #         return torch.Tensor([top_logprob.logprob]).exp()
+        
+        # print(f"Warning: answer not generated for {data['path']} and question: {question}")
+        # print(completion.choices[0].logprobs.content[0].top_logprobs)
+        # return torch.Tensor([0.0])
 
     def forward(self,
                 paths: List[str],

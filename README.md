@@ -68,23 +68,23 @@ import t2v_metrics
 
 ### For a single (video, text) pair on a single-image model:
 clip_flant5_score = t2v_metrics.VQAScore(model='clip-flant5-xxl') 
-video = "videos/yes.mp4" # an image path in string format
+video = "videos/baby.mp4" # an image path in string format
 text = "a baby crying"
-score = clip_flant5_score(videos=[image], texts=[text], concatenate='horizontal', num_frames=4) # For native interleaved-image/video LMM models (like LLaVA-OneVision), the 'concatenate' argument is unecessary.
+score = clip_flant5_score(videos=[video], texts=[text], concatenate='horizontal', num_frames=4) # For native interleaved-image/video LMM models (like LLaVA-OneVision), the 'concatenate' argument is unecessary.
 
 
 ### For a single (video, text) pair on an interleaved-image/video model:
-clip_flant5_score = t2v_metrics.VQAScore(model='llava-onevision-qwen2-7b-ov') 
-video = "videos/yes.mp4" # an image path in string format
+llava_ov_score = t2v_metrics.VQAScore(model='llava-onevision-qwen2-7b-ov') 
+video = "videos/baby.mp4" # an image path in string format
 text = "a baby crying"
-score = clip_flant5_score(videos=[image], texts=[text], num_frames=4) 
+score = llava_ov_score(videos=[video], texts=[text], num_frames=4) 
 
 ### Alternatively, if you want to calculate the pairwise similarity scores 
 ### between M videos and N texts, run the following to return a M x N score tensor.
-images = ["videos/football.mp4", "video/running.mp4"]
-texts = ["a quarterback throwing a football before being tackled",
-         "an athlete out of breath after finishing a race"]
-score = clip_flant5_score(videos=[image], texts=[text], num_frames=4) # scores[i][j] is the score between video i and text j
+videos = ["videos/baby.mp4", "video/ducks.mp4"]
+texts = ["a baby crying",
+         "a group of ducks standing in the water"]
+score = llava_ov_score(videos=[videos], texts=[text], num_frames=4) # scores[i][j] is the score between video i and text j
 ```
 
 

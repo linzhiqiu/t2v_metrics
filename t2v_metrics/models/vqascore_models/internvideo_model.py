@@ -79,9 +79,9 @@ class InternVideo2Model(VQAScoreModel):
 
     def load_video(self, video_path, num_segments=8, resolution=224, hd_num=6):
         if self.model_name == 'internvideo2-chat-8b':
-            return load_video_chat(video_path, num_segments, return_msg=False)
+            return self.load_video_chat(video_path, num_segments, return_msg=False)
         elif self.model_name == 'internvideo2-chat-8b-hd':
-            return load_video_chat_hd(video_path, num_segments=8, return_msg=False, resolution=224, hd_num=6)
+            return self.load_video_chat_hd(video_path, num_segments=8, return_msg=False, resolution=224, hd_num=6)
 
     def process_image(self, path, resolution=224):
         if self.model_name == 'internvideo2-chat-8b':
@@ -116,12 +116,13 @@ class InternVideo2Model(VQAScoreModel):
         for data, question in zip(processed_data, questions):
             data = data.to(self.device)
             chat_history = []
-            media_type='video' if data.dim() == 6 else 'image',  # 6D for video, 5D for image
+            media_type='video' if data.dim() == 6 else 'image'  # 6D for video, 5D for image
             instruction=None
             msg = ''
             user_prompt = question
             media_tensor = data
-
+            print(f'Media Type {media_type}')
+            print(f'Media Tensor {data.shape}')
             if self.model_name == 'internvideo2-chat-8b':
                 input_ids, attention_masks, labels = [], [], []
 
@@ -215,7 +216,7 @@ class InternVideo2Model(VQAScoreModel):
                     return_tensors='pt'
                 )
                 if media_type == 'image':
-                    generation_output = self.generate_caption_chat_hd(
+                    response = self.generate_caption_chat_hd(
                         tokenized['input_ids'].unsqueeze(0).to(self.device), 
                         tokenized['attention_mask'].unsqueeze(0).to(self.device), 
                         image_idx = tokenized['index'].unsqueeze(0),
@@ -224,17 +225,18 @@ class InternVideo2Model(VQAScoreModel):
                  
                     )
                 else:
-                    generation_output = self.generate_caption_chat_hd(
+                    response = self.generate_caption_chat_hd(
                         tokenized['input_ids'].unsqueeze(0).to(self.device), 
                         tokenized['attention_mask'].unsqueeze(0).to(self.device), 
                         video_idx = tokenized['index'].unsqueeze(0),
                         video = media_tensor, 
                         instruction=[instruction]* ilen if instruction else None,
                     )
-
+   
             scores = response.scores[0] 
+
             probs = torch.nn.functional.softmax(scores, dim=-1)
-            yes_token_id = self.tokenizer.encode("Yes")[0]
+            yes_token_id = self.tokenizer.encode("Yes")[1]
             lm_prob = probs[0, yes_token_id].item()
             lm_probs.append(lm_prob)
 
@@ -249,7 +251,7 @@ class InternVideo2Model(VQAScoreModel):
     def load_video_chat(self, video_path, num_segments=8, return_msg=False, resolution=224, hd_num=4, padding=False):
         vr = VideoReader(video_path, ctx=cpu(0), num_threads=1)
         num_frames = len(vr)
-        frame_indices = get_index(num_frames, num_segments)
+        frame_indices = self.get_index(num_frames, num_segments)
 
         mean = (0.485, 0.456, 0.406)
         std = (0.229, 0.224, 0.225)
@@ -298,7 +300,6 @@ class InternVideo2Model(VQAScoreModel):
             frames = HD_transform_no_padding(frames.float(), image_size=resolution, hd_num=hd_num)
 
         frames = transform(frames)
-        # print(frames.shape)
         T_, C, H, W = frames.shape
 
         sub_img = frames.reshape(
@@ -424,7 +425,7 @@ class InternVideo2Model(VQAScoreModel):
         else:
             image = Image.open(image_path).convert('RGB')
             image = transforms.ToTensor()(image)
-        image = image.unsqueeze(0)
+        
 
         transform = transforms.Compose([
             transforms.Lambda(lambda x: x.float().div(255.0)),
@@ -482,7 +483,7 @@ class InternVideo2Model(VQAScoreModel):
         video: Optional[torch.Tensor] = None,
         num_beams=1,
         max_new_tokens=1,
-        do_sample=False,
+        do_sample=True,
         top_p=0.9,
         top_k=None,
         temperature=1.0,
@@ -490,7 +491,9 @@ class InternVideo2Model(VQAScoreModel):
         repetition_penalty=1.0,
         instruction=None
     ):
+       
         text_embeds = self.model.pad_text_embeds(input_ids=input_ids, image=image, video=video, image_idx=image_idx, video_idx=video_idx,instruction=instruction)
+        
         # outputs = self.lm.generate(
         #     inputs_embeds=text_embeds,
         #     attention_mask=attention_mask,
@@ -586,7 +589,10 @@ class InternVideo2Model(VQAScoreModel):
         length_penalty=1,
         repetition_penalty=1.0,
     ):
+        
         text_embeds = self.model.pad_text_embeds(input_ids=input_ids, image=image, video=video, image_idx=image_idx, video_idx=video_idx)
+        print(f'Text Embeds Shape {text_embeds.shape}')
+        print(f'Text Embeds {text_embeds}')
         # outputs = self.lm.generate(
         #     inputs_embeds=text_embeds,
         #     attention_mask=attention_mask,

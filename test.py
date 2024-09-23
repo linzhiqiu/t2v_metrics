@@ -6,11 +6,11 @@ import t2v_metrics
 # score = llava_ov_score(images=[image], texts=[text])
 # print(score)
 
-mplug_score = t2v_metrics.VQAScore(model='internvl2-8b')
-image = "images/0.png" # an image path in string format
-text = "someone talks on the phone angrily while another person sits happily"
-score = mplug_score(images=[image], texts=[text])
-print(score)
+# mplug_score = t2v_metrics.VQAScore(model='internvl2-8b')
+# image = "images/0.png" # an image path in string format
+# text = "someone talks on the phone angrily while another person sits happily"
+# score = mplug_score(images=[image], texts=[text])
+# print(score)
 
 # import t2v_metrics
 # import torch
@@ -70,3 +70,11 @@ print(score)
 # # # model = mPLUGOwl3Model(config).cuda().half()
 # # model = mPLUGOwl3Model.from_pretrained(model_path, attn_implementation='sdpa', torch_dtype=torch.bfloat16)
 # # model.eval().cuda()
+
+internvideo_score = t2v_metrics.VQAScore('internvideo2-chat-8b-hd') 
+# image = "images/0.png" # an image path in string format
+# text = "someone talks on the phone angrily while another person sits happily"
+video = "videos/1_yes.mp4" # an image path in string format
+text = "a garage door opening"
+score = internvideo_score(videos=[video], texts=[text], num_frames=8)
+print(score)

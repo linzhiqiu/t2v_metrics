@@ -132,8 +132,6 @@ class InstructBLIPModel(VQAScoreModel):
             labels=labels,
         )
         
-        print(labels.shape)
-        print(outputs.logits.shape)
         loss_fct = torch.nn.CrossEntropyLoss(reduction='mean')
         lm_prob = torch.zeros(outputs.logits.shape[0])
         for k in range(lm_prob.shape[0]):

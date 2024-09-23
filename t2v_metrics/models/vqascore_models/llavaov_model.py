@@ -92,7 +92,7 @@ class LLaVAOneVisionModel(VQAScoreModel):
     def forward(self,
                 paths: List[str],
                 texts: List[str],
-                question_template: str = "Does this figure show \"{}\"? Please answer yes or no.",
+                question_template: str = "Does this image show \"{}\"? Answer the question with Yes or No",
                 answer_template: str = "Yes") -> torch.Tensor:
         assert len(paths) == len(texts), "Number of paths and texts must match"
         

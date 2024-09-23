@@ -40,11 +40,30 @@ dependencies = [
     "pycocoevalcap",
     "image-reward",
     "hpsv2",
+    # Video Model Additional Requirements
+    "llava @ git+https://github.com/LLaVA-VL/LLaVA-NeXT.git",
     "fire==0.4.0",
     "tiktoken>=0.7.0",
     "peft",
     "decord",
-    "easydict"
+    "easydict",
+    "av",
+    "icecream",
+    "markdown2",
+    "pydantic",
+    "accelerate",
+    "shortuuid",
+    "bitsandbytes",
+    "timm",
+    "requests",
+    "httpx==0.24.0",
+    "uvicorn",
+    "einops-exts",
+    "einops",
+    "flash-attn @ https://github.com/Dao-AILab/flash-attention/releases/download/v2.5.8/flash_attn-2.5.8+cu122torch2.3cxx11abiFALSE-cp310-cp310-linux_x86_64.whl",
+    "PyYAML",
+    "wandb",
+    "moviepy"
 ]
 
 [tool.setuptools]

@@ -190,6 +190,6 @@ cython_debug/
 *.whl
 
 # Videos
-*.mp4
-*.mov
-*.avi
+# *.mp4
+# *.mov
+# *.avi

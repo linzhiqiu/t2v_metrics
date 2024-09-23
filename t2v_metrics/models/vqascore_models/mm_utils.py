@@ -5,6 +5,8 @@ import torch
 from transformers import AutoTokenizer
 from ...constants import HF_CACHE_DIR, IMAGE_TOKEN_INDEX
 
+# from moviepy.editor import VideoFileClip
+
 
 import cv2
 import numpy as np

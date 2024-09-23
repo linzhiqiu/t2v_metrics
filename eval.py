@@ -41,8 +41,6 @@ def main():
         TIFA160_DSG,
         Pickapic_v1,
         SeeTrue,
-        StanfordT23D,
-        T2VScore,
         Flickr8K_CF,
     ]:
         

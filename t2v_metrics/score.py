@@ -58,6 +58,7 @@ class Score(nn.Module):
             if isinstance(videos, str):
                 videos = [videos]
             
+            assert any(videos[0][-4:] in extension for extension in ['.mp4', '.avi', '.mov', '.mkv']), 'Video file type not supported'
             
             if any(name in self.model_name.lower() for name in ['clip', 'blip', 'llava-v1.5', 'llava-v1.6', 'hpsv2', 'pickscore', 'imag-reward']):
                 processed_images = []
@@ -102,54 +103,44 @@ class Score(nn.Module):
         for i, image in enumerate(images):
             scores[i] = self.model.forward([image] * len(texts), texts, **kwargs)
         return scores
-    # def forward(self,
-    #             videos: Optional[Union[str, List[str]]],
-    #             num_frames: Optional[Union[str, List[str]]],
-    #             concatenate: Optional[str],
-    #             images: Optional[Union[str, List[str]]],
-    #             texts: Optional[Union[str, List[str]]],
-    #             **kwargs) -> torch.Tensor:
-    #     """Return the similarity score(s) between the image(s) and the text(s)
-    #     If there are m images and n texts, return a m x n tensor
-    #     """
-    #     if type(images) == str:
-    #         images = [images]
-    #     if type(texts) == str:
-    #         texts = [texts]
-        
-    #     scores = torch.zeros(len(images), len(texts)).to(self.device)
-    #     for i, image in enumerate(images):
-    #         scores[i] = self.model.forward([image] * len(texts), texts, **kwargs)
-    #     return scores
     
     def batch_forward(self,
                       dataset: List[ImageTextDict],
                       batch_size: int=16,
+                      num_frames: int=4,
                       **kwargs) -> torch.Tensor:
-        """Return the similarity score(s) between the image(s) and the text(s)
+        """Return the similarity score(s) between the image(s)/video(s) and the text(s)
         If there are m images and n texts, return a m x n tensor
         """
         num_samples = len(dataset)
-        num_images = len(dataset[0]['images'])
+        if "videos" in dataset[0]:
+            media_type = "videos"
+        else:
+            media_type = "images"
+        num_visuals = len(dataset[0][media_type])
         num_texts = len(dataset[0]['texts'])
-        scores = torch.zeros(num_samples, num_images, num_texts).to(self.device)
+        scores = torch.zeros(num_samples, num_visuals, num_texts).to(self.device)
         
         
         dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=False)
         counter = 0
         for batch_idx, batch in tqdm(enumerate(dataloader), total=len(dataloader)):
-            cur_batch_size = len(batch['images'][0])
-            assert len(batch['images']) == num_images, \
-                f"Number of image options in batch {batch_idx} is {len(batch['images'])}. Expected {num_images} images."
+            cur_batch_size = len(batch[media_type][0])
+            assert len(batch[media_type]) == num_visuals, \
+                f"Number of visual (image/video) options in batch {batch_idx} is {len(batch[media_type])}. Expected {num_visuals} visuals."
             assert len(batch['texts']) == num_texts, \
                 f"Number of text options in batch {batch_idx} is {len(batch['texts'])}. Expected {num_texts} texts."
             
-            for image_idx in range(num_images):
-                images = batch['images'][image_idx]
+            for vis_idx in range(num_visuals):
+                visuals = batch[media_type][vis_idx]
                 for text_idx in range(num_texts):
                     texts = batch['texts'][text_idx]
-                    scores[counter:counter+cur_batch_size, image_idx, text_idx] = \
-                        self.model.forward(images, texts, **kwargs)
+                    if media_type == 'videos':
+                        scores[counter:counter+cur_batch_size, vis_idx, text_idx] = \
+                        torch.squeeze(torch.cat([self.forward(videos=visual, texts=text, num_frames=num_frames, **kwargs) for (visual, text) in zip(visuals, texts)], dim=0))
+                    else:
+                        scores[counter:counter+cur_batch_size, vis_idx, text_idx] = \
+                        torch.squeeze(torch.cat([self.forward(images=visual, texts=text, **kwargs) for (visual, text) in zip(visuals, texts)], dim=0))
             
             counter += cur_batch_size
         return scores
