@@ -12,7 +12,7 @@ Baiqi Li*, [Zhiqiu Lin*](https://linzhiqiu.github.io/), [Deepak Pathak](https://
 
 ## News
 
-- [2024/08/13] 🔥 **VQAScore** is highlighted in Google's [Imagen3 report](https://arxiv.org/abs/2408.07009) as the strongest replacement of CLIPScore for automated evaluation! **GenAI-Bench** was chosen as one of the key benchmark to showcase Imagen3's superior prompt-image alignment. Kudos to Google for this achievement! [[Paper](https://arxiv.org/abs/2408.07009)]
+- [2024/08/13] 🔥 **VQAScore** is highlighted in Google's [Imagen3 report](https://arxiv.org/abs/2408.07009) as the strongest replacement of CLIPScore for automated evaluation! **GenAI-Bench** was chosen as one of the key benchmarks to showcase Imagen3's superior prompt-image alignment. Kudos to Google for this achievement! [[Paper](https://arxiv.org/abs/2408.07009)]
 - [2024/07/01] 🔥 **VQAScore** has been accepted to ECCV 2024!
 - [2024/06/20] 🔥 **GenAI-Bench** won Best Short Paper at the CVPR'24 SynData Workshop! [[Workshop Site](https://syndata4cv.github.io/)].
 
@@ -36,8 +36,6 @@ pip install git+https://github.com/openai/CLIP.git
 pip install -e . # local pip install
 ```
 
-Note: For CLIP-FlanT5 usage only, version 4.36.1 of the `transformers` package is necessary (i.e.`pip install transformers==4.36.1`).
-
 <!-- (not yet implemented) Or simply run `pip install t2v_metrics`.  -->
 Or you can install via `pip install t2v-metrics`.
 
@@ -59,36 +57,6 @@ texts = ["someone talks on the phone angrily while another person sits happily",
          "someone talks on the phone happily while another person sits angrily"]
 scores = clip_flant5_score(images=images, texts=texts) # scores[i][j] is the score between image i and text j
 ```
-## (Preview) NEW! - Video Inference:
-
-This is a preview version of a new feature for T2V: video inference! Note that this feature requires installation of `flash-attn`. Please do this in addition to the evironment setup above to align with your system environment. 
-
-For single-image and CLIP-like models, video frames are concatenated. For all other native interleaved-image/video models (we recommend LLaVA-OneVision at the time of writing), video frames are passed directly to the model.
-
-```python
-import t2v_metrics
-
-### For a single (video, text) pair on a single-image model:
-clip_flant5_score = t2v_metrics.VQAScore(model='clip-flant5-xxl') 
-video = "videos/baby.mp4" # an image path in string format
-text = "a baby crying"
-score = clip_flant5_score(videos=[video], texts=[text], concatenate='horizontal', num_frames=4) # For native interleaved-image/video LMM models (like LLaVA-OneVision), the 'concatenate' argument is unecessary.
-
-
-### For a single (video, text) pair on an interleaved-image/video model:
-llava_ov_score = t2v_metrics.VQAScore(model='llava-onevision-qwen2-7b-ov') 
-video = "videos/baby.mp4" # an image path in string format
-text = "a baby crying"
-score = llava_ov_score(videos=[video], texts=[text], num_frames=4) 
-
-### Alternatively, if you want to calculate the pairwise similarity scores 
-### between M videos and N texts, run the following to return a M x N score tensor.
-videos = ["videos/baby.mp4", "video/ducks.mp4"]
-texts = ["a baby crying",
-         "a group of ducks standing in the water"]
-score = llava_ov_score(videos=[videos], texts=[text], num_frames=4) # scores[i][j] is the score between video i and text j
-```
-
 
 ### Notes on GPU and cache
 - **GPU usage**: By default, this code uses the first cuda device on your machine. We recommend 40GB GPUs for the largest VQAScore models such as `clip-flant5-xxl` and `llava-v1.5-13b`. If you have limited GPU memory, consider smaller models such as `clip-flant5-xl` and `llava-v1.5-7b`.
@@ -104,6 +72,7 @@ score = llava_ov_score(videos=[videos], texts=[text], num_frames=4) # scores[i][
 - [Using GPT-4o for VQAScore](#using-gpt-4o-for-vqascore)
 - [Implementing your own scoring metric](#implementing-your-own-scoring-metric)
 - [Text generation (VQA) using CLIP-FlanT5](#text-generation-vqa-using-clip-flant5)
+- [Video-text alignment scores](#video-text-alignment-scores)
 
 ### Batch processing for more image-text pairs
 With a large batch of M images x N texts, you can speed up using the ``batch_forward()`` function. 
@@ -216,6 +185,53 @@ images = ["images/0.png", "images/0.png"] # A list of images
 prompts = ["Please describe this image: ", "Does the image show 'someone talks on the phone angrily while another person sits happily'?"] # Corresponding prompts
 clip_flant5_score.model.generate(images=images, prompts=prompts)
 ```
+Note that this feature is only supported for version 4.36.1 of the `transformers` package (i.e.`pip install transformers==4.36.1`).
+
+### Video-Text Alignment Scores
+
+We now support video-text alignment scores, including video-CLIPScore with InternVideo2, and video-VQAScore with LLaVA-OneVision, mPlug-Owl3, and CLIP-FlanT5. To get started, please install `flash-attn':
+
+```
+pip install flash-attn --no-build-isolation
+```
+
+For single-image and CLIP-like models, video frames are concatenated. For all other native interleaved-image/video models (we recommend LLaVA-OneVision at the time of writing), video frames are passed directly to the model.
+
+```python
+import t2v_metrics
+
+### For a single (video, text) pair on a image-only VQA model:
+clip_flant5_score = t2v_metrics.VQAScore(model='clip-flant5-xxl') 
+video = "videos/baby.mp4" # a video path in string format
+text = "a baby crying"
+score = clip_flant5_score(videos=[video], texts=[text], concatenate='horizontal', num_frames=4) # For native interleaved-image/video LMM models (like LLaVA-OneVision), the 'concatenate' argument is unecessary.
+
+### For a single (video, text) pair on an interleaved-image/video VQA model:
+llava_ov_score = t2v_metrics.VQAScore(model='llava-onevision-qwen2-7b-ov') 
+video = "videos/baby.mp4" # a video path in string format
+text = "a baby crying"
+score = llava_ov_score(videos=[video], texts=[text], num_frames=4) 
+
+### Alternatively, if you want to calculate the pairwise similarity scores 
+### between M videos and N texts, run the following to return a M x N score tensor.
+videos = ["videos/baby.mp4", "video/ducks.mp4"]
+texts = ["a baby crying",
+         "a group of ducks standing in the water"]
+score = llava_ov_score(videos=[videos], texts=[text], num_frames=4) # scores[i][j] is the score between video i and text j
+```
+
+## Contributions
+
+- **[Zhiqiu Lin](https://x.com/ZhiqiuLin)**, **[Jean de Nyandwi](https://x.com/Jeande_d)**, **[Chancharik Mitra](https://x.com/chancharikm)**  
+  Implemented image-based **CLIPScore** and **VQAScore** for:  
+  CLIP-FlanT5, GPT-4o, LLaVA-1.5, InstructBLIP, OpenCLIP, HPSv2, ImageReward, PickScore.
+
+- **Baiqi Li**  
+  Implemented **GenAI-Bench** and **GenAI-Rank** benchmarks.
+
+- **[Chancharik Mitra](https://x.com/chancharikm)**  
+  Implemented video-based **VQAScore** for:  
+  LLaVA-OneVision, InternVideo2, mPLUG-Owl3, PaLI-Gemma, InternVL2, InternLMXC2.5.
 
 ## Citation
 
