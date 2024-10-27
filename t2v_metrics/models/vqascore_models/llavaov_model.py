@@ -36,6 +36,8 @@ LLAVA_OV_MODELS = {
 }
 
 class LLaVAOneVisionModel(VQAScoreModel):
+    video_mode = "direct"
+    allows_image = True
     def __init__(self,
                  model_name='llava-onevision-qwen2-7b-ov',
                  device='cuda',
@@ -47,6 +49,7 @@ class LLaVAOneVisionModel(VQAScoreModel):
         self.model_info = LLAVA_OV_MODELS[model_name]
         self.conversational_style = self.model_info['model']['conversation']
         self.load_model()
+        
 
     def load_model(self):
         model_path = self.model_info['model']['path']
@@ -137,6 +140,41 @@ class LLaVAOneVisionModel(VQAScoreModel):
 
         
         return torch.tensor(lm_probs)
+    
+    def generate(self,
+            paths: List[str],
+            texts: List[str],
+            max_new_tokens: int = 256) -> List[str]:
+        assert len(paths) == len(texts), "Number of paths and texts must match"
+        
+        texts = [self.format_question(text) for text in texts]
+        processed_data = self.load_images(paths)
+        
+        generated_texts = []
+        for data, prompt in zip(processed_data, texts):
+            if isinstance(data, torch.Tensor) and data.dim() == 4:  # Video
+                image_sizes = [data.shape[2:] for _ in range(data.shape[0])]
+                modalities = ["video"]
+            else:  # Image
+                image_sizes = [data.shape[1:]]
+                modalities = None
+            
+            input_ids = tokenizer_image_token(prompt, self.tokenizer, IMAGE_TOKEN_INDEX, return_tensors="pt").unsqueeze(0).to(self.device)
+            
+            outputs = self.model.generate(
+                input_ids,
+                images=[data],
+                image_sizes=image_sizes,
+                do_sample=False,
+                temperature=0,
+                max_new_tokens=max_new_tokens,
+                modalities=modalities
+            )
+            
+            text = self.tokenizer.decode(outputs[0], skip_special_tokens=True)
+            generated_texts.append(text.strip())
+
+        return generated_texts
 
     def format_question(self, question):
         conv = copy.deepcopy(conv_templates[self.conversational_style])

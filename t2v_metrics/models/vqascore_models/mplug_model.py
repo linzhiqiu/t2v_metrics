@@ -22,6 +22,8 @@ MPLUG_OWL3_MODELS = {
 }
 
 class mPLUGOwl3Model(VQAScoreModel):
+    video_mode = "direct"
+    allows_image = True
     def __init__(self,
                  model_name='mplug-owl3-7b',
                  device='cuda',
@@ -32,6 +34,7 @@ class mPLUGOwl3Model(VQAScoreModel):
         self.cache_dir = cache_dir
         self.model_info = MPLUG_OWL3_MODELS[model_name]
         self.load_model()
+        
 
     def load_model(self):
         # model_path = self.model_info['model']['path']
@@ -107,16 +110,6 @@ class mPLUGOwl3Model(VQAScoreModel):
                 inputs = self.processor(messages, images=[data], videos=None)
 
             inputs.to(self.device)
-            # inputs.update({
-            #     'tokenizer': self.tokenizer,
-            #     'max_new_tokens': 1,
-            #     'do_sample': False,
-            #     'output_scores': True,
-            #     'return_dict_in_generate': True,
-            # })
-
-            # It seems the generate method will need to be reimplemented since mPLUGOwl assumes that the model would only be used for text generation and not checking logit probaility :(
-            # outputs = self.model.generate(**inputs)
 
             with torch.inference_mode():
                 image_embeds = self.model.forward_image(inputs['pixel_values'])
@@ -143,3 +136,50 @@ class mPLUGOwl3Model(VQAScoreModel):
             lm_probs.append(lm_prob)
 
         return torch.tensor(lm_probs)
+    
+
+    def generate(self,
+                paths: List[str],
+                texts: List[str],
+                max_new_tokens: int = 256) -> List[str]:
+        assert len(paths) == len(texts), "Number of paths and texts must match"
+
+        processed_data = self.load_images(paths)
+
+        generated_texts = []
+        for data, text in zip(processed_data, texts):
+            if isinstance(data, list):  # Video
+                messages = [
+                    {"role": "user", "content": f"<|video|>\n{text}"},
+                    {"role": "assistant", "content": ""}
+                ]
+                inputs = self.processor(messages, images=None, videos=[data])
+            else:  # Image
+                messages = [
+                    {"role": "user", "content": f"<|image|>\n{text}"},
+                    {"role": "assistant", "content": ""}
+                ]
+                inputs = self.processor(messages, images=[data], videos=None)
+
+            inputs.to(self.device)
+
+            with torch.inference_mode():
+                image_embeds = self.model.forward_image(inputs['pixel_values'])
+
+                terminators = [self.tokenizer.convert_tokens_to_ids(i) for i in self.model.terminators]
+
+                outputs = self.model.language_model.generate(
+                    input_ids=inputs['input_ids'],
+                    image_embeds=image_embeds,
+                    media_offset=inputs['media_offset'],
+                    pad_token_id=0,
+                    eos_token_id=terminators,
+                    attention_mask=None,
+                    max_new_tokens=max_new_tokens,
+                    do_sample=False
+                )
+                
+                text = self.tokenizer.decode(outputs[0], skip_special_tokens=True)
+                generated_texts.append(text.strip())
+
+        return generated_texts

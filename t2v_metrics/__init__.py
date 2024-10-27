@@ -2,6 +2,10 @@
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
+import sys
+import os
+
+sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'models/clipscore_models/InternVideo2/multi_modality/'))
 
 from .constants import HF_CACHE_DIR
 from .vqascore import VQAScore, list_all_vqascore_models

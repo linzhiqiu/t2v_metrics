@@ -158,6 +158,8 @@ CLIP_T5_MODELS = {
 
 class CLIPT5Model(VQAScoreModel):
     """A wrapper for the CLIP-FlanT5 or CLIP-T5 models"""
+    video_mode = "concat"
+    allows_image = True
     def __init__(self,
                  model_name='clip-flant5-xxl',
                  device='cuda',

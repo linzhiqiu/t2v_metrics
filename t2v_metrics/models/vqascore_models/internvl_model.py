@@ -32,6 +32,8 @@ IMAGENET_MEAN = (0.485, 0.456, 0.406)
 IMAGENET_STD = (0.229, 0.224, 0.225)
 
 class InternVL2Model(VQAScoreModel):
+    video_mode = "direct"
+    allows_image = True
     def __init__(self,
                  model_name='internvl2-8b',
                  device='cuda',
@@ -42,6 +44,7 @@ class InternVL2Model(VQAScoreModel):
         self.cache_dir = cache_dir
         self.model_info = INTERNVL2_MODELS[model_name]
         self.load_model()
+        
 
     def load_model(self):
         tokenizer_path = self.model_info['tokenizer']['path']
@@ -151,7 +154,7 @@ class InternVL2Model(VQAScoreModel):
         transform = self.build_transform(input_size=input_size)
         frame_indices = self.get_video_index(bound, fps, max_frame, first_idx=0, num_segments=num_segments)
         for frame_index in frame_indices:
-            img = Image.fromarray(vr[frame_index].asnumpy()).convert('RGB')
+            img = Image.fromarray(vr[frame_index].numpy()).convert('RGB')
             img = self.dynamic_preprocess(img, image_size=input_size, use_thumbnail=True, max_num=max_num)
             pixel_values = [transform(tile) for tile in img]
             pixel_values = torch.stack(pixel_values)
@@ -167,7 +170,7 @@ class InternVL2Model(VQAScoreModel):
             if path.lower().endswith(('.mp4', '.avi', '.mov', '.mkv')):  # Video file
                 video_frames, video_num_patches = self.load_video(path, num_segments=num_frames)
                 processed_data.append(video_frames)
-                num_patches_list.extend(video_num_patches)
+                num_patches_list.append(video_num_patches) # You want a list of lists
             else:  # Image file or .npy file
                 image_tensor = self.load_image(path)
                 processed_data.append(image_tensor)
@@ -251,15 +254,10 @@ class InternVL2Model(VQAScoreModel):
                 attention_mask=attention_mask,
                 **generation_config
             )
-            
-            # print(f'Prompt {query}')
-            # print(f'Output {self.tokenizer.batch_decode(outputs["sequences"])[0]}')
-            # print(f'Scores Len {len(outputs.scores)}')
-            # print(f'Tokenizer encoding of 1 {self.tokenizer.convert_ids_to_tokens(0)}')
-            # print(f'Tokenizer encoding of 1 {self.tokenizer.convert_ids_to_tokens(9583)}')
+
 
             scores = outputs.scores[0]
-            # print(scores.shape)
+
             probs = torch.nn.functional.softmax(scores, dim=-1)
             yes_token_id = self.tokenizer.encode("Yes")[1] 
             '''
@@ -269,9 +267,76 @@ class InternVL2Model(VQAScoreModel):
 
             Not sure if this affects the old baselines. Check with Zhiqiu.
             '''
-            # print(yes_token_id)
-            # print(scores)
+
             lm_prob = probs[0, yes_token_id].item()
             lm_probs.append(lm_prob)
 
         return torch.tensor(lm_probs)
+    
+     def generate(self,
+                paths: List[str],
+                texts: List[str],
+                max_new_tokens: int = 256) -> torch.Tensor:
+        assert len(paths) == len(texts), "Number of paths and texts must match"
+
+        questions = texts
+        processed_data, num_patches_list = self.load_images(paths)
+
+        gen_outputs = []
+        for data, question, num_patches in zip(processed_data, questions, num_patches_list):
+            if isinstance(num_patches, list):  # Video
+                video_prefix = ''.join([f'Frame{i+1}: <image>\n' for i in range(len(num_patches))])
+                prompt = video_prefix + question
+            else:  # Image
+                prompt = '<image>\n' + question
+                num_patches = [num_patches]
+
+            pixel_values = data.to(self.device).to(self.model.dtype)
+            generation_config = dict(max_new_tokens=max_new_tokens, do_sample=False, output_scores=True, return_dict_in_generate=True)
+            IMG_START_TOKEN='<img>'
+            IMG_END_TOKEN='</img>' 
+            IMG_CONTEXT_TOKEN='<IMG_CONTEXT>'
+            verbose=False
+            history=None
+
+            
+            assert pixel_values is None or len(pixel_values) == sum(num_patches)
+            img_context_token_id = self.tokenizer.convert_tokens_to_ids(IMG_CONTEXT_TOKEN)
+            self.model.img_context_token_id = img_context_token_id
+
+            template = get_conv_template(self.model.template)
+            template.system_message = self.model.system_message
+            eos_token_id = self.tokenizer.convert_tokens_to_ids(template.sep)
+
+            history = [] if history is None else history
+            for (old_question, old_answer) in history:
+                template.append_message(template.roles[0], old_question)
+                template.append_message(template.roles[1], old_answer)
+            template.append_message(template.roles[0], prompt)
+            template.append_message(template.roles[1], None)
+            query = template.get_prompt()
+
+            if verbose and pixel_values is not None:
+                image_bs = pixel_values.shape[0]
+                print(f'dynamic ViT batch size: {image_bs}')
+
+            for patch in num_patches:
+                image_tokens = IMG_START_TOKEN + IMG_CONTEXT_TOKEN * self.model.num_image_token * patch + IMG_END_TOKEN
+                query = query.replace('<image>', image_tokens, 1)
+
+            model_inputs = self.tokenizer(query, return_tensors='pt')
+            input_ids = model_inputs['input_ids'].to(self.device)
+            attention_mask = model_inputs['attention_mask'].to(self.device)
+            generation_config['eos_token_id'] = eos_token_id
+            outputs = self.model.generate(
+                pixel_values=pixel_values,
+                input_ids=input_ids,
+                attention_mask=attention_mask,
+                **generation_config
+            )
+
+
+            outputs = self.decode(outputs.sequences[0], skip_special_tokens=True).strip()
+            gen_outputs.append(outputs)
+
+        return gen_outputs

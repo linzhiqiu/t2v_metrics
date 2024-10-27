@@ -59,6 +59,7 @@ texts = ["someone talks on the phone angrily while another person sits happily",
          "someone talks on the phone happily while another person sits angrily"]
 scores = clip_flant5_score(images=images, texts=texts) # scores[i][j] is the score between image i and text j
 ```
+**Disclaimer:** If you would like to use text generation with CLIP-FlanT5, please downgrade the transformers package to `transformers==4.36.1`.
 ## (Preview) NEW! - Video Inference:
 
 This is a preview version of a new feature for T2V: video inference! Note that this feature requires installation of `flash-attn`. Please do this in addition to the evironment setup above to align with your system environment. 

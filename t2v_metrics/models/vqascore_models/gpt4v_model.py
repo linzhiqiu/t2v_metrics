@@ -44,6 +44,8 @@ def extract_frames(video_path, num_frames):
     return frames
 
 class GPT4VModel(VQAScoreModel):
+    video_mode = "direct"
+    allows_image = True
     def __init__(self,
                  model_name='gpt-4-turbo',
                  device='cuda',
@@ -80,7 +82,7 @@ class GPT4VModel(VQAScoreModel):
                 })
         return loaded_data
 
-    def forward_single(self, data, question, answer):
+    def forward_single(self, data, question):#, answer):
         try:
             if data['type'] == 'video':
                 content = [
@@ -119,34 +121,24 @@ class GPT4VModel(VQAScoreModel):
                     logprobs=True,
                     top_logprobs=self.top_logprobs,
                 )
-            except: # Old Error Handling
-                print(f"Failed image: {image['path']} and question: {question} and answer: {answer}")
+            except Exception as e: # Old Error Handling
+                print(f"Failed image: {data['path']} and question: {question} and answer: {answer}")
+                print(f"Error: {str(e)}")
                 return torch.Tensor([0.0])
 
                 
         is_generated = False
         for top_logprob in completion.choices[0].logprobs.content[0].top_logprobs:
-            if top_logprob.token == answer:
+            if top_logprob.token == 'Yes' or top_logprob.token == 'yes':
                 is_generated = True
                 return torch.Tensor([top_logprob.logprob]).exp()
+            elif top_logprob.token == 'No' or top_logprob.token == 'no':
+                is_generated = True
+                return 1 - torch.Tensor([top_logprob.logprob]).exp()
         if not is_generated:
-            print(f"Warning: answer not generated for image: {image['path']} and question: {question} and answer: {answer}")
+            print(f"Warning: 'Yes' not included in gpt4o log probs: {data['path']} and question: {question} and answer: {answer}")
             print(completion.choices[0].logprobs.content[0].top_logprobs)
             return torch.Tensor([0.0])
-        # except Exception as e:
-        #     print(f"Warning: completion not generated for {data['path']} and question: {question}")
-        #     print(f"Error: {str(e)}")
-        #     return torch.Tensor([0.0])
-        
-
-
-        # for top_logprob in completion.choices[0].logprobs.content[0].top_logprobs:
-        #     if top_logprob.token == answer:
-        #         return torch.Tensor([top_logprob.logprob]).exp()
-        
-        # print(f"Warning: answer not generated for {data['path']} and question: {question}")
-        # print(completion.choices[0].logprobs.content[0].top_logprobs)
-        # return torch.Tensor([0.0])
 
     def forward(self,
                 paths: List[str],
@@ -168,6 +160,67 @@ class GPT4VModel(VQAScoreModel):
         lm_prob = torch.zeros(len(paths))
 
         for idx, (data, question, answer) in enumerate(zip(loaded_data, questions, answers)):
-            lm_prob[idx] = self.forward_single(data, question, answer)
+            lm_prob[idx] = self.forward_single(data, question)#, answer)
 
         return lm_prob
+    
+    def generate_single(self, data, question):
+        try:
+            if data['type'] == 'video':
+                content = [
+                    {"type": "text", "text": question},
+                    *[{"type": "image_url", "image_url": {"url": f"data:image/jpg;base64,{frame}"}} for frame in data['frames']]
+                ]
+            else:
+                content = [
+                    {"type": "text", "text": question},
+                    {"type": "image_url", "image_url": {"url": f"data:image/{data['type']};base64,{data['base64']}"}}
+                ]
+
+            completion = self.client.chat.completions.create(
+                model=self.model_name,
+                messages=[{"role": "user", "content": content}],
+                max_tokens=256,
+            )
+
+        except:
+            try:  # Second try
+                if data['type'] == 'video':
+                    content = [
+                        {"type": "text", "text": question},
+                        *[{"type": "image_url", "image_url": {"url": f"data:image/jpg;base64,{frame}"}} for frame in data['frames']]
+                    ]
+                else:
+                    content = [
+                        {"type": "text", "text": question},
+                        {"type": "image_url", "image_url": {"url": f"data:image/{data['type']};base64,{data['base64']}"}}
+                    ]
+
+                completion = self.client.chat.completions.create(
+                    model=self.model_name,
+                    messages=[{"role": "user", "content": content}],
+                    max_tokens=256,
+                )
+            except Exception as e:
+                print(f"Failed image: {data['path']} and question: {question}")
+                print(f"Error: {str(e)}")
+                return ""
+
+        return completion.choices[0].message.content
+
+    def generate(self,
+            paths: List[str],
+            texts: List[str],
+            num_frames: int = 5) -> List[str]:
+        assert len(paths) == len(texts), "Number of paths and texts must match"
+        
+        questions = texts
+        loaded_data = self.load_images(paths, num_frames)
+
+        generated_outputs = []
+
+        for idx, (data, question) in enumerate(zip(loaded_data, questions)):
+            generated_text = self.generate_single(data, question)
+            generated_outputs.append(generated_text)
+
+        return generated_outputs

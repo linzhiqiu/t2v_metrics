@@ -40,6 +40,18 @@ INTERNVIDEO2_MODELS = {
             'trust_remote_code': True,
         },
     },
+    'internvideo2-chat-8b-internlm': {
+        'tokenizer': {
+            'pretrained_model_name_or_path': 'OpenGVLab/InternVideo2_Chat_8B_InternLM2_5',
+            'trust_remote_code': True,
+            'use_fast': False,
+        },
+        'model': {
+            'pretrained_model_name_or_path': 'OpenGVLab/InternVideo2_Chat_8B_InternLM2_5',
+            'torch_dtype': torch.bfloat16,
+            'trust_remote_code': True,
+        },
+    },
 }
 
 IMG_TOKEN = "[<IMG_PLH>]"
@@ -56,6 +68,8 @@ DEFAULT_VIDEO_TOKEN = "[VIDEOTOKEN]"
 DEFAULT_IMG_PLACEHOLDER = "[<IMG_PLH>]"
 DEFAULT_VID_PLACEHOLDER = "[<VID_PLH>]"
 class InternVideo2Model(VQAScoreModel):
+    video_mode = "direct"
+    allows_image = False
     def __init__(self,
                  model_name='internvideo2-chat-8b',
                  device='cuda',
@@ -273,7 +287,177 @@ class InternVideo2Model(VQAScoreModel):
             lm_probs.append(lm_prob)
 
         return torch.tensor(lm_probs)
-    
+
+    def generate(self,
+                    paths: List[str],
+                    texts: List[str],
+                    num_segments: int = None,
+                    resolution: int = None,
+                    hd_num: int = None) -> torch.Tensor:
+        assert len(paths) == len(texts), "Number of paths and texts must match"
+
+        questions = texts
+        processed_data = self.load_images(paths)
+
+        gen_outputs = []
+        for data, question in zip(processed_data, questions):
+            data = data.to(self.device)
+            chat_history = []
+            media_type='video' if data.dim() == 6 else 'image'  # 6D for video, 5D for image
+            instruction=None
+            msg = ''
+            user_prompt = question
+            media_tensor = data
+            if self.model_name == 'internvideo2-chat-8b':
+                input_ids, attention_masks, labels = [], [], []
+
+                conversation = ""
+                if instruction:
+                    conversation += instruction
+                conversation += (
+                            "[INST]" + " "
+                        )
+
+                if media_type == 'image':
+                    conversation +=( "<Image>" + IMG_TOKEN + "</Image>")#*ilen
+                else:
+                    conversation += ("<Video>" + VID_TOKEN + "</Video>")#*ilen
+
+
+                conversation += (
+                            msg.rstrip() + "[/INST]"
+                        )
+
+                for q,a in chat_history:
+                    conversation += (" [INST] " + q + " [/INST]")
+                    conversation += (a + "</s>")
+
+                conversation += (" [INST] " + user_prompt + " [/INST]")
+                conversation += ("")
+
+
+                total_len = 0
+                indexs = []
+                tokenized = self.build_input_ids_chat(
+                    self.tokenizer,
+                    conversation,
+                    max_length=248,
+                    add_special_tokens=True,
+                    truncation=False,
+                    padding=False,
+                    return_tensors='pt'
+                )
+                if media_type == 'image':
+                    response = self.generate_caption_chat(
+                        tokenized['input_ids'].unsqueeze(0).to(self.device), 
+                        tokenized['attention_mask'].unsqueeze(0).to(self.device), 
+                        image_idx = tokenized['index'].unsqueeze(0),
+                        image = media_tensor.unsqueeze(0), 
+                    )
+                else:
+                    response = self.generate_caption_chat(
+                        tokenized['input_ids'].unsqueeze(0).to(self.device), 
+                        tokenized['attention_mask'].unsqueeze(0).to(self.device), 
+                        video_idx = tokenized['index'].unsqueeze(0),
+                        video = media_tensor.unsqueeze(0), 
+                    )
+            elif self.model_name == 'internvideo2-chat-8b-hd':
+                answer_prompt = None
+                conversation = ""
+                if instruction:
+                    conversation += instruction
+                conversation += (
+                            "[INST]" + " "
+                        )
+
+                if media_type == 'image':
+                    ilen = media_tensor.shape[0]
+                    conversation +=( "<Image>" + IMG_TOKEN + "</Image>")*ilen
+                else:
+                    ilen = media_tensor.shape[1]
+                    conversation += ("<Video>" + VID_TOKEN + "</Video>")*ilen
+
+
+                conversation += (
+                            msg.rstrip() + "[/INST]"
+                        )
+
+                for q,a in chat_history:
+                    conversation += (" [INST] " + q + " [/INST]")
+                    conversation += (a + "</s>")
+
+                conversation += (" [INST] " + user_prompt + " [/INST]")
+                if answer_prompt:
+                    conversation += (answer_prompt)
+                else:
+                    conversation += ("")
+
+
+                total_len = 0
+                indexs = []
+                # ilen = media_tensor.shape[1]
+
+                # conversation = ""
+                # if instruction:
+                #     conversation += instruction
+                # conversation += (
+                #             "[INST]" + " "
+                #         )
+
+                # if media_type == 'image':
+                #     conversation +=( "<Image>" + IMG_TOKEN + "</Image>")*ilen
+                # else:
+                #     conversation += ("<Video>" + VID_TOKEN + "</Video>")*ilen
+
+
+                # conversation += (
+                #             msg.rstrip() + "[/INST]"
+                #         )
+
+                # for q,a in chat_history:
+                #     conversation += (" [INST] " + q + " [/INST]")
+                #     conversation += (a + "</s>")
+
+                # conversation += (" [INST] " + user_prompt + " [/INST]")
+                # conversation += ("")
+
+
+                # total_len = 0
+                # indexs = []
+                tokenized = self.build_input_ids_chat_hd(
+                    self.tokenizer,
+                    conversation,
+                    max_length=1024,
+                    add_special_tokens=True,
+                    truncation=False,
+                    padding=False,
+                    return_tensors='pt'
+                )
+                if media_type == 'image':
+                    response = self.generate_caption_chat_hd(
+                        tokenized['input_ids'].unsqueeze(0).to(self.device), 
+                        tokenized['attention_mask'].unsqueeze(0).to(self.device), 
+                        image_idx = tokenized['index'].unsqueeze(0),
+                        image = media_tensor,
+                        instruction=[instruction]* ilen if instruction else None,
+                
+                    )
+                else:
+                    response = self.generate_caption_chat_hd(
+                        tokenized['input_ids'].unsqueeze(0).to(self.device), 
+                        tokenized['attention_mask'].unsqueeze(0).to(self.device), 
+                        video_idx = tokenized['index'].unsqueeze(0),
+                        video = media_tensor, 
+                        instruction=[instruction]* ilen if instruction else None,
+                    )
+
+            tokens = response.sequences[0] 
+            text = self.tokenizer.decode(tokens, skip_special_tokens=True).strip()
+
+            gen_outputs.append(text)
+
+        return gen_outputs
+        
     # **
     # **
     # Helper Functions:

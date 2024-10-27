@@ -4,6 +4,7 @@ import os
 import tempfile
 from typing import List, Union
 from transformers import AutoModel, AutoTokenizer
+from PIL import Image
 
 from .vqa_model import VQAScoreModel
 
@@ -23,6 +24,8 @@ INTERNLMXCOMPOSER25_MODELS = {
 }
 
 class InternLMXComposer25Model(VQAScoreModel):
+    video_mode = "direct"
+    allows_image = True
     def __init__(self,
                  model_name='internlmxcomposer25-7b',
                  device='cuda',
@@ -33,6 +36,7 @@ class InternLMXComposer25Model(VQAScoreModel):
         self.cache_dir = cache_dir
         self.model_info = INTERNLMXCOMPOSER25_MODELS[model_name]
         self.load_model()
+        
 
     def load_model(self):
         tokenizer_path = self.model_info['tokenizer']['path']
@@ -90,7 +94,7 @@ class InternLMXComposer25Model(VQAScoreModel):
                 query = f"<ImageHere> {question}"
             
             use_meta = True
-            image = path
+            image = [path]
             history = []
             meta_instruction = 'You are an AI assistant whose name is InternLM-XComposer (浦语·灵笔).\n'
             '- InternLM-XComposer (浦语·灵笔) is a multi-modality conversational language model that is developed by Shanghai AI Laboratory (上海人工智能实验室). It is designed to be helpful, honest, and harmless.\n'
@@ -102,40 +106,50 @@ class InternLMXComposer25Model(VQAScoreModel):
             infer_mode='base'
             hd_num = 24
 
-
-
-            if not use_meta:
-                meta_instruction = ''
-            if image is None:
-                inputs = self.model.build_inputs(self.tokenizer, query, history, meta_instruction)
-                im_mask = torch.zeros(inputs['input_ids'].shape[:2]).cuda().bool()
-            else:
-                inputs, im_mask, _ = self.model.interleav_wrap_chat(query, image, history=history, meta_instruction=meta_instruction, hd_num=hd_num)
-            inputs = {
-                k: v.to(self.device)
-                for k, v in inputs.items() if torch.is_tensor(v)
-            }
-            # also add end-of-assistant token in eos token id to avoid unnecessary generation
-            eos_token_id = [
-                tokenizer.eos_token_id,
-                tokenizer.convert_tokens_to_ids(['[UNUSED_TOKEN_145]'])[0]
-            ]
-            outputs = self.model.generate(
-                **inputs,
-                streamer=streamer,
-                max_new_tokens=max_new_tokens,
-                num_beams=num_beams,
-                do_sample=do_sample,
-                eos_token_id=eos_token_id,
-                repetition_penalty=repetition_penalty,
-                im_mask=im_mask,
-                infer_mode=infer_mode,
-                output_scores=True, 
-                return_dict_in_generate=True
-            )
+            # Ensure all input images are in RGB:
+            with Image.open(path) as img:
+                # If the image has an alpha channel (RGBA), convert it to RGB
+                if img.mode == 'RGBA':
+                    img = img.convert('RGB')
+                    # Overwrite the original image or save to a new directory
+                    img.save(path)  # Overwrite the original file
+                elif img.mode == 'LA':  # Convert LA (grayscale with alpha) to RGB
+                    img = img.convert('RGB')
+                    img.save(path)
+        
+            with torch.autocast(device_type='cuda', dtype=torch.float16):
+                if not use_meta:
+                    meta_instruction = ''
+                if image is None:
+                    inputs = self.model.build_inputs(self.tokenizer, query, history, meta_instruction)
+                    im_mask = torch.zeros(inputs['input_ids'].shape[:2]).cuda().bool()
+                else:
+                    inputs, im_mask, _ = self.model.interleav_wrap_chat(query, image, history=history, meta_instruction=meta_instruction, hd_num=hd_num)
+                inputs = {
+                    k: v.to(self.device)
+                    for k, v in inputs.items() if torch.is_tensor(v)
+                }
+                # also add end-of-assistant token in eos token id to avoid unnecessary generation
+                eos_token_id = [
+                    self.tokenizer.eos_token_id,
+                    self.tokenizer.convert_tokens_to_ids(['[UNUSED_TOKEN_145]'])[0]
+                ]
+                outputs = self.model.generate(
+                    **inputs,
+                    streamer=streamer,
+                    max_new_tokens=1,
+                    num_beams=num_beams,
+                    do_sample=do_sample,
+                    eos_token_id=eos_token_id,
+                    repetition_penalty=1.005,
+                    im_mask=im_mask,
+                    infer_mode='base',
+                    output_scores=True, 
+                    return_dict_in_generate=True
+                )
             scores = outputs.scores[0]
             probs = torch.nn.functional.softmax(scores, dim=-1)
-            yes_token_id = self.tokenizer.encode("Yes")[0]
+            yes_token_id = self.tokenizer.encode("Yes")[1]
             lm_prob = probs[0, yes_token_id].item()
             lm_probs.append(lm_prob)
 
@@ -149,3 +163,79 @@ class InternLMXComposer25Model(VQAScoreModel):
             os.remove(temp_file)
 
         return torch.tensor(lm_probs)
+    def generate(self,
+            paths: List[str],
+            texts: List[str],
+            max_new_tokens: int = 256) -> List[str]:
+        assert len(paths) == len(texts), "Number of paths and texts must match"
+
+        questions = texts
+        processed_paths = self.load_images(paths)
+
+        generated_outputs = []
+        temp_files = []
+        for path, question in zip(processed_paths, questions):
+            if path.lower().endswith(('.mp4', '.avi', '.mov', '.mkv')):
+                query = f"Here are some frames of a video. {question}"
+            else:
+                query = f"<ImageHere> {question}"
+            
+            use_meta = True
+            image = [path]
+            history = []
+            meta_instruction = 'You are an AI assistant whose name is InternLM-XComposer (浦语·灵笔).\n'
+            '- InternLM-XComposer (浦语·灵笔) is a multi-modality conversational language model that is developed by Shanghai AI Laboratory (上海人工智能实验室). It is designed to be helpful, honest, and harmless.\n'
+            '- InternLM-XComposer (浦语·灵笔) can understand and communicate fluently in the language chosen by the user such as English and 中文.\n'
+            '- InternLM-XComposer (浦语·灵笔) is capable of comprehending and articulating responses effectively based on the provided image.'
+            streamer = None
+            num_beams = 5
+            do_sample = False
+            infer_mode = 'base'
+            hd_num = 24
+
+            with Image.open(path) as img:
+                if img.mode == 'RGBA':
+                    img = img.convert('RGB')
+                    img.save(path)
+                elif img.mode == 'LA':
+                    img = img.convert('RGB')
+                    img.save(path)
+        
+            with torch.autocast(device_type='cuda', dtype=torch.float16):
+                if not use_meta:
+                    meta_instruction = ''
+                if image is None:
+                    inputs = self.model.build_inputs(self.tokenizer, query, history, meta_instruction)
+                    im_mask = torch.zeros(inputs['input_ids'].shape[:2]).cuda().bool()
+                else:
+                    inputs, im_mask, _ = self.model.interleav_wrap_chat(query, image, history=history, meta_instruction=meta_instruction, hd_num=hd_num)
+                inputs = {
+                    k: v.to(self.device)
+                    for k, v in inputs.items() if torch.is_tensor(v)
+                }
+                eos_token_id = [
+                    self.tokenizer.eos_token_id,
+                    self.tokenizer.convert_tokens_to_ids(['[UNUSED_TOKEN_145]'])[0]
+                ]
+                outputs = self.model.generate(
+                    **inputs,
+                    streamer=streamer,
+                    max_new_tokens=max_new_tokens,
+                    num_beams=num_beams,
+                    do_sample=do_sample,
+                    eos_token_id=eos_token_id,
+                    repetition_penalty=1.005,
+                    im_mask=im_mask,
+                    infer_mode='base'
+                )
+                
+                generated_text = self.tokenizer.decode(outputs[0], skip_special_tokens=True).strip()
+                generated_outputs.append(generated_text)
+
+            if path.startswith(tempfile.gettempdir()):
+                temp_files.append(path)
+
+        for temp_file in temp_files:
+            os.remove(temp_file)
+
+        return generated_outputs

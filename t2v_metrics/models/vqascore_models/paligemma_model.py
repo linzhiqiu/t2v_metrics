@@ -35,6 +35,8 @@ PALIGEMMA_MODELS = {
 }
 
 class PaliGemmaModel(VQAScoreModel):
+    video_mode = "concat" # Paligemma's pytorch port does not have video inference natively
+    allows_image = True
     def __init__(self,
                  model_name='paligemma-3b-mix-448',
                  device='cuda',
@@ -75,11 +77,7 @@ class PaliGemmaModel(VQAScoreModel):
         return processed_data
 
     def load_video(self, video_path, num_frames):
-        vr = VideoReader(video_path, ctx=cpu(0))
-        total_frames = len(vr)
-        indices = np.linspace(0, total_frames - 1, num_frames, dtype=int)
-        video_frames = vr.get_batch(indices)
-        return [torch.from_numpy(frame.numpy()).permute(2, 0, 1) for frame in video_frames]
+        raise NotImplementedError("Direct video processing is not supported for PaliGemma's PyTorch port.")
 
     def forward(self,
                 paths: List[str],
@@ -107,3 +105,27 @@ class PaliGemmaModel(VQAScoreModel):
             lm_probs.append(lm_prob)
 
         return torch.tensor(lm_probs)
+    
+    def generate(self,
+            paths: List[str],
+            texts: List[str],
+            max_new_tokens: int = 256) -> List[str]:
+        assert len(paths) == len(texts), "Number of paths and texts must match"
+
+        processed_data = self.load_images(paths)
+
+        generated_texts = []
+        for data, text in zip(processed_data, texts):
+            model_inputs = self.processor(text=text, images=data, return_tensors="pt")
+            model_inputs = {k: v.to(self.device) for k, v in model_inputs.items()}
+
+            with torch.inference_mode():
+                outputs = self.model.generate(
+                    **model_inputs,
+                    max_new_tokens=max_new_tokens
+                )
+                
+                text = self.processor.tokenizer.decode(outputs[0], skip_special_tokens=True)
+                generated_texts.append(text.strip())
+
+        return generated_texts
