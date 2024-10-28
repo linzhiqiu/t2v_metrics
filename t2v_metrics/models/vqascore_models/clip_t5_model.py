@@ -154,15 +154,16 @@ CLIP_T5_MODELS = {
     },
 }
 
-
-
 class CLIPT5Model(VQAScoreModel):
     """A wrapper for the CLIP-FlanT5 or CLIP-T5 models"""
     def __init__(self,
                  model_name='clip-flant5-xxl',
                  device='cuda',
-                 cache_dir=HF_CACHE_DIR):
+                 cache_dir=HF_CACHE_DIR,
+                 model_path=None):
         assert model_name in CLIP_T5_MODELS
+        if model_path is not None:
+            CLIP_T5_MODELS[model_name]['model']['path'] = model_path
         super().__init__(model_name=model_name,
                          device=device,
                          cache_dir=cache_dir)

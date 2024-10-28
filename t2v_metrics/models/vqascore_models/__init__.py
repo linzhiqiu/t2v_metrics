@@ -16,14 +16,14 @@ ALL_VQA_MODELS = [
 def list_all_vqascore_models():
     return [model for models in ALL_VQA_MODELS for model in models]
 
-def get_vqascore_model(model_name, device='cuda', cache_dir=HF_CACHE_DIR, **kwargs):
+def get_vqascore_model(model_name, model_path=None, device='cuda', cache_dir=HF_CACHE_DIR, **kwargs):
     assert model_name in list_all_vqascore_models()
     if model_name in CLIP_T5_MODELS:
-        return CLIPT5Model(model_name, device=device, cache_dir=cache_dir, **kwargs)
+        return CLIPT5Model(model_name, model_path=model_path, device=device, cache_dir=cache_dir, **kwargs)
     elif model_name in LLAVA_MODELS:
-        return LLaVAModel(model_name, device=device, cache_dir=cache_dir, **kwargs)
+        return LLaVAModel(model_name, model_path=model_path, device=device, cache_dir=cache_dir, **kwargs)
     elif model_name in LLAVA16_MODELS:
-        return LLaVA16Model(model_name, device=device, cache_dir=cache_dir, **kwargs)
+        return LLaVA16Model(model_name, model_path=model_path, device=device, cache_dir=cache_dir, **kwargs)
     elif model_name in InstructBLIP_MODELS:
         return InstructBLIPModel(model_name, device=device, cache_dir=cache_dir, **kwargs)
     elif model_name in GPT4V_MODELS:
