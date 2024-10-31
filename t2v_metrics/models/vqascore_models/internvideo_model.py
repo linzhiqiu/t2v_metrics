@@ -117,6 +117,7 @@ class InternVideo2Model(VQAScoreModel):
     def forward(self,
                 paths: List[str],
                 texts: List[str],
+                num_frames: int=8,
                 question_template: str = "Does this figure show \"{}\"? Please answer yes or no.",
                 answer_template: str = "Yes",
                 num_segments: int = None,
@@ -125,7 +126,7 @@ class InternVideo2Model(VQAScoreModel):
         assert len(paths) == len(texts), "Number of paths and texts must match"
 
         questions = [question_template.format(text) for text in texts]
-        processed_data = self.load_images(paths)
+        processed_data = self.load_images(paths, num_segments=num_frames)
 
         lm_probs = []
         for data, question in zip(processed_data, questions):
@@ -291,13 +292,13 @@ class InternVideo2Model(VQAScoreModel):
     def generate(self,
                     paths: List[str],
                     texts: List[str],
-                    num_segments: int = None,
+                    num_frames: int=8,
                     resolution: int = None,
                     hd_num: int = None) -> torch.Tensor:
         assert len(paths) == len(texts), "Number of paths and texts must match"
 
         questions = texts
-        processed_data = self.load_images(paths)
+        processed_data = self.load_images(paths, num_segments=num_frames)
 
         gen_outputs = []
         for data, question in zip(processed_data, questions):

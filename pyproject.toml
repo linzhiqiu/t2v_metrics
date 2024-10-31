@@ -74,6 +74,7 @@ dependencies = [
     "psutil==5.9.5",
     "soundfile==0.12.1",
     "termcolor==2.4.0",
+    "qwen-vl-utils"
 ]
 
 [tool.setuptools]

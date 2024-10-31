@@ -82,7 +82,7 @@ class GPT4VModel(VQAScoreModel):
                 })
         return loaded_data
 
-    def forward_single(self, data, question):#, answer):
+    def forward_single(self, data, question, answer):
         try:
             if data['type'] == 'video':
                 content = [
@@ -129,12 +129,17 @@ class GPT4VModel(VQAScoreModel):
                 
         is_generated = False
         for top_logprob in completion.choices[0].logprobs.content[0].top_logprobs:
-            if top_logprob.token == 'Yes' or top_logprob.token == 'yes':
-                is_generated = True
-                return torch.Tensor([top_logprob.logprob]).exp()
-            elif top_logprob.token == 'No' or top_logprob.token == 'no':
-                is_generated = True
-                return 1 - torch.Tensor([top_logprob.logprob]).exp()
+            if answer.lower() == "yes":
+                if top_logprob.token == 'Yes' or top_logprob.token == 'yes':
+                    is_generated = True
+                    return torch.Tensor([top_logprob.logprob]).exp()
+                elif top_logprob.token == 'No' or top_logprob.token == 'no':
+                    is_generated = True
+                    return 1 - torch.Tensor([top_logprob.logprob]).exp()
+            else:
+                if top_logprob.token == answer:
+                    is_generated = True
+                    return torch.Tensor([top_logprob.logprob]).exp()
         if not is_generated:
             print(f"Warning: 'Yes' not included in gpt4o log probs: {data['path']} and question: {question} and answer: {answer}")
             print(completion.choices[0].logprobs.content[0].top_logprobs)
@@ -160,7 +165,7 @@ class GPT4VModel(VQAScoreModel):
         lm_prob = torch.zeros(len(paths))
 
         for idx, (data, question, answer) in enumerate(zip(loaded_data, questions, answers)):
-            lm_prob[idx] = self.forward_single(data, question)#, answer)
+            lm_prob[idx] = self.forward_single(data, question, answer)
 
         return lm_prob
     

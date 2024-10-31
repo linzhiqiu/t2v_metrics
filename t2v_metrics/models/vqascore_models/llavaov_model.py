@@ -95,6 +95,7 @@ class LLaVAOneVisionModel(VQAScoreModel):
     def forward(self,
                 paths: List[str],
                 texts: List[str],
+                num_frames: int=16,
                 question_template: str = "Does this image show \"{}\"? Answer the question with Yes or No",
                 answer_template: str = "Yes") -> torch.Tensor:
         assert len(paths) == len(texts), "Number of paths and texts must match"
@@ -105,7 +106,7 @@ class LLaVAOneVisionModel(VQAScoreModel):
         questions = [self.format_question(question) for question in questions]
         answers = [self.format_answer(answer) for answer in answers]
         
-        processed_data = self.load_images(paths)
+        processed_data = self.load_images(paths, num_frames)
         
         prompts = [qs for qs in questions]
 
@@ -144,12 +145,11 @@ class LLaVAOneVisionModel(VQAScoreModel):
     def generate(self,
             paths: List[str],
             texts: List[str],
-            max_new_tokens: int = 256) -> List[str]:
+            num_frames: int = 4,
+            max_new_tokens: int = 256,) -> List[str]:
         assert len(paths) == len(texts), "Number of paths and texts must match"
-        
         texts = [self.format_question(text) for text in texts]
-        processed_data = self.load_images(paths)
-        
+        processed_data = self.load_images(paths, num_frames)
         generated_texts = []
         for data, prompt in zip(processed_data, texts):
             if isinstance(data, torch.Tensor) and data.dim() == 4:  # Video

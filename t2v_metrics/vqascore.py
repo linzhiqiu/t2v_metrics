@@ -21,3 +21,6 @@ class VQAScore(Score):
             
     def list_all_models(self) -> List[str]:
         return list_all_vqascore_models()
+    
+    def generate(self, paths, texts, max_new_tokens=256):
+        raise NotImplementedError("Subclasses must implement generate()")

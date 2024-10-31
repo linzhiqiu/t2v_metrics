@@ -97,12 +97,13 @@ class Qwen2VLModel(VQAScoreModel):
     def forward(self,
                 paths: List[str],
                 texts: List[str],
+                num_frames: int=16,
                 question_template: str = "Does this image show \"{}\"? Answer the question with Yes or No",
                 answer_template: str = "Yes") -> torch.Tensor:
         assert len(paths) == len(texts), "Number of paths and texts must match"
         
         questions = [question_template.format(text) for text in texts]
-        processed_data = self.load_images(paths)
+        processed_data = self.load_images(paths, num_frames)
         
         lm_probs = []
         for data, question in zip(processed_data, questions):
@@ -138,10 +139,11 @@ class Qwen2VLModel(VQAScoreModel):
     def generate(self,
                 paths: List[str],
                 texts: List[str],
+                num_frames: int=16,
                 max_new_tokens: int = 256) -> List[str]:
         assert len(paths) == len(texts), "Number of paths and texts must match"
         
-        processed_data = self.load_images(paths)
+        processed_data = self.load_images(paths, num_frames)
         
         generated_texts = []
         for data, text in zip(processed_data, texts):

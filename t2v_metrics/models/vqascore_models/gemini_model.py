@@ -61,7 +61,7 @@ class GeminiModel(VQAScoreModel):
             })
         return loaded_data
 
-    def forward_single(self, data, question):
+    def forward_single(self, data, question, answer):
         try:
             response = self.model.generate_content(
                 [question, data['file']],
@@ -73,11 +73,14 @@ class GeminiModel(VQAScoreModel):
             candidates = response.candidates[0].logprobs_result.chosen_candidates
             
             for candidate in candidates:
-                if candidate.token.lower() == 'yes':
+                if answer.lower() == "yes":
+                    if candidate.token.lower() == 'yes':
+                        return torch.tensor([candidate.log_probability]).exp()
+                    elif candidate.token.lower() == 'no':
+                        return 1 - torch.tensor([candidate.log_probability]).exp()
+                elif candidate.token == answer:
                     return torch.tensor([candidate.log_probability]).exp()
-                elif candidate.token.lower() == 'no':
-                    return 1 - torch.tensor([candidate.log_probability]).exp()
-            
+        
             print(f"Warning: 'Yes' or 'No' not included in Gemini log probs: {data['path']} and question: {question}")
             return torch.tensor([0.0])
 
@@ -100,7 +103,7 @@ class GeminiModel(VQAScoreModel):
         lm_prob = torch.zeros(len(paths))
 
         for idx, (data, question) in enumerate(zip(loaded_data, questions)):
-            lm_prob[idx] = self.forward_single(data, question)
+            lm_prob[idx] = self.forward_single(data, question, answer)
 
         return lm_prob
     def generate_single(self, data, question):

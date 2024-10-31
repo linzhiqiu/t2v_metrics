@@ -163,7 +163,7 @@ class InternVL2Model(VQAScoreModel):
         pixel_values = torch.cat(pixel_values_list)
         return pixel_values, num_patches_list
 
-    def load_images(self, paths: List[str], num_frames: int = 32) -> List[Union[torch.Tensor, List[torch.Tensor]]]:
+    def load_images(self, paths: List[str], num_frames: int = 16) -> List[Union[torch.Tensor, List[torch.Tensor]]]:
         processed_data = []
         num_patches_list = []
         for path in paths:
@@ -180,11 +180,12 @@ class InternVL2Model(VQAScoreModel):
     def forward(self,
                 paths: List[str],
                 texts: List[str],
+                num_frames: int=16,
                 question_template: str = "Does this figure show \"{}\"? Please answer yes or no.") -> torch.Tensor:
         assert len(paths) == len(texts), "Number of paths and texts must match"
 
         questions = [question_template.format(text) for text in texts]
-        processed_data, num_patches_list = self.load_images(paths)
+        processed_data, num_patches_list = self.load_images(paths, num_frames)
 
         lm_probs = []
         for data, question, num_patches in zip(processed_data, questions, num_patches_list):
@@ -273,14 +274,15 @@ class InternVL2Model(VQAScoreModel):
 
         return torch.tensor(lm_probs)
     
-     def generate(self,
+    def generate(self,
                 paths: List[str],
                 texts: List[str],
+                num_frames: int=16,
                 max_new_tokens: int = 256) -> torch.Tensor:
         assert len(paths) == len(texts), "Number of paths and texts must match"
 
         questions = texts
-        processed_data, num_patches_list = self.load_images(paths)
+        processed_data, num_patches_list = self.load_images(paths, num_frames)
 
         gen_outputs = []
         for data, question, num_patches in zip(processed_data, questions, num_patches_list):

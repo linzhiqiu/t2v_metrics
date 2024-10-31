@@ -52,6 +52,7 @@ class Score(nn.Module):
                 concatenate: Optional[str]='horizontal',
                 images: Optional[Union[str, List[str]]]=None,
                 texts: Optional[Union[str, List[str]]]=None,
+                generate: Optional[bool]=False,
                 **kwargs) -> torch.Tensor:
         """Return the similarity score(s) between the image(s)/video(s) and the text(s)
         If there are m images/videos and n texts, return a m x n tensor
@@ -112,8 +113,11 @@ class Score(nn.Module):
             return
         
         scores = torch.zeros(len(images), len(texts)).to(self.device)
-        for i, image in enumerate(images):
-            scores[i] = self.model.forward([image] * len(texts), texts, **kwargs)
+        if generate:
+            scores = self.model.generate(images, texts, **kwargs)
+        else:
+            for i, image in enumerate(images):
+                scores[i] = self.model.forward([image] * len(texts), texts, **kwargs)
         
         if delete_images:
             for f in processed_images:

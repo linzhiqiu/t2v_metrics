@@ -220,6 +220,24 @@ texts = ["a baby crying",
 score = llava_ov_score(videos=[videos], texts=[text], num_frames=4) # scores[i][j] is the score between video i and text j
 ```
 
+### Natural Language Text Generation:
+
+We also support natural language text generation for image/video inputs on any VQAScore model. Here is a representative example:
+```python
+import t2v_metrics
+
+### For a single (video, text) pair on an interleaved-image/video VQA model:
+llava_ov_score = t2v_metrics.VQAScore(model='llava-onevision-qwen2-7b-ov') 
+video = "videos/baby.mp4" # a video path in string format
+text = "What is the baby doing in this video?"
+generated_text = llava_ov_score(videos=[video], texts=[text], num_frames=4, max_new_tokens=512,  generate=True)
+
+### Alternatively, if you want to output a list of generations from a batch of paired vision inputs and prompts.
+videos = ["videos/baby.mp4", "video/ducks.mp4"]
+texts = ["What is the baby doing in this video?",
+         "How many ducks are there?"]
+generated_text = llava_ov_score(videos=[video], texts=[text], num_frames=4, max_new_tokens=512,  generate=True)
+```
 ## Contributions
 
 - **[Zhiqiu Lin](https://x.com/ZhiqiuLin)**, **[Jean de Nyandwi](https://x.com/Jeande_d)**, **[Chancharik Mitra](https://x.com/chancharikm)**  
