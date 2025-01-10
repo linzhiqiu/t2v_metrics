@@ -25,7 +25,8 @@ _OPENAI_API_KEY.txt
 temp*/
 temp*
 *.pt
-
+vicuna-7b/
+test.ipynb
 # Zhiqiu's temporary files
 genai_image_800_temp.py
 gpt4_eval.txt
