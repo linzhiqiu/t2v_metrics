@@ -49,8 +49,11 @@ class LLaVA16Model(VQAScoreModel):
     def __init__(self,
                  model_name='llava-v1.6-13b',
                  device='cuda',
-                 cache_dir=HF_CACHE_DIR):
+                 cache_dir=HF_CACHE_DIR,
+                 model_path=None):
         assert model_name in LLAVA16_MODELS
+        if model_path is not None:
+            LLAVA16_MODELS[model_name]['model']['path'] = model_path
         super().__init__(model_name=model_name,
                          device=device,
                          cache_dir=cache_dir)
