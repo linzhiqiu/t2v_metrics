@@ -1733,3 +1733,70 @@ class GenAIBench_Ranking(Dataset):
         our_scores = [float(our_scores[idx][0]) for idx in range(len(self.images))]
         results = self.correlation(our_scores, human_avg_scores_alignment)
         return results
+
+
+class NaturalBench_Retrieval(Dataset):
+    def __init__(self,
+                 root_dir='./datasets',
+                 download=True,
+                 image_preprocess=None,
+                 return_image_paths=True):
+        self.root_dir = root_dir
+        self.dataset_dir = os.path.join(root_dir, "NaturalBench-Retrieval")
+        self.image_dir = os.path.join(self.dataset_dir, "images")
+        self.metadata_path = os.path.join(self.dataset_dir, 'metadata.json')
+
+        self.download_links =  "https://huggingface.co/datasets/BaiqiL/NaturalBench/resolve/main/NaturalBench-Retrieval.zip"
+
+        if not os.path.exists(self.dataset_dir):
+            if download:
+                import subprocess
+                model_file_name = "NaturalBench-Retrieval.zip"
+                image_zip_file = os.path.join(self.root_dir, model_file_name)
+                if not os.path.exists(image_zip_file):
+                    subprocess.call(
+                        ["wget", self.download_links, "-O", model_file_name], cwd=self.root_dir
+                    )
+                subprocess.call(["unzip", "-q", model_file_name], cwd=self.root_dir)
+
+        with open(self.metadata_path, 'r', encoding='utf-8') as file:
+            self.metadata = json.load(file)
+
+        self.return_image_paths = return_image_paths
+        
+        if return_image_paths:
+            assert image_preprocess is None
+            self.preprocess = None
+        self.preprocess = image_preprocess
+    
+    def __len__(self):
+        return len(self.metadata)
+
+    def __getitem__(self, idx):
+        assert self.metadata[idx]['index'] == idx
+        image_0_path = os.path.join(self.image_dir, self.metadata[idx]['image_0'])
+        image_1_path = os.path.join(self.image_dir, self.metadata[idx]['image_1'])
+        if self.return_image_paths:
+            image_0 = image_0_path
+            image_1 = image_1_path
+        else:
+            image_0 = self.preprocess(self.image_loader(image_0_path))
+            image_1 = self.preprocess(self.image_loader(image_1_path))
+        
+        caption_0 = self.metadata[idx]['caption_0']
+        caption_1 = self.metadata[idx]['caption_1']
+        item = {
+            "images": [image_0, image_1],
+            "texts": [caption_0, caption_1]
+        }
+        return item
+    
+    def evaluate_scores(self, scores):
+        winoground_scores = get_winoground_scores(scores)
+        acc = get_winoground_acc(winoground_scores)
+        print("NaturalBench-Retrieval performance (overall)")
+        print(f"{'Dataset': <70} {'Text': <10} {'Image': <10} {'Group': <10}")
+        print(f"{'NaturalBench-Retrieval': <70} {acc['text']: <10.2%} {acc['image']: <10.2%} {acc['group']: <10.2%}")
+        results = {}
+        results['all'] = acc
+        return results
