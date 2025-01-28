@@ -184,6 +184,10 @@ images = ["images/0.png", "images/0.png"] # A list of images
 prompts = ["Please describe this image: ", "Does the image show 'someone talks on the phone angrily while another person sits happily'?"] # Corresponding prompts
 clip_flant5_score.model.generate(images=images, prompts=prompts)
 ```
+If the above code does not run, it might due to the wrong transformers library. Consider downgrade to 4.36.1:
+```
+pip install transformers==4.36.1
+```
 
 ## Citation
 
