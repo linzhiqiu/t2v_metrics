@@ -16,6 +16,7 @@ def config():
     parser.add_argument("--model", default="clip-flant5-xxl", type=str)
     parser.add_argument("--question", default=None, type=str)
     parser.add_argument("--answer", default=None, type=str)
+    parser.add_argument("--model_path", default=None, type=str)
     return parser.parse_args()
 
 def main():
@@ -23,7 +24,7 @@ def main():
     if not os.path.exists(args.root_dir):
         os.makedirs(args.root_dir)
     
-    score_func = t2v_metrics.get_score_model(model=args.model, device=args.device, cache_dir=args.cache_dir)
+    score_func = t2v_metrics.get_score_model(model=args.model, model_path=args.model_path, device=args.device, cache_dir=args.cache_dir)
 
     kwargs = {}
     if args.question is not None:

@@ -9,11 +9,13 @@ from .models.vqascore_models import list_all_vqascore_models, get_vqascore_model
 class VQAScore(Score):
     def prepare_scoremodel(self,
                            model='clip-flant5-xxl',
+                           model_path=None,
                            device='cuda',
                            cache_dir=HF_CACHE_DIR,
                            **kwargs):
         return get_vqascore_model(
             model,
+            model_path=model_path,
             device=device,
             cache_dir=cache_dir,
             **kwargs
