@@ -63,7 +63,7 @@ scores = clip_flant5_score(images=images, texts=texts) # scores[i][j] is the sco
 - **Cache directory**: You can change the cache folder which saves all model checkpoints (default is `./hf_cache/`) by updating `HF_CACHE_DIR` in [t2v_metrics/constants.py](t2v_metrics/constants.py).
 
 
-## How to benchmark text-to-image models on GenAI-Bench?
+## Benchmarking text-to-image models on GenAI-Bench
 
 ### 1. Generate Images
 To generate images using a specified model, run:
@@ -71,7 +71,7 @@ To generate images using a specified model, run:
 python genai_bench/generate.py --output_dir ./outputs/ --gen_model runwayml/stable-diffusion-v1-5
 ```
 
-The generated images will be saved in `./outputs/<model>/`.
+The generated images will be saved in `./outputs/<model>/`. You may want to modify this script to generate images using your own models.
 
 ### 2. Evaluate VQAScore Performance
 
@@ -85,7 +85,7 @@ Or you can use GPT-4o based VQAScore:
 python genai_bench/evaluate.py --model gpt-4o --openai_key INPUT_YOUR_KEY_HERE --output_dir ./outputs --gen_model runwayml/stable-diffusion-v1-5
 ```
 
-For comparative results against state-of-the-art models like DALLE-3 and Midjourney v6, please refer to Table 6 (sections b and d) in our [GenAI-Bench paper](https://arxiv.org/pdf/2406.13743). We will also provide a markdown file with detailed model performance using GPT-4o soon!
+For comparative VQAScore results (based on clip-flant5-xxl) against state-of-the-art models like DALLE-3 and Midjourney v6, please refer to Table 6 (sections b and d) in our [GenAI-Bench paper](https://arxiv.org/pdf/2406.13743). We will also provide a markdown file with detailed model performance using GPT-4o soon!
 
 
 ## **Advanced Usage**  
