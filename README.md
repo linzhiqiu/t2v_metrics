@@ -84,30 +84,20 @@ Or you can use GPT-4o based VQAScore:
 ```bash
 python genai_bench/evaluate.py --model gpt-4o --openai_key INPUT_YOUR_KEY_HERE --output_dir ./outputs --gen_model runwayml/stable-diffusion-v1-5
 ```
-For comparative VQAScore results (based on clip-flant5-xxl and GPT-4o) against state-of-the-art models like DALLE-3 and Midjourney v6, please refer to the [VQAScore results](https://github.com/linzhiqiu/t2v_metrics/blob/main/genai_bench/model_performance_vqacore.md)!
 
+For comparative VQAScore results (based on clip-flant5-xxl and GPT-4o) against state-of-the-art models like DALLE-3 and Midjourney v6, please refer to the [VQAScore results](https://github.com/linzhiqiu/t2v_metrics/blob/main/genai_bench/model_performance_vqacore.md)!
 
 
 ## **Advanced Usage**  
 
-- [**VQAScore for Evaluating Text-to-Visual Models \[Project Page\]**](#vqascore-for-evaluating-text-to-visual-models-project-page)
-- [News](#news)
-- [Quick start](#quick-start)
-  - [Notes on GPU and cache](#notes-on-gpu-and-cache)
-- [Benchmarking text-to-image models on GenAI-Bench](#benchmarking-text-to-image-models-on-genai-bench)
-  - [1. Generate Images](#1-generate-images)
-  - [2. Evaluate VQAScore Performance](#2-evaluate-vqascore-performance)
-- [**Advanced Usage**](#advanced-usage)
-  - [Batch processing for more image-text pairs](#batch-processing-for-more-image-text-pairs)
-  - [Check all supported models](#check-all-supported-models)
-  - [Customizing the question and answer template (for VQAScore)](#customizing-the-question-and-answer-template-for-vqascore)
-  - [Reproducing VQAScore paper results](#reproducing-vqascore-paper-results)
-  - [Reproducing GenAI-Bench paper results](#reproducing-genai-bench-paper-results)
-  - [Using GPT-4o for VQAScore!](#using-gpt-4o-for-vqascore)
-  - [Implementing your own scoring metric](#implementing-your-own-scoring-metric)
-  - [Text generation (VQA) using CLIP-FlanT5](#text-generation-vqa-using-clip-flant5)
-- [Citation](#citation)
-- [Acknowledgements](#acknowledgements)
+- [Batch processing for more image-text pairs](#batch-processing-for-more-image-text-pairs)
+- [Check all supported models](#check-all-supported-models)
+- [Customizing the question and answer template (for VQAScore)](#customizing-the-question-and-answer-template-for-vqascore)
+- [Reproducing VQAScore paper results](#reproducing-vqascore-paper-results)
+- [Reproducing GenAI-Bench paper results](#reproducing-genai-bench-paper-results)
+- [Using GPT-4o for VQAScore](#using-gpt-4o-for-vqascore)
+- [Implementing your own scoring metric](#implementing-your-own-scoring-metric)
+- [Text generation (VQA) using CLIP-FlanT5](#text-generation-vqa-using-clip-flant5)
 
 ### Batch processing for more image-text pairs
 With a large batch of M images x N texts, you can speed up using the ``batch_forward()`` function. 
