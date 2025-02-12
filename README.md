@@ -85,7 +85,7 @@ Or you can use GPT-4o based VQAScore:
 python genai_bench/evaluate.py --model gpt-4o --openai_key INPUT_YOUR_KEY_HERE --output_dir ./outputs --gen_model runwayml/stable-diffusion-v1-5
 ```
 
-For comparative VQAScore results (based on clip-flant5-xxl) against state-of-the-art models like DALLE-3 and Midjourney v6, please refer to Table 6 (sections b and d) in our [GenAI-Bench paper](https://arxiv.org/pdf/2406.13743). We will also provide a markdown file with detailed model performance using GPT-4o soon!
+For comparative VQAScore results (based on clip-flant5-xxl and GPT-4o) against state-of-the-art models like DALLE-3 and Midjourney v6, please refer to the [VQAScore results](https://github.com/linzhiqiu/t2v_metrics/blob/main/genai_bench/model_performance_vqacore.md)!
 
 
 ## **Advanced Usage**  
