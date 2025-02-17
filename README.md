@@ -5,7 +5,7 @@
 [[VQAScore Page](https://linzhiqiu.github.io/papers/vqascore/)] [[VQAScore Demo](https://huggingface.co/spaces/zhiqiulin/VQAScore)]  [[GenAI-Bench Page](https://linzhiqiu.github.io/papers/genai_bench/)] [[GenAI-Bench Demo](https://huggingface.co/spaces/BaiqiL/GenAI-Bench-DataViewer)] [[CLIP-FlanT5 Model Zoo](https://github.com/linzhiqiu/CLIP-FlanT5/blob/master/docs/MODEL_ZOO.md)]
 
 **VQAScore: Evaluating Text-to-Visual Generation with Image-to-Text Generation** (ECCV 2024) [[Paper](https://arxiv.org/pdf/2404.01291)] [[HF](https://huggingface.co/zhiqiulin/clip-flant5-xxl)] <br>
-[Zhiqiu Lin](https://linzhiqiu.github.io/), [Deepak Pathak](https://www.cs.cmu.edu/~dpathak/), Baiqi Li, Jiayao Li, [Xide Xia](https://scholar.google.com/citations?user=FHLTntIAAAAJ&hl=en), [Graham Neubig](https://www.phontron.com/), [Pengchuan Zhang](https://scholar.google.com/citations?user=3VZ_E64AAAAJ&hl=en), [Deva Ramanan](https://www.cs.cmu.edu/~deva/)
+[Zhiqiu Lin](https://linzhiqiu.github.io/), [Deepak Pathak](https://www.cs.cmu.edu/~dpathak/), Baiqi Li, Jiayao Li, [Xide Xia](https://scholar.google.com/citations?user=FHLTntIAAAAJ&hl=en), [Graham Neubig](https://www.phontron.com/), [Pengchuan Zhang*](https://scholar.google.com/citations?user=3VZ_E64AAAAJ&hl=en), [Deva Ramanan*](https://www.cs.cmu.edu/~deva/) (*Co-First and co-senior authors)
 
 **GenAI-Bench: Evaluating and Improving Compositional Text-to-Visual Generation** (CVPR 2024, **Best Short Paper @ SynData Workshop**) [[Paper](https://arxiv.org/abs/2406.13743)] [[HF](https://huggingface.co/spaces/BaiqiL/GenAI-Bench-DataViewer)] <br>
 Baiqi Li*, [Zhiqiu Lin*](https://linzhiqiu.github.io/), [Deepak Pathak](https://www.cs.cmu.edu/~dpathak/), Jiayao Li, Yixin Fei, Kewen Wu, Tiffany Ling, [Xide Xia*](https://scholar.google.com/citations?user=FHLTntIAAAAJ&hl=en), [Pengchuan Zhang*](https://scholar.google.com/citations?user=3VZ_E64AAAAJ&hl=en), [Graham Neubig*](https://www.phontron.com/), [Deva Ramanan*](https://www.cs.cmu.edu/~deva/) (*Co-First and co-senior authors)
@@ -61,6 +61,32 @@ scores = clip_flant5_score(images=images, texts=texts) # scores[i][j] is the sco
 ### Notes on GPU and cache
 - **GPU usage**: By default, this code uses the first cuda device on your machine. We recommend 40GB GPUs for the largest VQAScore models such as `clip-flant5-xxl` and `llava-v1.5-13b`. If you have limited GPU memory, consider smaller models such as `clip-flant5-xl` and `llava-v1.5-7b`.
 - **Cache directory**: You can change the cache folder which saves all model checkpoints (default is `./hf_cache/`) by updating `HF_CACHE_DIR` in [t2v_metrics/constants.py](t2v_metrics/constants.py).
+
+
+## Benchmarking text-to-image models on GenAI-Bench
+
+### 1. Generate Images
+To generate images using a specified model, run:
+```bash
+python genai_bench/generate.py --output_dir ./outputs/ --gen_model runwayml/stable-diffusion-v1-5
+```
+
+The generated images will be saved in `./outputs/<model>/`. You may want to modify this script to generate images using your own models.
+
+### 2. Evaluate VQAScore Performance
+
+You can evaluate your model using VQAScore based on clip-flant5-xxl:
+```bash
+python genai_bench/evaluate.py --model clip-flant5-xxl --output_dir ./outputs --gen_model runwayml/stable-diffusion-v1-5
+```
+
+Or you can use GPT-4o based VQAScore:
+```bash
+python genai_bench/evaluate.py --model gpt-4o --openai_key INPUT_YOUR_KEY_HERE --output_dir ./outputs --gen_model runwayml/stable-diffusion-v1-5
+```
+
+For comparative VQAScore results (based on clip-flant5-xxl and GPT-4o) against state-of-the-art models like DALLE-3 and Midjourney v6, please refer to the [VQAScore results](https://github.com/linzhiqiu/t2v_metrics/blob/main/genai_bench/model_performance_vqacore.md)!
+
 
 ## **Advanced Usage**  
 
@@ -166,7 +192,7 @@ python genai_image_ranking.py --model clip-flant5-xxl --gen_model SDXL_Base
 ```
 
 ### Using GPT-4o for VQAScore!
-We implemented VQAScore using GPT-4o to achieve a new state-of-the-art performance. Please see [t2v_metrics/gpt4_eval.py](t2v_metrics/gpt4_eval.py) for an example. Here is how to use it in command line:
+We implemented VQAScore using GPT-4o to achieve a new state-of-the-art performance. Please see [gpt4_eval.py](gpt4_eval.py) for an example. Here is how to use it in command line:
 ```python
 openai_key = # Your OpenAI key
 score_func = t2v_metrics.get_score_model(model="gpt-4o", device="cuda", openai_key=openai_key, top_logprobs=20) # We find top_logprobs=20 to be sufficient for most (image, text) samples. Consider increase this number if you get errors (the API cost will not increase).
@@ -185,7 +211,10 @@ images = ["images/0.png", "images/0.png"] # A list of images
 prompts = ["Please describe this image: ", "Does the image show 'someone talks on the phone angrily while another person sits happily'?"] # Corresponding prompts
 clip_flant5_score.model.generate(images=images, prompts=prompts)
 ```
-Note that this feature is only supported for version 4.36.1 of the `transformers` package (i.e.`pip install transformers==4.36.1`).
+If the above code does not run, it might due to the wrong transformers library. Consider downgrade to 4.36.1:
+```
+pip install transformers==4.36.1
+```
 
 ### Video-Text Alignment Scores
 

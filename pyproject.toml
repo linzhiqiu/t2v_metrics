@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "t2v_metrics"
-version = "1.1"
+version = "1.2"
 description = "Evaluating Text-to-Visual Generation with Image-to-Text Generation."
 authors = [
     {name="Zhiqiu Lin", email="zl279@cornell.edu"},
@@ -21,15 +21,15 @@ dependencies = [
     "gdown>=4.7.1",
     "huggingface-hub>=0.19.4",
     "matplotlib>=3.6.2",
-    "numpy>=1.26.2",
+    "numpy>=2.2.2",
     "open-clip-torch>=2.23.0",
     "openai>=1.29.0",
-    "opencv-python>=4.6.0.66",
+    "opencv-python>=4.11.0.86",
     "opencv-python-headless",
     "pandas>=2.1.4",
     "scipy>=1.11.4",
     "sentencepiece>=0.1.99",
-    "transformers",
+    "transformers>=4.48.1",
     "datasets>=2.15.0",
     "tokenizers",
     "omegaconf",
@@ -82,7 +82,7 @@ include-package-data = true
 packages = ["t2v_metrics", "t2v_metrics.models"]
 
 [tool.setuptools.package-data]
-'t2v_metrics' = ['**/*.json', '**/*.yaml']
+'t2v_metrics' = ['**/*.json', '**/*.yaml', '**/*.py']
 
 [project.urls]
 Home = "https://linzhiqiu.github.io/papers/vqascore"
