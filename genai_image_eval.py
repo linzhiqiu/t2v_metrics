@@ -1,4 +1,4 @@
-# Evaluate on GenAI-Bench-Image (with 527 prompt) using a specific model
+# Evaluate on GenAI-Bench-Image using a specific model
 # Example scripts to run:
 # VQAScore: python genai_image_eval.py --model clip-flant5-xxl
 # CLIPScore: python genai_image_eval.py --model openai:ViT-L-14-336
@@ -18,6 +18,7 @@ def config():
     parser.add_argument("--cache_dir", default=t2v_metrics.constants.HF_CACHE_DIR, type=str) 
     parser.add_argument("--device", default="cuda", type=str)
     parser.add_argument("--batch_size", default=16, type=int)
+    parser.add_argument("--num_prompts", default=1600, type=int, choices=[527, 1600])
     parser.add_argument("--model", default="clip-flant5-xxl", type=str)
     parser.add_argument("--question", default=None, type=str)
     parser.add_argument("--answer", default=None, type=str)
@@ -109,11 +110,11 @@ def main():
     args = config()
     if not os.path.exists(args.root_dir):
         os.makedirs(args.root_dir)
-    
-    
     os.makedirs(args.result_dir, exist_ok=True)
-    dataset = GenAIBench_Image(root_dir=args.root_dir)
-    result_path = f"{args.result_dir}/{args.model}_527_prompts.pt"
+
+    dataset =  GenAIBench_Image(root_dir=args.root_dir, num_prompts=args.num_prompts) # 'num_prompts' is the number of prompts in GenAI-Bench（1600 in GenAI-Bench paper; 527 in VQAScore paper）
+    result_path = f"{args.result_dir}/{args.model}_{args.num_prompts}_prompts.pt"
+
     if os.path.exists(result_path):
         print(f"Result file {result_path} already exists. Skipping.")
         scores = torch.load(result_path)
@@ -153,9 +154,19 @@ def main():
     our_scores = scores.mean(axis=1)
     show_performance_per_skill(our_scores, dataset, print_std=True)    
     
-    print("Alignment Performance")
-    ### Alignment performance
+    print("Overall Alignment Performance")
+    ### Overall Alignment performance
     dataset.evaluate_scores(scores)
+
+    ### Alignment performance per skill
+    print("Evaluating scores of each skill for model:", args.model)
+    skill_result = dataset.evaluate_scores_per_skill(scores)
+    print("Results saved to:", f"{args.result_dir}/{args.model}_{args.num_prompts}_per_skill.json")
+    output_file = f"{args.result_dir}/{args.model}_{args.num_prompts}_per_skill.json"
+    with open(output_file, 'w') as f:
+        json.dump(skill_result, f)
+    print("\n")
+
 
 if __name__ == "__main__":
     main()

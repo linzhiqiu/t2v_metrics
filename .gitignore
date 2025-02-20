@@ -13,7 +13,9 @@ datasets/flickr30k
 !datasets/t2vscore_results.csv
 !datasets/stanfordt23d.json
 ranking_results/
+genai_bench_results/
 hf_cache
+videos/
 winoground_results/
 stanfordt23d_results/
 seetrue/
@@ -22,8 +24,16 @@ genai_video_results/
 genai_image_temp/
 genai_800_temp.py
 _OPENAI_API_KEY.txt
+outputs/
 temp*/
 temp*
+*.pt
+vicuna-7b/
+test.ipynb
+# Zhiqiu's temporary files
+genai_image_800_temp.py
+gpt4_eval.txt
+vqascore_ablation.py
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

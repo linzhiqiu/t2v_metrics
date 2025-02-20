@@ -3,7 +3,7 @@
 import argparse
 import os
 import t2v_metrics
-from dataset import Winoground, EqBen_Mini, StanfordT23D, TIFA160_DSG, Flickr8K_CF, SeeTrue, Pickapic_v1, T2VScore
+from dataset import Winoground, NaturalBench_Retrieval, EqBen_Mini, StanfordT23D, TIFA160_DSG, Flickr8K_CF, SeeTrue, Pickapic_v1, T2VScore
 
 
 def config():
@@ -17,7 +17,6 @@ def config():
     parser.add_argument("--question", default=None, type=str)
     parser.add_argument("--answer", default=None, type=str)
     return parser.parse_args()
-
 
 def main():
     args = config()
@@ -37,11 +36,19 @@ def main():
     print(f"Performance of {args.model}.")
     for dataset_cls in [
         Winoground,
+        NaturalBench_Retrieval,
         EqBen_Mini,
         TIFA160_DSG,
         Pickapic_v1,
+<<<<<<< HEAD
         # SeeTrue,
         # Flickr8K_CF,
+=======
+        SeeTrue,
+        StanfordT23D,
+        T2VScore,
+        Flickr8K_CF
+>>>>>>> fb4a1472e5fa69e413b2fa5d6e1f78981adb4cda
     ]:
         
         dataset = dataset_cls(root_dir=args.root_dir)
