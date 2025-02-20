@@ -38,6 +38,148 @@ QWEN2_VL_MODELS = {
             'attn_implementation': 'flash_attention_2',
         },
     },
+
+    # Winoground Finetuning
+    'qwen2-vl-1': {
+        'tokenizer': {
+            'path': 'Qwen/Qwen2-VL-7B-Instruct',
+        },
+        'model': {
+            'path': '../LLaMA-Factory/saves/qwen2_vl-7b/lora/wino_lora_3epochs',
+            'torch_dtype': torch.bfloat16,
+            'attn_implementation': 'flash_attention_2',
+        },
+    },
+
+    'qwen2-vl-2': {
+        'tokenizer': {
+            'path': 'Qwen/Qwen2-VL-7B-Instruct',
+        },
+        'model': {
+            'path': '../LLaMA-Factory/saves/qwen2_vl-7b/lora/wino_lora_5epochs',
+            'torch_dtype': torch.bfloat16,
+            'attn_implementation': 'flash_attention_2',
+        },
+    },
+
+    'qwen2-vl-3': {
+        'tokenizer': {
+            'path': 'Qwen/Qwen2-VL-7B-Instruct',
+        },
+        'model': {
+            'path': '../LLaMA-Factory/saves/qwen2_vl-7b/lora/wino_dpo_3epochs',
+            'torch_dtype': torch.bfloat16,
+            'attn_implementation': 'flash_attention_2',
+        },
+    },
+
+    'qwen2-vl-4': {
+        'tokenizer': {
+            'path': 'Qwen/Qwen2-VL-7B-Instruct',
+        },
+        'model': {
+            'path': '../LLaMA-Factory/saves/qwen2_vl-7b/lora/wino_dpo_5epochs',
+            'torch_dtype': torch.bfloat16,
+            'attn_implementation': 'flash_attention_2',
+        },
+    },
+
+    # GenAI-Bench Finetuning:
+
+    'qwen2-vl-5': {
+        'tokenizer': {
+            'path': 'Qwen/Qwen2-VL-7B-Instruct',
+        },
+        'model': {
+            'path': '../LLaMA-Factory/saves/qwen2_vl-7b/lora/genai_lora_3epochs',
+            'torch_dtype': torch.bfloat16,
+            'attn_implementation': 'flash_attention_2',
+        },
+    },
+
+    'qwen2-vl-6': {
+        'tokenizer': {
+            'path': 'Qwen/Qwen2-VL-7B-Instruct',
+        },
+        'model': {
+            'path': '../LLaMA-Factory/saves/qwen2_vl-7b/lora/genai_lora_5epochs',
+            'torch_dtype': torch.bfloat16,
+            'attn_implementation': 'flash_attention_2',
+        },
+    },
+
+    'qwen2-vl-7': {
+        'tokenizer': {
+            'path': 'Qwen/Qwen2-VL-7B-Instruct',
+        },
+        'model': {
+            'path': '../LLaMA-Factory/saves/qwen2_vl-7b/lora/genai_dpo_3epochs',
+            'torch_dtype': torch.bfloat16,
+            'attn_implementation': 'flash_attention_2',
+        },
+    },
+
+    'qwen2-vl-8': {
+        'tokenizer': {
+            'path': 'Qwen/Qwen2-VL-7B-Instruct',
+        },
+        'model': {
+            'path': '../LLaMA-Factory/saves/qwen2_vl-7b/lora/genai_dpo_5epochs',
+            'torch_dtype': torch.bfloat16,
+            'attn_implementation': 'flash_attention_2',
+        },
+    },
+
+
+    # NaturalBench Finetuning:
+
+    'qwen2-vl-9': {
+        'tokenizer': {
+            'path': 'Qwen/Qwen2-VL-7B-Instruct',
+        },
+        'model': {
+            'path': '../LLaMA-Factory/saves/qwen2_vl-7b/lora/nb_lora_3epochs',
+            'torch_dtype': torch.bfloat16,
+            'attn_implementation': 'flash_attention_2',
+        },
+    },
+
+    'qwen2-vl-10': {
+        'tokenizer': {
+            'path': 'Qwen/Qwen2-VL-7B-Instruct',
+        },
+        'model': {
+            'path': '../LLaMA-Factory/saves/qwen2_vl-7b/lora/nb_lora_5epochs',
+            'torch_dtype': torch.bfloat16,
+            'attn_implementation': 'flash_attention_2',
+        },
+    },
+
+    'qwen2-vl-11': {
+        'tokenizer': {
+            'path': 'Qwen/Qwen2-VL-7B-Instruct',
+        },
+        'model': {
+            'path': '../LLaMA-Factory/saves/qwen2_vl-7b/lora/nb_dpo_3epochs',
+            'torch_dtype': torch.bfloat16,
+            'attn_implementation': 'flash_attention_2',
+        },
+    },
+
+    'qwen2-vl-12': {
+        'tokenizer': {
+            'path': 'Qwen/Qwen2-VL-7B-Instruct',
+        },
+        'model': {
+            'path': '../LLaMA-Factory/saves/qwen2_vl-7b/lora/nb_dpo_5epochs',
+            'torch_dtype': torch.bfloat16,
+            'attn_implementation': 'flash_attention_2',
+        },
+    },
+
+
+
+    
 }
 
 class Qwen2VLModel(VQAScoreModel):
@@ -98,7 +240,7 @@ class Qwen2VLModel(VQAScoreModel):
                 paths: List[str],
                 texts: List[str],
                 num_frames: int=16,
-                question_template: str = "Does this image show \"{}\"? Answer the question with Yes or No",
+                question_template: str = "Does this image show \"{}\"?", #"Does this image show \"{}\"? Answer the question with Yes or No",
                 answer_template: str = "Yes") -> torch.Tensor:
         assert len(paths) == len(texts), "Number of paths and texts must match"
         
@@ -124,16 +266,18 @@ class Qwen2VLModel(VQAScoreModel):
                 outputs = self.model.generate(
                     **inputs,
                     max_new_tokens=1,
+                    do_sample=False, # Odd that greedy decoding seems necessary for some reason to get the logprobs
                     output_scores=True,
                     return_dict_in_generate=True
                 )
-                
+
+
             scores = outputs.scores[0]
+
             probs = torch.nn.functional.softmax(scores, dim=-1)
             yes_token_id = self.processor.tokenizer.encode("Yes")[0]
             lm_prob = probs[0, yes_token_id].item()
             lm_probs.append(lm_prob)
-            
         return torch.tensor(lm_probs)
     
     def generate(self,

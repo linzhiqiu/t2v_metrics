@@ -40,8 +40,8 @@ def main():
         EqBen_Mini,
         TIFA160_DSG,
         Pickapic_v1,
-        SeeTrue,
-        Flickr8K_CF,
+        # SeeTrue,
+        # Flickr8K_CF,
     ]:
         
         dataset = dataset_cls(root_dir=args.root_dir)
@@ -50,4 +50,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
 

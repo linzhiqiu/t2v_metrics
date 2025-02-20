@@ -46,82 +46,102 @@ class Score(nn.Module):
         """
         pass
 
+    class Score(nn.Module):
+    def __init__(self,
+                 model: str,
+                 device: str='cuda',
+                 cache_dir: str=HF_CACHE_DIR,
+                 **kwargs):
+        """Initialize the ScoreModel"""
+        super().__init__()
+        assert model in self.list_all_models()
+        self.device = device
+        self.model = self.prepare_scoremodel(model, device, cache_dir, **kwargs)
+        self.model_name = model
+    
+    @abstractmethod
+    def prepare_scoremodel(self,
+                           model: str,
+                           device: str,
+                           cache_dir: str,
+                           **kwargs):
+        """Prepare the ScoreModel"""
+        pass
+    
+    @abstractmethod
+    def list_all_models(self) -> List[str]:
+        """List all available models"""
+        pass
+
     def forward(self,
-                videos: Optional[Union[str, List[str]]]=None,
-                num_frames: Optional[int]=8,
-                concatenate: Optional[str]='horizontal',
                 images: Optional[Union[str, List[str]]]=None,
                 texts: Optional[Union[str, List[str]]]=None,
-                generate: Optional[bool]=False,
+                num_frames: Optional[int]=8,
                 **kwargs) -> torch.Tensor:
         """Return the similarity score(s) between the image(s)/video(s) and the text(s)
         If there are m images/videos and n texts, return a m x n tensor
-        """
-        delete_images=False
-        if videos is not None:
-            
-            if isinstance(videos, str):
-                videos = [videos]
-            
-            assert any(videos[0][-4:] in extension for extension in ['.mp4', '.avi', '.mov', '.mkv']), 'Video file type not supported'
-            
-            # if any(name in self.model_name.lower() for name in ['clip', 'blip', 'llava-v1.5', 'llava-v1.6', 'hpsv2', 'pickscore', 'imag-reward']):
-            if self.model.video_mode == "concat":
-                delete_images=True
-                processed_images = []
-                for video in videos:
-                    # Extract frames
-                    output_dir = f"temp_{os.path.basename(video)}"
-                    extract_frames(video, num_frames, output_dir)
-                    
-                    # Read extracted frames
-                    frame_images = [cv2.imread(os.path.join(output_dir, f)) for f in os.listdir(output_dir) if f.endswith('.jpg')]
-                    
-                    # Concatenate frames
-                    if concatenate == "horizontal":
-                        concat_image = concatenate_images_horizontal(frame_images, dist_images=10)
-                    elif concatenate == "vertical":
-                        concat_image = concatenate_images_vertical(frame_images, dist_images=10)
-                    elif concatenate == "grid":
-                        concat_image = concatenate_images_grid(frame_images, dist_images=10, output_size=(1024, 1024))
-                    else:
-                        raise ValueError("Invalid concatenation method")
-                    
-                    # Save concatenated image
-                    output_path = f"concat_{os.path.basename(video)}.jpg"
-                    cv2.imwrite(output_path, concat_image)
-                    processed_images.append(output_path)
-                    
-                    # Clean up temporary directory
-                    for f in os.listdir(output_dir):
-                        os.remove(os.path.join(output_dir, f))
-                    os.rmdir(output_dir)
-                    
-                images = processed_images
-            elif self.model.video_mode == "direct":
-                images = videos
-            else:
-                print(f"Invalid `video_mode` for the given model. Please check model's class attributes")
-        elif self.model.allows_image:
         
-            if isinstance(images, str):
-                images = [images]
-            if isinstance(texts, str):
-                texts = [texts]
-        else:
+        Args:
+            images: Path to image/video file, or list of paths to image frames
+            texts: Text or list of texts to score against
+            num_frames: Number of frames to extract from video
+        """
+        if not self.model.allows_image:
             print(f'The model does not support image-only inference. Please try again.')
             return
+
+        # Convert single inputs to lists
+        if isinstance(images, str):
+            images = [images]
+        if isinstance(texts, str):
+            texts = [texts]
+
+        delete_images = False
+        processed_images = images
+
+        # Handle video inputs for image-only models
+        # Note: video processing for video-native models is handled at the model level
+        valid_video_extensions = {'.mp4', '.avi', '.mov', '.mkv'}
+        if any(isinstance(img, str) and img[-4:].lower() in valid_video_extensions for img in images):
+            if self.model.video_mode == "concat":
+                delete_images = True
+                processed_images = []
+                
+                for video in images:
+                    # Handle video file or list of frames
+                    frame_images = []
+                    if isinstance(video, str):
+                        output_dir = f"temp_{os.path.basename(video)}"
+                        extract_frames(video, num_frames, output_dir)
+                        frame_images = [cv2.imread(os.path.join(output_dir, f)) 
+                                     for f in os.listdir(output_dir) if f.endswith('.jpg')]
+                        
+                        # Clean up temp directory
+                        for f in os.listdir(output_dir):
+                            os.remove(os.path.join(output_dir, f))
+                        os.rmdir(output_dir)
+                    elif isinstance(video, list):
+                        frame_images = [cv2.imread(frame) for frame in video]
+
+                    # Concatenate and save frames
+                    concat_image = concatenate_images_horizontal(frame_images, dist_images=10)
+                    output_path = f"concat_{os.path.basename(str(video))}.jpg"
+                    cv2.imwrite(output_path, concat_image)
+                    processed_images.append(output_path)
+            elif self.model.video_mode != "direct":
+                print(f"Invalid `video_mode` for the given model. Please check model's class attributes")
+                return
+
+        # Process scores
+        scores = torch.zeros(len(processed_images), len(texts)).to(self.device)
+        for i, image in enumerate(processed_images):
+            scores[i] = self.model.forward([image] * len(texts), texts, **kwargs)
         
-        scores = torch.zeros(len(images), len(texts)).to(self.device)
-        if generate:
-            scores = self.model.generate(images, texts, **kwargs)
-        else:
-            for i, image in enumerate(images):
-                scores[i] = self.model.forward([image] * len(texts), texts, **kwargs)
-        
+        # Cleanup temporary files
         if delete_images:
             for f in processed_images:
                 os.remove(f)
+                
         return scores
     
     def batch_forward(self,

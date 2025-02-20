@@ -26,22 +26,22 @@ def get_image_type(image_path):
     assert image_type in ['png', 'jpeg', 'jpg', 'gif', 'bmp', 'webp']
     return image_type
 
-def extract_frames(video_path, num_frames):
-    video = cv2.VideoCapture(video_path)
-    total_frames = int(video.get(cv2.CAP_PROP_FRAME_COUNT))
-    step = total_frames // num_frames
-    frames = []
+# def extract_frames(video_path, num_frames):
+#     video = cv2.VideoCapture(video_path)
+#     total_frames = int(video.get(cv2.CAP_PROP_FRAME_COUNT))
+#     step = total_frames // num_frames
+#     frames = []
     
-    for i in range(num_frames):
-        video.set(cv2.CAP_PROP_POS_FRAMES, i * step)
-        ret, frame = video.read()
-        if ret:
-            _, buffer = cv2.imencode('.jpg', frame)
-            base64_frame = base64.b64encode(buffer).decode('utf-8')
-            frames.append(base64_frame)
+#     for i in range(num_frames):
+#         video.set(cv2.CAP_PROP_POS_FRAMES, i * step)
+#         ret, frame = video.read()
+#         if ret:
+#             _, buffer = cv2.imencode('.jpg', frame)
+#             base64_frame = base64.b64encode(buffer).decode('utf-8')
+#             frames.append(base64_frame)
     
-    video.release()
-    return frames
+#     video.release()
+#     return frames
 
 class GPT4VModel(VQAScoreModel):
     video_mode = "direct"
@@ -73,6 +73,12 @@ class GPT4VModel(VQAScoreModel):
                     'path': path,
                     'type': 'video',
                     'frames': frames
+                })
+            elif isinstance(path, list):
+                loaded_data.append({
+                    'path': path,
+                    'type': 'frame_list',
+                    'frames': []
                 })
             else:  # Image file
                 loaded_data.append({
@@ -169,7 +175,7 @@ class GPT4VModel(VQAScoreModel):
 
         return lm_prob
     
-    def generate_single(self, data, question):
+    def generate_single(self, data, question, max_new_tokens):
         try:
             if data['type'] == 'video':
                 content = [
@@ -185,7 +191,7 @@ class GPT4VModel(VQAScoreModel):
             completion = self.client.chat.completions.create(
                 model=self.model_name,
                 messages=[{"role": "user", "content": content}],
-                max_tokens=256,
+                max_tokens=max_new_tokens,
             )
 
         except:
@@ -216,7 +222,8 @@ class GPT4VModel(VQAScoreModel):
     def generate(self,
             paths: List[str],
             texts: List[str],
-            num_frames: int = 5) -> List[str]:
+            num_frames: int = 5,
+            max_new_tokens: int = 4) -> List[str]:
         assert len(paths) == len(texts), "Number of paths and texts must match"
         
         questions = texts
@@ -225,7 +232,7 @@ class GPT4VModel(VQAScoreModel):
         generated_outputs = []
 
         for idx, (data, question) in enumerate(zip(loaded_data, questions)):
-            generated_text = self.generate_single(data, question)
+            generated_text = self.generate_single(data, question, max_new_tokens)
             generated_outputs.append(generated_text)
 
         return generated_outputs

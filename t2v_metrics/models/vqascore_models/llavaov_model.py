@@ -55,6 +55,7 @@ class LLaVAOneVisionModel(VQAScoreModel):
         model_path = self.model_info['model']['path']
         self.tokenizer, self.model, self.processor, _ = load_pretrained_model(
             model_path, None, "llava_qwen", device_map="auto", attn_implementation="sdpa")
+        # tokenizer, model, image_processor, max_length = load_pretrained_model("/home/chancharikm/LLaVA-NeXT/scripts/train/checkpoints/wino_sft", "lmms-lab/llava-onevision-qwen2-7b-ov", "llava_qwen_lora", device_map="auto", attn_implementation="sdpa")
         self.model.eval()
 
     def load_images(self, paths: List[str], num_frames: int = 16) -> List[Union[torch.Tensor, List[torch.Tensor]]]:

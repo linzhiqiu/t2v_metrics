@@ -5,7 +5,7 @@
 [[VQAScore Page](https://linzhiqiu.github.io/papers/vqascore/)] [[VQAScore Demo](https://huggingface.co/spaces/zhiqiulin/VQAScore)]  [[GenAI-Bench Page](https://linzhiqiu.github.io/papers/genai_bench/)] [[GenAI-Bench Demo](https://huggingface.co/spaces/BaiqiL/GenAI-Bench-DataViewer)] [[CLIP-FlanT5 Model Zoo](https://github.com/linzhiqiu/CLIP-FlanT5/blob/master/docs/MODEL_ZOO.md)]
 
 **VQAScore: Evaluating Text-to-Visual Generation with Image-to-Text Generation** (ECCV 2024) [[Paper](https://arxiv.org/pdf/2404.01291)] [[HF](https://huggingface.co/zhiqiulin/clip-flant5-xxl)] <br>
-[Zhiqiu Lin](https://linzhiqiu.github.io/), [Deepak Pathak](https://www.cs.cmu.edu/~dpathak/), Baiqi Li, Jiayao Li, [Xide Xia](https://scholar.google.com/citations?user=FHLTntIAAAAJ&hl=en), [Graham Neubig](https://www.phontron.com/), [Pengchuan Zhang](https://scholar.google.com/citations?user=3VZ_E64AAAAJ&hl=en), [Deva Ramanan](https://www.cs.cmu.edu/~deva/)
+[Zhiqiu Lin](https://linzhiqiu.github.io/), [Deepak Pathak](https://www.cs.cmu.edu/~dpathak/), Baiqi Li, Jiayao Li, [Xide Xia](https://scholar.google.com/citations?user=FHLTntIAAAAJ&hl=en), [Graham Neubig](https://www.phontron.com/), [Pengchuan Zhang*](https://scholar.google.com/citations?user=3VZ_E64AAAAJ&hl=en), [Deva Ramanan*](https://www.cs.cmu.edu/~deva/) (*Co-First and co-senior authors)
 
 **GenAI-Bench: Evaluating and Improving Compositional Text-to-Visual Generation** (CVPR 2024, **Best Short Paper @ SynData Workshop**) [[Paper](https://arxiv.org/abs/2406.13743)] [[HF](https://huggingface.co/spaces/BaiqiL/GenAI-Bench-DataViewer)] <br>
 Baiqi Li*, [Zhiqiu Lin*](https://linzhiqiu.github.io/), [Deepak Pathak](https://www.cs.cmu.edu/~dpathak/), Jiayao Li, Yixin Fei, Kewen Wu, Tiffany Ling, [Xide Xia*](https://scholar.google.com/citations?user=FHLTntIAAAAJ&hl=en), [Pengchuan Zhang*](https://scholar.google.com/citations?user=3VZ_E64AAAAJ&hl=en), [Graham Neubig*](https://www.phontron.com/), [Deva Ramanan*](https://www.cs.cmu.edu/~deva/) (*Co-First and co-senior authors)
@@ -61,6 +61,32 @@ scores = clip_flant5_score(images=images, texts=texts) # scores[i][j] is the sco
 ### Notes on GPU and cache
 - **GPU usage**: By default, this code uses the first cuda device on your machine. We recommend 40GB GPUs for the largest VQAScore models such as `clip-flant5-xxl` and `llava-v1.5-13b`. If you have limited GPU memory, consider smaller models such as `clip-flant5-xl` and `llava-v1.5-7b`.
 - **Cache directory**: You can change the cache folder which saves all model checkpoints (default is `./hf_cache/`) by updating `HF_CACHE_DIR` in [t2v_metrics/constants.py](t2v_metrics/constants.py).
+
+
+## Benchmarking text-to-image models on GenAI-Bench
+
+### 1. Generate Images
+To generate images using a specified model, run:
+```bash
+python genai_bench/generate.py --output_dir ./outputs/ --gen_model runwayml/stable-diffusion-v1-5
+```
+
+The generated images will be saved in `./outputs/<model>/`. You may want to modify this script to generate images using your own models.
+
+### 2. Evaluate VQAScore Performance
+
+You can evaluate your model using VQAScore based on clip-flant5-xxl:
+```bash
+python genai_bench/evaluate.py --model clip-flant5-xxl --output_dir ./outputs --gen_model runwayml/stable-diffusion-v1-5
+```
+
+Or you can use GPT-4o based VQAScore:
+```bash
+python genai_bench/evaluate.py --model gpt-4o --openai_key INPUT_YOUR_KEY_HERE --output_dir ./outputs --gen_model runwayml/stable-diffusion-v1-5
+```
+
+For comparative VQAScore results (based on clip-flant5-xxl and GPT-4o) against state-of-the-art models like DALLE-3 and Midjourney v6, please refer to the [VQAScore results](https://github.com/linzhiqiu/t2v_metrics/blob/main/genai_bench/model_performance_vqacore.md)!
+
 
 ## **Advanced Usage**  
 
@@ -166,7 +192,7 @@ python genai_image_ranking.py --model clip-flant5-xxl --gen_model SDXL_Base
 ```
 
 ### Using GPT-4o for VQAScore!
-We implemented VQAScore using GPT-4o to achieve a new state-of-the-art performance. Please see [t2v_metrics/gpt4_eval.py](t2v_metrics/gpt4_eval.py) for an example. Here is how to use it in command line:
+We implemented VQAScore using GPT-4o to achieve a new state-of-the-art performance. Please see [gpt4_eval.py](gpt4_eval.py) for an example. Here is how to use it in command line:
 ```python
 openai_key = # Your OpenAI key
 score_func = t2v_metrics.get_score_model(model="gpt-4o", device="cuda", openai_key=openai_key, top_logprobs=20) # We find top_logprobs=20 to be sufficient for most (image, text) samples. Consider increase this number if you get errors (the API cost will not increase).
@@ -175,17 +201,20 @@ score_func = t2v_metrics.get_score_model(model="gpt-4o", device="cuda", openai_k
 ### Implementing your own scoring metric
 You can easily implement your own scoring metric. For example, if you have a VQA model that you believe is more effective, you can incorporate it into the directory at [t2v_metrics/models/vqascore_models](t2v_metrics/models/vqascore_models/). For guidance, please refer to our example implementations of [LLaVA-1.5](t2v_metrics/models/vqascore_models/llava_model.py) and [InstructBLIP](t2v_metrics/models/vqascore_models/instructblip_model.py) as starting points.
 
-### Text generation (VQA) using CLIP-FlanT5
-To generate texts (captioning or VQA tasks) using CLIP-FlanT5, please use the below code:
+### Text generation (VQA)
+To generate texts (captioning or VQA tasks) for any of our models, please use the below code:
 ```python
 import t2v_metrics
 clip_flant5_score = t2v_metrics.VQAScore(model='clip-flant5-xxl')
 
 images = ["images/0.png", "images/0.png"] # A list of images
-prompts = ["Please describe this image: ", "Does the image show 'someone talks on the phone angrily while another person sits happily'?"] # Corresponding prompts
-clip_flant5_score.model.generate(images=images, prompts=prompts)
+texts = ["Please describe this image: ", "Does the image show 'someone talks on the phone angrily while another person sits happily'?"] # Corresponding prompts
+clip_flant5_score.model.generate(images=images, texts=prompts)
 ```
-Note that this feature is only supported for version 4.36.1 of the `transformers` package (i.e.`pip install transformers==4.36.1`).
+The generate method for CLIP-FlanT5 may require downgrading to 4.36.1:
+```
+pip install transformers==4.36.1
+```
 
 ### Video-Text Alignment Scores
 
@@ -200,26 +229,23 @@ For single-image and CLIP-like models, video frames are concatenated. For all ot
 ```python
 import t2v_metrics
 
-### For a single (video, text) pair on a image-only VQA model:
-clip_flant5_score = t2v_metrics.VQAScore(model='clip-flant5-xxl') 
-video = "videos/baby.mp4" # a video path in string format
-text = "a baby crying"
-score = clip_flant5_score(videos=[video], texts=[text], concatenate='horizontal', num_frames=4) # For native interleaved-image/video LMM models (like LLaVA-OneVision), the 'concatenate' argument is unecessary.
-
-### For a single (video, text) pair on an interleaved-image/video VQA model:
+### For a single (video, text) pair:
 llava_ov_score = t2v_metrics.VQAScore(model='llava-onevision-qwen2-7b-ov') 
 video = "videos/baby.mp4" # a video path in string format
 text = "a baby crying"
-score = llava_ov_score(videos=[video], texts=[text], num_frames=4) 
+score = llava_ov_score(images=[video], texts=[text], num_frames=4) 
 
 ### Alternatively, if you want to calculate the pairwise similarity scores 
 ### between M videos and N texts, run the following to return a M x N score tensor.
 videos = ["videos/baby.mp4", "video/ducks.mp4"]
 texts = ["a baby crying",
          "a group of ducks standing in the water"]
-score = llava_ov_score(videos=[videos], texts=[text], num_frames=4) # scores[i][j] is the score between video i and text j
-```
+score = llava_ov_score(images=[videos], texts=[text], num_frames=4) # scores[i][j] is the score between video i and text j
 
+## We also accept lists of frames for each video as a valid input.
+#TODO
+```
+<!-- 
 ### Natural Language Text Generation:
 
 We also support natural language text generation for image/video inputs on any VQAScore model. Here is a representative example:
@@ -237,7 +263,7 @@ videos = ["videos/baby.mp4", "video/ducks.mp4"]
 texts = ["What is the baby doing in this video?",
          "How many ducks are there?"]
 generated_text = llava_ov_score(videos=[video], texts=[text], num_frames=4, max_new_tokens=512,  generate=True)
-```
+``` -->
 ## Contributions
 
 - **[Zhiqiu Lin](https://x.com/ZhiqiuLin)**, **[Jean de Nyandwi](https://x.com/Jeande_d)**, **[Chancharik Mitra](https://x.com/chancharikm)**  

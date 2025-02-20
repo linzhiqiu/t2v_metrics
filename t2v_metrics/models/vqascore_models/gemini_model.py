@@ -27,7 +27,7 @@ class GeminiModel(VQAScoreModel):
                  model_name='gemini-1.5',
                  device='cuda',
                  cache_dir=None,
-                 api_key=None,
+                 api_key="AIzaSyDI4FXAxtnw5IqB7NJoR7TYKPdHGGffKvg",
                  top_logprobs=2):
         assert model_name in GEMINI_MODELS
         assert api_key is not None, "Please provide a Google API key"
@@ -103,7 +103,7 @@ class GeminiModel(VQAScoreModel):
         lm_prob = torch.zeros(len(paths))
 
         for idx, (data, question) in enumerate(zip(loaded_data, questions)):
-            lm_prob[idx] = self.forward_single(data, question, answer)
+            lm_prob[idx] = self.forward_single(data, question, answer_template)
 
         return lm_prob
     def generate_single(self, data, question):

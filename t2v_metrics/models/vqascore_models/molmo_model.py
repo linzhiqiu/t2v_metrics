@@ -85,6 +85,7 @@ class MOLMOVisionModel:
                         max_new_tokens=1,
                         return_dict_in_generate=True,
                         output_scores=True,
+                        stop_strings="<|endoftext|>"
                     ),
                     tokenizer=self.processor.tokenizer
                 )
@@ -93,8 +94,8 @@ class MOLMOVisionModel:
             logits = outputs.scores[0]
             
             # Get the index of the "Yes" token
-            yes_token_id = self.processor.tokenizer.encode("Yes")[0]
-            
+            yes_token_id = self.processor.tokenizer.encode(" Yes")[0]
+
             # Apply softmax to get probabilities
             probs = torch.nn.functional.softmax(logits, dim=-1)
             
@@ -107,39 +108,51 @@ class MOLMOVisionModel:
                 paths: List[str],
                 texts: List[str],
                 max_new_tokens: int = 256) -> List[str]:
+        """
+        Generate text responses for the given images and prompts.
+        
+        Args:
+            paths: List of paths to image files
+            texts: List of prompt texts
+            max_new_tokens: Maximum number of tokens to generate
+            
+        Returns:
+            List of generated text responses
+        """
         assert len(paths) == len(texts), "Number of paths and texts must match"
         
-        texts = [self.format_question(text) for text in texts]
-        processed_data = self.load_images(paths)
-        
+        images = self.load_images(paths)
         generated_texts = []
-        for data, prompt in zip(processed_data, texts):
-            if isinstance(data, torch.Tensor) and data.dim() == 4:  # Video
-                image_sizes = [data.shape[2:] for _ in range(data.shape[0])]
-                modalities = ["video"]
-            else:  # Image
-                image_sizes = [data.shape[1:]]
-                modalities = None
+        
+
+        
+
+        for image, prompt in zip(images, texts):
+            inputs = self.processor.process(images=[image], text=prompt)
+            inputs = {k: v.to(self.model.device).unsqueeze(0) for k, v in inputs.items()}
             
-            input_ids = tokenizer_image_token(prompt, self.tokenizer, IMAGE_TOKEN_INDEX, return_tensors="pt").unsqueeze(0).to(self.device)
+            input_length = inputs['input_ids'].size(1)
+            with torch.no_grad():
+                outputs = self.model.generate_from_batch(
+                    inputs,
+                    GenerationConfig(
+                        max_new_tokens=max_new_tokens,
+                        return_dict_in_generate=True,
+                        stop_strings="<|endoftext|>"
+                    ),
+                    tokenizer=self.processor.tokenizer
+                )
+            new_tokens = outputs.sequences[:, input_length:]
             
-            outputs = self.model.generate(
-                input_ids,
-                images=[data],
-                image_sizes=image_sizes,
-                do_sample=False,
-                temperature=0,
-                max_new_tokens=max_new_tokens,
-                modalities=modalities
-            )
-            
-            text = self.tokenizer.decode(outputs[0], skip_special_tokens=True)
-            generated_texts.append(text.strip())
+            # Decode the generated tokens
+            text = self.processor.tokenizer.batch_decode(new_tokens, skip_special_tokens=True)
+            generated_texts.extend(text)
+            # generated_texts.append(text.strip())
 
         return generated_texts
 
-    def load_video(self, video_path, max_frames_num):
-        raise NotImplementedError("Direct video processing is not supported for MOLMO Vision model.")
+    # def load_video(self, video_path, max_frames_num):
+    #     raise NotImplementedError("Direct video processing is not supported for MOLMO Vision model.")
 
     def __call__(self, *args, **kwargs):
         return self.forward(*args, **kwargs)
