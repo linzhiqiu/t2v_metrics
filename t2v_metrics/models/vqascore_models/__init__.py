@@ -11,7 +11,7 @@ from .internvideo_model import INTERNVIDEO2_MODELS, InternVideo2Model
 from .internlm_model import INTERNLMXCOMPOSER25_MODELS, InternLMXComposer25Model
 from .llama32_model import LLAMA_32_VISION_MODELS, LLaMA32VisionModel
 from .molmo_model import MOLMO_MODELS, MOLMOVisionModel
-from .gemini_model import GEMINI_MODELS, GeminiModel
+# from .gemini_model import GEMINI_MODELS, GeminiModel
 from .qwen2vl_model import QWEN2_VL_MODELS, Qwen2VLModel
 
 from ...constants import HF_CACHE_DIR
@@ -30,7 +30,7 @@ ALL_VQA_MODELS = [
     INTERNLMXCOMPOSER25_MODELS,
     LLAMA_32_VISION_MODELS,
     MOLMO_MODELS,
-    GEMINI_MODELS,
+    # GEMINI_MODELS,
     QWEN2_VL_MODELS
 ]
 
@@ -66,8 +66,8 @@ def get_vqascore_model(model_name, device='cuda', cache_dir=HF_CACHE_DIR, **kwar
         return LLaMA32VisionModel(model_name, device=device, cache_dir=cache_dir, **kwargs)
     elif model_name in MOLMO_MODELS:
         return MOLMOVisionModel(model_name, device=device, cache_dir=cache_dir, **kwargs)
-    elif model_name in GEMINI_MODELS:
-        return GeminiModel(model_name, device=device, cache_dir=cache_dir, **kwargs)
+    # elif model_name in GEMINI_MODELS:
+    #     return GeminiModel(model_name, device=device, cache_dir=cache_dir, **kwargs)
     elif model_name in QWEN2_VL_MODELS:
         return Qwen2VLModel(model_name, device=device, cache_dir=cache_dir, **kwargs)
     else:
