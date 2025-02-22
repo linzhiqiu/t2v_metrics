@@ -111,6 +111,8 @@ class InternVideo2Model(VQAScoreModel):
             if path.lower().endswith(('.mp4', '.avi', '.mov', '.mkv')):  # Video file
                 processed_data.append(self.load_video(path, num_segments=num_segments, resolution=resolution, hd_num=hd_num))
             else:  # Image file or .npy file
+                print('This model does not yet support image inference.')
+                exit()
                 processed_data.append(self.process_image(path, resolution))
         return processed_data
 
@@ -633,27 +635,37 @@ class InternVideo2Model(VQAScoreModel):
             mode='bicubic', align_corners=False
         )
         return resized_frame
-    def process_image_chat(self, image_path):
-        mean = (0.485, 0.456, 0.406)
-        std = (0.229, 0.224, 0.225)
+    def process_image_chat(self, image_path, resolution=224):
+        mean = (0.48145466, 0.4578275, 0.40821073)
+        std = (0.26862954, 0.26130258, 0.27577711)
+        d_hid = self.model.vision_encoder.encoder.img_pos_embed.shape[-1]  # Get embedding dimension
+
         if image_path.lower().endswith('.npy'):
-            image = np.load(image_path)
-            image = torch.from_numpy(image).permute(2, 0, 1)
+            img = np.load(image_path)
+            img = torch.from_numpy(img)
         else:
-            image = Image.open(image_path).convert('RGB')
-            image = transforms.ToTensor()(image)
+            img = Image.open(image_path).convert('RGB')
+            transform = transforms.Compose([
+                transforms.Resize((resolution, resolution), 
+                            interpolation=InterpolationMode.BICUBIC),
+                transforms.ToTensor(),
+                transforms.Normalize(mean, std)
+            ])
+            img = transform(img)
+
+        img = img.unsqueeze(0).unsqueeze(0)  # Add batch and frame dimensions
         
+        # For single image, we can use ckpt_num_frame=-1 to skip interpolation
+        n_position = (resolution//16)**2
+        new_pos_emb = self.get_sinusoid_encoding_table(
+            n_position=n_position,
+            d_hid=d_hid,
+            ckpt_num_frame=-1,  # Skip frame interpolation for single image
+            cur_frame=1  # Single frame
+        )
+        self.model.vision_encoder.encoder.img_pos_embed = new_pos_emb
 
-        transform = transforms.Compose([
-            transforms.Lambda(lambda x: x.float().div(255.0)),
-            transforms.Resize(224, interpolation=transforms.InterpolationMode.BICUBIC),
-            transforms.CenterCrop(224),
-            transforms.Normalize(mean, std)
-        ])
-
-        image = transform(image).unsqueeze(0)
-
-        return image
+        return img.to(self.device)
 
     def process_image_chat_hd(self, image_path, resolution=224, hd_num=12, padding=False):
         mean = (0.485, 0.456, 0.406)
@@ -661,12 +673,13 @@ class InternVideo2Model(VQAScoreModel):
 
         if image_path.lower().endswith('.npy'):
             img = np.load(image_path)
-            img = torch.from_numpy(img).permute(2, 0, 1)
+            img = torch.from_numpy(img)
         else:
             img = Image.open(image_path).convert('RGB')
             img = PILToTensor()(img)
-
-        img = img.unsqueeze(0).float().div(255.0)
+        
+        # Match authors' implementation
+        img = img.float().div(255.0).unsqueeze(0)  # Adding batch dimension first
 
         if padding:
             img = self.HD_transform_padding(img, image_size=resolution, hd_num=hd_num)
@@ -677,9 +690,41 @@ class InternVideo2Model(VQAScoreModel):
             transforms.Normalize(mean, std)
         ])
         
-        img = transform(img).unsqueeze(0)
-
+        img = transform(img).unsqueeze(0)  # Final unsqueeze for model input
         return img.to(self.device)
+    
+    def get_sinusoid_encoding_table(self, n_position, d_hid, ckpt_num_frame=-1, cur_frame=12): 
+        ''' Sinusoid position encoding table ''' 
+        # TODO: make it with torch instead of numpy 
+        def get_position_angle_vec(position): 
+            return [position / np.power(10000, 2 * (hid_j // 2) / d_hid) for hid_j in range(d_hid)] 
+        
+        if ckpt_num_frame != -1 and ckpt_num_frame != cur_frame:
+            logger.info(f"Interpolate position embedding")
+            logger.info(f"Testing frame: {cur_frame}")
+            logger.info(f"Checkpoint frame: {ckpt_num_frame}")
+
+            T = ckpt_num_frame # checkpoint frame
+            new_T = cur_frame # testing frame
+            n_position = n_position // new_T * T # generate checkpoint position embedding
+            sinusoid_table = np.array([get_position_angle_vec(pos_i) for pos_i in range(n_position)]) 
+            sinusoid_table[:, 0::2] = np.sin(sinusoid_table[:, 0::2]) # dim 2i 
+            sinusoid_table[:, 1::2] = np.cos(sinusoid_table[:, 1::2]) # dim 2i+1 
+            sinusoid_table = torch.tensor(sinusoid_table, dtype=torch.float, requires_grad=False).unsqueeze(0)
+            # interpolate
+            P = int((n_position // T) ** 0.5)
+            C = d_hid
+            sinusoid_table = sinusoid_table.reshape(-1, T, P, P, C)
+            sinusoid_table = sinusoid_table.permute(0, 2, 3, 4, 1).reshape(-1, C, T)  # BHW, C, T
+            sinusoid_table = torch.nn.functional.interpolate(sinusoid_table, size=new_T, mode='linear')
+            sinusoid_table = sinusoid_table.reshape(1, P, P, C, new_T).permute(0, 4, 1, 2, 3) # B, T, H, W, C
+            sinusoid_table = sinusoid_table.flatten(1, 3)
+            return sinusoid_table
+        else:
+            sinusoid_table = np.array([get_position_angle_vec(pos_i) for pos_i in range(n_position)]) 
+            sinusoid_table[:, 0::2] = np.sin(sinusoid_table[:, 0::2]) # dim 2i 
+            sinusoid_table[:, 1::2] = np.cos(sinusoid_table[:, 1::2]) # dim 2i+1 
+            return torch.tensor(sinusoid_table, dtype=torch.float, requires_grad=False).unsqueeze(0) 
     def get_index(self, num_frames, num_segments):
         seg_size = float(num_frames - 1) / num_segments
         start = int(seg_size / 2)

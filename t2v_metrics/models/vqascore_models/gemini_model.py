@@ -9,6 +9,9 @@ GEMINI_MODELS = {
     'gemini-1.5': {
         'model_path' : 'models/gemini-1.5-flash-002'
     },
+    'gemini-2.0': {
+        'model_path': 'gemini-2.0-flash-001' 
+    }
 }
 
 def get_file_type(file_path):
@@ -27,7 +30,7 @@ class GeminiModel(VQAScoreModel):
                  model_name='gemini-1.5',
                  device='cuda',
                  cache_dir=None,
-                 api_key="AIzaSyDI4FXAxtnw5IqB7NJoR7TYKPdHGGffKvg",
+                 api_key=None,
                  top_logprobs=2):
         assert model_name in GEMINI_MODELS
         assert api_key is not None, "Please provide a Google API key"
@@ -68,6 +71,7 @@ class GeminiModel(VQAScoreModel):
                 request_options={"timeout": 600},
                 generation_config=genai.GenerationConfig(max_output_tokens=10, response_logprobs=True, candidate_count=2)
             )
+            print(f'Response {response}')
             time.sleep(1.5) #This is added to prevent against quota limit of the free tier for gemini.
         
             candidates = response.candidates[0].logprobs_result.chosen_candidates
@@ -113,6 +117,7 @@ class GeminiModel(VQAScoreModel):
                 request_options={"timeout": 600},
                 generation_config=genai.GenerationConfig(max_output_tokens=256)
             )
+      
             time.sleep(1.5)  # This is added to prevent against quota limit of the free tier for gemini.
             
             # Extract the generated text from the response

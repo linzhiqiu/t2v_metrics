@@ -40,15 +40,10 @@ def main():
         EqBen_Mini,
         TIFA160_DSG,
         Pickapic_v1,
-<<<<<<< HEAD
-        # SeeTrue,
-        # Flickr8K_CF,
-=======
         SeeTrue,
         StanfordT23D,
         T2VScore,
         Flickr8K_CF
->>>>>>> fb4a1472e5fa69e413b2fa5d6e1f78981adb4cda
     ]:
         
         dataset = dataset_cls(root_dir=args.root_dir)

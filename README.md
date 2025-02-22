@@ -31,9 +31,12 @@ conda create -n t2v python=3.10 -y
 conda activate t2v
 conda install pip -y
 
-pip install torch torchvision torchaudio
+pip install torch==2.3.1 torchvision==0.18.1 torchaudio==2.3.1 --index-url https://download.pytorch.org/whl/cu118
 pip install git+https://github.com/openai/CLIP.git
 pip install -e . # local pip install
+
+ # Install this version of timm if you want to use any Intern models
+pip install timm==1.0.13 --no-dependencies
 ```
 
 <!-- (not yet implemented) Or simply run `pip install t2v_metrics`.  -->
@@ -82,7 +85,7 @@ python genai_bench/evaluate.py --model clip-flant5-xxl --output_dir ./outputs --
 
 Or you can use GPT-4o based VQAScore:
 ```bash
-python genai_bench/evaluate.py --model gpt-4o --openai_key INPUT_YOUR_KEY_HERE --output_dir ./outputs --gen_model runwayml/stable-diffusion-v1-5
+python genai_bench/evaluate.py --model gpt-4o --api_key INPUT_YOUR_KEY_HERE --output_dir ./outputs --gen_model runwayml/stable-diffusion-v1-5
 ```
 
 For comparative VQAScore results (based on clip-flant5-xxl and GPT-4o) against state-of-the-art models like DALLE-3 and Midjourney v6, please refer to the [VQAScore results](https://github.com/linzhiqiu/t2v_metrics/blob/main/genai_bench/model_performance_vqacore.md)!
@@ -194,8 +197,8 @@ python genai_image_ranking.py --model clip-flant5-xxl --gen_model SDXL_Base
 ### Using GPT-4o for VQAScore!
 We implemented VQAScore using GPT-4o to achieve a new state-of-the-art performance. Please see [gpt4_eval.py](gpt4_eval.py) for an example. Here is how to use it in command line:
 ```python
-openai_key = # Your OpenAI key
-score_func = t2v_metrics.get_score_model(model="gpt-4o", device="cuda", openai_key=openai_key, top_logprobs=20) # We find top_logprobs=20 to be sufficient for most (image, text) samples. Consider increase this number if you get errors (the API cost will not increase).
+api_key = # Your OpenAI key
+score_func = t2v_metrics.get_score_model(model="gpt-4o", device="cuda", api_key=openai_key, top_logprobs=20) # We find top_logprobs=20 to be sufficient for most (image, text) samples. Consider increase this number if you get errors (the API cost will not increase).
 ```
 
 ### Implementing your own scoring metric

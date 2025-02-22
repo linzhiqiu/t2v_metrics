@@ -11,6 +11,49 @@ from .vqa_model import VQAScoreModel
 from .fastchat_utils import get_conv_template
 
 INTERNVL2_MODELS = {
+    # InternVL2 Models
+    'internvl2-1b': {
+        'tokenizer': {
+            'path': 'OpenGVLab/InternVL2-1B',
+            'trust_remote_code': True,
+            'use_fast': False,
+        },
+        'model': {
+            'pretrained_model_name_or_path': 'OpenGVLab/InternVL2-1B',
+            'torch_dtype': torch.bfloat16,
+            'low_cpu_mem_usage': True,
+            'use_flash_attn': True,
+            'trust_remote_code': True,
+        },
+    },
+    'internvl2-2b': {
+        'tokenizer': {
+            'path': 'OpenGVLab/InternVL2-2B',
+            'trust_remote_code': True,
+            'use_fast': False,
+        },
+        'model': {
+            'pretrained_model_name_or_path': 'OpenGVLab/InternVL2-2B',
+            'torch_dtype': torch.bfloat16,
+            'low_cpu_mem_usage': True,
+            'use_flash_attn': True,
+            'trust_remote_code': True,
+        },
+    },
+    'internvl2-4b': {
+        'tokenizer': {
+            'path': 'OpenGVLab/InternVL2-4B',
+            'trust_remote_code': True,
+            'use_fast': False,
+        },
+        'model': {
+            'pretrained_model_name_or_path': 'OpenGVLab/InternVL2-4B',
+            'torch_dtype': torch.bfloat16,
+            'low_cpu_mem_usage': True,
+            'use_flash_attn': True,
+            'trust_remote_code': True,
+        },
+    },
     'internvl2-8b': {
         'tokenizer': {
             'path': 'OpenGVLab/InternVL2-8B',
@@ -25,7 +68,148 @@ INTERNVL2_MODELS = {
             'trust_remote_code': True,
         },
     },
-    # Add other InternVL2 model variants here if needed
+    'internvl2-26b': {
+        'tokenizer': {
+            'path': 'OpenGVLab/InternVL2-26B',
+            'trust_remote_code': True,
+            'use_fast': False,
+        },
+        'model': {
+            'pretrained_model_name_or_path': 'OpenGVLab/InternVL2-26B',
+            'torch_dtype': torch.bfloat16,
+            'low_cpu_mem_usage': True,
+            'use_flash_attn': True,
+            'trust_remote_code': True,
+        },
+    },
+    'internvl2-40b': {
+        'tokenizer': {
+            'path': 'OpenGVLab/InternVL2-40B',
+            'trust_remote_code': True,
+            'use_fast': False,
+        },
+        'model': {
+            'pretrained_model_name_or_path': 'OpenGVLab/InternVL2-40B',
+            'torch_dtype': torch.bfloat16,
+            'low_cpu_mem_usage': True,
+            'use_flash_attn': True,
+            'trust_remote_code': True,
+        },
+    },
+    'internvl2-llama3-76b': {
+        'tokenizer': {
+            'path': 'OpenGVLab/InternVL2-Llama3-76B',
+            'trust_remote_code': True,
+            'use_fast': False,
+        },
+        'model': {
+            'pretrained_model_name_or_path': 'OpenGVLab/InternVL2-Llama3-76B',
+            'torch_dtype': torch.bfloat16,
+            'low_cpu_mem_usage': True,
+            'use_flash_attn': True,
+            'trust_remote_code': True,
+        },
+    },
+    
+    # InternVL2.5 Models
+    'internvl2.5-1b': {
+        'tokenizer': {
+            'path': 'OpenGVLab/InternVL2_5-1B',
+            'trust_remote_code': True,
+            'use_fast': False,
+        },
+        'model': {
+            'pretrained_model_name_or_path': 'OpenGVLab/InternVL2_5-1B',
+            'torch_dtype': torch.bfloat16,
+            'low_cpu_mem_usage': True,
+            'use_flash_attn': True,
+            'trust_remote_code': True,
+        },
+    },
+    'internvl2.5-2b': {
+        'tokenizer': {
+            'path': 'OpenGVLab/InternVL2_5-2B',
+            'trust_remote_code': True,
+            'use_fast': False,
+        },
+        'model': {
+            'pretrained_model_name_or_path': 'OpenGVLab/InternVL2_5-2B',
+            'torch_dtype': torch.bfloat16,
+            'low_cpu_mem_usage': True,
+            'use_flash_attn': True,
+            'trust_remote_code': True,
+        },
+    },
+    'internvl2.5-4b': {
+        'tokenizer': {
+            'path': 'OpenGVLab/InternVL2_5-4B',
+            'trust_remote_code': True,
+            'use_fast': False,
+        },
+        'model': {
+            'pretrained_model_name_or_path': 'OpenGVLab/InternVL2_5-4B',
+            'torch_dtype': torch.bfloat16,
+            'low_cpu_mem_usage': True,
+            'use_flash_attn': True,
+            'trust_remote_code': True,
+        },
+    },
+    'internvl2.5-8b': {
+        'tokenizer': {
+            'path': 'OpenGVLab/InternVL2_5-8B',
+            'trust_remote_code': True,
+            'use_fast': False,
+        },
+        'model': {
+            'pretrained_model_name_or_path': 'OpenGVLab/InternVL2_5-8B',
+            'torch_dtype': torch.bfloat16,
+            'low_cpu_mem_usage': True,
+            'use_flash_attn': True,
+            'trust_remote_code': True,
+        },
+    },
+    'internvl2.5-26b': {
+        'tokenizer': {
+            'path': 'OpenGVLab/InternVL2_5-26B',
+            'trust_remote_code': True,
+            'use_fast': False,
+        },
+        'model': {
+            'pretrained_model_name_or_path': 'OpenGVLab/InternVL2_5-26B',
+            'torch_dtype': torch.bfloat16,
+            'low_cpu_mem_usage': True,
+            'use_flash_attn': True,
+            'trust_remote_code': True,
+        },
+    },
+    'internvl2.5-38b': {
+        'tokenizer': {
+            'path': 'OpenGVLab/InternVL2_5-38B',
+            'trust_remote_code': True,
+            'use_fast': False,
+        },
+        'model': {
+            'pretrained_model_name_or_path': 'OpenGVLab/InternVL2_5-38B',
+            'torch_dtype': torch.bfloat16,
+            'low_cpu_mem_usage': True,
+            'use_flash_attn': True,
+            'trust_remote_code': True,
+        },
+    },
+    'internvl2.5-78b': {
+        'tokenizer': {
+            'path': 'OpenGVLab/InternVL2_5-78B',
+            'trust_remote_code': True,
+            'use_fast': False,
+        },
+        'model': {
+            'pretrained_model_name_or_path': 'OpenGVLab/InternVL2_5-78B',
+            'torch_dtype': torch.bfloat16,
+            'low_cpu_mem_usage': True,
+            'use_flash_attn': True,
+            'trust_remote_code': True,
+        },
+    },
 }
 
 IMAGENET_MEAN = (0.485, 0.456, 0.406)

@@ -2,12 +2,13 @@ import torch
 import numpy as np
 from PIL import Image
 from typing import List, Union
-from transformers import Qwen2VLForConditionalGeneration, AutoProcessor
+from transformers import Qwen2VLForConditionalGeneration, Qwen2_5_VLForConditionalGeneration, AutoProcessor
 from qwen_vl_utils import process_vision_info
 from decord import VideoReader, cpu
 from .vqa_model import VQAScoreModel
 
 QWEN2_VL_MODELS = {
+    # Qwen2_VL
     'qwen2-vl-2b': {
         'tokenizer': {
             'path': 'Qwen/Qwen2-VL-2B-Instruct',
@@ -34,6 +35,38 @@ QWEN2_VL_MODELS = {
         },
         'model': {
             'path': 'Qwen/Qwen2-VL-72B-Instruct',
+            'torch_dtype': torch.bfloat16,
+            'attn_implementation': 'flash_attention_2',
+        },
+    },
+
+    # Qwen2.5_VL:
+    'qwen2.5-vl-3b': {
+        'tokenizer': {
+            'path': 'Qwen/Qwen2.5-VL-3B-Instruct',
+        },
+        'model': {
+            'path': 'Qwen/Qwen2.5-VL-3B-Instruct',
+            'torch_dtype': torch.bfloat16,
+            'attn_implementation': 'flash_attention_2',
+        },
+    },
+    'qwen2.5-vl-7b': {
+        'tokenizer': {
+            'path': 'Qwen/Qwen2.5-VL-7B-Instruct',
+        },
+        'model': {
+            'path': 'Qwen/Qwen2.5-VL-7B-Instruct',
+            'torch_dtype': torch.bfloat16,
+            'attn_implementation': 'flash_attention_2',
+        },
+    },
+    'qwen2.5-vl-72b': {
+        'tokenizer': {
+            'path': 'Qwen/Qwen2.5-VL-72B-Instruct',
+        },
+        'model': {
+            'path': 'Qwen/Qwen2.5-VL-72B-Instruct',
             'torch_dtype': torch.bfloat16,
             'attn_implementation': 'flash_attention_2',
         },
@@ -198,12 +231,21 @@ class Qwen2VLModel(VQAScoreModel):
 
     def load_model(self):
         model_path = self.model_info['model']['path']
-        self.model = Qwen2VLForConditionalGeneration.from_pretrained(
-            model_path,
-            torch_dtype=self.model_info['model']['torch_dtype'],
-            attn_implementation=self.model_info['model']['attn_implementation'],
-            device_map="auto"
-        )
+        if '2.5' in model_path:
+            self.model = Qwen2_5_VLForConditionalGeneration.from_pretrained(
+                model_path,
+                torch_dtype=self.model_info['model']['torch_dtype'],
+                attn_implementation=self.model_info['model']['attn_implementation'],
+                device_map="auto"
+            )    
+        
+        else:
+            self.model = Qwen2VLForConditionalGeneration.from_pretrained(
+                model_path,
+                torch_dtype=self.model_info['model']['torch_dtype'],
+                attn_implementation=self.model_info['model']['attn_implementation'],
+                device_map="auto"
+            )
         self.processor = AutoProcessor.from_pretrained(self.model_info['tokenizer']['path'])
         self.model.eval()
 

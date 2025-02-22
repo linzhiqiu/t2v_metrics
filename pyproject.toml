@@ -21,7 +21,7 @@ dependencies = [
     "gdown>=4.7.1",
     "huggingface-hub>=0.19.4",
     "matplotlib>=3.6.2",
-    "numpy>=2.2.2",
+    "numpy==1.26.4",
     "open-clip-torch>=2.23.0",
     "openai>=1.29.0",
     "opencv-python>=4.11.0.86",
@@ -54,13 +54,11 @@ dependencies = [
     "accelerate",
     "shortuuid",
     "bitsandbytes",
-    "timm",
     "requests",
     "httpx==0.24.0",
     "uvicorn",
     "einops-exts",
     "einops",
-    "flash-attn @ https://github.com/Dao-AILab/flash-attention/releases/download/v2.5.8/flash_attn-2.5.8+cu122torch2.3cxx11abiFALSE-cp310-cp310-linux_x86_64.whl",
     "PyYAML",
     "wandb",
     "moviepy",
@@ -74,8 +72,9 @@ dependencies = [
     "psutil==5.9.5",
     "soundfile==0.12.1",
     "termcolor==2.4.0",
-    "qwen-vl-utils"
-]
+    "qwen-vl-utils",
+    "flash-attn @ https://github.com/Dao-AILab/flash-attention/releases/download/v2.5.8/flash_attn-2.5.8+cu122torch2.3cxx11abiFALSE-cp310-cp310-linux_x86_64.whl"
+] 
 
 [tool.setuptools]
 include-package-data = true

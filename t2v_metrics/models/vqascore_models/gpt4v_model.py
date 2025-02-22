@@ -26,22 +26,22 @@ def get_image_type(image_path):
     assert image_type in ['png', 'jpeg', 'jpg', 'gif', 'bmp', 'webp']
     return image_type
 
-# def extract_frames(video_path, num_frames):
-#     video = cv2.VideoCapture(video_path)
-#     total_frames = int(video.get(cv2.CAP_PROP_FRAME_COUNT))
-#     step = total_frames // num_frames
-#     frames = []
+def extract_frames(video_path, num_frames):
+    video = cv2.VideoCapture(video_path)
+    total_frames = int(video.get(cv2.CAP_PROP_FRAME_COUNT))
+    step = total_frames // num_frames
+    frames = []
     
-#     for i in range(num_frames):
-#         video.set(cv2.CAP_PROP_POS_FRAMES, i * step)
-#         ret, frame = video.read()
-#         if ret:
-#             _, buffer = cv2.imencode('.jpg', frame)
-#             base64_frame = base64.b64encode(buffer).decode('utf-8')
-#             frames.append(base64_frame)
+    for i in range(num_frames):
+        video.set(cv2.CAP_PROP_POS_FRAMES, i * step)
+        ret, frame = video.read()
+        if ret:
+            _, buffer = cv2.imencode('.jpg', frame)
+            base64_frame = base64.b64encode(buffer).decode('utf-8')
+            frames.append(base64_frame)
     
-#     video.release()
-#     return frames
+    video.release()
+    return frames
 
 class GPT4VModel(VQAScoreModel):
     video_mode = "direct"
@@ -50,11 +50,11 @@ class GPT4VModel(VQAScoreModel):
                  model_name='gpt-4-turbo',
                  device='cuda',
                  cache_dir=None,
-                 openai_key=None,
+                 api_key=None,
                  top_logprobs=2):
         assert model_name in GPT4V_MODELS
-        assert openai_key is not None, "Please provide an OpenAI API key"
-        self.openai_key = openai_key
+        assert api_key is not None, "Please provide an OpenAI API key"
+        self.api_key = api_key
         self.top_logprobs = top_logprobs
         super().__init__(model_name=model_name,
                          device=device,
@@ -62,7 +62,7 @@ class GPT4VModel(VQAScoreModel):
 
     def load_model(self):
         self.tokenizer = tiktoken.encoding_for_model(self.model_name)
-        self.client = OpenAI(api_key=self.openai_key)
+        self.client = OpenAI(api_key=self.api_key)
 
     def load_images(self, paths: List[str], num_frames: int = None) -> List[dict]:
         loaded_data = []
