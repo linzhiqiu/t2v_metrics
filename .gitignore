@@ -35,6 +35,9 @@ genai_image_800_temp.py
 gpt4_eval.txt
 vqascore_ablation.py
 
+# Binary scores
+temp/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

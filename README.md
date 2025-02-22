@@ -27,13 +27,16 @@ Install the package via:
 git clone https://github.com/linzhiqiu/t2v_metrics
 cd t2v_metrics
 
-conda create -n t2v python=3.10 -y
-conda activate t2v
+conda create -n t2v_video python=3.10 -y
+conda activate t2v_video
 conda install pip -y
 
 pip install torch torchvision torchaudio
 pip install git+https://github.com/openai/CLIP.git
 pip install -e . # local pip install
+pip install -r requirements_umt.txt # to use unmasked teacher
+pip install -r requirements_internvideo.txt # to use internvideo2
+pip install flash-attn --use-pep517 --no-build-isolation
 ```
 
 <!-- (not yet implemented) Or simply run `pip install t2v_metrics`.  -->
