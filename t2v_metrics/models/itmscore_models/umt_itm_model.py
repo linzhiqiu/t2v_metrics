@@ -49,6 +49,7 @@ class UMTITMScoreModel(ScoreModel):
         # Simply verify if all are videos ending with video formats such as mp4
         if not all([img.endswith((".mp4", ".avi")) for img in image]):
             raise ValueError("All images must be video files")
+        return image
 
     @torch.no_grad()
     def forward(self,
@@ -57,11 +58,12 @@ class UMTITMScoreModel(ScoreModel):
                 num_frames: int=4) -> torch.Tensor:
         """Forward pass of the model to return n scores for n (image, text) pairs (in PyTorch Tensor)
         """
+        images = self.load_images(images)
         assert len(images) == len(texts)
         if num_frames != self.config.num_frames:
             raise ValueError(f"num_frames must be {self.config.num_frames} for this model")
 
-        _, i2t_emb = evaluation(
+        t2i_scores_x, _ = evaluation(
             texts,
             images,
             self.transforms,
@@ -72,4 +74,4 @@ class UMTITMScoreModel(ScoreModel):
             num_frames=num_frames,
             max_txt_l=self.config.max_txt_l,
         )
-        return i2t_emb.diagonal()
+        return t2i_scores_x

@@ -162,7 +162,7 @@ def setup_main(config_file, pretrained_path):
     if is_main_process():
         setup_output_dir(config.output_dir, excludes=["code"])
         setup_logger(output=config.output_dir, color=True, name="vindlu")
-        logger.info(f"config: {Config.pretty_text(config)}")
+        # logger.info(f"config: {Config.pretty_text(config)}")
         # Config.dump(config, os.path.join(config.output_dir, "config.json"))
     
     # dist.barrier()

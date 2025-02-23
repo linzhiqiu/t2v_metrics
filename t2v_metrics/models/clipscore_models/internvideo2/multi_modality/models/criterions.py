@@ -466,8 +466,8 @@ class new_UTA_Loss(nn.Module):
         self.distill_final_features = distill_final_features
         self.clip_loss_ratio = clip_loss_ratio
 
-        logger.info(f'distill_final_features: {distill_final_features}')
-        logger.info(f'clip_loss_ratio: {clip_loss_ratio}')
+        # logger.info(f'distill_final_features: {distill_final_features}')
+        # logger.info(f'clip_loss_ratio: {clip_loss_ratio}')
 
     
     def uta_loss(self, student_output, student_output_final,

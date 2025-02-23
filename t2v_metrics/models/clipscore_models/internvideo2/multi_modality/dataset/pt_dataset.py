@@ -6,11 +6,11 @@ import io
 import torch
 import numpy as np
 
-from dataset.base_dataset import BaseDataset
-from dataset.text_prompt import kinetics_templates, imagenet_templates
-from dataset.utils import pre_text
-from dataset.video_utils import VIDEO_READER_FUNCS
-from dataset.serialize import get_local_rank, TorchShmSerializedList
+from .base_dataset import BaseDataset
+from .text_prompt import kinetics_templates, imagenet_templates
+from .utils import pre_text
+from .video_utils import VIDEO_READER_FUNCS
+from .serialize import get_local_rank, TorchShmSerializedList
 
 logger = logging.getLogger(__name__)
 

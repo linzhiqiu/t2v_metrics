@@ -320,8 +320,8 @@ class UTA_Loss(nn.Module):
         super().__init__()
         self.norm_type = uta_norm_type
         self.loss_type = uta_loss_type
-        logger.info(f'Norm type: {uta_norm_type}')
-        logger.info(f'Loss type: {uta_loss_type}')
+        # logger.info(f'Norm type: {uta_norm_type}')
+        # logger.info(f'Loss type: {uta_loss_type}')
 
         if uta_loss_type == 'mse':
             self.loss_func = nn.MSELoss()

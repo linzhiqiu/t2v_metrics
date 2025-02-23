@@ -39,19 +39,16 @@ def get_media_types(datasources):
 
 
 def setup_model(
-    config, model_cls, has_decoder=False, pretrain=False, find_unused_parameters=False
+    config, model_cls, has_decoder=False, pretrain=False, device="cuda"
 ):
-    logger.info("Creating model")
+    # logger.info("Creating model")
     config = copy.deepcopy(config)
 
-    if "bert" in config.model.text_encoder.name:
-        tokenizer = BertTokenizer.from_pretrained(config.model.text_encoder.pretrained)
-    else:
-        raise ValueError(f"Not supported text encoder.")
+    tokenizer = BertTokenizer.from_pretrained(config.model.text_encoder.pretrained)
 
     model = model_cls(config=config, tokenizer=tokenizer, is_pretrain=pretrain)
 
-    model = model.to(torch.device(config.device))
+    model = model.to(device)
     model_without_ddp = model
     # if config.distributed:
     #     model = torch.nn.parallel.DistributedDataParallel(

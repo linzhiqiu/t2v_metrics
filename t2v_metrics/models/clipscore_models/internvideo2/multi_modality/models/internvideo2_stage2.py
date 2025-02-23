@@ -52,7 +52,7 @@ class InternVideo2_Stage2(nn.Module):
         self.criterion_vtc_vtm = VTC_VTM_Loss(config.criterion.vtm_hard_neg)
         self.criterion_mlm = MLMLoss(config.criterion.mlm_masking_prob, tokenizer)
         self.uta_image_only = config.criterion.get('uta_image_only', False)
-        logger.info(f"uta_image_only={self.uta_image_only}")
+        # logger.info(f"uta_image_only={self.uta_image_only}")
 
     def freeze_vision(self):
         """freeze vision encoder"""
@@ -299,7 +299,7 @@ class InternVideo2_Stage2(nn.Module):
 
         """
         encoder_name = self.config.model.vision_encoder.name
-        logger.info(f"Build vision_encoder: {encoder_name}")
+        # logger.info(f"Build vision_encoder: {encoder_name}")
         if encoder_name == 'pretrain_internvideo2_1b_patch14_224':
             vision_encoder = pretrain_internvideo2_1b_patch14_224(self.config.model)
         elif encoder_name == 'pretrain_internvideo2_6b_patch14_224':
@@ -342,7 +342,7 @@ class InternVideo2_Stage2(nn.Module):
 
         """
         encoder_name = self.config.model.text_encoder.name
-        logger.info(f"Build text_encoder {encoder_name}")
+        # logger.info(f"Build text_encoder {encoder_name}")
 
         if "bert" in encoder_name:
             text_encoder = build_bert(

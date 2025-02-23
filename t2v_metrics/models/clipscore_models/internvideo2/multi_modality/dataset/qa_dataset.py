@@ -1,7 +1,7 @@
 import json
-from dataset.base_dataset import BaseDataset
-from dataset.utils import pre_text, load_anno
-from dataset.video_utils import VIDEO_READER_FUNCS
+from .base_dataset import BaseDataset
+from .utils import pre_text, load_anno
+from .video_utils import VIDEO_READER_FUNCS
 import logging
 
 logger = logging.getLogger(__name__)

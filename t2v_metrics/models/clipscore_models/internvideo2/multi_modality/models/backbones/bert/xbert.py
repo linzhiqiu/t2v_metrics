@@ -694,7 +694,7 @@ class BertEncoder(nn.Module):
         self.layer = nn.ModuleList(
             [BertLayer(config, i) for i in range(config.num_hidden_layers)]
         )
-        logger.info(f"build bert with cross_module: {config.cross_module}")
+        # logger.info(f"build bert with cross_module: {config.cross_module}")
 
     def forward(
         self,

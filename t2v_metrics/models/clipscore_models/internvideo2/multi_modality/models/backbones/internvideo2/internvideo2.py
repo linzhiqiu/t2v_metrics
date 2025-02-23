@@ -17,12 +17,14 @@ logger = logging.getLogger(__name__)
 try:
     from flash_attn.modules.mlp import FusedMLP
 except:
-    logger.warn(f'FusedMLP of flash_attn is not installed!!!')
+    # logger.warn(f'FusedMLP of flash_attn is not installed!!!')
+    pass
 
 try:
     from flash_attn.ops.rms_norm import DropoutAddRMSNorm
 except:
-    logger.warn(f'DropoutAddRMSNorm of flash_attn is not installed!!!')
+    # logger.warn(f'DropoutAddRMSNorm of flash_attn is not installed!!!')
+    pass
 
 
 class CrossAttention(nn.Module):
@@ -144,8 +146,8 @@ class LayerScale(nn.Module):
         self.inplace = inplace
         self.gamma = nn.Parameter(init_values * torch.ones(dim))
         self.force_fp32 = force_fp32
-    
-    @torch.cuda.amp.autocast(enabled=False)
+
+    @torch.amp.autocast("cuda", enabled=False)
     def forward(self, x):
         if self.force_fp32:
             output_type = x.dtype
@@ -349,7 +351,7 @@ class Linear_Decoder(nn.Module):
                  norm_layer=nn.LayerNorm, clip_norm_type='l2'):
         super().__init__()
         self.clip_norm_type = clip_norm_type
-        logger.info(f'Normalization Type: {clip_norm_type}')
+        # logger.info(f'Normalization Type: {clip_norm_type}')
 
         self.head = nn.Linear(in_channels, out_channels)
         self.norm =  norm_layer(out_channels)
@@ -426,8 +428,8 @@ class PretrainInternVideo2(nn.Module):
         self.return_index = []
         for i in range(clip_return_layer):
             self.return_index.append(depth - int(i * clip_student_return_interval) - 1)
-        logger.info(f'Normalization Type: {clip_norm_type}')
-        logger.info(f'Strudent Return Index: {self.return_index}')
+        # logger.info(f'Normalization Type: {clip_norm_type}')
+        # logger.info(f'Strudent Return Index: {self.return_index}')
         
         if use_fused_rmsnorm:
             norm_layer_for_blocks = partial(DropoutAddRMSNorm, eps=1e-6, prenorm=True)
@@ -450,14 +452,14 @@ class PretrainInternVideo2(nn.Module):
             raise NotImplementedError
         else:
             if sep_image_video_pos_embed:
-                logger.info("Use joint position embedding, for image and video we use different pos_embed.")
+                # logger.info("Use joint position embedding, for image and video we use different pos_embed.")
                 self.pos_embed = nn.Parameter(torch.zeros(1, num_patches + 1, embed_dim))
                 self.img_pos_embed = nn.Parameter(torch.zeros(1, num_img_patches + 1, embed_dim))
                 # for CLIP decoder
                 self.clip_pos_embed = nn.Parameter(torch.zeros(1, num_patches + 1, embed_dim))
                 self.clip_img_pos_embed = nn.Parameter(torch.zeros(1, num_img_patches + 1, embed_dim))
             else:
-                logger.info("Use joint position embedding, for image and video we use same pos_embed.")
+                # logger.info("Use joint position embedding, for image and video we use same pos_embed.")
                 self.pos_embed = nn.Parameter(torch.zeros(1, num_patches + 1, embed_dim))
                 self.clip_pos_embed = nn.Parameter(torch.zeros(1, num_patches + 1, embed_dim))
         dpr = [x.item() for x in torch.linspace(0, drop_path_rate, depth)]
@@ -467,8 +469,8 @@ class PretrainInternVideo2(nn.Module):
             for idx in range(depth):
                 if idx < checkpoint_num:
                     with_cp_list[idx] = True
-        logger.info(f"Droppath rate: {dpr}")
-        logger.info(f"Checkpoint list: {with_cp_list}")
+        # logger.info(f"Droppath rate: {dpr}")
+        # logger.info(f"Checkpoint list: {with_cp_list}")
         
         self.blocks = nn.ModuleList([
             Block(embed_dim, num_heads, mlp_ratio, qkv_bias=qkv_bias,
@@ -509,7 +511,7 @@ class PretrainInternVideo2(nn.Module):
         self.fix_init_weight()
 
     def init_pos_embed(self):
-        logger.info("Init pos_embed from sincos pos_embed")
+        # logger.info("Init pos_embed from sincos pos_embed")
         if self.sep_pos_embed:
             raise NotImplementedError
         else:
@@ -683,7 +685,7 @@ class PretrainInternVideo2(nn.Module):
         
 
         return x_vis, x_pool_vis, x_clip_align, x_align
-    
+
 
 def pretrain_internvideo2_1b_patch14_224(config):
     model = PretrainInternVideo2(
@@ -713,11 +715,22 @@ def pretrain_internvideo2_1b_patch14_224(config):
     )
 
     if config.vision_encoder.pretrained is not None:
-        logger.info(f"Loading pretrained weights from {config.vision_encoder.pretrained}")
-        state_dict = torch.load(config.vision_encoder.pretrained, map_location='cpu')
+        # logger.info(f"Loading pretrained weights from {config.vision_encoder.pretrained}")
+        # state_dict = torch.load(config.vision_encoder.pretrained, map_location='cpu')
+        # state_dict = torch.load("./hf_cache/internvideo2_1b_stage2.pth")
+        # another_state_dict = torch.load("./hf_cache/internvl_c_13b_224px.pth", map_location='cpu')
+        # state_dict = torch.load("./hf_cache/internvideo2_1b_stage2.pth", map_location='cpu')
+        state_dict = torch.load(config.vision_encoder.pretrained, map_location="cpu")
+
         interpolate_pos_embed_internvideo2(state_dict, model, orig_t_size=8)
-        message = model.load_state_dict(state_dict, strict=False)
-        logger.info(message)
+        # interpolate_pos_embed_internvideo2(filtered_state_dict, model, orig_t_size=8)
+        # interpolate_pos_embed_internvideo2(another_state_dict, model, orig_t_size=8)
+        # import pdb; pdb.set_trace()
+        filtered_state_dict = {k.replace("vision_encoder.", "", 1): v for k, v in state_dict["module"].items() if k.startswith("vision_encoder.")}
+        # message = model.load_state_dict(state_dict, strict=True)
+        message = model.load_state_dict(filtered_state_dict, strict=True)
+        # import pdb; pdb.set_trace()
+        # logger.info(message)
     else:
         logger.info("No pretrained weights!!!")
     return model
@@ -751,15 +764,14 @@ def pretrain_internvideo2_6b_patch14_224(config):
     )
 
     if config.vision_encoder.pretrained is not None:
-        logger.info(f"Loading pretrained weights from {config.vision_encoder.pretrained}")
+        # logger.info(f"Loading pretrained weights from {config.vision_encoder.pretrained}")
         state_dict = torch.load(config.vision_encoder.pretrained, map_location='cpu')
         interpolate_pos_embed_internvideo2(state_dict, model, orig_t_size=8)
         msg = model.load_state_dict(state_dict, strict=False)
-        logger.info(msg)
+        # logger.info(msg)
     else:
         logger.info("No pretrained weights!!!")
     return model
-
 
 
 if __name__ == '__main__':

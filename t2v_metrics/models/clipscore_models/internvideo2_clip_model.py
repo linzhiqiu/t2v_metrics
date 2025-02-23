@@ -3,13 +3,14 @@ import torch
 from ..model import ScoreModel
 from ...constants import HF_CACHE_DIR
 
-from .internvideo2.internvideo2 import download_internvideo2
+from .internvideo2.internvideo2 import download_internvideo2, evaluation
 
 INTERNVIDEO2_CLIP_MODELS = ["internvideo2-1b-stage2-clip"]
 
 INTERNVIDEO2_CLIP_PRETRAINED = {
     "internvideo2-1b-stage2-clip": {
         "model": "internvideo2_1b_stage2",
+        "pretrained": "internvl_c_13b_224px",
     },
 }
 
@@ -29,12 +30,11 @@ class InternVideo2CLIPScoreModel(ScoreModel):
         model_name = INTERNVIDEO2_CLIP_PRETRAINED[self.model_name]["model"]
         (
             self.model_path,
-            self.pretrained_ckpt_path,
             self.model,
             self.tokenizer,
             self.config,
             self.transforms,
-        ) = download_internvideo2(model_name, self.cache_dir)
+        ) = download_internvideo2(model_name, INTERNVIDEO2_CLIP_PRETRAINED[self.model_name]["pretrained"], self.cache_dir, device=self.device)
 
     def load_images(self,
                     image: List[str]) -> torch.Tensor:
@@ -43,6 +43,7 @@ class InternVideo2CLIPScoreModel(ScoreModel):
         # Simply verify if all are videos ending with video formats such as mp4
         if not all([img.endswith((".mp4", ".avi")) for img in image]):
             raise ValueError("All images must be video files")
+        return image
 
     @torch.no_grad()
     def forward(self,

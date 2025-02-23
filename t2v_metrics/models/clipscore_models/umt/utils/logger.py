@@ -157,7 +157,7 @@ def setup_logger(
             warnings_logger.addHandler(sh)
             handlers.append(sh)
 
-        logger.info(f"Logging to: {filename}")
+        # logger.info(f"Logging to: {filename}")
 
     # Remove existing handlers to add MMF specific handlers
     if clear_handlers:

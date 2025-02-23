@@ -1,4 +1,4 @@
-from utils.distributed import is_main_process, get_rank, get_world_size
+from ..utils.distributed import is_main_process, get_rank, get_world_size
 import logging
 import torch.distributed as dist
 import torch

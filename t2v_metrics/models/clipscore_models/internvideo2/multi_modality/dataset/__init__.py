@@ -1,14 +1,14 @@
 import logging
 import torch
 from torch.utils.data import ConcatDataset, DataLoader
-from dataset.resample_concat_dataset import ResampleConcatDataset
+from .resample_concat_dataset import ResampleConcatDataset
 from torchvision import transforms
 from torchvision.transforms import InterpolationMode
 import copy
 
-from dataset.sampler import StatefulDistributedSampler
-from dataset.dataloader import MetaLoader, MetaLoader_rs # NOTE keep it
-from dataset.ret_dataset import (ImgTxtRetTrainDataset,
+from .sampler import StatefulDistributedSampler
+from .dataloader import MetaLoader, MetaLoader_rs # NOTE keep it
+from .ret_dataset import (ImgTxtRetTrainDataset,
                                  VidTxtRetTrainDataset,
                                  ImgTxtRetEvalDataset,
                                  VidTxtRetEvalDataset,
@@ -24,8 +24,8 @@ from dataset.ret_dataset import (ImgTxtRetTrainDataset,
 #                                  AudioTxtRetTrainDataset,
 #                                  AudioTxtRetEvalDataset)
 
-from dataset.qa_dataset import ImageQADataset, VideoQADataset
-from dataset.pt_dataset import (ImgTxtPtTrainDataset,
+from .qa_dataset import ImageQADataset, VideoQADataset
+from .pt_dataset import (ImgTxtPtTrainDataset,
                                 VidTxtPtTrainDataset,)
 # from dataset.pt_dataset import (ImgTxtPtTrainDataset,
 #                                 VidTxtPtTrainDataset,

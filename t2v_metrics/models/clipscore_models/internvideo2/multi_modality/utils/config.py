@@ -100,6 +100,8 @@ class Config(object):
         else:
             raise FileNotFoundError(f"Config file not found: {config_file}")
         cfg = cls.merge_list(cfg, ["pretrained_path", pretrained_path])
+        cfg = cls.merge_list(cfg, ["model.vision_encoder.pretrained", pretrained_path]) 
+        # import pdb; pdb.set_trace()
         cfg = eval_dict_leaf(cfg)
 
         # update some keys to make them show at the last

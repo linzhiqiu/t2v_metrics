@@ -34,6 +34,41 @@ TextEncoders["med_bert_large"] = dict(
 
 num_workers = 6
 
+criterion = dict(
+    loss_weight=dict(
+        vtc=1.0, 
+        mlm=1.0, 
+        vtm=1.0, 
+        mvm=0.0,
+        uta=0.0,
+    ),  # 0: disabled.
+    vtm_hard_neg=True,
+    mlm_masking_prob=0.5,
+    distill_final_features=True,
+    clip_loss_ratio=[1., 1.]
+)
+
+optimizer = dict(
+    opt="adamW",
+    lr=1e-5,
+    opt_betas=[0.9, 0.98],  # default
+    weight_decay=0.05,
+    max_grad_norm=3.,  # requires a positive float, use -1 to disable
+    # use a different lr for some modules, e.g., larger lr for new modules
+    different_lr=dict(enable=False, module_names=[], lr=1e-3),
+)
+
+scheduler = dict(sched="cosine", epochs=1, min_lr_multi=0.01, warmup_epochs=0.2)
+
+evaluate = True
+deep_fusion = False
+evaluation = dict(
+    eval_frame_ensemble="concat",  # [concat, max, mean, lse]
+    eval_x_only=False,
+    k_test=128,
+    eval_offload=True,  # offload gpu tensors to cpu to save memory.
+)
+
 # ========================= input ==========================
 num_frames = 4
 num_frames_test = 4
@@ -132,7 +167,7 @@ log_freq = 100
 seed = 42
 
 save_latest = False
-auto_resume = True
+auto_resume = False
 jump_evaluate = False
 pretrained_path = ""
 

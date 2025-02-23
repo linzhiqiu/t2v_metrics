@@ -3,10 +3,10 @@ import numpy as np
 import logging
 import torch
 
-from dataset.base_dataset import BaseDataset
-from dataset.utils import load_anno, pre_text
-from dataset.video_utils import VIDEO_READER_FUNCS
-from dataset.text_prompt import kinetics_templates_action_clip as kinetics_templates
+from .base_dataset import BaseDataset
+from .utils import load_anno, pre_text
+from .video_utils import VIDEO_READER_FUNCS
+from .text_prompt import kinetics_templates_action_clip as kinetics_templates
 
 logger = logging.getLogger(__name__)
 
