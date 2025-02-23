@@ -13,6 +13,7 @@ from .llama32_model import LLAMA_32_VISION_MODELS, LLaMA32VisionModel
 from .molmo_model import MOLMO_MODELS, MOLMOVisionModel
 # from .gemini_model import GEMINI_MODELS, GeminiModel
 from .qwen2vl_model import QWEN2_VL_MODELS, Qwen2VLModel
+from .llavavideo_model import LLAVA_VIDEO_MODELS, LLaVAVideoModel
 
 from ...constants import HF_CACHE_DIR
 
@@ -31,7 +32,8 @@ ALL_VQA_MODELS = [
     LLAMA_32_VISION_MODELS,
     MOLMO_MODELS,
     # GEMINI_MODELS,
-    QWEN2_VL_MODELS
+    QWEN2_VL_MODELS,
+    LLAVA_VIDEO_MODELS
 ]
 
 
@@ -70,5 +72,7 @@ def get_vqascore_model(model_name, device='cuda', cache_dir=HF_CACHE_DIR, **kwar
     #     return GeminiModel(model_name, device=device, cache_dir=cache_dir, **kwargs)
     elif model_name in QWEN2_VL_MODELS:
         return Qwen2VLModel(model_name, device=device, cache_dir=cache_dir, **kwargs)
+    elif model_name in LLAVA_VIDEO_MODELS:
+        return LLaVAVideoModel(model_name, device=device, cache_dir=cache_dir, **kwargs)
     else:
         raise NotImplementedError()
