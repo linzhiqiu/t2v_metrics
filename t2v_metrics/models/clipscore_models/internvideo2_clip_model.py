@@ -15,9 +15,9 @@ INTERNVIDEO2_CLIP_PRETRAINED = {
 }
 
 class InternVideo2CLIPScoreModel(ScoreModel):
-    "A wrapper for UMT models"
+    "A wrapper for InternVideo2 CLIPScore models"
     def __init__(
-        self, model_name="umt-b16-25m-clip", device="cuda", cache_dir=HF_CACHE_DIR
+        self, model_name="internvideo2-1b-stage2-clip", device="cuda", cache_dir=HF_CACHE_DIR
     ):
         assert model_name in INTERNVIDEO2_CLIP_MODELS
         super().__init__(model_name=model_name,
@@ -56,15 +56,14 @@ class InternVideo2CLIPScoreModel(ScoreModel):
         if num_frames != self.config.num_frames:
             raise ValueError(f"num_frames must be {self.config.num_frames} for this model")
 
-        t2i_x, i2t_emb = evaluation(
+        _, i2t_scores = evaluation(
             texts,
             images,
             self.transforms,
             self.model,
             self.tokenizer,
             self.device,
-            self.config,
             num_frames=num_frames,
             max_txt_l=self.config.max_txt_l,
         )
-        return t2i_x.diagonal()
+        return i2t_scores

@@ -344,7 +344,6 @@ def evaluation(
     model,
     tokenizer,
     device,
-    config,
     num_frames=4,
     max_txt_l=32,
 ):
@@ -355,42 +354,15 @@ def evaluation(
     image_feats, pooled_image_feats = extract_vision_feats(
         image_paths, transforms, model, device, num_frames=num_frames
     )  # (bsz, 1, #frm*Li, d) or (bsz, #frm, Li, d), (bsz, #frm, d)
-    # logger.info("Finished feature extraction")
-    # logger.info("Computing ITC scores [dot-product]")
-    _pooled_image_feats = (
-        pooled_image_feats.to(device, non_blocking=True)
-        if config.evaluation.eval_offload
-        else pooled_image_feats
-    )
-    i2t_scores, t2i_scores = get_sim(
+    _pooled_image_feats = pooled_image_feats.to(device, non_blocking=True)
+    i2t_scores, _ = get_sim(
         model.vision_proj(_pooled_image_feats), model.text_proj(text_feats[:, 0])
     )
-    # logger.info("Computing ITC scores [dot-product], done!")
 
     text_encoder = model.get_text_encoder()
-    # generate score for each clip, and aggregate all clip scores for a video
-    n_clip_per_video = (
-        image_feats.shape[1] if not config.deep_fusion else image_feats[0].shape[1]
-    )
-    assert n_clip_per_video == 1
-
-    # compute text2image #
-    # num_text = len(texts)
-    # t2i_scores_x = torch.full((num_text, len(image_paths)), -100.0).to(
-    #     device, torch.float, non_blocking=True
-    # )
-    # step = num_text + 1
-    # start = 0
-    # end = min(num_text, start + step)
-    # logger.info(f"t2i_scores.shape {t2i_scores[start:end].shape}")
-    # generate score for each clip, and aggregate all clip scores for a video
-    # n_clip_per_video = (
-    #     image_feats.shape[1] if not config.deep_fusion else image_feats[0].shape[1]
-    # )
     encoder_output = image_feats[:, 0].to(device, non_blocking=True)
     encoder_att = torch.ones(encoder_output.size()[:-1], dtype=torch.long).to(device, non_blocking=True)
 
-    # repeat_n = encoder_output.shape[0]
     output = text_encoder(
         encoder_embeds=text_feats,
         attention_mask=text_atts,
@@ -403,109 +375,6 @@ def evaluation(
     itm_embeds = torch.cat([itm_outputs], dim=0)
     itm_scores = model.itm_head(itm_embeds)[:, 1]
 
-    # for i, sims in enumerate(t2i_scores[start:end]):
-    #     print(f"Processing i={i}")
-    #     k = min(len(sims), config.evaluation.k_test)
-    #     # topk_sim, topk_idx = sims.topk(k=k, dim=0)  # only conduct deep fusion for the top_k image/video embeddings
-    #     topk_idx = torch.tensor([i]).to(
-    #         device
-    #     )  # only conduct deep fusion for the same image/video-text pair
-    #     # import pdb; pdb.set_trace()
-    #     # clip_scores = []
-    #     # clip_idx = 0
-    #     # for clip_idx in range(n_clip_per_video):
-
-    #     """old
-    #     encoder_output = image_feats[topk_idx, clip_idx].to(device, non_blocking=True) \
-    #         if config.evaluation.eval_offload else image_feats[topk_idx, clip_idx]
-    #     encoder_att = torch.ones(
-    #         encoder_output.size()[:-1], dtype=torch.long
-    #     ).to(device, non_blocking=True)
-    #     output = text_encoder(1.
-    #         encoder_embeds=text_feats[start+i].repeat(k, 1, 1),
-    #         attention_mask=text_atts[start+i].repeat(k, 1),
-    #         encoder_hidden_states=encoder_output,
-    #         encoder_attention_mask=encoder_att,
-    #         return_dict=True,
-    #         mode="fusion"
-    #     )
-
-    #     itm_embeds = output.last_hidden_state[:, 0]
-    #     """
-
-    #     # new
-    #     bs = 32
-    #     # bs = config.batch_size_test.video
-    #     itm_embeds = []
-    #     # if config.deep_fusion:
-    #     #     encoder_output = [
-    #     #         feat[topk_idx[j : j + bs], clip_idx].to(
-    #     #             device, non_blocking=True
-    #     #         )
-    #     #         for feat in image_feats
-    #     #     ]
-    #     #     encoder_att = [
-    #     #         torch.ones(feat.size()[:-1], dtype=torch.long).to(
-    #     #             device, non_blocking=True
-    #     #         )
-    #     #         for feat in encoder_output
-    #     #     ]
-    #     # else:
-    #     encoder_output = (
-    #         image_feats[topk_idx[:bs], 0].to(
-    #             device, non_blocking=True
-    #         )
-    #         if config.evaluation.eval_offload
-    #         else image_feats[topk_idx[:bs], 0]
-    #     )
-    #     encoder_att = torch.ones(
-    #         encoder_output.size()[:-1], dtype=torch.long
-    #     ).to(device, non_blocking=True)
-
-    #     # repeat_n = (
-    #     #     encoder_output.shape[0]
-    #     #     if not config.deep_fusion
-    #     #     else encoder_output[0].shape[0]
-    #     # )
-    #     repeat_n = encoder_output.shape[0]
-    #     output = text_encoder(
-    #         encoder_embeds=text_feats[start + i].repeat(repeat_n, 1, 1),
-    #         attention_mask=text_atts[start + i].repeat(repeat_n, 1),
-    #         encoder_hidden_states=encoder_output,
-    #         encoder_attention_mask=encoder_att,
-    #         return_dict=True,
-    #         mode="fusion",
-    #     )
-    #     # import pdb; pdb.set_trace()
-    #     batch_itm_embeds = output.last_hidden_state[:, 0]
-    #     itm_embeds.append(batch_itm_embeds)
-    #     # import pdb; pdb.set_trace()
-
-    #     itm_embeds = torch.cat(itm_embeds, dim=0)
-    #     # end new
-
-    #     score = model.itm_head(itm_embeds)[:, 1]
-    #     # clip_scores.append(score)
-    #     # if len(clip_scores) == 1:
-    #     # score = clip_scores[0]
-    #     # else:
-    #     #     import pdb; pdb.set_trace()
-    #     # assert config.evaluation.eval_frame_ensemble in ["mean", "max", "lse"]
-    #     # clip_scores = torch.stack(clip_scores)  # (#clips, k)
-    #     # if config.evaluation.eval_frame_ensemble == "mean":
-    #     #     score = clip_scores.mean(0)
-    #     # elif config.evaluation.eval_frame_ensemble == "max":
-    #     #     score = clip_scores.max(0)[0]
-    #     # elif config.evaluation.eval_frame_ensemble == "lse":  # LogSumExp
-    #     #     score = torch.logsumexp(clip_scores, dim=0)
-    #     # else:
-    #     #     raise ValueError(
-    #     #         "config.evaluation.eval_frame_ensemble must in [mean, max, lse] when #clip > 1."
-    #     #     )
-    #     assert (start + i) == topk_idx[0]
-    #     t2i_scores_x[start + i, topk_idx] = score.to(t2i_scores_x.dtype)
-
-    # import pdb; pdb.set_trace()
     return (
         itm_scores,
         i2t_scores.diagonal(),

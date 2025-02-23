@@ -63,15 +63,14 @@ class UMTITMScoreModel(ScoreModel):
         if num_frames != self.config.num_frames:
             raise ValueError(f"num_frames must be {self.config.num_frames} for this model")
 
-        t2i_scores_x, _ = evaluation(
+        itm_scores, _ = evaluation(
             texts,
             images,
             self.transforms,
             self.model,
             self.tokenizer,
             self.device,
-            self.config,
             num_frames=num_frames,
             max_txt_l=self.config.max_txt_l,
         )
-        return t2i_scores_x
+        return itm_scores

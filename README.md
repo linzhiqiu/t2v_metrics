@@ -34,9 +34,7 @@ conda install pip -y
 pip install torch torchvision torchaudio
 pip install git+https://github.com/openai/CLIP.git
 pip install -e . # local pip install
-pip install -r requirements_umt.txt # to use unmasked teacher
-pip install -r requirements_internvideo.txt # to use internvideo2
-pip install flash-attn --use-pep517 --no-build-isolation
+pip install -r requirements_video.txt # to use unmasked teacher and internvideo2
 ```
 
 <!-- (not yet implemented) Or simply run `pip install t2v_metrics`.  -->

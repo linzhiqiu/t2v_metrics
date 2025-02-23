@@ -41,7 +41,7 @@ def setup_output_dir(output_dir, excludes=["code"]):
         remaining = [e for e in remaining if "slurm" not in e]
         remaining = [e for e in remaining if ".out" not in e]
         # assert len(remaining) == 0, f"remaining dirs or files: {remaining}"
-        logger.warn(f"remaining dirs or files: {remaining}")
+        # logger.warn(f"remaining dirs or files: {remaining}")
 
 
 def setup_deepspeed_zero_config(stage):

@@ -70,7 +70,6 @@ class UMTCLIPScoreModel(ScoreModel):
             self.model,
             self.tokenizer,
             self.device,
-            self.config,
             num_frames=num_frames,
             max_txt_l=self.config.max_txt_l,
         )

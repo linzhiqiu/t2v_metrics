@@ -1,3 +1,4 @@
+# Below for UMT and InternVideo2
 transformers
 datasets
 scipy
@@ -34,3 +35,18 @@ gitpython
 einops
 imageio
 sentencepiece
+# Below for InternVideo2
+apex==0.9.10dev
+deepspeed
+fvcore
+librosa
+opencv_python
+Pillow
+psutil
+PyYAML
+soundfile
+termcolor
+wandb
+packaging
+ninja
+peft
