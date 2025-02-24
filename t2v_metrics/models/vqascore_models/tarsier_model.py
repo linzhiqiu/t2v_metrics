@@ -1,13 +1,18 @@
+import os 
+import sys
+sys.path.append(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'vqascore_models/tarsier'))
+sys.path.append(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'vqascore_models/tarsier/models'))
 import torch
 import numpy as np
 from PIL import Image
 from typing import List, Union
 import copy
 import warnings
-from tarsier.tasks.utils import load_model_and_processor
-from tarsier.dataset.custom_data_parsers.utils import put_pred_to_data_dict, get_prompt_from_data_dict
-from tarsier.dataset.utils import format_one_sample, get_visual_type
+from .tarsier.tasks.utils import load_model_and_processor
+from .tarsier.dataset.custom_data_parsers.utils import put_pred_to_data_dict, get_prompt_from_data_dict
+from .tarsier.dataset.utils import format_one_sample, get_visual_type
 import yaml
+
 
 from .vqa_model import VQAScoreModel
 
