@@ -104,8 +104,7 @@ class LLaVAOneVisionModel(VQAScoreModel):
         answers = [answer_template.format(text) for text in texts]
         
         questions = [self.format_question(question) for question in questions]
-        answers = [self.format_answer(answer) for answer in answers]
-        
+       
         processed_data = self.load_images(paths, num_frames)
         
         prompts = [qs for qs in questions]
@@ -182,5 +181,3 @@ class LLaVAOneVisionModel(VQAScoreModel):
         conv.append_message(conv.roles[1], None)
         return conv.get_prompt()
 
-    def format_answer(self, answer):
-        return answer
