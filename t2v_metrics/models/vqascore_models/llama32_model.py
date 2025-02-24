@@ -165,12 +165,12 @@ class LLaMA32VisionModel:
         return torch.tensor(lm_probs)
 
     def generate(self,
-            paths: List[str],
+            images: List[str],
             texts: List[str],
             max_new_tokens: int = 256) -> List[str]:
-        assert len(paths) == len(texts), "Number of paths and texts must match"
+        assert len(images) == len(texts), "Number of paths and texts must match"
         
-        images = self.load_images(paths)
+        images = self.load_images(images)
         questions = texts
         
         generated_outputs = []

@@ -459,14 +459,14 @@ class InternVL2Model(VQAScoreModel):
         return torch.tensor(lm_probs)
     
     def generate(self,
-                paths: List[str],
+                images: List[str],
                 texts: List[str],
                 num_frames: int=16,
                 max_new_tokens: int = 256) -> torch.Tensor:
-        assert len(paths) == len(texts), "Number of paths and texts must match"
+        assert len(images) == len(texts), "Number of paths and texts must match"
 
         questions = texts
-        processed_data, num_patches_list = self.load_images(paths, num_frames)
+        processed_data, num_patches_list = self.load_images(images, num_frames)
 
         gen_outputs = []
         for data, question, num_patches in zip(processed_data, questions, num_patches_list):

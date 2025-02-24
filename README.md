@@ -35,8 +35,7 @@ pip install torch==2.3.1 torchvision==0.18.1 torchaudio==2.3.1 --index-url https
 pip install git+https://github.com/openai/CLIP.git
 pip install -e . # local pip install
 
- # Install this version of timm if you want to use any Intern models
-pip install timm==1.0.13 --no-dependencies
+ # Check if the model you are using has any model-specific requirements (i.e. check for an additional requirements.txt file)
 ```
 
 <!-- (not yet implemented) Or simply run `pip install t2v_metrics`.  -->

@@ -130,13 +130,13 @@ class GeminiModel(VQAScoreModel):
             return ""
 
     def generate(self,
-                paths: List[str],
+                images: List[str],
                 texts: List[str],
                 num_frames: int = 5) -> List[str]:
-        assert len(paths) == len(texts), "Number of paths and texts must match"
+        assert len(images) == len(texts), "Number of paths and texts must match"
         
         questions = texts
-        loaded_data = self.load_images(paths)
+        loaded_data = self.load_images(images)
 
         generated_outputs = []
 

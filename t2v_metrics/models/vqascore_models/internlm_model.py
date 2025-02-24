@@ -164,13 +164,13 @@ class InternLMXComposer25Model(VQAScoreModel):
 
         return torch.tensor(lm_probs)
     def generate(self,
-            paths: List[str],
+            images: List[str],
             texts: List[str],
             max_new_tokens: int = 256) -> List[str]:
-        assert len(paths) == len(texts), "Number of paths and texts must match"
+        assert len(images) == len(texts), "Number of paths and texts must match"
 
         questions = texts
-        processed_paths = self.load_images(paths)
+        processed_paths = self.load_images(images)
 
         generated_outputs = []
         temp_files = []

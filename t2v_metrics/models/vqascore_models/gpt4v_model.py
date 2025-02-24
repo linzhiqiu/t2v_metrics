@@ -220,14 +220,14 @@ class GPT4VModel(VQAScoreModel):
         return completion.choices[0].message.content
 
     def generate(self,
-            paths: List[str],
+            images: List[str],
             texts: List[str],
             num_frames: int = 5,
             max_new_tokens: int = 4) -> List[str]:
-        assert len(paths) == len(texts), "Number of paths and texts must match"
+        assert len(images) == len(texts), "Number of paths and texts must match"
         
         questions = texts
-        loaded_data = self.load_images(paths, num_frames)
+        loaded_data = self.load_images(images, num_frames)
 
         generated_outputs = []
 

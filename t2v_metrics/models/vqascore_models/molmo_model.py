@@ -64,13 +64,13 @@ class MOLMOVisionModel:
         return processed_data
 
     def forward(self,
-                paths: List[str],
+                images: List[str],
                 texts: List[str],
                 question_template: str = "Does this image show \"{}\"? Answer the question with Yes or No",
                 answer_template: str = "Yes") -> torch.Tensor:
         assert len(paths) == len(texts), "Number of paths and texts must match"
         
-        images = self.load_images(paths)
+        images = self.load_images(images)
         questions = [question_template.format(text) for text in texts]
         
         lm_probs = []
