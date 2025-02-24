@@ -25,20 +25,27 @@ parser.add_argument(
     "--score_model",
     type=str,
     # default="umt-b16-25m-clip",
-    default="umt-l16-25m-clip",
+    # default="umt-l16-25m-clip",
     # default="umt-l16-25m-itm",
     # default="umt-b16-25m-itm",
     # default="internvideo2-1b-stage2-clip",
     # default="internvideo2-1b-stage2-itm",
+    default="languagebind-video-v1.5-ft",
+    # default="languagebind-video-ft",
+    # default="languagebind-video-v1.5",
+    # default="languagebind-video",
+    # default="languagebind-video-v1.5-huge-ft",
     help="The score model to use",
 )
 parser.add_argument(
     "--video_label_file",
     type=str,
     help="The video label to use",
-    # default="video_labels/cam_motion-20250219_0338/label_names.json",
-    # default="video_labels/cam_motion-cam_setup-20250218_1042/label_names.json",
-    default="video_labels/cam_motion-20250223_0313/label_names_subset.json",
+    # default="video_labels/cam_motion-20250219_0338/label_names.json", @ noisy 4000
+    # default="video_labels/cam_motion-cam_setup-20250218_1042/label_names.json", # good initial set of around 2000
+    # default="video_labels/cam_motion-20250223_0313/label_names_subset.json", # only a subset of 300 videos
+    default="video_labels/cam_motion-20250223_2308/label_names_selected.json", # the full set of 2000 videos for cam-centric
+    # default="video_labels/cam_motion-cam_setup-20250224_0130/label_names_selected.json", # the full set of 2384 videos for ground-centric + shotcomp
     nargs="?",
 )
 parser.add_argument("--batch_size", type=int, default=256, help="The batch size to use")
@@ -164,6 +171,8 @@ class BinaryTask(Dataset):
 #     neg = len(ALL_LABELS[label_name]['neg'])
 #     label_counts[label_name] = pos + neg
 
+# for label_name in ALL_LABELS:
+#     print(f"{label_name}: Positives: {len(ALL_LABELS[label_name]['pos'])}, Negatives: {len(ALL_LABELS[label_name]['neg'])}")
 # sorted_labels = sorted(label_counts, key=lambda x: label_counts[x])
 # for label_name in sorted_labels[:10]:
 #     print(f"{label_name}: {label_counts[label_name]}")

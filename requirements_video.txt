@@ -50,3 +50,13 @@ wandb
 packaging
 ninja
 peft
+# Below are for LanguageBind
+accelerate
+evaluate
+iopath
+pytorchvideo @ git+https://github.com/linzhiqiu/pytorchvideo.git
+tensorboardX
+tokenizers
+braceexpand
+webdataset
+urllib3
