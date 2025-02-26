@@ -1,16 +1,17 @@
 import os 
 import sys
-sys.path.append(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'vqascore_models/tarsier'))
-sys.path.append(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'vqascore_models/tarsier/models'))
 import torch
 import numpy as np
 from PIL import Image
 from typing import List, Union
 import copy
 import warnings
+
 from .tarsier.tasks.utils import load_model_and_processor
 from .tarsier.dataset.custom_data_parsers.utils import put_pred_to_data_dict, get_prompt_from_data_dict
 from .tarsier.dataset.utils import format_one_sample, get_visual_type
+# sys.path = sys.path[2:]
+# print(sys.path)
 import yaml
 
 
@@ -21,10 +22,22 @@ warnings.filterwarnings("ignore")
 TARSIER_MODELS = {
     'tarsier-recap-7b': {
         'model': {
-            'path': 'path_to_tarsier_model',  # Replace with actual path
-            'config': 'configs/tarser2_default_config.yaml',
+            'path': "omni-research/Tarsier2-Recap-7b" ,
+            'config': 't2v_metrics/models/vqascore_models/tarsier/configs/tarser2_default_config.yaml',
         },
     },
+    # 'tarsier-7b': {
+    #     'model': {
+    #         'path': 'omni-research/Tarsier-7b' ,
+    #         'config': 't2v_metrics/models/vqascore_models/tarsier/configs/tarser2_default_config.yaml',
+    #     },
+    # },
+    # 'tarsier-34b': {
+    #     'model': {
+    #         'path': 'omni-research/Tarsier-34b' ,
+    #         'config': 't2v_metrics/models/vqascore_models/tarsier/configs/tarser2_default_config.yaml',
+    #     },
+    # }
 }
 
 class TarsierModel(VQAScoreModel):
@@ -42,14 +55,18 @@ class TarsierModel(VQAScoreModel):
         self.load_model()
 
     def load_model(self):
+        # sys.path = [os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'vqascore_models/tarsier')] + sys.path
+        # sys.path = [os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'vqascore_models/tarsier/models')] + sys.path
+        # print(f'sys.path {sys.path}')
         model_path = self.model_info['model']['path']
         config_path = self.model_info['model']['config']
         
         data_config = yaml.safe_load(open(config_path, 'r'))
         self.model, self.processor = load_model_and_processor(model_path, data_config=data_config)
         self.model.eval()
+        # sys.path = sys.path[2:]
 
-    def process_one(self, prompt, video_file, generate_kwargs):
+    def load_images(self, prompt, video_file, generate_kwargs):
         sample = format_one_sample(video_file, prompt)
         batch_data = self.processor(sample)
         
@@ -97,7 +114,7 @@ class TarsierModel(VQAScoreModel):
                 "return_dict_in_generate": True,
             }
             
-            _, model_inputs = self.process_one(question, path, generate_kwargs)
+            _, model_inputs = self.load_images(question, path, generate_kwargs)
             
             outputs = self.model.generate(
                 **model_inputs,
@@ -134,7 +151,7 @@ class TarsierModel(VQAScoreModel):
                 "use_cache": True
             }
             
-            output_text, _ = self.process_one(text, path, generate_kwargs)
+            output_text, _ = self.load_images(text, path, generate_kwargs)
             generated_outputs.append(output_text.strip())
 
         return generated_outputs

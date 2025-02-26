@@ -18,8 +18,10 @@ from transformers.generation import GenerationMixin
 
 from transformers import LlamaForCausalLM, Qwen2ForCausalLM
 # from models.modeling_qwen2 import Qwen2ForCausalLM
-from models.modeling_qwen2_vl_fast import Qwen2VLForCausalLM
-from models.utils import _pad_input, _unpad_input
+from ..models.modeling_qwen2_vl_fast import Qwen2VLForCausalLM
+from ..models.utils import _pad_input, _unpad_input
+
+import sys
 
 logger = logging.get_logger(__name__)
 
@@ -60,6 +62,11 @@ class LlavaConfig(PretrainedConfig):
             )
             if 'auto_map' in vision_config:
                 repo_id, class_ref = vision_config['auto_map']['AutoConfig'].split("--")
+                # repo_id = 't2v_metrics.models.vqascore_models.tarsier.models'
+                # # repo_id = 'omni-research/Tarsier2-Recap-7b'
+
+                # print(f'repo_id {repo_id} class_ref {class_ref}')
+                # print(f'sys.path {sys.path} before repo_id {repo_id} class_ref {class_ref}')
                 config_class = get_class_from_dynamic_module(class_ref, repo_id, **kwargs)
                 self.vision_config = config_class(**vision_config)
             elif vision_config["model_type"] in CONFIG_MAPPING:

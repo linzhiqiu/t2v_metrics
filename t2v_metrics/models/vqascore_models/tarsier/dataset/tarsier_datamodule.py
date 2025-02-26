@@ -13,7 +13,7 @@ import torch
 import torch.nn.functional as F
 from transformers import DataCollatorForSeq2Seq
 
-from tools.rw_utils import read_jsonlines
+from ..tools.rw_utils import read_jsonlines
 from torch.utils.data import Dataset, DataLoader
 
 np_str_obj_array_pattern = re.compile(r"[SaUO]")
@@ -31,7 +31,7 @@ from .custom_data_parsers.utils_visualize import visualize_image_bbox
 
 from .tarsier_processor import TarsierProcessor
 
-from tools.rw_utils import NumpyArrayEncoder
+from ..tools.rw_utils import NumpyArrayEncoder
 from .utils import DictToObject
 
 class TarsierDataProcessor:

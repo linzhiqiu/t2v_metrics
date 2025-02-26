@@ -154,7 +154,7 @@ class VideoReader:
         return self._fps
 
     def sample(self, frame_indices) -> List[Image.Image]:
-        frames = self.vr.get_batch(frame_indices).asnumpy()
+        frames = self.vr.get_batch(frame_indices).numpy()
         frames = [Image.fromarray(f).convert('RGB') for f in frames]
         return frames
 
