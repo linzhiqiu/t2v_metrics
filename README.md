@@ -31,7 +31,7 @@ conda create -n t2v_video python=3.10 -y
 conda activate t2v_video
 conda install pip -y
 
-pip install torch==2.3.1 torchvision==0.18.1 torchaudio==2.3.1 --index-url https://download.pytorch.org/whl/cu118
+pip install torch==2.3.1 torchvision==0.18.1 torchaudio==2.3.1 
 pip install git+https://github.com/openai/CLIP.git
 pip install -e . # local pip install
 
