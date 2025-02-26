@@ -1,0 +1,11 @@
+[{
+        "caption_id": 0,
+        "video": "datasets/eval_crafter/pika_v1/0000.mp4",
+        "caption": "two dogs on ocean"
+    },
+    {
+        "caption_id": 1,
+        "video": "datasets/eval_crafter/pika_v1/0001.mp4",
+        "caption": "two dogs on ocean"
+    }
+]
