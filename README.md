@@ -34,7 +34,7 @@ conda install pip -y
 pip install torch torchvision torchaudio
 pip install git+https://github.com/openai/CLIP.git
 pip install -e . # local pip install
-pip install -r requirements_video.txt # to use unmasked teacher and internvideo2
+pip install -r requirements_video.txt # to use unmasked teacher and internvideo2 and languagebind-video
 ```
 
 <!-- (not yet implemented) Or simply run `pip install t2v_metrics`.  -->

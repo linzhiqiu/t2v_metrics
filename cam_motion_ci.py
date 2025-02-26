@@ -25,16 +25,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument(
     "--score_model",
     type=str,
-    # default="umt-b16-25m-clip",
-    # default="umt-l16-25m-clip",
-    # default="umt-l16-25m-itm",
-    # default="umt-b16-25m-itm",
-    # default="internvideo2-1b-stage2-clip",
-    # default="internvideo2-1b-stage2-itm",
     default="languagebind-video-v1.5-ft",
-    # default="languagebind-video-ft",
-    # default="languagebind-video-v1.5",
-    # default="languagebind-video",
     # default="languagebind-video-v1.5-huge-ft",
     help="The score model to use",
 )
@@ -42,14 +33,14 @@ parser.add_argument(
     "--video_label_file",
     type=str,
     help="The video label to use",
-    # default="video_labels/cam_motion-20250219_0338/label_names.json", @ noisy 4000
-    # default="video_labels/cam_motion-cam_setup-20250218_1042/label_names.json", # good initial set of around 2000
-    # default="video_labels/cam_motion-20250223_0313/label_names_subset.json", # only a subset of 300 videos
     default="video_labels/cam_motion-20250223_2308/label_names_selected.json", # the full set of 2000 videos for cam-centric
     # default="video_labels/cam_motion-cam_setup-20250224_0130/label_names_selected.json", # the full set of 2384 videos for ground-centric + shotcomp
     nargs="?",
 )
 parser.add_argument("--batch_size", type=int, default=64, help="The batch size to use")
+parser.add_argument("--question", default=None, type=str)
+parser.add_argument("--answer", default=None, type=str)
+parser.add_argument("--mode", default="vqa", type=str, choices=["vqa", "retrieval"])
 args = parser.parse_args()
 
 score_model = args.score_model
@@ -82,9 +73,9 @@ class BinaryTask(Dataset):
         self.neg = [video_dir / video_path for video_path in ALL_LABELS[label_name]['neg']]
         self.labels = [1] * len(self.pos) + [0] * len(self.neg)
         self.videos = self.pos + self.neg
-        self.def_prompts = labels_collection[label_name].def_prompt
-        self.alt_prompts = labels_collection[label_name].alt_prompt
-        self.prompts = self.def_prompts + self.alt_prompts
+        self.def_questions = labels_collection[label_name].def_question
+        self.alt_questions = labels_collection[label_name].alt_question
+        self.prompts = self.def_questions + self.alt_questions
         self.label_name = label_name
 
     def __len__(self):
@@ -173,6 +164,7 @@ class HasForward(BinaryTask):
         label_name="cam_motion.camera_centric_movement.forward.has_forward_wrt_camera",
         seed=42,
         num_pos_samples=100,
+        mode="vqa",
     ):
         self.video_dir = video_dir
         self.seed = seed
@@ -189,112 +181,72 @@ class HasForward(BinaryTask):
 
         self.labels = [1] * len(self.pos) + [0] * len(self.neg)
         self.videos = self.pos + self.neg
-        self.def_prompts = labels_collection[label_name].def_prompt
-        self.alt_prompts = labels_collection[label_name].alt_prompt
-        # self.prompts = self.def_prompts + self.alt_prompts
-        self.prompts = [self.def_prompts[0]]
+        if mode == "vqa":
+            self.defs = labels_collection[label_name].def_question
+        else:
+            self.defs = labels_collection[label_name].def_prompt
+        self.prompts = [self.defs[0]]
         self.label_name = label_name
 
-# label_name = "cam_motion.camera_centric_movement.forward.has_forward_wrt_camera"
-# LABEL_SAVE_DIR = SAVE_DIR / label_name
-# if not LABEL_SAVE_DIR.exists():
-#     LABEL_SAVE_DIR.mkdir(parents=True)
-# LABEL_SAVE_PATH = LABEL_SAVE_DIR / f"{score_model}_scores_random_seed.pt"
-# all_seeds_results = {}
-# if LABEL_SAVE_PATH.exists():
-#     print(f"Skipping {label_name}")
-#     all_seeds_results = torch.load(LABEL_SAVE_PATH)
-# else:
-#     for seed in range(42, 52):
-#         dataset = HasForward(label_name=label_name, seed=seed)
-#         scores = score_model.batch_forward(dataset, batch_size=args.batch_size)
-#         results = dataset.evaluate_scores(scores)
-#         all_seeds_results[seed] = {
-#             "scores": scores,
-#             "results": results,
-#             "best_prompt": results["best"]["prompt"],
-#             "best_ap": results["best"]["ap"],
-#         }
-#     torch.save(all_seeds_results, LABEL_SAVE_PATH)
-# # Print the best AP for each seed, and show the
-# import numpy as np
-# import scipy.stats as stats
 
-# # Extract best_ap values from the dictionary
-# best_ap_values = [data["best_ap"] for data in all_seeds_results.values()]
+kwargs = {}
+if args.question is not None:
+    print(f"Using question template: {args.question}")
+    kwargs['question_template'] = args.question
+if args.answer is not None:
+    print(f"Using answer template: {args.answer}")
+    kwargs['answer_template'] = args.answer
 
-# # Compute mean and standard deviation
-# mean_ap = np.mean(best_ap_values)
-# std_ap = np.std(best_ap_values, ddof=1)  # Use ddof=1 for sample standard deviation
-
-# # Compute 95% confidence interval using normal approximation
-# z_score = stats.norm.ppf(0.975)  # 1.96 for 95% CI
-# ci_lower = mean_ap - z_score * (std_ap / np.sqrt(len(best_ap_values)))
-# ci_upper = mean_ap + z_score * (std_ap / np.sqrt(len(best_ap_values)))
-
-# # Print results
-# print(f"Mean AP: {mean_ap:.3f}")
-# print(f"Std Dev: {std_ap:.3f}")
-# print(f"95% CI: ({ci_lower:.3f}, {ci_upper:.3f})")
-# import pdb; pdb.set_trace()
-
-# Sort all labels by the total number of positive and negative examples
-label_counts = {}
-for label_name in ALL_LABELS:
-    pos = len(ALL_LABELS[label_name]['pos'])
-    neg = len(ALL_LABELS[label_name]['neg'])
-    label_counts[label_name] = pos + neg
-
-for label_name in ALL_LABELS:
-    print(f"{label_name}: Positives: {len(ALL_LABELS[label_name]['pos'])}, Negatives: {len(ALL_LABELS[label_name]['neg'])}")
-sorted_labels = sorted(label_counts, key=lambda x: label_counts[x])
-for label_name in sorted_labels[:10]:
-    print(f"{label_name}: {label_counts[label_name]}")
-import pdb; pdb.set_trace()
-
-# dataset = BinaryTask()
-# # scores = score_model.batch_forward(dataset, batch_size=16)
-# scores = torch.FloatTensor(len(dataset.videos), 1, len(dataset.prompts)).uniform_(-1, 1)
-# results = dataset.evaluate_scores(scores)
-
-SAVE_PATH = Path(SAVE_DIR / f"{score_model}_scores.pt")
-
-if SAVE_PATH.exists():
-    saved_results = torch.load(SAVE_PATH)
-    all_labels_scores = saved_results["all_labels_scores"]
-    all_labels = saved_results["all_labels"]
+label_name = "cam_motion.camera_centric_movement.forward.has_forward_wrt_camera"
+LABEL_SAVE_DIR = SAVE_DIR / label_name
+if not LABEL_SAVE_DIR.exists():
+    LABEL_SAVE_DIR.mkdir(parents=True)
+LABEL_SAVE_PATH = LABEL_SAVE_DIR / f"{args.score_model}_scores_random_seed.pt"
+all_seeds_results = {}
+if LABEL_SAVE_PATH.exists():
+    print(f"already exists: {LABEL_SAVE_PATH}")
+    print(f"Skipping {label_name}")
+    all_seeds_results = torch.load(LABEL_SAVE_PATH)
 else:
-    
-    all_labels_scores = {}
-    for label_name in ALL_LABELS:
-        LABEL_SAVE_DIR = SAVE_DIR / label_name
-        if not LABEL_SAVE_DIR.exists():
-            LABEL_SAVE_DIR.mkdir(parents=True)
-        LABEL_SAVE_PATH = LABEL_SAVE_DIR / f"{score_model}_scores.pt"
-        dataset = BinaryTask(label_name=label_name)
-        if LABEL_SAVE_PATH.exists():
-            print(f"Skipping {label_name}")
-            all_labels_scores[label_name] = torch.load(LABEL_SAVE_PATH)
-            results = dataset.evaluate_scores(all_labels_scores[label_name]["scores"], plot_path=LABEL_SAVE_DIR / f"{score_model}_pr_curve.jpeg")
-            continue
-        scores = score_model.batch_forward(dataset, batch_size=args.batch_size)
+    import time
+    time_start = time.time()
+    for seed in range(42, 52):
+        dataset = HasForward(label_name=label_name, seed=seed)
+        scores = score_model.batch_forward(
+            dataset,
+            batch_size=args.batch_size,
+            **kwargs
+        )
         results = dataset.evaluate_scores(scores)
-        all_labels_scores[label_name] = {
+        all_seeds_results[seed] = {
             "scores": scores,
             "results": results,
             "best_prompt": results["best"]["prompt"],
-            "best_ap": results["best"]["ap"]
+            "best_ap": results["best"]["ap"],
         }
-        torch.save(all_labels_scores[label_name], LABEL_SAVE_PATH)
-    # torch.save(
-    #     {
-    #         "all_labels_scores": all_labels_scores,
-    #         "all_labels": all_labels
-    #     },
-    #     SAVE_PATH
-    # )
+    torch.save(all_seeds_results, LABEL_SAVE_PATH)
+    time_end = time.time()
+    time_total = time_end - time_start
+    # print time in minutes
+    print(f"Time taken: {time_total / 60:.2f} minutes")
 
-# Sort by best AP
-sorted_labels = sorted(all_labels_scores, key=lambda x: all_labels_scores[x]["best_ap"], reverse=True)
-for label_name in sorted_labels:
-    print(f"{label_name:50s}: Best AP: {all_labels_scores[label_name]['best_ap']:.4f} with prompt {all_labels_scores[label_name]['best_prompt']:100s}")
+# Print the best AP for each seed, and show the
+import numpy as np
+import scipy.stats as stats
+
+# Extract best_ap values from the dictionary
+best_ap_values = [data["best_ap"] for data in all_seeds_results.values()]
+
+# Compute mean and standard deviation
+mean_ap = np.mean(best_ap_values)
+std_ap = np.std(best_ap_values, ddof=1)  # Use ddof=1 for sample standard deviation
+
+# Compute 95% confidence interval using normal approximation
+z_score = stats.norm.ppf(0.975)  # 1.96 for 95% CI
+ci_lower = mean_ap - z_score * (std_ap / np.sqrt(len(best_ap_values)))
+ci_upper = mean_ap + z_score * (std_ap / np.sqrt(len(best_ap_values)))
+
+# Print results
+print(f"Mean AP: {mean_ap:.3f}")
+print(f"Std Dev: {std_ap:.3f}")
+print(f"95% CI: ({ci_lower:.3f}, {ci_upper:.3f})")
