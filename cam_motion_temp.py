@@ -166,4 +166,4 @@ for label_name in all_labels:
 # Sort by best AP
 sorted_labels = sorted(all_labels_scores, key=lambda x: all_labels_scores[x]["results"]["ap"], reverse=True)
 for label_name in sorted_labels:
-    print(f"{label_name:50s}: AP: {all_labels_scores[label_name]['best_ap']:.4f} with prompt {all_labels_scores[label_name]['best_prompt']:100s}")
+    print(f"{label_name:50s}: AP: {all_labels_scores[label_name]['ap']:.4f} with prompt {all_labels_scores[label_name]['prompt']:100s}")
