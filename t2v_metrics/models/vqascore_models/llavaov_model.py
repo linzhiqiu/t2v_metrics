@@ -110,7 +110,7 @@ class LLaVAOneVisionModel(VQAScoreModel):
         prompts = [qs for qs in questions]
 
         lm_probs = []
-        for data, prompt in zip(processed_data, prompts):
+        for data, prompt, answer in zip(processed_data, prompts, answers):
             if isinstance(data, torch.Tensor) and data.dim() == 4:  # Video
                 image_sizes = [data.shape[2:] for _ in range(data.shape[0])]
                 modalities = ["video"]
@@ -134,7 +134,7 @@ class LLaVAOneVisionModel(VQAScoreModel):
             
             scores = outputs.scores[0]
             probs = torch.nn.functional.softmax(scores, dim=-1)
-            yes_token_id = self.tokenizer.encode("Yes")[0]
+            yes_token_id = self.tokenizer.encode(answer)[0]
             lm_prob = probs[0, yes_token_id].item()
             lm_probs.append(lm_prob)
 

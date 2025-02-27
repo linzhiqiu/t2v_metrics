@@ -87,10 +87,11 @@ class PaliGemmaModel(VQAScoreModel):
         assert len(paths) == len(texts), "Number of paths and texts must match"
 
         questions = [question_template.format(text) for text in texts]
+        answers = [answer_template.format(text) for text in texts]
         processed_data = self.load_images(paths)
 
         lm_probs = []
-        for data, question in zip(processed_data, questions):
+        for data, question, answer in zip(processed_data, questions, answers):
             model_inputs = self.processor(text=question, images=data, return_tensors="pt")
             model_inputs = {k: v.to(self.device) for k, v in model_inputs.items()}
             input_len = model_inputs["input_ids"].shape[-1]
@@ -100,7 +101,7 @@ class PaliGemmaModel(VQAScoreModel):
             
             scores = outputs.scores[0]
             probs = torch.nn.functional.softmax(scores, dim=-1)
-            yes_token_id = self.processor.tokenizer.encode("Yes")[0]
+            yes_token_id = self.processor.tokenizer.encode(answer)[0]
             lm_prob = probs[0, yes_token_id].item()
             lm_probs.append(lm_prob)
 

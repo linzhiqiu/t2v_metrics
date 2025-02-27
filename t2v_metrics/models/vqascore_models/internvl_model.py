@@ -166,6 +166,7 @@ INTERNVL2_MODELS = {
             'low_cpu_mem_usage': True,
             'use_flash_attn': True,
             'trust_remote_code': True,
+            'device_map': 'auto'
         },
     },
     'internvl2.5-26b': {
@@ -180,6 +181,7 @@ INTERNVL2_MODELS = {
             'low_cpu_mem_usage': True,
             'use_flash_attn': True,
             'trust_remote_code': True,
+            'device_map': 'auto'
         },
     },
     'internvl2.5-38b': {
@@ -232,16 +234,22 @@ class InternVL2Model(VQAScoreModel):
 
     def load_model(self):
         tokenizer_path = self.model_info['tokenizer']['path']
+        # self.model_info['model']['max_memory'] = {
+        #         0: "45GB",  # GPU 0
+        #         1: "45GB",  # GPU 1
+        #         2: "45GB",  # GPU 4
+        # }
         
         self.model = AutoModel.from_pretrained(
             **self.model_info['model']
-        ).eval().to(self.device)
+        ).eval()#.to(self.device)
         
         self.tokenizer = AutoTokenizer.from_pretrained(
             tokenizer_path,
             **self.model_info['tokenizer']
         )
-
+        
+        self.device = next(self.model.parameters()).device # If there are multiple GPUs put the model on the first parameters GPU
     def build_transform(self, input_size=448):
         transform = T.Compose([
             T.Lambda(lambda img: img.convert('RGB') if img.mode != 'RGB' else img),
@@ -365,14 +373,16 @@ class InternVL2Model(VQAScoreModel):
                 paths: List[str],
                 texts: List[str],
                 num_frames: int=16,
-                question_template: str = "Does this figure show \"{}\"? Please answer yes or no.") -> torch.Tensor:
+                question_template: str = "Does this figure show \"{}\"? Please answer yes or no.",
+                answer_template: str = "Yes") -> torch.Tensor:
         assert len(paths) == len(texts), "Number of paths and texts must match"
 
         questions = [question_template.format(text) for text in texts]
+        answers = [answer_template.format(text) for text in texts]
         processed_data, num_patches_list = self.load_images(paths, num_frames)
 
         lm_probs = []
-        for data, question, num_patches in zip(processed_data, questions, num_patches_list):
+        for data, question, num_patches, answer in zip(processed_data, questions, num_patches_list, answers):
             if isinstance(num_patches, list):  # Video
                 video_prefix = ''.join([f'Frame{i+1}: <image>\n' for i in range(len(num_patches))])
                 prompt = video_prefix + question
@@ -396,7 +406,7 @@ class InternVL2Model(VQAScoreModel):
             #     )
 
             # Chat Arguments:
-            pixel_values = data.to(self.device).to(self.model.dtype)
+            pixel_values = data.to(self.device)
             generation_config = dict(max_new_tokens=1, do_sample=False, output_scores=True, return_dict_in_generate=True)
             IMG_START_TOKEN='<img>'
             IMG_END_TOKEN='</img>' 
@@ -433,25 +443,19 @@ class InternVL2Model(VQAScoreModel):
             input_ids = model_inputs['input_ids'].to(self.device)
             attention_mask = model_inputs['attention_mask'].to(self.device)
             generation_config['eos_token_id'] = eos_token_id
-            outputs = self.model.generate(
-                pixel_values=pixel_values,
-                input_ids=input_ids,
-                attention_mask=attention_mask,
-                **generation_config
-            )
+            with torch.amp.autocast(device_type='cuda', dtype=torch.bfloat16):
+                outputs = self.model.generate(
+                    pixel_values=pixel_values,
+                    input_ids=input_ids,
+                    attention_mask=attention_mask,
+                    **generation_config
+                )
 
 
             scores = outputs.scores[0]
 
             probs = torch.nn.functional.softmax(scores, dim=-1)
-            yes_token_id = self.tokenizer.encode("Yes")[1] 
-            '''
-            Okay, so it seems that some tokenizers: I think this one is some version of the LLaMA tokenizer, actually include the start token when they encode any string
-
-            WHY I DO NOT KNOW>!>>!?LIGHP @LSDHJFIOJ:O
-
-            Not sure if this affects the old baselines. Check with Zhiqiu.
-            '''
+            yes_token_id = self.tokenizer.encode(answer)[1] 
 
             lm_prob = probs[0, yes_token_id].item()
             lm_probs.append(lm_prob)
@@ -477,7 +481,7 @@ class InternVL2Model(VQAScoreModel):
                 prompt = '<image>\n' + question
                 num_patches = [num_patches]
 
-            pixel_values = data.to(self.device).to(self.model.dtype)
+            pixel_values = data.to(self.device)
             generation_config = dict(max_new_tokens=max_new_tokens, do_sample=False, output_scores=True, return_dict_in_generate=True)
             IMG_START_TOKEN='<img>'
             IMG_END_TOKEN='</img>' 
@@ -511,15 +515,16 @@ class InternVL2Model(VQAScoreModel):
                 query = query.replace('<image>', image_tokens, 1)
 
             model_inputs = self.tokenizer(query, return_tensors='pt')
-            input_ids = model_inputs['input_ids'].to(self.device)
+            input_ids = model_inputs['input_ids'].to(self.model.device)
             attention_mask = model_inputs['attention_mask'].to(self.device)
             generation_config['eos_token_id'] = eos_token_id
-            outputs = self.model.generate(
-                pixel_values=pixel_values,
-                input_ids=input_ids,
-                attention_mask=attention_mask,
-                **generation_config
-            )
+            with torch.amp.autocast(device_type='cuda', dtype=torch.bfloat16):
+                outputs = self.model.generate(
+                    pixel_values=pixel_values,
+                    input_ids=input_ids,
+                    attention_mask=attention_mask,
+                    **generation_config
+                )
 
 
             outputs = self.decode(outputs.sequences[0], skip_special_tokens=True).strip()

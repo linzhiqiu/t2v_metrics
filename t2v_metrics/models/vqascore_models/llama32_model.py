@@ -136,9 +136,10 @@ class LLaMA32VisionModel:
         
         images = self.load_images(paths)
         questions = [question_template.format(text) for text in texts]
+        answers = [answer_template.format(text) for text in texts]
         
         lm_probs = []
-        for image, question in zip(images, questions):
+        for image, question, answer in zip(images, questions, answers):
             messages = [
                 {"role": "user", "content": [
                     {"type": "image"},
@@ -158,7 +159,7 @@ class LLaMA32VisionModel:
 
             scores = outputs.scores[0]
             probs = torch.nn.functional.softmax(scores, dim=-1)
-            yes_token_id = self.processor.tokenizer.encode("Yes")[1]
+            yes_token_id = self.processor.tokenizer.encode(answer)[1]
     
             lm_probs.append(lm_prob)
         

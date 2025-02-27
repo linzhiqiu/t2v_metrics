@@ -83,11 +83,12 @@ class InternLMXComposer25Model(VQAScoreModel):
         assert len(paths) == len(texts), "Number of paths and texts must match"
 
         questions = [question_template.format(text) for text in texts]
+        answers = [answer_template.format(text) for text in texts]
         processed_paths = self.load_images(paths)
 
         lm_probs = []
         temp_files = []
-        for path, question in zip(processed_paths, questions):
+        for path, question, answer in zip(processed_paths, questions, answers):
             if path.lower().endswith(('.mp4', '.avi', '.mov', '.mkv')):  # Video file
                 query = f"Here are some frames of a video. {question}"
             else:  # Image file
@@ -107,15 +108,15 @@ class InternLMXComposer25Model(VQAScoreModel):
             hd_num = 24
 
             # Ensure all input images are in RGB:
-            with Image.open(path) as img:
-                # If the image has an alpha channel (RGBA), convert it to RGB
-                if img.mode == 'RGBA':
-                    img = img.convert('RGB')
-                    # Overwrite the original image or save to a new directory
-                    img.save(path)  # Overwrite the original file
-                elif img.mode == 'LA':  # Convert LA (grayscale with alpha) to RGB
-                    img = img.convert('RGB')
-                    img.save(path)
+            # with Image.open(path) as img:
+            #     # If the image has an alpha channel (RGBA), convert it to RGB
+            #     if img.mode == 'RGBA':
+            #         img = img.convert('RGB')
+            #         # Overwrite the original image or save to a new directory
+            #         img.save(path)  # Overwrite the original file
+            #     elif img.mode == 'LA':  # Convert LA (grayscale with alpha) to RGB
+            #         img = img.convert('RGB')
+            #         img.save(path)
         
             with torch.autocast(device_type='cuda', dtype=torch.float16):
                 if not use_meta:
@@ -149,7 +150,8 @@ class InternLMXComposer25Model(VQAScoreModel):
                 )
             scores = outputs.scores[0]
             probs = torch.nn.functional.softmax(scores, dim=-1)
-            yes_token_id = self.tokenizer.encode("Yes")[1]
+            # print(f'Yes Tokens {self.tokenizer.encode("Yes")}') InternLM adds a beginning of sentence token
+            yes_token_id = self.tokenizer.encode(answer)[1]
             lm_prob = probs[0, yes_token_id].item()
             lm_probs.append(lm_prob)
 
@@ -193,13 +195,13 @@ class InternLMXComposer25Model(VQAScoreModel):
             infer_mode = 'base'
             hd_num = 24
 
-            with Image.open(path) as img:
-                if img.mode == 'RGBA':
-                    img = img.convert('RGB')
-                    img.save(path)
-                elif img.mode == 'LA':
-                    img = img.convert('RGB')
-                    img.save(path)
+            # with Image.open(path) as img:
+            #     if img.mode == 'RGBA':
+            #         img = img.convert('RGB')
+            #         img.save(path)
+            #     elif img.mode == 'LA':
+            #         img = img.convert('RGB')
+            #         img.save(path)
         
             with torch.autocast(device_type='cuda', dtype=torch.float16):
                 if not use_meta:

@@ -88,7 +88,7 @@ class LLaVAVideoModel(VQAScoreModel):
                 lm_probs.append(0.0)
             else:
                 video,frame_time,video_time = self.load_images(path, 64, 1, force_sample=True)
-                video = self.processor.preprocess(video, return_tensors='pt')["pixel_values"].cuda().half() #why do they convert to half type???
+                video = self.processor.preprocess(video, return_tensors='pt')["pixel_values"].cuda().half()
                 video = [video]
 
                 question = question_template.format(text)
@@ -97,21 +97,22 @@ class LLaVAVideoModel(VQAScoreModel):
                 question = self.format_question(question, video_time, video, frame_time)
 
                 input_ids = tokenizer_image_token(question, self.tokenizer, IMAGE_TOKEN_INDEX, return_tensors="pt").unsqueeze(0).to(self.device)
-                print(input_ids.dtype)
-                outputs = self.model.generate(
-                    input_ids,
-                    images=video,
-                    do_sample=False,
-                    temperature=0,
-                    max_new_tokens=1,
-                    modalities=["video"],
-                    output_scores=True,
-                    return_dict_in_generate=True,
-                )
+
+                with torch.amp.autocast(device_type='cuda', dtype=torch.float16):
+                    outputs = self.model.generate(
+                        input_ids,
+                        images=video,
+                        do_sample=False,
+                        temperature=0,
+                        max_new_tokens=1,
+                        modalities=["video"],
+                        output_scores=True,
+                        return_dict_in_generate=True,
+                    )
                 
                 scores = outputs.scores[0]
                 probs = torch.nn.functional.softmax(scores, dim=-1)
-                yes_token_id = self.tokenizer.encode("Yes")[0]
+                yes_token_id = self.tokenizer.encode(answer)[0]
                 lm_prob = probs[0, yes_token_id].item()
                 lm_probs.append(lm_prob)
 
@@ -139,16 +140,16 @@ class LLaVAVideoModel(VQAScoreModel):
                 question = self.format_question(text, video_time, video, frame_time)
 
                 input_ids = tokenizer_image_token(question, self.tokenizer, IMAGE_TOKEN_INDEX, return_tensors="pt").unsqueeze(0).to(self.device)
-                
-                outputs = self.model.generate(
-                    input_ids,
-                    images=video,
-                    do_sample=False,
-                    temperature=0,
-                    max_new_tokens=max_new_tokens,  # Use the passed max_new_tokens
-                    modalities=["video"],
-                    return_dict_in_generate=True,
-                )
+                with torch.amp.autocast(device_type='cuda', dtype=torch.float16):
+                    outputs = self.model.generate(
+                        input_ids,
+                        images=video,
+                        do_sample=False,
+                        temperature=0,
+                        max_new_tokens=max_new_tokens,  # Use the passed max_new_tokens
+                        modalities=["video"],
+                        return_dict_in_generate=True,
+                    )
                 
                 # Decode the generated tokens
                 generated_text = self.tokenizer.decode(outputs.sequences[0], skip_special_tokens=True)
@@ -163,6 +164,3 @@ class LLaVAVideoModel(VQAScoreModel):
         conv.append_message(conv.roles[0], DEFAULT_IMAGE_TOKEN + f"\n{time_instruction}\n" + question)
         conv.append_message(conv.roles[1], None)
         return conv.get_prompt()
-
-    def format_answer(self, answer):
-        return answer

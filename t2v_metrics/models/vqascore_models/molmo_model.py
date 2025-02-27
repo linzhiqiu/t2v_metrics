@@ -72,9 +72,10 @@ class MOLMOVisionModel:
         
         images = self.load_images(images)
         questions = [question_template.format(text) for text in texts]
-        
+        answers = [answer_template.format(text) for text in texts]
+
         lm_probs = []
-        for image, question in zip(images, questions):
+        for image, question, answer in zip(images, questions, answers):
             inputs = self.processor.process(images=[image], text=question)
             inputs = {k: v.to(self.model.device).unsqueeze(0) for k, v in inputs.items()}
             
@@ -94,7 +95,7 @@ class MOLMOVisionModel:
             logits = outputs.scores[0]
             
             # Get the index of the "Yes" token
-            yes_token_id = self.processor.tokenizer.encode(" Yes")[0]
+            yes_token_id = self.processor.tokenizer.encode(" " + answer)[0]
 
             # Apply softmax to get probabilities
             probs = torch.nn.functional.softmax(logits, dim=-1)

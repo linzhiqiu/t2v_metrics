@@ -147,7 +147,7 @@ class GPT4VModel(VQAScoreModel):
                     is_generated = True
                     return torch.Tensor([top_logprob.logprob]).exp()
         if not is_generated:
-            print(f"Warning: 'Yes' not included in gpt4o log probs: {data['path']} and question: {question} and answer: {answer}")
+            print(f"Warning: '{answer}' not included in gpt4o log probs: {data['path']} and question: {question} and answer: {answer}")
             print(completion.choices[0].logprobs.content[0].top_logprobs)
             return torch.Tensor([0.0])
 
@@ -156,7 +156,7 @@ class GPT4VModel(VQAScoreModel):
                 texts: List[str],
                 question_template: str = default_question_template,
                 answer_template: str = default_answer_template,
-                num_frames: int = 5) -> torch.Tensor:
+                num_frames: int = 32) -> torch.Tensor:
         assert len(paths) == len(texts), "Number of paths and texts must match"
         
         questions = [question_template.format(text) for text in texts]

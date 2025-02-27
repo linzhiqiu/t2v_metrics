@@ -6,7 +6,7 @@ import google.generativeai as genai
 from .vqa_model import VQAScoreModel
 
 GEMINI_MODELS = {
-    'gemini-1.5': {
+    'gemini-1.5-flash': {
         'model_path' : 'models/gemini-1.5-flash-002'
     },
     'gemini-2.0': {
@@ -66,11 +66,14 @@ class GeminiModel(VQAScoreModel):
 
     def forward_single(self, data, question, answer):
         try:
+            gen_config = genai.GenerationConfig()
+            print(dir(gen_config))
             response = self.model.generate_content(
                 [question, data['file']],
                 request_options={"timeout": 600},
-                generation_config=genai.GenerationConfig(max_output_tokens=10, response_logprobs=True, candidate_count=2)
+                generation_config=genai.GenerationConfig(max_output_tokens=10, responseLogprobs=True, candidate_count=2)
             )
+
             print(f'Response {response}')
             time.sleep(1.5) #This is added to prevent against quota limit of the free tier for gemini.
         

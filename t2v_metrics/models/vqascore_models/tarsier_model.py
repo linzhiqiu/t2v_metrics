@@ -103,6 +103,7 @@ class TarsierModel(VQAScoreModel):
                 continue
 
             question = question_template.format(text)
+            answer = answer_template.format(text)
             
             generate_kwargs = {
                 "do_sample": False,
@@ -123,7 +124,7 @@ class TarsierModel(VQAScoreModel):
             
             scores = outputs.scores[0]
             probs = torch.nn.functional.softmax(scores, dim=-1)
-            yes_token_id = self.processor.processor.tokenizer.encode("Yes")[0]
+            yes_token_id = self.processor.processor.tokenizer.encode(answer)[0]
             lm_prob = probs[0, yes_token_id].item()
             lm_probs.append(lm_prob)
 

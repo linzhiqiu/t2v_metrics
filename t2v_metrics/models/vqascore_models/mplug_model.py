@@ -93,10 +93,11 @@ class mPLUGOwl3Model(VQAScoreModel):
         assert len(paths) == len(texts), "Number of paths and texts must match"
 
         questions = [question_template.format(text) for text in texts]
+        answers = [answer_template.format(text) for text in texts]
         processed_data = self.load_images(paths, num_frames)
 
         lm_probs = []
-        for data, question in zip(processed_data, questions):
+        for data, question, answer in zip(processed_data, questions, answers):
             if isinstance(data, list):  # Video
                 messages = [
                     {"role": "user", "content": f"<|video|>\n{question}"},
@@ -132,7 +133,7 @@ class mPLUGOwl3Model(VQAScoreModel):
             
             scores = outputs.scores[0]
             probs = torch.nn.functional.softmax(scores, dim=-1)
-            yes_token_id = self.tokenizer.encode("Yes")[0]
+            yes_token_id = self.tokenizer.encode(answer)[0]
             lm_prob = probs[0, yes_token_id].item()
             lm_probs.append(lm_prob)
 
