@@ -1,12 +1,12 @@
 # Evaluate on all datasets in VQAScore paper
 # CUDA_VISIBLE_DEVICES=2 python cam_motion_temp.py --score_model umt-b16-25m-clip
-# CUDA_VISIBLE_DEVICES=2 python cam_motion_temp.py --score_model umt-b16-25m-itm
-# CUDA_VISIBLE_DEVICES=2 python cam_motion_temp.py --score_model languagebind-video-v1.5-ft
+# CUDA_VISIBLE_DEVICES=4 python cam_motion_temp.py --score_model umt-b16-25m-itm
+# CUDA_VISIBLE_DEVICES=1 python cam_motion_temp.py --score_model languagebind-video-v1.5-ft
 # CUDA_VISIBLE_DEVICES=2 python cam_motion_temp.py --score_model languagebind-video-ft
-# CUDA_VISIBLE_DEVICES=4 python cam_motion_temp.py --score_model internvideo2-1b-stage2-clip
+# CUDA_VISIBLE_DEVICES=3 python cam_motion_temp.py --score_model internvideo2-1b-stage2-clip
 # CUDA_VISIBLE_DEVICES=4 python cam_motion_temp.py --score_model internvideo2-1b-stage2-itm
-# CUDA_VISIBLE_DEVICES=4 python cam_motion_temp.py --score_model umt-l16-25m-clip
-# CUDA_VISIBLE_DEVICES=4 python cam_motion_temp.py --score_model umt-l16-25m-itm
+# CUDA_VISIBLE_DEVICES=5 python cam_motion_temp.py --score_model umt-l16-25m-clip
+# CUDA_VISIBLE_DEVICES=6 python cam_motion_temp.py --score_model umt-l16-25m-itm
 import argparse
 import os
 import sys
@@ -144,7 +144,7 @@ for label_name in all_labels:
     
     if LABEL_SAVE_PATH.exists():
         print(f"Skipping {label_name}")
-        all_labels_scores[label_name] = torch.load(LABEL_SAVE_PATH)
+        all_labels_scores[label_name] = torch.load(LABEL_SAVE_PATH, weights_only=False)
     else:
         scores = score_model.batch_forward(
             dataset,
