@@ -29,11 +29,13 @@ temp*/
 temp*
 *.pt
 vicuna-7b/
+temp_pairwise/
 test.ipynb
 # Zhiqiu's temporary files
 genai_image_800_temp.py
 gpt4_eval.txt
 vqascore_ablation.py
+temp_better_question/
 
 # Binary scores
 temp/

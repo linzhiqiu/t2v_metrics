@@ -71,7 +71,7 @@ parser.add_argument(
     "--save_dir",
     type=str,
     help="The directory to save the results",
-    default="./temp/",
+    default="./temp_better_question/",
 )
 parser.add_argument(
     "--batch_size",
@@ -106,7 +106,7 @@ score_model = t2v_metrics.get_score_model(model=args.score_model)
 if isinstance(score_model, t2v_metrics.VQAScore):
     mode = "vqa"
     score_kwargs = {
-        "question": "{}",
+        "question": "{} Please only answer Yes or No.",
         "answer": "Yes"
     }
 else:
