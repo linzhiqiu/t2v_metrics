@@ -1,12 +1,12 @@
 # Evaluate on camera-centric benchmark
 # CUDA_VISIBLE_DEVICES=1 python cam_motion_pairwise_temp.py --score_model umt-b16-25m-clip
-# CUDA_VISIBLE_DEVICES=4 python cam_motion_pairwise_temp.py --score_model umt-b16-25m-itm
-# CUDA_VISIBLE_DEVICES=5 python cam_motion_pairwise_temp.py --score_model umt-l16-25m-clip
-# CUDA_VISIBLE_DEVICES=6 python cam_motion_pairwise_temp.py --score_model umt-l16-25m-itm
-# CUDA_VISIBLE_DEVICES=1 python cam_motion_pairwise_temp.py --score_model languagebind-video-v1.5-ft
-# CUDA_VISIBLE_DEVICES=2 python cam_motion_pairwise_temp.py --score_model languagebind-video-ft
-# CUDA_VISIBLE_DEVICES=3 python cam_motion_pairwise_temp.py --score_model internvideo2-1b-stage2-clip
-# CUDA_VISIBLE_DEVICES=4 python cam_motion_pairwise_temp.py --score_model internvideo2-1b-stage2-itm
+# CUDA_VISIBLE_DEVICES=1 python cam_motion_pairwise_temp.py --score_model umt-b16-25m-itm
+# CUDA_VISIBLE_DEVICES=2 python cam_motion_pairwise_temp.py --score_model umt-l16-25m-clip
+# CUDA_VISIBLE_DEVICES=3 python cam_motion_pairwise_temp.py --score_model umt-l16-25m-itm
+# CUDA_VISIBLE_DEVICES=4 python cam_motion_pairwise_temp.py --score_model languagebind-video-v1.5-ft
+# CUDA_VISIBLE_DEVICES=5 python cam_motion_pairwise_temp.py --score_model languagebind-video-ft
+# CUDA_VISIBLE_DEVICES=6 python cam_motion_pairwise_temp.py --score_model internvideo2-1b-stage2-clip
+# CUDA_VISIBLE_DEVICES=7 python cam_motion_pairwise_temp.py --score_model internvideo2-1b-stage2-itm
 import argparse
 import os
 import sys
@@ -60,15 +60,15 @@ parser.add_argument(
     "--sampling",
     type=str,
     help="The sampling method to use (random meaning random sampling, top meaning taking the first N samples)",
-    default="random",
-    # default="top",
+    # default="random",
+    default="top",
     choices=["random", "top"],
 )
 parser.add_argument(
     "--max_samples",
     type=int,
     help="The maximum number of samples to use",
-    default=50,
+    default=100,
     # default=10,
 )
 parser.add_argument(
