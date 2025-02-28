@@ -12,9 +12,7 @@ import os
 import sys
 import t2v_metrics
 import torch
-from torch.utils.data import Dataset
 from pathlib import Path
-import random
 
 ROOT = Path("/data3/zhiqiul/video_annotation")
 VIDEO_ROOT = ROOT / "videos"
@@ -25,8 +23,6 @@ sys.path.append(os.path.abspath(ROOT))
 
 from pairwise_benchmark import generate_pairwise_benchmark, PairwiseBenchmark, print_task_statistics
 
-
-import argparse
 
 parser = argparse.ArgumentParser()
 parser.add_argument(
@@ -63,7 +59,7 @@ parser.add_argument(
 parser.add_argument(
     "--sampling",
     type=str,
-    help="The video label to use",
+    help="The sampling method to use (random meaning random sampling, top meaning taking the first N samples)",
     default="random",
     # default="top",
     choices=["random", "top"],
