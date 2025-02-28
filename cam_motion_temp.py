@@ -141,7 +141,7 @@ for label_name in all_labels:
     LABEL_SAVE_PATH = LABEL_SAVE_DIR / f"{args.score_model}_scores.pt"
 
     dataset = BinaryTask(label_dict=all_labels[label_name])
-    
+
     if LABEL_SAVE_PATH.exists():
         print(f"Skipping {label_name}")
         all_labels_scores[label_name] = torch.load(LABEL_SAVE_PATH, weights_only=False)
@@ -152,7 +152,7 @@ for label_name in all_labels:
             **score_kwargs
         )
         scores = scores[:, 0, 0].cpu().numpy() # (num_videos, 1, 1) -> (num_videos,)
-    
+
         results = dataset.evaluate_scores(
             scores,
             plot_path=LABEL_SAVE_DIR / f"{args.score_model}_pr_curve.jpeg",
@@ -164,6 +164,20 @@ for label_name in all_labels:
         torch.save(all_labels_scores[label_name], LABEL_SAVE_PATH)
 
 # Sort by best AP
-sorted_labels = sorted(all_labels_scores, key=lambda x: all_labels_scores[x]["results"]["ap"], reverse=True)
-for label_name in sorted_labels:
-    print(f"{label_name:100s}: AP: {all_labels_scores[label_name]['results']['ap']:.4f} ")
+# sorted_labels = sorted(all_labels_scores, key=lambda x: all_labels_scores[x]["results"]["ap"], reverse=True)
+# print(f"Using Score Model: {args.score_model}")
+header = f"{args.score_model:50s} {'AP':>10} {'ROC AUC':>10} {'F1':>10} {'Threshold':>12}"
+separator = "-" * len(header)
+
+print(header)
+print(separator)
+
+for label_name, scores in all_labels_scores.items():
+    ap = scores["results"]["ap"]
+    roc_auc = scores["results"]["roc_auc"]
+    optimal_f1 = scores["results"]["optimal_f1"]
+    optimal_threshold = scores["results"]["optimal_threshold"]
+
+    print(
+        f"{label_name.rsplit('.')[-1]:50s} {ap:>10.4f} {roc_auc:>10.4f} {optimal_f1:>10.4f} {optimal_threshold:>12.4f}"
+    )
