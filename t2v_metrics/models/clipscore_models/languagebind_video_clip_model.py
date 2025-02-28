@@ -71,5 +71,8 @@ class LanguageBindVideoCLIPScoreModel(ScoreModel):
 
         data = self.video_process(images, texts, return_tensors="pt")
         out = self.model(**data)
-        scores = out.text_embeds @ out.image_embeds.T
-        return scores.diagonal()
+        # scores = out.text_embeds @ out.image_embeds.T
+        similarity_scores = torch.sum(out.text_embeds * out.image_embeds, dim=1)
+        return similarity_scores
+        # import pdb; pdb.set_trace()
+        # return scores.diagonal()

@@ -116,6 +116,7 @@ class BinaryTask(Dataset):
         # print highest performing prompt
         best_prompt = max(results, key=lambda x: results[x]["ap"])
         best_prompt_index = self.prompts.index(best_prompt)
+        # best_prompt_str = f"{best_prompt} ({'def' if best_prompt in self.def_prompts else 'alt'})"
         best_prompt_str = f"{best_prompt}"
         print(f"Best prompt: {best_prompt_str:100s} AP: {results[best_prompt]['ap']:.4f}, ROC AUC: {results[best_prompt]['roc_auc']:.4f}, Optimal F1: {results[best_prompt]['optimal_f1']:.4f}")
         results["best"] = {
