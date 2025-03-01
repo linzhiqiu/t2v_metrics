@@ -140,8 +140,8 @@ sampled_tasks = datasets["sampled_tasks"]["test"]
 if isinstance(score_model, t2v_metrics.VQAScore):
     benchmark = PairwiseBenchmark(sampled_tasks, mode="vqa")
     
-    yes_kwargs = {"question": args.question, "answer": "Yes"}
-    no_kwargs = {"question": args.question, "answer": "No"}
+    yes_kwargs = {"question_template": args.question, "answer_template": "Yes"}
+    no_kwargs = {"question_template": args.question, "answer_template": "No"}
     
     yes_scores = score_model.batch_forward(benchmark, batch_size=args.batch_size, **yes_kwargs).cpu()
     no_scores = score_model.batch_forward(benchmark, batch_size=args.batch_size, **no_kwargs).cpu()
