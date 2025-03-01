@@ -1,5 +1,5 @@
 # Evaluate on camera-centric benchmark
-# CUDA_VISIBLE_DEVICES=1 python cam_motion_pairwise_test_temp.py --score_model umt-b16-25m-clip
+# CUDA_VISIBLE_DEVICES=0 python cam_motion_pairwise_test_temp.py --score_model umt-b16-25m-clip
 # CUDA_VISIBLE_DEVICES=1 python cam_motion_pairwise_test_temp.py --score_model umt-b16-25m-itm
 # CUDA_VISIBLE_DEVICES=2 python cam_motion_pairwise_test_temp.py --score_model umt-l16-25m-clip
 # CUDA_VISIBLE_DEVICES=3 python cam_motion_pairwise_test_temp.py --score_model umt-l16-25m-itm
@@ -71,7 +71,7 @@ parser.add_argument(
     "--max_samples",
     type=int,
     help="The maximum number of samples to use",
-    default=100,
+    default=80,
 )
 parser.add_argument(
     "--seed",
