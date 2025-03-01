@@ -18,7 +18,7 @@ from llava.conversation import conv_templates, SeparatorStyle
 
 warnings.filterwarnings("ignore")
 LLAVA_VIDEO_MODELS = {
-    'llava-video-7B': {
+    'llava-video-7b': {
         'model': {
             'path': "lmms-lab/LLaVA-Video-7B-Qwen2",
             'conversation': 'qwen_1_5',
@@ -35,7 +35,7 @@ LLAVA_VIDEO_MODELS = {
 class LLaVAVideoModel(VQAScoreModel):
     video_mode = "direct"
     allows_image = True
-    def __init__(self,
+    def __init__(self, 
                  model_name='llava-video-7B',
                  device='cuda',
                  cache_dir=None):
@@ -51,7 +51,7 @@ class LLaVAVideoModel(VQAScoreModel):
     def load_model(self):
         model_path = self.model_info['model']['path']
         self.tokenizer, self.model, self.processor, _ = load_pretrained_model(
-            model_path, None, "llava_qwen", torch_dtype='bfloat16', device_map="auto")
+            model_path, None, "llava_qwen", torch_dtype='bfloat16', device_map="auto", attn_implementation='flash_attention_2')
         self.model.eval()
 
     def load_images(self, video_path, max_frames_num,fps=1,force_sample=False):

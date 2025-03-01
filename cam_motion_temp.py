@@ -97,7 +97,6 @@ parser.add_argument(
 # )
 args = parser.parse_args()
 
-
 print(f"Using score model: {args.score_model}")
 
 score_model = t2v_metrics.get_score_model(model=args.score_model)
@@ -106,8 +105,8 @@ score_model = t2v_metrics.get_score_model(model=args.score_model)
 if isinstance(score_model, t2v_metrics.VQAScore):
     mode = "vqa"
     score_kwargs = {
-        "question": "{}",
-        "answer": "Yes"
+        "question_template": "{}",
+        "answer_template": "Yes"
     }
 else:
     mode = "retrieval"
