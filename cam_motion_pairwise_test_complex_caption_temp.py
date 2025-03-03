@@ -368,7 +368,7 @@ def merge_and_rename_skills(results, skill_mapping, counts=None):
     return new_results
 
 
-def process_benchmark_results(results, benchmark, skill_mapping):
+def process_benchmark_results(results, benchmark, skill_mapping, counts=None):
     """
     Process benchmark results by calculating sample counts and merging/renaming skills.
 
@@ -376,12 +376,14 @@ def process_benchmark_results(results, benchmark, skill_mapping):
         results: Dictionary from evaluate_retrieval_scores or evaluate_vqa_scores
         benchmark: The PairwiseBenchmark object
         skill_mapping: Dictionary mapping new skill names to lists of old skill names
+        counts: Optional dictionary with sample counts
 
     Returns:
         Tuple of (merged_results, merged_counts)
     """
-    # First get the counts
-    counts = count_samples_by_task(benchmark)
+    if counts is None:
+        # First get the counts
+        counts = count_samples_by_task(benchmark)
 
     # Then merge and rename skills in the counts
     merged_counts = merge_and_rename_skills(counts, skill_mapping)
@@ -567,7 +569,7 @@ combine_results, combined_counts = combine_results(
     caption_retrieval_counts
 )
 combine_results, combined_counts = process_benchmark_results(
-    combine_results, benchmark, RETRIEVAL_MAPPING
+    combine_results, benchmark, RETRIEVAL_MAPPING, counts=combined_counts
 )
 combined_retrieval_results_str = benchmark.format_retrieval_results(combine_results)
 print(combined_retrieval_results_str)
