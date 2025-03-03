@@ -1,5 +1,5 @@
 # Evaluate on all datasets in VQAScore paper
-# Model List = [gemini-2.0, gemini-1.5-flash, gpt4v, gpt-4o, internlm-7b, internvideo2-chat-8b, internvl2.5 7B, internvl2.5-26B, llava-ov-7B, llava-video-7b, mplug-7b, qwen-2-7b, qwen2.57b, tarsier, blip2_item, image_reward, internvideo2_itm, umt_itm, internvideo2_clip, languagebind_clip, umt_clip]
+# Model List = [gemini-2.0, gemini-1.5-flash, gpt4v, gpt-4o, internlm-7b, internvideo2-chat-8b, internvl2.5 8B, internvl2.5-26B, llava-ov-7B, llava-video-7b, mplug-7b, qwen2.57b, tarsier, blip2_item, image_reward, internvideo2_itm, umt_itm, internvideo2_clip, languagebind_clip, umt_clip]
 import argparse
 import os
 import sys

@@ -106,8 +106,8 @@ score_model = t2v_metrics.get_score_model(model=args.score_model)
 if isinstance(score_model, t2v_metrics.VQAScore):
     mode = "vqa"
     score_kwargs = {
-        "question": "{} Please only answer Yes or No.",
-        "answer": "Yes"
+        "question_template": "{} Please only answer Yes or No.",
+        "answer_template": "Yes"
     }
 else:
     mode = "retrieval"

@@ -362,7 +362,7 @@ class TarsierForConditionalGeneration(TarsierPreTrainedModel, GenerationMixin):
 
         if max_seq_len > 1:
             special_image_mask = input_ids == self.config.image_token_index
-            print(f'[{input_ids.device}] num_images: {num_images.tolist()} num_image_tokens: {special_image_mask.sum(-1).tolist()}', flush=True)
+            # print(f'[{input_ids.device}] num_images: {num_images.tolist()} num_image_tokens: {special_image_mask.sum(-1).tolist()}', flush=True)
 
         if position_ids is None:
             if 'Qwen2VLForCausalLM' in self.language_model.__class__.__name__:
