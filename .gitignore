@@ -24,6 +24,9 @@ genai_video_results/
 genai_image_temp/
 genai_800_temp.py
 _OPENAI_API_KEY.txt
+temp_testset/
+plot_temp.py
+plot_temp_round_0.py
 outputs/
 temp*/
 temp*
@@ -37,6 +40,9 @@ genai_image_800_temp.py
 gpt4_eval.txt
 vqascore_ablation.py
 temp_better_question/
+sfm_outputs/
+training.png
+training_0.png
 
 # Binary scores
 temp/
