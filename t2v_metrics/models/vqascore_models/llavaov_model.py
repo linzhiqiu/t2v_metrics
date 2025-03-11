@@ -144,7 +144,7 @@ class LLaVAOneVisionModel(VQAScoreModel):
     def generate(self,
             images: List[str],
             texts: List[str],
-            num_frames: int = 4,
+            num_frames: int = 12,
             max_new_tokens: int = 256,) -> List[str]:
         assert len(images) == len(texts), "Number of paths and texts must match"
         texts = [self.format_question(text) for text in texts]

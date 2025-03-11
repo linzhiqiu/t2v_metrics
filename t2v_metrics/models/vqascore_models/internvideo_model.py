@@ -358,6 +358,7 @@ class InternVideo2Model(VQAScoreModel):
                         tokenized['attention_mask'].unsqueeze(0).to(self.device), 
                         image_idx = tokenized['index'].unsqueeze(0),
                         image = media_tensor.unsqueeze(0), 
+                        max_new_tokens=256
                     )
                 else:
                     response = self.generate_caption_chat(
@@ -365,6 +366,7 @@ class InternVideo2Model(VQAScoreModel):
                         tokenized['attention_mask'].unsqueeze(0).to(self.device), 
                         video_idx = tokenized['index'].unsqueeze(0),
                         video = media_tensor.unsqueeze(0), 
+                        max_new_tokens=256
                     )
             elif self.model_name == 'internvideo2-chat-8b-hd':
                 answer_prompt = None
@@ -445,6 +447,7 @@ class InternVideo2Model(VQAScoreModel):
                         image_idx = tokenized['index'].unsqueeze(0),
                         image = media_tensor,
                         instruction=[instruction]* ilen if instruction else None,
+                        max_new_tokens=256
                 
                     )
                 else:
@@ -454,8 +457,10 @@ class InternVideo2Model(VQAScoreModel):
                         video_idx = tokenized['index'].unsqueeze(0),
                         video = media_tensor, 
                         instruction=[instruction]* ilen if instruction else None,
+                        max_new_tokens=256
                     )
-
+       
+    
             tokens = response.sequences[0] 
             text = self.tokenizer.decode(tokens, skip_special_tokens=True).strip()
 

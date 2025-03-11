@@ -527,7 +527,7 @@ class InternVL2Model(VQAScoreModel):
                 )
 
 
-            outputs = self.decode(outputs.sequences[0], skip_special_tokens=True).strip()
+            outputs = self.tokenizer.decode(outputs.sequences[0], skip_special_tokens=True).strip()
             gen_outputs.append(outputs)
 
         return gen_outputs

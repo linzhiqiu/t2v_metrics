@@ -127,6 +127,7 @@ class GPT4VModel(VQAScoreModel):
                     logprobs=True,
                     top_logprobs=self.top_logprobs,
                 )
+                print(f'completion {completion}')
             except Exception as e: # Old Error Handling
                 print(f"Failed image: {data['path']} and question: {question} and answer: {answer}")
                 print(f"Error: {str(e)}")
@@ -156,9 +157,8 @@ class GPT4VModel(VQAScoreModel):
                 texts: List[str],
                 question_template: str = default_question_template,
                 answer_template: str = default_answer_template,
-                num_frames: int = 32) -> torch.Tensor:
+                num_frames: int = 4) -> torch.Tensor:
         assert len(paths) == len(texts), "Number of paths and texts must match"
-        
         questions = [question_template.format(text) for text in texts]
         answers = [answer_template.format(text) for text in texts]
 
@@ -223,7 +223,7 @@ class GPT4VModel(VQAScoreModel):
             images: List[str],
             texts: List[str],
             num_frames: int = 5,
-            max_new_tokens: int = 4) -> List[str]:
+            max_new_tokens: int = 256) -> List[str]:
         assert len(images) == len(texts), "Number of paths and texts must match"
         
         questions = texts

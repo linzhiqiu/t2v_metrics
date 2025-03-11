@@ -210,7 +210,61 @@ QWEN2_VL_MODELS = {
         },
     },
 
+    # Camera Motion Weights:
+    'qwen2.5-vl-cam2500': {
+        'tokenizer': {
+            'path': 'Qwen/Qwen2.5-VL-7B-Instruct',
+        },
+        'model': {
+            'path': '../LLaMA-Factory/saves/qwen2.5_vl-7b/lora/cam_motion_sft_2500',
+            'torch_dtype': torch.bfloat16,
+            'attn_implementation': 'flash_attention_2',
+        },
+    },
 
+    'qwen2.5-vl-cam10000': {
+        'tokenizer': {
+            'path': 'Qwen/Qwen2.5-VL-7B-Instruct',
+        },
+        'model': {
+            'path': '../LLaMA-Factory/models/qwen2.5-vl-cam10000',
+            'torch_dtype': torch.bfloat16,
+            'attn_implementation': 'flash_attention_2',
+        },
+    },
+
+    'qwen2.5-vl-cam15000': {
+        'tokenizer': {
+            'path': 'Qwen/Qwen2.5-VL-7B-Instruct',
+        },
+        'model': {
+            'path': '/data3/cmitra/LLaMA-Factory/models/qwen2.5-vl-cam15000',
+            'torch_dtype': torch.bfloat16,
+            'attn_implementation': 'flash_attention_2',
+        },
+    },
+
+    'qwen2.5-vl-balanced': {
+        'tokenizer': {
+            'path': 'Qwen/Qwen2.5-VL-7B-Instruct',
+        },
+        'model': {
+            'path': '/data3/cmitra/LLaMA-Factory/models/qwen2.5-vl-balanced',
+            'torch_dtype': torch.bfloat16,
+            'attn_implementation': 'flash_attention_2',
+        },
+    },
+
+    'qwen2.5-vl-balanced2': {
+        'tokenizer': {
+            'path': 'Qwen/Qwen2.5-VL-7B-Instruct',
+        },
+        'model': {
+            'path': '/data3/cmitra/LLaMA-Factory/models/qwen2.5-vl-balanced2',
+            'torch_dtype': torch.bfloat16,
+            'attn_implementation': 'flash_attention_2',
+        },
+    },
 
     
 }
@@ -254,9 +308,9 @@ class Qwen2VLModel(VQAScoreModel):
     def load_images(self, paths: List[str], num_frames: int = 16) -> List[Union[torch.Tensor, List[torch.Tensor]]]:
         processed_data = []
         for path in paths:
-            if path.lower().endswith(('.mp4', '.avi', '.mov', '.mkv')):  # Video file
-                video_frames = self.load_video(path, num_frames)
-                processed_data.append({"type": "video", "video": video_frames})
+            if path.lower().endswith(('.mp4', '.avi', '.mov', '.mkv')):  # Video file path
+                # video_frames = self.load_video(path, num_frames)
+                processed_data.append({"type": "video", "video": path, "max_pixels": 360*420, "fps":2.0})
             elif path.lower().endswith('.npy'):  # NumPy file
                 np_array = np.load(path)
                 if np_array.ndim == 3:  # Single image
@@ -273,6 +327,7 @@ class Qwen2VLModel(VQAScoreModel):
         return processed_data
 
     def load_video(self, video_path, max_frames_num):
+        print(f'Going into load_video method.')
         vr = VideoReader(video_path, ctx=cpu(0))
         total_frame_num = len(vr)
         uniform_sampled_frames = np.linspace(0, total_frame_num - 1, max_frames_num, dtype=int)

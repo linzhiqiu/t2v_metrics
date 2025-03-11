@@ -107,7 +107,12 @@ args = parser.parse_args()
 
 print(f"Using score model: {args.score_model}")
 
-score_model = t2v_metrics.get_score_model(model=args.score_model)
+if 'gemini' in args.score_model:
+    score_model = t2v_metrics.get_score_model(model=args.score_model, api_key='api_key')
+elif 'gpt' in args.score_model:
+    score_model = t2v_metrics.get_score_model(model=args.score_model, api_key='api_key')
+else:
+    score_model = t2v_metrics.get_score_model(model=args.score_model)
 
 sampling_str = "top" if args.sampling == "top" else f"random_seed_{args.seed}"
 folder_name = f"test_ratio_{1 - args.train_ratio:.2f}_num_{args.max_samples}_sampling_{sampling_str}"

@@ -1,16 +1,19 @@
-import base64
 import time
-from typing import List, Union
+from typing import List
 import torch
-import google.generativeai as genai
+from google import genai
+from google.genai.types import HttpOptions, Part, GenerateContentConfig
 from .vqa_model import VQAScoreModel
 
 GEMINI_MODELS = {
     'gemini-1.5-flash': {
-        'model_path' : 'models/gemini-1.5-flash-002'
+        'model_path': 'gemini-1.5-flash-002'
     },
     'gemini-2.0': {
-        'model_path': 'gemini-2.0-flash-001' 
+        'model_path': 'gemini-2.0-flash-001'
+    },
+    'gemini-2.0-pro': {
+        'model_path': 'gemini-2.0-pro-exp-02-05'
     }
 }
 
@@ -23,11 +26,23 @@ def get_file_type(file_path):
     else:
         raise ValueError(f"Unsupported file type: {file_type}")
 
+def get_mime_type(file_path):
+    file_type = get_file_type(file_path)
+    extension = file_path.split('.')[-1].lower()
+    
+    if file_type == 'image':
+        return f"image/{extension if extension != 'jpg' else 'jpeg'}"
+    elif file_type == 'video':
+        return f"video/{extension}"
+    else:
+        raise ValueError(f"Unsupported file type: {file_path}")
+
 class GeminiModel(VQAScoreModel):
     video_mode = "direct"
     allows_image = True
+    
     def __init__(self,
-                 model_name='gemini-1.5',
+                 model_name='gemini-1.5-flash',
                  device='cuda',
                  cache_dir=None,
                  api_key=None,
@@ -36,60 +51,63 @@ class GeminiModel(VQAScoreModel):
         assert api_key is not None, "Please provide a Google API key"
         self.api_key = api_key
         self.top_logprobs = top_logprobs
+
         super().__init__(model_name=model_name,
                          device=device,
                          cache_dir=cache_dir)
 
     def load_model(self):
-        genai.configure(api_key=self.api_key)
-        self.model = genai.GenerativeModel(GEMINI_MODELS[self.model_name]['model_path'])
+        self.client = genai.Client(
+            api_key=self.api_key,
+            http_options=HttpOptions(api_version="v1")
+        )
+        self.model_path = GEMINI_MODELS[self.model_name]['model_path']
 
     def load_images(self, paths: List[str]) -> List[dict]:
         loaded_data = []
         for path in paths:
             file_type = get_file_type(path)
-            file = genai.upload_file(path=path)
+            mime_type = get_mime_type(path)
             
-            while file.state.name == "PROCESSING":
-                time.sleep(3)
-                file = genai.get_file(file.name)
-            
-            if file.state.name == "FAILED":
-                raise ValueError(f"File processing failed: {path}")
+            # Read file content
+            with open(path, 'rb') as f:
+                file_content = f.read()
             
             loaded_data.append({
                 'path': path,
                 'type': file_type,
-                'file': file
+                'mime_type': mime_type,
+                'content': file_content
             })
         return loaded_data
-
+    
     def forward_single(self, data, question, answer):
         try:
-            gen_config = genai.GenerationConfig()
-            print(dir(gen_config))
-            response = self.model.generate_content(
-                [question, data['file']],
-                request_options={"timeout": 600},
-                generation_config=genai.GenerationConfig(max_output_tokens=10, responseLogprobs=True, candidate_count=2)
+            response = self.client.models.generate_content(
+                model=self.model_path,
+                contents=[
+                    question,
+                    Part.from_bytes(data=data['content'], mime_type=data['mime_type'])
+                ],
+                config=GenerateContentConfig(
+                    max_output_tokens=64
+                )
             )
 
-            print(f'Response {response}')
-            time.sleep(1.5) #This is added to prevent against quota limit of the free tier for gemini.
+            time.sleep(1.5)  # This is added to prevent quota limit of the free tier for gemini.
         
-            candidates = response.candidates[0].logprobs_result.chosen_candidates
+            # Extract the generated text
+            generated_text = response.text.strip().lower()
             
-            for candidate in candidates:
-                if answer.lower() == "yes":
-                    if candidate.token.lower() == 'yes':
-                        return torch.tensor([candidate.log_probability]).exp()
-                    elif candidate.token.lower() == 'no':
-                        return 1 - torch.tensor([candidate.log_probability]).exp()
-                elif candidate.token == answer:
-                    return torch.tensor([candidate.log_probability]).exp()
-        
-            print(f"Warning: 'Yes' or 'No' not included in Gemini log probs: {data['path']} and question: {question}")
-            return torch.tensor([0.0])
+            # Simple string matching
+            if answer.lower() == "yes":
+                # If "yes" is in the generated text, return 1.0, otherwise 0.0
+                score = 1.0 if "yes" in generated_text else 0.0
+            else:
+                # If looking for a different answer, check if that answer is in the text
+                score = 1.0 if answer.lower() in generated_text else 0.0
+                
+            return torch.tensor([score])
 
         except Exception as e:
             print(f"Failed file: {data['path']} and question: {question}")
@@ -113,18 +131,24 @@ class GeminiModel(VQAScoreModel):
             lm_prob[idx] = self.forward_single(data, question, answer_template)
 
         return lm_prob
+        
     def generate_single(self, data, question):
         try:
-            response = self.model.generate_content(
-                [question, data['file']],
-                request_options={"timeout": 600},
-                generation_config=genai.GenerationConfig(max_output_tokens=256)
+            response = self.client.models.generate_content(
+                model=self.model_path,
+                contents=[
+                    question,
+                    Part.from_bytes(data=data['content'], mime_type=data['mime_type'])
+                ],
+                config=GenerateContentConfig(
+                    max_output_tokens=256
+                )
             )
       
-            time.sleep(1.5)  # This is added to prevent against quota limit of the free tier for gemini.
+            time.sleep(1.5)  # This is added to prevent quota limit of the free tier for gemini.
             
             # Extract the generated text from the response
-            generated_text = response.candidates[0].content.parts[0].text
+            generated_text = response.text
             return generated_text
 
         except Exception as e:
@@ -148,4 +172,5 @@ class GeminiModel(VQAScoreModel):
             generated_outputs.append(generated_text)
 
         return generated_outputs
-        
+
+         
