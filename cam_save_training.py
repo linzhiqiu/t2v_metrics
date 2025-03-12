@@ -284,6 +284,6 @@ print(f"Size of dataset: {len(all_samples)} with {pos_samples} positive samples 
 import random
 import json
 random.shuffle(all_samples)
-with open(args.save_file, "w") as f:
-    json.dump(all_samples, f, indent=4)
-print(f"Saved to {args.save_file}")
+# with open(args.save_file, "w") as f:
+#     json.dump(all_samples, f, indent=4)
+# print(f"Saved to {args.save_file}")

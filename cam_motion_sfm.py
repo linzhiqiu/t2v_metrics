@@ -1,6 +1,9 @@
 # Evaluate on camera-centric benchmark
 # python cam_motion_sfm.py --score_model megasam_posed_videos
 # python cam_motion_sfm.py --score_model cut3r_posed_videos
+# python cam_motion_sfm.py --score_model posed_vggsfm_videos
+# python cam_motion_sfm.py --score_model posed_colmap_videos
+# python cam_motion_sfm.py --score_model posed_mast3r_videos
 import argparse
 import os
 import sys
@@ -102,7 +105,9 @@ parser.add_argument(
     "--score_model",
     type=str,
     help="The sfm method to use",
-    default="megasam_posed_videos",
+    # default="megasam_posed_videos",
+    default="posed_colmap_videos",
+    # default="posed_vggsfm_videos",
     # default="cut3r_posed_videos",
 )
 args = parser.parse_args()
@@ -385,12 +390,6 @@ def static_score(item):
         abs(item["delta_pitch"] / 180),
         abs(item["delta_roll"] / 180),
         abs(item["delta_zoom"] - 1.0),
-        # abs(item["delta_yaw"] / 180),
-        # abs(item["delta_pitch"] / 180),
-        # abs(item["delta_roll"] / 180),
-        # abs(item["delta_yaw"]),
-        # abs(item["delta_pitch"]),
-        # abs(item["delta_roll"]),
     )
 
 motion_to_score = {
@@ -399,18 +398,10 @@ motion_to_score = {
     "Zoom Out": lambda item: -item["delta_zoom"],
     "Move In": lambda item: item["delta_z"],
     "Move Out": lambda item: -item["delta_z"],
-    #   "Move Up": lambda item: item['delta_y'],
     "Move Up": lambda item: -item["delta_y"],
-    #   "Move Down": lambda item: -item['delta_y'],
     "Move Down": lambda item: item["delta_y"],
     "Move Right": lambda item: item["delta_x"],
     "Move Left": lambda item: -item["delta_x"],
-    # "Pan Right": lambda item: item["delta_yaw"],
-    # "Pan Left": lambda item: -item["delta_yaw"],
-    #   "Tilt Up": lambda item: item['delta_pitch'],
-    #   "Tilt Down": lambda item: -item['delta_pitch'],
-    #   "Roll Clockwise": lambda item: item['delta_roll'],
-    #   "Roll Counterclockwise": lambda item: -item['delta_roll'],
     "Pan Right": lambda item: item["delta_pitch"],
     "Pan Left": lambda item: -item["delta_pitch"],
     "Tilt Up": lambda item: item["delta_roll"],
@@ -531,16 +522,16 @@ def get_subset_videos(label_name, split="all", balanced=False, scene_movement=["
 
 
 subset_names = [
-    "Dynamic Scene Balanced (Test)",
+    # "Dynamic Scene Balanced (Test)",
     "Dynamic Scene Balanced (All)",
-    "Mostly Static Scene Balanced (Test)",
+    # "Mostly Static Scene Balanced (Test)",
     "Mostly Static Scene Balanced (All)",
-    "Static Scene Balanced (Test)",
+    # "Static Scene Balanced (Test)",
     "Static Scene Balanced (All)",
-    "Dynamic and Mostly Static Scene Balanced (Test)",
-    "Dynamic and Mostly Static Scene Balanced (All)",
-    "Mostly Static and Static Scene Balanced (Test)",
-    "Mostly Static and Static Scene Balanced (All)",
+    # "Dynamic and Mostly Static Scene Balanced (Test)",
+    # "Dynamic and Mostly Static Scene Balanced (All)",
+    # "Mostly Static and Static Scene Balanced (Test)",
+    # "Mostly Static and Static Scene Balanced (All)",
     "All Scene (Test)",
     "All Scene (All)",
 ]
@@ -579,23 +570,23 @@ for label_name, scores in all_labels_scores.items():
         # "Static Scene (Test)": get_subset_videos(label_name, split="test", scene_movement=["Static Scene"]),
         # "Dynamic and Mostly Static Scene (Test)": get_subset_videos(label_name, split="test", scene_movement=["Dynamic Scene", "Mostly Static Scene"]),
         # "Mostly Static and Static Scene (Test)": get_subset_videos(label_name, split="test", scene_movement=["Mostly Static Scene", "Static Scene"]),
+        # "Dynamic Scene Balanced (Test)": get_subset_videos(label_name, split="test", scene_movement=["Dynamic Scene"], balanced=True),
+        # "Mostly Static Scene Balanced (Test)": get_subset_videos(label_name, split="test", scene_movement=["Mostly Static Scene"], balanced=True),
+        # "Static Scene Balanced (Test)": get_subset_videos(label_name, split="test", scene_movement=["Static Scene"], balanced=True),
         "All Scene (Test)": get_subset_videos(label_name, split="test", scene_movement=[]),
-        "Dynamic Scene Balanced (Test)": get_subset_videos(label_name, split="test", scene_movement=["Dynamic Scene"], balanced=True),
-        "Mostly Static Scene Balanced (Test)": get_subset_videos(label_name, split="test", scene_movement=["Mostly Static Scene"], balanced=True),
-        "Static Scene Balanced (Test)": get_subset_videos(label_name, split="test", scene_movement=["Static Scene"], balanced=True),
-        "Dynamic and Mostly Static Scene Balanced (Test)": get_subset_videos(label_name, split="test", scene_movement=["Dynamic Scene", "Mostly Static Scene"], balanced=True),
-        "Mostly Static and Static Scene Balanced (Test)": get_subset_videos(label_name, split="test", scene_movement=["Mostly Static Scene", "Static Scene"], balanced=True),
+        # "Dynamic and Mostly Static Scene Balanced (Test)": get_subset_videos(label_name, split="test", scene_movement=["Dynamic Scene", "Mostly Static Scene"], balanced=True),
+        # "Mostly Static and Static Scene Balanced (Test)": get_subset_videos(label_name, split="test", scene_movement=["Mostly Static Scene", "Static Scene"], balanced=True),
 
+        "Dynamic Scene Balanced (All)": get_subset_videos(label_name, split="all", scene_movement=["Dynamic Scene"], balanced=True),
         # "Mostly Static Scene (All)": get_subset_videos(label_name, split="all", scene_movement=["Mostly Static Scene"]),
         # "Static Scene (All)": get_subset_videos(label_name, split="all", scene_movement=["Static Scene"]),
         # "Dynamic and Mostly Static Scene (All)": get_subset_videos(label_name, split="all", scene_movement=["Dynamic Scene", "Mostly Static Scene"]),
         # "Mostly Static and Static Scene (All)": get_subset_videos(label_name, split="all", scene_movement=["Mostly Static Scene", "Static Scene"]),
-        "All Scene (All)": get_subset_videos(label_name, split="all", scene_movement=[]),
-        "Dynamic Scene Balanced (All)": get_subset_videos(label_name, split="all", scene_movement=["Dynamic Scene"], balanced=True),
-        "Mostly Static Scene Balanced (All)": get_subset_videos(label_name, split="all", scene_movement=["Mostly Static Scene"], balanced=True),
         "Static Scene Balanced (All)": get_subset_videos(label_name, split="all", scene_movement=["Static Scene"], balanced=True),
-        "Dynamic and Mostly Static Scene Balanced (All)": get_subset_videos(label_name, split="all", scene_movement=["Dynamic Scene", "Mostly Static Scene"], balanced=True),
-        "Mostly Static and Static Scene Balanced (All)": get_subset_videos(label_name, split="all", scene_movement=["Mostly Static Scene", "Static Scene"], balanced=True),
+        "Mostly Static Scene Balanced (All)": get_subset_videos(label_name, split="all", scene_movement=["Mostly Static Scene"], balanced=True),
+        "All Scene (All)": get_subset_videos(label_name, split="all", scene_movement=[]),
+        # "Dynamic and Mostly Static Scene Balanced (All)": get_subset_videos(label_name, split="all", scene_movement=["Dynamic Scene", "Mostly Static Scene"], balanced=True),
+        # "Mostly Static and Static Scene Balanced (All)": get_subset_videos(label_name, split="all", scene_movement=["Mostly Static Scene", "Static Scene"], balanced=True),
 
     }
     dataset = BinaryTask(label_dict=all_labels[label_name])
@@ -605,6 +596,7 @@ for label_name, scores in all_labels_scores.items():
         if subset_name not in ["All Scene (All)", "All Scene (Test)"] and label_name_nice == "Static":
             # print(f"Skipping {subset_name} for {label_name_nice}")
             continue
+        # import pdb; pdb.set_trace()
         results = dataset.evaluate_scores_subset(
             raw_scores,
             subset_videos,
