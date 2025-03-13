@@ -84,7 +84,8 @@ dependencies = [
     "gitpython",
     "torchvision>=0.18.1",
     "torchaudio>=2.3.1",
-    "google-generativeai"
+    "google-generativeai",
+    "pytorchvideo @ git+https://github.com/linzhiqiu/pytorchvideo.git",
 ] 
 
 [tool.setuptools]
