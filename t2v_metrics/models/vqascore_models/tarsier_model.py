@@ -19,11 +19,13 @@ from .vqa_model import VQAScoreModel
 
 warnings.filterwarnings("ignore")
 
+# get current file path
+current_path = os.path.dirname(os.path.abspath(__file__))
 TARSIER_MODELS = {
     'tarsier-recap-7b': {
         'model': {
             'path': "omni-research/Tarsier2-Recap-7b" ,
-            'config': 't2v_metrics/models/vqascore_models/tarsier/configs/tarser2_default_config.yaml',
+            'config': f'{current_path}/tarsier/configs/tarser2_default_config.yaml',
         },
     },
     # 'tarsier-7b': {
