@@ -52,7 +52,7 @@ def sample_video(
         n_frames=n_frames,
     )
 
-    frames = vr.get_batch(frame_indices).numpy()
+    frames = vr.get_batch(frame_indices).asnumpy()
     frames = [Image.fromarray(f).convert('RGB') for f in frames]
     return frames
 
