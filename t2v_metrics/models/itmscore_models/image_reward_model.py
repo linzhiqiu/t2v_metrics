@@ -3,7 +3,7 @@ import torch
 import os
 from torchvision import transforms
 
-import ImageReward as reward
+# import ImageReward as reward
 from ..model import ScoreModel
 from ...constants import HF_CACHE_DIR
 

@@ -22,6 +22,9 @@ from ..models.modeling_qwen2_vl_fast import Qwen2VLForCausalLM
 from ..models.utils import _pad_input, _unpad_input
 
 import sys
+import os
+
+current_path = os.path.dirname(os.path.abspath(__file__))
 
 logger = logging.get_logger(__name__)
 
@@ -64,8 +67,8 @@ class LlavaConfig(PretrainedConfig):
                 repo_id, class_ref = vision_config['auto_map']['AutoConfig'].split("--")
                 # repo_id = 't2v_metrics.models.vqascore_models.tarsier.models'
                 # # repo_id = 'omni-research/Tarsier2-Recap-7b'
-
-                # print(f'repo_id {repo_id} class_ref {class_ref}')
+                repo_id = current_path
+                # print(f'\n\nrepo_id {repo_id} class_ref {class_ref}\n\n')
                 # print(f'sys.path {sys.path} before repo_id {repo_id} class_ref {class_ref}')
                 config_class = get_class_from_dynamic_module(class_ref, repo_id, **kwargs)
                 self.vision_config = config_class(**vision_config)
@@ -80,6 +83,8 @@ class LlavaConfig(PretrainedConfig):
             text_config["model_type"] = text_config["model_type"] if "model_type" in text_config else "llama"
             if 'auto_map' in text_config:
                 repo_id, class_ref = text_config['auto_map']['AutoConfig'].split("--")
+                repo_id = current_path
+                # print(f'\n\nrepo_id {repo_id} class_ref {class_ref}\n\n')
                 config_class = get_class_from_dynamic_module(class_ref, repo_id, **kwargs)
                 self.text_config = config_class(**text_config)
             elif text_config["model_type"] in CONFIG_MAPPING:
@@ -280,6 +285,11 @@ class TarsierPreTrainedModel(PreTrainedModel):
 class TarsierForConditionalGeneration(TarsierPreTrainedModel, GenerationMixin):
     def __init__(self, config: LlavaConfig):
         super().__init__(config)
+        # config.vision_config.name_or_path = current_path
+        config.vision_config.auto_map["AutoModel"] = current_path + '--modeling_qwen2_vl_fast.Qwen2VisionTransformerPretrainedModel'
+        class_ref = config.vision_config.auto_map["AutoModel"]
+        # print(f'Config {class_ref}')
+        # exit()
         self.vision_tower = AutoModel.from_config(config.vision_config, trust_remote_code=True)
         if config.text_config.model_type == 'qwen2':
             self.language_model = Qwen2ForCausalLM(config.text_config)
@@ -296,6 +306,8 @@ class TarsierForConditionalGeneration(TarsierPreTrainedModel, GenerationMixin):
             self.multi_modal_projector = LlavaMultiModalProjector(config)
         elif config.projection_head == 'auto_map':
             repo_id, class_ref = config.auto_map['ProjectionLayer'].split("--")
+            repo_id = current_path
+            # print(f'\n\nrepo_id {repo_id} class_ref {class_ref}\n\n')
             model_class = get_class_from_dynamic_module(class_ref, repo_id)
             self.multi_modal_projector = model_class(config)
         elif config.projection_head is None:

@@ -38,19 +38,15 @@ dependencies = [
     # for clipscore
     "scikit-learn",
     "pycocoevalcap",
-    # "image-reward",
+    "image-reward",
     "hpsv2",
-    "clip @ git+https://github.com/openai/CLIP.git",
     # Video Model Additional Requirements
     "llava @ git+https://github.com/LLaVA-VL/LLaVA-NeXT.git",
     "fire==0.4.0",
     "tiktoken>=0.7.0",
     "peft==0.5.0",
-    "matplotlib-inline",
     "decord",
     "easydict",
-    "protobuf",
-    "pytz",
     "av",
     "icecream",
     "markdown2",
@@ -67,7 +63,7 @@ dependencies = [
     "wandb",
     "moviepy",
     "apex==0.9.10dev",
-    "deepspeed",
+    "deepspeed==0.10.1",
     "fvcore==0.1.5.post20221221",
     "imageio==2.31.1",
     "librosa==0.10.1",
@@ -78,13 +74,8 @@ dependencies = [
     "qwen-vl-utils",
     "flash-attn @ https://github.com/Dao-AILab/flash-attention/releases/download/v2.5.8/flash_attn-2.5.8+cu122torch2.3cxx11abiFALSE-cp310-cp310-linux_x86_64.whl",
     "func_timeout",
-    "timm>=1.0.15",
-    "torch>=2.3.1",
-    "gitpython",
-    "torchvision>=0.18.1",
-    "torchaudio>=2.3.1",
-    "google-genai"
 ] 
+
 [tool.setuptools]
 include-package-data = true
 packages = ["t2v_metrics", "t2v_metrics.models"]
