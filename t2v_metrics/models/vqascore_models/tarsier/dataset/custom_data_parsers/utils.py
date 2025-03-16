@@ -124,8 +124,8 @@ def _download_file(path):
     else:
         local_path = path
 
-    if not os.path.exists(local_path):
-        raise FileNotFoundError(f'{local_path}')
+    # if not os.path.exists(local_path):
+    #     raise FileNotFoundError(f'{local_path}')
 
     return local_path
 
