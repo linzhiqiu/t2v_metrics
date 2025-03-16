@@ -52,7 +52,12 @@ def sample_video(
         n_frames=n_frames,
     )
 
-    frames = vr.get_batch(frame_indices).asnumpy()
+    frames = vr.get_batch(frame_indices)
+    # Ensure compatibility: Convert to NumPy array if necessary
+    if hasattr(frames, "asnumpy"):  # It's a Tensor
+        frames = frames.asnumpy()
+    elif hasattr(frames, "numpy"):  # Older decord versions
+        frames = frames.numpy()
     frames = [Image.fromarray(f).convert('RGB') for f in frames]
     return frames
 
