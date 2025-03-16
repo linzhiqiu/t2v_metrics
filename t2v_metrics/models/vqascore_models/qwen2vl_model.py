@@ -227,7 +227,7 @@ QWEN2_VL_MODELS = {
             'path': 'Qwen/Qwen2.5-VL-7B-Instruct',
         },
         'model': {
-            'path': '../LLaMA-Factory/models/qwen2.5-vl-cam10000',
+            'path': '/data3/cmitra/LLaMA-Factory/models/qwen2.5-vl-cam10000',
             'torch_dtype': torch.bfloat16,
             'attn_implementation': 'flash_attention_2',
         },
@@ -266,6 +266,31 @@ QWEN2_VL_MODELS = {
         },
     },
 
+
+    # Post-ICCV Results:
+
+
+    'qwen2.5-vl-bal-cap-fps2': {
+        'tokenizer': {
+            'path': 'Qwen/Qwen2.5-VL-7B-Instruct',
+        },
+        'model': {
+            'path': '/data3/cmitra/LLaMA-Factory/models/qwen2.5-vl-bal-cap-fps2',
+            'torch_dtype': torch.bfloat16,
+            'attn_implementation': 'flash_attention_2',
+        },
+    },
+
+    'qwen2.5-vl-bal-cap-fps4': {
+        'tokenizer': {
+            'path': 'Qwen/Qwen2.5-VL-7B-Instruct',
+        },
+        'model': {
+            'path': '/data3/cmitra/LLaMA-Factory/models/qwen2.5-vl-bal-cap-fps4',
+            'torch_dtype': torch.bfloat16,
+            'attn_implementation': 'flash_attention_2',
+        },
+    },
     
 }
 
@@ -310,7 +335,7 @@ class Qwen2VLModel(VQAScoreModel):
         for path in paths:
             if path.lower().endswith(('.mp4', '.avi', '.mov', '.mkv')):  # Video file path
                 # video_frames = self.load_video(path, num_frames)
-                processed_data.append({"type": "video", "video": path, "max_pixels": 360*420, "fps":2.0})
+                processed_data.append({"type": "video", "video": path, "max_pixels": 360*420, "fps":4.0})
             elif path.lower().endswith('.npy'):  # NumPy file
                 np_array = np.load(path)
                 if np_array.ndim == 3:  # Single image
