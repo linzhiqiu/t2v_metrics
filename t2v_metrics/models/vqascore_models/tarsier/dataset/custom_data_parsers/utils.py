@@ -135,12 +135,34 @@ def download_file(path):
         return _download_file(path)
     except func_timeout.exceptions.FunctionTimedOut as e:
         raise ValueError(e)
+    
+def load_video_from_url(video_url):
+    """
+    Streams video from a URL and saves it to a temporary file, 
+    which can be loaded into Decord's VideoReader.
+    """
+    import imageio
+    # Create a temporary file to store the video
+    temp_video_file = tempfile.NamedTemporaryFile(delete=False, suffix=".mp4")
+    temp_video_path = temp_video_file.name
+    # Read the video and write it to the temporary file
+    reader = imageio.get_reader(video_url, "ffmpeg")
+    writer = imageio.get_writer(temp_video_path, format="ffmpeg")
+    for frame in reader:
+        writer.append_data(frame)
+    reader.close()
+    writer.close()
+    return temp_video_path  # Return path for Decord to read
+
 
 class VideoReader:
     def __init__(self, path: str) -> None:
         self.path = path
         self.local_path = self.preprocess()
-        self.vr = decord.VideoReader(self.local_path, num_threads=1, ctx=decord.cpu(0), fault_tol=1)
+        if self.local_path.startswith("http"):
+            self.vr = decord.VideoReader(load_video_from_url(self.local_path), num_threads=1, ctx=decord.cpu(0), fault_tol=1)
+        else:
+            self.vr = decord.VideoReader(self.local_path, num_threads=1, ctx=decord.cpu(0), fault_tol=1)
         self.vr.seek(0)
         self._length = len(self.vr)
         self._fps = self.vr.get_avg_fps()
