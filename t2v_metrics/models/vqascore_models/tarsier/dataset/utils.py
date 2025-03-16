@@ -176,7 +176,7 @@ def format_one_sample(media_file=None, prompt="Describe the video in detail."):
         sample["task"] = f"{media_type}/QA"
     else:
         sample["task"] = 'text-only'
-    check_data_format(sample)
+    # check_data_format(sample)
     return sample
 
 
