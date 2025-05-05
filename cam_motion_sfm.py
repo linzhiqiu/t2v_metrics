@@ -1,10 +1,14 @@
 # Evaluate on camera-centric benchmark
 # python cam_motion_sfm.py --score_model megasam_posed_videos
 # python cam_motion_sfm.py --score_model cut3r_posed_videos
+# python cam_motion_sfm.py --score_model posed_vggsfm_videos
+# python cam_motion_sfm.py --score_model posed_colmap_videos
+# python cam_motion_sfm.py --score_model posed_mast3r_videos
+# python cam_motion_sfm.py --score_model megasam_extracted_videos_4_fps
+# python cam_motion_sfm.py --score_model megasam_extracted_videos_8_fps
 import argparse
 import os
 import sys
-import t2v_metrics
 import torch
 import json
 from torch.utils.data import Dataset
