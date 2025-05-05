@@ -28,6 +28,13 @@ TARSIER_MODELS = {
             'config': f'{current_path}/tarsier/configs/tarser2_default_config.yaml',
         },
     },
+
+    'tarsier2-7b': {
+        'model': {
+            'path': "omni-research/Tarsier2-7b-0115" ,
+            'config': f'{current_path}/tarsier/configs/tarser2_default_config.yaml',
+        },
+    },
     # 'tarsier-7b': {
     #     'model': {
     #         'path': 'omni-research/Tarsier-7b' ,

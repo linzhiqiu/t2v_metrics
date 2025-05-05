@@ -23,7 +23,7 @@ dependencies = [
     "matplotlib>=3.6.2",
     "numpy==1.26.4",
     "open-clip-torch>=2.23.0",
-    "openai>=1.29.0",
+    "openai",
     "opencv-python>=4.11.0.86",
     "opencv-python-headless",
     "pandas>=2.1.4",
