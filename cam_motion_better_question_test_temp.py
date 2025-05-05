@@ -235,10 +235,12 @@ datasets = generate_pairwise_datasets(
     train_ratio=args.train_ratio,
 )
 test_videos = datasets["sampled_tasks"]["test_videos"]
+train_videos = datasets["sampled_tasks"]["train_videos"]
 
 print(f"Loaded {len(all_labels)} labels and {len(scene_movement_labels)} scene movement labels")
 label_counts = {}
 test_labels = {}
+train_labels = {}
 scene_labels = {
     "Dynamic Scene": {},
     "Mostly Static Scene": {},
@@ -263,6 +265,13 @@ for label_name in all_labels:
         "pos": pos_test,
         "neg": neg_test,
         "total": pos_test + neg_test
+    }
+    pos_train = [v for v in all_labels[label_name]["pos"] if v in train_videos]
+    neg_train = [v for v in all_labels[label_name]["neg"] if v in train_videos]
+    train_labels[label_name] = {
+        "pos": pos_train,
+        "neg": neg_train,
+        "total": pos_train + neg_train,
     }
     for scene_name in scene_labels:
         scene_label = name_to_label[scene_name]
