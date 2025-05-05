@@ -29,7 +29,7 @@ dependencies = [
     "pandas>=2.1.4",
     "scipy>=1.11.4",
     "sentencepiece>=0.1.99",
-    "transformers>=4.48.1",
+    "transformers==4.49.0",
     "datasets>=2.15.0",
     "tokenizers",
     "omegaconf",
@@ -65,6 +65,7 @@ dependencies = [
     "einops",
     "PyYAML",
     "wandb",
+    # torchcodec==0.1.0,
     "moviepy",
     "apex==0.9.10dev",
     "deepspeed",
@@ -83,7 +84,8 @@ dependencies = [
     "gitpython",
     "torchvision>=0.18.1",
     "torchaudio>=2.3.1",
-    "google-genai"
+    "google-genai",
+    "blobfile"
 ] 
 [tool.setuptools]
 include-package-data = true
