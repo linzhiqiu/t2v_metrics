@@ -3,7 +3,7 @@ import torch
 import os
 from torchvision import transforms
 
-import ImageReward as reward
+# import ImageReward as reward
 from ..model import ScoreModel
 from ...constants import HF_CACHE_DIR
 
@@ -13,6 +13,8 @@ IMAGE_REWARD_MODELS = {
 
 class ImageRewardScoreModel(ScoreModel):
     "A wrapper for ImageReward ITMScore (finetuned on human preference) models"
+    video_mode = "concat"
+    allows_image = True
     def __init__(self,
                  model_name='image-reward-v1',
                  device='cuda',

@@ -15,6 +15,8 @@ BLIP2_ITM_MODELS = {
 
 class BLIP2ITMScoreModel(ScoreModel):
     "A wrapper for BLIP-2 ITMScore models"
+    video_mode = "concat"
+    allows_image = True
     def __init__(self,
                  model_name='blip2-itm',
                  device='cuda',

@@ -1,5 +1,5 @@
 # Evaluate on all datasets in VQAScore paper
-
+# Model List = [gemini-2.0, gemini-1.5-flash, gpt4v, gpt-4o, internlm-7b, internvideo2-chat-8b, internvl2.5 8B, internvl2.5-26B, llava-ov-7B, llava-video-7b, mplug-7b, qwen2.57b, tarsier, blip2_item, image_reward, internvideo2_itm, umt_itm, internvideo2_clip, languagebind_clip, umt_clip]
 import argparse
 import os
 import sys
@@ -9,6 +9,7 @@ from torch.utils.data import Dataset
 import pathlib
 from pathlib import Path
 import random
+import gc
 
 ROOT = Path("/data3/zhiqiul/video_annotation")
 VIDEO_ROOT = Path("/data3/zhiqiul/video_annotation/videos")
@@ -213,6 +214,7 @@ else:
     time_start = time.time()
     for seed in range(42, 52):
         dataset = HasForward(label_name=label_name, seed=seed)
+        print(f'Batch Forward Step')
         scores = score_model.batch_forward(
             dataset,
             batch_size=args.batch_size,
@@ -225,6 +227,9 @@ else:
             "best_prompt": results["best"]["prompt"],
             "best_ap": results["best"]["ap"],
         }
+        # Add memory cleanup here
+        torch.cuda.empty_cache()
+        gc.collect()
     torch.save(all_seeds_results, LABEL_SAVE_PATH)
     time_end = time.time()
     time_total = time_end - time_start

@@ -12,7 +12,7 @@ Baiqi Li*, [Zhiqiu Lin*](https://linzhiqiu.github.io/), [Deepak Pathak](https://
 
 ## News
 
-- [2024/08/13] 🔥 **VQAScore** is highlighted in Google's [Imagen3 report](https://arxiv.org/abs/2408.07009) as the strongest replacement of CLIPScore for automated evaluation! **GenAI-Bench** was chosen as one of the key benchmark to showcase Imagen3's superior prompt-image alignment. Kudos to Google for this achievement! [[Paper](https://arxiv.org/abs/2408.07009)]
+- [2024/08/13] 🔥 **VQAScore** is highlighted in Google's [Imagen3 report](https://arxiv.org/abs/2408.07009) as the strongest replacement of CLIPScore for automated evaluation! **GenAI-Bench** was chosen as one of the key benchmarks to showcase Imagen3's superior prompt-image alignment. Kudos to Google for this achievement! [[Paper](https://arxiv.org/abs/2408.07009)]
 - [2024/07/01] 🔥 **VQAScore** has been accepted to ECCV 2024!
 - [2024/06/20] 🔥 **GenAI-Bench** won Best Short Paper at the CVPR'24 SynData Workshop! [[Workshop Site](https://syndata4cv.github.io/)].
 
@@ -31,9 +31,13 @@ conda create -n t2v_video python=3.10 -y
 conda activate t2v_video
 conda install pip -y
 
-pip install torch torchvision torchaudio
+pip install torch==2.3.1 torchvision==0.18.1 torchaudio==2.3.1 --index-url https://download.pytorch.org/whl/cu121
 pip install git+https://github.com/openai/CLIP.git
 pip install -e . # local pip install
+
+pip install timm==1.0.15
+
+# Check if the model you are using has any model-specific requirements (i.e. check for an additional requirements.txt file)
 pip install -r requirements_video.txt # to use unmasked teacher and internvideo2 and languagebind-video
 ```
 
@@ -83,7 +87,7 @@ python genai_bench/evaluate.py --model clip-flant5-xxl --output_dir ./outputs --
 
 Or you can use GPT-4o based VQAScore:
 ```bash
-python genai_bench/evaluate.py --model gpt-4o --openai_key INPUT_YOUR_KEY_HERE --output_dir ./outputs --gen_model runwayml/stable-diffusion-v1-5
+python genai_bench/evaluate.py --model gpt-4o --api_key INPUT_YOUR_KEY_HERE --output_dir ./outputs --gen_model runwayml/stable-diffusion-v1-5
 ```
 
 For comparative VQAScore results (based on clip-flant5-xxl and GPT-4o) against state-of-the-art models like DALLE-3 and Midjourney v6, please refer to the [VQAScore results](https://github.com/linzhiqiu/t2v_metrics/blob/main/genai_bench/model_performance_vqacore.md)!
@@ -99,6 +103,7 @@ For comparative VQAScore results (based on clip-flant5-xxl and GPT-4o) against s
 - [Using GPT-4o for VQAScore](#using-gpt-4o-for-vqascore)
 - [Implementing your own scoring metric](#implementing-your-own-scoring-metric)
 - [Text generation (VQA) using CLIP-FlanT5](#text-generation-vqa-using-clip-flant5)
+- [Video-text alignment scores](#video-text-alignment-scores)
 
 ### Batch processing for more image-text pairs
 With a large batch of M images x N texts, you can speed up using the ``batch_forward()`` function. 
@@ -194,27 +199,88 @@ python genai_image_ranking.py --model clip-flant5-xxl --gen_model SDXL_Base
 ### Using GPT-4o for VQAScore!
 We implemented VQAScore using GPT-4o to achieve a new state-of-the-art performance. Please see [gpt4_eval.py](gpt4_eval.py) for an example. Here is how to use it in command line:
 ```python
-openai_key = # Your OpenAI key
-score_func = t2v_metrics.get_score_model(model="gpt-4o", device="cuda", openai_key=openai_key, top_logprobs=20) # We find top_logprobs=20 to be sufficient for most (image, text) samples. Consider increase this number if you get errors (the API cost will not increase).
+api_key = # Your OpenAI key
+score_func = t2v_metrics.get_score_model(model="gpt-4o", device="cuda", api_key=openai_key, top_logprobs=20) # We find top_logprobs=20 to be sufficient for most (image, text) samples. Consider increase this number if you get errors (the API cost will not increase).
 ```
 
 ### Implementing your own scoring metric
 You can easily implement your own scoring metric. For example, if you have a VQA model that you believe is more effective, you can incorporate it into the directory at [t2v_metrics/models/vqascore_models](t2v_metrics/models/vqascore_models/). For guidance, please refer to our example implementations of [LLaVA-1.5](t2v_metrics/models/vqascore_models/llava_model.py) and [InstructBLIP](t2v_metrics/models/vqascore_models/instructblip_model.py) as starting points.
 
-### Text generation (VQA) using CLIP-FlanT5
-To generate texts (captioning or VQA tasks) using CLIP-FlanT5, please use the below code:
+### Text generation (VQA)
+To generate texts (captioning or VQA tasks) for any of our models, please use the below code:
 ```python
 import t2v_metrics
 clip_flant5_score = t2v_metrics.VQAScore(model='clip-flant5-xxl')
 
 images = ["images/0.png", "images/0.png"] # A list of images
-prompts = ["Please describe this image: ", "Does the image show 'someone talks on the phone angrily while another person sits happily'?"] # Corresponding prompts
-clip_flant5_score.model.generate(images=images, prompts=prompts)
+texts = ["Please describe this image: ", "Does the image show 'someone talks on the phone angrily while another person sits happily'?"] # Corresponding prompts
+clip_flant5_score.model.generate(images=images, texts=prompts)
 ```
-If the above code does not run, it might due to the wrong transformers library. Consider downgrade to 4.36.1:
+The generate method for CLIP-FlanT5 may require downgrading to 4.36.1:
 ```
 pip install transformers==4.36.1
 ```
+
+### Video-Text Alignment Scores
+
+We now support video-text alignment scores, including video-CLIPScore with InternVideo2, and video-VQAScore with LLaVA-OneVision, mPlug-Owl3, and CLIP-FlanT5. To get started, please install `flash-attn':
+
+```
+pip install flash-attn --no-build-isolation
+```
+
+For single-image and CLIP-like models, video frames are concatenated. For all other native interleaved-image/video models (we recommend LLaVA-OneVision at the time of writing), video frames are passed directly to the model.
+
+```python
+import t2v_metrics
+
+### For a single (video, text) pair:
+llava_ov_score = t2v_metrics.VQAScore(model='llava-onevision-qwen2-7b-ov') 
+video = "videos/baby.mp4" # a video path in string format
+text = "a baby crying"
+score = llava_ov_score(images=[video], texts=[text], num_frames=4) 
+
+### Alternatively, if you want to calculate the pairwise similarity scores 
+### between M videos and N texts, run the following to return a M x N score tensor.
+videos = ["videos/baby.mp4", "video/ducks.mp4"]
+texts = ["a baby crying",
+         "a group of ducks standing in the water"]
+score = llava_ov_score(images=[videos], texts=[text], num_frames=4) # scores[i][j] is the score between video i and text j
+
+## We also accept lists of frames for each video as a valid input.
+#TODO
+```
+<!-- 
+### Natural Language Text Generation:
+
+We also support natural language text generation for image/video inputs on any VQAScore model. Here is a representative example:
+```python
+import t2v_metrics
+
+### For a single (video, text) pair on an interleaved-image/video VQA model:
+llava_ov_score = t2v_metrics.VQAScore(model='llava-onevision-qwen2-7b-ov') 
+video = "videos/baby.mp4" # a video path in string format
+text = "What is the baby doing in this video?"
+generated_text = llava_ov_score(videos=[video], texts=[text], num_frames=4, max_new_tokens=512,  generate=True)
+
+### Alternatively, if you want to output a list of generations from a batch of paired vision inputs and prompts.
+videos = ["videos/baby.mp4", "video/ducks.mp4"]
+texts = ["What is the baby doing in this video?",
+         "How many ducks are there?"]
+generated_text = llava_ov_score(videos=[video], texts=[text], num_frames=4, max_new_tokens=512,  generate=True)
+``` -->
+## Contributions
+
+- **[Zhiqiu Lin](https://x.com/ZhiqiuLin)**, **[Jean de Nyandwi](https://x.com/Jeande_d)**, **[Chancharik Mitra](https://x.com/chancharikm)**  
+  Implemented image-based **CLIPScore** and **VQAScore** for:  
+  CLIP-FlanT5, GPT-4o, LLaVA-1.5, InstructBLIP, OpenCLIP, HPSv2, ImageReward, PickScore.
+
+- **Baiqi Li**  
+  Implemented **GenAI-Bench** and **GenAI-Rank** benchmarks.
+
+- **[Chancharik Mitra](https://x.com/chancharikm)**  
+  Implemented video-based **VQAScore** for:  
+  LLaVA-OneVision, InternVideo2, mPLUG-Owl3, PaLI-Gemma, InternVL2, InternLMXC2.5.
 
 ## Citation
 

@@ -1,0 +1,602 @@
+[
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/IWv0EhEGmNI.16.6.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains fixed but slightly unsteady, with no intentional movement.",
+    "gpt-4o": "The camera in this video sequence maintains a steady, fixed position. It captures an over-the-shoulder view focusing on the man wearing tactical gear, engaging in conversation with a woman whose back is to the camera. The frame remains stable without any noticeable panning, zooming, or tracking movements, emphasizing the dialogue between the two characters."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/iXzposKQzvs.2.1.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera pans left slowly, maintaining a very smooth and steady motion without any shaking.",
+    "gpt-4o": "In the video, the camera movement is largely static, focusing on capturing the athlete's dive. It follows the diver as they move downward. The framing stays consistent, keeping the diver centered in the shot against a backdrop with the Olympic rings. There is little to no dynamic movement or panning."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/5eDQ2SSsmEk.8.5.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera slowly zooms in with minor movement, maintaining a very smooth and steady motion throughout.",
+    "gpt-4o": "The images provided show a static shot without any indication of camera movement. The camera appears to be fixed, focusing on a control panel with an oscilloscope and a computer screen. There's no visible motion in the sequence of images."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/6d270d88db28043321dd8a3e0e6204ce7aac74c6fd8916e0b244626e531f2733.7.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly trucks left, maintaining a steady and fluid motion throughout.",
+    "gpt-4o": "The camera movement in the video involves a slow panning and possibly zooming out or ascending movement. It captures a wide aerial view of a coastal or lakeside scene as it gradually moves to the right. The view expands slightly to reveal more of the horizon and surrounding landscape, maintaining a steady, smooth, and elevated perspective throughout."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/B_8bbKn3amE.0.6.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The drone arcs counterclockwise in a smooth motion to track the climber from an aerial view, incorporating a gentle tilt downward to maintain focus on them, and concludes with a slight forward movement to approach the subject.",
+    "gpt-4o": "The video features a smooth and dynamic camera movement, likely captured with a drone. The camera follows a diagonal downward glide along the edge of a rocky ridge, maintaining a consistent pace. It pans slightly to reveal the vast landscape and mountainous backdrop, creating an expansive and cinematic view. The movement suggests an exploration of both the terrain and the scenery in a continuous flow."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/4022437.0.0.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly moves backward, maintaining minimal shaking, and midway through, it slightly pans to the left.",
+    "gpt-4o": "Based on the series of images, the camera appears to be performing a rightward panning motion around the car. The angle slightly changes, suggesting a gradual movement to maintain focus on the car while offering different perspectives of its open doors and exterior."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/1934.1.11.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains completely fixed, exhibiting no movement or shaking.",
+    "gpt-4o": "The camera movement in the video appears to be static and does not show any noticeable pan, tilt, zoom, or track. The frames seem to maintain a fixed position, capturing characters as they move around within the setting."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/LtXUoaZcp70.3.1.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera arcs counterclockwise around the subject, smoothly incorporating an upward movement while subtly tilting down to adjust the view angle, all with a very steady motion and no shaking.",
+    "gpt-4o": "The camera in the video moves in a circular motion around the blue statue. It rotates smoothly to provide a 360-degree view, keeping the statue centered while revealing different angles and perspectives."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/MuNyfqxAO6Y.8.5.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera arcs smoothly in a counterclockwise direction around the car, maintaining a steady and fluid motion without any shaking.",
+    "gpt-4o": "Based on the images, the camera movement in this video involves a smooth sideways pan across the rear window of a car, revealing various stickers and reflections as it moves. The angle and framing suggest a precise focus on the branding and design elements on the window."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/4422.0.24.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera arcs counterclockwise with an unsteady motion, exhibiting noticeable shaking throughout the movement.",
+    "gpt-4o": "The camera movement in the video involves dynamic motion, likely following the energy of the performance. It includes:\n\n1. **Pan and Tilt**: The camera is panning and tilting to capture different parts of the action, focusing on the drummer and the instruments.\n   \n2. **Zoom**: There might be a slight zoom in and out to emphasize specific actions and emotions.\n\n3. **Handheld Movement**: The footage appears to have a handheld feel, adding energy and realism.\n\n4. **Close-Ups and Medium Shots**: The camera alternates between close-ups of the drummer's expressions and medium shots showing the drumming action.\n\nThese movements contribute to a lively and engaging presentation."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/4uGfFYzxWEg.1.5.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly dollies backward, maintaining a steady and fluid motion throughout.",
+    "gpt-4o": "The video features a static camera focused on a bank of monitors showing a quiz show. There are minor movements from the figures in the foreground, but the camera itself remains stationary, keeping the focus on the screens and their content."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/ZXloF-qGW4U.2.2.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera moves backward and to the left, tracking the subject from the front-side with a slightly unsteady motion, exhibiting some shaking.",
+    "gpt-4o": "The camera movement in the video appears to be a horizontal tracking shot. The camera moves steadily alongside the character, maintaining a consistent parallel position as the character walks. This movement creates a sense of motion and continuity, allowing the viewer to follow the character's progress through the scene."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/JDaw5I_5hPk.0.19.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains fixed but slightly unsteady, with no intentional movement.",
+    "gpt-4o": "I'm unable to view videos or determine camera movements from images alone. However, based on the stills you've shared, I can describe the scene.\n\nThe images show a car driving through a forested area on a winding road. If there's camera movement in the video, it could potentially be a tracking shot following the car, a pan as the car moves through the frame, or a stationary shot with the car passing by. The presence of any of these would depend on the dynamic elements of the video not visible in these stills."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/6h6bMAWLYAI.2.2.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera vibrates with noticeable shakiness, lacking a clear pattern in its movement.",
+    "gpt-4o": "The camera movement in this video appears to be mostly stationary and focused on the speaker, capturing a close-up shot. The position seems fixed, aiming to maintain a clear view amidst a crowd, which includes microphones and other cameras in the frame. There's no apparent panning or zooming, indicating a steady focus on the subject speaking at the center."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/H4AZhS5WqKk.0.0.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains completely fixed, exhibiting no movement or shaking.",
+    "gpt-4o": "In the sequence of images you\u2019ve provided, the camera movement appears to be fixed or very minimal. The focus remains on the character and the scene doesn't show any visible panning, tilting, or zooming. The composition keeps the character centered, allowing the viewer to concentrate fully on the character\u2019s actions and expressions."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/MQugcNLFI9k.2.8.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera arcs smoothly in a clockwise direction, maintaining minimal shaking throughout the movement.",
+    "gpt-4o": "The camera movement in these images appears to involve a circular or tracking motion around the central character. This technique creates a dynamic and immersive effect, capturing the surroundings and the character's reactions as they look around. It emphasizes the bustling environment and the character's perspective within the scene."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/338.2.32.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly zooms out and moves upward, then remains fixed as the lazy Susan in the foreground rotates, revealing various food items.",
+    "gpt-4o": "The camera movement in the video involves a horizontal panning motion. It smoothly moves from left to right across a table, focusing on various items like fortune cookies, an MSG container, fried food, and a waffle maker. The background features a person seated, but the primary focus shifts between the objects in the foreground as the camera pans."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/4PcpGxihPac.3.2.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly pans left, tracking the subject with minimal shaking.",
+    "gpt-4o": "The camera in the video captures a smooth, gradual panning movement from right to left. This technique reveals more of the setting and characters as the scene unfolds, enhancing the viewer's understanding of the environment and interactions within it. The lighting and color effects create a vivid, atmospheric mood throughout the sequence."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/RZs5Hz1klno.1.1.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly dollies forward while simultaneously panning left to focus on the screen of a laptop, maintaining a steady and fluid motion throughout.",
+    "gpt-4o": "The video features a camera dolly movement that shifts horizontally from the right towards the left, focusing on a laptop placed on a toilet seat. The foreground includes a wall and a bowl sink, with a blurry shower door in the background. The camera's motion keeps the sink and wall elements partially visible, emphasizing the stationary position of the laptop. As the movement continues, a satellite image appears on the laptop screen."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/OCBYMQzG44U.21.2.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera moves forward and rapidly pans right as it rounds a corner in the hallway, with a slightly unsteady motion that includes some shaking.",
+    "gpt-4o": "The camera in the video moves forward through a dimly lit, tiled corridor. It progresses smoothly and steadily, maintaining a consistent speed. As the camera approaches the corner, it turns slightly to the right, revealing another passageway with soft lighting and repeating archways, creating a sense of depth and exploration."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/ZBsv_5fHtIg.0.3.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera quickly trucks right, closely tracking the car from its side, then smoothly arcs counterclockwise around it, transitioning into a lead and side-tracking shot that reveals the car in full view. Throughout this sequence, the subject becomes smaller in the frame, and the camera movement remains very smooth with no shaking.",
+    "gpt-4o": "The camera in this video moves smoothly alongside the car, capturing a dynamic rolling shot. It maintains a steady pace parallel to the vehicle, gradually zooming out to reveal more of the car as the video progresses. This type of motion creates a cinematic effect, emphasizing the car's speed and sleek design."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/ti231UvSvfQ.0.0.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera arcs slowly and smoothly clockwise around the person's face, moving backward and upward to transition from an extreme close-up to a close-up shot, then remains fixed until the end.",
+    "gpt-4o": "I'm unable to watch videos or describe their camera movements. However, if you describe the scene or the movements you'd like me to analyze or explain, I can certainly help with that!"
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/M0jmSsQ5ptw.3.16.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The handheld camera moves forward with an unsteady shake, following a man running toward a helicopter, capturing him from behind as he grows larger in the frame. Once he boards the helicopter, the camera becomes stationary but continues to exhibit noticeable handheld shaking.",
+    "gpt-4o": "The video showcases a steady tracking shot that moves slightly forward as the person approaches and enters the helicopter. The camera smoothly follows their movement, gradually zooming in to capture more detail as the subject gets closer to the helicopter and steps inside."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/px9IqOnilHI.1.2.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains completely static, fixed in place without any movement or shaking.",
+    "gpt-4o": "I'm unable to watch videos or describe motion in them. If there's a specific scene or element you're curious about, you could provide details, and I might be able to help with background information or context."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/nGJMwixogyk.5.8.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera continuously dollies forward along the street, panning left to face the street, with a slightly unsteady movement that includes some shaking.",
+    "gpt-4o": "The camera movement in this video shows a smooth, forward tracking shot. It moves steadily through a narrow street, showcasing the traditional architecture on either side. This continuous forward motion gives an immersive feel, drawing the viewer into the scene."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/sKJeTaIEldM.2.2.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera moves backward while simultaneously zooming in, with a slightly unsteady motion that includes some shaking.",
+    "gpt-4o": "Based on the images provided, the camera seems to be doing a subtle zoom-in on the person. The sequence appears to focus on a close-up of the character's face, getting progressively closer with each shot. There doesn't appear to be any significant lateral movement or panning.\n\nIf there are other movement nuances not captured by the stills, you may need to describe those specifically."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/9H942RAVrHQ.0.2.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains completely fixed, exhibiting no movement or shaking.",
+    "gpt-4o": "The camera movement in the video appears to be mostly static, focusing on the character's animated actions. The character moves dynamically within the frame, utilizing the space with jumps and spins. The camera maintains a consistent view, centered on the character, ensuring that all actions remain visible to the viewer without additional camera movement."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/Vm-b2AVwARw.1.0.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly dollies forward and pedestals downward, approaching the marble table on the floor with minimal shaking.",
+    "gpt-4o": "The camera movement in the video is a slow, subtle zoom that gradually brings the viewer closer to the furniture in the room. This movement creates a more intimate and detailed view of the interior space, allowing the viewer to appreciate the design and layout."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/u5JBlwlnJX0.1.0.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera arcs smoothly in a clockwise direction, maintaining minimal shaking throughout the movement.",
+    "gpt-4o": "The camera movement in this video involves a slow dolly zoom. The camera zooms in gently toward the two figures, enhancing the focus on them against the expansive sea backdrop. This technique creates a sense of depth and draws the viewer's attention to the characters and their interaction."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/Ao4Y7JU30zc.0.0.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera steadily trucks left while panning right to keep the person centered in the frame, though the movement is slightly unsteady with some shaking.",
+    "gpt-4o": "I'm unable to watch videos or observe motion. From the images provided, it appears the camera maintains a stationary position, focusing on a person sitting in a dimly lit room. If you can provide details on camera movement from the scene, I'd be happy to help interpret them!"
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/HasIb5pfWkQ.3.3.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly tracks the subject from the side while moving downward, maintaining a steady and fluid motion throughout.",
+    "gpt-4o": "The camera in this video appears to be following a spacecraft in a vertical ascent. The movement is steady and follows the upward path of the ship, maintaining a central focus on it. The camera may slightly adjust its angle to keep the ship in view as it aligns with the trajectory of the light beams emanating from it. The environment around suggests a dark, possibly enclosed space which the camera navigates smoothly to maintain focus."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/m1LHXV49zn8.2.10.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly tilts downward to capture the fighting crowds below, subtly moving forward to avoid obstruction from the woman in the foreground, maintaining minimal shaking throughout.",
+    "gpt-4o": "The camera movement in the video sequence begins with a slow pan to the right, focusing on the person's profile as they gaze across the desert. The camera continues to pan right, gradually revealing more of the expansive desert landscape and a group of figures moving in the sand. The smooth motion and shifting focus help to create a sense of scale and immersion in the scene."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/as8lT-q2_E8.0.0.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly moves backward, tracking the approaching motorcycles from the front. It then cranes up to a bird's-eye view before craning down to a level angle, executing a simultaneous clockwise roll. This fluid motion transitions seamlessly into a tail-tracking shot, maintaining minimal shaking throughout.",
+    "gpt-4o": "The camera movement in the video is dynamic and immersive, capturing the intensity of the scene:\n\n1. **Starting Position**: Initially, the camera is positioned at a low angle, capturing a group of vehicles from the front as they move forward.\n\n2. **Forward Movement**: The camera moves forward with the vehicles, maintaining a close distance to highlight their speed and intensity.\n\n3. **Zooming In**: The camera zooms in on the central vehicle, focusing on its details and perhaps the driver.\n\n4. **Top-Down View**: It shifts to a top-down perspective, showcasing the sleek design and layout of the vehicle in motion.\n\n5. **Panning**: The camera pans to follow the trajectory of the central vehicle as it veers off, maintaining focus on its movements.\n\n6. **Wide Shot**: Finally, a wide shot captures multiple vehicles from behind, showcasing their trails of light against the arena's backdrop.\n\nThis combination of techniques emphasizes speed, agility, and the futuristic setting."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/0tIoyN7WKuA.3.1.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly arcs clockwise around the Flash Man, slightly moving forward to approach him before shifting backward, maintaining minimal shaking throughout.",
+    "gpt-4o": "The video shows a scene with a dynamic and immersive camera movement. The camera starts close to the character, focusing on their movement and gradually pans and tilts to reveal the surrounding environment. The movement is fluid and follows the character, possibly giving a sense of action or urgency. The background, with swirling colors and textures, adds to the intensity of the scene. This type of camera movement is often used to create a connection between the character and their surroundings while maintaining focus on the action."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/4021529.0.0.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly rolls counterclockwise while moving upward, maintaining minimal shaking throughout the motion.",
+    "gpt-4o": "The camera movement in the video appears to be a smooth upward zoom out, starting close and gradually moving higher. This gives a wider view, revealing more of the rocky landscape and surrounding greenery. The camera maintains a top-down perspective throughout the sequence."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/P8JgTjTPIuk.1.3.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera arcs clockwise with a slightly unsteady motion, exhibiting some shaking as it moves.",
+    "gpt-4o": "The camera movement in this video primarily tracks around the character, focusing on his face and torso. It smoothly pans and slightly tilts upwards, creating a sense of wonder as he looks at the surroundings. The camera maintains a close to medium shot, capturing the details of the character's armor and expressions while also showing the dynamic environment with flying creatures. The movement is fluid and consistent, emphasizing the character's perspective and the immersive atmosphere of the scene."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/RooDYxp5Fx8.0.4.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera moves forward while panning right, with a slightly unsteady motion that includes some shaking.",
+    "gpt-4o": "The camera in this video moves smoothly backward along the sidewalk, providing a continuous view of the street, pedestrians, and passing vehicles. The movement maintains a consistent pace, capturing the dynamic street scene while keeping the buildings and road in focus."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/h1PjJ9_Yd2c.2.16.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains fixed but slightly unsteady, with no intentional movement.",
+    "gpt-4o": "I'm unable to watch the video, but I can help analyze the images you've provided. Based on these stills:\n\n1. **Initial Shots**: The camera appears to be focused on a person looking at an object, seemingly standing still. The framing is close, suggesting an intimate, personal moment.\n\n2. **Positioning**: The person is framed in front of a mirror, which might create reflections, adding depth to the shot.\n\n3. **Movement**: As there are slight differences in the person\u2019s position, it's possible that there might be slight camera pans or zooms to maintain focus on the subject.\n\nIf there are any further details or specific camera movements you'd like to discuss, please let me know!"
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/pNGMY3xVkVE.0.0.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly dollies forward with minimal shaking, maintaining a steady and clear movement pattern.",
+    "gpt-4o": "The camera in this video appears to steadily track or dolly along with the group of people as they walk through a tunnel. The movement is smooth and maintains a consistent following distance, creating a sense of forward momentum as the group approaches the bright light at the end of the tunnel. This camera technique enhances the feeling of progression and anticipation."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/Vm-b2AVwARw.5.0.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera slowly rolls counterclockwise, maintaining a very smooth and steady motion without any shaking.",
+    "gpt-4o": "The camera in the video maintains a fixed downward angle as it starts with an overhead shot of a piece of paper. There is no visible movement or panning; the animation changes by drawing new elements onto the paper itself. The focus remains steady on the two icons and text, as additional symbols are added and connected with lines and chains. The view is stable, and the changes occur within the frame rather than through any movement of the camera."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/0UthxdAH0ks.5.3.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera arcs smoothly in a clockwise direction, maintaining minimal shaking throughout the movement.",
+    "gpt-4o": "I'm unable to watch or analyze videos. However, if you describe the video to me, I can help explain common types of camera movement or techniques that might be used in such a scene."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/upC8hjr2b4g.10.1.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera rolls clockwise throughout the video with a steady and very smooth motion, maintaining a seamless flow without any shaking.",
+    "gpt-4o": "The video displays a slow zoom-out combined with a slight upward tilt, gradually revealing more of a building's roof against a blue sky. The movement is smooth, creating a sense of expansion or unveiling as the camera moves."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/jGDdHNOeQ0c.0.1.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains fixed but exhibits a slight unsteadiness, with no intentional movement.",
+    "gpt-4o": "The camera is performing a slow pan to the right. It starts with a low angle, showing people walking across the frame from left to right, while the background buildings and vehicles remain relatively stable in the frame."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/kSx5KGOv5Qc.0.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly zooms in, maintaining a steady and fluid motion throughout.",
+    "gpt-4o": "The camera movement in the video is a slow zoom out, revealing more of the landscape over time. The scene starts with a closer view and gradually pulls back to show a broader view of the area, including the coastline and surrounding greenery."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/MQugcNLFI9k.3.4.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera, positioned in a bird's-eye view of two people fighting, rolls clockwise with very smooth movement and no shaking.",
+    "gpt-4o": "The camera movement in this video sequence involves a top-down shot that rotates around the action. This type of rotating or spinning camera movement creates a dynamic and disorienting effect that enhances the intensity of the fight scene. It allows the audience to fully engage with the characters' movements and the choreography, providing a comprehensive view of the physical struggle."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/G_TLZr6ZbLE.0.0.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains completely static, fixed in place without any movement or shaking.",
+    "gpt-4o": "The video shows a static camera setup with no apparent movement. The scene unfolds in a fixed position, capturing the interaction between the two characters at the concession stand. As they converse, the camera remains steady without panning, tilting, or zooming."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/2519.5.16.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains fixed but slightly unsteady, with no intentional movement.",
+    "gpt-4o": "The video shows a gradual zoom out from an extreme close-up of a man\u2019s face to a wider close-up. The camera movement is smooth and slow, drawing back to reveal more of his features and upper body."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/wqn8akChql4.1.11.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera arcs smoothly in a clockwise direction, maintaining minimal shaking throughout the movement.",
+    "gpt-4o": "The camera movement in this sequence features a dynamic aerial shot that rotates around the stadium. It starts with an elevated view, capturing the scene from above. As the destruction unfolds, the camera smoothly circles around the stadium, maintaining focus on the collapsing structure while showcasing the surrounding chaos. The movement creates a dramatic and immersive effect, emphasizing the scale and impact of the event."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/YBC2JaevzOI.6.4.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly tracks a boy running through a forest at night, beginning with a slight pan to the left. As the video progresses, the pan speeds up, accompanied by a subtle downward tilt, all while maintaining a steady, shake-free motion.",
+    "gpt-4o": "The video shows a person running through a dark area. The camera is stationary, focusing on the individual as they move closer. As the person changes direction and moves left, the camera continues to remain fixed in position, capturing the person as they move off-screen. There's no apparent camera movement such as panning, tilting, or tracking."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/TktL3QR8Yg8.0.3.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains completely fixed, exhibiting no movement or shaking.",
+    "gpt-4o": "In the video, the camera movement starts with a slow pan to the left, revealing a plush teddy bear and a rocking horse in a softly lit room. The camera then performs a rapid push-in to focus on the bear, emphasizing its worn features and the details like the button eye and red scarf. This is followed by a slight tilt downwards as a hand places a hat on the bear, keeping the framing tight on the bear to maintain focus and create an intimate moment. The overall movements are smooth, enhancing the nostalgic and warm atmosphere."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/gooWdc6kb80.0.7.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains completely fixed, exhibiting no movement or shaking.",
+    "gpt-4o": "I'm unable to view videos. However, I can help if you describe the video or its key elements!"
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/i82xURPkLWo.3.6.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains completely fixed, exhibiting no movement or shaking.",
+    "gpt-4o": "I'm unable to watch videos or identify people in them. I can help analyze still images if you have specific questions about them. If you're interested in understanding camera movement, consider these common types:\n\n1. **Pan**: The camera moves horizontally from a fixed location.\n2. **Tilt**: The camera moves vertically from a fixed location.\n3. **Dolly**: The camera moves closer or further from the subject.\n4. **Zoom**: The lens magnifies or reduces the focus on the subject.\n5. **Handheld**: The camera is held by a person, which can result in a shaky effect.\n6. **Tracking**: The camera follows a subject or moves along with it.\n\nLet me know if you\u2019d like more details on any of these!"
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/JDaw5I_5hPk.0.1.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains completely fixed, exhibiting no movement or shaking.",
+    "gpt-4o": "I'm unable to view videos, but I can help with a description based on a description or frame-by-frame analysis. Could you provide more details or context about the video?"
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/5eDQ2SSsmEk.9.7.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera rolls counterclockwise in a slow, smooth motion, maintaining steadiness without any shaking.",
+    "gpt-4o": "The camera in the video appears to be slowly panning to the right. This movement follows the hovering vehicle as it approaches the structure, maintaining focus on the scene while capturing the surrounding environment and the action of docking. The effect is a smooth and controlled motion that emphasizes the vastness and detail of the setting."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/Kapdye-diSM.8.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera moves forward with a clear pattern, but its progress is unsteady, marked by noticeable shaking.",
+    "gpt-4o": "The camera in the video exhibits a slow panning movement along the street, revealing parked cars and surrounding buildings. It maintains a steady pace, likely on a stabilized device, providing a smooth view of the scene without abrupt changes in direction or speed."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/_I6Y-rtiTPc.0.2.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera quickly zooms in with a smooth and steady motion, maintaining minimal shaking throughout.",
+    "gpt-4o": "The camera in the video is using a downward tilt while simultaneously panning to follow the movement of the three people walking. This combination creates a dynamic tracking shot that maintains focus on the subjects as they move across the frame."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/1hu1np_BI2M.7.0.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly zooms out while moving left, maintaining a steady and fluid motion throughout.",
+    "gpt-4o": "The video shows a gradual zoom-out, revealing more of the scene over time. It starts with a close-up of a figure behind a conveyor belt and then pulls back to reveal additional figures and more of the surroundings, providing a broader view of the setting."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/jOdkb3FYrhA.0.0.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera arcs clockwise with a slightly unsteady motion, exhibiting some shaking as it moves.",
+    "gpt-4o": "In this video, the camera follows the person as they walk. Initially, it tracks from behind and slightly to the side, maintaining focus on their movement toward the car. Once the person starts interacting with the car's trunk, the camera slightly adjusts angles to keep them in frame, ensuring the motion is smooth and continuous. The overall movement creates a sense of following the character's actions closely."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/G2EAFkURl0U.5.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly pans right, maintaining a steady and fluid motion throughout.",
+    "gpt-4o": "The camera exhibits a steady pan movement to the right, smoothly capturing the surroundings of the cabins and trees in the wooded area."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/xo9p8p6deRI.10.2.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera slowly dollies forward with a slight wobble, its movement slightly unsteady with some shaking.",
+    "gpt-4o": "Based on the provided sequence of still images from the video, the camera appears to be stationary. It is positioned in a fixed location, framed to view the car's interior from the windshield, focusing on the two occupants. There are no noticeable changes in angles, panning, tilting, or movements visible in these images. The perspective remains consistent throughout the sequence."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/338.2.6.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains completely fixed, exhibiting no movement or shaking.",
+    "gpt-4o": "The camera movement in the video includes a slow push-in towards the subject. This creates a more intimate and focused feel by gradually moving closer to the person sitting at the table."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/1470.0.7.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera vibrates erratically, lacking a clear pattern in its movement.",
+    "gpt-4o": "I'm unable to view videos, but based on the images you provided, the camera appears to be stationary with the subject standing in profile view, maintaining a consistent composition. The reflection adds a visual layer, suggesting that the camera is in a fixed position where both the subject and their reflection in the window are visible. There doesn't seem to be any movement in the shots themselves."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/3pxrECZYEAA.2.3.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera zooms out slightly at first while smoothly trucking left to track a bird in flight from the side, maintaining a steady and fluid motion as the subject gradually becomes smaller in the frame.",
+    "gpt-4o": "The camera movement in these video frames appears to be a smooth horizontal pan to the right, following the bird character as it moves. This creates a continuous flow, allowing the viewer to see more of the bright, colorful background environment as the animation progresses. The panning maintains focus on the bird while revealing different parts of the landscape."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/wqn8akChql4.0.14.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera arcs smoothly clockwise while gently descending, capturing a couple embracing and kissing on the battlefield, with no shaking to disrupt the serene motion.",
+    "gpt-4o": "The camera movement in the video appears to have a smooth, floating quality, enhancing the dynamic and dramatic effect. It likely includes:\n\n1. **Continuous Circular Motion**: The camera moves around the characters, giving a 360-degree view, creating an immersive experience.\n\n2. **Panning and Zooming**: It may pan to follow the action closely while occasionally zooming in or out to emphasize particular moments or details.\n\n3. **Tracking**: The camera follows the characters as they move, maintaining a constant focus on them against the vibrant backdrop.\n\nThis kind of fluid camera work adds to the visual impact of the scene."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/_jli4enm3vw.2.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains fixed but slightly unsteady, with no intentional movement.",
+    "gpt-4o": "The camera in the video is primarily static. It is positioned to capture the scene with a crowd in the foreground and people forming a human tower in the background. The camera does not appear to pan, tilt, or zoom significantly, maintaining a steady view of the unfolding action."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/8ouj_JN2ytI.0.9.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera slowly trucks left to capture the audience, then gently tilts up as they applaud, maintaining a smooth movement with minimal shaking.",
+    "gpt-4o": "From the sequence of images, the camera appears to remain mostly stationary, capturing the scene from a medium wide angle. The focus is on the crowd's reaction in a stadium. There are no visible signs of movement such as panning, tilting, or zooming in the frames provided. The shots maintain a consistent composition, centered on the crowd's actions and expressions."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/GVr8pZmSa-c.0.3.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera pans left to right with noticeable shaking, creating an unsteady and dynamic view.",
+    "gpt-4o": "The camera movement in the video appears to be a slow tracking shot alongside a ship during a storm. It captures the side of the ship and the rough sea, possibly simulating the motion of the waves by slightly swaying or rocking to enhance the feeling of being at sea. This movement adds a dynamic and immersive element to the scene, emphasizing the ocean's turbulent conditions."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/xo9p8p6deRI.0.0.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly lifts up and tilts down, while simultaneously panning to the left to change its facing direction and capture the crowd, maintaining a steady and shake-free motion throughout.",
+    "gpt-4o": "The camera in the video is smoothly moving backward through a crowd of people. It creates a sense of depth by slowly revealing more of the scene, maintaining focus on the movement and interaction of the crowd. The camera maintains a steady path, allowing the viewer to observe the environment and details of the scene."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/CQYQKehqjgI.3.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains completely fixed, exhibiting no movement or shaking.",
+    "gpt-4o": "I'm unable to watch videos, but if you can describe the content, I can help analyze typical camera movements like panning, tilting, zooming, etc."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/LI7i6DQfh0o.0.2.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera arcs slowly and smoothly in a clockwise direction, maintaining a steady and fluid motion without any shaking.",
+    "gpt-4o": "The video shows a series of slow, smooth camera movements that carefully showcase a picnic setup on a wooden surface. The camera pans slowly from side to side, as well as gently rotating and tilting to present the picnic layout from various angles, providing a detailed view of the items, including containers and utensils."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/upC8hjr2b4g.12.7.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera moves forward with a clear pattern, but its progress is unsteady, marked by noticeable shaking.",
+    "gpt-4o": "I'm unable to view videos or the movement within them. You can upload a description of the video, and I'll be happy to help analyze it!"
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/kSx5KGOv5Qc.1.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly tilts down while simultaneously panning right, maintaining minimal shaking throughout the movement.",
+    "gpt-4o": "The camera movement in the video involves a slow, smooth zooming in towards the coastal city and the surrounding sea. The camera maintains a stable position while gradually narrowing focus on the city from the initial wider view of the landscape."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/-2uIa-XMJC0.8.1.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The handheld camera begins on a black screen inside a well, gradually moving backward and upward to track a person crawling out. It leads the subject from the front, capturing them as they grow larger in the frame. The movement is slightly unsteady, with some shaking.",
+    "gpt-4o": "In the video, the camera is gradually moving upward, starting from below a hatch and slowly revealing more of the scene. This vertical movement gives a sense of emerging from darkness or concealment, emphasizing the focus on the person as they become more visible. The upward motion creates a sense of elevation and anticipation, drawing attention to the subject's entrance into the space above."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/QMlfVwN3iTw.7.5.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera zooms out with a slightly unsteady motion, exhibiting some shaking.",
+    "gpt-4o": "The camera movement in this video is a slow pan to the right. The camera gradually moves horizontally, capturing the row of modern buildings along the waterfront."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/XA2X_JBzkzY.2.1.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly zooms out, maintaining minimal shaking throughout the movement.",
+    "gpt-4o": "The camera in the video appears to be executing a slow, steady pull back, starting from a close-up of the baby and gradually revealing more of the scene to show the mother and surroundings. This movement can create a sense of intimacy and gradually introduce the broader context of the setting."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/5e5ef4541835cc6ffc817c5dd4eb7f240d200553b3eed64782d61ccde60d4ade.1.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains completely fixed, exhibiting no movement or shaking.",
+    "gpt-4o": "The camera exhibits a subtle zoom in and out, focusing on the wolf as the central subject of the shot. The wolf remains centered while the background appears to softly blur, adding depth to the scene. The movement is gentle and maintains the natural ambiance of the forest setting."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/c41pRPO9TQk.3.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly pans to the right while trucking left, then rapidly zooms out, all with minimal shaking.",
+    "gpt-4o": "The camera movement in the video appears to be handheld, with slight shaking or wobbling as it captures the scene. The camera remains relatively still, focusing on the people and their actions amidst the flood. There is no significant panning, tilting, or zooming observed."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/0Pzq0URbL2M.9.3.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera moves smoothly and swiftly downward, centering the subject while rolling clockwise, maintaining a very smooth steadiness with no shaking.",
+    "gpt-4o": "The video features a static overhead shot with no camera movement. The subject appears to be a person or object viewed from above, standing out against a dark background. The camera remains fixed, focusing on the small, centrally-located point of interest."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/3epU697sU9E.0.0.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera rapidly zooms out, rolling clockwise and panning right to reveal the whole map, all with very smooth and quick movement.",
+    "gpt-4o": "The camera in the video is executing a zooming out movement. It starts with a close view of \"The Colony Beach & Tennis Resort\" area and gradually moves backward, revealing a larger geographical area. As it zooms out, more of the surrounding environment and the path leading to \"Emma E. Booker Elementary School\" becomes visible, offering a wider perspective of the location and its context."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/sJsu7Tv-fRY.0.2.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera, positioned at a bird's eye view, moves upward while rolling clockwise, gradually revealing the entire map with very smooth, steady motion and no shaking.",
+    "gpt-4o": "The camera in the video is executing a zoom-out motion. Starting from a closer, detailed view of a section of the map, it gradually moves outward to reveal a wider view of the area. This reveals the layout and structure in a broader context, providing a comprehensive view of the map as the camera continues to pull back."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/FUQhNGEu2KA.0.0.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains completely fixed, exhibiting no movement or vibration.",
+    "gpt-4o": "The camera in this video appears to be stationary, with the person walking towards it down a hallway. There is no noticeable movement or panning; the subject moves closer while the camera remains fixed in position."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/cdbdf71cb5b76ac81a00f2e3e5c22bc27b126da4579752cd6a10da3650b4d8e3.0.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains completely fixed, exhibiting no movement or shaking.",
+    "gpt-4o": "The video features a slow panning movement from left to right along a pebble beach, with a steady horizon and gentle waves in view, maintaining a smooth and continuous flow."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/1560.0.17.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly dollies forward while simultaneously panning right to maintain focus on the walking man, ensuring a steady and fluid motion without any shaking.",
+    "gpt-4o": "The camera movement in this video involves a smooth, horizontal tracking shot. It follows the subject as they walk from left to right through a snowy park, keeping a consistent distance and speed, maintaining the subject centrally framed against the wintery backdrop."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/kxcw0iSn0xw.5.1.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains fixed but slightly unsteady, with no intentional movement.",
+    "gpt-4o": "The camera movement in the video appears to focus on a stationary subject, the apple, as it is struck by a jet of water. The camera is likely steady, capturing the action in slow motion to emphasize the interaction between the water and the apple. There is minimal movement, maintaining focus on the dynamics of the water impact."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/fT6olrwrjnI.5.3.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera moves forward quickly with a very smooth and steady motion, showing a clear movement pattern.",
+    "gpt-4o": "The camera in the video begins with a high-angle shot looking down at a soccer net. It then tilts downwards to reveal a soccer ball hitting the net. After the ball impacts the net, the camera zooms in slightly to emphasize the point of contact and the deformation of the net caused by the ball."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/yGsVo0uIJVs.3.5.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera arcs slowly and smoothly in a clockwise direction, maintaining a steady and fluid motion without any shaking.",
+    "gpt-4o": "The images show a static view of a wall with a drawing and a photograph. Since there's no visible motion in the images, it suggests the camera is likely stationary or maintaining a fixed perspective in the video."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/JDaw5I_5hPk.0.10.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains fixed but slightly unsteady, with no intentional movement.",
+    "gpt-4o": "The camera in the video is performing a slow zoom-out motion. It starts closely focused on the cluster of boats and rocky outcrops, then gradually moves backward to reveal more of the surrounding seascape and the horizon. The movement is smooth and steady, enhancing the scenic and tranquil nature of the setting."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/3m-ME9AXCTo.1.1.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera arcs counterclockwise with a slightly unsteady motion, exhibiting some shaking.",
+    "gpt-4o": "The camera in the video uses a slow, continuous rotating motion around the couple dancing. This movement likely creates a dreamy and intimate atmosphere, enhancing the focus on the dancers and the environment they are in, with the rotating lights and decorations in the background."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/8iZ8RtiJq14.1.0.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly moves backward, leading the subject from the front as it tracks the flying metal tag. Near the end, it halts its backward motion and shifts slightly forward, maintaining a very smooth and steady movement throughout.",
+    "gpt-4o": "The video features a camera movement that involves smoothly dollying out from the red tab on a McDonald's cup. This movement begins with the camera close to the tab and gradually pulls back, revealing more of the surrounding objects, such as food packaging, on a table."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/8iZ8RtiJq14.5.1.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera, in a bird\u2019s-eye view, smoothly moves from one sticker to another on the board while rolling counterclockwise to adjust its orientation, maintaining a steady and shake-free motion throughout.",
+    "gpt-4o": "The camera in the video appears to smoothly zoom out or pull back, revealing more of the scene. The movement is gradual, allowing the viewer to see additional details, such as the surrounding notes and labels. This type of camera movement helps provide context and enhances the storytelling by showing more of the investigation board."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/wQ09HsEKmvE.1.1.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly tilts upward while panning right, maintaining a steady focus as it tracks the subject.",
+    "gpt-4o": "The video features a high-angle camera movement that follows a man as he walks across a tiled surface. The camera moves smoothly along with the man, maintaining a consistent top-down perspective. This movement gives the viewer a bird's-eye view of the scene, focusing on the man and his shadow while capturing the broader environment and the people around him. The framing suggests a sense of surveillance or observation, emphasizing the geometry of the surroundings and the path of the individual."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/qYztDs8vPBg.2.2.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains completely static, fixed in place without any movement or shaking.",
+    "gpt-4o": "I'm unable to watch or analyze videos, but I can help with a description or analysis of its content if you provide more details or context!"
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/tCRbVEGHZlQ.0.5.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly trucks right, maintaining a steady and fluid motion throughout.",
+    "gpt-4o": "The camera movement in the video remains static, focusing on the character. The camera does not pan, tilt, or zoom; instead, it holds a consistent view, allowing the character to walk horizontally across the frame."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/3pxrECZYEAA.2.7.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly zooms in to approach the drunk person, slightly tilting up to center them, maintaining a steady and shake-free motion throughout.",
+    "gpt-4o": "The camera movement in the video involves a smooth dolly zoom towards the bar scene. The camera gradually closes in on the bar and the person behind it, enhancing a sense of focus and intimacy with the scene."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/yGsVo0uIJVs.0.4.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly moves forward while simultaneously zooming out, maintaining minimal shaking throughout the motion.",
+    "gpt-4o": "The camera in the video appears to be moving backwards slowly, creating an effect of revealing more of the surrounding area and giving a sense of depth and space around the door marked \"Top Secret.\" The movement adds to the suspenseful and mysterious tone of the scene."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/4jdZkC33NXw.0.1.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera moves forward while simultaneously moving down, with a slightly unsteady motion that includes some shaking.",
+    "gpt-4o": "The video features a gradual zoom-in down a rainy street, capturing a tranquil suburban landscape flanked by trees and houses. The camera steadily draws closer to the scene at center, showing greater detail in the surroundings as it progresses."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/CBRwF0LU3Ys.0.16.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The drone camera flies low over a desert, moving forward with a very smooth motion. As a racing car comes into view, the camera slightly rolls clockwise and pans right to follow the car, which kicks up a cloud of sand that momentarily obscures the lens. It then continues to follow the car, with the motion gradually transitioning into slow motion.",
+    "gpt-4o": "The camera movement in the video appears dynamic and fast-paced. It starts with a forward movement through a desert landscape, likely using a tracking shot to create a sense of speed as it rushes toward a camel in front of a tent. The camera then swiftly moves past the tent, maintaining a lateral momentum that adds to the feeling of rapid motion.\n\nNext, there's a brief cut transitioning into a close-up shot where debris and sand are thrown into the air, likely indicating the presence of a vehicle or some forceful action nearby. The camera angle and movement emphasize the dynamic energy and speed of the scene, focusing on the dramatic effect of the flying sand and dirt.\n\nOverall, the camera movements combine swift transitions, tracking shots, and close-ups to enhance the sense of action and speed throughout the sequence."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/f4ZzHtww6Tc.5.6.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera moves forward at a slight angle, tracking the skateboarder from a rear-side perspective. Around the middle of the video, it pans slightly to the left as the skateboarder moves slightly left, positioning himself in front of the camera. The camera is following the subject from behind, and during the tracking shot, the subject becomes larger in the frame. The camera movement is slightly unsteady with some shaking.",
+    "gpt-4o": "The video depicts dynamic camera movement that follows a skateboarder. The camera is positioned close to the ground, moving alongside the skateboarder to capture the action smoothly. This technique provides an immersive view of the skateboarding action, maintaining a steady focus on the skater\u2019s movements. The motion likely includes some subtle panning and tracking to keep the skateboarder centered in the frame, creating an engaging and continuous perspective of the scene."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/JGiXuXc3cao.3.4.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera initially frames two subjects before smoothly dollying backward and trucking leftward, incorporating a subtle counterclockwise roll. This movement gradually reveals a group photo of four subjects, starting slowly and accelerating as the video progresses, all while maintaining a very smooth and steady motion without any shaking.",
+    "gpt-4o": "I can't view videos, but based on the images provided, it looks like a pan from right to left, revealing multiple characters in an illustrated scene."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/oRt5NPY7yYA.4.1.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera arcs counterclockwise with a smooth, steady motion, exhibiting minimal shaking.",
+    "gpt-4o": "The camera movement in this video follows a smooth tracking motion alongside a moving truck. It maintains a consistent distance and angle, keeping the truck centered in the frame while capturing the surrounding landscape. The camera appears to be panning slightly to maintain the truck in focus as it moves forward."
+  }
+]

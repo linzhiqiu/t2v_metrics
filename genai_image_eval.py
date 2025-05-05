@@ -1,4 +1,4 @@
-# Evaluate on GenAI-Bench-Image (with 527 prompt) using a specific model
+# Evaluate on GenAI-Bench-Image using a specific model
 # Example scripts to run:
 # VQAScore: python genai_image_eval.py --model clip-flant5-xxl
 # CLIPScore: python genai_image_eval.py --model openai:ViT-L-14-336

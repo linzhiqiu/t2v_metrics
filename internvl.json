@@ -1,0 +1,602 @@
+[
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/IWv0EhEGmNI.16.6.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains fixed but slightly unsteady, with no intentional movement.",
+    "internvl2.5-8b": "The camera remains stationary throughout the video, focusing on the man and woman in the dark room. text appears on the screen.\nThe camera remains stationary throughout the video, focusing on the man and woman in the dark room.\nThe camera remains stationary throughout the video, focusing on the man and woman in the dark room.\nThe camera remains stationary throughout the video, focusing on the man and woman in the dark room.\nThe camera remains stationary throughout the video, focusing on the man and woman in the dark room.\nThe camera remains stationary throughout the video, focusing on the man and woman in the dark room.\nThe camera remains stationary throughout the video, focusing on the man and woman in the dark room.\nThe camera remains stationary throughout the video, focusing on the man and woman in the dark room.\nThe camera remains stationary throughout the video, focusing on the man and woman in the dark room.\nThe camera remains stationary throughout the video, focusing on the man and woman in the dark room.\nThe camera remains stationary throughout the video, focusing on the man and woman in the dark room.\nThe camera remains stationary throughout the video, focusing on the man and woman in"
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/iXzposKQzvs.2.1.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera pans left slowly, maintaining a very smooth and steady motion without any shaking.",
+    "internvl2.5-8b": "The camera zooms in on the woman as she performs her dive.\nThe camera zooms in on the woman as she performs her dive.\nThe camera zooms in on the woman as she performs her dive.\nThe camera zooms in on the woman as she performs her dive.\nThe camera zooms in on the woman as she performs her dive.\nThe camera zooms in on the woman as she performs her dive.\nThe camera zooms in on the woman as she performs her dive.\nThe camera zooms in on the woman as she performs her dive.\nThe camera zooms in on the woman as she performs her dive.\nThe camera zooms in on the woman as she performs her dive.\nThe camera zooms in on the woman as she performs her dive.\nThe camera zooms in on the woman as she performs her dive.\nThe camera zooms in on the woman as she performs her dive.\nThe camera zooms in on the woman as she performs her dive.\nThe camera zooms in on the woman as she performs her dive.\nThe camera zooms in on the woman as she performs her dive."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/5eDQ2SSsmEk.8.5.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera slowly zooms in with minor movement, maintaining a very smooth and steady motion throughout.",
+    "internvl2.5-8b": "The camera is static, and there is no movement. cell phone."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/6d270d88db28043321dd8a3e0e6204ce7aac74c6fd8916e0b244626e531f2733.7.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly trucks left, maintaining a steady and fluid motion throughout.",
+    "internvl2.5-8b": "The camera is stationary, providing a static aerial view of the lake and the surrounding landscape. docked boats, and the water's surface reflects the colors of the sky. two small islands in the middle of the lake, with a few boats docked on one of them. The water is calm, and the sky is partly cloudy with a soft pink hue near the horizon."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/B_8bbKn3amE.0.6.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The drone arcs counterclockwise in a smooth motion to track the climber from an aerial view, incorporating a gentle tilt downward to maintain focus on them, and concludes with a slight forward movement to approach the subject.",
+    "internvl2.5-8b": "The camera is moving forward, following the person as they walk down the mountain.\nIs there any interaction between the person and the environment? walking down the mountain.No, there is no interaction between the person and the environment.The person is just walking down the mountain.Is there any interaction between the person and the camera?No, there is no interaction between the person and the camera.Is there any interaction between the person and the other objects in the video?No, there is no interaction between the person and the other objects in the video.Is there any interaction between the person and the camera?No, there is no interaction between the person and the camera.Is there any interaction between the person and the other objects in the video?No, there is no interaction between the person and the other objects in the video.Is there any interaction between the person and the camera?No, there is no interaction between the person and the camera.Is there any interaction between the person and the other objects in the video?No, there is no interaction between the person and the other objects in the video.Is there any interaction between the person and the camera?No, there is no interaction between the person and"
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/4022437.0.0.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly moves backward, maintaining minimal shaking, and midway through, it slightly pans to the left.",
+    "internvl2.5-8b": "The camera moves forward, approaching the car from the front. doors are open."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/1934.1.11.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains completely fixed, exhibiting no movement or shaking.",
+    "internvl2.5-8b": "The camera pans around the room, showing the mannequins and the white room.\nThe camera pans around the room, showing the mannequins and the white room.\nThe camera pans around the room, showing the mannequins and the white room.\nThe camera pans around the room, showing the mannequins and the white room.\nThe camera pans around the room, showing the mannequins and the white room.\nThe camera pans around the room, showing the mannequins and the white room.\nThe camera pans around the room, showing the mannequins and the white room.\nThe camera pans around the room, showing the mannequins and the white room.\nThe camera pans around the room, showing the mannequins and the white room.\nThe camera pans around the room, showing the mannequins and the white room.\nThe camera pans around the room, showing the mannequins and the white room.\nThe camera pans around the room, showing the mannequins and the white room.\nThe camera pans"
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/LtXUoaZcp70.3.1.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera arcs counterclockwise around the subject, smoothly incorporating an upward movement while subtly tilting down to adjust the view angle, all with a very steady motion and no shaking.",
+    "internvl2.5-8b": "The camera moves closer to the man in the blue suit. standing on the brown floor.suit.suit.suit.suit.suit.suit.suit.suit.suit.suit.suit.suit.suit.suit.suit.suit."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/MuNyfqxAO6Y.8.5.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera arcs smoothly in a counterclockwise direction around the car, maintaining a steady and fluid motion without any shaking.",
+    "internvl2.5-8b": "The camera is stationary, and there is no movement in the video.\nSource: https://www.youtube.com/watch?v=LvZ5Z5Z5Z5Z\n car\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/4422.0.24.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera arcs counterclockwise with an unsteady motion, exhibiting noticeable shaking throughout the movement.",
+    "internvl2.5-8b": "The camera pans around the man as he plays the drums, capturing different angles and perspectives of his performance. set on a rooftop with a city skyline in the background.\nWhat is the man wearing while playing the drums? city skyline in the background.\nThe man is wearing a blue jacket and a white hoodie while playing the drums.\nWhat is the man doing in the video?\nThe man in the video is playing the drums on a rooftop.\nIs there any interaction between the man and the camera?\nThe video does not show any interaction between the man and the camera. The camera is simply panning around him as he plays the drums.\nWhat is the man's expression while playing the drums? camera.\nThe video does not provide any information about the man's expression while playing the drums.\nWhat is the man's relationship with the drums?\nThe man is playing the drums in the video, so it can be inferred that he has a relationship with the drums as a musician.\nWhat is the man's relationship with the city skyline?\nThe video does not"
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/4uGfFYzxWEg.1.5.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly dollies backward, maintaining a steady and fluid motion throughout.",
+    "internvl2.5-8b": "The camera moves from a close-up of a man's face to a wider shot of a group of people watching a television. man's face. people watching a television.sitting in front of a television.sitting in front of a television.sitting in front of a television."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/ZXloF-qGW4U.2.2.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera moves backward and to the left, tracking the subject from the front-side with a slightly unsteady motion, exhibiting some shaking.",
+    "internvl2.5-8b": "The camera is moving forward, following the man as he walks down the sidewalk.\nIs there any interaction between the man and the environment?  (Yes/No)\nNo, there is no interaction between the man and the environment. storefronts.\nThe man is walking down the sidewalk, passing by various storefronts.\nThe man is walking down the sidewalk, passing by various storefronts.\nThe man is walking down the sidewalk, passing by various storefronts.\nThe man is walking down the sidewalk, passing by various storefronts.\nThe man is walking down the sidewalk, passing by various storefronts.\nThe man is walking down the sidewalk, passing by various storefronts.\nThe man is walking down the sidewalk, passing by various storefronts.\nThe man is walking down the sidewalk, passing by various storefronts.\nThe man is walking down the sidewalk, passing by various storefronts.\nThe man is walking down the sidewalk, passing by various storefronts.\nThe man is walking down the sidewalk, passing by various storefronts.\nThe man is walking down the sidewalk,"
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/JDaw5I_5hPk.0.19.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains fixed but slightly unsteady, with no intentional movement.",
+    "internvl2.5-8b": "The camera is stationary, capturing the car driving down the road. sign.()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()"
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/6h6bMAWLYAI.2.2.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera vibrates with noticeable shakiness, lacking a clear pattern in its movement.",
+    "internvl2.5-8b": "The camera is stationary and does not move throughout the video. microphone.\nIs there any interaction between the man and the camera?\nYes, the man is speaking into the microphone, which is being held by the camera.\nWhat is the man wearing?\nThe man is wearing a blue shirt. sign.\nThere is a sign in the background, but it is not clear what it says.\nIs there any other object in the video besides the microphone and the man?\nYes, there is a camera in the video, which is being used to record the man speaking.\nCan you describe the man's facial expression?\nThe video does not provide any information about the man's facial expression.\nIs there any sound in the video?\nThe video does not provide any information about the sound.\nCan you describe the lighting in the video? The man is speaking into a microphone.\nThe video does not provide any information about the"
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/H4AZhS5WqKk.0.0.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains completely fixed, exhibiting no movement or shaking.",
+    "internvl2.5-8b": "The camera remains stationary throughout the video, focusing on the cat and the keyboard. playing the keyboard.sits on the ground.sits on the ground.sits on the ground.sits on the ground.sits on the ground.sits on the ground.sits on the ground.sits on the ground.sits on the ground.sits on the ground.sits on the ground.sits on the ground.sits on the ground.sits on the ground.sits on the ground.sits on the ground."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/MQugcNLFI9k.2.8.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera arcs smoothly in a clockwise direction, maintaining minimal shaking throughout the movement.",
+    "internvl2.5-8b": "The camera is following the man as he walks down the street. busy city street.\nThe video shows a man walking down a busy city street. The camera is following him as he walks.\nThe video shows a man walking down a busy city street. The camera is following him as he walks.\nThe video shows a man walking down a busy city street. The camera is following him as he walks.\nThe video shows a man walking down a busy city street. The camera is following him as he walks.\nThe video shows a man walking down a busy city street. The camera is following him as he walks.\nThe video shows a man walking down a busy city street. The camera is following him as he walks.\nThe video shows a man walking down a busy city street. The camera is following him as he walks.\nThe video shows a man walking down a busy city street. The camera is following him as he walks.\nThe video shows a man walking down a busy city street. The camera is following him as he walks.\nThe video shows a man walking down a busy city street. The camera is following him as he walks.\nThe video shows"
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/338.2.32.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly zooms out and moves upward, then remains fixed as the lazy Susan in the foreground rotates, revealing various food items.",
+    "internvl2.5-8b": "The camera in the video moves slowly and smoothly, panning across the table to showcase the different food items. It starts with a close-up of the fried chicken and then moves to the waffle, and finally to the waffle maker. The camera's movement is gentle and deliberate, allowing the viewer to take in the details of each item. breakfast. a close-up of a plate of fried chicken, a can of MSG, and a waffle maker. The camera then pans to the right, revealing a waffle on a plate, and then a waffle maker on a yellow plate. The scene is set in a restaurant with a warm and inviting atmosphere. The camera's movement is smooth and deliberate, allowing the viewer to take in the details of each item. The video is likely a commercial or advertisement for a restaurant or food product. video shows a table with various food items, including a plate of fried chicken, a can of MSG, and a waffle maker. The camera pans across the table, showcasing the different food items. The scene is set in a restaurant with a warm and inviting atmosphere. The video is likely a commercial or advertisement for"
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/4PcpGxihPac.3.2.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly pans left, tracking the subject with minimal shaking.",
+    "internvl2.5-8b": "The camera pans around the room, showing the audience and the woman on stage.\nThe camera pans around the room, showing the audience and the woman on stage.\nThe camera pans around the room, showing the audience and the woman on stage.\nThe camera pans around the room, showing the audience and the woman on stage.\nThe camera pans around the room, showing the audience and the woman on stage.\nThe camera pans around the room, showing the audience and the woman on stage.\nThe camera pans around the room, showing the audience and the woman on stage.\nThe camera pans around the room, showing the audience and the woman on stage.\nThe camera pans around the room, showing the audience and the woman on stage.\nThe camera pans around the room, showing the audience and the woman on stage.\nThe camera pans around the room, showing the audience and the woman on stage.\nThe camera pans around the room, showing the audience and the woman on stage.\nThe camera pans around the room, showing the audience and the woman on stage.\nThe camera pans around the room, showing"
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/RZs5Hz1klno.1.1.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly dollies forward while simultaneously panning left to focus on the screen of a laptop, maintaining a steady and fluid motion throughout.",
+    "internvl2.5-8b": "The camera starts with a close-up of the laptop on the toilet, then slowly zooms out to reveal more of the bathroom.\nDescribe the setting of the video. a bathroom with a toilet and a laptop on it.\nThe video takes place in a bathroom with a modern design, featuring a white toilet and a laptop placed on top of it.\nWhat is the laptop doing in the video? turn on and display an aerial view of a city.\nThe laptop is turned on and displays an aerial view of a city.\nWhat is the significance of the laptop being on the toilet?\nThe laptop being on the toilet is unusual and may suggest that the person using it is multitasking or working in an unconventional setting. view of the city on the laptop screen.\nThe video shows an aerial view of a city on the laptop screen.\nWhat is the purpose of the video?\nThe purpose of the video is unclear, but it may be intended to showcase the laptop's screen capabilities or to create a humorous or unexpected scene.\nWhat is the relationship between the laptop and the toilet?\nThe laptop and the toilet are placed in close proximity"
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/OCBYMQzG44U.21.2.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera moves forward and rapidly pans right as it rounds a corner in the hallway, with a slightly unsteady motion that includes some shaking.",
+    "internvl2.5-8b": "The camera moves forward through the hallway, giving the viewer a sense of walking through the space.\nI used the provided information to come up with the answer. The video description mentions that the camera moves forward through the hallway, which indicates that the camera is advancing towards the end of the hallway. light.\nThe camera moves forward through the hallway, giving the viewer a sense of walking through the space.\nI used the provided information to come up with the answer. The video description mentions that the camera moves forward through the hallway, which indicates that the camera is advancing towards the end of the hallway.\nThe camera moves forward through the hallway, giving the viewer a sense of walking through the space.\nI used the provided information to come up with the answer. The video description mentions that the camera moves forward through the hallway, which indicates that the camera is advancing towards the end of the hallway.\nThe camera moves forward through the hallway, giving the viewer a sense of walking through the space.\nI used the provided information to come up with the answer. The video description mentions that the camera moves forward through the hallway, which indicates that the camera is advancing towards the end of the hallway.\nThe camera moves"
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/ZBsv_5fHtIg.0.3.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera quickly trucks right, closely tracking the car from its side, then smoothly arcs counterclockwise around it, transitioning into a lead and side-tracking shot that reveals the car in full view. Throughout this sequence, the subject becomes smaller in the frame, and the camera movement remains very smooth with no shaking.",
+    "internvl2.5-8b": "The camera is stationary, and the car is moving towards it. headlights are on. headlights are on."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/ti231UvSvfQ.0.0.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera arcs slowly and smoothly clockwise around the person's face, moving backward and upward to transition from an extreme close-up to a close-up shot, then remains fixed until the end.",
+    "internvl2.5-8b": "The camera slowly zooms in on the man's face, focusing on his eyes and nose.\nIs there any interaction between objects in the video? young man:No, there is no interaction between objects in the video.Is there any text or subtitles in the video?No, there is no text or subtitles in the video.Is there any music or sound effects in the video?No, there is no music or sound effects in the video.Is there any change in the lighting or environment?No, there is no change in the lighting or environment.Is there any change in the man's expression or position?No, there is no change in the man's expression or position.Is there any change in the camera angle or position?No, there is no change in the camera angle or position.Is there any change in the man's clothing or appearance?No, there is no change in the man's clothing or appearance.Is there any change in the man's hair or facial hair?No, there is no change in the man's hair or facial hair.Is there any change in the man's skin tone or color?No, there is no change in the man's skin tone"
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/M0jmSsQ5ptw.3.16.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The handheld camera moves forward with an unsteady shake, following a man running toward a helicopter, capturing him from behind as he grows larger in the frame. Once he boards the helicopter, the camera becomes stationary but continues to exhibit noticeable handheld shaking.",
+    "internvl2.5-8b": "The camera starts with a wide shot of the helicopter and the man walking towards it. It then zooms in on the man as he approaches the helicopter. The camera then moves closer to the helicopter, showing the man entering the helicopter. Finally, the camera zooms in on the man as he sits inside the helicopter. Red Bull helicopter.\nThe camera then zooms in on the man as he approaches the helicopter. The camera then moves closer to the helicopter, showing the man entering the helicopter. Finally, the camera zooms in on the man as he sits inside the helicopter. Red Bull helicopter.\nThe camera then zooms in on the man as he approaches the helicopter. The camera then moves closer to the helicopter, showing the man entering the helicopter. Finally, the camera zooms in on the man as he sits inside the helicopter. The Red Bull helicopter.\nThe camera then zooms in on the man as he approaches the helicopter. The camera then moves closer to the helicopter, showing the man entering the helicopter. Finally, the camera zooms in on the man as he sits inside the helicopter. The Red Bull helicopter.\nThe camera then zooms in on the man as"
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/px9IqOnilHI.1.2.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains completely static, fixed in place without any movement or shaking.",
+    "internvl2.5-8b": "The camera remains stationary throughout the video, focusing on the person's hands holding the game controller. red button. a black button."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/nGJMwixogyk.5.8.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera continuously dollies forward along the street, panning left to face the street, with a slightly unsteady movement that includes some shaking.",
+    "internvl2.5-8b": "The camera moves forward down the street, providing a closer view of the buildings and the street. signs."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/sKJeTaIEldM.2.2.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera moves backward while simultaneously zooming in, with a slightly unsteady motion that includes some shaking.",
+    "internvl2.5-8b": "The camera is stationary and does not move. man is wearing a white shirt and a tie. man is wearing a white shirt and a tie."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/9H942RAVrHQ.0.2.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains completely fixed, exhibiting no movement or shaking.",
+    "internvl2.5-8b": "The camera remains static throughout the video, focusing on the fox character's movements. balancing on one leg. fox is holding a yo-yo."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/Vm-b2AVwARw.1.0.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly dollies forward and pedestals downward, approaching the marble table on the floor with minimal shaking.",
+    "internvl2.5-8b": "The camera moves forward in the video, providing a closer view of the furniture and the room. couches, tables, and chairs.\nWhat is the color of the couches in the room? couches in the room are white.\nWhat is the color of the table in the room? the room is white."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/u5JBlwlnJX0.1.0.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera arcs smoothly in a clockwise direction, maintaining minimal shaking throughout the movement.",
+    "internvl2.5-8b": "The camera pans around the two men standing on the cliff overlooking the ocean.\nWhat is the man in the brown coat doing in the video?\nThe man in the brown coat is standing on the cliff overlooking the ocean. rifle.\nWhat is the man in the brown coat holding?\nThe man in the brown coat is holding a rifle.\nWhat is the man in the brown coat wearing?\nThe man in the brown coat is wearing a brown coat.\nWhat is the man in the brown coat looking at?\nThe man in the brown coat is looking at the ocean. other man.\nWhat is the other man wearing?\nThe other man is wearing a white coat.\nWhat is the other man doing?\nThe other man is standing on the cliff overlooking the ocean.\nWhat is the other man looking at?\nThe other man is looking at the man in the brown coat.\nWhat is the other man holding?\nThe other man is holding a rifle.\nWhat is the other man wearing?\nThe other man is wearing a white coat.\nWhat is the other man looking at?\nThe other man is looking at the man in"
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/Ao4Y7JU30zc.0.0.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera steadily trucks left while panning right to keep the person centered in the frame, though the movement is slightly unsteady with some shaking.",
+    "internvl2.5-8b": "The camera moves closer to the man sitting on the bench. holding a phone.\nI see the man holding a phone.\nYes, the man is holding a phone in his hand.\nIs the man sitting on a bench?\nYes, the man is sitting on a bench.\nCan you describe the man's clothing?\nThe man is wearing a black shirt and black pants.\nIs the man alone in the video?\nYes, the man is the only person in the video.\nDoes the man move from the bench?\nNo, the man remains sitting on the bench throughout the video.\nIs the man looking at the phone?\nYes, the man is looking at the phone in his hand.\nDoes the man interact with anyone else in the video?"
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/HasIb5pfWkQ.3.3.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly tracks the subject from the side while moving downward, maintaining a steady and fluid motion throughout.",
+    "internvl2.5-8b": "The camera is stationary, and there is no movement in the video.\nI understand. Can you describe the relationship between the objects in the video? lights and the airplane.\nYes, the lights are shining on the airplane, and the airplane is flying through the air.\nCan you describe the airplane's position relative to the lights?\nThe airplane is in the center of the lights, and the lights are shining on the airplane. blue lights.\nYes, the airplane is flying through the air, and the blue lights are shining on it.\nThe airplane is flying through the air, and the blue lights are shining on it.\nThe airplane is flying through the air, and the blue lights are shining on it.\nThe airplane is flying through the air, and the blue lights are shining on it.\nThe airplane is flying through the air, and the blue lights are shining on it.\nThe airplane is flying through the air, and the blue lights are shining on it.\nThe airplane is flying through the air, and the blue lights are shining on it.\nThe airplane is flying through the air, and the blue lights are shining on it.\nThe"
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/m1LHXV49zn8.2.10.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly tilts downward to capture the fighting crowds below, subtly moving forward to avoid obstruction from the woman in the foreground, maintaining minimal shaking throughout.",
+    "internvl2.5-8b": "The camera pans across the desert, showing the vastness of the landscape and the movement of the people.\nThe camera pans across the desert, showing the vastness of the landscape and the movement of the people.\nThe camera pans across the desert, showing the vastness of the landscape and the movement of the people.\nThe camera pans across the desert, showing the vastness of the landscape and the movement of the people.\nThe camera pans across the desert, showing the vastness of the landscape and the movement of the people.\nThe camera pans across the desert, showing the vastness of the landscape and the movement of the people.\nThe camera pans across the desert, showing the vastness of the landscape and the movement of the people.\nThe camera pans across the desert, showing the vastness of the landscape and the movement of the people.\nThe camera pans across the desert, showing the vastness of the landscape and the movement of the people.\nThe camera pans across the desert, showing the vastness of the landscape and the movement of the people.\nThe camera pans across the desert, showing the vastness of the landscape and"
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/as8lT-q2_E8.0.0.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly moves backward, tracking the approaching motorcycles from the front. It then cranes up to a bird's-eye view before craning down to a level angle, executing a simultaneous clockwise roll. This fluid motion transitions seamlessly into a tail-tracking shot, maintaining minimal shaking throughout.",
+    "internvl2.5-8b": "The camera moves forward, following the motorcycle as it speeds down the track. motorcycle.\nThe motorcycle is black and orange, and it is being ridden by a person wearing a black helmet.\nThe motorcycle is moving at a high speed, and the rider is leaning forward to maintain balance.\nThe motorcycle is the main focus of the video, and it is shown from various angles as it speeds down the track.\nThe video is shot in a dark, futuristic setting, with neon lights illuminating the track.\nThe motorcycle is shown from a front view, a side view, and a rear view as it speeds down the track.\nThe rider is shown from a front view, a side view, and a rear view as they ride the motorcycle.\nThe video is shot in a way that emphasizes the speed and power of the motorcycle, with the camera following closely behind as it speeds down the track.\nThe video is shot in a way that emphasizes the speed and power of the motorcycle, with the camera following closely behind as it speeds down the track.\nThe video is shot in a way that emphasizes the speed and power of the motorcycle, with the camera following closely behind as"
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/0tIoyN7WKuA.3.1.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly arcs clockwise around the Flash Man, slightly moving forward to approach him before shifting backward, maintaining minimal shaking throughout.",
+    "internvl2.5-8b": "The camera is stationary, and the video is a still image.\nI don't see any camera movement in the video. video.\nThe video is a still image, and there is no camera movement.\nThe video is a still image, and there is no camera movement.\nThe video is a still image, and there is no camera movement.\nThe video is a still image, and there is no camera movement.\nThe video is a still image, and there is no camera movement.\nThe video is a still image, and there is no camera movement.\nThe video is a still image, and there is no camera movement.\nThe video is a still image, and there is no camera movement.\nThe video is a still image, and there is no camera movement.\nThe video is a still image, and there is no camera movement.\nThe video is a still image, and there is no camera movement.\nThe video is a still image, and there is no camera movement.\nThe video is a still image, and there is no camera movement.\nThe video is a still image, and there is no camera movement."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/4021529.0.0.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly rolls counterclockwise while moving upward, maintaining minimal shaking throughout the motion.",
+    "internvl2.5-8b": "The camera starts with a close-up view of the person on the rock, then slowly zooms out to reveal the surrounding landscape. It then pans to the right, showing the person from a different angle and the car parked on the road. Finally, it pans to the left, showing the person from a different angle and the car parked on the road. sign. the person on the rock."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/P8JgTjTPIuk.1.3.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera arcs clockwise with a slightly unsteady motion, exhibiting some shaking as it moves.",
+    "internvl2.5-8b": "The camera pans around the man, showing him from different angles. armor and a bow. He is standing in a dark room with a fire burning in the background. The camera captures his movements as he walks around the room, and he eventually stops to look up at the ceiling. armor and a bow. He is standing in a dark room with a fire burning in the background. The camera captures his movements as he walks around the room, and he eventually stops to look up at the ceiling. armor and a bow. He is standing in a dark room with a fire burning in the background. The camera captures his movements as he walks around the room, and he eventually stops to look up at the ceiling. armor and a bow. He is standing in a dark room with a fire burning in the background. The camera captures his movements as he walks around the room, and he eventually stops to look up at the ceiling. armor and a bow."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/RooDYxp5Fx8.0.4.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera moves forward while panning right, with a slightly unsteady motion that includes some shaking.",
+    "internvl2.5-8b": "The camera is stationary, capturing the movement of vehicles and pedestrians on a city street. buildings, and the sky."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/h1PjJ9_Yd2c.2.16.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains fixed but slightly unsteady, with no intentional movement.",
+    "internvl2.5-8b": "The camera remains stationary throughout the video, focusing on the girl and her actions. h2o.\nHow does the girl's actions change over time? h2o.\nThe girl's actions change from holding the blue object to spraying it, and then to looking at the mirror.\nh2o.What is the girl's relationship with the blue object? h2o.\nThe girl's relationship with the blue object is that of a user, as she is seen holding and spraying it.\nh2o.What is the significance of the girl's actions in the video? h2o.\nThe significance of the girl's actions in the video is that they demonstrate the use of the blue object, which could be a product or tool.\nh2o.\nThe video shows a girl in a bathroom, holding a blue object and spraying it. She then looks at herself in the mirror. The camera remains stationary throughout the video. The girl's actions change from holding the blue object to spraying it, and then to looking at the mirror. The significance of the girl's actions in the video is that they"
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/pNGMY3xVkVE.0.0.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly dollies forward with minimal shaking, maintaining a steady and clear movement pattern.",
+    "internvl2.5-8b": "The camera moves forward, following the group of people as they walk down the tunnel. tunnel.\nThe camera moves forward, following the group of people as they walk down the tunnel.\nThe camera moves forward, following the group of people as they walk down the tunnel.\nThe camera moves forward, following the group of people as they walk down the tunnel.\nThe camera moves forward, following the group of people as they walk down the tunnel.\nThe camera moves forward, following the group of people as they walk down the tunnel.\nThe camera moves forward, following the group of people as they walk down the tunnel.\nThe camera moves forward, following the group of people as they walk down the tunnel.\nThe camera moves forward, following the group of people as they walk down the tunnel.\nThe camera moves forward, following the group of people as they walk down the tunnel.\nThe camera moves forward, following the group of people as they walk down the tunnel.\nThe camera moves forward, following the group of people as they walk down the tunnel.\nThe camera moves forward, following the group of people as they walk down the tunnel.\nThe camera moves forward"
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/Vm-b2AVwARw.5.0.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera slowly rolls counterclockwise, maintaining a very smooth and steady motion without any shaking.",
+    "internvl2.5-8b": "The camera zooms in on the paper with the drawing of the man and the word \"Kafala\" written on it. modern art. camera zooms in on the paper with the drawing of the man and the word \"Kafala\" written on it."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/0UthxdAH0ks.5.3.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera arcs smoothly in a clockwise direction, maintaining minimal shaking throughout the movement.",
+    "internvl2.5-8b": "The camera pans around the group of men, showing them from different angles.\nIs there any interaction between the men in the video? standing in a circle?\nYes, the men are standing in a circle and appear to be interacting with each other.\nWhat is the purpose of the video?\nThe video shows a group of men standing in a circle and interacting with each other. The purpose of the video is not clear from the given information. shirtless men standing in a circle. The camera pans around the group, showing them from different angles.100000000000000000000000000000000"
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/upC8hjr2b4g.10.1.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera rolls clockwise throughout the video with a steady and very smooth motion, maintaining a seamless flow without any shaking.",
+    "internvl2.5-8b": "The camera is moving slowly to the right. building.\nDescribe the color of the sky in the video.\nThe sky in the video is blue.\nWhat is the color of the building in the video? blue."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/jGDdHNOeQ0c.0.1.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains fixed but exhibits a slight unsteadiness, with no intentional movement.",
+    "internvl2.5-8b": "The camera remains stationary throughout the video, capturing the women walking towards it. busy city street.\nThe video captures a busy city street with people walking in different directions. The camera remains stationary, capturing the movement of the people and the cars passing by.\nThe video captures a busy city street with people walking in different directions. The camera remains stationary, capturing the movement of the people and the cars passing by.\nThe video captures a busy city street with people walking in different directions. The camera remains stationary, capturing the movement of the people and the cars passing by.\nThe video captures a busy city street with people walking in different directions. The camera remains stationary, capturing the movement of the people and the cars passing by.\nThe video captures a busy city street with people walking in different directions. The camera remains stationary, capturing the movement of the people and the cars passing by.\nThe video captures a busy city street with people walking in different directions. The camera remains stationary, capturing the movement of the people and the cars passing by.\nThe video captures a busy city street with people walking in different directions. The camera remains stationary, capturing the movement of the people and the cars passing by."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/kSx5KGOv5Qc.0.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly zooms in, maintaining a steady and fluid motion throughout.",
+    "internvl2.5-8b": "The camera is stationary, capturing the same view of the city from a high vantage point. red-roofed buildings, a large body of water, and a castle.\nI see a castle in the video.\nYes, the castle is visible in the video. It is located on the right side of the frame.\nCan you tell me more about the castle? a large, red-roofed building.\nI'm sorry, but the video does not provide any information about the castle.\nIs there any movement in the video?\nThe video is a still image, so there is no movement.\nCan you describe the color of the water?\nThe water in the video is blue.\nIs there any other object in the video besides the castle and the water?\nYes, there are red-roofed buildings visible in the video.\nCan you tell me more about the red-roofed buildings?\nThe red-roofed buildings are located in the center of the frame. They are clustered together and appear to be part of a city.\nIs there any other object in the video besides the"
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/MQugcNLFI9k.3.4.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera, positioned in a bird's-eye view of two people fighting, rolls clockwise with very smooth movement and no shaking.",
+    "internvl2.5-8b": "The camera is focused on the man and woman as they wrestle on the floor. It captures their movements and interactions closely.\nI noticed that the man and woman are wearing black clothing. Is that correct? play\nYes, that is correct. The man is wearing a black shirt and the woman is wearing a black jacket.\nI see that the man is holding a green object in his hand. Can you tell me what it is? cell phoneThe man is holding a green cell phone in his hand.\nI noticed that the woman is wearing a black jacket. Can you tell me what color her hair is?\nYes, the woman has brown hair.\nI see that the man and woman are wrestling on the floor. Can you tell me what they are doing?\nYes, they are wrestling with each other. The man is trying to pin the woman down while she is trying to escape.\nI noticed that the man is wearing a black shirt. Can you tell me what color his hair is?\nYes, the man has brown hair.\nI see that the woman is wearing a black jacket. Can you tell"
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/G_TLZr6ZbLE.0.0.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains completely static, fixed in place without any movement or shaking.",
+    "internvl2.5-8b": "The camera remains stationary throughout the video, focusing on the interaction between the two characters.sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/2519.5.16.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains fixed but slightly unsteady, with no intentional movement.",
+    "internvl2.5-8b": "The camera remains stationary throughout the video, focusing on the man's face. short description. setting.short description.short description.short description.short description.short description.short description.short description.short description.short description.short description.short description.short description.short description.short description.short description.short description.short description.short description.short description.short description.short description.short description.short description.short description.short description.short description.short description.short description.short description.short description.short description.short description.short description.short description.short description.short description.short description.short description.short description.short description.short description.short description.short description.short description.short description.short description.short description.short description.short description.short description.short description.short description.short description.short description.short description."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/wqn8akChql4.1.11.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera arcs smoothly in a clockwise direction, maintaining minimal shaking throughout the movement.",
+    "internvl2.5-8b": "The camera moves around the stadium, showing different angles of the building and the surrounding area. smoke is seen coming out of the stadium.\nWhat is the color of the smoke coming out of the stadium? smoke is black. smoke is seen coming out of the stadium. smoke is seen coming out of the stadium. smoke is seen coming out of the stadium. smoke is seen coming out of the stadium. smoke is seen coming out of the stadium. smoke is seen coming out of the stadium. smoke is seen coming out of the stadium. smoke is seen coming out of the stadium. smoke is seen coming out of the stadium. smoke is seen coming out of the stadium. smoke is seen"
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/YBC2JaevzOI.6.4.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly tracks a boy running through a forest at night, beginning with a slight pan to the left. As the video progresses, the pan speeds up, accompanied by a subtle downward tilt, all while maintaining a steady, shake-free motion.",
+    "internvl2.5-8b": "The camera follows the man as he runs through the forest, capturing his movements and the surrounding environment. hide\nIs there any interaction between the man and the environment?  (Yes / No)  (Yes / No)  (Yes / No)  (Yes / No)  (Yes / No)  (Yes / No)  (Yes / No)  (Yes / No)  (Yes / No)  (Yes / No)  (Yes / No)  (Yes / No)  (Yes / No)  (Yes / No)  (Yes / No)  (Yes / No)  (Yes / No)  (Yes / No)  ("
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/TktL3QR8Yg8.0.3.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains completely fixed, exhibiting no movement or shaking.",
+    "internvl2.5-8b": "The camera moves closer to the teddy bear, focusing on its face and the hat it is wearing. hat is placed on the bear's head.\nWhat is the teddy bear wearing?\nThe teddy bear is wearing a hat.\nWhat is the teddy bear doing? button on its face. eye. eye. eye. eye. eye. eye. eye. eye. eye. eye. eye. eye. eye. eye. eye. eye. eye. eye. eye. eye. eye. eye. eye. eye. eye. eye. eye. eye. eye. eye."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/gooWdc6kb80.0.7.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains completely fixed, exhibiting no movement or shaking.",
+    "internvl2.5-8b": "The camera remains stationary throughout the video, focusing on the man and the Jenga tower. carefully places each block on top of the tower, demonstrating his skill and concentration.sits at the table, ready to continue the game.sits at the table, ready to continue the game.sits at the table, ready to continue the game.sits at the table, ready to continue the game.sits at the table, ready to continue the game.sits at the table, ready to continue the game.sits at the table, ready to continue the game.sits at the table, ready to continue the game.sits at the table, ready to continue the game.sits at the table, ready to continue the game.sits at the table, ready to continue the game.sits at the table, ready to continue the game.sits at the table, ready to continue the game.sits at the table,"
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/i82xURPkLWo.3.6.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains completely fixed, exhibiting no movement or shaking.",
+    "internvl2.5-8b": "The camera remains stationary throughout the video, focusing on the man's face and upper body.laughing, talking, and looking down.\nThe man is seen laughing, talking, and looking down.\nThe man is seen laughing, talking, and looking down.\nThe man is seen laughing, talking, and looking down.\nThe man is seen laughing, talking, and looking down.\nThe man is seen laughing, talking, and looking down.\nThe man is seen laughing, talking, and looking down.\nThe man is seen laughing, talking, and looking down.\nThe man is seen laughing, talking, and looking down.\nThe man is seen laughing, talking, and looking down.\nThe man is seen laughing, talking, and looking down.\nThe man is seen laughing, talking, and looking down.\nThe man is seen laughing, talking, and looking down.\nThe man is seen laughing, talking, and looking down.\nThe man is seen laughing, talking, and looking down.\nThe man is seen laughing, talking, and looking down.\nThe man is seen laughing, talking, and looking down."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/JDaw5I_5hPk.0.1.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains completely fixed, exhibiting no movement or shaking.",
+    "internvl2.5-8b": "The camera is moving slowly across the surface of the water, capturing the gentle waves and the reflection of the sky. vast ocean. The camera moves slowly across the surface of the water, capturing the gentle waves and the reflection of the sky. vast ocean. The camera moves slowly across the surface of the water, capturing the gentle waves and the reflection of the sky."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/5eDQ2SSsmEk.9.7.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera rolls counterclockwise in a slow, smooth motion, maintaining steadiness without any shaking.",
+    "internvl2.5-8b": "The camera is moving forward, following the car as it drives down the road. flashing.\nThe car is driving down the road.\nThe car is driving down the road.\nThe car is driving down the road.\nThe car is driving down the road.\nThe car is driving down the road.\nThe car is driving down the road.\nThe car is driving down the road.\nThe car is driving down the road.\nThe car is driving down the road.\nThe car is driving down the road.\nThe car is driving down the road.\nThe car is driving down the road.\nThe car is driving down the road.\nThe car is driving down the road.\nThe car is driving down the road.\nThe car is driving down the road.\nThe car is driving down the road.\nThe car is driving down the road.\nThe car is driving down the road.\nThe car is driving down the road.\nThe car is driving down the road.\nThe car is driving down the road.\nThe car is driving down the road.\nThe car"
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/Kapdye-diSM.8.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera moves forward with a clear pattern, but its progress is unsteady, marked by noticeable shaking.",
+    "internvl2.5-8b": "The camera is moving forward down the street, capturing the cars and buildings as it goes.\nI see a red car and a white van.\nYes, there is a red car and a white van parked on the side of the street.\nThe red car is parked on the left side of the street.\nYes, the red car is parked on the left side of the street.\nThe white van is parked on the right side of the street.\nYes, the white van is parked on the right side of the street.\nThe red car is parked in front of the white van.\nNo, the red car is parked on the left side of the street, while the white van is parked on the right side.\nThe red car is parked in front of the white van.\nNo, the red car is parked on the left side of the street, while the white van is parked on the right side.\nThe red car is parked in front of the white van.\nNo, the red car is parked on the left side of the street, while the white van is parked on the right side.\nThe red car is parked in front of the white van"
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/_I6Y-rtiTPc.0.2.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera quickly zooms in with a smooth and steady motion, maintaining minimal shaking throughout.",
+    "internvl2.5-8b": "The camera is moving forward, following the three men as they walk down the street. police officer is walking behind them.\nThe camera is moving forward, following the three men as they walk down the street. The police officer is walking behind them.\nThe camera is moving forward, following the three men as they walk down the street. The police officer is walking behind them.\nThe camera is moving forward, following the three men as they walk down the street. The police officer is walking behind them.\nThe camera is moving forward, following the three men as they walk down the street. The police officer is walking behind them.\nThe camera is moving forward, following the three men as they walk down the street. The police officer is walking behind them.\nThe camera is moving forward, following the three men as they walk down the street. The police officer is walking behind them.\nThe camera is moving forward, following the three men as they walk down the street. The police officer is walking behind them.\nThe camera is moving forward, following the three men as they walk down the street. The police officer is walking behind them.\nThe camera is moving forward, following the three men"
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/1hu1np_BI2M.7.0.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly zooms out while moving left, maintaining a steady and fluid motion throughout.",
+    "internvl2.5-8b": "The camera does not move in this video. It remains stationary, focusing on the black and white drawings of the people and the line of circles. dollar signs.\nThe video is a simple animation that features a black and white drawing of a person standing in front of a line of circles. The circles are arranged in a row, and each one contains a dollar sign. The person is standing still, and the circles remain in the same position throughout the video. The animation is simple and straightforward, with no additional elements or actions taking place. The focus is solely on the person and the line of circles, and there is no movement or interaction between the two. The video is likely intended to convey a message or idea related to money or finance, as suggested by the presence of the dollar signs. However, without additional context or information, it is difficult to determine the exact meaning or purpose of the animation."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/jOdkb3FYrhA.0.0.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera arcs clockwise with a slightly unsteady motion, exhibiting some shaking as it moves.",
+    "internvl2.5-8b": "The camera pans around the man and the car, showing different angles of the scene.s\nWhat is the man's relationship with the car?\nThe video does not provide information about the man's relationship with the car.s\nWhat is the man's relationship with the house?s\nThe video does not provide information about the man's relationship with the house.s\nWhat is the man's relationship with the car's trunk?\nThe man is seen opening the trunk of the car and looking inside. It is unclear what his relationship with the trunk is.s\nWhat is the man's relationship with the car's hood? \nThe man is seen opening the hood of the car and looking inside. It is unclear what his relationship with the hood is.s\nWhat is the man's relationship with the car's windshield? \nThe man is seen opening the windshield of the car and looking inside. It is unclear what his relationship with the windshield is.s\nWhat is the man's relationship with the car's rear window? \nThe man is seen opening the rear window of the car and looking inside. It is unclear what"
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/G2EAFkURl0U.5.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly pans right, maintaining a steady and fluid motion throughout.",
+    "internvl2.5-8b": "The camera moves forward in a straight line, panning to the right to show the cabin and the surrounding area. green trees and the cabin.\nThe camera then moves forward again, panning to the right to show the cabin and the surrounding area.\nThe camera then moves forward again, panning to the right to show the cabin and the surrounding area.\nThe camera then moves forward again, panning to the right to show the cabin and the surrounding area.\nThe camera then moves forward again, panning to the right to show the cabin and the surrounding area.\nThe camera then moves forward again, panning to the right to show the cabin and the surrounding area.\nThe camera then moves forward again, panning to the right to show the cabin and the surrounding area.\nThe camera then moves forward again, panning to the right to show the cabin and the surrounding area.\nThe camera then moves forward again, panning to the right to show the cabin and the surrounding area.\nThe camera then moves forward again, panning to the right to show the cabin and the surrounding area.\nThe camera then moves forward again, panning to the right to show"
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/xo9p8p6deRI.10.2.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera slowly dollies forward with a slight wobble, its movement slightly unsteady with some shaking.",
+    "internvl2.5-8b": "The camera moves closer to the car, providing a closer view of the car's interior."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/338.2.6.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains completely fixed, exhibiting no movement or shaking.",
+    "internvl2.5-8b": "The camera remains static throughout the video, focusing on the man in the maroon shirt as he eats his meal. pad thai.\nThe camera remains static throughout the video, focusing on the man in the maroon shirt as he eats his meal.\nThe camera remains static throughout the video, focusing on the man in the maroon shirt as he eats his meal.\nThe camera remains static throughout the video, focusing on the man in the maroon shirt as he eats his meal.\nThe camera remains static throughout the video, focusing on the man in the maroon shirt as he eats his meal.\nThe camera remains static throughout the video, focusing on the man in the maroon shirt as he eats his meal.\nThe camera remains static throughout the video, focusing on the man in the maroon shirt as he eats his meal.\nThe camera remains static throughout the video, focusing on the man in the maroon shirt as he eats his meal.\nThe camera remains static throughout the video, focusing on the man in the maroon shirt as he eats his meal.\nThe camera remains static throughout the video, focusing on the man in the maroon shirt as he eats his meal."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/1470.0.7.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera vibrates erratically, lacking a clear pattern in its movement.",
+    "internvl2.5-8b": "The camera is stationary, and there is no movement in the video. woman is standing in front of a house.woman is wearing a white shirt and black pants.woman is holding a black object in her hand.woman is standing in front of a house.woman is wearing a white shirt and black pants.woman is holding a black object in her hand.woman is standing in front of a house.woman is wearing a white shirt and black pants.woman is holding a black object in her hand.woman is standing in front of a house.woman is wearing a white shirt and black pants.woman is holding a black object in her hand.woman is standing in front of a house.woman is wearing a white shirt and black pants.woman is holding a black object in her hand.woman is standing in front of a house.woman is wearing a white shirt and black pants.woman is holding a black object in her hand.woman is standing in front of a house.woman is wearing a white shirt and black pants.woman is holding a black object in her hand"
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/3pxrECZYEAA.2.3.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera zooms out slightly at first while smoothly trucking left to track a bird in flight from the side, maintaining a steady and fluid motion as the subject gradually becomes smaller in the frame.",
+    "internvl2.5-8b": "The camera remains stationary throughout the video, focusing on the bird and the surrounding environment. keypoints are not applicable as the video does not contain any keypoints. actions are not applicable as the video does not contain any actions. objects are not applicable as the video does not contain any objects. locations are not applicable as the video does not contain any locations. descriptions are not applicable as the video does not contain any descriptions. mud. the bird is lying on the ground. the bird is lying on the ground. the bird is lying on the ground. the bird is lying on the"
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/wqn8akChql4.0.14.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera arcs smoothly clockwise while gently descending, capturing a couple embracing and kissing on the battlefield, with no shaking to disrupt the serene motion.",
+    "internvl2.5-8b": "The camera is stationary, and the video is a compilation of still images.\nI thought the camera was moving in the video.\nI'm sorry, but the video is a compilation of still images, and there is no camera movement. person in a costume is standing in front of a large ball of fire.\nI see the person in a costume standing in front of a large ball of fire.\nThe person in the costume is standing in front of a large ball of fire.\nThe person in the costume is standing in front of a large ball of fire.\nThe person in the costume is standing in front of a large ball of fire.\nThe person in the costume is standing in front of a large ball of fire.\nThe person in the costume is standing in front of a large ball of fire.\nThe person in the costume is standing in front of a large ball of fire.\nThe person in the costume is standing in front of a large ball of fire.\nThe person in the costume is standing in front of a large ball of fire.\nThe person in the costume is standing in front of a large ball of fire.\nThe person in the costume"
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/_jli4enm3vw.2.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains fixed but slightly unsteady, with no intentional movement.",
+    "internvl2.5-8b": "The camera is stationary and does not move throughout the video. team. street."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/8ouj_JN2ytI.0.9.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera slowly trucks left to capture the audience, then gently tilts up as they applaud, maintaining a smooth movement with minimal shaking.",
+    "internvl2.5-8b": "The camera is stationary and does not move throughout the video. crowd of people are standing in a stadium. crowd of people are standing in a stadium. crowd of people are standing in a stadium. crowd of people are standing in a stadium. crowd of people are standing in a stadium. crowd of people are standing in a stadium. crowd of people are standing in a stadium. crowd of people are standing in a stadium. crowd of people are standing in a stadium. crowd of people are standing in a stadium. crowd of people are standing in a stadium. crowd of people are standing in a stadium. crowd of people are standing in a stadium. crowd of people are standing in a stadium. crowd of people are standing in a stadium. crowd of people are standing in a stadium."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/GVr8pZmSa-c.0.3.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera pans left to right with noticeable shaking, creating an unsteady and dynamic view.",
+    "internvl2.5-8b": "The camera moves along the side of the boat, showing the waves and the boat's structure. it moves along the side of the boat, showing the waves and the boat's structure.'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''"
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/xo9p8p6deRI.0.0.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly lifts up and tilts down, while simultaneously panning to the left to change its facing direction and capture the crowd, maintaining a steady and shake-free motion throughout.",
+    "internvl2.5-8b": "The camera moves forward in the video."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/CQYQKehqjgI.3.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains completely fixed, exhibiting no movement or shaking.",
+    "internvl2.5-8b": "The camera remains stationary throughout the video, focusing on the person's hand and the bowl of ingredients. mix the ingredients together.\nThe camera remains stationary throughout the video, focusing on the person's hand and the bowl of ingredients.\nThe camera remains stationary throughout the video, focusing on the person's hand and the bowl of ingredients.\nThe camera remains stationary throughout the video, focusing on the person's hand and the bowl of ingredients.\nThe camera remains stationary throughout the video, focusing on the person's hand and the bowl of ingredients.\nThe camera remains stationary throughout the video, focusing on the person's hand and the bowl of ingredients.\nThe camera remains stationary throughout the video, focusing on the person's hand and the bowl of ingredients.\nThe camera remains stationary throughout the video, focusing on the person's hand and the bowl of ingredients.\nThe camera remains stationary throughout the video, focusing on the person's hand and the bowl of ingredients.\nThe camera remains stationary throughout the video, focusing on the person's hand and the bowl of ingredients.\nThe camera remains stationary throughout the video, focusing on the person's hand and the bowl of ingredients.\nThe camera remains stationary throughout the"
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/LI7i6DQfh0o.0.2.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera arcs slowly and smoothly in a clockwise direction, maintaining a steady and fluid motion without any shaking.",
+    "internvl2.5-8b": "The camera remains stationary throughout the video, providing a top-down view of the picnic setup. cooler, and a white plate with a fork and knife. The camera does not move, and there is no change in the scene or the objects within it."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/upC8hjr2b4g.12.7.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera moves forward with a clear pattern, but its progress is unsteady, marked by noticeable shaking.",
+    "internvl2.5-8b": "The camera in the video is stationary and does not move. It remains focused on the person and the computer screen throughout the entire video. yellow line on the screen.\nIs there any interaction between the person and the computer?\nYes, the person is looking at the computer screen and appears to be analyzing the yellow line on the screen.\nCan you describe the person's actions in the video? person's actions in the video.\nThe person is standing in front of the computer screen and appears to be analyzing the yellow line on the screen. They do not move or interact with any other objects in the video.\nIs there any other object in the video besides the person and the computer screen?\nNo, there are no other objects in the video besides the person and the computer screen.\nCan you describe the person's clothing? person's clothing in the video"
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/kSx5KGOv5Qc.1.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly tilts down while simultaneously panning right, maintaining minimal shaking throughout the movement.",
+    "internvl2.5-8b": "The camera moves closer to the city, providing a closer view of the buildings and the water. red-tiled roofs, and the blue water.red-tiled roofs, and the blue water."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/-2uIa-XMJC0.8.1.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The handheld camera begins on a black screen inside a well, gradually moving backward and upward to track a person crawling out. It leads the subject from the front, capturing them as they grow larger in the frame. The movement is slightly unsteady, with some shaking.",
+    "internvl2.5-8b": "The camera moves closer to the car and the woman inside.towards the end of the video.sits in the car.sits in the car.sits in the car.sits in the car.sits in the car.sits in the car.sits in the car.sits in the car.sits in the car.sits in the car.sits in the car.sits in the car.sits in the car.sits in the car.sits in the car.sits in the car.sits in the car.sits in the car.sits in the car.sits in the car.sits in the car.sits in the car.sits in the"
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/QMlfVwN3iTw.7.5.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera zooms out with a slightly unsteady motion, exhibiting some shaking.",
+    "internvl2.5-8b": "The camera is stationary and does not move throughout the video. bridge over the water.\nHow many buildings are visible in the video? red building.\nThere are multiple buildings visible in the video, but the red building is one of them.\nWhat is the color of the building in the video?\nThe building in the video is red.\nWhat is the color of the sky in the video?\nThe sky in the video is blue.\nWhat is the color of the water in the video?\nThe water in the video is blue.\nWhat is the color of the bridge in the video?\nThe bridge in the video is gray.\nWhat is the color of the building in the video?\nThe building in the video is red.\nWhat is the color of the water in the video?\nThe water in the video is blue.\nWhat is the color of the sky in the video?\nThe sky in the video is blue.\nWhat is the color of the bridge in the video?"
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/XA2X_JBzkzY.2.1.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly zooms out, maintaining minimal shaking throughout the movement.",
+    "internvl2.5-8b": "The camera slowly zooms in on the baby, creating a sense of intimacy and focus on the tender moment. mother and child. close-up shot of the baby. mother and child. mother and child. mother and child."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/5e5ef4541835cc6ffc817c5dd4eb7f240d200553b3eed64782d61ccde60d4ade.1.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains completely fixed, exhibiting no movement or shaking.",
+    "internvl2.5-8b": "The camera is stationary, and there is no movement in the video. wolf lying down in the grass. wolf lying down in the grass. wolf lying down in the grass. wolf lying down in the grass. wolf lying down in the grass. wolf lying down in the grass. wolf lying down in the grass. wolf lying down in the grass. wolf lying down in the grass. wolf lying down in the grass. wolf lying down in the grass. wolf lying down in the grass. wolf lying down in the grass. wolf lying down in the grass. wolf lying down in the grass. wolf lying down in the grass. wolf lying down in the grass. wolf lying down in the grass. wolf lying down in the grass. wolf lying down in the grass. wolf lying down in the grass. wolf lying down in the grass. wolf lying down in the grass. wolf lying down in the"
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/c41pRPO9TQk.3.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly pans to the right while trucking left, then rapidly zooms out, all with minimal shaking.",
+    "internvl2.5-8b": "The camera pans to the right, showing the flooded area and the people in the water. flood.\nThe camera pans to the right, showing the flooded area and the people in the water.\nThe camera pans to the right, showing the flooded area and the people in the water.\nThe camera pans to the right, showing the flooded area and the people in the water.\nThe camera pans to the right, showing the flooded area and the people in the water.\nThe camera pans to the right, showing the flooded area and the people in the water.\nThe camera pans to the right, showing the flooded area and the people in the water.\nThe camera pans to the right, showing the flooded area and the people in the water.\nThe camera pans to the right, showing the flooded area and the people in the water.\nThe camera pans to the right, showing the flooded area and the people in the water.\nThe camera pans to the right, showing the flooded area and the people in the water.\nThe camera pans to the right, showing the flooded area and the people in the water."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/0Pzq0URbL2M.9.3.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera moves smoothly and swiftly downward, centering the subject while rolling clockwise, maintaining a very smooth steadiness with no shaking.",
+    "internvl2.5-8b": "The camera zooms in on the hole in the ground, and then it zooms out to show the hole again. man standing in the hole.\nThe video shows a man standing in a hole in the ground. The camera zooms in on the hole, and then it zooms out to show the hole again. The man is standing in the hole, and he is the only person in the video. The hole is in the middle of a field, and there are no other objects in the video. The man is standing still, and he is not moving. The video is a still image, and there is no sound. The video is a simple, straightforward shot of a man standing in a hole in the ground. hole in the ground.\nThe video shows a hole in the ground. The camera zooms in on the hole, and then it zooms out to show the hole again. The hole is in the middle of a field, and there are no other objects in the video. The video is a still image, and there is no sound. The video is a simple, straightforward shot of a hole in the ground."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/3epU697sU9E.0.0.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera rapidly zooms out, rolling clockwise and panning right to reveal the whole map, all with very smooth and quick movement.",
+    "internvl2.5-8b": "The camera is stationary and does not move. It captures the same scene from a fixed position. map of the city with a river running through it. The video shows a map of the city with a river running through it. The map is shown in a close-up view, and the river is clearly visible. The video is a still image, and there is no movement or action. The map is the only object in the video, and it is the main focus. The video does not contain any other objects or actions. The map is shown in a clear and detailed manner, and it is easy to see the river running through the city. The video is a simple and straightforward representation of a map, and it does not contain any additional elements or actions. map of the city with a river running through it. The video shows a map of the city with a river running through it. The map is shown in a close-up view, and the river is clearly visible. The video is a still image, and there is no movement or action. The map is the only object in the video, and it is the main focus. The video does not contain any other objects or actions. The map is shown in a clear and detailed manner,"
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/sJsu7Tv-fRY.0.2.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera, positioned at a bird's eye view, moves upward while rolling clockwise, gradually revealing the entire map with very smooth, steady motion and no shaking.",
+    "internvl2.5-8b": "The camera is moving slowly across the map, providing a detailed view of the layout. city.\nThe camera is moving slowly across the map, providing a detailed view of the layout.\nThe camera is moving slowly across the map, providing a detailed view of the layout.\nThe camera is moving slowly across the map, providing a detailed view of the layout.\nThe camera is moving slowly across the map, providing a detailed view of the layout.\nThe camera is moving slowly across the map, providing a detailed view of the layout.\nThe camera is moving slowly across the map, providing a detailed view of the layout.\nThe camera is moving slowly across the map, providing a detailed view of the layout.\nThe camera is moving slowly across the map, providing a detailed view of the layout.\nThe camera is moving slowly across the map, providing a detailed view of the layout.\nThe camera is moving slowly across the map, providing a detailed view of the layout.\nThe camera is moving slowly across the map, providing a detailed view of the layout.\nThe camera is moving slowly across the map, providing a detailed view of the layout.\nThe camera is"
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/FUQhNGEu2KA.0.0.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains completely fixed, exhibiting no movement or vibration.",
+    "internvl2.5-8b": "The camera remains stationary throughout the video, capturing the woman walking down the hallway. doorway.\nHow does the woman's movement change as she walks down the hallway?\nThe woman's movement is steady and consistent as she walks down the hallway. doorway.\nWhat is the significance of the woman's attire in the video? walking down the hallway."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/cdbdf71cb5b76ac81a00f2e3e5c22bc27b126da4579752cd6a10da3650b4d8e3.0.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains completely fixed, exhibiting no movement or shaking.",
+    "internvl2.5-8b": "The camera is stationary, capturing the natural movement of the waves and the boats passing by. pebble beach.\nThe camera is stationary, capturing the natural movement of the waves and the boats passing by.\nThe camera is stationary, capturing the natural movement of the waves and the boats passing by.\nThe camera is stationary, capturing the natural movement of the waves and the boats passing by.\nThe camera is stationary, capturing the natural movement of the waves and the boats passing by.\nThe camera is stationary, capturing the natural movement of the waves and the boats passing by.\nThe camera is stationary, capturing the natural movement of the waves and the boats passing by.\nThe camera is stationary, capturing the natural movement of the waves and the boats passing by.\nThe camera is stationary, capturing the natural movement of the waves and the boats passing by.\nThe camera is stationary, capturing the natural movement of the waves and the boats passing by.\nThe camera is stationary, capturing the natural movement of the waves and the boats passing by.\nThe camera is stationary, capturing the natural movement of the waves and the boats passing by.\nThe camera is stationary, capturing the natural"
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/1560.0.17.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly dollies forward while simultaneously panning right to maintain focus on the walking man, ensuring a steady and fluid motion without any shaking.",
+    "internvl2.5-8b": "The camera is stationary and does not move throughout the video. It captures the man walking in the snowy park from a fixed position. bench. snowy park."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/kxcw0iSn0xw.5.1.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains fixed but slightly unsteady, with no intentional movement.",
+    "internvl2.5-8b": "The camera remains stationary throughout the video, focusing on the apple and the water stream. being sprayed. the apple. the apple."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/fT6olrwrjnI.5.3.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera moves forward quickly with a very smooth and steady motion, showing a clear movement pattern.",
+    "internvl2.5-8b": "The camera in the video moves closer to the soccer ball that is stuck in the net. It starts from a distance and gradually zooms in, providing a closer view of the ball and the net. went to the goal. soccer ball."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/yGsVo0uIJVs.3.5.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera arcs slowly and smoothly in a clockwise direction, maintaining a steady and fluid motion without any shaking.",
+    "internvl2.5-8b": "The camera remains stationary throughout the video, focusing on the same scene without any movement. picture drawing of a man on a horse."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/JDaw5I_5hPk.0.10.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains fixed but slightly unsteady, with no intentional movement.",
+    "internvl2.5-8b": "The camera remains stationary throughout the video, capturing the serene scene of boats and rocks in the water. large rocks in the water.\nWhat is the color of the water in the video?"
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/3m-ME9AXCTo.1.1.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera arcs counterclockwise with a slightly unsteady motion, exhibiting some shaking.",
+    "internvl2.5-8b": "The camera pans around the room, showing the people dancing and the decorations.\nIs there any interaction between the man and the woman in the video? slow dancing together.\nYes, the man and the woman are seen slow dancing together in the video. party.\nWhat is the man wearing in the video? a party.\nThe man is wearing a blue suit in the video.\nWhat is the woman wearing in the video?\nThe woman is wearing a white dress in the video.\nWhat is the man doing in the video?\nThe man is seen dancing with the woman in the video.\nWhat is the woman doing in the video?\nThe woman is seen dancing with the man in the video. curly hair.\nWhat is the man's hair like in the video?\nThe man has curly hair in the video.\nWhat is the woman's hair like in the video?\nThe woman has long blonde hair in the video.\nWhat is the man holding in the video? a party.\nThe man is holding a microphone in the video.\nWhat"
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/8iZ8RtiJq14.1.0.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly moves backward, leading the subject from the front as it tracks the flying metal tag. Near the end, it halts its backward motion and shifts slightly forward, maintaining a very smooth and steady movement throughout.",
+    "internvl2.5-8b": "The camera moves closer to the cup of soda in the video. tag.\n``` table.\n``` tag.\n``` tag.\n``` tag.\n``` tag.\n``` tag.\n``` tag.\n``` tag.\n``` tag.\n``` tag.\n``` tag.\n``` tag.\n``` tag.\n``` tag.\n``` tag.\n``` tag.\n``` tag.\n``` tag.\n``` tag.\n``` tag.\n``` tag.\n``` tag.\n``` tag.\n``` tag.\n``` tag.\n``` tag.\n``` tag.\n``` tag.\n``` tag.\n``` tag.\n``` tag.\n``` tag."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/8iZ8RtiJq14.5.1.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera, in a bird\u2019s-eye view, smoothly moves from one sticker to another on the board while rolling counterclockwise to adjust its orientation, maintaining a steady and shake-free motion throughout.",
+    "internvl2.5-8b": "The camera moves closer to the table and the objects on it, focusing on the red ball and the note. magnet.\nThe camera then moves away from the table, showing the entire table and the objects on it.\nThe camera then moves closer to the table and the objects on it, focusing on the red ball and the note.\nThe camera then moves away from the table, showing the entire table and the objects on it.\nThe camera then moves closer to the table and the objects on it, focusing on the red ball and the note.\nThe camera then moves away from the table, showing the entire table and the objects on it.\nThe camera then moves closer to the table and the objects on it, focusing on the red ball and the note.\nThe camera then moves away from the table, showing the entire table and the objects on it.\nThe camera then moves closer to the table and the objects on it, focusing on the red ball and the note.\nThe camera then moves away from the table, showing the entire table and the objects on it.\nThe camera then moves closer to the table and the objects on it, focusing on the red ball and the"
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/wQ09HsEKmvE.1.1.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly tilts upward while panning right, maintaining a steady focus as it tracks the subject.",
+    "internvl2.5-8b": "The camera follows the man as he walks, maintaining a consistent distance and angle. book.\nThe camera follows the man as he walks, maintaining a consistent distance and angle.\nThe camera follows the man as he walks, maintaining a consistent distance and angle.\nThe camera follows the man as he walks, maintaining a consistent distance and angle.\nThe camera follows the man as he walks, maintaining a consistent distance and angle.\nThe camera follows the man as he walks, maintaining a consistent distance and angle.\nThe camera follows the man as he walks, maintaining a consistent distance and angle.\nThe camera follows the man as he walks, maintaining a consistent distance and angle.\nThe camera follows the man as he walks, maintaining a consistent distance and angle.\nThe camera follows the man as he walks, maintaining a consistent distance and angle.\nThe camera follows the man as he walks, maintaining a consistent distance and angle.\nThe camera follows the man as he walks, maintaining a consistent distance and angle.\nThe camera follows the man as he walks, maintaining a consistent distance and angle.\nThe camera follows the man as he walks, maintaining a consistent distance and angle."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/qYztDs8vPBg.2.2.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains completely static, fixed in place without any movement or shaking.",
+    "internvl2.5-8b": "The camera remains stationary throughout the video, focusing on the person's hands and the smartphone. using the stylus. using the stylus. using the stylus. using the stylus."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/tCRbVEGHZlQ.0.5.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly trucks right, maintaining a steady and fluid motion throughout.",
+    "internvl2.5-8b": "The camera remains stationary throughout the video, focusing on the stick figure and its actions. carry a briefcase. plain white background."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/3pxrECZYEAA.2.7.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly zooms in to approach the drunk person, slightly tilting up to center them, maintaining a steady and shake-free motion throughout.",
+    "internvl2.5-8b": "The camera in the video moves closer to the man in the bar. It starts with a wide shot of the bar and then zooms in on the man, focusing on his face and upper body. drink.\nThe camera then moves back to a medium shot, showing the man sitting at the bar.\nThe camera then moves closer to the man again, this time focusing on his face and upper body.\nFinally, the camera moves back to a wide shot of the bar, showing the man sitting at the bar.\nThe camera then moves closer to the man again, this time focusing on his face and upper body.\nFinally, the camera moves back to a medium shot, showing the man sitting at the bar.\nThe camera then moves closer to the man again, this time focusing on his face and upper body.\nFinally, the camera moves back to a wide shot of the bar, showing the man sitting at the bar.\nThe camera then moves closer to the man again, this time focusing on his face and upper body.\nFinally, the camera moves back to a medium shot, showing the man sitting at the bar.\nThe camera then moves closer to the man again,"
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/yGsVo0uIJVs.0.4.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly moves forward while simultaneously zooming out, maintaining minimal shaking throughout the motion.",
+    "internvl2.5-8b": "The camera does not move in this video. It remains stationary, focusing on the red door with the circular window and the sign that says \"Top Secret.\" door.\nThe video shows a red door with a circular window and a sign that says \"Top Secret.\" The door is located in a hallway with red walls and a red floor. The camera remains stationary, focusing on the door and the sign.\nThe video shows a red door with a circular window and a sign that says \"Top Secret.\" The door is located in a hallway with red walls and a red floor. The camera remains stationary, focusing on the door and the sign.\nThe video shows a red door with a circular window and a sign that says \"Top Secret.\" The door is located in a hallway with red walls and a red floor. The camera remains stationary, focusing on the door and the sign.\nThe video shows a red door with a circular window and a sign that says \"Top Secret.\" The door is located in a hallway with red walls and a red floor. The camera remains stationary, focusing on the door and the sign.\nThe video shows a red door with a circular window and a sign that says \"Top Secret.\" The door"
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/4jdZkC33NXw.0.1.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera moves forward while simultaneously moving down, with a slightly unsteady motion that includes some shaking.",
+    "internvl2.5-8b": "The camera moves forward down the street, providing a closer view of the houses and the street. power lines.\nThe camera moves forward down the street, providing a closer view of the houses and the street.\nThe camera moves forward down the street, providing a closer view of the houses and the street.\nThe camera moves forward down the street, providing a closer view of the houses and the street.\nThe camera moves forward down the street, providing a closer view of the houses and the street.\nThe camera moves forward down the street, providing a closer view of the houses and the street.\nThe camera moves forward down the street, providing a closer view of the houses and the street.\nThe camera moves forward down the street, providing a closer view of the houses and the street.\nThe camera moves forward down the street, providing a closer view of the houses and the street.\nThe camera moves forward down the street, providing a closer view of the houses and the street.\nThe camera moves forward down the street, providing a closer view of the houses and the street.\nThe camera moves forward down the street, providing a closer view of the houses and the street."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/CBRwF0LU3Ys.0.16.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The drone camera flies low over a desert, moving forward with a very smooth motion. As a racing car comes into view, the camera slightly rolls clockwise and pans right to follow the car, which kicks up a cloud of sand that momentarily obscures the lens. It then continues to follow the car, with the motion gradually transitioning into slow motion.",
+    "internvl2.5-8b": "The camera is moving forward, following the car as it drives through the desert.\nIs there any interaction between the objects in the video? dust is being kicked up by the car.\nYes, the car is kicking up dust as it drives through the desert.\nIs there any interaction between the objects in the video?\nYes, the car is kicking up dust as it drives through the desert.\nIs there any interaction between the objects in the video?\nYes, the car is kicking up dust as it drives through the desert.\nIs there any interaction between the objects in the video?\nYes, the car is kicking up dust as it drives through the desert.\nIs there any interaction between the objects in the video?\nYes, the car is kicking up dust as it drives through the desert.\nIs there any interaction between the objects in the video?\nYes, the car is kicking up dust as it drives through the desert.\nIs there any interaction between the objects in the video?\nYes, the car is kicking up dust as it drives through the desert.\nIs there any interaction between the objects in the video?\nYes, the car"
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/f4ZzHtww6Tc.5.6.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera moves forward at a slight angle, tracking the skateboarder from a rear-side perspective. Around the middle of the video, it pans slightly to the left as the skateboarder moves slightly left, positioning himself in front of the camera. The camera is following the subject from behind, and during the tracking shot, the subject becomes larger in the frame. The camera movement is slightly unsteady with some shaking.",
+    "internvl2.5-8b": "The camera is moving forward, following the skateboarder as he rides down the sidewalk. riding down the sidewalk.\nThe camera is moving forward, following the skateboarder as he rides down the sidewalk.\nThe camera is moving forward, following the skateboarder as he rides down the sidewalk.\nThe camera is moving forward, following the skateboarder as he rides down the sidewalk.\nThe camera is moving forward, following the skateboarder as he rides down the sidewalk.\nThe camera is moving forward, following the skateboarder as he rides down the sidewalk.\nThe camera is moving forward, following the skateboarder as he rides down the sidewalk.\nThe camera is moving forward, following the skateboarder as he rides down the sidewalk.\nThe camera is moving forward, following the skateboarder as he rides down the sidewalk.\nThe camera is moving forward, following the skateboarder as he rides down the sidewalk.\nThe camera is moving forward, following the skateboarder as he rides down the sidewalk.\nThe camera is moving forward, following the skateboarder as he rides down the sidewalk.\nThe camera is moving forward, following the"
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/JGiXuXc3cao.3.4.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera initially frames two subjects before smoothly dollying backward and trucking leftward, incorporating a subtle counterclockwise roll. This movement gradually reveals a group photo of four subjects, starting slowly and accelerating as the video progresses, all while maintaining a very smooth and steady motion without any shaking.",
+    "internvl2.5-8b": "The camera remains stationary throughout the video, focusing on the same scene without any movement. man is holding a monkey. cartoon. cartoon."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/oRt5NPY7yYA.4.1.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera arcs counterclockwise with a smooth, steady motion, exhibiting minimal shaking.",
+    "internvl2.5-8b": "The camera is stationary, and the truck is moving from left to right. trailer.\nThe truck is driving down a road in the desert.\nThe truck is driving down a road in the desert.\nThe truck is driving down a road in the desert.\nThe truck is driving down a road in the desert.\nThe truck is driving down a road in the desert.\nThe truck is driving down a road in the desert.\nThe truck is driving down a road in the desert.\nThe truck is driving down a road in the desert.\nThe truck is driving down a road in the desert.\nThe truck is driving down a road in the desert.\nThe truck is driving down a road in the desert.\nThe truck is driving down a road in the desert.\nThe truck is driving down a road in the desert.\nThe truck is driving down a road in the desert.\nThe truck is driving down a road in the desert.\nThe truck is driving down a road in the desert.\nThe truck is driving down a road in the desert.\nThe truck is driving down a road in the desert."
+  }
+]

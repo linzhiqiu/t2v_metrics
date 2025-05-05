@@ -1,0 +1,14 @@
+max_n_frames: 256
+n_frames: 16
+max_pixels: 460800 # 1280 * 720 // 2
+min_pixels: 0
+max_seq_len: 16384
+is_training: false  # 会影响：1. 训练和测试时采帧不同；2. 测试时忽略 response。
+print_data_error: true
+is_training: false
+do_image_padding: false
+do_image_crop: false
+do_image_resize: false
+video_sampling_strategy: {'video_sampler_version': 'v1', 'force_frames_n_divisible': 1, 'use_multi_images_for_video': true}
+prompt: ""
+train_task: sft

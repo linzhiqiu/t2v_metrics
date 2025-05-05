@@ -10,11 +10,14 @@ class CLIPScore(Score):
     def prepare_scoremodel(self,
                            model='openai:ViT-L/14',
                            device='cuda',
-                           cache_dir=HF_CACHE_DIR):
+                           cache_dir=HF_CACHE_DIR,
+                           **kwargs):
+        print(f'{kwargs["model_path"]}')
         return get_clipscore_model(
             model,
             device=device,
-            cache_dir=cache_dir
+            cache_dir=cache_dir,
+            **kwargs
         )
             
     def list_all_models(self) -> List[str]:

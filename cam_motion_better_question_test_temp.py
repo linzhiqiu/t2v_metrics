@@ -15,6 +15,24 @@ import torch
 from torch.utils.data import Dataset
 from pathlib import Path
 
+# ROOT = Path("/data3/zhiqiul/video_annotation")
+# VIDEO_ROOT = Path("/data3/zhiqiul/video_annotation/videos")
+# VIDEO_LABEL_DIR = ROOT / "video_labels/"
+# # Get the absolute path of the video_annotation/ folder
+# # Add it to sys.path
+# sys.path.append(os.path.abspath(ROOT))
+
+# from benchmark import labels_as_dict, BinaryTask
+# from pairwise_benchmark import (
+#     generate_pairwise_datasets,
+# )
+
+
+from pairwise_benchmark import (
+    generate_pairwise_datasets,
+)
+import argparse
+
 ROOT = Path("/data3/zhiqiul/video_annotation")
 VIDEO_ROOT = Path("/data3/zhiqiul/video_annotation/videos")
 VIDEO_LABEL_DIR = ROOT / "video_labels/"
@@ -23,11 +41,6 @@ VIDEO_LABEL_DIR = ROOT / "video_labels/"
 sys.path.append(os.path.abspath(ROOT))
 
 from benchmark import labels_as_dict, BinaryTask
-from pairwise_benchmark import (
-    generate_pairwise_datasets,
-)
-
-import argparse
 
 parser = argparse.ArgumentParser()
 parser.add_argument(
@@ -138,7 +151,12 @@ args = parser.parse_args()
 
 print(f"Using score model: {args.score_model}")
 
-score_model = t2v_metrics.get_score_model(model=args.score_model)
+if 'gemini' in args.score_model:
+    score_model = t2v_metrics.get_score_model(model=args.score_model, api_key='api_key')
+elif 'gpt' in args.score_model:
+    score_model = t2v_metrics.get_score_model(model=args.score_model, api_key='api_key')
+else:
+    score_model = t2v_metrics.get_score_model(model=args.score_model)
 
 # if type of score_model is VQAScoreModel
 if isinstance(score_model, t2v_metrics.VQAScore):
@@ -165,11 +183,11 @@ all_labels = labels_as_dict(root=args.root, video_label_file=args.video_label_fi
 scene_movement_labels = labels_as_dict(root=args.root, video_label_file=args.video_label_file_scene_movement, video_root=args.video_root)
 
 label_to_name = {
+    "cam_motion.camera_centric_movement.forward.has_forward_wrt_camera": "Move In",
+    "cam_motion.camera_centric_movement.backward.has_backward_wrt_camera": "Move Out",
     "cam_motion.steadiness_and_movement.fixed_camera": "Static",
     "cam_motion.camera_centric_movement.zoom_in.has_zoom_in": "Zoom In",
     "cam_motion.camera_centric_movement.zoom_out.has_zoom_out": "Zoom Out",
-    "cam_motion.camera_centric_movement.forward.has_forward_wrt_camera": "Move In",
-    "cam_motion.camera_centric_movement.backward.has_backward_wrt_camera": "Move Out",
     "cam_motion.camera_centric_movement.upward.has_upward_wrt_camera": "Move Up",
     "cam_motion.camera_centric_movement.downward.has_downward_wrt_camera": "Move Down",
     "cam_motion.camera_centric_movement.rightward.has_rightward": "Move Right",
@@ -184,6 +202,26 @@ label_to_name = {
     "cam_motion.scene_movement.mostly_static_scene": "Mostly Static Scene",
     "cam_motion.scene_movement.static_scene": "Static Scene",
 }
+# label_to_name = {
+#     "cam_motion.steadiness_and_movement.fixed_camera": "Static",
+#     "cam_motion.camera_centric_movement.zoom_in.has_zoom_in": "Zoom In",
+#     "cam_motion.camera_centric_movement.zoom_out.has_zoom_out": "Zoom Out",
+#     "cam_motion.camera_centric_movement.forward.has_forward_wrt_camera": "Move In",
+#     "cam_motion.camera_centric_movement.backward.has_backward_wrt_camera": "Move Out",
+#     "cam_motion.camera_centric_movement.upward.has_upward_wrt_camera": "Move Up",
+#     "cam_motion.camera_centric_movement.downward.has_downward_wrt_camera": "Move Down",
+#     "cam_motion.camera_centric_movement.rightward.has_rightward": "Move Right",
+#     "cam_motion.camera_centric_movement.leftward.has_leftward": "Move Left",
+#     "cam_motion.camera_centric_movement.pan_right.has_pan_right": "Pan Right",
+#     "cam_motion.camera_centric_movement.pan_left.has_pan_left": "Pan Left",
+#     "cam_motion.camera_centric_movement.tilt_up.has_tilt_up": "Tilt Up",
+#     "cam_motion.camera_centric_movement.tilt_down.has_tilt_down": "Tilt Down",
+#     "cam_motion.camera_centric_movement.roll_clockwise.has_roll_clockwise": "Roll Clockwise",
+#     "cam_motion.camera_centric_movement.roll_counterclockwise.has_roll_counterclockwise": "Roll Counterclockwise",
+#     "cam_motion.scene_movement.dynamic_scene": "Dynamic Scene",
+#     "cam_motion.scene_movement.mostly_static_scene": "Mostly Static Scene",
+#     "cam_motion.scene_movement.static_scene": "Static Scene",
+# }
 
 name_to_label = {v: k for k, v in label_to_name.items()}
 
