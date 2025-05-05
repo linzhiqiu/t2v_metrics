@@ -196,6 +196,7 @@ INTERNVL2_MODELS = {
             'low_cpu_mem_usage': True,
             'use_flash_attn': True,
             'trust_remote_code': True,
+            'device_map': 'auto'
         },
     },
     'internvl2.5-78b': {
@@ -210,8 +211,57 @@ INTERNVL2_MODELS = {
             'low_cpu_mem_usage': True,
             'use_flash_attn': True,
             'trust_remote_code': True,
+            'device_map': 'auto'
         },
     },
+
+    'internvl3-8b': {
+    "tokenizer": {
+        "path": "OpenGVLab/InternVL3-8B",
+        "trust_remote_code": True,
+        "use_fast": False,
+    },
+    "model": {
+        "pretrained_model_name_or_path": "OpenGVLab/InternVL3-8B",
+        "torch_dtype": torch.bfloat16,
+        "low_cpu_mem_usage": True,
+        "use_flash_attn": True,
+        "trust_remote_code": True, 
+        'device_map': 'auto'
+        },
+    },
+
+    'internvl3-14b': {
+    "tokenizer": {
+        "path": "OpenGVLab/InternVL3-14B",
+        "trust_remote_code": True,
+        "use_fast": False,
+    },
+    "model": {
+        "pretrained_model_name_or_path": "OpenGVLab/InternVL3-14B",
+        "torch_dtype": torch.bfloat16,
+        "low_cpu_mem_usage": True,
+        "use_flash_attn": True,
+        "trust_remote_code": True,
+        'device_map': 'auto'
+        },
+    },
+
+    'internvl3-78b': {
+    "tokenizer": {
+        "path": "OpenGVLab/InternVL3-78B",
+        "trust_remote_code": True,
+        "use_fast": False,
+    },
+    "model": {
+        "pretrained_model_name_or_path": "OpenGVLab/InternVL3-78B",
+        "torch_dtype": torch.bfloat16,
+        "low_cpu_mem_usage": True,
+        "use_flash_attn": True,
+        "trust_remote_code": True,
+        'device_map': 'auto'
+        },
+    }
 }
 
 IMAGENET_MEAN = (0.485, 0.456, 0.406)
@@ -249,7 +299,10 @@ class InternVL2Model(VQAScoreModel):
             **self.model_info['tokenizer']
         )
         
+        # if 'internvl2' in self.model_name:
         self.device = next(self.model.parameters()).device # If there are multiple GPUs put the model on the first parameters GPU
+        # elif 'internvl3' in self.model_name:
+        #     self.device
     def build_transform(self, input_size=448):
         transform = T.Compose([
             T.Lambda(lambda img: img.convert('RGB') if img.mode != 'RGB' else img),
@@ -373,7 +426,7 @@ class InternVL2Model(VQAScoreModel):
                 paths: List[str],
                 texts: List[str],
                 num_frames: int=16,
-                question_template: str = "Does this figure show \"{}\"? Please answer yes or no.",
+                question_template: str = "Does this figure show \"{}\"? Please answer Yes or No.",
                 answer_template: str = "Yes") -> torch.Tensor:
         assert len(paths) == len(texts), "Number of paths and texts must match"
 
@@ -407,6 +460,7 @@ class InternVL2Model(VQAScoreModel):
 
             # Chat Arguments:
             pixel_values = data.to(self.device)
+            pixel_values = pixel_values.to(self.model.dtype)
             generation_config = dict(max_new_tokens=1, do_sample=False, output_scores=True, return_dict_in_generate=True)
             IMG_START_TOKEN='<img>'
             IMG_END_TOKEN='</img>' 
@@ -455,7 +509,11 @@ class InternVL2Model(VQAScoreModel):
             scores = outputs.scores[0]
 
             probs = torch.nn.functional.softmax(scores, dim=-1)
-            yes_token_id = self.tokenizer.encode(answer)[1] 
+            yes_token_id = self.tokenizer.encode(answer)[0] # Option 1
+
+            # Option 2:
+            # if answer == "Yes":
+            #     yes_token_id = self.tokenizer.encode(" " + answer, add_special_tokens=False)[0]
 
             lm_prob = probs[0, yes_token_id].item()
             lm_probs.append(lm_prob)
@@ -496,7 +554,7 @@ class InternVL2Model(VQAScoreModel):
 
             template = get_conv_template(self.model.template)
             template.system_message = self.model.system_message
-            eos_token_id = self.tokenizer.convert_tokens_to_ids(template.sep)
+            eos_token_id = self.tokenizer.convert_tokens_to_ids(template.sep.strip())
 
             history = [] if history is None else history
             for (old_question, old_answer) in history:

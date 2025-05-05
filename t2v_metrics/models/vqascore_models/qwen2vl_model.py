@@ -61,6 +61,16 @@ QWEN2_VL_MODELS = {
             'attn_implementation': 'flash_attention_2',
         },
     },
+    'qwen2.5-vl-32b': {
+        'tokenizer': {
+            'path': 'Qwen/Qwen2.5-VL-32B-Instruct',
+        },
+        'model': {
+            'path': 'Qwen/Qwen2.5-VL-32B-Instruct',
+            'torch_dtype': torch.bfloat16,
+            'attn_implementation': 'flash_attention_2',
+        },
+    },
     'qwen2.5-vl-72b': {
         'tokenizer': {
             'path': 'Qwen/Qwen2.5-VL-72B-Instruct',
@@ -267,9 +277,7 @@ QWEN2_VL_MODELS = {
     },
 
 
-    # Post-ICCV Results:
-
-
+   # Post-ICCV Results - set fps based on model name:
     'qwen2.5-vl-bal-cap-fps2': {
         'tokenizer': {
             'path': 'Qwen/Qwen2.5-VL-7B-Instruct',
@@ -279,6 +287,7 @@ QWEN2_VL_MODELS = {
             'torch_dtype': torch.bfloat16,
             'attn_implementation': 'flash_attention_2',
         },
+        'fps': 2.0,  # Specific fps from model name
     },
 
     'qwen2.5-vl-bal-cap-fps4': {
@@ -290,8 +299,211 @@ QWEN2_VL_MODELS = {
             'torch_dtype': torch.bfloat16,
             'attn_implementation': 'flash_attention_2',
         },
+        'fps': 4.0,  # Specific fps from model name
     },
-    
+
+    'qwen2.5-vl-bal-cap-fps8': {
+        'tokenizer': {
+            'path': 'Qwen/Qwen2.5-VL-7B-Instruct',
+        },
+        'model': {
+            'path': '/data3/cmitra/LLaMA-Factory/models/qwen2.5-vl-bal-cap-fps8',
+            'torch_dtype': torch.bfloat16,
+            'attn_implementation': 'flash_attention_2',
+        },
+        'fps': 8.0,  # Specific fps from model name
+    },
+
+    'qwen2.5-vl-bal-imb-cap-fps2': {
+        'tokenizer': {
+            'path': 'Qwen/Qwen2.5-VL-7B-Instruct',
+        },
+        'model': {
+            'path': '/data3/cmitra/LLaMA-Factory/models/qwen2.5-vl-bal-imb-cap-fps2',
+            'torch_dtype': torch.bfloat16,
+            'attn_implementation': 'flash_attention_2',
+        },
+        'fps': 2.0,  # Specific fps from model name
+    },
+
+    'qwen2.5-vl-bal-imb-cap-fps4': {
+        'tokenizer': {
+            'path': 'Qwen/Qwen2.5-VL-7B-Instruct',
+        },
+        'model': {
+            'path': '/data3/cmitra/LLaMA-Factory/models/qwen2.5-vl-bal-imb-cap-fps4',
+            'torch_dtype': torch.bfloat16,
+            'attn_implementation': 'flash_attention_2',
+        },
+        'fps': 4.0,  # Specific fps from model name
+    },
+
+    'qwen2.5-vl-bal-imb-cap-fps8': {
+        'tokenizer': {
+            'path': 'Qwen/Qwen2.5-VL-7B-Instruct',
+        },
+        'model': {
+            'path': '/data3/cmitra/LLaMA-Factory/models/qwen2.5-vl-bal-imb-cap-fps8',
+            'torch_dtype': torch.bfloat16,
+            'attn_implementation': 'flash_attention_2',
+        },
+        'fps': 8.0,  # Specific fps from model name
+    },
+
+    'qwen2.5-vl-imb-cap-fps2': {
+        'tokenizer': {
+            'path': 'Qwen/Qwen2.5-VL-7B-Instruct',
+        },
+        'model': {
+            'path': '/data3/cmitra/LLaMA-Factory/models/qwen2.5-vl-imb-cap-fps2',
+            'torch_dtype': torch.bfloat16,
+            'attn_implementation': 'flash_attention_2',
+        },
+        'fps': 2.0,  # Specific fps from model name
+    },
+
+    'qwen2.5-vl-imb-fps2-full': {
+        'tokenizer': {
+            'path': 'Qwen/Qwen2.5-VL-7B-Instruct',
+        },
+        'model': {
+            'path': '/data3/cmitra/LLaMA-Factory/saves/qwen2.5_vl-7b/full/sft/imb_fps2',
+            'torch_dtype': torch.bfloat16,
+            'attn_implementation': 'flash_attention_2',
+        },
+        'fps': 2.0,  # Specific fps from model name
+    },
+
+    'qwen2.5-vl-imb-forward': {
+        'tokenizer': {
+            'path': 'Qwen/Qwen2.5-VL-7B-Instruct',
+        },
+        'model': {
+            'path': '/data3/cmitra/LLaMA-Factory/saves/qwen2.5_vl-7b/lora/forward_fps8',
+            'torch_dtype': torch.bfloat16,
+            'attn_implementation': 'flash_attention_2',
+        },
+        'fps': 8.0,  # Specific fps from model name
+    },
+
+    'qwen2.5-vl-imb-backward': {
+        'tokenizer': {
+            'path': 'Qwen/Qwen2.5-VL-7B-Instruct',
+        },
+        'model': {
+            'path': '/data3/cmitra/LLaMA-Factory/saves/qwen2.5_vl-7b/lora/backward_fps8',
+            'torch_dtype': torch.bfloat16,
+            'attn_implementation': 'flash_attention_2',
+        },
+        'fps': 8.0,  # Specific fps from model name
+    },
+
+    'qwen2.5-vl-imb-cap-fps8': {
+        'tokenizer': {
+            'path': 'Qwen/Qwen2.5-VL-7B-Instruct',
+        },
+        'model': {
+            'path': '/data3/cmitra/LLaMA-Factory/saves/qwen2.5_vl-7b/lora/imb_cap_fps2',
+            'torch_dtype': torch.bfloat16,
+            'attn_implementation': 'flash_attention_2',
+        },
+        'fps': 8.0,  # Specific fps from model name
+    },
+
+    'qwen2.5-vl-balraw': {
+        'tokenizer': {
+            'path': 'Qwen/Qwen2.5-VL-7B-Instruct',
+        },
+        'model': {
+            'path': '/data3/cmitra/LLaMA-Factory/saves/qwen2.5_vl-7b/lora/balraw_cap_fps8',
+            'torch_dtype': torch.bfloat16,
+            'attn_implementation': 'flash_attention_2',
+        },
+        'fps': 8.0,  # Specific fps from model name
+    },
+
+    'qwen2.5-vl-imbraw': {
+        'tokenizer': {
+            'path': 'Qwen/Qwen2.5-VL-7B-Instruct',
+        },
+        'model': {
+            'path': '/data3/cmitra/LLaMA-Factory/saves/qwen2.5_vl-7b/lora/imbraw_cap_fps8',
+            'torch_dtype': torch.bfloat16,
+            'attn_implementation': 'flash_attention_2',
+        },
+        'fps': 8.0,  # Specific fps from model name
+    },
+
+    'qwen2.5-vl-cam-centric-only': {
+        'tokenizer': {
+            'path': 'Qwen/Qwen2.5-VL-7B-Instruct',
+        },
+        'model': {
+            'path': '/data3/cmitra/LLaMA-Factory/saves/qwen2.5_vl-7b/lora/cam_centric_only',
+            'torch_dtype': torch.bfloat16,
+            'attn_implementation': 'flash_attention_2',
+        },
+        'fps': 8.0,  # Specific fps from model name
+    },
+
+    'qwen2.5-vl-rank64-5e-5': {
+        'tokenizer': {
+            'path': 'Qwen/Qwen2.5-VL-7B-Instruct',
+        },
+        'model': {
+            'path': '/data3/cmitra/LLaMA-Factory/saves/qwen2.5_vl-7b/lora/bal_imb_cap_rank64_lr5e-5_fps8',
+            'torch_dtype': torch.bfloat16,
+            'attn_implementation': 'flash_attention_2',
+        },
+        'fps': 8.0,  # Specific fps from model name
+    },
+
+    'qwen2.5-vl-rank64-lr2e-4-freezevisTrue-2000it': {
+        'tokenizer': {
+            'path': 'Qwen/Qwen2.5-VL-7B-Instruct',
+        },
+        'model': {
+            'path': '/data3/cmitra/saves/qwen2.5_vl-7b/lora/bal_imb_cap_rank64_lr2e-4_epoch10.0_freezevisTrue_fps8/checkpoint-2000',
+            'torch_dtype': torch.bfloat16,
+            'attn_implementation': 'flash_attention_2',
+        },
+        'fps': 8.0,  # Specific fps from model name
+    },
+
+    'qwen2.5-vl-rank64-lr2e-4-freezevisTrue-800it': {
+        'tokenizer': {
+            'path': 'Qwen/Qwen2.5-VL-7B-Instruct',
+        },
+        'model': {
+            'path': '/data3/cmitra/LLaMA-Factory/saves/qwen2.5_vl-7b/lora/bal_imb_cap_rank64_lr2e-4_epoch10.0_freezevisTrue_fps8/checkpoint-800',
+            'torch_dtype': torch.bfloat16,
+            'attn_implementation': 'flash_attention_2',
+        },
+        'fps': 8.0,  # Specific fps from model name
+    },
+    'qwen2.5-vl-full-lr2e-4-freezevisTrue-2000it': {
+        'tokenizer': {
+            'path': 'Qwen/Qwen2.5-VL-7B-Instruct',
+        },
+        'model': {
+            'path': '/data3/cmitra/LLaMA-Factory/saves/qwen2.5_vl-7b/full/sft/bal_imb_cap_full_lr2e-4_epoch10.0_freezevisTrue_fps8/checkpoint-2000',
+            'torch_dtype': torch.bfloat16,
+            'attn_implementation': 'flash_attention_2',
+        },
+        'fps': 8.0,  # Specific fps from model name
+    },
+
+    'qwen2.5-vl-full-lr2e-4-freezevisTrue': {
+        'tokenizer': {
+            'path': 'Qwen/Qwen2.5-VL-7B-Instruct',
+        },
+        'model': {
+            'path': '/data3/cmitra/saves/qwen2.5_vl-7b/full/sft/bal_imb_cap_full_lr2e-4_epoch10.0_freezevisTrue_fps8',
+            'torch_dtype': torch.bfloat16,
+            'attn_implementation': 'flash_attention_2',
+        },
+        'fps': 8.0,  # Specific fps from model name
+    },
 }
 
 class Qwen2VLModel(VQAScoreModel):
@@ -332,10 +544,11 @@ class Qwen2VLModel(VQAScoreModel):
 
     def load_images(self, paths: List[str], num_frames: int = 16) -> List[Union[torch.Tensor, List[torch.Tensor]]]:
         processed_data = []
+        fps = self.model_info.get('fps', 2.0)
         for path in paths:
             if path.lower().endswith(('.mp4', '.avi', '.mov', '.mkv')):  # Video file path
                 # video_frames = self.load_video(path, num_frames)
-                processed_data.append({"type": "video", "video": path, "max_pixels": 360*420, "fps":4.0})
+                processed_data.append({"type": "video", "video": path, "max_pixels": 360*420, "fps":fps})
             elif path.lower().endswith('.npy'):  # NumPy file
                 np_array = np.load(path)
                 if np_array.ndim == 3:  # Single image
