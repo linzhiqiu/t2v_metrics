@@ -1,22 +1,7 @@
-# Copyright (2024) Bytedance Ltd. and/or its affiliates
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
 from typing import List
 import os
 from PIL import Image, ImageSequence
 import decord
-
-import requests
 
 VALID_DATA_FORMAT_STRING = "Input data must be {'.jpg', '.jpeg', '.png', '.tif'} for image; or {'.mp4', '.avi', '.webm', '.mov', '.mkv', '.wmv', '.gif'}  for videos!"
 
@@ -54,8 +39,7 @@ def sample_video(
         n_frames=n_frames,
     )
 
-    # frames = vr.get_batch(frame_indices).asnumpy()
-    frames = self.vr.get_batch(frame_indices)
+    frames = vr.get_batch(frame_indices)
     # Ensure compatibility: Convert to NumPy array if necessary
     if hasattr(frames, "asnumpy"):  # It's a Tensor
         frames = frames.asnumpy()
@@ -149,27 +133,6 @@ def check_data_format(data):
                 for path in meida_paths:
                     assert os.path.exists(path), f"File not found: {path}"
 
-def check_path(media_file: str):
-    
-    # Check if local path or web link:
-    if media_file.startswith(('http://', 'https://')):
-        response = requests.get(media_file, stream=True)
-        response.raise_for_status() # Error handling
-
-        temp_dir = os.path.join(os.getcwd(), 'temp_videos')
-        os.makedirs(temp_dir, exist_ok=True)
-        print(f'tarsier.dataset.utils Temp video directory for videos {temp_dir}')
-
-        file_name = media_file.split('/')[-1]
-        temp_path = os.path.join(temp_dir, file_name)
-
-        with open(temp_path, 'wb') as file:
-            for chunk in response.iter_content(chunk_size=8192): # Prevent any issues with memory.
-                file.write(chunk)
-        return temp_path
-    else:
-        return media_file
-
 def format_one_sample(media_file=None, prompt="Describe the video in detail."):
     sample = {
         "messages": []
@@ -183,9 +146,6 @@ def format_one_sample(media_file=None, prompt="Describe the video in detail."):
         if media_type in ("video", "gif"):
             media_type = "video"
         media_path_key = f"{media_type}_file"
-
-        # CM: Add handling for online video download:
-        media_file = check_path(media_file)
         user_content["content"].append({
             "type": media_type,
             media_type: {
@@ -208,7 +168,7 @@ def format_one_sample(media_file=None, prompt="Describe the video in detail."):
         sample["task"] = f"{media_type}/QA"
     else:
         sample["task"] = 'text-only'
-    check_data_format(sample)
+    # check_data_format(sample)
     return sample
 
 
