@@ -90,7 +90,6 @@ dependencies = [
     "torchaudio>=2.3.1",
     "google-genai",
     "blobfile",
-    "t2v_metrics @ git+https://github.com/chancharikmitra/t2v_metrics.git@main"
 ] 
 [tool.setuptools]
 include-package-data = true
