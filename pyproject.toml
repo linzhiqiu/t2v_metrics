@@ -91,9 +91,13 @@ dependencies = [
     "google-genai",
     "blobfile",
 ] 
-[tool.setuptools]
-include-package-data = true
-packages = ["t2v_metrics", "t2v_metrics.models"]
+# [tool.setuptools]
+# include-package-data = true
+# packages = ["t2v_metrics", "t2v_metrics.models"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["t2v_metrics*"]
 
 [tool.setuptools.package-data]
 't2v_metrics' = ['**/*.json', '**/*.yaml', '**/*.py']
