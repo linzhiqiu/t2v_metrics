@@ -15,6 +15,7 @@ from .gemini_model import GEMINI_MODELS, GeminiModel
 from .qwen2vl_model import QWEN2_VL_MODELS, Qwen2VLModel
 from .llavavideo_model import LLAVA_VIDEO_MODELS, LLaVAVideoModel
 from .tarsier_model import TARSIER_MODELS, TarsierModel
+from .perceptionlm_model import PERCEPTION_LM_MODELS, PerceptionLMModel
 
 from ...constants import HF_CACHE_DIR
 
@@ -35,7 +36,8 @@ ALL_VQA_MODELS = [
     GEMINI_MODELS,
     QWEN2_VL_MODELS,
     LLAVA_VIDEO_MODELS,
-    TARSIER_MODELS
+    TARSIER_MODELS,
+    PERCEPTION_LM_MODELS
 ]
 
 
@@ -78,5 +80,7 @@ def get_vqascore_model(model_name, device='cuda', cache_dir=HF_CACHE_DIR, **kwar
         return LLaVAVideoModel(model_name, device=device, cache_dir=cache_dir, **kwargs)
     elif model_name in TARSIER_MODELS:
         return TarsierModel(model_name, device=device, cache_dir=cache_dir, **kwargs)
+    elif model_name in PERCEPTION_LM_MODELS:
+        return PerceptionLMModel(model_name, device=device, cache_dir=cache_dir, **kwargs)
     else:
         raise NotImplementedError()

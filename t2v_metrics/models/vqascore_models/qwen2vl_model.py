@@ -504,6 +504,42 @@ QWEN2_VL_MODELS = {
         },
         'fps': 8.0,  # Specific fps from model name
     },
+
+    'qwen2.5-vl-cambench-sft-dpo-5000': {
+        'tokenizer': {
+            'path': 'Qwen/Qwen2.5-VL-7B-Instruct',
+        },
+        'model': {
+            'path': '/data3/cmitra/saves/qwen2_vl-7b/lora/cambench_sft_dpo_5000/checkpoint-770',
+            'torch_dtype': torch.bfloat16,
+            'attn_implementation': 'flash_attention_2',
+        },
+        'fps': 8.0,  # Specific fps from model name
+    },
+
+    'qwen2.5-vl-32b-sft': {
+        'tokenizer': {
+            'path': 'Qwen/Qwen2.5-VL-32B-Instruct',
+        },
+        'model': {
+            'path': '/data3/cmitra/saves/qwen2.5_vl-32b/lora/bal_imb_cap_rank64_lr1e-4_epoch2.0_freezevisTrue_fps8',
+            'torch_dtype': torch.bfloat16,
+            'attn_implementation': 'flash_attention_2',
+        },
+        'fps': 8.0,  # Specific fps from model name
+    },
+
+    'qwen2.5-vl-72b-sft': {
+        'tokenizer': {
+            'path': 'Qwen/Qwen2.5-VL-72B-Instruct',
+        },
+        'model': {
+            'path': '/data3/cmitra/saves/qwen2.5_vl-72b/lora/bal_imb_cap_rank64_lr1e-4_epoch3.0_freezevisTrue_fps8/checkpoint-1800',
+            'torch_dtype': torch.bfloat16,
+            'attn_implementation': 'flash_attention_2',
+        },
+        'fps': 8.0,  # Specific fps from model name
+    },
 }
 
 class Qwen2VLModel(VQAScoreModel):

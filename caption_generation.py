@@ -22,7 +22,7 @@ def process_videos_with_model(model_name, videos, questions):
     try:
         # Initialize the model once
         if 'gemini' in model_name:
-            score_model = t2v_metrics.get_score_model(model=model_name, api_key='AIzaSyBzG1kegwZQBdztDCYv24aCsx4Y_Rfk_-c')
+            score_model = t2v_metrics.get_score_model(model=model_name, api_key='api_key')
         elif 'gpt' in model_name:
             score_model = t2v_metrics.get_score_model(model=model_name, api_key='api_key')
         else:
@@ -50,9 +50,9 @@ def process_videos_with_model(model_name, videos, questions):
 def main():
     parser = argparse.ArgumentParser(description="Generate captions using different models")
     parser.add_argument("--input", type=str, default="~/test_caption.json", help="Path to input JSON file")
-    parser.add_argument("--output", type=str, default="gemini_2.5_pro_captions.json", help="Path to output JSON file")
+    parser.add_argument("--output", type=str, default="cambench_72b_sft.json", help="Path to output JSON file")
     parser.add_argument("--sample-size", type=int, default=100, help="Number of items to sample")
-    parser.add_argument("--models", type=str, nargs="+", default=["gemini-2.5-pro-preview"], 
+    parser.add_argument("--models", type=str, nargs="+", default=['qwen2.5-vl-72b-sft'], 
                         help="List of model names to use")
     args = parser.parse_args()
     

@@ -765,8 +765,8 @@ def evaluate_models_from_combined(combined_data, api_key=None):
 def main():
     parser = argparse.ArgumentParser(description="Evaluate model outputs in a combined JSON file")
     parser.add_argument("--input", type=str, required=True, help="Path to combined JSON file")
-    parser.add_argument("--output", default="evaluation_results_arxiv.json", help="Path to output JSON file")
-    parser.add_argument("--excel", default="evaluation_results.xlsx", help="Path to output Excel file")
+    parser.add_argument("--output", default="evaluation_results_72b.json", help="Path to output JSON file")
+    parser.add_argument("--excel", default="evaluation_results_72b.xlsx", help="Path to output Excel file")
     parser.add_argument("--api_key", type=str, help="OpenAI API key for GPT-4o judge")
     parser.add_argument("--no_gpt", action="store_true", help="Skip GPT-4o judge evaluation")
     
