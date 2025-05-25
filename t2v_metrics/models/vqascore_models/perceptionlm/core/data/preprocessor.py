@@ -8,7 +8,7 @@ import numpy as np
 import torch
 from PIL import Image
 
-from apps.plm.dataset_conf import DatasetConf
+from ...apps.plm.dataset_conf import DatasetConf
 
 logger = logging.getLogger(__name__)
 

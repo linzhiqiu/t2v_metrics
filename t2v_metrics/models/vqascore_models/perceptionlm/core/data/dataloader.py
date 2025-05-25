@@ -5,12 +5,12 @@ from dataclasses import dataclass
 from functools import partial
 from typing import Any, Dict, Optional
 
-from core.data.data_collators import MllmPaddingCollator
-from core.data.data_mixer import DatasetMixer, PersistentDataLoader
-from core.data.preprocessor import VisionPreprocessor
-from core.transforms.image_transform import get_image_transform
-from core.transforms.region_transform import get_region_transform
-from core.transforms.video_transform import get_video_transform
+from ...core.data.data_collators import MllmPaddingCollator
+from ...core.data.data_mixer import DatasetMixer, PersistentDataLoader
+from ...core.data.preprocessor import VisionPreprocessor
+from ...core.transforms.image_transform import get_image_transform
+from ...core.transforms.region_transform import get_region_transform
+from ...core.transforms.video_transform import get_video_transform
 
 logger = logging.getLogger(__name__)
 

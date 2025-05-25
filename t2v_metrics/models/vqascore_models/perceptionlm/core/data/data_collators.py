@@ -7,7 +7,7 @@ from typing import Any, Dict, List, Optional
 
 import torch
 
-from core.distributed import get_is_master
+from ...core.distributed import get_is_master
 
 logger = getLogger()
 

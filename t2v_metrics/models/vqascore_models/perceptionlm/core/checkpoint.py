@@ -21,7 +21,7 @@ from torch.distributed.checkpoint.state_dict import (get_model_state_dict,
                                                      get_state_dict,
                                                      set_state_dict)
 
-from core.distributed import get_is_master
+from ..core.distributed import get_is_master
 
 logger = logging.getLogger("CHECKPOINT")
 

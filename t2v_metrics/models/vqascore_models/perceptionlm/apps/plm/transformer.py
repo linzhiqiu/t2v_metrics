@@ -18,16 +18,16 @@ from torch.distributed.tensor.parallel import (
 from torch.nn.attention.flex_attention import BlockMask, create_block_mask
 from xformers.ops import AttentionBias, fmha
 
-from core.transformer import (
+from ...core.transformer import (
     BaseTransformer,
     BaseTransformerArgs,
     RMSNorm,
     TiedLinear,
     cross_entropy,
 )
-from core.utils import InitArgs
-from core.vision_encoder.pe import VisionTransformer as PE_VisionTransformer
-from core.vision_projector.mlp import MLPProjector
+from ...core.utils import InitArgs
+from ...core.vision_encoder.pe import VisionTransformer as PE_VisionTransformer
+from ...core.vision_projector.mlp import MLPProjector
 
 logger = logging.getLogger(__name__)
 

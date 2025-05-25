@@ -6,11 +6,14 @@ import copy
 import time
 from decord import VideoReader, cpu
 import os
-current_dir = os.path.dirname(os.path.abspath(__file__))
-current_dir = os.path.join(current_dir, "perceptionlm")
+# current_dir = os.path.dirname(os.path.abspath(__file__))
+# current_dir = os.path.join(current_dir, "perceptionlm")
+# print(f'current_dir {current_dir}')
 import sys
+import tempfile
+import requests
 
-sys.path.append(current_dir)
+# sys.path.append(current_dir)
 from .perceptionlm.core.args import dataclass_from_dict
 from .perceptionlm.core.transforms.image_transform import get_image_transform
 from .perceptionlm.core.transforms.video_transform import get_video_transform
@@ -53,6 +56,8 @@ class PerceptionLMModel:
         self.cache_dir = cache_dir
         self.model_info = PERCEPTION_LM_MODELS[model_name]
         self.load_model()
+
+        self.tmp_files = []
         
     def load_model(self):
         model_path = self.model_info['path']
@@ -97,6 +102,34 @@ class PerceptionLMModel:
         return processed_data
 
     def load_video(self, video_path, num_frames):
+        if video_path.startswith(("http://", "https://")):
+            tmpfile = None  
+
+            try:
+
+                response = requests.get(video_path, stream=True)
+                response.raise_for_status()
+
+
+                with tempfile.NamedTemporaryFile(delete=False, suffix=".mp4") as tmpfile:
+
+                    self.tmp_files.append(tmpfile.name)
+                    for chunk in response.iter_content(chunk_size=8192):
+                        tmpfile.write(chunk)
+                    
+                    tmpfile.flush()
+                    video_path = tmpfile.name
+            
+            except Exception as e:
+                if tmpfile:
+                    os.remove(tmpfile.name)
+                    self.tmp_files.remove(tmpfile.name)
+                
+                
+                print(f'Error when downloading video {video_path} \n\nError: {e}')
+
+                raise
+                
         vr = VideoReader(video_path, ctx=cpu(0))
         total_frame_num = len(vr)
         uniform_sampled_frames = np.linspace(0, total_frame_num - 1, num_frames, dtype=int)
@@ -105,7 +138,6 @@ class PerceptionLMModel:
         
         # Convert to PIL Image list
         frames = [Image.fromarray(frame) for frame in video_frames]
-        
         # Apply video transform
         transform = get_video_transform(
             image_res=self.model.vision_model.image_size,
@@ -113,6 +145,14 @@ class PerceptionLMModel:
         video_tensor, _ = transform((video_path, num_frames, None, None, None))
         return video_tensor
 
+    def clear_temp_files(self):
+        for file_name in self.tmp_files:
+            try:
+                os.remove(file_name)
+            except OSError:
+                pass
+        self.tmp_files.clear()
+    
     def forward(self,
                 paths: List[str],
                 texts: List[str],
@@ -155,6 +195,7 @@ class PerceptionLMModel:
             lm_prob = torch.exp(logits[yes_id]).item()
             lm_probs.append(lm_prob)
         
+        self.clear_temp_files()
         return torch.tensor(lm_probs)
     
     def generate(self,
@@ -177,7 +218,7 @@ class PerceptionLMModel:
             
             # Create prompt
             prompts = [(prompt, data)]
-            
+            print(prompt)
             # Create generator
             gen_cfg = dataclass_from_dict(
                 PackedCausalTransformerGeneratorArgs,
@@ -190,9 +231,12 @@ class PerceptionLMModel:
             start_time = time.time() 
             generation, _, _ = generator.generate(prompts)
             end_time = time.time()
-            
+            print(generation)
             for gen in generation:
                 generated_texts.append(gen)
+            
+        
+        self.clear_temp_files()
                 
         return generated_texts
     

@@ -9,7 +9,7 @@ from typing import Any, Dict
 
 from omegaconf import OmegaConf
 
-from core.args import dataclass_from_dict
+from ..core.args import dataclass_from_dict
 
 
 @dataclass

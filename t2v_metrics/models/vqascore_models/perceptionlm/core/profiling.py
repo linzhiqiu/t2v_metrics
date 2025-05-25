@@ -13,7 +13,7 @@ import xformers.profiler
 from torch.profiler.profiler import profile
 from xformers.profiler import MemSnapshotsProfiler, PyTorchProfiler
 
-from core.distributed import get_is_master
+from ..core.distributed import get_is_master
 
 
 @dataclass

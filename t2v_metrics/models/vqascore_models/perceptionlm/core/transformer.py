@@ -12,7 +12,7 @@ from torch.nn.attention.flex_attention import (BlockMask, _mask_mod_signature,
                                                flex_attention)
 from xformers.ops import AttentionBias, fmha
 
-from core import probe
+from ..core import probe
 
 
 class InitStdFactor(Enum):

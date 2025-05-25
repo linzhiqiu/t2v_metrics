@@ -1,6 +1,6 @@
 import torchvision.transforms as T
 
-from core.vision_encoder.tokenizer import SimpleTokenizer
+from ...core.vision_encoder.tokenizer import SimpleTokenizer
 
 
 def get_image_transform(

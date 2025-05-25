@@ -9,7 +9,7 @@ from PIL import Image
 from torchcodec.decoders import VideoDecoder
 from torchvision.utils import draw_bounding_boxes
 
-from core.transforms.image_transform import ImageTransform
+from ...core.transforms.image_transform import ImageTransform
 
 logger = getLogger()
 

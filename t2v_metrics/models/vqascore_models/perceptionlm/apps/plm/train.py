@@ -20,29 +20,29 @@ from torch.distributed._tensor import DTensor
 from torch.distributed.checkpoint.stateful import Stateful
 from torch.optim import lr_scheduler
 
-from apps.plm.dataset_conf import dataset_config as DATASET_CONFIGS
-from apps.plm.tokenizer import build_tokenizer
-from apps.plm.transformer import (LMTransformer, LMTransformerArgs,
+from ...apps.plm.dataset_conf import dataset_config as DATASET_CONFIGS
+from ...apps.plm.tokenizer import build_tokenizer
+from ...apps.plm.transformer import (LMTransformer, LMTransformerArgs,
                                   build_fsdp_grouping_plan,
                                   get_no_recompute_ops, get_num_flop_per_token,
                                   tp_parallelize)
-from core.args import dataclass_from_dict, dump_config, flatten_dict
-from core.checkpoint import (CheckpointArgs, CheckpointManager,
+from ...core.args import dataclass_from_dict, dump_config, flatten_dict
+from ...core.checkpoint import (CheckpointArgs, CheckpointManager,
                              load_consolidated_checkpoint,
                              load_from_checkpoint)
-from core.data.dataloader import DataloadArgs, get_dataloader
-from core.distributed import (DistributedArgs, EnvironmentArgs,
+from ...core.data.dataloader import DataloadArgs, get_dataloader
+from ...core.distributed import (DistributedArgs, EnvironmentArgs,
                               check_model_value_range, clean_env,
                               dist_mean_dict, get_device_mesh, get_is_master,
                               get_world_size, init_signal_handler,
                               parallelize_model, requeue_slurm_job, setup_env,
                               setup_torch_distributed)
-from core.logger import init_logger
-from core.metrics import (GPUMemoryMonitor, LoggingArgs, MetricLogger,
+from ...core.logger import init_logger
+from ...core.metrics import (GPUMemoryMonitor, LoggingArgs, MetricLogger,
                           get_num_params, log_model_params)
-from core.optim import OptimArgs, build_optimizer
-from core.probe import AutoProbeD
-from core.profiling import ProfilerArgs, maybe_run_profiler
+from ...core.optim import OptimArgs, build_optimizer
+from ...core.probe import AutoProbeD
+from ...core.profiling import ProfilerArgs, maybe_run_profiler
 
 logging.getLogger("PIL").setLevel(
     logging.WARNING

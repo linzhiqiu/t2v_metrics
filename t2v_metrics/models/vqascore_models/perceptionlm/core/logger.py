@@ -6,7 +6,7 @@ import sys
 import time
 from datetime import timedelta
 
-from core.distributed import get_global_rank, get_is_slurm_job
+from ..core.distributed import get_global_rank, get_is_slurm_job
 
 
 class LogFormatter(logging.Formatter):

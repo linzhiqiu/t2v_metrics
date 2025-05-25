@@ -6,6 +6,8 @@ from PIL import Image
 from typing import List, Union
 import copy
 import warnings
+import requests
+import tempfile
 
 from .tarsier.tasks.utils import load_model_and_processor
 from .tarsier.dataset.custom_data_parsers.utils import put_pred_to_data_dict, get_prompt_from_data_dict
@@ -35,18 +37,6 @@ TARSIER_MODELS = {
             'config': f'{current_path}/tarsier/configs/tarser2_default_config.yaml',
         },
     },
-    # 'tarsier-7b': {
-    #     'model': {
-    #         'path': 'omni-research/Tarsier-7b' ,
-    #         'config': 't2v_metrics/models/vqascore_models/tarsier/configs/tarser2_default_config.yaml',
-    #     },
-    # },
-    # 'tarsier-34b': {
-    #     'model': {
-    #         'path': 'omni-research/Tarsier-34b' ,
-    #         'config': 't2v_metrics/models/vqascore_models/tarsier/configs/tarser2_default_config.yaml',
-    #     },
-    # }
 }
 
 class TarsierModel(VQAScoreModel):
@@ -63,6 +53,8 @@ class TarsierModel(VQAScoreModel):
         self.model_info = TARSIER_MODELS[model_name]
         self.load_model()
 
+        self.tmp_files = []
+
     def load_model(self):
         # sys.path = [os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'vqascore_models/tarsier')] + sys.path
         # sys.path = [os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'vqascore_models/tarsier/models')] + sys.path
@@ -76,6 +68,34 @@ class TarsierModel(VQAScoreModel):
         # sys.path = sys.path[2:]
 
     def load_images(self, prompt, video_file, generate_kwargs):
+        if video_file.startswith(("http://", "https://")):
+            tmpfile = None
+            try:
+                # 1. Read video
+                response = requests.get(video_file, stream=True)
+                response.raise_for_status()
+
+                # 2. Create tempfile to write  video to
+                with tempfile.NamedTemporaryFile(delete=False, suffix='.mp4') as tmpfile:
+                    self.tmp_files.append(tmpfile.name)
+
+                    for chunk in response.iter_content(chunk_size=8192):
+                        tmpfile.write(chunk)
+
+                    
+                    tmpfile.flush()
+                # 3. Replace video file link with the temp file path name
+                    
+                    video_file=tmpfile.name
+            except Exception as e:
+                if tmpfile:
+                    os.remove(tmpfile.name)
+                    self.tmp_files.remove(tmpfile.name)
+
+                
+                print(f"Exception while downloading video {video_file} \n\nError: {e}")
+                raise
+
         sample = format_one_sample(video_file, prompt)
         batch_data = self.processor(sample)
         
@@ -95,7 +115,14 @@ class TarsierModel(VQAScoreModel):
             skip_special_tokens=True
         )
         return output_text, model_inputs
-
+    def clean_temp_files(self):
+        # Clean up tempfiles created:
+        for file_path in self.tmp_files:
+            try:
+                os.remove(file_path)
+            except OSError:
+                pass
+        self.tmp_files.clear()
     def forward(self,
                 images: List[str],
                 texts: List[str],
@@ -137,6 +164,8 @@ class TarsierModel(VQAScoreModel):
             lm_prob = probs[0, yes_token_id].item()
             lm_probs.append(lm_prob)
 
+        self.clean_temp_files()
+
         return torch.tensor(lm_probs)
     
     def generate(self,
@@ -163,5 +192,8 @@ class TarsierModel(VQAScoreModel):
             
             output_text, _ = self.load_images(text, path, generate_kwargs)
             generated_outputs.append(output_text.strip())
+
+        
+        self.clean_temp_files()
 
         return generated_outputs
