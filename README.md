@@ -115,7 +115,7 @@ scores = clip_flant5_score.batch_forward(dataset=dataset, batch_size=16) # (n_sa
 ```
 
 ### Check all supported models
-We currently support running VQAScore with CLIP-FlanT5, LLaVA-1.5, and InstructBLIP. For ablation, we also include CLIPScore, BLIPv2Score, PickScore, HPSv2Score, and ImageReward:
+We currently support running VQAScore with CLIP-FlanT5, LLaVA-1.5, and InstructBLIP as well as SOTA interleaved and video LMMs like LLaVA-OneVision, Qwen2.5-VL, and GPT-4o. For ablation, we also include CLIPScore, BLIPv2Score, PickScore, HPSv2Score, and ImageReward:
 ```python
 llava_score = t2v_metrics.VQAScore(model='llava-v1.5-13b')
 instructblip_score = t2v_metrics.VQAScore(model='instructblip-flant5-xxl')
