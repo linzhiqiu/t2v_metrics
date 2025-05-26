@@ -4,6 +4,21 @@ from __future__ import print_function
 import sys
 import os
 
+import subprocess
+import shutil
+
+# Check for ffmpeg on import - REQUIRED system dependency
+try:
+    if shutil.which("ffmpeg") is None:
+        raise FileNotFoundError
+    subprocess.run(["ffmpeg", "-version"], capture_output=True, check=True)
+except (FileNotFoundError, subprocess.CalledProcessError):
+    raise RuntimeError(
+        "ffmpeg is a required system requirement but not found. Install with:\n"
+        "conda install ffmpeg -c conda-forge\n"
+        "or visit: https://ffmpeg.org/download.html"
+    )
+
 sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'models/clipscore_models/InternVideo2/multi_modality/'))
 
 from .constants import HF_CACHE_DIR

@@ -125,11 +125,12 @@ parser.add_argument(
     default=64,
     help="The batch size to use"
 )
-parser.add_argument(
-    "--use_testset",
-    action="store_true",
-    help="Use the test set for evaluation. Important: If this flag is true, then must use this flag for all subsequent runs."
-)
+# Just make using test set true to be default
+# parser.add_argument(
+#     "--use_testset",
+#     action="store_true",
+#     help="Use the test set for evaluation. Important: If this flag is true, then must use this flag for all subsequent runs."
+# )
 # parser.add_argument(
 #     "--question",
 #     default=None,
@@ -172,7 +173,7 @@ else:
 sampling_str = "top" if args.sampling == "top" else f"random_seed_{args.seed}"
 folder_name = f"test_ratio_{1 - args.train_ratio:.2f}_num_{args.max_samples}_sampling_{sampling_str}"
 video_label_str = "_".join(args.video_label_file.split("/")[-2:])[:-5]
-use_testset_str = "_testset" if args.use_testset else ""
+use_testset_str = "_testset" #if args.use_testset else ""
 
 # SAVE_DIR = Path(args.save_dir) / f"{video_label_str}_{folder_name}{use_testset_str}"
 SAVE_DIR = Path(args.save_dir) / f"{video_label_str}"
