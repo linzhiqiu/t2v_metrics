@@ -17,7 +17,7 @@ INTERNVIDEO2_ITM_PRETRAINED = {
 
 class InternVideo2ITMScoreModel(ScoreModel):
     "A wrapper for InternVideo2 ITM models"
-
+    video_mode = "direct"
     def __init__(
         self, model_name="internvideo2-1b-stage2-itm", device="cuda", cache_dir=HF_CACHE_DIR
     ):

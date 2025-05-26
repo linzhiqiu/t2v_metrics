@@ -108,6 +108,8 @@ class InternVideo2Model(VQAScoreModel):
     def load_images(self, paths: List[str], num_segments: int = 8, resolution: int = 224, hd_num: int = 6) -> List[torch.Tensor]:
         processed_data = []
         for path in paths:
+            if path.startswith(("http://", "https://")):
+                raise NotImplementedError("Web link image/video inputs are not yet supported for this model. Please use a local path, or otherwise, make a Github issue request if this feature is necessary.")
             if path.lower().endswith(('.mp4', '.avi', '.mov', '.mkv')):  # Video file
                 processed_data.append(self.load_video(path, num_segments=num_segments, resolution=resolution, hd_num=hd_num))
             else:  # Image file or .npy file

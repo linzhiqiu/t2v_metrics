@@ -56,6 +56,8 @@ class MOLMOVisionModel:
     def load_images(self, paths: List[str]) -> List[Image.Image]:
         processed_data = []
         for path in paths:
+            if path.startswith(("http://", "https://")):
+                raise NotImplementedError("Web link image/video inputs are not yet supported for this model. Please use a local path, or otherwise, make a Github issue request if this feature is necessary.")
             if path.lower().endswith(('.mp4', '.avi', '.mov', '.mkv')):
                 raise NotImplementedError("Video processing is not supported for MOLMO Vision model.")
             else:  # Regular image file

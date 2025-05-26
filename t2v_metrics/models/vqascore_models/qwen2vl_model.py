@@ -600,14 +600,14 @@ class Qwen2VLModel(VQAScoreModel):
                 processed_data.append({"type": "image", "image": image})
         return processed_data
 
-    def load_video(self, video_path, max_frames_num):
-        print(f'Going into load_video method.')
-        vr = VideoReader(video_path, ctx=cpu(0))
-        total_frame_num = len(vr)
-        uniform_sampled_frames = np.linspace(0, total_frame_num - 1, max_frames_num, dtype=int)
-        frame_idx = uniform_sampled_frames.tolist()
-        spare_frames = vr.get_batch(frame_idx).numpy()
-        return [Image.fromarray(frame) for frame in spare_frames]
+    # def load_video(self, video_path, max_frames_num):
+    #     print(f'Going into load_video method.')
+    #     vr = VideoReader(video_path, ctx=cpu(0))
+    #     total_frame_num = len(vr)
+    #     uniform_sampled_frames = np.linspace(0, total_frame_num - 1, max_frames_num, dtype=int)
+    #     frame_idx = uniform_sampled_frames.tolist()
+    #     spare_frames = vr.get_batch(frame_idx).numpy()
+    #     return [Image.fromarray(frame) for frame in spare_frames]
 
     def forward(self,
                 paths: List[str],

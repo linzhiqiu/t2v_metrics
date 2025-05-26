@@ -412,6 +412,8 @@ class InternVL2Model(VQAScoreModel):
         processed_data = []
         num_patches_list = []
         for path in paths:
+            if path.startswith(("http://", "https://")):
+                raise NotImplementedError("Web link image/video inputs are not yet supported for this model. Please use a local path, or otherwise, make a Github issue request if this feature is necessary.")
             if path.lower().endswith(('.mp4', '.avi', '.mov', '.mkv')):  # Video file
                 video_frames, video_num_patches = self.load_video(path, num_segments=num_frames)
                 processed_data.append(video_frames)

@@ -55,6 +55,8 @@ class LLaVAVideoModel(VQAScoreModel):
         self.model.eval()
 
     def load_images(self, video_path, max_frames_num,fps=1,force_sample=False):
+        if video_path.startswith(("http://", "https://")):
+            raise NotImplementedError("Web link image/video inputs are not yet supported for this model. Please use a local path, or otherwise, make a Github issue request if this feature is necessary.")
         if max_frames_num == 0:
             return np.zeros((1, 336, 336, 3))
         vr = VideoReader(video_path, ctx=cpu(0),num_threads=1)

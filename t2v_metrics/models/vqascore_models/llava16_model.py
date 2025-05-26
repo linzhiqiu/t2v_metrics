@@ -98,6 +98,8 @@ class LLaVA16Model(VQAScoreModel):
                     image: List[str]) -> torch.Tensor:
         """Load the image(s), and return a tensor (after preprocessing) put on self.device
         """
+        if any(path.startswith(("http://", "https://")) for path in image):
+            raise NotImplementedError("Web link image/video inputs are not yet supported for this model. Please use a local path, or otherwise, make a Github issue request if this feature is necessary.")
         image = [self.image_loader(x) for x in image]
         if self.image_aspect_ratio == 'pad':
             image = [expand2square(image, tuple(int(x*255) for x in self.image_processor.image_mean)) for image in image]

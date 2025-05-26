@@ -20,6 +20,7 @@ UMT_ITM_PRETRAINED = {
 
 class UMTITMScoreModel(ScoreModel):
     "A wrapper for UMT models"
+    video_mode = "direct"
     def __init__(
         self, model_name="umt-b16-25m-itm", device="cuda", cache_dir=HF_CACHE_DIR
     ):

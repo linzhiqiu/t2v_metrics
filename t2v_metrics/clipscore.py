@@ -12,7 +12,7 @@ class CLIPScore(Score):
                            device='cuda',
                            cache_dir=HF_CACHE_DIR,
                            **kwargs):
-        print(f'{kwargs["model_path"]}')
+
         return get_clipscore_model(
             model,
             device=device,

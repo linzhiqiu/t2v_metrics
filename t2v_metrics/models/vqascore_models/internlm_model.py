@@ -72,6 +72,8 @@ class InternLMXComposer25Model(VQAScoreModel):
     def load_images(self, paths: List[str]) -> List[str]:
         processed_paths = []
         for path in paths:
+            if path.startswith(("http://", "https://")):
+                raise NotImplementedError("Web link image/video inputs are not yet supported for this model. Please use a local path, or otherwise, make a Github issue request if this feature is necessary.")
             processed_paths.append(self.process_path(path))
         return processed_paths
 

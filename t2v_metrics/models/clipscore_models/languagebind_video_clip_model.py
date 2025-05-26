@@ -31,7 +31,7 @@ INTERNVIDEO2_CLIP_PRETRAINED = {
 
 class LanguageBindVideoCLIPScoreModel(ScoreModel):
     "A wrapper for InternVideo2 CLIPScore models"
-
+    video_mode = "direct"
     def __init__(
         self,
         model_name="languagebind-video-v1.5-ft",

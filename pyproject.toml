@@ -90,6 +90,7 @@ dependencies = [
     "torchaudio>=2.3.1",
     "google-genai",
     "blobfile",
+    pytorchvideo @ git+https://github.com/linzhiqiu/pytorchvideo.git
 ] 
 # [tool.setuptools]
 # include-package-data = true

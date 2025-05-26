@@ -16,6 +16,7 @@ INTERNVIDEO2_CLIP_PRETRAINED = {
 
 class InternVideo2CLIPScoreModel(ScoreModel):
     "A wrapper for InternVideo2 CLIPScore models"
+    video_mode = "direct"
     def __init__(
         self, model_name="internvideo2-1b-stage2-clip", device="cuda", cache_dir=HF_CACHE_DIR
     ):

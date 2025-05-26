@@ -53,6 +53,8 @@ class InstructBLIPModel(VQAScoreModel):
                     image: List[str]) -> torch.Tensor:
         """Load the image(s), and return a tensor (after preprocessing) put on self.device
         """
+        if any(path.startswith(("http://", "https://")) for path in image):
+            raise NotImplementedError("Web link image/video inputs are not yet supported for this model. Please use a local path, or otherwise, make a Github issue request if this feature is necessary.")
         image = [self.image_loader(x) for x in image]
         image = [self.image_preprocess(image) for image in image]
         assert all(x.shape == image[0].shape for x in image)
