@@ -1,4 +1,3 @@
-from abc import abstractmethod
 from typing import List, TypedDict, Union, Optional
 from tqdm import tqdm
 import torch
@@ -30,7 +29,6 @@ class Score(nn.Module):
         self.model = self.prepare_scoremodel(model, device, cache_dir, **kwargs)
         self.model_name = model
     
-    @abstractmethod
     def prepare_scoremodel(self,
                            model: str,
                            device: str,
@@ -38,13 +36,12 @@ class Score(nn.Module):
                            **kwargs):
         """Prepare the ScoreModel
         """
-        pass
+        raise NotImplementedError("Subclasses must implement prepare_scoremodel")
     
-    @abstractmethod
     def list_all_models(self) -> List[str]:
         """List all available models
         """
-        pass
+        raise NotImplementedError("Subclasses must implement list_all_models")
 
     def forward(self,
                 images: Optional[Union[str, List[str]]]=None,
