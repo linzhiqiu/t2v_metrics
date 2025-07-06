@@ -15,27 +15,27 @@ import torch
 from torch.utils.data import Dataset
 from pathlib import Path
 
-# ROOT = Path("/data3/zhiqiul/video_annotation")
-# VIDEO_ROOT = Path("/data3/zhiqiul/video_annotation/videos")
-# VIDEO_LABEL_DIR = ROOT / "video_labels/"
-# # Get the absolute path of the video_annotation/ folder
-# # Add it to sys.path
-# sys.path.append(os.path.abspath(ROOT))
-
-# from benchmark import labels_as_dict, BinaryTask
-# from pairwise_benchmark import (
-#     generate_pairwise_datasets,
-# )
-
-
-from pairwise_benchmark import (
-    generate_pairwise_datasets,
-)
-import argparse
-
 ROOT = Path("/data3/zhiqiul/video_annotation")
 VIDEO_ROOT = Path("/data3/zhiqiul/video_annotation/videos")
 VIDEO_LABEL_DIR = ROOT / "video_labels/"
+# Get the absolute path of the video_annotation/ folder
+# Add it to sys.path
+sys.path.append(os.path.abspath(ROOT))
+
+from benchmark import labels_as_dict, BinaryTask
+from pairwise_benchmark import (
+    generate_pairwise_datasets,
+)
+
+
+# from pairwise_benchmark import (
+#     generate_pairwise_datasets,
+# )
+import argparse
+
+# ROOT = Path("/data3/zhiqiul/video_annotation")
+# VIDEO_ROOT = Path("/data3/zhiqiul/video_annotation/videos")
+# VIDEO_LABEL_DIR = ROOT / "video_labels/"
 # Get the absolute path of the video_annotation/ folder
 # Add it to sys.path
 sys.path.append(os.path.abspath(ROOT))
