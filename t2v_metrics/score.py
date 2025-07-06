@@ -42,7 +42,7 @@ class Score(nn.Module):
     def list_all_models(self) -> List[str]:
         """List all available models
         """
-        pass
+        raise NotImplementedError("Subclasses must implement list_all_models")
 
     def forward(self,
                 images: Optional[Union[str, List[str]]]=None,

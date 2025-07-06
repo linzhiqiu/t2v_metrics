@@ -11,7 +11,7 @@
 Baiqi Li*, [Zhiqiu Lin*](https://linzhiqiu.github.io/), [Deepak Pathak](https://www.cs.cmu.edu/~dpathak/), Jiayao Li, Yixin Fei, Kewen Wu, Tiffany Ling, [Xide Xia*](https://scholar.google.com/citations?user=FHLTntIAAAAJ&hl=en), [Pengchuan Zhang*](https://scholar.google.com/citations?user=3VZ_E64AAAAJ&hl=en), [Graham Neubig*](https://www.phontron.com/), [Deva Ramanan*](https://www.cs.cmu.edu/~deva/) (*Co-First and co-senior authors)
 
 ## News
-
+- [2025/05/26] 🔥 **VQAScore** gets new SoTA interleaved and video model additions (e.g. LLaVA-OneVision, Qwen2.5-VL, etc.) as well as [evaluation code](https://github.com/chancharikmitra/t2v_metrics/tree/main/camerabench) for a groundbreaking new benchmark [CameraBench](https://linzhiqiu.github.io/papers/camerabench/) evaluating the camera motion understanding of both LMMs and SfMs.
 - [2024/08/13] 🔥 **VQAScore** is highlighted in Google's [Imagen3 report](https://arxiv.org/abs/2408.07009) as the strongest replacement of CLIPScore for automated evaluation! **GenAI-Bench** was chosen as one of the key benchmarks to showcase Imagen3's superior prompt-image alignment. Kudos to Google for this achievement! [[Paper](https://arxiv.org/abs/2408.07009)]
 - [2024/07/01] 🔥 **VQAScore** has been accepted to ECCV 2024!
 - [2024/06/20] 🔥 **GenAI-Bench** won Best Short Paper at the CVPR'24 SynData Workshop! [[Workshop Site](https://syndata4cv.github.io/)].
@@ -115,7 +115,7 @@ scores = clip_flant5_score.batch_forward(dataset=dataset, batch_size=16) # (n_sa
 ```
 
 ### Check all supported models
-We currently support running VQAScore with CLIP-FlanT5, LLaVA-1.5, and InstructBLIP. For ablation, we also include CLIPScore, BLIPv2Score, PickScore, HPSv2Score, and ImageReward:
+We currently support running VQAScore with CLIP-FlanT5, LLaVA-1.5, and InstructBLIP as well as SOTA interleaved and video LMMs like LLaVA-OneVision, Qwen2.5-VL, and GPT-4o. For ablation, we also include CLIPScore, BLIPv2Score, PickScore, HPSv2Score, and ImageReward:
 ```python
 llava_score = t2v_metrics.VQAScore(model='llava-v1.5-13b')
 instructblip_score = t2v_metrics.VQAScore(model='instructblip-flant5-xxl')
