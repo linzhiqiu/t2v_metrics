@@ -26,14 +26,14 @@ Run these three scripts to generate complete CameraBench results:
 
 ### 1. LMM Binary Classification
 ```bash
-python cam_motion_binary_classification.py --use_testset --score_model 'qwen2.5-vl-7b'
+python cam_motion_binary_classification.py --use_testset --score_model 'qwen2.5-vl-7b-cambench' # 32B and 72B versions available
 ```
 
 ### 2. LMM VQA and Retrieval
 To obtain our VQA and Retrieval results, please run **both** of the scripts that follow.
 ```bash
-python cam_motion_vqa_and_retrieval.py --use_testset --score_model 'qwen2.5-vl-7b'
-python cam_motion_vqa_and_retrieval_complex_caption.py --use_testset --score_model 'qwen2.5-vl-7b'
+python cam_motion_vqa_and_retrieval.py --use_testset --score_model 'qwen2.5-vl-7b-cambench'
+python cam_motion_vqa_and_retrieval_complex_caption.py --use_testset --score_model 'qwen2.5-vl-7b-cambench'
 ```
 ### 3. SfM Evaluation (TBD)
 

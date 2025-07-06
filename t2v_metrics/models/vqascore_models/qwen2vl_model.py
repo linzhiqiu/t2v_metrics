@@ -60,6 +60,7 @@ QWEN2_VL_MODELS = {
             'torch_dtype': torch.bfloat16,
             'attn_implementation': 'flash_attention_2',
         },
+        'fps': 8.0
     },
     'qwen2.5-vl-32b': {
         'tokenizer': {
@@ -70,6 +71,7 @@ QWEN2_VL_MODELS = {
             'torch_dtype': torch.bfloat16,
             'attn_implementation': 'flash_attention_2',
         },
+        'fps': 8.0
     },
     'qwen2.5-vl-72b': {
         'tokenizer': {
@@ -80,6 +82,7 @@ QWEN2_VL_MODELS = {
             'torch_dtype': torch.bfloat16,
             'attn_implementation': 'flash_attention_2',
         },
+        'fps': 8.0
     },
 
     # Winoground Finetuning
@@ -579,12 +582,12 @@ QWEN2_VL_MODELS = {
             'fps': 8.0,  # Specific fps from model name
         },
 
-     'qwen2.5-vl-1-3-6-lora': {
+    'qwen2.5-vl-1-3-6-lora': {
         'tokenizer': {
             'path': 'Qwen/Qwen2.5-VL-7B-Instruct',
         },
         'model': {
-            'path': '/data3/cmitra/saves/qwen2.5-vl-1-3-6',
+            'path': '/data3/cmitra/saves/qwen2.5-vl-7b-1-3-6',
             'torch_dtype': torch.bfloat16,
             'attn_implementation': 'flash_attention_2',
         },
@@ -602,7 +605,63 @@ QWEN2_VL_MODELS = {
         },
         'fps': 8.0,  # Specific fps from model name
     },
+    "train_all_except_proj": {
+        'tokenizer': {
+            'path': 'Qwen/Qwen2.5-VL-7B-Instruct',
+        },
+        'model': {
+            'path': '/data3/cmitra/saves_2/qwen2.5-vl-7b/full/train_all_except_proj/checkpoint-12000',
+            'torch_dtype': torch.bfloat16,
+            'attn_implementation': 'flash_attention_2',
+        },
+        'fps': 8.0,  # Specific fps from model name
+    }, 
 
+    "train_proj_only": {
+        'tokenizer': {
+            'path': 'Qwen/Qwen2.5-VL-7B-Instruct',
+        },
+        'model': {
+            'path': '/data3/cmitra/saves_2/qwen2.5-vl-7b/train_proj_only/checkpoint-12800',
+            'torch_dtype': torch.bfloat16,
+            'attn_implementation': 'flash_attention_2',
+        },
+        'fps': 8.0,  # Specific fps from model name
+    }, 
+    'qwen2.5-vl-7b-cambench': {
+        'tokenizer': {
+            'path': 'Qwen/Qwen2.5-VL-7B-Instruct',
+        },
+        'model': {
+            'path': 'chancharikm/qwen2.5-vl-7b-cam-motion-preview',
+            'torch_dtype': torch.bfloat16,
+            'attn_implementation': 'flash_attention_2',
+        },
+        'fps': 8.0,  # Specific fps from model name
+    },
+    'qwen2.5-vl-32b-cambench': {
+        'tokenizer': {
+            'path': 'Qwen/Qwen2.5-VL-7B-Instruct',
+        },
+        'model': {
+            'path': 'chancharikm/qwen2.5-vl-32b-cam-motion-preview',
+            'torch_dtype': torch.bfloat16,
+            'attn_implementation': 'flash_attention_2',
+        },
+        'fps': 8.0,  # Specific fps from model name
+    },
+
+    'qwen2.5-vl-72b-cambench': {
+        'tokenizer': {
+            'path': 'Qwen/Qwen2.5-VL-7B-Instruct',
+        },
+        'model': {
+            'path': 'chancharikm/qwen2.5-vl-72b-cam-motion-preview',
+            'torch_dtype': torch.bfloat16,
+            'attn_implementation': 'flash_attention_2',
+        },
+        'fps': 8.0,  # Specific fps from model name
+    },
 }
 
 class Qwen2VLModel(VQAScoreModel):
@@ -663,15 +722,6 @@ class Qwen2VLModel(VQAScoreModel):
                 processed_data.append({"type": "image", "image": image})
         return processed_data
 
-    # def load_video(self, video_path, max_frames_num):
-    #     print(f'Going into load_video method.')
-    #     vr = VideoReader(video_path, ctx=cpu(0))
-    #     total_frame_num = len(vr)
-    #     uniform_sampled_frames = np.linspace(0, total_frame_num - 1, max_frames_num, dtype=int)
-    #     frame_idx = uniform_sampled_frames.tolist()
-    #     spare_frames = vr.get_batch(frame_idx).numpy()
-    #     return [Image.fromarray(frame) for frame in spare_frames]
-
     def forward(self,
                 paths: List[str],
                 texts: List[str],
@@ -687,7 +737,7 @@ class Qwen2VLModel(VQAScoreModel):
         lm_probs = []
         for data, question, answer in zip(processed_data, questions, answers):
             messages = [{"role": "user", "content": [data, {"type": "text", "text": question}]}]
-            
+            print(f'Messages {messages}')
             text = self.processor.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
             image_inputs, video_inputs = process_vision_info(messages)
             inputs = self.processor(

@@ -352,11 +352,11 @@ for label_name in all_labels:
         LABEL_SAVE_DIR.mkdir(parents=True)
     LABEL_SAVE_PATH = LABEL_SAVE_DIR / f"{args.score_model}_scores{use_testset_str}.pt"
 
-    if args.use_testset:
-        all_labels[label_name]["pos"] = test_labels[label_name]["pos"]
-        all_labels[label_name]["neg"] = test_labels[label_name]["neg"]
-        print(f"Using test set for {label_name}. If you want to use the full set, please rerun without the --use_testset flag.")
-        
+    # if args.use_testset:
+    all_labels[label_name]["pos"] = test_labels[label_name]["pos"]
+    all_labels[label_name]["neg"] = test_labels[label_name]["neg"]
+    print(f"Using test set for {label_name}. If you want to use the full set, please rerun without the --use_testset flag.")
+    
     dataset = BinaryTask(label_dict=all_labels[label_name])
 
     if LABEL_SAVE_PATH.exists():
