@@ -62,7 +62,7 @@ class GPT4VModel(VQAScoreModel):
                          cache_dir=cache_dir)
 
     def load_model(self):
-        self.tokenizer = tiktoken.encoding_for_model(self.model_name)
+        self.tokenizer = tiktoken.encoding_for_model('gpt-4o')
         self.client = OpenAI(api_key=self.api_key)
 
     def load_images(self, paths: List[str], num_frames: int = None) -> List[dict]:
@@ -164,7 +164,7 @@ class GPT4VModel(VQAScoreModel):
         answers = [answer_template.format(text) for text in texts]
 
         for ans in answers:
-            ans_tokens = self.tokenizer.encode('gpt-4o')
+            ans_tokens = self.tokenizer.encode(ans)
             assert len(ans_tokens) == 1, "Currently only support single token answers"
 
         loaded_data = self.load_images(paths, num_frames)
