@@ -164,7 +164,7 @@ class GPT4VModel(VQAScoreModel):
         answers = [answer_template.format(text) for text in texts]
 
         for ans in answers:
-            ans_tokens = self.tokenizer.encode(ans)
+            ans_tokens = self.tokenizer.encode('gpt-4o')
             assert len(ans_tokens) == 1, "Currently only support single token answers"
 
         loaded_data = self.load_images(paths, num_frames)
