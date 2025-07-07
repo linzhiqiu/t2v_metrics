@@ -15,6 +15,7 @@ default_answer_template = 'Yes'
 GPT4V_MODELS = {
     'gpt-4-turbo': {},
     'gpt-4o': {},
+    'gpt-4.1': {}
 }
 
 def encode_image(image_path):
