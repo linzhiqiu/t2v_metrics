@@ -737,7 +737,6 @@ class Qwen2VLModel(VQAScoreModel):
         lm_probs = []
         for data, question, answer in zip(processed_data, questions, answers):
             messages = [{"role": "user", "content": [data, {"type": "text", "text": question}]}]
-            print(f'Messages {messages}')
             text = self.processor.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
             image_inputs, video_inputs = process_vision_info(messages)
             inputs = self.processor(
