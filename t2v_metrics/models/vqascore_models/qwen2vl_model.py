@@ -507,7 +507,7 @@ QWEN2_VL_MODELS = {
         },
         'fps': 8.0,  # Specific fps from model name
     },
-
+    
     'qwen2.5-vl-cambench-sft-dpo-5000': {
         'tokenizer': {
             'path': 'Qwen/Qwen2.5-VL-7B-Instruct',
@@ -662,6 +662,140 @@ QWEN2_VL_MODELS = {
         },
         'fps': 8.0,  # Specific fps from model name
     },
+
+    'bal_imb_cap_fps_8': {
+        'tokenizer': {
+            'path': 'Qwen/Qwen2.5-VL-7B-Instruct',
+        },
+        'model': {
+            'path': 'chancharikm/qwen2.5-vl-72b-cam-motion-preview',
+            'torch_dtype': torch.bfloat16,
+            'attn_implementation': 'flash_attention_2',
+        },
+        'fps': 8.0,  # Specific fps from model name
+    },
+    #
+    # Captioning FT Experiments
+    #
+    'qwen2.5-vl-hlc-ft-1': {
+    'tokenizer': {
+        'path': 'Qwen/Qwen2.5-VL-7B-Instruct',
+    },
+    'model': {
+        'path': '/data3/cmitra/LLaMA-Factory/saves/hlc_experiments/hlc_ft_1',
+        'torch_dtype': torch.bfloat16,
+        'attn_implementation': 'flash_attention_2',
+        },
+        'fps': 8.0,
+    },
+
+    'qwen2.5-vl-hlc-ft-1-2-3-5-6-camera-only': {
+        'tokenizer': {
+            'path': 'Qwen/Qwen2.5-VL-7B-Instruct',
+        },
+        'model': {
+            'path': '/data3/cmitra/LLaMA-Factory/saves/hlc_experiments/hlc_ft_1_2_3_5_6_camera_only',
+            'torch_dtype': torch.bfloat16,
+            'attn_implementation': 'flash_attention_2',
+        },
+        'fps': 8.0,
+    },
+
+    'qwen2.5-vl-hlc-ft-1-3': {
+        'tokenizer': {
+            'path': 'Qwen/Qwen2.5-VL-7B-Instruct',
+        },
+        'model': {
+            'path': '/data3/cmitra/LLaMA-Factory/saves/hlc_experiments/hlc_ft_1_3',
+            'torch_dtype': torch.bfloat16,
+            'attn_implementation': 'flash_attention_2',
+        },
+        'fps': 8.0,
+    },
+
+    'qwen2.5-vl-hlc-ft-1-3-camera-only': {
+        'tokenizer': {
+            'path': 'Qwen/Qwen2.5-VL-7B-Instruct',
+        },
+        'model': {
+            'path': '/data3/cmitra/LLaMA-Factory/saves/hlc_experiments/hlc_ft_1_3_camera_only',
+            'torch_dtype': torch.bfloat16,
+            'attn_implementation': 'flash_attention_2',
+        },
+        'fps': 8.0,
+    },
+
+    'qwen2.5-vl-hlc-ft-1-5': {
+        'tokenizer': {
+            'path': 'Qwen/Qwen2.5-VL-7B-Instruct',
+        },
+        'model': {
+            'path': '/data3/cmitra/LLaMA-Factory/saves/hlc_experiments/hlc_ft_1_5',
+            'torch_dtype': torch.bfloat16,
+            'attn_implementation': 'flash_attention_2',
+        },
+        'fps': 8.0,
+    },
+
+    'qwen2.5-vl-hlc-ft-1-camera-only': {
+        'tokenizer': {
+            'path': 'Qwen/Qwen2.5-VL-7B-Instruct',
+        },
+        'model': {
+            'path': '/data3/cmitra/LLaMA-Factory/saves/hlc_experiments/hlc_ft_1_camera_only',
+            'torch_dtype': torch.bfloat16,
+            'attn_implementation': 'flash_attention_2',
+        },
+        'fps': 8.0,
+    },
+
+    'qwen2.5-vl-hlc-ft-3': {
+        'tokenizer': {
+            'path': 'Qwen/Qwen2.5-VL-7B-Instruct',
+        },
+        'model': {
+            'path': '/data3/cmitra/LLaMA-Factory/saves/hlc_experiments/hlc_ft_3',
+            'torch_dtype': torch.bfloat16,
+            'attn_implementation': 'flash_attention_2',
+        },
+        'fps': 8.0,
+    },
+
+    'qwen2.5-vl-hlc-ft-3-camera-only': {
+        'tokenizer': {
+            'path': 'Qwen/Qwen2.5-VL-7B-Instruct',
+        },
+        'model': {
+            'path': '/data3/cmitra/LLaMA-Factory/saves/hlc_experiments/hlc_ft_3_camera_only',
+            'torch_dtype': torch.bfloat16,
+            'attn_implementation': 'flash_attention_2',
+        },
+        'fps': 8.0,
+    },
+
+    'qwen2.5-vl-hlc-ft-5': {
+        'tokenizer': {
+            'path': 'Qwen/Qwen2.5-VL-7B-Instruct',
+        },
+        'model': {
+            'path': '/data3/cmitra/LLaMA-Factory/saves/hlc_experiments/hlc_ft_5',
+            'torch_dtype': torch.bfloat16,
+            'attn_implementation': 'flash_attention_2',
+        },
+        'fps': 8.0,
+    },
+
+    'qwen2.5-vl-hlc-ft-1-2-3-5-6': {
+    'tokenizer': {
+        'path': 'Qwen/Qwen2.5-VL-7B-Instruct',
+    },
+    'model': {
+        'path': '/data3/cmitra/LLaMA-Factory/saves/hlc_experiments/hlc_ft_1_2_3_5_6',
+        'torch_dtype': torch.bfloat16,
+        'attn_implementation': 'flash_attention_2',
+    },
+    'fps': 8.0,
+},
 }
 
 class Qwen2VLModel(VQAScoreModel):
@@ -737,7 +871,6 @@ class Qwen2VLModel(VQAScoreModel):
         lm_probs = []
         for data, question, answer in zip(processed_data, questions, answers):
             messages = [{"role": "user", "content": [data, {"type": "text", "text": question}]}]
-            print(f'Messages {messages}')
             text = self.processor.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
             image_inputs, video_inputs = process_vision_info(messages)
             inputs = self.processor(
