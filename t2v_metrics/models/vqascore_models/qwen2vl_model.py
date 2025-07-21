@@ -674,19 +674,16 @@ QWEN2_VL_MODELS = {
         },
         'fps': 8.0,  # Specific fps from model name
     },
-    #
-    # Captioning FT Experiments
-    #
     'qwen2.5-vl-hlc-ft-1': {
-    'tokenizer': {
-        'path': 'Qwen/Qwen2.5-VL-7B-Instruct',
-    },
-    'model': {
-        'path': '/data3/cmitra/LLaMA-Factory/saves/hlc_experiments/hlc_ft_1',
-        'torch_dtype': torch.bfloat16,
-        'attn_implementation': 'flash_attention_2',
+        'tokenizer': {
+            'path': 'Qwen/Qwen2.5-VL-7B-Instruct',
         },
-        'fps': 8.0,
+        'model': {
+            'path': '/data3/cmitra/LLaMA-Factory/saves/hlc_experiments/hlc_ft_1',
+            'torch_dtype': torch.bfloat16,
+            'attn_implementation': 'flash_attention_2',
+            },
+            'fps': 8.0,
     },
 
     'qwen2.5-vl-hlc-ft-1-2-3-5-6-camera-only': {
@@ -795,7 +792,7 @@ QWEN2_VL_MODELS = {
         'attn_implementation': 'flash_attention_2',
     },
     'fps': 8.0,
-},
+    }
 }
 
 class Qwen2VLModel(VQAScoreModel):
