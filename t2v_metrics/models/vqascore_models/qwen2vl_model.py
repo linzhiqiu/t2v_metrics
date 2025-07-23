@@ -662,6 +662,18 @@ QWEN2_VL_MODELS = {
         },
         'fps': 8.0,  # Specific fps from model name
     },
+
+    'bal_imb_cap_fps_8': {
+        'tokenizer': {
+            'path': 'Qwen/Qwen2.5-VL-7B-Instruct',
+        },
+        'model': {
+            'path': 'chancharikm/qwen2.5-vl-72b-cam-motion-preview',
+            'torch_dtype': torch.bfloat16,
+            'attn_implementation': 'flash_attention_2',
+        },
+        'fps': 8.0,  # Specific fps from model name
+    },
 }
 
 class Qwen2VLModel(VQAScoreModel):
@@ -737,7 +749,6 @@ class Qwen2VLModel(VQAScoreModel):
         lm_probs = []
         for data, question, answer in zip(processed_data, questions, answers):
             messages = [{"role": "user", "content": [data, {"type": "text", "text": question}]}]
-            print(f'Messages {messages}')
             text = self.processor.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
             image_inputs, video_inputs = process_vision_info(messages)
             inputs = self.processor(
