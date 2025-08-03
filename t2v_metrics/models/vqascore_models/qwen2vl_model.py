@@ -679,7 +679,18 @@ QWEN2_VL_MODELS = {
             'path': 'Qwen/Qwen2.5-VL-7B-Instruct',
         },
         'model': {
-            'path': '/data3/cmitra/LLaMA-Factory/saves/hlc_experiments/hlc_ft_1',
+            'path': '/data3/cmitra/saves/hlc_experiments_qwen_2.5/hlc_ft_1',
+            'torch_dtype': torch.bfloat16,
+            'attn_implementation': 'flash_attention_2',
+            },
+            'fps': 8.0,
+    },
+    'qwen2.5-vl-hlc-ft-1-test': {
+        'tokenizer': {
+            'path': 'Qwen/Qwen2.5-VL-7B-Instruct',
+        },
+        'model': {
+            'path': '/data3/cmitra/saves/hlc_experiments_qwen_2.5/hlc_ft_1_test_2.5',
             'torch_dtype': torch.bfloat16,
             'attn_implementation': 'flash_attention_2',
             },
@@ -691,7 +702,7 @@ QWEN2_VL_MODELS = {
             'path': 'Qwen/Qwen2.5-VL-7B-Instruct',
         },
         'model': {
-            'path': '/data3/cmitra/LLaMA-Factory/saves/hlc_experiments/hlc_ft_1_2_3_5_6_camera_only',
+            'path': '/data3/cmitra/saves/hlc_experiments_qwen_2.5/hlc_ft_1_2_3_5_6_camera_only',
             'torch_dtype': torch.bfloat16,
             'attn_implementation': 'flash_attention_2',
         },
@@ -703,7 +714,7 @@ QWEN2_VL_MODELS = {
             'path': 'Qwen/Qwen2.5-VL-7B-Instruct',
         },
         'model': {
-            'path': '/data3/cmitra/LLaMA-Factory/saves/hlc_experiments/hlc_ft_1_3',
+            'path': '/data3/cmitra/saves/hlc_experiments_qwen_2.5/hlc_ft_1_3',
             'torch_dtype': torch.bfloat16,
             'attn_implementation': 'flash_attention_2',
         },
@@ -715,7 +726,7 @@ QWEN2_VL_MODELS = {
             'path': 'Qwen/Qwen2.5-VL-7B-Instruct',
         },
         'model': {
-            'path': '/data3/cmitra/LLaMA-Factory/saves/hlc_experiments/hlc_ft_1_3_camera_only',
+            'path': '/data3/cmitra/saves/hlc_experiments_qwen_2.5/hlc_ft_1_3_camera_only',
             'torch_dtype': torch.bfloat16,
             'attn_implementation': 'flash_attention_2',
         },
@@ -727,19 +738,43 @@ QWEN2_VL_MODELS = {
             'path': 'Qwen/Qwen2.5-VL-7B-Instruct',
         },
         'model': {
-            'path': '/data3/cmitra/LLaMA-Factory/saves/hlc_experiments/hlc_ft_1_5',
+            'path': '/data3/cmitra/saves/hlc_experiments_qwen_2.5/hlc_ft_1_5',
             'torch_dtype': torch.bfloat16,
             'attn_implementation': 'flash_attention_2',
         },
         'fps': 8.0,
     },
 
+    'qwen2.5-vl-hlc-ft-2': {
+        'tokenizer': {
+            'path': 'Qwen/Qwen2.5-VL-7B-Instruct',
+        },
+        'model': {
+            'path': '/data3/cmitra/saves/hlc_experiments_qwen_2.5/hlc_ft_2',
+            'torch_dtype': torch.bfloat16,
+            'attn_implementation': 'flash_attention_2',
+        },
+        'fps': 8.0,
+    }, 
+
+    'qwen2.5-vl-hlc-ft-2-camera-only': {
+        'tokenizer': {
+            'path': 'Qwen/Qwen2.5-VL-7B-Instruct',
+        },
+        'model': {
+            'path': '/data3/cmitra/saves/hlc_experiments_qwen_2.5/hlc_ft_2_camera_only',
+            'torch_dtype': torch.bfloat16,
+            'attn_implementation': 'flash_attention_2',
+        },
+        'fps': 8.0,
+    }, 
+
     'qwen2.5-vl-hlc-ft-1-camera-only': {
         'tokenizer': {
             'path': 'Qwen/Qwen2.5-VL-7B-Instruct',
         },
         'model': {
-            'path': '/data3/cmitra/LLaMA-Factory/saves/hlc_experiments/hlc_ft_1_camera_only',
+            'path': '/data3/cmitra/saves/hlc_experiments_qwen_2.5/hlc_ft_1_camera_only',
             'torch_dtype': torch.bfloat16,
             'attn_implementation': 'flash_attention_2',
         },
@@ -751,7 +786,7 @@ QWEN2_VL_MODELS = {
             'path': 'Qwen/Qwen2.5-VL-7B-Instruct',
         },
         'model': {
-            'path': '/data3/cmitra/LLaMA-Factory/saves/hlc_experiments/hlc_ft_3',
+            'path': '/data3/cmitra/saves/hlc_experiments_qwen_2.5/hlc_ft_3',
             'torch_dtype': torch.bfloat16,
             'attn_implementation': 'flash_attention_2',
         },
@@ -763,7 +798,7 @@ QWEN2_VL_MODELS = {
             'path': 'Qwen/Qwen2.5-VL-7B-Instruct',
         },
         'model': {
-            'path': '/data3/cmitra/LLaMA-Factory/saves/hlc_experiments/hlc_ft_3_camera_only',
+            'path': '/data3/cmitra/saves/hlc_experiments_qwen_2.5/hlc_ft_3_camera_only',
             'torch_dtype': torch.bfloat16,
             'attn_implementation': 'flash_attention_2',
         },
@@ -775,7 +810,7 @@ QWEN2_VL_MODELS = {
             'path': 'Qwen/Qwen2.5-VL-7B-Instruct',
         },
         'model': {
-            'path': '/data3/cmitra/LLaMA-Factory/saves/hlc_experiments/hlc_ft_5',
+            'path': '/data3/cmitra/saves/hlc_experiments_qwen_2.5/hlc_ft_5',
             'torch_dtype': torch.bfloat16,
             'attn_implementation': 'flash_attention_2',
         },
@@ -787,7 +822,7 @@ QWEN2_VL_MODELS = {
         'path': 'Qwen/Qwen2.5-VL-7B-Instruct',
     },
     'model': {
-        'path': '/data3/cmitra/LLaMA-Factory/saves/hlc_experiments/hlc_ft_1_2_3_5_6',
+        'path': '/data3/cmitra/saves/hlc_experiments_qwen_2.5/hlc_ft_1_2_3_5_6',
         'torch_dtype': torch.bfloat16,
         'attn_implementation': 'flash_attention_2',
     },
