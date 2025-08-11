@@ -32,8 +32,8 @@ python cam_motion_binary_classification.py --score_model 'qwen2.5-vl-7b-cambench
 ### 2. LMM VQA and Retrieval
 To obtain our VQA and Retrieval results, please run **both** of the scripts that follow.
 ```bash
-python cam_motion_vqa_and_retrieval.py --use_testset --score_model 'qwen2.5-vl-7b-cambench'
-python cam_motion_vqa_and_retrieval_complex_caption.py --use_testset --score_model 'qwen2.5-vl-7b-cambench'
+python cam_motion_vqa_and_retrieval.py --score_model 'qwen2.5-vl-7b-cambench'
+python cam_motion_vqa_and_retrieval_complex_caption.py --score_model 'qwen2.5-vl-7b-cambench'
 ```
 ### 3. SfM Evaluation (TBD)
 
