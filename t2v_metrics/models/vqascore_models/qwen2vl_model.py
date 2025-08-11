@@ -827,19 +827,19 @@ QWEN2_VL_MODELS = {
         'attn_implementation': 'flash_attention_2',
     },
     'fps': 8.0,
-    }
+    },
 
-    'qwen2.5-vl-7b-1-3-6: {
-    'tokenizer': {
-        'path': 'Qwen/Qwen2.5-VL-7B-Instruct',
-    },
-    'model': {
-        'path': 'chancharikm/qwen2.5_saves_7b_1_3_6',
-        'torch_dtype': torch.bfloat16,
-        'attn_implementation': 'flash_attention_2',
-    },
-    'fps': 8.0,
-    }
+    'qwen2.5-vl-7b-1-3-6': {
+        'tokenizer': {
+            'path': 'Qwen/Qwen2.5-VL-7B-Instruct',
+        },
+        'model': {
+            'path': 'chancharikm/qwen2.5_saves_7b_1_3_6',
+            'torch_dtype': torch.bfloat16,
+            'attn_implementation': 'flash_attention_2',
+        },
+        'fps': 8.0,
+        }
 }
 
 class Qwen2VLModel(VQAScoreModel):
