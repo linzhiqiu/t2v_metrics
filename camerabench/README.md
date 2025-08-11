@@ -26,7 +26,7 @@ Run these three scripts to generate complete CameraBench results:
 
 ### 1. LMM Binary Classification
 ```bash
-python cam_motion_binary_classification.py --use_testset --score_model 'qwen2.5-vl-7b-cambench' # 32B and 72B versions available
+python cam_motion_binary_classification.py --score_model 'qwen2.5-vl-7b-cambench' # 32B and 72B versions available
 ```
 
 ### 2. LMM VQA and Retrieval
