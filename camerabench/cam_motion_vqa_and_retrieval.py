@@ -145,6 +145,9 @@ sampled_tasks = datasets["sampled_tasks"]["test"]
 # if type of score_model is VQAScoreModel
 if isinstance(score_model, t2v_metrics.VQAScore):
     benchmark = PairwiseBenchmark(sampled_tasks, mode="vqa")
+    print(benchmark[1500:1505])
+    print(len(benchmark))
+    exit()
     
     yes_kwargs = {"question_template": args.question, "answer_template": "Yes"}
     no_kwargs = {"question_template": args.question, "answer_template": "No"}

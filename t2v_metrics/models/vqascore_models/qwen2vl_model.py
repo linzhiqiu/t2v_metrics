@@ -909,6 +909,7 @@ class Qwen2VLModel(VQAScoreModel):
         assert len(paths) == len(texts), "Number of paths and texts must match"
         
         questions = [question_template.format(text) for text in texts]
+        print(f'Question Sample {questions[0]}')
         answers = [answer_template.format(text) for text in texts]
         processed_data = self.load_images(paths, num_frames)
         

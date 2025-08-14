@@ -358,6 +358,8 @@ for label_name in all_labels:
     print(f"Using test set for {label_name}. If you want to use the full set, please rerun without the --use_testset flag.")
     
     dataset = BinaryTask(label_dict=all_labels[label_name])
+    # print(dataset[:5])
+    # exit()
 
     if LABEL_SAVE_PATH.exists():
         print(f"Already finished {label_name}")
