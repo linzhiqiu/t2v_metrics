@@ -12,14 +12,13 @@ Run these three scripts to generate complete CameraBench results:
 
 ### 1. LMM Binary Classification
 ```bash
-python cam_motion_binary_classification.py --score_model 'qwen2.5-vl-7b-cambench' # 32B and 72B versions available
+python binary_classification.py --model 'model_name' # You can list available models using the t2v_metrics api
 ```
 
 ### 2. LMM VQA and Retrieval
-To obtain our VQA and Retrieval results, please run **both** of the scripts that follow.
+
 ```bash
-python cam_motion_vqa_and_retrieval.py --score_model 'qwen2.5-vl-7b-cambench'
-python cam_motion_vqa_and_retrieval_complex_caption.py --score_model 'qwen2.5-vl-7b-cambench'
+python cam_motion_vqa_and_retrieval.py --model 'model_name'
 ```
 
 ```bibtex
