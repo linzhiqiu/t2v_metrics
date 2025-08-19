@@ -848,16 +848,20 @@ class Qwen2VLModel(VQAScoreModel):
     def __init__(self,
                  model_name='qwen2-vl-7b',
                  device='cuda',
-                 cache_dir=None):
+                 cache_dir=None,
+                 checkpoint='Qwen/Qwen2-VL-7B-Instruct'):
         assert model_name in QWEN2_VL_MODELS, f"Model {model_name} not found in QWEN2_VL_MODELS"
         self.model_name = model_name
         self.device = device
         self.cache_dir = cache_dir
         self.model_info = QWEN2_VL_MODELS[model_name]
         self.load_model()
+        self.checkpoint = checkpoint
 
     def load_model(self):
-        model_path = self.model_info['model']['path']
+        # Switch from model dictionary to checkpoint argument
+        # model_path = self.model_info['model']['path']
+        model_path = self.checkpoint
         if '2.5' in model_path:
             self.model = Qwen2_5_VLForConditionalGeneration.from_pretrained(
                 model_path,
