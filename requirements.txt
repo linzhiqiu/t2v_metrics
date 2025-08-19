@@ -1,0 +1,16 @@
+transformers
+datasets
+scipy
+sentencepiece
+gdown
+tqdm
+ftfy
+regex
+git+https://github.com/openai/CLIP.git
+open-clip-torch
+opencv-python
+opencv-python-headless
+openai
+einops
+pandas
+# salesforce-lavis

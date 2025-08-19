@@ -1,0 +1,602 @@
+[
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/IWv0EhEGmNI.16.6.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains fixed but slightly unsteady, with no intentional movement.",
+    "internvl3-78b": "The camera remains static throughout the video, focusing on the interaction between the two characters. The background is dimly lit, suggesting a nighttime setting, possibly in a military or covert operation environment. The male character is dressed in tactical gear with a 'G-25' patch, indicating a military or special forces affiliation. He has a beard and is wearing a beanie. The female character has blonde hair tied back and is wearing a white lab coat, suggesting she may be a scientist or medical professional. They are standing close to each other, indicating a serious conversation. The environment appears to be outdoors with other indistinct figures in the background, possibly other operatives. The lighting is low-key with high contrast, creating a tense atmosphere. The colors are desaturated with a greenish tint, common in night vision or low-light scenes."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/iXzposKQzvs.2.1.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera pans left slowly, maintaining a very smooth and steady motion without any shaking.",
+    "internvl3-78b": "The camera follows the diver as she jumps off the diving board and performs a series of flips and twists in the air. The camera captures her movements from different angles, including a close-up of her face as she approaches the water. The camera then follows her as she enters the water and swims to the surface."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/5eDQ2SSsmEk.8.5.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera slowly zooms in with minor movement, maintaining a very smooth and steady motion throughout.",
+    "internvl3-78b": "The video clip depicts a tense and suspenseful scene, likely from a horror or thriller film. The setting appears to be a dimly lit control room or laboratory, with various electronic equipment and monitors visible. A person, whose face is not shown, is seated in front of a computer screen displaying the text \"TRY IN PROGRESS\" and \"WAITING FOR THE SCENE.\" The screen also shows a waveform or heartbeat monitor, suggesting a medical or scientific context. The lighting is moody and atmospheric, with blue and red hues dominating the scene. The overall tone is ominous and foreboding, hinting at some kind of experiment or procedure underway."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/6d270d88db28043321dd8a3e0e6204ce7aac74c6fd8916e0b244626e531f2733.7.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly trucks left, maintaining a steady and fluid motion throughout.",
+    "internvl3-78b": "The camera is static."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/B_8bbKn3amE.0.6.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The drone arcs counterclockwise in a smooth motion to track the climber from an aerial view, incorporating a gentle tilt downward to maintain focus on them, and concludes with a slight forward movement to approach the subject.",
+    "internvl3-78b": "The camera wearer walks on the mountain."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/4022437.0.0.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly moves backward, maintaining minimal shaking, and midway through, it slightly pans to the left.",
+    "internvl3-78b": "The camera wearer opens the car boot."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/1934.1.11.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains completely fixed, exhibiting no movement or shaking.",
+    "internvl3-78b": "The camera in this video is static, meaning it does not move. It remains in one position throughout the video, capturing the actions of the people in the room."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/LtXUoaZcp70.3.1.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera arcs counterclockwise around the subject, smoothly incorporating an upward movement while subtly tilting down to adjust the view angle, all with a very steady motion and no shaking.",
+    "internvl3-78b": "The camera remains stationary throughout the video, focusing on the man in the blue suit."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/MuNyfqxAO6Y.8.5.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera arcs smoothly in a counterclockwise direction around the car, maintaining a steady and fluid motion without any shaking.",
+    "internvl3-78b": "The camera wearer looks at the car."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/4422.0.24.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera arcs counterclockwise with an unsteady motion, exhibiting noticeable shaking throughout the movement.",
+    "internvl3-78b": "The camera in this video is moving around the man playing the drums, capturing his movements from different angles. The camera also zooms in on the man's face, showing his expressions as he plays."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/4uGfFYzxWEg.1.5.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly dollies backward, maintaining a steady and fluid motion throughout.",
+    "internvl3-78b": "The video shows a group of people watching a game show on multiple televisions. The camera is stationary and captures the scene from a fixed position. The people in the video are standing and sitting in front of the televisions, and their movements are limited to their reactions to the game show. The televisions are arranged in a row, and the camera captures the entire scene in one shot. The lighting in the room is dim, and the focus is on the televisions and the people watching them. The video does not show any significant camera movement or changes in perspective."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/ZXloF-qGW4U.2.2.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera moves backward and to the left, tracking the subject from the front-side with a slightly unsteady motion, exhibiting some shaking.",
+    "internvl3-78b": "The camera in this video follows a man as he walks along a brightly lit street at night. The camera is positioned at a low angle, capturing the man from behind and slightly to the side. It moves smoothly, tracking his movement as he walks past a series of neon signs and storefronts. The camera stays focused on the man, maintaining a consistent distance as he walks. The movement is fluid and continuous, creating a sense of following the man on his journey through the vibrant urban environment. The camera's perspective emphasizes the neon lights and reflections on the glass windows, adding to the dynamic and colorful atmosphere of the scene."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/JDaw5I_5hPk.0.19.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains fixed but slightly unsteady, with no intentional movement.",
+    "internvl3-78b": "The camera remains static throughout the video, capturing the scene from a fixed position. The focus is on the car as it drives along the winding road, surrounded by the tall trees and lush greenery. The camera angle does not change, providing a consistent view of the car's movement through the forest. The static nature of the camera emphasizes the tranquility and serenity of the forest setting, allowing the viewer to fully appreciate the natural beauty of the surroundings. The lack of camera movement also adds to the sense of calm and peacefulness, as the car moves smoothly along the road without any sudden or jarring movements. Overall, the static camera work enhances the overall aesthetic of the video, creating a visually pleasing and immersive experience for the viewer."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/6h6bMAWLYAI.2.2.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera vibrates with noticeable shakiness, lacking a clear pattern in its movement.",
+    "internvl3-78b": "The camera in this video is positioned in front of the man and remains stationary throughout the video. The man is speaking into a microphone while surrounded by reporters and cameras."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/H4AZhS5WqKk.0.0.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains completely fixed, exhibiting no movement or shaking.",
+    "internvl3-78b": "The camera remains stationary throughout the video."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/MQugcNLFI9k.2.8.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera arcs smoothly in a clockwise direction, maintaining minimal shaking throughout the movement.",
+    "internvl3-78b": "\u89c6\u9891\u7684\u4e3b\u8981\u5185\u5bb9\u5c55\u793a\u4e86\u4e00\u4f4d\u5e74\u8f7b\u7537\u5b50\u5728\u7ebd\u7ea6\u65f6\u4ee3\u5e7f\u573a\u7684\u8857\u5934\u884c\u8d70\u3002\u89c6\u9891\u7684\u6838\u5fc3\u4e2d\u5fc3\u601d\u60f3\u4f3c\u4e4e\u662f\u5728\u8868\u73b0\u8fd9\u4f4d\u7537\u5b50\u5728\u7e41\u5fd9\u90fd\u5e02\u4e2d\u7684\u5b64\u72ec\u611f\u548c\u575a\u5b9a\u7684\u610f\u5fd7\u3002\u4ed6\u8eab\u7a7f\u4e00\u4ef6\u767d\u8272\u7d27\u8eabT\u6064\u548c\u5361\u5176\u8272\u77ed\u88e4\uff0c\u663e\u5f97\u975e\u5e38\u5065\u58ee\u548c\u81ea\u4fe1\u3002\u4ed6\u7684\u8868\u60c5\u4e25\u8083\uff0c\u76ee\u5149\u575a\u5b9a\uff0c\u4f3c\u4e4e\u5728\u5bfb\u627e\u4ec0\u4e48\u6216\u8005\u601d\u8003\u7740\u91cd\u8981\u7684\u4e8b\u60c5\u3002\n\n\u89c6\u9891\u4e2d\u7684\u4eba\u7269\u4e3b\u8981\u662f\u8fd9\u4f4d\u5e74\u8f7b\u7537\u5b50\uff0c\u4ed6\u72ec\u81ea\u4e00\u4eba\u5728\u65f6\u4ee3\u5e7f\u573a\u7684\u8857\u5934\u884c\u8d70\u3002\u4ed6\u7684\u52a8\u4f5c\u4e3b\u8981\u662f\u5411\u524d\u8d70\uff0c\u5076\u5c14\u8f6c\u5934\u89c2\u5bdf\u56db\u5468\u3002\u89c6\u9891\u4e2d\u6ca1\u6709\u5176\u4ed6\u660e\u663e\u7684\u4eba\u7269\u4e0e\u4ed6\u4e92\u52a8\uff0c\u4f46\u80cc\u666f\u4e2d\u53ef\u4ee5\u770b\u5230\u8bb8\u591a\u884c\u4eba\u548c\u8f66\u8f86\uff0c\u4ed6\u4eec\u5404\u81ea\u5fd9\u788c\uff0c\u4e0e\u7537\u5b50\u5f62\u6210\u9c9c\u660e\u5bf9\u6bd4\u3002\n\n\u573a\u666f\u63cf\u8ff0\u65b9\u9762\uff0c\u89c6\u9891\u7684\u80cc\u666f\u662f\u7ebd\u7ea6\u65f6\u4ee3\u5e7f\u573a\uff0c\u8fd9\u91cc\u5145\u6ee1\u4e86\u5404\u79cd\u9713\u8679\u706f\u5e7f\u544a\u724c\u548c\u5de8\u5927\u7684\u7535\u5b50\u5c4f\u5e55\u3002\u5e7f\u544a\u724c\u4e0a\u663e\u793a\u7740\u5404\u79cd\u5404\u6837\u7684\u5185\u5bb9\uff0c\u5305\u62ec\u201cLa\u201d\u3001\u201cSO KODAK\u201d\u3001\u201cBank of America\u201d\u3001\u201cAMERICAN EAGLE OUTFITTERS\u201d\u7b49\u3002\u8fd9\u4e9b\u5e7f\u544a\u724c\u548c\u7535\u5b50\u5c4f\u5e55\u4e0d\u65ad\u95ea\u70c1\uff0c\u8425\u9020\u51fa\u4e00\u79cd\u7e41\u5fd9\u548c\u55a7\u56a3\u7684\u90fd\u5e02\u6c1b\u56f4\u3002\u89c6\u9891\u4e2d\u7684\u573a\u666f\u53d8\u5316\u4e3b\u8981\u4f53\u73b0\u5728\u7537\u5b50\u884c\u8d70\u7684\u8fc7\u7a0b\u4e2d\uff0c\u955c\u5934\u8ddf\u968f\u4ed6\u7684\u6b65\u4f10\uff0c\u4ece\u4e0d\u540c\u89d2\u5ea6\u5c55\u793a\u65f6\u4ee3\u5e7f\u573a\u7684\u7e41\u534e\u666f\u8c61\u3002\n\n\u89c6\u9891\u4e2d\u6d89\u53ca\u5230\u7684\u8fd0\u52a8\u7269\u4f53\u4e3b\u8981\u662f\u7537\u5b50\u548c\u80cc\u666f\u4e2d\u7684\u8f66\u8f86\u3002\u7537\u5b50"
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/338.2.32.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly zooms out and moves upward, then remains fixed as the lazy Susan in the foreground rotates, revealing various food items.",
+    "internvl3-78b": "The video begins with a close-up shot of a wooden table, focusing on the surface and the blurred background. The camera then slowly zooms in on a plate of fortune cookies placed on a yellow and blue circular stand. The background remains slightly out of focus, showing a warm, inviting restaurant setting with a fireplace and various condiments on the table. The camera then pans to the right, revealing a red can of MSG seasoning placed on a similar yellow and blue stand. The camera continues to pan, showing a plate of fried food, possibly onion rings, on another yellow and blue stand. Finally, the camera focuses on a blue sandwich press with a sandwich inside, also on a yellow and blue stand. Throughout the video, the background remains consistent, featuring ornate decorations and a warm, cozy atmosphere."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/4PcpGxihPac.3.2.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly pans left, tracking the subject with minimal shaking.",
+    "internvl3-78b": "The camera in this video is positioned in a fixed location, capturing the scene from a single angle. There is no movement or panning of the camera throughout the video. The focus remains on the woman standing in the center of the room, holding a piece of paper and addressing the group. The camera angle provides a clear view of the woman and the individuals seated around her, allowing the viewer to observe their reactions and expressions. The lack of camera movement creates a sense of stillness and emphasizes the woman's speech and the attentive atmosphere of the room."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/RZs5Hz1klno.1.1.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly dollies forward while simultaneously panning left to focus on the screen of a laptop, maintaining a steady and fluid motion throughout.",
+    "internvl3-78b": "The camera wearer opens the laptop."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/OCBYMQzG44U.21.2.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera moves forward and rapidly pans right as it rounds a corner in the hallway, with a slightly unsteady motion that includes some shaking.",
+    "internvl3-78b": "The camera wearer walks in the corridor."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/ZBsv_5fHtIg.0.3.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera quickly trucks right, closely tracking the car from its side, then smoothly arcs counterclockwise around it, transitioning into a lead and side-tracking shot that reveals the car in full view. Throughout this sequence, the subject becomes smaller in the frame, and the camera movement remains very smooth with no shaking.",
+    "internvl3-78b": "The camera starts with a close-up shot of the front left side of a black BMW car, focusing on the headlight and wheel. It then slowly zooms out to reveal more of the car's front end, including the grille and license plate. The camera continues to zoom out, showing the entire front of the car as it drives through a tunnel. The car's headlights are on, illuminating the road ahead. The camera follows the car as it drives down the tunnel, maintaining a steady pace. The car's sleek design and shiny black paint are highlighted by the tunnel's lighting. The video ends with the car driving away from the camera, disappearing into the distance."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/ti231UvSvfQ.0.0.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera arcs slowly and smoothly clockwise around the person's face, moving backward and upward to transition from an extreme close-up to a close-up shot, then remains fixed until the end.",
+    "internvl3-78b": "The camera remains static throughout the video, focusing on the man's face."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/M0jmSsQ5ptw.3.16.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The handheld camera moves forward with an unsteady shake, following a man running toward a helicopter, capturing him from behind as he grows larger in the frame. Once he boards the helicopter, the camera becomes stationary but continues to exhibit noticeable handheld shaking.",
+    "internvl3-78b": "The camera follows the man as he walks towards the helicopter and then moves closer to him as he climbs inside."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/px9IqOnilHI.1.2.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains completely static, fixed in place without any movement or shaking.",
+    "internvl3-78b": "The camera remains static throughout the video, focusing on the person's hands holding the game controller."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/nGJMwixogyk.5.8.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera continuously dollies forward along the street, panning left to face the street, with a slightly unsteady movement that includes some shaking.",
+    "internvl3-78b": "The camera wearer walks on the road."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/sKJeTaIEldM.2.2.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera moves backward while simultaneously zooming in, with a slightly unsteady motion that includes some shaking.",
+    "internvl3-78b": "The camera in this video is static, meaning it does not move. It remains focused on the man throughout the entire video."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/9H942RAVrHQ.0.2.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains completely fixed, exhibiting no movement or shaking.",
+    "internvl3-78b": "The camera in this video is static, meaning it does not move. The focus is on the character's movements and actions, and the camera remains stationary to capture the entire performance. The lack of camera movement allows the viewer to fully appreciate the character's acrobatic skills and the fluidity of their movements. The simplicity of the background also helps to keep the focus on the character and their performance. Overall, the static camera adds to the minimalist and artistic feel of the video, allowing the viewer to fully immerse themselves in the character's performance."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/Vm-b2AVwARw.1.0.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly dollies forward and pedestals downward, approaching the marble table on the floor with minimal shaking.",
+    "internvl3-78b": "The camera in this video is stationary, meaning it does not move. It captures the scene from a fixed position, providing a clear view of the objects and their locations."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/u5JBlwlnJX0.1.0.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera arcs smoothly in a clockwise direction, maintaining minimal shaking throughout the movement.",
+    "internvl3-78b": "The camera in this video is static, meaning it does not move. It remains in one position throughout the entire video, capturing the scene from a fixed angle. The static camera allows the viewer to focus on the two people standing on the cliff and the surrounding environment, without any distractions from camera movement. The lack of camera movement also creates a sense of stillness and calmness, which is fitting for the peaceful and serene setting of the video. Overall, the static camera enhances the viewer's experience by providing a clear and stable view of the scene, allowing them to fully appreciate the beauty of the natural surroundings and the interaction between the two people on the cliff."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/Ao4Y7JU30zc.0.0.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera steadily trucks left while panning right to keep the person centered in the frame, though the movement is slightly unsteady with some shaking.",
+    "internvl3-78b": "The camera slowly zooms in on the man sitting on the bench."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/HasIb5pfWkQ.3.3.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly tracks the subject from the side while moving downward, maintaining a steady and fluid motion throughout.",
+    "internvl3-78b": "The camera in this video is static, meaning it does not move. It remains in the same position throughout the entire video, capturing the scene from a fixed angle. The focus is on the objects and their interactions within the frame, rather than on any camera movement or panning. The static camera allows for a clear and consistent view of the scene, emphasizing the details and elements present in the environment."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/m1LHXV49zn8.2.10.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly tilts downward to capture the fighting crowds below, subtly moving forward to avoid obstruction from the woman in the foreground, maintaining minimal shaking throughout.",
+    "internvl3-78b": "\u89c6\u9891\u5f00\u59cb\u65f6\uff0c\u955c\u5934\u805a\u7126\u5728\u4e00\u4f4d\u5973\u6027\u7684\u4fa7\u8138\uff0c\u5979\u7ad9\u5728\u4e00\u7247\u5e7f\u88a4\u7684\u6c99\u6f20\u4e2d\uff0c\u80cc\u666f\u662f\u8fde\u7ef5\u8d77\u4f0f\u7684\u6c99\u4e18\u3002\u9633\u5149\u4ece\u5979\u7684\u80cc\u540e\u7167\u5c04\u8fc7\u6765\uff0c\u5f62\u6210\u4e86\u4e00\u79cd\u9006\u5149\u6548\u679c\uff0c\u4f7f\u5979\u7684\u8f6e\u5ed3\u663e\u5f97\u683c\u5916\u6e05\u6670\u3002\u5979\u7684\u5934\u53d1\u88ab\u5fae\u98ce\u5439\u62c2\uff0c\u663e\u5f97\u6709\u4e9b\u51cc\u4e71\uff0c\u4f46\u540c\u65f6\u4e5f\u589e\u6dfb\u4e86\u4e00\u79cd\u81ea\u7136\u7684\u7f8e\u611f\u3002\u5979\u7684\u76ee\u5149\u575a\u5b9a\u5730\u671b\u5411\u8fdc\u65b9\uff0c\u4f3c\u4e4e\u5728\u601d\u8003\u7740\u4ec0\u4e48\u91cd\u8981\u7684\u4e8b\u60c5\u3002\n\n\u968f\u7740\u955c\u5934\u7684\u7f13\u6162\u79fb\u52a8\uff0c\u753b\u9762\u9010\u6e10\u62c9\u8fdc\uff0c\u5c55\u73b0\u51fa\u66f4\u591a\u7684\u6c99\u6f20\u666f\u8c61\u3002\u6c99\u4e18\u7684\u7ebf\u6761\u5728\u9633\u5149\u7684\u7167\u5c04\u4e0b\u663e\u5f97\u683c\u5916\u67d4\u548c\uff0c\u6574\u4e2a\u573a\u666f\u5145\u6ee1\u4e86\u5b81\u9759\u4e0e\u58ee\u4e3d\u3002\u8fdc\u5904\u7684\u5c71\u8109\u9690\u7ea6\u53ef\u89c1\uff0c\u4e3a\u8fd9\u7247\u6c99\u6f20\u589e\u6dfb\u4e86\u4e00\u4e1d\u795e\u79d8\u611f\u3002\n\n\u7a81\u7136\uff0c\u955c\u5934\u5207\u6362\u5230\u4e00\u4e2a\u66f4\u5e7f\u9614\u7684\u89c6\u89d2\uff0c\u4ece\u9ad8\u5904\u4fef\u77b0\u6574\u4e2a\u6c99\u6f20\u3002\u8fd9\u65f6\uff0c\u53ef\u4ee5\u770b\u5230\u4e00\u5927\u7fa4\u4eba\u6b63\u5728\u6c99\u6f20\u4e2d\u5954\u8dd1\u3002\u4ed6\u4eec\u7a7f\u7740\u7edf\u4e00\u7684\u670d\u88c5\uff0c\u663e\u5f97\u975e\u5e38\u6709\u7ec4\u7ec7\u6027\u3002\u4eba\u7fa4\u7684\u6570\u91cf\u4f17\u591a\uff0c\u5bc6\u5bc6\u9ebb\u9ebb\u5730\u5206\u5e03\u5728\u6c99\u6f20\u4e2d\uff0c\u5f62\u6210\u4e86\u4e00\u9053\u72ec\u7279\u7684\u98ce\u666f\u7ebf\u3002\u4ed6\u4eec\u7684\u5954\u8dd1\u65b9\u5411\u4e00\u81f4\uff0c\u4f3c\u4e4e\u5728\u671d\u7740\u67d0\u4e2a\u76ee\u6807\u524d\u8fdb\u3002\n\n\u968f\u7740\u4eba\u7fa4\u7684\u5954\u8dd1\uff0c\u6c99\u5c18\u88ab\u626c\u8d77\uff0c\u5f62\u6210\u4e86\u4e00\u7247\u5c18\u571f\u98de\u626c\u7684\u666f\u8c61\u3002\u955c\u5934\u7ee7\u7eed\u62c9\u8fdc\uff0c\u4eba\u7fa4\u7684\u89c4\u6a21\u53d8\u5f97\u66f4\u52a0\u6e05\u6670\uff0c\u4ed6\u4eec\u5206\u6210\u51e0\u4e2a\u4e0d\u540c\u7684\u961f\u4f0d\uff0c\u5f7c\u6b64\u4e4b\u95f4\u4fdd\u6301\u7740\u4e00\u5b9a\u7684\u8ddd\u79bb"
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/as8lT-q2_E8.0.0.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly moves backward, tracking the approaching motorcycles from the front. It then cranes up to a bird's-eye view before craning down to a level angle, executing a simultaneous clockwise roll. This fluid motion transitions seamlessly into a tail-tracking shot, maintaining minimal shaking throughout.",
+    "internvl3-78b": "The camera in this video is moving along with the motorcyclist, giving the viewer a sense of speed and motion. The camera also captures the futuristic design of the motorcycle and the neon lights on the track."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/0tIoyN7WKuA.3.1.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly arcs clockwise around the Flash Man, slightly moving forward to approach him before shifting backward, maintaining minimal shaking throughout.",
+    "internvl3-78b": "The camera in this video is moving around the man in the red suit, capturing him from different angles. The camera also zooms in and out to show the man's movements and the surrounding environment."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/4021529.0.0.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly rolls counterclockwise while moving upward, maintaining minimal shaking throughout the motion.",
+    "internvl3-78b": "The camera wearer climbs down the mountain."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/P8JgTjTPIuk.1.3.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera arcs clockwise with a slightly unsteady motion, exhibiting some shaking as it moves.",
+    "internvl3-78b": "The camera in this video is static, meaning it does not move. It remains in the same position throughout the entire video, capturing the scene from a fixed angle. The focus is on the man in the armor, and the camera does not shift to show any other objects or people in the room. The lighting in the room is dim, and the camera captures the man's movements and expressions as he looks up at the ceiling. The video is shot in a realistic style, with attention to detail in the man's armor and the objects in the room. The overall effect is a sense of stillness and contemplation, as the man stands alone in the dark room."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/RooDYxp5Fx8.0.4.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera moves forward while panning right, with a slightly unsteady motion that includes some shaking.",
+    "internvl3-78b": "The camera wearer looks around."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/h1PjJ9_Yd2c.2.16.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains fixed but slightly unsteady, with no intentional movement.",
+    "internvl3-78b": "The camera wearer sprays deodorant on her left armpit."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/pNGMY3xVkVE.0.0.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly dollies forward with minimal shaking, maintaining a steady and clear movement pattern.",
+    "internvl3-78b": "The camera follows a group of people walking through a dimly lit tunnel. The tunnel is illuminated by red lights, creating a dramatic and intense atmosphere. The group is diverse, with individuals of different ages and styles of dress. They are all walking in the same direction, towards a bright light at the end of the tunnel. The camera moves forward with the group, capturing their determined expressions and the anticipation in their movements. The light at the end of the tunnel grows brighter as they approach, suggesting a sense of hope or escape. The overall style of the video is suspenseful and cinematic, with a focus on the journey of the group and the mystery of what lies ahead."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/Vm-b2AVwARw.5.0.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera slowly rolls counterclockwise, maintaining a very smooth and steady motion without any shaking.",
+    "internvl3-78b": "The camera remains static throughout the video, focusing on the white paper with the black icons and text. The only movement is the appearance of the chain connecting the two icons."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/0UthxdAH0ks.5.3.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera arcs smoothly in a clockwise direction, maintaining minimal shaking throughout the movement.",
+    "internvl3-78b": "The video starts with a black screen, and then the camera slowly zooms in on a group of shirtless men standing in a circle. The camera remains focused on the group as they talk and gesture to each other. The lighting is dim, with a red light illuminating the scene. The camera then slowly zooms out, revealing more of the dark room they are in. The video ends with a black screen."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/upC8hjr2b4g.10.1.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera rolls clockwise throughout the video with a steady and very smooth motion, maintaining a seamless flow without any shaking.",
+    "internvl3-78b": "The camera wearer looks around."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/jGDdHNOeQ0c.0.1.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains fixed but exhibits a slight unsteadiness, with no intentional movement.",
+    "internvl3-78b": "The camera in this video is positioned at a fixed point, capturing a wide shot of the street scene. It remains stationary throughout the sequence, providing a stable and continuous view of the unfolding action. The camera angle is slightly elevated, offering a clear perspective of the street, the buildings, and the people moving within the frame. This static camera setup allows for a comprehensive observation of the environment and the interactions taking place. The lack of camera movement emphasizes the natural flow of the scene, focusing attention on the movements of the characters and the passing vehicles. The composition of the shot remains consistent, maintaining a balanced view of the street and the surrounding architecture. This fixed camera perspective creates a sense of stability and allows the viewer to absorb the details of the setting and the activities occurring within it."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/kSx5KGOv5Qc.0.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly zooms in, maintaining a steady and fluid motion throughout.",
+    "internvl3-78b": "The camera in this video is positioned on a hill overlooking the city and the sea. It remains stationary throughout the video, providing a panoramic view of the city and the sea."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/MQugcNLFI9k.3.4.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera, positioned in a bird's-eye view of two people fighting, rolls clockwise with very smooth movement and no shaking.",
+    "internvl3-78b": "The camera is circling around them."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/G_TLZr6ZbLE.0.0.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains completely static, fixed in place without any movement or shaking.",
+    "internvl3-78b": "\u89c6\u9891\u7684\u4e3b\u8981\u5185\u5bb9\u5c55\u793a\u4e86\u4e00\u5bf9\u7537\u5973\u5728\u4e00\u4e2a\u7535\u5f71\u9662\u7684\u552e\u7968\u5904\u8fdb\u884c\u4e92\u52a8\u3002\u89c6\u9891\u7684\u6838\u5fc3\u4e2d\u5fc3\u601d\u60f3\u53ef\u80fd\u56f4\u7ed5\u7740\u4e24\u4eba\u4e4b\u95f4\u7684\u4ea4\u6d41\u548c\u4e92\u52a8\uff0c\u53ef\u80fd\u6d89\u53ca\u5230\u8d2d\u7968\u6216\u67d0\u79cd\u670d\u52a1\u7684\u573a\u666f\u3002\n\n\u89c6\u9891\u4e2d\u6d89\u53ca\u5230\u4e24\u4e2a\u4eba\u7269\uff0c\u4e00\u4e2a\u662f\u7ad9\u5728\u67dc\u53f0\u540e\u9762\u7684\u4e00\u4f4d\u5973\u6027\uff0c\u5979\u7a7f\u7740\u4e00\u4ef6\u5e26\u6709\u5c0f\u5706\u70b9\u56fe\u6848\u7684\u767d\u8272\u886c\u886b\uff0c\u5934\u53d1\u624e\u6210\u9a6c\u5c3e\u3002\u5979\u9762\u5e26\u5fae\u7b11\uff0c\u663e\u5f97\u975e\u5e38\u53cb\u597d\u548c\u70ed\u60c5\u3002\u53e6\u4e00\u4f4d\u662f\u7ad9\u5728\u67dc\u53f0\u524d\u7684\u4e00\u4f4d\u7537\u6027\uff0c\u4ed6\u7a7f\u7740\u6df1\u8272\u7684\u5916\u5957\uff0c\u770b\u8d77\u6765\u6bd4\u8f83\u968f\u610f\u3002\u4e24\u4eba\u4e4b\u95f4\u7684\u4e92\u52a8\u663e\u5f97\u975e\u5e38\u81ea\u7136\u548c\u8f7b\u677e\uff0c\u5973\u6027\u5458\u5de5\u4f3c\u4e4e\u5728\u5411\u7537\u6027\u987e\u5ba2\u89e3\u91ca\u6216\u63a8\u8350\u67d0\u4e9b\u4e1c\u897f\uff0c\u800c\u7537\u6027\u987e\u5ba2\u5219\u5728\u8ba4\u771f\u8046\u542c\u5e76\u56de\u5e94\u3002\n\n\u573a\u666f\u8bbe\u5b9a\u5728\u4e00\u4e2a\u7535\u5f71\u9662\u7684\u552e\u7968\u5904\uff0c\u80cc\u666f\u4e2d\u53ef\u4ee5\u770b\u5230\u4e00\u4e2a\u6807\u6709\u201cpopcorn\u201d\u7684\u7206\u7c73\u82b1\u673a\uff0c\u7ea2\u8272\u7684\u9713\u8679\u706f\u5b57\u6837\u975e\u5e38\u663e\u773c\u3002\u67dc\u53f0\u4e0a\u65b9\u6709\u4e00\u4e2a\u94f6\u8272\u7684\u673a\u5668\uff0c\u53ef\u80fd\u662f\u7528\u6765\u5236\u4f5c\u70ed\u72d7\u6216\u5176\u4ed6\u5c0f\u5403\u7684\u8bbe\u5907\u3002\u80cc\u666f\u7684\u697c\u68af\u901a\u5411\u4e0a\u5c42\uff0c\u697c\u68af\u7684\u5c3d\u5934\u6709\u4e00\u4e2a\u7eff\u8272\u7684\u201cEXIT\u201d\u6807\u5fd7\uff0c\u6307\u793a\u51fa\u53e3\u7684\u65b9\u5411\u3002\u6574\u4e2a\u573a\u666f\u7684\u706f\u5149\u504f\u6696\u8272\u8c03\uff0c\u8425\u9020\u51fa\u4e00\u79cd\u6e29\u99a8\u548c\u8212\u9002\u7684\u6c1b\u56f4\u3002\n\n\u89c6\u9891\u4e2d\uff0c\u5973\u6027\u5458\u5de5\u7ad9\u5728\u67dc\u53f0\u540e\u9762\uff0c\u8eab\u4f53\u7a0d\u5fae\u5411\u53f3\u4fa7\u503e\u659c\uff0c\u9762\u5e26\u5fae\u7b11\u5730\u770b\u7740\u7537\u6027\u987e\u5ba2\u3002\u5979\u7684\u4e00\u53ea\u624b\u653e\u5728\u67dc\u53f0\u4e0a\uff0c\u53e6\u4e00\u53ea\u624b\u5219\u5728"
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/2519.5.16.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains fixed but slightly unsteady, with no intentional movement.",
+    "internvl3-78b": "The camera remains static throughout the video, focusing on the man's face."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/wqn8akChql4.1.11.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera arcs smoothly in a clockwise direction, maintaining minimal shaking throughout the movement.",
+    "internvl3-78b": "The camera in this video is moving in a circular motion around a stadium. It provides a bird's eye view of the stadium and its surroundings. The camera movement is smooth and continuous, giving the viewer a sense of the scale and layout of the stadium."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/YBC2JaevzOI.6.4.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly tracks a boy running through a forest at night, beginning with a slight pan to the left. As the video progresses, the pan speeds up, accompanied by a subtle downward tilt, all while maintaining a steady, shake-free motion.",
+    "internvl3-78b": "The video begins with a completely dark scene, gradually revealing a person running through a dense forest at night. The camera remains stationary, capturing the runner as they approach from a distance. The runner, dressed in a green long-sleeve shirt, gray shorts, and a white cap, moves steadily towards the camera. As the runner gets closer, the camera angle remains fixed, allowing the viewer to observe the runner's movements and the surrounding environment. The forest is dark, with tall, thin trees lining the path, and the ground is covered with fallen leaves, creating a soft crunching sound underfoot. The runner's pace is steady, and they appear focused on their path. As the runner passes by the camera, they continue moving to the left side of the frame, eventually disappearing into the darkness of the forest. The camera remains still, leaving the viewer with the eerie silence of the night forest."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/TktL3QR8Yg8.0.3.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains completely fixed, exhibiting no movement or shaking.",
+    "internvl3-78b": "The camera starts with a wide shot of the room, then quickly zooms in on the teddy bear. The camera then focuses on the teddy bear's face as the hand places the hat on its head."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/gooWdc6kb80.0.7.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains completely fixed, exhibiting no movement or shaking.",
+    "internvl3-78b": "The camera in the video is stationary, and it captures the man playing the game of Jenga from a fixed position. The camera angle is slightly elevated, and it provides a clear view of the man's actions and the game pieces. The lighting in the video is also consistent, and it highlights the man and the game pieces without creating any glare or shadows. The video is shot in a simple and straightforward manner, and it focuses on the man's actions and the game itself without any additional distractions. Overall, the camera work in the video is effective in conveying the man's concentration and skill in playing the game of Jenga."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/i82xURPkLWo.3.6.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains completely fixed, exhibiting no movement or shaking.",
+    "internvl3-78b": "The video features a man sitting in a rustic, weathered wooden structure, possibly a porch or an old house. The background shows a worn-out wooden wall with peeling paint and a window that reveals a glimpse of greenery outside, suggesting a rural or semi-rural setting. The man is wearing a plain brown t-shirt and has a short haircut with a neatly trimmed beard. His expressions change throughout the sequence, indicating a conversation or an internal monologue. Initially, he appears contemplative or slightly amused, then he seems to be in discomfort or pain as he touches his nose, possibly indicating a headache or distress. His facial expressions convey a range of emotions from mild amusement to concern and discomfort. The lighting is natural, suggesting daytime, and the overall color palette is muted with earthy tones."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/JDaw5I_5hPk.0.1.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains completely fixed, exhibiting no movement or shaking.",
+    "internvl3-78b": "The camera wearer looks at the sea."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/5eDQ2SSsmEk.9.7.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera rolls counterclockwise in a slow, smooth motion, maintaining steadiness without any shaking.",
+    "internvl3-78b": "The camera slowly zooms in on the vehicle."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/Kapdye-diSM.8.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera moves forward with a clear pattern, but its progress is unsteady, marked by noticeable shaking.",
+    "internvl3-78b": "The camera wearer rides bike on the road."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/_I6Y-rtiTPc.0.2.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera quickly zooms in with a smooth and steady motion, maintaining minimal shaking throughout.",
+    "internvl3-78b": "The camera follows the three men as they walk across the cobblestone courtyard. It starts with a wide shot of the courtyard and then zooms in on the three men as they walk towards the camera. The camera then follows them as they walk away from the camera, keeping them in the center of the frame."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/1hu1np_BI2M.7.0.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly zooms out while moving left, maintaining a steady and fluid motion throughout.",
+    "internvl3-78b": "The camera in this video is static, meaning it does not move. It remains in the same position throughout the entire video, capturing the objects and their movements from a fixed angle."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/jOdkb3FYrhA.0.0.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera arcs clockwise with a slightly unsteady motion, exhibiting some shaking as it moves.",
+    "internvl3-78b": "The camera follows the man as he walks towards the car and opens the trunk. It then moves closer to show him rummaging through the trunk. Finally, it zooms out to show him closing the trunk and walking away."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/G2EAFkURl0U.5.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly pans right, maintaining a steady and fluid motion throughout.",
+    "internvl3-78b": "The camera pans to the right."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/xo9p8p6deRI.10.2.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera slowly dollies forward with a slight wobble, its movement slightly unsteady with some shaking.",
+    "internvl3-78b": "The camera is static in this video, and it is positioned inside the car, looking out through the windshield. The camera does not move, and the focus remains on the two figures in the car. The camera angle is slightly elevated, giving a clear view of the figures and the road ahead. The camera does not zoom in or out, and there are no changes in the camera angle or position throughout the video. The static camera creates a sense of stillness and tension, emphasizing the emotional exchange between the two figures in the car. The lack of movement also draws attention to the dialogue and the expressions of the figures, making the scene more intimate and personal. Overall, the static camera adds to the dramatic effect of the scene, highlighting the emotional intensity of the moment."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/338.2.6.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains completely fixed, exhibiting no movement or shaking.",
+    "internvl3-78b": "\u89c6\u9891\u7684\u4e3b\u8981\u5185\u5bb9\u662f\u4e00\u4f4d\u5e74\u957f\u7684\u7537\u6027\u6b63\u5728\u9910\u5385\u7528\u9910\u3002\u4ed6\u7a7f\u7740\u4e00\u4ef6\u6df1\u7ea2\u8272\u7684\u77ed\u8896\u886c\u886b\uff0c\u886c\u886b\u4e0a\u6709\u4e00\u6761\u9ec4\u8272\u7684\u88c5\u9970\u6761\u7eb9\u3002\u4ed6\u6234\u7740\u773c\u955c\uff0c\u795e\u60c5\u4e13\u6ce8\u5730\u7528\u7b77\u5b50\u5939\u8d77\u76d8\u4e2d\u7684\u98df\u7269\u3002\u76d8\u5b50\u91cc\u88c5\u7740\u4e00\u4efd\u8272\u5f69\u9c9c\u8273\u7684\u7092\u9762\uff0c\u9762\u6761\u4e0a\u70b9\u7f00\u7740\u7eff\u8272\u7684\u852c\u83dc\uff0c\u770b\u8d77\u6765\u975e\u5e38\u7f8e\u5473\u3002\u4ed6\u7684\u9762\u524d\u653e\u7740\u4e00\u676f\u6a59\u8272\u7684\u996e\u6599\uff0c\u996e\u6599\u4e2d\u4f3c\u4e4e\u6709\u51b0\u5757\uff0c\u676f\u5b50\u662f\u900f\u660e\u7684\u73bb\u7483\u676f\u3002\n\n\u89c6\u9891\u7684\u573a\u666f\u8bbe\u5b9a\u5728\u4e00\u4e2a\u88c5\u9970\u534e\u4e3d\u7684\u9910\u5385\u5185\u3002\u9910\u5385\u7684\u80cc\u666f\u706f\u5149\u67d4\u548c\uff0c\u5929\u82b1\u677f\u4e0a\u6709\u590d\u6742\u7684\u91d1\u8272\u88c5\u9970\uff0c\u663e\u5f97\u975e\u5e38\u5178\u96c5\u548c\u5e84\u91cd\u3002\u80cc\u666f\u4e2d\u53ef\u4ee5\u770b\u5230\u4e00\u4e9b\u5176\u4ed6\u7684\u9910\u684c\u548c\u6905\u5b50\uff0c\u4f46\u6ca1\u6709\u5176\u4ed6\u987e\u5ba2\uff0c\u663e\u5f97\u6709\u4e9b\u7a7a\u65f7\u548c\u5b89\u9759\u3002\u9910\u5385\u7684\u5899\u58c1\u4e0a\u6302\u7740\u4e00\u5e45\u5927\u578b\u7684\u753b\u4f5c\uff0c\u753b\u4f5c\u5185\u5bb9\u6a21\u7cca\u4e0d\u6e05\uff0c\u4f46\u53ef\u4ee5\u770b\u51fa\u662f\u4e00\u5e45\u98ce\u666f\u753b\u3002\n\n\u5728\u89c6\u9891\u4e2d\uff0c\u8fd9\u4f4d\u5e74\u957f\u7684\u7537\u6027\u662f\u552f\u4e00\u7684\u8fd0\u52a8\u4e3b\u4f53\u3002\u4ed6\u7528\u53f3\u624b\u62ff\u7740\u7b77\u5b50\uff0c\u5de6\u624b\u6276\u7740\u76d8\u5b50\uff0c\u52a8\u4f5c\u7f13\u6162\u800c\u7a33\u91cd\uff0c\u663e\u793a\u51fa\u4ed6\u7528\u9910\u65f6\u7684\u4e13\u6ce8\u548c\u4eab\u53d7\u3002\u4ed6\u7684\u52a8\u4f5c\u4e3b\u8981\u662f\u5939\u8d77\u9762\u6761\uff0c\u7136\u540e\u9001\u5165\u53e3\u4e2d\uff0c\u6574\u4e2a\u8fc7\u7a0b\u663e\u5f97\u975e\u5e38\u81ea\u7136\u548c\u6d41\u7545\u3002\u4ed6\u7684\u8868\u60c5\u5e73\u9759\uff0c\u4f3c\u4e4e\u5728\u4eab\u53d7\u8fd9\u987f\u7f8e\u98df\u3002\n\n\u89c6\u9891\u4e2d\u7684\u4eba\u7269\u5173\u7cfb\u5e76\u4e0d\u590d\u6742\uff0c\u56e0\u4e3a\u53ea\u6709\u8fd9\u4f4d\u5e74\u957f\u7684\u7537\u6027"
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/1470.0.7.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera vibrates erratically, lacking a clear pattern in its movement.",
+    "internvl3-78b": "\u89c6\u9891\u4e2d\u5c55\u793a\u4e86\u4e00\u4f4d\u5973\u6027\u7ad9\u5728\u4e00\u680b\u9ec4\u8272\u623f\u5c4b\u7684\u95e8\u524d\uff0c\u5979\u8eab\u7a7f\u767d\u8272\u77ed\u8896\u886c\u886b\u548c\u6df1\u8272\u957f\u88e4\uff0c\u624b\u4e2d\u62ff\u7740\u4e00\u672c\u9ed1\u8272\u7684\u7b14\u8bb0\u672c\u3002\u5979\u7ad9\u5728\u4e00\u6247\u73bb\u7483\u95e8\u524d\uff0c\u73bb\u7483\u95e8\u7684\u53cd\u5c04\u6e05\u6670\u5730\u6620\u51fa\u4e86\u5979\u7684\u8eab\u5f71\u3002\u89c6\u9891\u7684\u6838\u5fc3\u4e2d\u5fc3\u601d\u60f3\u4f3c\u4e4e\u662f\u5728\u8868\u73b0\u8fd9\u4f4d\u5973\u6027\u7684\u5185\u5fc3\u4e16\u754c\u6216\u67d0\u79cd\u60c5\u611f\u72b6\u6001\uff0c\u5979\u9759\u9759\u5730\u7ad9\u5728\u95e8\u524d\uff0c\u4f3c\u4e4e\u5728\u601d\u8003\u6216\u7b49\u5f85\u4ec0\u4e48\u3002\n\n\u89c6\u9891\u4e2d\u7684\u573a\u666f\u4e3b\u8981\u96c6\u4e2d\u5728\u9ec4\u8272\u623f\u5c4b\u7684\u5916\u90e8\uff0c\u8fd9\u680b\u623f\u5c4b\u7684\u5916\u5899\u662f\u6de1\u9ec4\u8272\u7684\uff0c\u95e8\u662f\u767d\u8272\u7684\uff0c\u95e8\u4e0a\u88c5\u6709\u73bb\u7483\u7a97\u683c\u3002\u73bb\u7483\u7a97\u683c\u7684\u53cd\u5c04\u6548\u679c\u4f7f\u5f97\u753b\u9762\u4e2d\u51fa\u73b0\u4e86\u4e24\u4e2a\u51e0\u4e4e\u5bf9\u79f0\u7684\u5973\u6027\u5f62\u8c61\uff0c\u4e00\u4e2a\u5728\u73b0\u5b9e\u4e2d\uff0c\u4e00\u4e2a\u5728\u53cd\u5c04\u4e2d\u3002\u8fd9\u79cd\u5bf9\u79f0\u7684\u6784\u56fe\u589e\u52a0\u4e86\u753b\u9762\u7684\u89c6\u89c9\u51b2\u51fb\u529b\uff0c\u540c\u65f6\u4e5f\u53ef\u80fd\u6697\u793a\u4e86\u67d0\u79cd\u5185\u5fc3\u7684\u5bf9\u5cd9\u6216\u81ea\u6211\u53cd\u601d\u7684\u4e3b\u9898\u3002\n\n\u89c6\u9891\u4e2d\u7684\u4eba\u7269\u52a8\u4f5c\u975e\u5e38\u6709\u9650\uff0c\u5979\u53ea\u662f\u9759\u9759\u5730\u7ad9\u5728\u95e8\u524d\uff0c\u5076\u5c14\u5fae\u5fae\u8f6c\u5934\uff0c\u4f3c\u4e4e\u5728\u89c2\u5bdf\u5468\u56f4\u7684\u73af\u5883\u6216\u5728\u601d\u8003\u3002\u5979\u7684\u8868\u60c5\u5e73\u9759\uff0c\u4f46\u773c\u795e\u4e2d\u900f\u9732\u51fa\u4e00\u4e1d\u590d\u6742\u7684\u60c5\u611f\u3002\u5979\u624b\u4e2d\u7684\u9ed1\u8272\u7b14\u8bb0\u672c\u53ef\u80fd\u662f\u5979\u5de5\u4f5c\u6216\u5b66\u4e60\u7684\u5de5\u5177\uff0c\u4e5f\u53ef\u80fd\u662f\u5979\u8bb0\u5f55\u5185\u5fc3\u60f3\u6cd5\u7684\u8f7d\u4f53\u3002\n\n\u573a\u666f\u4e2d\u6ca1\u6709\u5176\u4ed6\u8fd0\u52a8\u7684\u7269\u4f53\uff0c\u6574\u4e2a\u753b\u9762\u663e\u5f97\u975e\u5e38\u9759\u8c27\u548c\u5b89\u9759\u3002\u8fd9\u79cd\u9759\u6b62\u7684\u72b6\u6001\u8fdb\u4e00\u6b65\u7a81\u51fa\u4e86\u4eba\u7269\u7684\u5185\u5fc3\u6d3b\u52a8\uff0c\u4f7f\u89c2\u4f17"
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/3pxrECZYEAA.2.3.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera zooms out slightly at first while smoothly trucking left to track a bird in flight from the side, maintaining a steady and fluid motion as the subject gradually becomes smaller in the frame.",
+    "internvl3-78b": "The camera remains static throughout the video, focusing on the bird's movements and the surrounding environment."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/wqn8akChql4.0.14.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera arcs smoothly clockwise while gently descending, capturing a couple embracing and kissing on the battlefield, with no shaking to disrupt the serene motion.",
+    "internvl3-78b": "The camera in this video is moving around the stage, capturing the performance from different angles. It is also zooming in and out to focus on different elements of the performance."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/_jli4enm3vw.2.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains fixed but slightly unsteady, with no intentional movement.",
+    "internvl3-78b": "The camera pans around the crowd, capturing the excitement and energy of the event. It also zooms in on the performers, highlighting their skill and precision."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/8ouj_JN2ytI.0.9.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera slowly trucks left to capture the audience, then gently tilts up as they applaud, maintaining a smooth movement with minimal shaking.",
+    "internvl3-78b": "The camera in the video is positioned at a high angle, providing a wide view of the stadium and the crowd. It captures the entire scene from a fixed position, without any noticeable movement or panning. The focus remains on the crowd and their reactions throughout the video."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/GVr8pZmSa-c.0.3.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera pans left to right with noticeable shaking, creating an unsteady and dynamic view.",
+    "internvl3-78b": "The camera in this video is moving along the side of a boat in the ocean. It captures the waves crashing against the boat and the rain falling on the water. The camera also shows the boat's railing and the structure of the boat."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/xo9p8p6deRI.0.0.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly lifts up and tilts down, while simultaneously panning to the left to change its facing direction and capture the crowd, maintaining a steady and shake-free motion throughout.",
+    "internvl3-78b": "The camera moves forward."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/CQYQKehqjgI.3.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains completely fixed, exhibiting no movement or shaking.",
+    "internvl3-78b": "The camera zooms in on the bowl as the person mixes the ingredients."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/LI7i6DQfh0o.0.2.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera arcs slowly and smoothly in a clockwise direction, maintaining a steady and fluid motion without any shaking.",
+    "internvl3-78b": "The camera wearer opens the lunch box."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/upC8hjr2b4g.12.7.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera moves forward with a clear pattern, but its progress is unsteady, marked by noticeable shaking.",
+    "internvl3-78b": "The camera remains static throughout the video, focusing on the computer screen displaying the graphs. There is no movement or change in perspective."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/kSx5KGOv5Qc.1.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly tilts down while simultaneously panning right, maintaining minimal shaking throughout the movement.",
+    "internvl3-78b": "The camera in this video is positioned on a hill overlooking the city and the ocean. It remains stationary throughout the video, providing a panoramic view of the city and the ocean. The camera captures the movement of boats in the water and the people walking around the city."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/-2uIa-XMJC0.8.1.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The handheld camera begins on a black screen inside a well, gradually moving backward and upward to track a person crawling out. It leads the subject from the front, capturing them as they grow larger in the frame. The movement is slightly unsteady, with some shaking.",
+    "internvl3-78b": "The camera wearer climbs out of the car."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/QMlfVwN3iTw.7.5.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera zooms out with a slightly unsteady motion, exhibiting some shaking.",
+    "internvl3-78b": "The camera wearer looks at the building."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/XA2X_JBzkzY.2.1.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly zooms out, maintaining minimal shaking throughout the movement.",
+    "internvl3-78b": "The camera slowly zooms out."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/5e5ef4541835cc6ffc817c5dd4eb7f240d200553b3eed64782d61ccde60d4ade.1.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains completely fixed, exhibiting no movement or shaking.",
+    "internvl3-78b": "The camera remains stationary throughout the video, capturing the wolf in a serene forest setting. The focus is on the wolf, with the background slightly blurred to emphasize the animal. The lighting suggests it is either early morning or late afternoon, with warm sunlight filtering through the trees. The wolf appears calm and relaxed, occasionally glancing around its surroundings. The overall atmosphere is peaceful and natural."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/c41pRPO9TQk.3.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly pans to the right while trucking left, then rapidly zooms out, all with minimal shaking.",
+    "internvl3-78b": "The camera zooms out."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/0Pzq0URbL2M.9.3.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera moves smoothly and swiftly downward, centering the subject while rolling clockwise, maintaining a very smooth steadiness with no shaking.",
+    "internvl3-78b": "The camera slowly zooms out."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/3epU697sU9E.0.0.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera rapidly zooms out, rolling clockwise and panning right to reveal the whole map, all with very smooth and quick movement.",
+    "internvl3-78b": "The camera remains static throughout the video, providing a bird's eye view of the map. The only movement is the animation of the orange line tracing the route from The Colony Beach & Tennis Resort to Emma E. Booker Elementary School."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/sJsu7Tv-fRY.0.2.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera, positioned at a bird's eye view, moves upward while rolling clockwise, gradually revealing the entire map with very smooth, steady motion and no shaking.",
+    "internvl3-78b": "The camera slowly zooms out from a close-up view of a map, gradually revealing more of the surrounding area. The movement is smooth and controlled, providing a clear and detailed view of the map's features. The camera then remains stationary, allowing the viewer to fully appreciate the map's layout and design. The overall effect is one of calm and clarity, with the camera movement enhancing the viewer's understanding of the map's content."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/FUQhNGEu2KA.0.0.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains completely fixed, exhibiting no movement or vibration.",
+    "internvl3-78b": "The camera wearer opens the door."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/cdbdf71cb5b76ac81a00f2e3e5c22bc27b126da4579752cd6a10da3650b4d8e3.0.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains completely fixed, exhibiting no movement or shaking.",
+    "internvl3-78b": "The camera remains static throughout the video, capturing the serene beach scene without any movement. The focus is on the gentle waves lapping against the pebbled shore under a clear blue sky. The only dynamic element is the appearance of a boat in the distance, moving across the water. The overall composition emphasizes the tranquility and natural beauty of the beach setting."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/1560.0.17.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly dollies forward while simultaneously panning right to maintain focus on the walking man, ensuring a steady and fluid motion without any shaking.",
+    "internvl3-78b": "The camera wearer walks in the park."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/kxcw0iSn0xw.5.1.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains fixed but slightly unsteady, with no intentional movement.",
+    "internvl3-78b": "The camera in this video is positioned close to the apple and the hose, capturing the action from a low angle. The camera remains stationary throughout the video, focusing on the apple and the water spraying out of the hose. The background is blurred, which helps to keep the viewer's attention on the main subject. The camera angle and focus create a sense of intimacy and immediacy, making the viewer feel as if they are right there in the action. The close-up shot also allows for a detailed view of the apple and the water, highlighting the texture and movement of both. Overall, the camera work in this video is simple but effective, creating a visually engaging and dynamic scene."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/fT6olrwrjnI.5.3.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera moves forward quickly with a very smooth and steady motion, showing a clear movement pattern.",
+    "internvl3-78b": "The camera wearer looks at the ball."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/yGsVo0uIJVs.3.5.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera arcs slowly and smoothly in a clockwise direction, maintaining a steady and fluid motion without any shaking.",
+    "internvl3-78b": "The camera is stationary throughout the video. It does not move or change its position."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/JDaw5I_5hPk.0.10.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains fixed but slightly unsteady, with no intentional movement.",
+    "internvl3-78b": "The camera wearer looks at the sea."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/3m-ME9AXCTo.1.1.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera arcs counterclockwise with a slightly unsteady motion, exhibiting some shaking.",
+    "internvl3-78b": "The camera in this video is mostly stationary, with occasional zooms in and out to capture different angles of the couple dancing. The focus is on the couple and their movements, with the background remaining out of focus."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/8iZ8RtiJq14.1.0.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly moves backward, leading the subject from the front as it tracks the flying metal tag. Near the end, it halts its backward motion and shifts slightly forward, maintaining a very smooth and steady movement throughout.",
+    "internvl3-78b": "The camera in the video is static, meaning it does not move. The focus is on the objects in the scene, which include a McDonald's cup, a red tag, and a pink box. The camera remains stationary throughout the video, allowing the viewer to observe the objects and their interactions without any distractions from camera movement. The static camera also helps to create a sense of stability and calmness in the scene, which is further emphasized by the soft lighting and the simple composition of the shot. Overall, the static camera in this video serves to highlight the objects and their details, while also contributing to the overall mood and atmosphere of the scene."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/8iZ8RtiJq14.5.1.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera, in a bird\u2019s-eye view, smoothly moves from one sticker to another on the board while rolling counterclockwise to adjust its orientation, maintaining a steady and shake-free motion throughout.",
+    "internvl3-78b": "The camera in this video is static, meaning it does not move. It remains focused on the corkboard and the notes pinned to it."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/wQ09HsEKmvE.1.1.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly tilts upward while panning right, maintaining a steady focus as it tracks the subject.",
+    "internvl3-78b": "The camera in this video is positioned high above the ground, providing a bird's-eye view of the scene. It remains stationary throughout the sequence, capturing the movement of the characters from a fixed vantage point. The camera angle emphasizes the isolation and the vastness of the open space, highlighting the solitary figure of the man in the gray trench coat as he walks across the pavement. The static nature of the camera adds a sense of tension and anticipation, as the viewer is left to observe the unfolding events without any change in perspective. The overhead shot also allows for a clear view of the shadows cast by the characters, adding depth and contrast to the scene. Overall, the camera's fixed position and elevated angle contribute to the overall mood and narrative of the video, focusing attention on the actions and interactions of the individuals below."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/qYztDs8vPBg.2.2.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains completely static, fixed in place without any movement or shaking.",
+    "internvl3-78b": "The camera is stationary in this video. It is focused on a person's hands as they use a tool to work on a smartphone. The camera does not move or change angles throughout the video. The focus remains on the person's hands and the smartphone, with the background remaining consistent. The video is a close-up shot, allowing the viewer to see the details of the person's actions and the smartphone. The camera does not pan or zoom, keeping the focus on the task at hand. The video is a straightforward demonstration of a task being performed, with no additional elements or distractions. The camera work is simple and effective, allowing the viewer to clearly see the actions being performed."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/tCRbVEGHZlQ.0.5.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly trucks right, maintaining a steady and fluid motion throughout.",
+    "internvl3-78b": "The camera remains static throughout the video, focusing on the stick figure walking across the screen."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/3pxrECZYEAA.2.7.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly zooms in to approach the drunk person, slightly tilting up to center them, maintaining a steady and shake-free motion throughout.",
+    "internvl3-78b": "The video features a static shot of a bar interior, with no camera movement. The scene is framed by a doorway, creating a vignette effect that focuses the viewer's attention on the bar. The bar is adorned with various decorations, including a dartboard, posters, and a neon 'Beer' sign. The shelves are stocked with bottles and cans, and there's a checkered floor. A bartender is seen resting his head on the counter, seemingly asleep or bored. The lighting is warm and dim, suggesting a quiet evening or late-night setting. The color palette is dominated by reds, oranges, and purples, giving the scene a cozy yet somber atmosphere. There's a potted plant to the left and what appears to be a television or monitor on the right, both outside the bar area."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/yGsVo0uIJVs.0.4.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly moves forward while simultaneously zooming out, maintaining minimal shaking throughout the motion.",
+    "internvl3-78b": "The camera remains static throughout the video, focusing on the red door with the top secret sign. There is no movement or change in perspective."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/4jdZkC33NXw.0.1.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera moves forward while simultaneously moving down, with a slightly unsteady motion that includes some shaking.",
+    "internvl3-78b": "The camera wearer looks around."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/CBRwF0LU3Ys.0.16.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The drone camera flies low over a desert, moving forward with a very smooth motion. As a racing car comes into view, the camera slightly rolls clockwise and pans right to follow the car, which kicks up a cloud of sand that momentarily obscures the lens. It then continues to follow the car, with the motion gradually transitioning into slow motion.",
+    "internvl3-78b": "The video begins with a wide shot of a vast desert landscape, showcasing rolling sand dunes under a clear sky. The camera then pans to the right, revealing a makeshift camp with camels and a person sitting on the ground. The scene transitions to a blue car speeding through the desert, kicking up sand as it races across the dunes. The camera follows the car's movement, capturing the dynamic action and the dust trail it leaves behind. The video concludes with a close-up shot of sand being violently displaced, suggesting a high-speed impact or collision."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/f4ZzHtww6Tc.5.6.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera moves forward at a slight angle, tracking the skateboarder from a rear-side perspective. Around the middle of the video, it pans slightly to the left as the skateboarder moves slightly left, positioning himself in front of the camera. The camera is following the subject from behind, and during the tracking shot, the subject becomes larger in the frame. The camera movement is slightly unsteady with some shaking.",
+    "internvl3-78b": "The camera wearer rides the skateboard on the pavement."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/JGiXuXc3cao.3.4.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera initially frames two subjects before smoothly dollying backward and trucking leftward, incorporating a subtle counterclockwise roll. This movement gradually reveals a group photo of four subjects, starting slowly and accelerating as the video progresses, all while maintaining a very smooth and steady motion without any shaking.",
+    "internvl3-78b": "The camera in this video is static, meaning it does not move. The video is a still image that shows a monkey sitting on the shoulders of a man, with other men standing around them. The camera angle is fixed, and there is no panning, tilting, or zooming. The focus is on the monkey and the men, and the background is not visible. The video is a simple and straightforward depiction of the scene, with no additional camera movements or effects."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/oRt5NPY7yYA.4.1.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera arcs counterclockwise with a smooth, steady motion, exhibiting minimal shaking.",
+    "internvl3-78b": "The camera is static in this video. It captures the truck driving down the road from a fixed position. There is no movement or panning of the camera."
+  }
+]

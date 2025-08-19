@@ -1,0 +1,51 @@
+[
+  {
+    "model": "internvideo2-chat-8b-hd",
+    "spice": 0.22148480244916804,
+    "cider": 0.34440673019775586,
+    "gen_match": 0.13,
+    "count": 100
+  },
+  {
+    "model": "llava-video-7b",
+    "spice": 0.2311603927164938,
+    "cider": 0.37098596117739807,
+    "gen_match": 0.09,
+    "count": 100
+  },
+  {
+    "model": "qwen2.5-vl-cam15000",
+    "spice": 0.4922626771264902,
+    "cider": 0.5423688853551935,
+    "gen_match": 0.19,
+    "count": 100
+  },
+  {
+    "model": "internvl2.5-8b",
+    "spice": 0.20120370272550203,
+    "cider": 0.34286744619284165,
+    "gen_match": 0.08,
+    "count": 100
+  },
+  {
+    "model": "qwen2.5-vl-7b",
+    "spice": 0.17716440880812226,
+    "cider": 0.4328865144094008,
+    "gen_match": 0.16,
+    "count": 100
+  },
+  {
+    "model": "gemini-2.0",
+    "spice": 0.23897104407455602,
+    "cider": 0.37390553843899815,
+    "gen_match": 0.07291666666666667,
+    "count": 96
+  },
+  {
+    "model": "gpt-4o",
+    "spice": 0.1982310271632989,
+    "cider": 0.39721088559014267,
+    "gen_match": 0.1,
+    "count": 100
+  }
+]

@@ -1,0 +1,602 @@
+[
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/IWv0EhEGmNI.16.6.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains fixed but slightly unsteady, with no intentional movement.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera remains fixed but slightly unsteady, with no intentional movement."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/iXzposKQzvs.2.1.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera pans left slowly, maintaining a very smooth and steady motion without any shaking.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera slowly tilts down following a diver as they perform a trick, then remains fixed and steady until the end."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/5eDQ2SSsmEk.8.5.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera slowly zooms in with minor movement, maintaining a very smooth and steady motion throughout.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera remains slowly zooming in with a very smooth and steady motion, showing no shaking."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/6d270d88db28043321dd8a3e0e6204ce7aac74c6fd8916e0b244626e531f2733.7.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly trucks left, maintaining a steady and fluid motion throughout.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera smoothly moves forward while simultaneously panning left, maintaining a steady and fluid motion throughout."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/B_8bbKn3amE.0.6.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The drone arcs counterclockwise in a smooth motion to track the climber from an aerial view, incorporating a gentle tilt downward to maintain focus on them, and concludes with a slight forward movement to approach the subject.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The drone smoothly flies forward,-panning back and forth to create a glass-like effect, all while maintaining a very smooth and steady motion without any shaking."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/4022437.0.0.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly moves backward, maintaining minimal shaking, and midway through, it slightly pans to the left.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera, positioned at a high angle, steadily moves backward while tilting up, exhibiting a slight unsteadiness with some shaking."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/1934.1.11.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains completely fixed, exhibiting no movement or shaking.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera remains completely fixed, exhibiting no movement or shaking."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/LtXUoaZcp70.3.1.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera arcs counterclockwise around the subject, smoothly incorporating an upward movement while subtly tilting down to adjust the view angle, all with a very steady motion and no shaking.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera\u7f13\u6162 moves backward while, at the same time, it is moving slowly to the left side of the 3D model, continuously panning right to maintain focus on it, and the movement is slightly unsteady with some shaking."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/MuNyfqxAO6Y.8.5.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera arcs smoothly in a counterclockwise direction around the car, maintaining a steady and fluid motion without any shaking.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera smooth dollies forward with a slight upward tilt, maintaining a very smooth and steady motion throughout."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/4422.0.24.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera arcs counterclockwise with an unsteady motion, exhibiting noticeable shaking throughout the movement.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera arcs counterclockwise with a very smooth and steady motion, showing no shaking."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/4uGfFYzxWEg.1.5.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly dollies backward, maintaining a steady and fluid motion throughout.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera smoothly dollies forward while simultaneously trucking right, maintaining a steady and fluid motion throughout."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/ZXloF-qGW4U.2.2.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera moves backward and to the left, tracking the subject from the front-side with a slightly unsteady motion, exhibiting some shaking.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera moves forward, leading the subject from the front with a slightly unsteady motion, exhibiting some shaking."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/JDaw5I_5hPk.0.19.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains fixed but slightly unsteady, with no intentional movement.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera remains completely fixed, exhibiting no movement or shaking."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/6h6bMAWLYAI.2.2.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera vibrates with noticeable shakiness, lacking a clear pattern in its movement.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera remains fixed but slightly unsteady, with no intentional movement."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/H4AZhS5WqKk.0.0.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains completely fixed, exhibiting no movement or shaking.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera remains completely fixed, exhibiting no movement or shaking."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/MQugcNLFI9k.2.8.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera arcs smoothly in a clockwise direction, maintaining minimal shaking throughout the movement.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera smoothies moves counterclockwise around the subject, maintaining a steady focus as it tracks their movement with minimal shaking."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/338.2.32.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly zooms out and moves upward, then remains fixed as the lazy Susan in the foreground rotates, revealing various food items.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera gradually moves backward, continuously panning right to adjust its orientation. As it backward moves, it gradually reveals more of the table and the objects on it, while the movement remains very smooth with no shaking."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/4PcpGxihPac.3.2.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly pans left, tracking the subject with minimal shaking.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera, positioned at a high angle, continuously moves left while slightly panning right to film the stage from the side, with a slightly unsteady motion that includes some shaking."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/RZs5Hz1klno.1.1.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly dollies forward while simultaneously panning left to focus on the screen of a laptop, maintaining a steady and fluid motion throughout.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera dollies forward with a very smooth and steady motion, showing a clear movement pattern without any shaking."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/OCBYMQzG44U.21.2.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera moves forward and rapidly pans right as it rounds a corner in the hallway, with a slightly unsteady motion that includes some shaking.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera, representing a 3D game perspective, continuously moves forward to approach the exit of the tunnel, gradually panning to the right along the way. Upon reaching the tunnel's end, it halts and remains static. The movement is very smooth, with no shaking, and the transition between moving and stopping is immediate and clear."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/ZBsv_5fHtIg.0.3.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera quickly trucks right, closely tracking the car from its side, then smoothly arcs counterclockwise around it, transitioning into a lead and side-tracking shot that reveals the car in full view. Throughout this sequence, the subject becomes smaller in the frame, and the camera movement remains very smooth with no shaking.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera smoothly tracks the moving car from the front, initially zooming in on its headlight. As the car approaches, it zooms out to reveal more of the car, maintaining a very smooth motion without any shaking."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/ti231UvSvfQ.0.0.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera arcs slowly and smoothly clockwise around the person's face, moving backward and upward to transition from an extreme close-up to a close-up shot, then remains fixed until the end.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera slowly tilts up while simultaneously panning left, maintaining a smooth and steady motion with minimal shaking."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/M0jmSsQ5ptw.3.16.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The handheld camera moves forward with an unsteady shake, following a man running toward a helicopter, capturing him from behind as he grows larger in the frame. Once he boards the helicopter, the camera becomes stationary but continues to exhibit noticeable handheld shaking.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera slowly zooms in while tilting down, with a slightly unsteady motion that includes some shaking."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/px9IqOnilHI.1.2.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains completely static, fixed in place without any movement or shaking.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera remains completely fixed, exhibiting no movement or vibration."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/nGJMwixogyk.5.8.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera continuously dollies forward along the street, panning left to face the street, with a slightly unsteady movement that includes some shaking.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The handheld camera gradually moves forward, capturing the street view, and midway through, it begins to pan left to reveal the left-side street view, all while exhibiting a slight unsteadiness with some shaking."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/sKJeTaIEldM.2.2.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera moves backward while simultaneously zooming in, with a slightly unsteady motion that includes some shaking.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera slowly zooms in with a slight counterclockwise roll, its movement being slightly unsteady with some shaking."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/9H942RAVrHQ.0.2.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains completely fixed, exhibiting no movement or shaking.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera remains completely fixed, exhibiting no movement or shaking."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/Vm-b2AVwARw.1.0.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly dollies forward and pedestals downward, approaching the marble table on the floor with minimal shaking.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera smoothly dollies backward and upward while simultaneously tilting down, maintaining a continuous and fluid motion throughout."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/u5JBlwlnJX0.1.0.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera arcs smoothly in a clockwise direction, maintaining minimal shaking throughout the movement.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera slowly zooms in with a very smooth and steady motion, showing no shaking."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/Ao4Y7JU30zc.0.0.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera steadily trucks left while panning right to keep the person centered in the frame, though the movement is slightly unsteady with some shaking.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera slowly zooms in with a very smooth and steady motion, showing no shaking."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/HasIb5pfWkQ.3.3.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly tracks the subject from the side while moving downward, maintaining a steady and fluid motion throughout.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera moves slowly and smoothly downward, maintaining a steady and fluid motion without any shaking."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/m1LHXV49zn8.2.10.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly tilts downward to capture the fighting crowds below, subtly moving forward to avoid obstruction from the woman in the foreground, maintaining minimal shaking throughout.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera gradually dollies forward while simultaneously tilting down, maintaining a very smooth and slow motion throughout."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/as8lT-q2_E8.0.0.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly moves backward, tracking the approaching motorcycles from the front. It then cranes up to a bird's-eye view before craning down to a level angle, executing a simultaneous clockwise roll. This fluid motion transitions seamlessly into a tail-tracking shot, maintaining minimal shaking throughout.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera smoothly moves forward, tracking the subject from behind with a steady and fluid motion."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/0tIoyN7WKuA.3.1.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly arcs clockwise around the Flash Man, slightly moving forward to approach him before shifting backward, maintaining minimal shaking throughout.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera slowly tilts up to follow the character from the side, then smooths out and glides rightward to track the subject from the front, maintaining a very smooth motion throughout."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/4021529.0.0.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly rolls counterclockwise while moving upward, maintaining minimal shaking throughout the motion.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The drone steadily ascends, gradually revealing a broader view of the scene, maintaining a very smooth motion with no shaking."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/P8JgTjTPIuk.1.3.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera arcs clockwise with a slightly unsteady motion, exhibiting some shaking as it moves.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera slowly arcs clockwise around the monk, tilting up to capture the scene from the side, maintaining a smooth motion with minimal shaking."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/RooDYxp5Fx8.0.4.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera moves forward while panning right, with a slightly unsteady motion that includes some shaking.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera moves forward while panning right, exhibiting a slightly unsteady motion with some shaking."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/h1PjJ9_Yd2c.2.16.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains fixed but slightly unsteady, with no intentional movement.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera remains static but slightly unsteady, with no intentional movement."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/pNGMY3xVkVE.0.0.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly dollies forward with minimal shaking, maintaining a steady and clear movement pattern.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera moves forward, following the subject from behind, with a slightly unsteady motion that includes some shaking."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/Vm-b2AVwARw.5.0.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera slowly rolls counterclockwise, maintaining a very smooth and steady motion without any shaking.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera slowly rotates counterclockwise, creating a smooth, slow-moving effect with minimal shaking."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/0UthxdAH0ks.5.3.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera arcs smoothly in a clockwise direction, maintaining minimal shaking throughout the movement.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera moves forward with a clear pattern, but its progress is unsteady, marked by noticeable shaking."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/upC8hjr2b4g.10.1.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera rolls clockwise throughout the video with a steady and very smooth motion, maintaining a seamless flow without any shaking.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera smoothly tilts up while panning left, maintaining a steady and fluid motion throughout."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/jGDdHNOeQ0c.0.1.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains fixed but exhibits a slight unsteadiness, with no intentional movement.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera remains fixed but exhibits a slight unsteadiness, with no intentional movement."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/kSx5KGOv5Qc.0.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly zooms in, maintaining a steady and fluid motion throughout.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera dollies forward with a very smooth and steady motion, showing a clear movement pattern without any shaking."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/MQugcNLFI9k.3.4.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera, positioned in a bird's-eye view of two people fighting, rolls clockwise with very smooth movement and no shaking.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera rolls counterclockwise while moving forward, tracking the subject from above with dynamic and unsteady motion."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/G_TLZr6ZbLE.0.0.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains completely static, fixed in place without any movement or shaking.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera remains completely fixed, exhibiting no movement or shaking."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/2519.5.16.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains fixed but slightly unsteady, with no intentional movement.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera remains fixed but exhibits a slight unsteadiness, with no intentional movement."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/wqn8akChql4.1.11.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera arcs smoothly in a clockwise direction, maintaining minimal shaking throughout the movement.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera\u5708rocks downward andwise around the stadium, rapidly moving counterclockwise to create a sense of panic and urgency, with the movement being very smooth and free of any shaking."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/YBC2JaevzOI.6.4.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly tracks a boy running through a forest at night, beginning with a slight pan to the left. As the video progresses, the pan speeds up, accompanied by a subtle downward tilt, all while maintaining a steady, shake-free motion.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera long tracks the runner from behind, moving forward and down, with a slightly unsteady motion that includes some shaking."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/TktL3QR8Yg8.0.3.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains completely fixed, exhibiting no movement or shaking.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera zooms in to focus on the teddy bear, then remains fixed and steady until the end."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/gooWdc6kb80.0.7.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains completely fixed, exhibiting no movement or shaking.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera remains completely fixed, exhibiting no movement or shaking."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/i82xURPkLWo.3.6.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains completely fixed, exhibiting no movement or shaking.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera remains completely static, fixed in place without any movement or shaking."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/JDaw5I_5hPk.0.1.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains completely fixed, exhibiting no movement or shaking.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera\u6ed1\u52a8\u53f3\u79fb, sea surface appears narrower in the field of view. The movement is very smooth, with no shaking."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/5eDQ2SSsmEk.9.7.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera rolls counterclockwise in a slow, smooth motion, maintaining steadiness without any shaking.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera rolls slowly and smoothly in a clockwise direction, maintaining a steady and fluid motion without any shaking."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/Kapdye-diSM.8.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera moves forward with a clear pattern, but its progress is unsteady, marked by noticeable shaking.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera, embedded in a car moving forward,\u4ea7\u751f\u7684\u6548\u679c\u662f\u524d\u8fdb\u8fc7\u7a0b\u4e2d\u540c\u65f6\u5728\u8f66\u5185\u79fb\u52a8\uff0c\u5bfc\u81f4\u524d\u65b9\u5411\u4e0a\u7684\u79fb\u52a8\u6bd4\u5b9e\u9645\u5730\u9762\u79fb\u52a8\u7a0d\u957f\uff0c\u8fd8\u6709\u8f7b\u5fae\u7684\u6447\u6643\u3002"
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/_I6Y-rtiTPc.0.2.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera quickly zooms in with a smooth and steady motion, maintaining minimal shaking throughout.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera, positioned at a high angle, quickly zooms in while moving down to approach the police officer, smooth with very little shaking."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/1hu1np_BI2M.7.0.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly zooms out while moving left, maintaining a steady and fluid motion throughout.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera smoothly trucks left, maintaining a steady and fluid motion throughout."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/jOdkb3FYrhA.0.0.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera arcs clockwise with a slightly unsteady motion, exhibiting some shaking as it moves.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera slowly pans right while tilting right, following the subject from the side. After the subject opens the car trunk, the camera zooms in and continues to pan right, maintaining a smooth motion with minimal shaking throughout."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/G2EAFkURl0U.5.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly pans right, maintaining a steady and fluid motion throughout.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera slowly pans right with a slight upward tilt, exhibiting a slightly unsteady motion with some shaking."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/xo9p8p6deRI.10.2.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera slowly dollies forward with a slight wobble, its movement slightly unsteady with some shaking.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera slowly dollies forward while simultaneously trucking right, maintaining a very smooth and steady motion throughout."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/338.2.6.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains completely fixed, exhibiting no movement or shaking.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera remains fixed but exhibits a slight unsteadiness, with no intentional movement."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/1470.0.7.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera vibrates erratically, lacking a clear pattern in its movement.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera remains fixed but exhibits a slight unsteadiness, with no intentional movement."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/3pxrECZYEAA.2.3.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera zooms out slightly at first while smoothly trucking left to track a bird in flight from the side, maintaining a steady and fluid motion as the subject gradually becomes smaller in the frame.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera pan rightward, tracking the subject from the side with a slightly unsteady motion, exhibiting some shaking."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/wqn8akChql4.0.14.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera arcs smoothly clockwise while gently descending, capturing a couple embracing and kissing on the battlefield, with no shaking to disrupt the serene motion.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera arcs smoothly in a clockwise direction, maintaining a steady and fluid motion without any shaking."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/_jli4enm3vw.2.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains fixed but slightly unsteady, with no intentional movement.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera moves forward advance, with a slightly unsteady motion that includes some shaking."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/8ouj_JN2ytI.0.9.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera slowly trucks left to capture the audience, then gently tilts up as they applaud, maintaining a smooth movement with minimal shaking.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera remains fixed, capturing a static medium shot of the audience, before smoothly zooming in to focus on a smaller group of people, maintaining a steady and fluid motion throughout."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/GVr8pZmSa-c.0.3.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera pans left to right with noticeable shaking, creating an unsteady and dynamic view.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera, positioned at a high angle, moves backward to follow the line of a ship, causing the subject to become larger in the frame. As it moves backward, the subject takes up a smaller part of the frame, all while the movement remaining unsteady with noticeable shaking."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/xo9p8p6deRI.0.0.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly lifts up and tilts down, while simultaneously panning to the left to change its facing direction and capture the crowd, maintaining a steady and shake-free motion throughout.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera smoothly moves forward and to the left, gradually revealing more of the scene, maintaining a steady and fluid motion throughout."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/CQYQKehqjgI.3.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains completely fixed, exhibiting no movement or shaking.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera remains completely fixed, exhibiting no movement or shaking."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/LI7i6DQfh0o.0.2.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera arcs slowly and smoothly in a clockwise direction, maintaining a steady and fluid motion without any shaking.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera rolls counterclockwise with a very smooth and steady motion, showing no shaking."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/upC8hjr2b4g.12.7.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera moves forward with a clear pattern, but its progress is unsteady, marked by noticeable shaking.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera slowly zooms in with a very smooth and steady motion, showing no shaking."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/kSx5KGOv5Qc.1.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly tilts down while simultaneously panning right, maintaining minimal shaking throughout the movement.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera smoothly dollies right and tilts down to reveal more of the city, maintaining a steady and fluid motion throughout."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/-2uIa-XMJC0.8.1.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The handheld camera begins on a black screen inside a well, gradually moving backward and upward to track a person crawling out. It leads the subject from the front, capturing them as they grow larger in the frame. The movement is slightly unsteady, with some shaking.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera, locked on the car's right front grill, smoothly tracks the car as it moves, tilting up and following its subject with minimal shaking."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/QMlfVwN3iTw.7.5.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera zooms out with a slightly unsteady motion, exhibiting some shaking.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera zooms out with a slightly unsteady motion, exhibiting some shaking as it captures the scene."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/XA2X_JBzkzY.2.1.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly zooms out, maintaining minimal shaking throughout the movement.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera slowly zooms out, maintaining a smooth and steady motion with minimal shaking."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/5e5ef4541835cc6ffc817c5dd4eb7f240d200553b3eed64782d61ccde60d4ade.1.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains completely fixed, exhibiting no movement or shaking.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera remains completely fixed, exhibiting no movement or shaking."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/c41pRPO9TQk.3.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly pans to the right while trucking left, then rapidly zooms out, all with minimal shaking.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera starts off fixed, then slowly zooms out while tilting up to reveal more of the scene, maintaining a smooth motion with minimal shaking."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/0Pzq0URbL2M.9.3.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera moves smoothly and swiftly downward, centering the subject while rolling clockwise, maintaining a very smooth steadiness with no shaking.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera, capturing a bird's eye view, smoothly moves upward while rolling clockwise, maintaining a steady and shake-free motion."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/3epU697sU9E.0.0.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera rapidly zooms out, rolling clockwise and panning right to reveal the whole map, all with very smooth and quick movement.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera steadily tilts up while moving right, gradually revealing more of the map, with a slightly unsteady motion that includes some shaking."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/sJsu7Tv-fRY.0.2.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera, positioned at a bird's eye view, moves upward while rolling clockwise, gradually revealing the entire map with very smooth, steady motion and no shaking.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera steadily and smoothly tilts up while simultaneously panning right, maintaining a steady and fluid motion throughout."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/FUQhNGEu2KA.0.0.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains completely fixed, exhibiting no movement or vibration.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera remains fixed, exhibiting a slight unsteadiness, with no intentional movement."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/cdbdf71cb5b76ac81a00f2e3e5c22bc27b126da4579752cd6a10da3650b4d8e3.0.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains completely fixed, exhibiting no movement or shaking.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera remains fixed but exhibits a slight unsteadiness, with no intentional movement."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/1560.0.17.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly dollies forward while simultaneously panning right to maintain focus on the walking man, ensuring a steady and fluid motion without any shaking.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera slowly moves forward, following the walking person, with a slightly unsteady motion that includes some shaking."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/kxcw0iSn0xw.5.1.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains fixed but slightly unsteady, with no intentional movement.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera remains completely fixed, exhibiting no movement or shaking."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/fT6olrwrjnI.5.3.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera moves forward quickly with a very smooth and steady motion, showing a clear movement pattern.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera smoothly rolls counterclockwise around the soccer goal, moving downward and then upward to capture the ball from an overhead perspective, maintaining a steady and fluid motion throughout."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/yGsVo0uIJVs.3.5.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera arcs slowly and smoothly in a clockwise direction, maintaining a steady and fluid motion without any shaking.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera rolls counterclockwise with a very smooth and steady motion, showing no shaking."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/JDaw5I_5hPk.0.10.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains fixed but slightly unsteady, with no intentional movement.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera slowly zooms in with very smooth, minor movement, maintaining a steady focus without any shaking."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/3m-ME9AXCTo.1.1.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera arcs counterclockwise with a slightly unsteady motion, exhibiting some shaking.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera arcs counterclockwise with a slightly unsteady motion, exhibiting some shaking."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/8iZ8RtiJq14.1.0.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly moves backward, leading the subject from the front as it tracks the flying metal tag. Near the end, it halts its backward motion and shifts slightly forward, maintaining a very smooth and steady movement throughout.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera decays slowly at first, then quickly moves downward with a slight tilt, maintaining a very smooth motion without any shaking."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/8iZ8RtiJq14.5.1.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera, in a bird\u2019s-eye view, smoothly moves from one sticker to another on the board while rolling counterclockwise to adjust its orientation, maintaining a steady and shake-free motion throughout.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera gradually tilts down while simultaneously panning left, maintaining a very smooth and slow motion throughout."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/wQ09HsEKmvE.1.1.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly tilts upward while panning right, maintaining a steady focus as it tracks the subject.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera smoothly tracks the subject from an aerial view, moving forward and to the right with a steady, fluid motion."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/qYztDs8vPBg.2.2.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera remains completely static, fixed in place without any movement or shaking.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera remains completely fixed, exhibiting no movement or vibration."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/tCRbVEGHZlQ.0.5.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly trucks right, maintaining a steady and fluid motion throughout.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera steadily moves rightward, tracking the subject from the side, with a slightly unsteady motion that includes some shaking."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/3pxrECZYEAA.2.7.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly zooms in to approach the drunk person, slightly tilting up to center them, maintaining a steady and shake-free motion throughout.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera slowly zooms in with a very smooth and steady motion, showing no shaking."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/yGsVo0uIJVs.0.4.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera smoothly moves forward while simultaneously zooming out, maintaining minimal shaking throughout the motion.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera steadily zooms out, gradually revealing more of the machine, with very smooth movement and no shaking."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/4jdZkC33NXw.0.1.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera moves forward while simultaneously moving down, with a slightly unsteady motion that includes some shaking.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera moves forward with a clear pattern, but its progress is unsteady, marked by noticeable shaking."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/CBRwF0LU3Ys.0.16.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The drone camera flies low over a desert, moving forward with a very smooth motion. As a racing car comes into view, the camera slightly rolls clockwise and pans right to follow the car, which kicks up a cloud of sand that momentarily obscures the lens. It then continues to follow the car, with the motion gradually transitioning into slow motion.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The drone camera begins in a static position, then moves forward to approach the car in the desert, making the subject appear larger in the frame. As it continues to pan left to track the subject from above, it gradually\u5347s higher into the air, ending with a slight pan to the left. Throughout this sequence, the camera movement is very smooth, with no shaking, and the transition between static and moving positions is seamless."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/f4ZzHtww6Tc.5.6.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera moves forward at a slight angle, tracking the skateboarder from a rear-side perspective. Around the middle of the video, it pans slightly to the left as the skateboarder moves slightly left, positioning himself in front of the camera. The camera is following the subject from behind, and during the tracking shot, the subject becomes larger in the frame. The camera movement is slightly unsteady with some shaking.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera continuously tracks the skateboarder from behind, moving forward with an under-exposure effect. It occasionally moves left or right to match the skateboarder's turns. As the video concludes, the camera stops tracking, tilts up, and follows the skateboarder as they become smaller in the frame. The camera movement is slightly unsteady with some shaking."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/JGiXuXc3cao.3.4.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera initially frames two subjects before smoothly dollying backward and trucking leftward, incorporating a subtle counterclockwise roll. This movement gradually reveals a group photo of four subjects, starting slowly and accelerating as the video progresses, all while maintaining a very smooth and steady motion without any shaking.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera slowly zooms out with a smooth and steady motion, maintaining minimal shaking throughout the scene."
+  },
+  {
+    "video": "/data3/zhiqiul/video_annotation/videos/oRt5NPY7yYA.4.1.mp4",
+    "question": "Describe the camera movement in this video.",
+    "reference": "The camera arcs counterclockwise with a smooth, steady motion, exhibiting minimal shaking.",
+    "qwen2.5-vl-cambench-sft-dpo-5000": "The camera smoothly tracks the truck from a front-side view, gliding backward and left along the road to maintain focus. As it moves leftward to follow the subject, the truck gradually becomes smaller in the frame, all while maintaining minimal shaking."
+  }
+]

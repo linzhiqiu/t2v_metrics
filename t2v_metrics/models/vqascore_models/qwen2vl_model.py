@@ -855,8 +855,8 @@ class Qwen2VLModel(VQAScoreModel):
         self.device = device
         self.cache_dir = cache_dir
         self.model_info = QWEN2_VL_MODELS[model_name]
-        self.load_model()
         self.checkpoint = checkpoint
+        self.load_model()
 
     def load_model(self):
         # Switch from model dictionary to checkpoint argument
