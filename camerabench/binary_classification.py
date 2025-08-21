@@ -11,6 +11,7 @@ import numpy as np
 from sklearn.metrics import average_precision_score, precision_recall_curve
 import t2v_metrics
 from tqdm import tqdm
+from datetime import datetime
 
 def load_json_data(file_path):
     """Load JSONL data from file"""
@@ -24,11 +25,10 @@ def compute_vqa_scores(data, model_name, checkpoint_name):
     """Compute VQA scores for all samples"""
     print(f"Initializing VQAScore model: {model_name}")
 
-    if checkpoint:
-        vqa_scorer = t2v_metrics.VQAScore(model=model_name, checkpoint_name=checkpoint)
+    if checkpoint_name:
+        vqa_scorer = t2v_metrics.VQAScore(model=model_name, checkpoint_name=checkpoint_name)
     else:
         vqa_scorer = t2v_metrics.VQAScore(model=model_name)
-    # vqa_scorer = t2v_metrics.VQAScore(model=model_name)
     
     scores = []
     labels = []
@@ -76,7 +76,7 @@ def compute_map(scores, labels):
     ap = average_precision_score(labels, scores)
     return ap
 
-def evaluate_split(json_file, model_name):
+def evaluate_split(json_file, model_name, checkpoint_name):
     """Evaluate a single split and return mAP"""
     print(f"\nEvaluating {json_file}")
     
@@ -88,7 +88,7 @@ def evaluate_split(json_file, model_name):
         return 0.0
     
     # Compute VQA scores
-    scores, labels = compute_vqa_scores(data, model_name)
+    scores, labels = compute_vqa_scores(data, model_name, checkpoint_name)
     
     if len(scores) == 0:
         print("No valid scores computed")
@@ -104,6 +104,25 @@ def evaluate_split(json_file, model_name):
     print(f"Average Precision (mAP): {map_score:.4f}")
     
     return map_score
+
+def generate_output_filename(model_name, checkpoint_name):
+    """Generate output filename with model, checkpoint, and timestamp"""
+    # Clean model name for filename (replace problematic characters)
+    clean_model = model_name.replace('/', '_').replace('\\', '_').replace(':', '_')
+    
+    # Generate timestamp
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    
+    # Build filename components
+    filename_parts = ["vqascore_results", clean_model]
+    
+    if checkpoint_name:
+        clean_checkpoint = checkpoint_name.replace('/', '_').replace('\\', '_').replace(':', '_')
+        filename_parts.append(clean_checkpoint)
+    
+    filename_parts.append(timestamp)
+    
+    return "_".join(filename_parts) + ".json"
 
 def main():
     parser = argparse.ArgumentParser(description='Evaluate VQAScore on binary classification tasks using JSONL files')
@@ -164,8 +183,10 @@ def main():
         print("-"*50)
         print(f"{'Overall Average':30s}: mAP = {overall_map:.4f}")
     
+    # Generate unique output filename
+    output_file = generate_output_filename(args.model, args.checkpoint)
+    
     # Save results to file
-    output_file = f"vqascore_results_{args.model.replace('/', '_')}.json"
     with open(output_file, 'w') as f:
         json.dump(results, f, indent=2)
     

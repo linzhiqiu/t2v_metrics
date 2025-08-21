@@ -10,6 +10,7 @@ import numpy as np
 from collections import defaultdict
 import t2v_metrics
 from tqdm import tqdm
+from datetime import datetime
 
 def load_jsonl_data(file_path):
     """Load JSONL data from file"""
@@ -295,6 +296,31 @@ def format_results(results, mode, specific_skill=None):
     
     return "\n".join(output)
 
+def generate_output_filename(model_name, checkpoint_name, mode, skill=None):
+    """Generate output filename with model, checkpoint, mode, skill, and timestamp"""
+    # Clean model name for filename (replace problematic characters)
+    clean_model = model_name.replace('/', '_').replace('\\', '_').replace(':', '_')
+    
+    # Generate timestamp
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    
+    # Build filename components
+    filename_parts = ["unified_eval_results", clean_model]
+    
+    if checkpoint_name:
+        clean_checkpoint = checkpoint_name.replace('/', '_').replace('\\', '_').replace(':', '_')
+        filename_parts.append(clean_checkpoint)
+    
+    filename_parts.append(mode)
+    
+    if skill:
+        clean_skill = skill.replace(' ', '_').replace('/', '_').replace('\\', '_').replace(':', '_')
+        filename_parts.append(clean_skill)
+    
+    filename_parts.append(timestamp)
+    
+    return "_".join(filename_parts) + ".json"
+
 def main():
     parser = argparse.ArgumentParser(description='Unified VQA and Retrieval Evaluation')
     parser.add_argument('--model', type=str, required=True,
@@ -311,7 +337,7 @@ def main():
                       default="{} Please only answer Yes or No.",
                       help='Question template for VQA evaluation')
     parser.add_argument('--output_file', type=str, default=None,
-                      help='File to save results (optional)')
+                      help='File to save results (optional, auto-generated if not provided)')
     
     args = parser.parse_args()
     
@@ -324,53 +350,59 @@ def main():
     data_dir = Path(args.data_dir)
     results = {}
     
+    # Load data once and use for both modes if needed
+    vqa_dir = data_dir / "vqa_and_retrieval"
+    if not vqa_dir.exists():
+        print(f"VQA data directory not found: {vqa_dir}")
+        return
+    
+    skill_data = load_data_by_skill(vqa_dir, args.skill)
+    
     if args.mode in ['vqa', 'both']:
         print("\n" + "="*50)
         print("EVALUATING VQA")
         print("="*50)
         
-        vqa_dir = data_dir / "vqa_and_retrieval"
-        if vqa_dir.exists():
-            vqa_skill_data = load_data_by_skill(vqa_dir, args.skill)
-            vqa_results = {}
-            
-            for skill_name, skill_data in vqa_skill_data.items():
-                print(f"\nEvaluating VQA for skill: {skill_name}")
-                metrics = evaluate_skill_data(skill_data, model, "vqa", args.question_template)
-                vqa_results[skill_name] = metrics
-            
-            results['vqa'] = vqa_results
-            print(format_results(vqa_results, "vqa", args.skill))
-        else:
-            print(f"VQA data directory not found: {vqa_dir}")
+        vqa_results = {}
+        for skill_name, skill_data_dict in skill_data.items():
+            print(f"\nEvaluating VQA for skill: {skill_name}")
+            metrics = evaluate_skill_data_both_modes(skill_data_dict, model, args.question_template)
+            vqa_results[skill_name] = metrics["vqa"]
+        
+        results['vqa'] = vqa_results
+        print(format_results(vqa_results, "vqa", args.skill))
     
     if args.mode in ['retrieval', 'both']:
         print("\n" + "="*50)
         print("EVALUATING RETRIEVAL")
         print("="*50)
         
-        # Use the same VQA data but with retrieval scoring
-        vqa_dir = data_dir / "vqa_and_retrieval"
-        if vqa_dir.exists():
-            retrieval_skill_data = load_data_by_skill(vqa_dir, args.skill)
-            retrieval_results = {}
-            
-            for skill_name, skill_data in retrieval_skill_data.items():
-                print(f"\nEvaluating Retrieval for skill: {skill_name}")
-                metrics = evaluate_skill_data(skill_data, model, "retrieval")
-                retrieval_results[skill_name] = metrics
-            
-            results['retrieval'] = retrieval_results
-            print(format_results(retrieval_results, "retrieval", args.skill))
-        else:
-            print(f"VQA data directory not found: {vqa_dir}")
+        retrieval_results = {}
+        for skill_name, skill_data_dict in skill_data.items():
+            print(f"\nEvaluating Retrieval for skill: {skill_name}")
+            if args.mode == 'both':
+                # Use existing metrics if we already computed them
+                metrics = evaluate_skill_data_both_modes(skill_data_dict, model, args.question_template)
+                retrieval_results[skill_name] = metrics["retrieval"]
+            else:
+                # Compute fresh if only doing retrieval
+                metrics = evaluate_skill_data_both_modes(skill_data_dict, model, args.question_template)
+                retrieval_results[skill_name] = metrics["retrieval"]
+        
+        results['retrieval'] = retrieval_results
+        print(format_results(retrieval_results, "retrieval", args.skill))
     
-    # Save results if requested
+    # Generate output filename if not provided
     if args.output_file:
         output_path = Path(args.output_file)
-        with open(output_path, 'w') as f:
-            json.dump(results, f, indent=2)
-        print(f"\nResults saved to: {output_path}")
+    else:
+        output_filename = generate_output_filename(args.model, args.checkpoint, args.mode, args.skill)
+        output_path = Path(output_filename)
+    
+    # Save results
+    with open(output_path, 'w') as f:
+        json.dump(results, f, indent=2)
+    print(f"\nResults saved to: {output_path}")
 
 if __name__ == "__main__":
     main()

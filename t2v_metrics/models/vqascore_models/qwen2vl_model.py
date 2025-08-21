@@ -849,13 +849,13 @@ class Qwen2VLModel(VQAScoreModel):
                  model_name='qwen2-vl-7b',
                  device='cuda',
                  cache_dir=None,
-                 checkpoint='Qwen/Qwen2-VL-7B-Instruct'):
+                 checkpoint=None):
         assert model_name in QWEN2_VL_MODELS, f"Model {model_name} not found in QWEN2_VL_MODELS"
         self.model_name = model_name
         self.device = device
         self.cache_dir = cache_dir
         self.model_info = QWEN2_VL_MODELS[model_name]
-        self.checkpoint = checkpoint
+        self.checkpoint = checkpoint if checkpoint else self.model_info['model']['path']
         self.load_model()
 
     def load_model(self):
