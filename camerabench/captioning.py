@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+import t2v_metrics
 import json
 import os
 import argparse
@@ -14,6 +16,56 @@ from nltk.translate.bleu_score import sentence_bleu, SmoothingFunction
 from nltk.util import ngrams
 from rouge_score import rouge_scorer
 import nltk
+
+
+def process_videos_with_model(model_name, checkpoint_name, videos, questions):
+    """
+    Process all videos with a single model instance.
+    
+    Args:
+        model_name: Name of the model to use
+        checkpoint_name: Optional checkpoint name for the model
+        videos: List of video paths
+        questions: List of questions corresponding to videos
+        
+    Returns:
+        List of generated captions
+    """
+    print(f"\nLoading model: {model_name}")
+    if checkpoint_name:
+        print(f"Using checkpoint: {checkpoint_name}")
+    
+    try:
+        # Initialize the model once
+        if 'gemini' in model_name:
+            score_model = t2v_metrics.get_score_model(model=model_name, api_key='api_key')
+        elif 'gpt' in model_name:
+            score_model = t2v_metrics.get_score_model(model=model_name, api_key='api_key')
+        else:
+            # For other models, pass checkpoint parameter if provided
+            if checkpoint_name:
+                score_model = t2v_metrics.VQAScore(model=model_name, checkpoint=checkpoint_name)
+            else:
+                score_model = t2v_metrics.VQAScore(model=model_name)
+        
+        captions = []
+        # Process all videos with this model
+        for i, (video, question) in enumerate(tqdm(zip(videos, questions), total=len(videos), desc=f"Processing with {model_name}")):
+            try:
+                # Generate the caption
+                response = score_model.model.generate(images=[video], texts=[question])
+                caption = response[0] if isinstance(response, list) else response
+                captions.append(caption)
+            except Exception as e:
+                error_msg = f"Error processing video {i} with {model_name}: {str(e)}"
+                print(error_msg)
+                captions.append(f"Error: {str(e)}")
+                
+        return captions
+    except Exception as e:
+        print(f"Fatal error with model {model_name}: {str(e)}")
+        # Return error messages for all videos if model initialization fails
+        return [f"Error loading model {model_name}: {str(e)}"] * len(videos)
 
 
 def load_json_file(file_path: str) -> List[Dict[str, Any]]:
@@ -310,7 +362,7 @@ def evaluate_models_from_combined(combined_data, api_key=None):
         Dictionary mapping model names to their evaluation results
     """
     # Extract model names (fields that are not common fields)
-    common_fields = {"video", "question", "reference"}
+    common_fields = {"video", "question", "reference", "answer"}
     
     if len(combined_data) == 0:
         print("Error: No data found in the input")
@@ -341,7 +393,7 @@ def evaluate_models_from_combined(combined_data, api_key=None):
         
         # Process each item
         for item in tqdm(combined_data, desc=f"Processing {model_name}"):
-            reference = item.get("reference", "")
+            reference = item.get("reference", "") or item.get("answer", "")
             
             # Skip if this model doesn't have a caption for this item
             if model_name not in item:
@@ -401,16 +453,64 @@ def evaluate_models_from_combined(combined_data, api_key=None):
     return results
 
 
-def main():
-    parser = argparse.ArgumentParser(description="Evaluate model outputs in a combined JSON file")
-    parser.add_argument("--input", type=str, required=True, help="Path to combined JSON file")
-    parser.add_argument("--output", default="evaluation_results_ldpo.json", help="Path to output JSON file")
-    parser.add_argument("--excel", default="evaluation_results_ldpo.xlsx", help="Path to output Excel file")
-    parser.add_argument("--api_key", type=str, help="OpenAI API key for GPT-4o judge")
-    parser.add_argument("--no_gpt", action="store_true", help="Skip GPT-4o judge evaluation")
+def generate_captions(args):
+    """Generate captions using specified model"""
+    # Expand the tilde in the path
+    input_path = os.path.expanduser(args.input)
     
-    args = parser.parse_args()
+    # Read the input JSON file
+    with open(input_path, 'r') as f:
+        data = json.load(f)
     
+    # Take the first n samples instead of random samples
+    if len(data) > args.sample_size:
+        sampled_data = data[:args.sample_size]
+        print(f"Selected the first {args.sample_size} out of {len(data)} items")
+    else:
+        sampled_data = data
+        print(f"Using all {len(data)} items (requested {args.sample_size})")
+    
+    # Extract videos and questions
+    videos = [item["video"] for item in sampled_data]
+    questions = [item["question"] for item in sampled_data]
+    references = [item.get("answer", item.get("reference", "")) for item in sampled_data]
+    
+    # Initialize results structure
+    results = []
+    for i, (video, question, reference) in enumerate(zip(videos, questions, references)):
+        results.append({
+            "video": video,
+            "question": question,
+            "reference": reference
+        })
+    
+    # Process videos with the single model
+    start_time = time.time()
+    
+    # Process all videos with the model
+    captions = process_videos_with_model(args.model, args.checkpoint, videos, questions)
+    
+    # Create model key (include checkpoint in name if provided)
+    model_key = f"{args.model}:{args.checkpoint}" if args.checkpoint else args.model
+    
+    # Add captions to results
+    for i, caption in enumerate(captions):
+        results[i][model_key] = caption
+        
+    end_time = time.time()
+    print(f"Completed model {model_key} in {end_time - start_time:.2f} seconds")
+    
+    # Save results
+    with open(args.output, 'w') as f:
+        json.dump(results, f, indent=2)
+    print(f"Results saved to {args.output}")
+    
+    print(f"Processed {len(results)} videos with model {model_key}.")
+    return results
+
+
+def evaluate_captions(args, data=None):
+    """Evaluate captions from a combined JSON file"""
     # Check for required NLTK data
     try:
         nltk.data.find('punkt')
@@ -418,15 +518,16 @@ def main():
         print("Downloading required NLTK data...")
         nltk.download('punkt', quiet=True)
     
-    # Load the combined data
-    combined_data = load_json_file(args.input)
-    if not combined_data:
-        print("Error: Could not load data from input file")
-        return
+    # Load data if not provided
+    if data is None:
+        data = load_json_file(args.input)
+        if not data:
+            print("Error: Could not load data from input file")
+            return None
     
     # Evaluate models
-    api_key = args.api_key if not args.no_gpt else None
-    evaluation_results = evaluate_models_from_combined(combined_data, api_key)
+    api_key = args.api_key if hasattr(args, 'api_key') and not getattr(args, 'no_gpt', False) else None
+    evaluation_results = evaluate_models_from_combined(data, api_key)
     
     # Convert results to list for easier serialization
     results_list = list(evaluation_results.values())
@@ -445,9 +546,10 @@ def main():
         print(f"  Sample count: {result['count']}")
     
     # Save results to JSON
-    with open(args.output, "w") as f:
+    eval_output = getattr(args, 'eval_output', 'evaluation_results.json')
+    with open(eval_output, "w") as f:
         json.dump(results_list, f, indent=2)
-    print(f"\nSaved evaluation results to {args.output}")
+    print(f"\nSaved evaluation results to {eval_output}")
     
     # Export to Excel
     try:
@@ -463,18 +565,19 @@ def main():
         comparison_df = results_df.sort_values(by=sort_key, ascending=False)
         
         # Export to Excel with multiple sheets
-        with pd.ExcelWriter(args.excel) as writer:
+        excel_output = getattr(args, 'excel_output', 'evaluation_results.xlsx')
+        with pd.ExcelWriter(excel_output) as writer:
             results_df.to_excel(writer, sheet_name='All Results', index=False)
             comparison_df.to_excel(writer, sheet_name='Model Comparison', index=False)
             
             # Add a sheet with detailed item-level results for further analysis
-            if len(combined_data) <= 1000:  # Only if the data is not too large
+            if len(data) <= 1000:  # Only if the data is not too large
                 detailed_results = []
                 
-                for item in combined_data:
+                for item in data:
                     video = item.get("video", "")
                     question = item.get("question", "")
-                    reference = item.get("reference", "")
+                    reference = item.get("reference", "") or item.get("answer", "")
                     
                     for model_name in evaluation_results.keys():
                         if model_name in item:
@@ -506,9 +609,62 @@ def main():
                 # Export to the Excel file
                 detailed_df.to_excel(writer, sheet_name='Detailed Results', index=False)
         
-        print(f"Exported results to Excel file: {args.excel}")
+        print(f"Exported results to Excel file: {excel_output}")
     except ImportError:
         print("Warning: pandas is required for Excel export. Install with 'pip install pandas openpyxl'.")
+    
+    return evaluation_results
+
+
+def main():
+    parser = argparse.ArgumentParser(description="Generate captions and/or evaluate model outputs")
+    
+    # Mode selection
+    parser.add_argument("--mode", type=str, choices=["generate", "evaluate", "both"], default="both",
+                        help="Mode: generate captions, evaluate existing results, or both")
+    
+    # Input/Output arguments
+    parser.add_argument("--input", type=str, default="~/test_caption.json", 
+                        help="Path to input JSON file")
+    parser.add_argument("--output", type=str, default="caption_results.json", 
+                        help="Path to output JSON file for generated captions")
+    
+    # Caption generation arguments - single model approach
+    parser.add_argument("--model", type=str, default="qwen2.5-vl-7b", 
+                        help="Model name to use for caption generation")
+    parser.add_argument("--checkpoint", type=str, 
+                        help="Optional checkpoint name for the model (e.g., chancharikm/qwen2.5-vl-7b-1-3-6)")
+    parser.add_argument("--sample-size", type=int, default=100, 
+                        help="Number of items to sample for caption generation")
+    
+    # Evaluation arguments  
+    parser.add_argument("--eval_output", type=str, default="evaluation_results.json",
+                        help="Path to evaluation results JSON file")
+    parser.add_argument("--excel_output", type=str, default="evaluation_results.xlsx",
+                        help="Path to evaluation results Excel file")
+    parser.add_argument("--api_key", type=str, help="OpenAI API key for GPT-4o judge")
+    parser.add_argument("--no_gpt", action="store_true", help="Skip GPT-4o judge evaluation")
+    
+    args = parser.parse_args()
+    
+    if args.mode == "generate":
+        print("Mode: Caption Generation Only")
+        generate_captions(args)
+        
+    elif args.mode == "evaluate":
+        print("Mode: Evaluation Only")
+        evaluate_captions(args)
+        
+    elif args.mode == "both":
+        print("Mode: Caption Generation + Evaluation")
+        # First generate captions
+        results = generate_captions(args)
+        
+        # Then evaluate the generated captions
+        print("\n" + "="*50)
+        print("Starting Evaluation Phase...")
+        print("="*50)
+        evaluate_captions(args, data=results)
 
 
 if __name__ == "__main__":

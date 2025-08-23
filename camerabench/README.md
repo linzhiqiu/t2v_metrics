@@ -8,7 +8,7 @@ The videos can be downloaded from HuggingFace [here](https://huggingface.co/data
 
 ## Evaluation Scripts
 
-Run these three scripts to generate complete CameraBench results:
+Run these three scripts to generate CameraBench results:
 
 ### 1. LMM Binary Classification
 ```bash
@@ -19,6 +19,12 @@ python binary_classification.py --model 'qwen2.5-vl-7b' --checkpoint 'chancharik
 
 ```bash
 python cam_motion_vqa_and_retrieval.py --model 'qwen2.5-vl-7b' --checkpoint 'chancharikm/qwen2.5-vl-7b-cam-motion' 
+```
+
+### 3. Captioning 
+
+```bash
+python captioning.py --model 'qwen2.5-vl-7b' --checkpoint 'chancharikm/qwen2.5-vl-7b-cam-motion' 
 ```
 
 ```bibtex

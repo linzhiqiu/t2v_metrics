@@ -26,7 +26,7 @@ def compute_vqa_scores(data, model_name, checkpoint_name):
     print(f"Initializing VQAScore model: {model_name}")
 
     if checkpoint_name:
-        vqa_scorer = t2v_metrics.VQAScore(model=model_name, checkpoint_name=checkpoint_name)
+        vqa_scorer = t2v_metrics.VQAScore(model=model_name, checkpoint=checkpoint_name)
     else:
         vqa_scorer = t2v_metrics.VQAScore(model=model_name)
     
