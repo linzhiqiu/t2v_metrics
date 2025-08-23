@@ -846,7 +846,7 @@ class Qwen2VLModel(VQAScoreModel):
     video_mode = "direct"
     allows_image = True
     def __init__(self,
-                 model_name='qwen2-vl-7b',
+                 model_name='qwen2.5-vl-7b',
                  device='cuda',
                  cache_dir=None,
                  checkpoint=None):
@@ -861,8 +861,9 @@ class Qwen2VLModel(VQAScoreModel):
     def load_model(self):
         # Switch from model dictionary to checkpoint argument
         # model_path = self.model_info['model']['path']
+        print('When loading a qwen model, ensure that your model_name or checkpoint contains "qwen2.5". Otherwise, it will be loaded using the "qwen2" config and architecture.')
         model_path = self.checkpoint
-        if '2.5' in model_path:
+        if 'qwen2.5' in model_path or 'qwen2.5' in self.model_name:
             self.model = Qwen2_5_VLForConditionalGeneration.from_pretrained(
                 model_path,
                 torch_dtype=self.model_info['model']['torch_dtype'],
