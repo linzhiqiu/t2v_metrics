@@ -37,6 +37,8 @@ pip install -e . # local pip install
 
 Or you can do a standard install via `pip install t2v-metrics`.
 
+**Note**: Certain models have additional requirements for full usability that may conflict with other model requirements. For these rare cases, please install the dependencies in the corresponding requirements.txt folder.
+
 Now, the following Python code is all you need to compute the VQAScore for image-text alignment (higher scores indicate greater similarity):
 
 ```python
