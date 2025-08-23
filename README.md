@@ -208,17 +208,17 @@ For single-image and CLIP-like models, video frames are concatenated. For all ot
 import t2v_metrics
 
 ### For a single (video, text) pair:
-llava_ov_score = t2v_metrics.VQAScore(model='llava-onevision-qwen2-7b-ov') 
+qwen_score = t2v_metrics.VQAScore(model='qwen2.5-vl-7b') 
 video = "videos/baby.mp4" # a video path in string format
 text = "a baby crying"
-score = llava_ov_score(images=[video], texts=[text], num_frames=8) 
+score = qwen_score(images=[video], texts=[text], num_frames=8) 
 
 ### Alternatively, if you want to calculate the pairwise similarity scores 
 ### between M videos and N texts, run the following to return a M x N score tensor.
 videos = ["videos/baby.mp4", "video/ducks.mp4"]
 texts = ["a baby crying",
          "a group of ducks standing in the water"]
-score = llava_ov_score(images=videos, texts=texts, num_frames=8) # scores[i][j] is the score between video i and text j
+score = qwen_score(images=videos, texts=texts, num_frames=8) # scores[i][j] is the score between video i and text j
 ```
 
 ### Text generation (VQA)
