@@ -21,6 +21,14 @@ Baiqi Li*, [Zhiqiu Lin*](https://linzhiqiu.github.io/), [Deepak Pathak](https://
 VQAScore significantly outperforms previous metrics such as CLIPScore and PickScore on compositional text prompts, and it is much simpler than prior art (e.g., ImageReward, HPSv2, TIFA, Davidsonian, VPEval, VIEScore) making use of human feedback or proprietary models like ChatGPT and GPT-4Vision. 
 
 ## Available Models:
+<table>
+<tr>
+<th><b>VQAScore Models</b></th>
+<th>ITMScore Models</th>
+<th>CLIPScore Models</th>
+</tr>
+<tr>
+<td>
 
 | Model Name              | Image | Video |
 | ----------------------- | :---: | :---: |
@@ -49,6 +57,52 @@ VQAScore significantly outperforms previous metrics such as CLIPScore and PickSc
 | llava-video             |       |   ✔   |
 | tarsier / tarsier2      |       |   ✔   |
 | perception-lm           |       |   ✔   |
+
+</td>
+<td>
+
+| Model family       | Image | Video |
+| ------------------ | :---: | :---: |
+| BLIP2-ITM          |   ✔   |       |
+| UMT (ITM)          |   ✔   |   ✔   |
+| InternVideo2 (ITM) |   ✔   |   ✔   |
+
+
+</td>
+<td>
+
+| Model family                | Image | Video |
+| --------------------------- | :---: | :---: |
+| OpenAI CLIP                 |   ✔   |       |
+| YFCC15M CLIP                |   ✔   |       |
+| CC12M CLIP                  |   ✔   |       |
+| LAION-400M CLIP             |   ✔   |       |
+| LAION-2B CLIP               |   ✔   |       |
+| DataComp CLIP (S/M/L/XL/1B) |   ✔   |       |
+| CommonPool CLIP (S/M/L/XL)  |   ✔   |       |
+| MetaCLIP                    |   ✔   |       |
+| DFN (2B/5B)                 |   ✔   |       |
+| SigLIP (webli)              |   ✔   |       |
+| SigLIP2 (webli)             |   ✔   |       |
+| RoBERTa-ViT                 |   ✔   |       |
+| XLM-RoBERTa-ViT             |   ✔   |       |
+| ConvNeXt-CLIP               |   ✔   |       |
+| CoCa                        |   ✔   |       |
+| CLIPA (DataComp1B)          |   ✔   |       |
+| NLLB-CLIP                   |   ✔   |       |
+| MobileCLIP                  |   ✔   |       |
+| ViTamin                     |   ✔   |       |
+| EVA (EVA01/EVA02)           |   ✔   |       |
+| BLIP2-ITC                   |   ✔   |       |
+| HPSv2                       |   ✔   |       |
+| PickScore                   |   ✔   |       |
+| UMT (CLIP)                  |   ✔   |   ✔   |
+| InternVideo2 (CLIP)         |   ✔   |   ✔   |
+| LanguageBind (video)        |   ✔   |   ✔   |
+
+</td>
+</tr>
+</table>
 
 ## Quick start
 
