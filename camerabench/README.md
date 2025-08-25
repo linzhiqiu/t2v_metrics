@@ -1,18 +1,16 @@
 # Evaluation Scripts
 
-CameraBench uses a **method-agnostic evaluation framework** that separates score/prediction generation from evaluation logic. This design enables fair comparison between different methods (LMMs, classical CV, human evaluation, etc.) by using standardized output formats.
-
-The method we use in the paper is VQAScore with VLMs for binary classification and retrieval and standard text generation with VLMs for captioning.
+CameraBench uses a **method-agnostic evaluation framework** that separates score/prediction generation (Script 1) from evaluation logic (Script 2). This allows any method to be evaluated on CameraBench (VLMs, task specific models, SfMs, and even human evaluation) by simply replacing the functionality of our Script 1. The method we use in the paper is VQAScore with VLMs for binary classification and retrieval and standard text generation with VLMs for captioning. 
 
 ## Two-Stage Evaluation Process
 
-### Stage 1: Score/Prediction Generation (Method-Specific)
+### Script 1: Score/Prediction Generation (Method-Specific)
 Generate scores or captions using your chosen method and save them in standardized formats.
 
-### Stage 2: Evaluation (Method-Agnostic) 
+### Script 2: Evaluation (Method-Agnostic) 
 Compute metrics from the standardized files using evaluation scripts that work with any method.
 
-**Key Benefit**: To use a different method (classical CV, other LMMs, or even human evaluators), you only need to modify the first script in each pair to output the standardized format. The evaluation logic remains unchanged.
+To use a different method (classical CV, other LMMs, or even human evaluators), you only need to modify the first script in each pair to output the standardized format. The evaluation logic remains unchanged.
 
 ---
 
@@ -20,7 +18,7 @@ Compute metrics from the standardized files using evaluation scripts that work w
 All evaluation data is located in the `data/` folder with the following structure:
 - `data/binary_classification/` - Binary classification tasks
 - `data/vqa_and_retrieval/` - VQA and retrieval tasks organized by skills
-- Caption data is specified via input JSON files
+- `caption_data.json` - Samples and Prompts for caption generation
 
 ---
 
@@ -147,10 +145,10 @@ python vqa_and_retrieval_evaluation.py scores/model1_*.json scores/model2_*.json
 ### Caption Generation
 ```bash
 # Generate captions using VLM models
-python caption_generation.py --models 'qwen2.5-vl-7b:chancharikm/qwen2.5-vl-7b-cam-motion' 'gpt-4o' --input ~/test_caption.json --output_dir captions --sample_size 100
+python caption_generation.py --models 'qwen2.5-vl-7b:chancharikm/qwen2.5-vl-7b-cam-motion' 'gpt-4o' --input data/caption_data.json --output_dir captions --sample_size 100
 
 # Generate captions for single model (backwards compatibility)
-python caption_generation.py --model 'qwen2.5-vl-7b' --checkpoint 'chancharikm/qwen2.5-vl-7b-cam-motion' --input ~/test_caption.json --output_dir captions --sample_size 100
+python caption_generation.py --model 'qwen2.5-vl-7b' --checkpoint 'chancharikm/qwen2.5-vl-7b-cam-motion' --input data/caption_data.json --output_dir captions --sample_size 100
 ```
 
 ### Evaluation
@@ -199,8 +197,8 @@ To evaluate your own method (classical CV, different LMMs, human evaluation, etc
 1. **Keep the evaluation scripts unchanged** - they work with any method
 2. **Modify only the generation scripts** to output the standardized JSON format shown above
 3. **Ensure your output includes**:
-   - Proper `metadata` section with your method information
    - All required fields for each sample (`sample_id`, `error`, etc.)
-   - Correct data types (scores as floats, error as string or null)
+   - Correct data types (scores as floats, captions as strings, and errors as strings or nulls)
+   - The `metadata` section, which is there to help with organizing outputs
 
-The evaluation scripts will automatically compute all metrics regardless of how the scores/captions were generated, enabling truly fair comparisons between methods.
+The evaluation scripts will automatically compute all metrics regardless of how the scores/captions were generated.
