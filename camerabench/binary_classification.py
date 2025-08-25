@@ -21,7 +21,7 @@ def load_json_data(file_path):
             data.append(json.loads(line.strip()))
     return data
 
-def compute_vqa_scores(data, model_name, checkpoint_name):
+def compute_vqa_scores(data, model_name, checkpoint_name, global_pbar=None):
     """Compute VQA scores for all samples"""
     print(f"Initializing VQAScore model: {model_name}")
 
@@ -34,7 +34,7 @@ def compute_vqa_scores(data, model_name, checkpoint_name):
     labels = []
     
     # Process one sample at a time
-    for item in tqdm(data, desc="Computing VQA scores"):
+    for item in tqdm(data, desc="Computing VQA scores", leave=False):
         video_path = item['image']  # Note: using 'image' key for video path
         question = item['question']
         label = item['label']
@@ -42,6 +42,8 @@ def compute_vqa_scores(data, model_name, checkpoint_name):
         # Check if video file exists
         if not os.path.exists(video_path):
             print(f"Warning: Video not found: {video_path}")
+            if global_pbar:
+                global_pbar.update(1)
             continue
         
         try:
@@ -60,6 +62,10 @@ def compute_vqa_scores(data, model_name, checkpoint_name):
             # Add placeholder score for failed sample
             scores.append(0.0)
             labels.append(1 if label.lower() == 'yes' else 0)
+        
+        # Update global progress bar
+        if global_pbar:
+            global_pbar.update(1)
     
     return np.array(scores), np.array(labels)
 
@@ -76,7 +82,7 @@ def compute_map(scores, labels):
     ap = average_precision_score(labels, scores)
     return ap
 
-def evaluate_split(json_file, model_name, checkpoint_name):
+def evaluate_split(json_file, model_name, checkpoint_name, global_pbar=None):
     """Evaluate a single split and return mAP"""
     print(f"\nEvaluating {json_file}")
     
@@ -88,7 +94,7 @@ def evaluate_split(json_file, model_name, checkpoint_name):
         return 0.0
     
     # Compute VQA scores
-    scores, labels = compute_vqa_scores(data, model_name, checkpoint_name)
+    scores, labels = compute_vqa_scores(data, model_name, checkpoint_name, global_pbar)
     
     if len(scores) == 0:
         print("No valid scores computed")
@@ -104,6 +110,14 @@ def evaluate_split(json_file, model_name, checkpoint_name):
     print(f"Average Precision (mAP): {map_score:.4f}")
     
     return map_score
+
+def count_total_samples(json_files):
+    """Count total samples across all splits"""
+    total = 0
+    for json_file in json_files:
+        data = load_json_data(json_file)
+        total += len(data)
+    return total
 
 def generate_output_filename(model_name, checkpoint_name):
     """Generate output filename with model, checkpoint, and timestamp"""
@@ -162,12 +176,18 @@ def main():
     
     print(f"Found {len(json_files)} JSONL files to evaluate")
     
-    # Evaluate each split
-    results = {}
-    for json_file in json_files:
-        split_name = json_file.stem  # filename without extension
-        map_score = evaluate_split(json_file, args.model, args.checkpoint)
-        results[split_name] = map_score
+    # Count total samples for global progress bar
+    total_samples = count_total_samples(json_files)
+    print(f"Total samples to process: {total_samples}")
+    
+    # Create global progress bar
+    with tqdm(total=total_samples, desc="Overall Progress", unit="samples", position=0) as global_pbar:
+        # Evaluate each split
+        results = {}
+        for json_file in json_files:
+            split_name = json_file.stem  # filename without extension
+            map_score = evaluate_split(json_file, args.model, args.checkpoint, global_pbar)
+            results[split_name] = map_score
     
     # Print summary
     print("\n" + "="*50)

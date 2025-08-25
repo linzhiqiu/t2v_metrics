@@ -18,19 +18,37 @@ from rouge_score import rouge_scorer
 import nltk
 
 
-def process_videos_with_model(model_name, checkpoint_name, videos, questions):
+def parse_model_spec(model_spec):
+    """
+    Parse model specification string.
+    
+    Args:
+        model_spec: String in format "model_name" or "model_name:checkpoint"
+        
+    Returns:
+        Tuple of (model_name, checkpoint_name)
+    """
+    if ':' in model_spec:
+        model_name, checkpoint_name = model_spec.split(':', 1)
+        return model_name.strip(), checkpoint_name.strip()
+    else:
+        return model_spec.strip(), None
+
+
+def process_videos_with_model(model_spec, videos, questions):
     """
     Process all videos with a single model instance.
     
     Args:
-        model_name: Name of the model to use
-        checkpoint_name: Optional checkpoint name for the model
+        model_spec: Model specification string (model_name or model_name:checkpoint)
         videos: List of video paths
         questions: List of questions corresponding to videos
         
     Returns:
         List of generated captions
     """
+    model_name, checkpoint_name = parse_model_spec(model_spec)
+    
     print(f"\nLoading model: {model_name}")
     if checkpoint_name:
         print(f"Using checkpoint: {checkpoint_name}")
@@ -277,7 +295,28 @@ def calculate_meteor_score(reference, candidate):
         return 0.0
 
 
-def calculate_generative_match(reference, candidate, api_key='api_key', retries=3, delay=2):
+def get_openai_api_key(provided_key=None):
+    """
+    Get OpenAI API key from argument or environment variable.
+    
+    Args:
+        provided_key: API key provided as command line argument
+        
+    Returns:
+        API key string or None if not found
+    """
+    if provided_key:
+        return provided_key
+    
+    # Try environment variable
+    env_key = os.environ.get("OPENAI_API_KEY")
+    if env_key:
+        return env_key
+    
+    return None
+
+
+def calculate_generative_match(reference, candidate, api_key=None, retries=3, delay=2):
     """
     Calculate generative match score using GPT-4o as judge.
     
@@ -298,9 +337,6 @@ def calculate_generative_match(reference, candidate, api_key='api_key', retries=
     if api_key:
         openai.api_key = api_key
     else:
-        openai.api_key = os.environ.get("OPENAI_API_KEY")
-    
-    if not openai.api_key:
         print("Warning: No OpenAI API key provided. Returning placeholder score.")
         return 0.5  # Return placeholder score
     
@@ -454,7 +490,7 @@ def evaluate_models_from_combined(combined_data, api_key=None):
 
 
 def generate_captions(args):
-    """Generate captions using specified model"""
+    """Generate captions using specified models"""
     # Expand the tilde in the path
     input_path = os.path.expanduser(args.input)
     
@@ -484,28 +520,34 @@ def generate_captions(args):
             "reference": reference
         })
     
-    # Process videos with the single model
-    start_time = time.time()
-    
-    # Process all videos with the model
-    captions = process_videos_with_model(args.model, args.checkpoint, videos, questions)
-    
-    # Create model key (include checkpoint in name if provided)
-    model_key = f"{args.model}:{args.checkpoint}" if args.checkpoint else args.model
-    
-    # Add captions to results
-    for i, caption in enumerate(captions):
-        results[i][model_key] = caption
+    # Process videos with each model
+    total_models = len(args.models)
+    for model_idx, model_spec in enumerate(args.models, 1):
+        print(f"\n{'='*50}")
+        print(f"Processing Model {model_idx}/{total_models}: {model_spec}")
+        print(f"{'='*50}")
         
-    end_time = time.time()
-    print(f"Completed model {model_key} in {end_time - start_time:.2f} seconds")
+        start_time = time.time()
+        
+        # Process all videos with the model
+        captions = process_videos_with_model(model_spec, videos, questions)
+        
+        # Create model key (use the full model_spec as the key)
+        model_key = model_spec
+        
+        # Add captions to results
+        for i, caption in enumerate(captions):
+            results[i][model_key] = caption
+            
+        end_time = time.time()
+        print(f"Completed model {model_key} in {end_time - start_time:.2f} seconds")
     
     # Save results
     with open(args.output, 'w') as f:
         json.dump(results, f, indent=2)
-    print(f"Results saved to {args.output}")
+    print(f"\nResults saved to {args.output}")
     
-    print(f"Processed {len(results)} videos with model {model_key}.")
+    print(f"Processed {len(results)} videos with {total_models} models.")
     return results
 
 
@@ -525,8 +567,19 @@ def evaluate_captions(args, data=None):
             print("Error: Could not load data from input file")
             return None
     
+    # Get API key from arguments or environment
+    api_key = get_openai_api_key(getattr(args, 'api_key', None))
+    
+    if not getattr(args, 'no_gpt', False) and api_key:
+        print(f"Using OpenAI API key for GPT-4o judge evaluation")
+    elif not getattr(args, 'no_gpt', False):
+        print("Warning: No OpenAI API key found. GPT-4o judge evaluation will be skipped.")
+        api_key = None
+    else:
+        print("GPT-4o judge evaluation disabled via --no_gpt flag")
+        api_key = None
+    
     # Evaluate models
-    api_key = args.api_key if hasattr(args, 'api_key') and not getattr(args, 'no_gpt', False) else None
     evaluation_results = evaluate_models_from_combined(data, api_key)
     
     # Convert results to list for easier serialization
@@ -629,26 +682,41 @@ def main():
     parser.add_argument("--output", type=str, default="caption_results.json", 
                         help="Path to output JSON file for generated captions")
     
-    # Caption generation arguments - single model approach
-    parser.add_argument("--model", type=str, default="qwen2.5-vl-7b", 
-                        help="Model name to use for caption generation")
-    parser.add_argument("--checkpoint", type=str, 
-                        help="Optional checkpoint name for the model (e.g., chancharikm/qwen2.5-vl-7b-1-3-6)")
+    # Caption generation arguments - multiple models approach
+    parser.add_argument("--models", type=str, nargs='+', 
+                        default=["qwen2.5-vl-7b"],
+                        help="List of model names to use for caption generation. Format: model_name or model_name:checkpoint")
     parser.add_argument("--sample-size", type=int, default=100, 
                         help="Number of items to sample for caption generation")
+    
+    # Backwards compatibility - single model arguments (deprecated)
+    parser.add_argument("--model", type=str, 
+                        help="Single model name (deprecated, use --models instead)")
+    parser.add_argument("--checkpoint", type=str, 
+                        help="Single model checkpoint (deprecated, use --models with model:checkpoint format)")
     
     # Evaluation arguments  
     parser.add_argument("--eval_output", type=str, default="evaluation_results.json",
                         help="Path to evaluation results JSON file")
     parser.add_argument("--excel_output", type=str, default="evaluation_results.xlsx",
                         help="Path to evaluation results Excel file")
-    parser.add_argument("--api_key", type=str, help="OpenAI API key for GPT-4o judge")
+    parser.add_argument("--api_key", type=str, help="OpenAI API key for GPT-4o judge (also checks OPENAI_API_KEY env var)")
     parser.add_argument("--no_gpt", action="store_true", help="Skip GPT-4o judge evaluation")
     
     args = parser.parse_args()
     
+    # Handle backwards compatibility for single model arguments
+    if args.model and not hasattr(args, 'models_specified'):
+        if args.checkpoint:
+            single_model_spec = f"{args.model}:{args.checkpoint}"
+        else:
+            single_model_spec = args.model
+        args.models = [single_model_spec]
+        print(f"Using single model specification: {single_model_spec}")
+    
     if args.mode == "generate":
         print("Mode: Caption Generation Only")
+        print(f"Models to process: {', '.join(args.models)}")
         generate_captions(args)
         
     elif args.mode == "evaluate":
@@ -657,6 +725,8 @@ def main():
         
     elif args.mode == "both":
         print("Mode: Caption Generation + Evaluation")
+        print(f"Models to process: {', '.join(args.models)}")
+        
         # First generate captions
         results = generate_captions(args)
         

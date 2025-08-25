@@ -49,12 +49,20 @@ def load_data_by_skill(data_dir, specific_skill=None):
     
     return skill_data
 
-def compute_scores(samples, model, question_template="{}"):
+def count_total_samples(skill_data):
+    """Count total samples across all skills and tasks"""
+    total = 0
+    for skill_name, skill_tasks in skill_data.items():
+        for task_name, task_samples in skill_tasks.items():
+            total += len(task_samples)
+    return total
+
+def compute_scores(samples, model, question_template="{}", global_pbar=None):
     """Compute scores for samples (used for both VQA and retrieval evaluation)"""
     yes_scores = []
     no_scores = []
     
-    for sample in tqdm(samples, desc="Computing scores"):
+    for sample in tqdm(samples, desc="Computing scores", leave=False):
         pos_video = sample["pos_video"]
         neg_video = sample["neg_video"]
         
@@ -91,6 +99,10 @@ def compute_scores(samples, model, question_template="{}"):
             print(f"Error processing sample: {e}")
             yes_scores.append([0.0, 0.0, 0.0, 0.0])
             no_scores.append([0.0, 0.0, 0.0, 0.0])
+        
+        # Update global progress bar
+        if global_pbar:
+            global_pbar.update(1)
     
     return np.array(yes_scores), np.array(no_scores)
 
@@ -198,7 +210,7 @@ def evaluate_retrieval_metrics(scores):
         "group": group_correct / total
     }
 
-def evaluate_skill_data_both_modes(skill_data, model, question_template="{}"):
+def evaluate_skill_data_both_modes(skill_data, model, question_template="{}", global_pbar=None):
     """Evaluate skill data for both VQA and retrieval modes (compute scores once)"""
     all_samples = []
     for task_name, task_samples in skill_data.items():
@@ -211,7 +223,7 @@ def evaluate_skill_data_both_modes(skill_data, model, question_template="{}"):
         }
     
     # Compute scores once
-    yes_scores, no_scores = compute_scores(all_samples, model, question_template)
+    yes_scores, no_scores = compute_scores(all_samples, model, question_template, global_pbar)
     
     # Evaluate both modes using the same scores
     vqa_metrics = evaluate_vqa_metrics(yes_scores, no_scores)
@@ -358,39 +370,57 @@ def main():
     
     skill_data = load_data_by_skill(vqa_dir, args.skill)
     
-    if args.mode in ['vqa', 'both']:
-        print("\n" + "="*50)
-        print("EVALUATING VQA")
-        print("="*50)
-        
-        vqa_results = {}
-        for skill_name, skill_data_dict in skill_data.items():
-            print(f"\nEvaluating VQA for skill: {skill_name}")
-            metrics = evaluate_skill_data_both_modes(skill_data_dict, model, args.question_template)
-            vqa_results[skill_name] = metrics["vqa"]
-        
-        results['vqa'] = vqa_results
-        print(format_results(vqa_results, "vqa", args.skill))
+    # Count total samples for progress bar
+    total_samples = count_total_samples(skill_data)
     
-    if args.mode in ['retrieval', 'both']:
-        print("\n" + "="*50)
-        print("EVALUATING RETRIEVAL")
-        print("="*50)
+    # Determine multiplier based on mode (since 'both' mode processes samples once but shows both results)
+    if args.mode == 'both':
+        # In 'both' mode, we process each sample once but get both VQA and retrieval results
+        progress_total = total_samples
+    else:
+        # In single mode, we process samples once for that mode
+        progress_total = total_samples
+    
+    print(f"Total samples to process: {progress_total}")
+    
+    # Create global progress bar
+    with tqdm(total=progress_total, desc="Overall Progress", unit="samples", position=0) as global_pbar:
         
-        retrieval_results = {}
-        for skill_name, skill_data_dict in skill_data.items():
-            print(f"\nEvaluating Retrieval for skill: {skill_name}")
-            if args.mode == 'both':
-                # Use existing metrics if we already computed them
-                metrics = evaluate_skill_data_both_modes(skill_data_dict, model, args.question_template)
-                retrieval_results[skill_name] = metrics["retrieval"]
-            else:
-                # Compute fresh if only doing retrieval
-                metrics = evaluate_skill_data_both_modes(skill_data_dict, model, args.question_template)
-                retrieval_results[skill_name] = metrics["retrieval"]
+        if args.mode in ['vqa', 'both']:
+            print("\n" + "="*50)
+            print("EVALUATING VQA")
+            print("="*50)
+            
+            vqa_results = {}
+            for skill_name, skill_data_dict in skill_data.items():
+                print(f"\nEvaluating VQA for skill: {skill_name}")
+                metrics = evaluate_skill_data_both_modes(skill_data_dict, model, args.question_template, 
+                                                       global_pbar if args.mode != 'both' else global_pbar)
+                vqa_results[skill_name] = metrics["vqa"]
+            
+            results['vqa'] = vqa_results
+            print(format_results(vqa_results, "vqa", args.skill))
         
-        results['retrieval'] = retrieval_results
-        print(format_results(retrieval_results, "retrieval", args.skill))
+        if args.mode in ['retrieval', 'both']:
+            print("\n" + "="*50)
+            print("EVALUATING RETRIEVAL")
+            print("="*50)
+            
+            retrieval_results = {}
+            for skill_name, skill_data_dict in skill_data.items():
+                print(f"\nEvaluating Retrieval for skill: {skill_name}")
+                if args.mode == 'both':
+                    # In 'both' mode, we already processed the samples and have both results
+                    # Just recompute to get the retrieval metrics (scores were already computed above)
+                    metrics = evaluate_skill_data_both_modes(skill_data_dict, model, args.question_template, None)
+                    retrieval_results[skill_name] = metrics["retrieval"]
+                else:
+                    # Compute fresh if only doing retrieval
+                    metrics = evaluate_skill_data_both_modes(skill_data_dict, model, args.question_template, global_pbar)
+                    retrieval_results[skill_name] = metrics["retrieval"]
+            
+            results['retrieval'] = retrieval_results
+            print(format_results(retrieval_results, "retrieval", args.skill))
     
     # Generate output filename if not provided
     if args.output_file:
