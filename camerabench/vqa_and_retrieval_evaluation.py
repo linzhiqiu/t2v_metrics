@@ -66,7 +66,7 @@ def compute_retrieval_scores_from_vqa(yes_scores):
 def evaluate_vqa_metrics(yes_scores, no_scores):
     """Evaluate VQA metrics - binary_acc and question_acc matching original implementation"""
     if len(yes_scores) == 0:
-        return {"binary_acc": 0.0, "question_acc": 0.0}
+        return {"binary_acc": 0.0, "question_acc": 0.0, "num_samples": 0}
     
     binary_correct = 0
     question_correct = 0
@@ -112,13 +112,14 @@ def evaluate_vqa_metrics(yes_scores, no_scores):
     
     return {
         "binary_acc": binary_correct / total_binary if total_binary > 0 else 0.0,
-        "question_acc": question_correct / total_questions if total_questions > 0 else 0.0
+        "question_acc": question_correct / total_questions if total_questions > 0 else 0.0,
+        "num_samples": len(yes_scores)
     }
 
 def evaluate_retrieval_metrics(scores):
     """Evaluate retrieval metrics - text, image, group"""
     if len(scores) == 0:
-        return {"text": 0.0, "image": 0.0, "group": 0.0}
+        return {"text": 0.0, "image": 0.0, "group": 0.0, "num_samples": 0}
     
     text_correct = 0
     image_correct = 0  
@@ -147,7 +148,8 @@ def evaluate_retrieval_metrics(scores):
     return {
         "text": text_correct / total,
         "image": image_correct / total, 
-        "group": group_correct / total
+        "group": group_correct / total,
+        "num_samples": total
     }
 
 def evaluate_single_file(score_file, mode='both'):
@@ -160,13 +162,27 @@ def evaluate_single_file(score_file, mode='both'):
     # Extract metadata
     metadata = score_data.get("metadata", {})
     method_name = metadata.get("method_type", "Unknown_Method")
+    model_name = metadata.get("model_name", "Unknown_Model")
+    checkpoint = metadata.get("checkpoint", "")
     skill_name = metadata.get("skill_name", "Unknown_Skill")
     task_name = metadata.get("task_name", "")
+    split_name = metadata.get("split_name", skill_name)
     
+    # Create a unique identifier that includes model and checkpoint info
+    if checkpoint:
+        clean_checkpoint = checkpoint.split("/")[-1] if "/" in checkpoint else checkpoint
+        unique_id = f"{model_name}_{clean_checkpoint}_{split_name}"
+    else:
+        unique_id = f"{model_name}_{split_name}"
+    
+    print(f"Model: {model_name}")
+    if checkpoint:
+        print(f"Checkpoint: {checkpoint}")
     print(f"Method: {method_name}")
     print(f"Skill: {skill_name}")
     if task_name:
         print(f"Task: {task_name}")
+    print(f"Split: {split_name}")
     print(f"Total samples in file: {score_data['total_samples']}")
     print(f"Successful samples: {score_data['successful_samples']}")
     print(f"Failed samples: {score_data['failed_samples']}")
@@ -176,9 +192,17 @@ def evaluate_single_file(score_file, mode='both'):
     
     if len(yes_scores) == 0:
         print("No valid scores found in file")
-        return skill_name, None
+        return unique_id, None
     
-    results = {"skill_name": skill_name, "task_name": task_name, "metadata": metadata}
+    results = {
+        "split_name": split_name,
+        "skill_name": skill_name, 
+        "task_name": task_name, 
+        "model_name": model_name,
+        "checkpoint": checkpoint,
+        "unique_id": unique_id,
+        "metadata": metadata
+    }
     
     # Evaluate VQA metrics
     if mode in ['vqa', 'both']:
@@ -188,6 +212,7 @@ def evaluate_single_file(score_file, mode='both'):
         print(f"VQA Results:")
         print(f"  Binary Accuracy: {vqa_metrics['binary_acc']:.4f}")
         print(f"  Question Accuracy: {vqa_metrics['question_acc']:.4f}")
+        print(f"  Valid samples used: {vqa_metrics['num_samples']}")
     
     # Evaluate Retrieval metrics
     if mode in ['retrieval', 'both']:
@@ -199,142 +224,186 @@ def evaluate_single_file(score_file, mode='both'):
         print(f"  Text: {retrieval_metrics['text']:.4f}")
         print(f"  Image: {retrieval_metrics['image']:.4f}")
         print(f"  Group: {retrieval_metrics['group']:.4f}")
+        print(f"  Valid samples used: {retrieval_metrics['num_samples']}")
     
-    return skill_name, results
-
-def format_results(results, mode):
-    """Format results for display"""
-    output = []
-    
-    if mode == "vqa":
-        output.append("\n" + "="*60)
-        output.append("VQA EVALUATION RESULTS")
-        output.append("="*60)
-        output.append(f"{'Skill':<30} {'Binary Acc':<12} {'Question Acc':<12}")
-        output.append("-" * 60)
-        
-        total_binary = 0.0
-        total_question = 0.0
-        count = 0
-        
-        for skill_name, metrics in results.items():
-            if metrics and "vqa" in metrics:
-                vqa = metrics["vqa"]
-                output.append(f"{skill_name:<30} {vqa['binary_acc']:<12.2%} {vqa['question_acc']:<12.2%}")
-                total_binary += vqa['binary_acc']
-                total_question += vqa['question_acc']
-                count += 1
-        
-        output.append("-" * 60)
-        
-        if count > 0:
-            avg_binary = total_binary / count
-            avg_question = total_question / count
-            output.append(f"{'Overall Average':<30} {avg_binary:<12.2%} {avg_question:<12.2%}")
-    
-    elif mode == "retrieval":
-        output.append("\n" + "="*70)
-        output.append("RETRIEVAL EVALUATION RESULTS")
-        output.append("="*70)
-        output.append(f"{'Skill':<30} {'Text':<12} {'Image':<12} {'Group':<12}")
-        output.append("-" * 70)
-        
-        # Separate skill tasks vs caption tasks for retrieval only
-        skill_tasks_total = {"text": 0.0, "image": 0.0, "group": 0.0, "count": 0}
-        caption_tasks_total = {"text": 0.0, "image": 0.0, "group": 0.0, "count": 0}
-        
-        for skill_name, metrics in results.items():
-            if metrics and "retrieval" in metrics:
-                retrieval = metrics["retrieval"]
-                output.append(f"{skill_name:<30} {retrieval['text']:<12.2%} {retrieval['image']:<12.2%} {retrieval['group']:<12.2%}")
-                
-                if "complex description" in skill_name.lower() or "caption" in skill_name.lower():
-                    caption_tasks_total["text"] += retrieval['text']
-                    caption_tasks_total["image"] += retrieval['image']
-                    caption_tasks_total["group"] += retrieval['group']
-                    caption_tasks_total["count"] += 1
-                else:
-                    skill_tasks_total["text"] += retrieval['text']
-                    skill_tasks_total["image"] += retrieval['image']
-                    skill_tasks_total["group"] += retrieval['group']
-                    skill_tasks_total["count"] += 1
-        
-        output.append("-" * 70)
-        
-        # Show aggregated results for retrieval
-        if skill_tasks_total["count"] > 0:
-            avg_text = skill_tasks_total["text"] / skill_tasks_total["count"]
-            avg_image = skill_tasks_total["image"] / skill_tasks_total["count"]
-            avg_group = skill_tasks_total["group"] / skill_tasks_total["count"]
-            output.append(f"{'Skill Tasks Average':<30} {avg_text:<12.2%} {avg_image:<12.2%} {avg_group:<12.2%}")
-        
-        if caption_tasks_total["count"] > 0:
-            avg_text = caption_tasks_total["text"] / caption_tasks_total["count"]
-            avg_image = caption_tasks_total["image"] / caption_tasks_total["count"]
-            avg_group = caption_tasks_total["group"] / caption_tasks_total["count"]
-            output.append(f"{'Caption Tasks Average':<30} {avg_text:<12.2%} {avg_image:<12.2%} {avg_group:<12.2%}")
-    
-    else:  # mode == "both"
-        # Format both VQA and retrieval results
-        vqa_output = format_results(results, "vqa")
-        retrieval_output = format_results(results, "retrieval")
-        output.extend(vqa_output)
-        output.extend(retrieval_output)
-    
-    return "\n".join(output)
+    return unique_id, results
 
 def save_evaluation_results(results, mode, output_file):
     """Save evaluation results to JSON file"""
-    # Prepare summary
+    # Compute overall statistics
+    overall_stats = {}
+    
+    if mode in ['vqa', 'both']:
+        valid_vqa = [r["vqa"] for r in results.values() if r is not None and "vqa" in r]
+        if valid_vqa:
+            binary_accs = [v["binary_acc"] for v in valid_vqa]
+            question_accs = [v["question_acc"] for v in valid_vqa]
+            
+            overall_stats["vqa"] = {
+                "mean_binary_acc": float(np.mean(binary_accs)),
+                "std_binary_acc": float(np.std(binary_accs)) if len(binary_accs) > 1 else 0.0,
+                "mean_question_acc": float(np.mean(question_accs)),
+                "std_question_acc": float(np.std(question_accs)) if len(question_accs) > 1 else 0.0,
+                "evaluated_splits": len(valid_vqa)
+            }
+    
+    if mode in ['retrieval', 'both']:
+        valid_retrieval = [r["retrieval"] for r in results.values() if r is not None and "retrieval" in r]
+        if valid_retrieval:
+            # Overall retrieval averages
+            text_scores = [v["text"] for v in valid_retrieval]
+            image_scores = [v["image"] for v in valid_retrieval]
+            group_scores = [v["group"] for v in valid_retrieval]
+            
+            overall_stats["retrieval"] = {
+                "mean_text": float(np.mean(text_scores)),
+                "std_text": float(np.std(text_scores)) if len(text_scores) > 1 else 0.0,
+                "mean_image": float(np.mean(image_scores)),
+                "std_image": float(np.std(image_scores)) if len(image_scores) > 1 else 0.0,
+                "mean_group": float(np.mean(group_scores)),
+                "std_group": float(np.std(group_scores)) if len(group_scores) > 1 else 0.0,
+                "evaluated_splits": len(valid_retrieval)
+            }
+            
+            # Separate skill-based vs caption-based averages
+            skill_retrieval = []
+            caption_retrieval = []
+            
+            for split_name, metrics in results.items():
+                if metrics and "retrieval" in metrics:
+                    skill_name = metrics.get("skill_name", "")
+                    if "complex description" in skill_name.lower() or "caption" in skill_name.lower():
+                        caption_retrieval.append(metrics["retrieval"])
+                    else:
+                        skill_retrieval.append(metrics["retrieval"])
+            
+            if skill_retrieval:
+                skill_text = [v["text"] for v in skill_retrieval]
+                skill_image = [v["image"] for v in skill_retrieval]
+                skill_group = [v["group"] for v in skill_retrieval]
+                
+                overall_stats["retrieval_skill_based"] = {
+                    "mean_text": float(np.mean(skill_text)),
+                    "std_text": float(np.std(skill_text)) if len(skill_text) > 1 else 0.0,
+                    "mean_image": float(np.mean(skill_image)),
+                    "std_image": float(np.std(skill_image)) if len(skill_image) > 1 else 0.0,
+                    "mean_group": float(np.mean(skill_group)),
+                    "std_group": float(np.std(skill_group)) if len(skill_group) > 1 else 0.0,
+                    "evaluated_splits": len(skill_retrieval)
+                }
+            
+            if caption_retrieval:
+                caption_text = [v["text"] for v in caption_retrieval]
+                caption_image = [v["image"] for v in caption_retrieval]
+                caption_group = [v["group"] for v in caption_retrieval]
+                
+                overall_stats["retrieval_caption_based"] = {
+                    "mean_text": float(np.mean(caption_text)),
+                    "std_text": float(np.std(caption_text)) if len(caption_text) > 1 else 0.0,
+                    "mean_image": float(np.mean(caption_image)),
+                    "std_image": float(np.std(caption_image)) if len(caption_image) > 1 else 0.0,
+                    "mean_group": float(np.mean(caption_group)),
+                    "std_group": float(np.std(caption_group)) if len(caption_group) > 1 else 0.0,
+                    "evaluated_splits": len(caption_retrieval)
+                }
+    
+    # Prepare summary with top-level overall averages for easy access (matching binary classification format)
     summary = {
         "evaluation_timestamp": datetime.now().isoformat(),
         "evaluation_mode": mode,
-        "total_skills": len(results),
-        "results_by_skill": results
+        "total_splits": len(results),
+        "evaluated_splits": len([r for r in results.values() if r is not None])
     }
     
-    # Compute overall statistics if multiple skills
-    if len(results) > 1:
-        if mode in ['vqa', 'both']:
-            valid_vqa = [r["vqa"] for r in results.values() if r is not None and "vqa" in r]
-            if valid_vqa:
-                binary_accs = [v["binary_acc"] for v in valid_vqa]
-                question_accs = [v["question_acc"] for v in valid_vqa]
-                
-                summary["overall_vqa_statistics"] = {
-                    "mean_binary_acc": float(np.mean(binary_accs)),
-                    "std_binary_acc": float(np.std(binary_accs)),
-                    "mean_question_acc": float(np.mean(question_accs)),
-                    "std_question_acc": float(np.std(question_accs)),
-                    "evaluated_skills": len(valid_vqa)
-                }
-        
-        if mode in ['retrieval', 'both']:
-            valid_retrieval = [r["retrieval"] for r in results.values() if r is not None and "retrieval" in r]
-            if valid_retrieval:
-                text_scores = [v["text"] for v in valid_retrieval]
-                image_scores = [v["image"] for v in valid_retrieval]
-                group_scores = [v["group"] for v in valid_retrieval]
-                
-                summary["overall_retrieval_statistics"] = {
-                    "mean_text": float(np.mean(text_scores)),
-                    "std_text": float(np.std(text_scores)),
-                    "mean_image": float(np.mean(image_scores)),
-                    "std_image": float(np.std(image_scores)),
-                    "mean_group": float(np.mean(group_scores)),
-                    "std_group": float(np.std(group_scores)),
-                    "evaluated_skills": len(valid_retrieval)
-                }
+    # Add top-level overall averages for easy access (matching binary classification format)
+    if "vqa" in overall_stats:
+        summary["overall_binary_acc"] = overall_stats["vqa"]["mean_binary_acc"]
+        summary["overall_question_acc"] = overall_stats["vqa"]["mean_question_acc"]
+    
+    if "retrieval" in overall_stats:
+        summary["overall_retrieval_text"] = overall_stats["retrieval"]["mean_text"]
+        summary["overall_retrieval_image"] = overall_stats["retrieval"]["mean_image"]
+        summary["overall_retrieval_group"] = overall_stats["retrieval"]["mean_group"]
+    
+    if "retrieval_skill_based" in overall_stats:
+        summary["skill_based_retrieval_text"] = overall_stats["retrieval_skill_based"]["mean_text"]
+        summary["skill_based_retrieval_image"] = overall_stats["retrieval_skill_based"]["mean_image"]
+        summary["skill_based_retrieval_group"] = overall_stats["retrieval_skill_based"]["mean_group"]
+    
+    if "retrieval_caption_based" in overall_stats:
+        summary["caption_based_retrieval_text"] = overall_stats["retrieval_caption_based"]["mean_text"]
+        summary["caption_based_retrieval_image"] = overall_stats["retrieval_caption_based"]["mean_image"]
+        summary["caption_based_retrieval_group"] = overall_stats["retrieval_caption_based"]["mean_group"]
+    
+    # Add detailed statistics (matching binary classification format)
+    summary["overall_statistics"] = overall_stats
+    summary["results_by_split"] = results
     
     with open(output_file, 'w') as f:
         json.dump(summary, f, indent=2)
     
     print(f"\nEvaluation results saved to: {output_file}")
+    
+    # Print overall averages when saving
+    if "vqa" in overall_stats:
+        vqa_stats = overall_stats["vqa"]
+        print(f"Overall VQA Binary Accuracy: {vqa_stats['mean_binary_acc']:.4f}")
+        print(f"Overall VQA Question Accuracy: {vqa_stats['mean_question_acc']:.4f}")
+    
+    if "retrieval" in overall_stats:
+        ret_stats = overall_stats["retrieval"]
+        print(f"Overall Retrieval Text: {ret_stats['mean_text']:.4f}")
+        print(f"Overall Retrieval Image: {ret_stats['mean_image']:.4f}")
+        print(f"Overall Retrieval Group: {ret_stats['mean_group']:.4f}")
+    
+    if "retrieval_skill_based" in overall_stats:
+        skill_stats = overall_stats["retrieval_skill_based"]
+        print(f"Skill-based Retrieval Text: {skill_stats['mean_text']:.4f}")
+        print(f"Skill-based Retrieval Image: {skill_stats['mean_image']:.4f}")
+        print(f"Skill-based Retrieval Group: {skill_stats['mean_group']:.4f}")
+    
+    if "retrieval_caption_based" in overall_stats:
+        caption_stats = overall_stats["retrieval_caption_based"]
+        print(f"Caption-based Retrieval Text: {caption_stats['mean_text']:.4f}")
+        print(f"Caption-based Retrieval Image: {caption_stats['mean_image']:.4f}")
+        print(f"Caption-based Retrieval Group: {caption_stats['mean_group']:.4f}")
+
+def find_score_files(score_dir):
+    """Find all VQA/retrieval score files in a directory"""
+    score_dir = Path(score_dir)
+    if not score_dir.exists():
+        return []
+    
+    # Look for VQA/retrieval score files, explicitly exclude binary classification files
+    patterns = ["*vqa_scores*.json", "*retrieval_scores*.json", "*_vqa_*.json", "*_retrieval_*.json"]
+    exclude_patterns = ["*binary_scores*.json", "*binary_classification*.json"]
+    
+    score_files = []
+    
+    for pattern in patterns:
+        score_files.extend(score_dir.glob(pattern))
+    
+    # Remove binary classification files that might have matched
+    filtered_files = []
+    for file_path in score_files:
+        is_excluded = False
+        for exclude_pattern in exclude_patterns:
+            if file_path.match(exclude_pattern):
+                is_excluded = True
+                break
+        if not is_excluded:
+            filtered_files.append(file_path)
+    
+    # Remove duplicates and sort
+    score_files = sorted(list(set(filtered_files)))
+    return score_files
 
 def main():
     parser = argparse.ArgumentParser(description='Method-agnostic VQA and Retrieval evaluator')
-    parser.add_argument('score_files', nargs='+', 
-                      help='Score files to evaluate (JSON format from score generation step)')
+    parser.add_argument('score_files', nargs='*', default=[],
+                      help='Score files to evaluate (JSON format from score generation step). If not provided, auto-discovers files in --score_dir')
+    parser.add_argument('--score_dir', type=str, default='scores',
+                      help='Directory to search for score files (used when no specific files provided)')
     parser.add_argument('--mode', type=str, choices=['vqa', 'retrieval', 'both'], default='both',
                       help='Evaluation mode')
     parser.add_argument('--output_dir', type=str, default='evaluation_results',
@@ -344,33 +413,46 @@ def main():
     
     args = parser.parse_args()
     
+    # Determine which score files to process
+    if args.score_files:
+        # Use explicitly provided files
+        score_files = [Path(f) for f in args.score_files]
+        print(f"Using {len(score_files)} explicitly provided score files")
+    else:
+        # Auto-discover score files in the score directory
+        score_files = find_score_files(args.score_dir)
+        if not score_files:
+            print(f"No VQA/retrieval score files found in {args.score_dir}")
+            print("Looking for files matching: *vqa_scores*.json, *retrieval_scores*.json, *_vqa_*.json, *_retrieval_*.json")
+            return
+        print(f"Auto-discovered {len(score_files)} score files in {args.score_dir}")
+        for f in score_files:
+            print(f"  - {f.name}")
+    
     # Create output directory
     output_dir = Path(args.output_dir)
     output_dir.mkdir(exist_ok=True)
     
-    print(f"{'='*80}")
+    print(f"\n{'='*80}")
     print("METHOD-AGNOSTIC VQA & RETRIEVAL EVALUATION")
     print(f"{'='*80}")
-    print(f"Score files to evaluate: {len(args.score_files)}")
+    print(f"Score files to evaluate: {len(score_files)}")
     print(f"Evaluation mode: {args.mode}")
     
     # Evaluate each file
     results = {}
     
-    for score_file in args.score_files:
-        if not Path(score_file).exists():
+    for score_file in score_files:
+        if not score_file.exists():
             print(f"Warning: Score file not found: {score_file}")
             continue
         
-        skill_name, metrics = evaluate_single_file(score_file, args.mode)
+        split_name, metrics = evaluate_single_file(score_file, args.mode)
         
         if metrics:
-            results[skill_name] = metrics
+            results[split_name] = metrics
     
     # Print summary
-    print(format_results(results, args.mode))
-    
-    # Print overall summary
     print(f"\n{'='*80}")
     print("EVALUATION SUMMARY")
     print(f"{'='*80}")
@@ -381,44 +463,54 @@ def main():
         print("No valid results to summarize")
         return
     
-    # Print individual results summary
+    # Print individual results
     if args.mode in ['vqa', 'both']:
-        print("\nVQA Summary:")
-        for skill_name, metrics in valid_results.items():
+        for split_name, metrics in valid_results.items():
             if "vqa" in metrics:
                 vqa = metrics["vqa"]
-                print(f"{skill_name:30s}: Binary={vqa['binary_acc']:.3f}, Question={vqa['question_acc']:.3f}")
-        
-        if len(valid_results) > 1:
+                print(f"{split_name:30s}: Binary = {vqa['binary_acc']:.4f}, Question = {vqa['question_acc']:.4f}")
+    
+    if args.mode in ['retrieval', 'both']:
+        for split_name, metrics in valid_results.items():
+            if "retrieval" in metrics:
+                ret = metrics["retrieval"]
+                print(f"{split_name:30s}: Text = {ret['text']:.4f}, Image = {ret['image']:.4f}, Group = {ret['group']:.4f}")
+    
+    # Print overall statistics
+    if len(valid_results) >= 1:
+        if args.mode in ['vqa', 'both']:
             vqa_metrics = [m["vqa"] for m in valid_results.values() if "vqa" in m]
             if vqa_metrics:
                 binary_accs = [v["binary_acc"] for v in vqa_metrics]
                 question_accs = [v["question_acc"] for v in vqa_metrics]
                 print("-" * 80)
-                print(f"{'VQA Overall Average':30s}: Binary={np.mean(binary_accs):.3f} (±{np.std(binary_accs):.3f}), Question={np.mean(question_accs):.3f} (±{np.std(question_accs):.3f})")
-    
-    if args.mode in ['retrieval', 'both']:
-        print("\nRetrieval Summary:")
-        for skill_name, metrics in valid_results.items():
-            if "retrieval" in metrics:
-                ret = metrics["retrieval"]
-                print(f"{skill_name:30s}: Text={ret['text']:.3f}, Image={ret['image']:.3f}, Group={ret['group']:.3f}")
+                if len(vqa_metrics) > 1:
+                    print(f"{'VQA Overall Average':30s}: Binary = {np.mean(binary_accs):.4f} (±{np.std(binary_accs):.4f}), Question = {np.mean(question_accs):.4f} (±{np.std(question_accs):.4f})")
+                else:
+                    print(f"{'VQA Overall (Single Split)':30s}: Binary = {np.mean(binary_accs):.4f}, Question = {np.mean(question_accs):.4f}")
         
-        if len(valid_results) > 1:
+        if args.mode in ['retrieval', 'both']:
             retrieval_metrics = [m["retrieval"] for m in valid_results.values() if "retrieval" in m]
             if retrieval_metrics:
                 text_scores = [v["text"] for v in retrieval_metrics]
                 image_scores = [v["image"] for v in retrieval_metrics]
                 group_scores = [v["group"] for v in retrieval_metrics]
                 print("-" * 80)
-                print(f"{'Retrieval Overall Average':30s}: Text={np.mean(text_scores):.3f} (±{np.std(text_scores):.3f}), Image={np.mean(image_scores):.3f} (±{np.std(image_scores):.3f}), Group={np.mean(group_scores):.3f} (±{np.std(group_scores):.3f})")
+                if len(retrieval_metrics) > 1:
+                    print(f"{'Retrieval Overall Average':30s}: Text = {np.mean(text_scores):.4f} (±{np.std(text_scores):.4f}), Image = {np.mean(image_scores):.4f} (±{np.std(image_scores):.4f}), Group = {np.mean(group_scores):.4f} (±{np.std(group_scores):.4f})")
+                else:
+                    print(f"{'Retrieval Overall (Single Split)':30s}: Text = {np.mean(text_scores):.4f}, Image = {np.mean(image_scores):.4f}, Group = {np.mean(group_scores):.4f}")
     
     # Generate output filename if not provided
     if args.output_file:
         output_file = Path(args.output_file)
     else:
+        # Create a more descriptive timestamp-based filename
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        output_file = output_dir / f"vqa_retrieval_evaluation_{args.mode}_{timestamp}.json"
+        # Include number of models/files for clarity
+        num_models = len(set([m.get("model_name", "unknown") for m in valid_results.values() if m and "metadata" in m]))
+        num_files = len(valid_results)
+        output_file = output_dir / f"vqa_retrieval_evaluation_{args.mode}_{num_models}models_{num_files}files_{timestamp}.json"
     
     # Save results
     save_evaluation_results(valid_results, args.mode, output_file)

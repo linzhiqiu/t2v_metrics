@@ -26,20 +26,44 @@ All evaluation data is located in the `data/` folder with the following structur
 
 ### Score Generation
 ```bash
-# Generate scores using VQAScore models
+# Generate scores using VQAScore models for all splits
 python binary_classification_vlm_scores.py --model 'qwen2.5-vl-7b' --checkpoint 'chancharikm/qwen2.5-vl-7b-cam-motion' --data_dir data/binary_classification --output_dir scores
 
 # Generate scores for specific splits only
-python binary_classification_vlm_scores.py --model 'qwen2.5-vl-7b' --checkpoint 'chancharikm/qwen2.5-vl-7b-cam-motion' --splits motion_coherence lighting_quality --output_dir scores
+python binary_classification_vlm_scores.py --model 'qwen2.5-vl-7b' --checkpoint 'chancharikm/qwen2.5-vl-7b-cam-motion' --splits Move_Down Move_Up Pan_Left Pan_Right --output_dir scores
+
+# Generate scores for camera movement splits
+python binary_classification_vlm_scores.py --model 'qwen2.5-vl-7b' --checkpoint 'chancharikm/qwen2.5-vl-7b-cam-motion' --splits Move_Down Move_In Move_Left Move_Out Move_Right Move_Up --output_dir scores
+
+# Generate scores for rotation and zoom splits
+python binary_classification_vlm_scores.py --model 'qwen2.5-vl-7b' --checkpoint 'chancharikm/qwen2.5-vl-7b-cam-motion' --splits Roll_Clockwise Roll_Counterclockwise Tilt_Down Tilt_Up Zoom_In Zoom_Out --output_dir scores
+
+# Generate scores for panning splits
+python binary_classification_vlm_scores.py --model 'qwen2.5-vl-7b' --checkpoint 'chancharikm/qwen2.5-vl-7b-cam-motion' --splits Pan_Left Pan_Right --output_dir scores
+
+# Generate scores for static analysis
+python binary_classification_vlm_scores.py --model 'qwen2.5-vl-7b' --checkpoint 'chancharikm/qwen2.5-vl-7b-cam-motion' --splits Static --output_dir scores
 ```
+
+**Available Binary Classification Splits:**
+- Movement: `Move_Down`, `Move_In`, `Move_Left`, `Move_Out`, `Move_Right`, `Move_Up`
+- Panning: `Pan_Left`, `Pan_Right`  
+- Rotation: `Roll_Clockwise`, `Roll_Counterclockwise`
+- Tilting: `Tilt_Down`, `Tilt_Up`
+- Zooming: `Zoom_In`, `Zoom_Out`
+- Static: `Static`
 
 ### Evaluation
 ```bash
-# Evaluate all score files with plots
+# Evaluate all score files with plots (processes whatever splits you generated)
 python binary_classification_evaluation.py scores/*_binary_scores_*.json --plots --output_dir evaluation_results
 
 # Evaluate specific score files
-python binary_classification_evaluation.py scores/binary_scores_qwen2.5-vl-7b_motion_coherence_*.json --output_file motion_results.json
+python binary_classification_evaluation.py scores/vqa_scores_qwen2.5-vl-7b_*_Move_Down_*.json scores/vqa_scores_qwen2.5-vl-7b_*_Move_Up_*.json --output_file movement_results.json
+
+# If you only generated scores for certain splits, the evaluation command remains the same
+# It will automatically process only the splits that have score files in the scores folder
+python binary_classification_evaluation.py scores/*.json --plots --output_dir evaluation_results
 ```
 
 **Required Output Format for Custom Methods:**
@@ -48,14 +72,14 @@ python binary_classification_evaluation.py scores/binary_scores_qwen2.5-vl-7b_mo
   "metadata": {
     "method_type": "Your_Method_Name",
     "model_name": "your_model_name",
-    "split_name": "motion_coherence",
+    "split_name": "Move_Down",
     "generation_timestamp": "2025-01-XX"
   },
   "scores": [
     {
       "sample_id": "0",
       "video_path": "path/to/video.mp4",
-      "question": "Is the motion smooth?",
+      "question": "Is the camera moving downward?",
       "ground_truth_label": "yes",
       "method": "your_method_identifier",
       "score": 0.85,
@@ -80,13 +104,21 @@ python vqa_and_retrieval_vlm_scores.py --model 'qwen2.5-vl-7b' --checkpoint 'cha
 # Generate scores for specific skill
 python vqa_and_retrieval_vlm_scores.py --model 'qwen2.5-vl-7b' --checkpoint 'chancharikm/qwen2.5-vl-7b-cam-motion' --skill "Motion & Steadiness" --output_dir scores
 
+# Generate scores for confusable motion skill
+python vqa_and_retrieval_vlm_scores.py --model 'qwen2.5-vl-7b' --checkpoint 'chancharikm/qwen2.5-vl-7b-cam-motion' --skill "confusable_motion" --output_dir scores
+
 # Generate with custom question template
 python vqa_and_retrieval_vlm_scores.py --model 'qwen2.5-vl-7b' --checkpoint 'chancharikm/qwen2.5-vl-7b-cam-motion' --question_template "Answer with only Yes or No: {}" --combine_tasks
 ```
 
+**Available VQA/Retrieval Skills:**
+- `complex_description` - Complex scene descriptions and captions
+- `confusable_motion` - Confusable camera motion patterns
+- (Additional skills based on your directory structure)
+
 ### Evaluation
 ```bash
-# Evaluate both VQA and retrieval metrics
+# Evaluate both VQA and retrieval metrics (processes whatever skills you generated)
 python vqa_and_retrieval_evaluation.py scores/*_vqa_retrieval_scores_*.json --mode both --output_dir evaluation_results
 
 # Evaluate only VQA metrics
@@ -95,7 +127,7 @@ python vqa_and_retrieval_evaluation.py scores/*_vqa_retrieval_scores_*.json --mo
 # Evaluate only retrieval metrics  
 python vqa_and_retrieval_evaluation.py scores/*_vqa_retrieval_scores_*.json --mode retrieval
 
-# Compare specific methods
+# Compare specific methods or skills
 python vqa_and_retrieval_evaluation.py scores/model1_*.json scores/model2_*.json --mode both --output_file comparison.json
 ```
 
@@ -105,8 +137,8 @@ python vqa_and_retrieval_evaluation.py scores/model1_*.json scores/model2_*.json
   "metadata": {
     "method_type": "Your_Method_Name", 
     "model_name": "your_model_name",
-    "skill_name": "Motion & Steadiness",
-    "task_name": "smooth_motion",
+    "skill_name": "confusable_motion",
+    "task_name": "backward_camera_only_vs_backward_ground_only",
     "generation_timestamp": "2025-01-XX"
   },
   "scores": [
@@ -114,8 +146,8 @@ python vqa_and_retrieval_evaluation.py scores/model1_*.json scores/model2_*.json
       "sample_id": "0",
       "pos_video": "path/to/positive_video.mp4",
       "neg_video": "path/to/negative_video.mp4",
-      "pos_question": "Is the motion smooth?", 
-      "neg_question": "Is the motion choppy?",
+      "pos_question": "Is the camera moving backward?", 
+      "neg_question": "Is the ground moving backward?",
       "method": "your_method_identifier",
       "yes_scores": {
         "pos_text_pos_image": 0.85,
