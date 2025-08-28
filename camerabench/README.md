@@ -10,7 +10,7 @@ Generate scores or captions using your chosen method and save them in standardiz
 ### Script 2: Evaluation (Method-Agnostic) 
 Compute metrics from the standardized files using evaluation scripts that work with any method.
 
-To use a different method (classical CV, other LMMs, or even human evaluators), you only need to modify the first script in each pair to output the standardized format. The evaluation logic remains unchanged.
+To use a different method (classical CV, other LMMs, or even human evaluators), you only need to modify/recreate the first script in each pair to output the standardized format. The evaluation logic in the 2nd script remains unchanged.
 
 ---
 
@@ -31,18 +31,6 @@ python binary_classification_vlm_scores.py --model 'qwen2.5-vl-7b' --checkpoint 
 
 # Generate scores for specific splits only
 python binary_classification_vlm_scores.py --model 'qwen2.5-vl-7b' --checkpoint 'chancharikm/qwen2.5-vl-7b-cam-motion' --splits Move_Down Move_Up Pan_Left Pan_Right --output_dir scores
-
-# Generate scores for camera movement splits
-python binary_classification_vlm_scores.py --model 'qwen2.5-vl-7b' --checkpoint 'chancharikm/qwen2.5-vl-7b-cam-motion' --splits Move_Down Move_In Move_Left Move_Out Move_Right Move_Up --output_dir scores
-
-# Generate scores for rotation and zoom splits
-python binary_classification_vlm_scores.py --model 'qwen2.5-vl-7b' --checkpoint 'chancharikm/qwen2.5-vl-7b-cam-motion' --splits Roll_Clockwise Roll_Counterclockwise Tilt_Down Tilt_Up Zoom_In Zoom_Out --output_dir scores
-
-# Generate scores for panning splits
-python binary_classification_vlm_scores.py --model 'qwen2.5-vl-7b' --checkpoint 'chancharikm/qwen2.5-vl-7b-cam-motion' --splits Pan_Left Pan_Right --output_dir scores
-
-# Generate scores for static analysis
-python binary_classification_vlm_scores.py --model 'qwen2.5-vl-7b' --checkpoint 'chancharikm/qwen2.5-vl-7b-cam-motion' --splits Static --output_dir scores
 ```
 
 **Available Binary Classification Splits:**
@@ -55,8 +43,6 @@ python binary_classification_vlm_scores.py --model 'qwen2.5-vl-7b' --checkpoint 
 
 ### Evaluation
 ```bash
-# Auto-discover and evaluate all binary classification score files in scores/ directory
-python binary_classification_evaluation.py --plots --output_dir evaluation_results
 
 # Auto-discover files in a specific directory
 python binary_classification_evaluation.py --score_dir path/to/scores --plots --output_dir evaluation_results
@@ -103,14 +89,9 @@ python binary_classification_evaluation.py scores/vqa_scores_qwen2.5-vl-7b_*_Mov
 # Generate scores for all skills using VQAScore models
 python vqa_and_retrieval_vlm_scores.py --model 'qwen2.5-vl-7b' --checkpoint 'chancharikm/qwen2.5-vl-7b-cam-motion' --data_dir data --combine_tasks --output_dir scores
 
-# Generate scores for specific skill
-python vqa_and_retrieval_vlm_scores.py --model 'qwen2.5-vl-7b' --checkpoint 'chancharikm/qwen2.5-vl-7b-cam-motion' --skill "Motion & Steadiness" --output_dir scores
 
-# Generate scores for confusable motion skill
-python vqa_and_retrieval_vlm_scores.py --model 'qwen2.5-vl-7b' --checkpoint 'chancharikm/qwen2.5-vl-7b-cam-motion' --skill "confusable_motion" --output_dir scores
-
-# Generate with custom question template
-python vqa_and_retrieval_vlm_scores.py --model 'qwen2.5-vl-7b' --checkpoint 'chancharikm/qwen2.5-vl-7b-cam-motion' --question_template "Answer with only Yes or No: {}" --combine_tasks
+# Generate scores for a specific skill
+python vqa_and_retrieval_vlm_scores.py --model 'qwen2.5-vl-7b' --checkpoint 'chancharikm/qwen2.5-vl-7b-cam-motion' --skill "has_motion" --output_dir scores
 ```
 
 **Available VQA/Retrieval Skills:**
@@ -120,20 +101,18 @@ python vqa_and_retrieval_vlm_scores.py --model 'qwen2.5-vl-7b' --checkpoint 'cha
 
 ### Evaluation
 ```bash
-# Auto-discover and evaluate all VQA/retrieval score files for both VQA and retrieval metrics
-python vqa_and_retrieval_evaluation.py --mode both --output_dir evaluation_results
 
-# Auto-discover files in a specific directory
+# Auto-discoverand evaluate all VQA/retrieval score files in a specific directory
 python vqa_and_retrieval_evaluation.py --score_dir path/to/scores --mode both --output_dir evaluation_results
 
 # Evaluate only VQA metrics with auto-discovery
-python vqa_and_retrieval_evaluation.py --mode vqa
+python vqa_and_retrieval_evaluation.py  --score_dir path/to/scores --mode vqa
 
 # Evaluate only retrieval metrics with auto-discovery
-python vqa_and_retrieval_evaluation.py --mode retrieval
+python vqa_and_retrieval_evaluation.py  --score_dir path/to/scores --mode retrieval
 
 # Evaluate specific score files explicitly
-python vqa_and_retrieval_evaluation.py scores/vqa_retrieval_scores_model1_*.json scores/vqa_retrieval_scores_model2_*.json --mode both --output_file comparison.json
+python vqa_and_retrieval_evaluation.py scores/vqa_retrieval_scores_model1_*.json scores/vqa_retrieval_scores_model2_*.json  --score_dir path/to/scores --mode both --output_file comparison.json
 ```
 
 **Auto-Discovery:** When no score files are provided, automatically finds `vqa_retrieval_scores_*.json` files in the specified directory.
