@@ -53,7 +53,7 @@ python binary_classification_evaluation.py scores/vqa_scores_qwen2.5-vl-7b_*_Mov
 
 **Auto-Discovery:** When no score files are provided, automatically finds `vqa_scores_*.json` files in the specified directory.
 
-**Required Output Format for Custom Methods:** (i.e. as long as the output scores of your method are in the following format, the inputs will be compatible with our *evaluation* script)
+**Required Output Format for Custom Methods:** 
 ```json
 {
   "metadata": {
@@ -117,7 +117,7 @@ python vqa_and_retrieval_evaluation.py scores/vqa_retrieval_scores_model1_*.json
 
 **Auto-Discovery:** When no score files are provided, automatically finds `vqa_retrieval_scores_*.json` files in the specified directory.
 
-**Required Output Format for Custom Methods:** (i.e. as long as the output scores of your method are in the following format, the inputs will be compatible with our *evaluation* script)
+**Required Output Format for Custom Methods:** 
 ```json
 {
   "metadata": {
@@ -211,63 +211,17 @@ python caption_evaluation.py captions/*_captions_*.json --detailed_excel --outpu
 
 ---
 
-## Output File Formats
-
-Both evaluation scripts now produce consistent output formats with top-level metrics for easy access:
-
-### Binary Classification Output
-```json
-{
-  "evaluation_timestamp": "2025-01-XX",
-  "overall_average_precision": 0.85,
-  "overall_roc_auc": 0.92,
-  "total_splits": 12,
-  "evaluated_splits": 12,
-  "overall_statistics": {
-    "mean_average_precision": 0.85,
-    "std_average_precision": 0.03,
-    "mean_roc_auc": 0.92,
-    "std_roc_auc": 0.02,
-    "evaluated_splits": 12
-  },
-  "results_by_split": { ... }
-}
-```
-
-### VQA/Retrieval Output
-```json
-{
-  "evaluation_timestamp": "2025-01-XX",
-  "evaluation_mode": "both",
-  "overall_binary_acc": 0.78,
-  "overall_question_acc": 0.82,
-  "overall_retrieval_text": 0.75,
-  "overall_retrieval_image": 0.80,
-  "overall_retrieval_group": 0.68,
-  "skill_based_retrieval_text": 0.77,
-  "skill_based_retrieval_image": 0.83,
-  "skill_based_retrieval_group": 0.71,
-  "total_splits": 5,
-  "evaluated_splits": 5,
-  "overall_statistics": { ... },
-  "results_by_split": { ... }
-}
-```
-
----
-
 ## Using Custom Methods
 
 To evaluate your own method (classical CV, different LMMs, human evaluation, etc.):
 
-1. **Keep the evaluation scripts unchanged** - they work with any method
-2. **Modify only the generation scripts** to output the standardized JSON format shown above
+1. **Modify only the generation script (Script 1)s** to output the standardized JSON formats shown above for each task (i.e. as long as the output scores of your method are in the required format, the inputs will be compatible with our *evaluation* script) 
+2. **Keep the evaluation scripts (Script 2) unchanged** - they work with any method
 3. **Ensure your output includes**:
    - All required fields for each sample (`sample_id`, `error`, etc.)
    - Correct data types (scores as floats, captions as strings, and errors as strings or nulls)
    - The `metadata` section with `model_name`, `method_type`, and optional `checkpoint`
    - Unique identifiers are automatically generated from `model_name`, `checkpoint`, and `split_name`
-
 4. **File naming conventions for auto-discovery**:
    - Binary classification: `vqa_scores_*.json`
    - VQA/Retrieval: `vqa_retrieval_scores_*.json`
