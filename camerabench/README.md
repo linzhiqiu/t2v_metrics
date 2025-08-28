@@ -55,16 +55,17 @@ python binary_classification_vlm_scores.py --model 'qwen2.5-vl-7b' --checkpoint 
 
 ### Evaluation
 ```bash
-# Evaluate all score files with plots (processes whatever splits you generated)
-python binary_classification_evaluation.py scores/*_binary_scores_*.json --plots --output_dir evaluation_results
+# Auto-discover and evaluate all binary classification score files in scores/ directory
+python binary_classification_evaluation.py --plots --output_dir evaluation_results
 
-# Evaluate specific score files
-python binary_classification_evaluation.py scores/vqa_scores_qwen2.5-vl-7b_*_Move_Down_*.json scores/vqa_scores_qwen2.5-vl-7b_*_Move_Up_*.json --output_file movement_results.json
+# Auto-discover files in a specific directory
+python binary_classification_evaluation.py --score_dir path/to/scores --plots --output_dir evaluation_results
 
-# If you only generated scores for certain splits, the evaluation command remains the same
-# It will automatically process only the splits that have score files in the scores folder
-python binary_classification_evaluation.py scores/*.json --plots --output_dir evaluation_results
+# Evaluate specific score files explicitly
+python binary_classification_evaluation.py scores/vqa_scores_qwen2.5-vl-7b_*_Move_Down_*.json scores/vqa_scores_qwen2.5-vl-7b_*_Move_Up_*.json --plots --output_file movement_results.json
 ```
+
+**Auto-Discovery:** When no score files are provided, automatically finds `vqa_scores_*.json` files in the specified directory.
 
 **Required Output Format for Custom Methods:**
 ```json
@@ -72,6 +73,7 @@ python binary_classification_evaluation.py scores/*.json --plots --output_dir ev
   "metadata": {
     "method_type": "Your_Method_Name",
     "model_name": "your_model_name",
+    "checkpoint": "optional_checkpoint_path",
     "split_name": "Move_Down",
     "generation_timestamp": "2025-01-XX"
   },
@@ -118,18 +120,23 @@ python vqa_and_retrieval_vlm_scores.py --model 'qwen2.5-vl-7b' --checkpoint 'cha
 
 ### Evaluation
 ```bash
-# Evaluate both VQA and retrieval metrics (processes whatever skills you generated)
-python vqa_and_retrieval_evaluation.py scores/*_vqa_retrieval_scores_*.json --mode both --output_dir evaluation_results
+# Auto-discover and evaluate all VQA/retrieval score files for both VQA and retrieval metrics
+python vqa_and_retrieval_evaluation.py --mode both --output_dir evaluation_results
 
-# Evaluate only VQA metrics
-python vqa_and_retrieval_evaluation.py scores/*_vqa_retrieval_scores_*.json --mode vqa
+# Auto-discover files in a specific directory
+python vqa_and_retrieval_evaluation.py --score_dir path/to/scores --mode both --output_dir evaluation_results
 
-# Evaluate only retrieval metrics  
-python vqa_and_retrieval_evaluation.py scores/*_vqa_retrieval_scores_*.json --mode retrieval
+# Evaluate only VQA metrics with auto-discovery
+python vqa_and_retrieval_evaluation.py --mode vqa
 
-# Compare specific methods or skills
-python vqa_and_retrieval_evaluation.py scores/model1_*.json scores/model2_*.json --mode both --output_file comparison.json
+# Evaluate only retrieval metrics with auto-discovery
+python vqa_and_retrieval_evaluation.py --mode retrieval
+
+# Evaluate specific score files explicitly
+python vqa_and_retrieval_evaluation.py scores/vqa_retrieval_scores_model1_*.json scores/vqa_retrieval_scores_model2_*.json --mode both --output_file comparison.json
 ```
+
+**Auto-Discovery:** When no score files are provided, automatically finds `vqa_retrieval_scores_*.json` files in the specified directory.
 
 **Required Output Format for Custom Methods:**
 ```json
@@ -137,8 +144,10 @@ python vqa_and_retrieval_evaluation.py scores/model1_*.json scores/model2_*.json
   "metadata": {
     "method_type": "Your_Method_Name", 
     "model_name": "your_model_name",
+    "checkpoint": "optional_checkpoint_path",
     "skill_name": "confusable_motion",
     "task_name": "backward_camera_only_vs_backward_ground_only",
+    "split_name": "confusable_motion",
     "generation_timestamp": "2025-01-XX"
   },
   "scores": [
@@ -201,6 +210,7 @@ python caption_evaluation.py captions/*_captions_*.json --detailed_excel --outpu
   "metadata": {
     "method_type": "Your_Caption_Method",
     "model_name": "your_model_name",
+    "checkpoint": "optional_checkpoint_path",
     "generation_timestamp": "2025-01-XX"
   },
   "captions": [
@@ -222,6 +232,51 @@ python caption_evaluation.py captions/*_captions_*.json --detailed_excel --outpu
 
 ---
 
+## Output File Formats
+
+Both evaluation scripts now produce consistent output formats with top-level metrics for easy access:
+
+### Binary Classification Output
+```json
+{
+  "evaluation_timestamp": "2025-01-XX",
+  "overall_average_precision": 0.85,
+  "overall_roc_auc": 0.92,
+  "total_splits": 12,
+  "evaluated_splits": 12,
+  "overall_statistics": {
+    "mean_average_precision": 0.85,
+    "std_average_precision": 0.03,
+    "mean_roc_auc": 0.92,
+    "std_roc_auc": 0.02,
+    "evaluated_splits": 12
+  },
+  "results_by_split": { ... }
+}
+```
+
+### VQA/Retrieval Output
+```json
+{
+  "evaluation_timestamp": "2025-01-XX",
+  "evaluation_mode": "both",
+  "overall_binary_acc": 0.78,
+  "overall_question_acc": 0.82,
+  "overall_retrieval_text": 0.75,
+  "overall_retrieval_image": 0.80,
+  "overall_retrieval_group": 0.68,
+  "skill_based_retrieval_text": 0.77,
+  "skill_based_retrieval_image": 0.83,
+  "skill_based_retrieval_group": 0.71,
+  "total_splits": 5,
+  "evaluated_splits": 5,
+  "overall_statistics": { ... },
+  "results_by_split": { ... }
+}
+```
+
+---
+
 ## Using Custom Methods
 
 To evaluate your own method (classical CV, different LMMs, human evaluation, etc.):
@@ -231,6 +286,11 @@ To evaluate your own method (classical CV, different LMMs, human evaluation, etc
 3. **Ensure your output includes**:
    - All required fields for each sample (`sample_id`, `error`, etc.)
    - Correct data types (scores as floats, captions as strings, and errors as strings or nulls)
-   - The `metadata` section, which is there to help with organizing outputs
+   - The `metadata` section with `model_name`, `method_type`, and optional `checkpoint`
+   - Unique identifiers are automatically generated from `model_name`, `checkpoint`, and `split_name`
 
-The evaluation scripts will automatically compute all metrics regardless of how the scores/captions were generated.
+4. **File naming conventions for auto-discovery**:
+   - Binary classification: `vqa_scores_*.json`
+   - VQA/Retrieval: `vqa_retrieval_scores_*.json`
+
+The evaluation scripts will automatically compute all metrics and generate timestamped output files with model and file counts included in the filename, regardless of how the scores/captions were generated.

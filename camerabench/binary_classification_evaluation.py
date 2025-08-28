@@ -215,12 +215,8 @@ def find_score_files(score_dir):
     if not score_dir.exists():
         return []
     
-    # Look for binary classification score files (typically named vqa_scores_*.json or *_binary_scores_*.json)
-    patterns = ["vqa_scores_*.json", "*_binary_scores_*.json", "*binary_classification*.json"]
-    score_files = []
-    
-    for pattern in patterns:
-        score_files.extend(score_dir.glob(pattern))
+    # Look for binary classification score files with the simplified pattern
+    score_files = list(score_dir.glob("vqa_scores_*.json"))
     
     # Remove duplicates and sort
     score_files = sorted(list(set(score_files)))
@@ -251,7 +247,7 @@ def main():
         score_files = find_score_files(args.score_dir)
         if not score_files:
             print(f"No binary classification score files found in {args.score_dir}")
-            print("Looking for files matching: vqa_scores_*.json, *_binary_scores_*.json, *binary_classification*.json")
+            print("Looking for files matching: vqa_scores_*.json")
             return
         print(f"Auto-discovered {len(score_files)} score files in {args.score_dir}")
         for f in score_files:

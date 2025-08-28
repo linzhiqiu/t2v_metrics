@@ -374,28 +374,11 @@ def find_score_files(score_dir):
     if not score_dir.exists():
         return []
     
-    # Look for VQA/retrieval score files, explicitly exclude binary classification files
-    patterns = ["*vqa_scores*.json", "*retrieval_scores*.json", "*_vqa_*.json", "*_retrieval_*.json"]
-    exclude_patterns = ["*binary_scores*.json", "*binary_classification*.json"]
-    
-    score_files = []
-    
-    for pattern in patterns:
-        score_files.extend(score_dir.glob(pattern))
-    
-    # Remove binary classification files that might have matched
-    filtered_files = []
-    for file_path in score_files:
-        is_excluded = False
-        for exclude_pattern in exclude_patterns:
-            if file_path.match(exclude_pattern):
-                is_excluded = True
-                break
-        if not is_excluded:
-            filtered_files.append(file_path)
+    # Look for VQA/retrieval score files with the simplified pattern
+    score_files = list(score_dir.glob("vqa_retrieval_scores_*.json"))
     
     # Remove duplicates and sort
-    score_files = sorted(list(set(filtered_files)))
+    score_files = sorted(list(set(score_files)))
     return score_files
 
 def main():
@@ -423,7 +406,7 @@ def main():
         score_files = find_score_files(args.score_dir)
         if not score_files:
             print(f"No VQA/retrieval score files found in {args.score_dir}")
-            print("Looking for files matching: *vqa_scores*.json, *retrieval_scores*.json, *_vqa_*.json, *_retrieval_*.json")
+            print("Looking for files matching: vqa_retrieval_scores_*.json")
             return
         print(f"Auto-discovered {len(score_files)} score files in {args.score_dir}")
         for f in score_files:
