@@ -67,7 +67,7 @@ python binary_classification_evaluation.py scores/vqa_scores_qwen2.5-vl-7b_*_Mov
 
 **Auto-Discovery:** When no score files are provided, automatically finds `vqa_scores_*.json` files in the specified directory.
 
-**Required Output Format for Custom Methods:**
+**Required Output Format for Custom Methods:** (i.e. as long as the output scores of your method are in the following format, the inputs will be compatible with our *evaluation* script)
 ```json
 {
   "metadata": {
@@ -138,7 +138,7 @@ python vqa_and_retrieval_evaluation.py scores/vqa_retrieval_scores_model1_*.json
 
 **Auto-Discovery:** When no score files are provided, automatically finds `vqa_retrieval_scores_*.json` files in the specified directory.
 
-**Required Output Format for Custom Methods:**
+**Required Output Format for Custom Methods:** (i.e. as long as the output scores of your method are in the following format, the inputs will be compatible with our *evaluation* script)
 ```json
 {
   "metadata": {
