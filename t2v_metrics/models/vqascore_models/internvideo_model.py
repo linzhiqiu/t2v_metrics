@@ -865,8 +865,6 @@ class InternVideo2Model(VQAScoreModel):
     ):
         
         text_embeds = self.model.pad_text_embeds(input_ids=input_ids, image=image, video=video, image_idx=image_idx, video_idx=video_idx)
-        print(f'Text Embeds Shape {text_embeds.shape}')
-        print(f'Text Embeds {text_embeds}')
         # outputs = self.lm.generate(
         #     inputs_embeds=text_embeds,
         #     attention_mask=attention_mask,
