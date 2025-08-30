@@ -1,33 +1,58 @@
 #!/usr/bin/env python3
-"""
-Method-agnostic caption evaluator.
-Takes standardized caption files and computes comprehensive evaluation metrics 
-(SPICE, CIDEr, BLEU-2, ROUGE-L, METEOR, GPT-4o Judge).
-This script works with any method that outputs captions in the expected format.
-"""
-
 import json
 import os
 import argparse
 import numpy as np
 from collections import Counter
 import string
-from tqdm import tqdm
-import pandas as pd
+from datetime import datetime
 import openai
 import time
-from datetime import datetime
-from pathlib import Path
+import glob
+from typing import List, Dict, Any, Tuple
 from nltk.translate.bleu_score import sentence_bleu, SmoothingFunction
 from rouge_score import rouge_scorer
 import nltk
 
-def load_caption_file(caption_file):
-    """Load captions from a standardized caption file"""
-    with open(caption_file, 'r') as f:
-        data = json.load(f)
+
+def load_json_file(file_path: str) -> Dict[str, Any]:
+    """Load data from a JSON file."""
+    try:
+        with open(file_path, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+        return data
+    except Exception as e:
+        print(f"Error loading {file_path}: {e}")
+        return {}
+
+
+def find_caption_files(score_dir: str) -> List[str]:
+    """
+    Auto-discover caption result files in the specified directory.
     
-    return data
+    Args:
+        score_dir: Directory to search for caption files
+        
+    Returns:
+        List of caption result file paths
+    """
+    if not os.path.exists(score_dir):
+        print(f"Warning: Directory {score_dir} does not exist")
+        return []
+    
+    # Look for files with pattern: caption_results_*.json
+    pattern = os.path.join(score_dir, "caption_results_*.json")
+    files = glob.glob(pattern)
+    
+    if files:
+        print(f"Auto-discovered {len(files)} caption result files:")
+        for f in sorted(files):
+            print(f"  {os.path.basename(f)}")
+    else:
+        print(f"No caption result files found with pattern: caption_results_*.json")
+    
+    return sorted(files)
+
 
 def preprocess_text(text):
     """Preprocess text for evaluation"""
@@ -42,6 +67,7 @@ def preprocess_text(text):
     # Split into words
     words = text.split()
     return words
+
 
 def calculate_spice_score(reference, candidate):
     """Simplified SPICE calculation"""
@@ -67,6 +93,7 @@ def calculate_spice_score(reference, candidate):
     f1 = 2 * precision * recall / (precision + recall)
     
     return f1
+
 
 def calculate_cider_score(reference, candidate):
     """Simplified CIDEr calculation"""
@@ -98,6 +125,7 @@ def calculate_cider_score(reference, candidate):
     similarity = dot_product / (ref_magnitude * cand_magnitude)
     
     return similarity
+
 
 def calculate_bleu2_score(reference, candidate):
     """
@@ -133,6 +161,7 @@ def calculate_bleu2_score(reference, candidate):
         print(f"Error calculating BLEU-2: {e}")
         return 0.0
 
+
 def calculate_rouge_l_score(reference, candidate):
     """
     Calculate ROUGE-L score (longest common subsequence)
@@ -159,6 +188,7 @@ def calculate_rouge_l_score(reference, candidate):
     except Exception as e:
         print(f"Error calculating ROUGE-L: {e}")
         return 0.0
+
 
 def calculate_meteor_score(reference, candidate):
     """
@@ -221,6 +251,7 @@ def calculate_meteor_score(reference, candidate):
         print(f"Error calculating METEOR: {e}")
         return 0.0
 
+
 def get_openai_api_key(provided_key=None):
     """
     Get OpenAI API key from argument or environment variable.
@@ -240,6 +271,7 @@ def get_openai_api_key(provided_key=None):
         return env_key
     
     return None
+
 
 def calculate_generative_match(reference, candidate, api_key=None, retries=3, delay=2):
     """
@@ -262,8 +294,7 @@ def calculate_generative_match(reference, candidate, api_key=None, retries=3, de
     if api_key:
         openai.api_key = api_key
     else:
-        print("Warning: No OpenAI API key provided. Returning placeholder score.")
-        return 0.5  # Return placeholder score
+        return None  # Return None if no API key
     
     prompt = f"Reference caption: '{reference}'\nCandidate caption: '{candidate}'\n\nDoes the candidate caption match the reference caption? Answer Yes or No."
     
@@ -310,28 +341,36 @@ def calculate_generative_match(reference, candidate, api_key=None, retries=3, de
     
     return 0.5  # Should never reach here but just in case
 
-def evaluate_single_file(caption_file, api_key=None, use_gpt_judge=True):
-    """Evaluate a single caption file"""
-    print(f"\nEvaluating: {caption_file}")
+
+def evaluate_caption_file(file_path: str, api_key: str = None) -> Dict[str, Any]:
+    """
+    Evaluate captions from a single result file.
     
-    # Load caption data
-    caption_data = load_caption_file(caption_file)
+    Args:
+        file_path: Path to the caption result file
+        api_key: OpenAI API key for GPT-4o judge
+        
+    Returns:
+        Dictionary with evaluation metrics
+    """
+    # Load the caption results
+    data = load_json_file(file_path)
     
-    # Extract metadata
-    metadata = caption_data.get("metadata", {})
-    method_name = metadata.get("method_type", "Unknown_Method")
-    model_name = metadata.get("model_name", "Unknown_Model")
-    model_spec = metadata.get("model_spec", model_name)
+    if not data or 'captions' not in data:
+        print(f"Error: Invalid or missing caption data in {file_path}")
+        return {}
     
-    print(f"Method: {method_name}")
-    print(f"Model: {model_spec}")
-    print(f"Total samples in file: {caption_data['total_samples']}")
-    print(f"Successful samples: {caption_data['successful_samples']}")
-    print(f"Failed samples: {caption_data['failed_samples']}")
+    captions = data['captions']
+    metadata = data.get('metadata', {})
     
-    # Extract captions and references
-    captions_list = caption_data["captions"]
+    model_name = metadata.get('model_name', 'unknown')
+    checkpoint = metadata.get('checkpoint', '')
     
+    print(f"Evaluating {len(captions)} captions from model: {model_name}")
+    if checkpoint:
+        print(f"  Checkpoint: {checkpoint}")
+    
+    # Initialize score lists
     spice_scores = []
     cider_scores = []
     bleu2_scores = []
@@ -340,18 +379,19 @@ def evaluate_single_file(caption_file, api_key=None, use_gpt_judge=True):
     gen_match_scores = []
     
     # Process each caption
-    for item in tqdm(captions_list, desc="Evaluating captions"):
-        if item["error"] is not None:
-            continue  # Skip failed samples
-            
-        reference = item.get("reference", "")
-        candidate = item.get("caption", "")
+    valid_samples = 0
+    for item in captions:
+        reference = item.get("reference_answer", "")
+        candidate = item.get("generated_caption", "")
+        error = item.get("error")
         
-        # Skip items with missing data
-        if not reference or not candidate:
+        # Skip items with errors or missing data
+        if error or not reference or not candidate:
             continue
             
-        # Calculate all metrics
+        valid_samples += 1
+        
+        # Calculate metrics
         spice = calculate_spice_score(reference, candidate)
         spice_scores.append(spice)
         
@@ -367,114 +407,45 @@ def evaluate_single_file(caption_file, api_key=None, use_gpt_judge=True):
         meteor = calculate_meteor_score(reference, candidate)
         meteor_scores.append(meteor)
         
-        # Calculate generative match score
-        if use_gpt_judge and api_key:
+        # Calculate generative match if API key provided
+        if api_key:
             gen_match = calculate_generative_match(reference, candidate, api_key)
-            gen_match_scores.append(gen_match)
+            if gen_match is not None:
+                gen_match_scores.append(gen_match)
     
-    # Calculate metrics
-    metrics = {
-        "model_name": model_spec,
+    # Calculate averages
+    results = {
+        "model": model_name,
+        "checkpoint": checkpoint,
+        "file_path": file_path,
+        "total_samples": len(captions),
+        "valid_samples": valid_samples,
         "spice": float(np.mean(spice_scores)) if spice_scores else 0.0,
         "cider": float(np.mean(cider_scores)) if cider_scores else 0.0,
         "bleu2": float(np.mean(bleu2_scores)) if bleu2_scores else 0.0,
         "rouge_l": float(np.mean(rouge_l_scores)) if rouge_l_scores else 0.0,
         "meteor": float(np.mean(meteor_scores)) if meteor_scores else 0.0,
-        "gen_match": float(np.mean(gen_match_scores)) if gen_match_scores else None,
-        "evaluated_samples": len(spice_scores),
-        "metadata": metadata
+        "gen_match": float(np.mean(gen_match_scores)) if gen_match_scores else None
     }
     
-    # Print results
-    print(f"Evaluation Results:")
-    print(f"  SPICE: {metrics['spice']:.4f}")
-    print(f"  CIDEr: {metrics['cider']:.4f}")
-    print(f"  BLEU-2: {metrics['bleu2']:.4f}")
-    print(f"  ROUGE-L: {metrics['rouge_l']:.4f}")
-    print(f"  METEOR: {metrics['meteor']:.4f}")
-    if metrics['gen_match'] is not None:
-        print(f"  GPT-4o Judge Score: {metrics['gen_match']:.4f}")
-    print(f"  Evaluated samples: {metrics['evaluated_samples']}")
-    
-    return model_spec, metrics
+    return results
 
-def save_evaluation_results(results, output_file):
-    """Save evaluation results to JSON file"""
-    summary = {
-        "evaluation_timestamp": datetime.now().isoformat(),
-        "total_models": len(results),
-        "results_by_model": results
-    }
-    
-    # Compute overall statistics if multiple models
-    if len(results) > 1:
-        valid_results = [r for r in results.values() if r is not None]
-        if valid_results:
-            metrics_names = ['spice', 'cider', 'bleu2', 'rouge_l', 'meteor']
-            overall_stats = {}
-            
-            for metric in metrics_names:
-                values = [r[metric] for r in valid_results]
-                overall_stats[f"mean_{metric}"] = float(np.mean(values))
-                overall_stats[f"std_{metric}"] = float(np.std(values))
-            
-            # Handle gen_match separately since it can be None
-            gen_match_scores = [r["gen_match"] for r in valid_results if r["gen_match"] is not None]
-            if gen_match_scores:
-                overall_stats["mean_gen_match"] = float(np.mean(gen_match_scores))
-                overall_stats["std_gen_match"] = float(np.std(gen_match_scores))
-            
-            summary["overall_statistics"] = overall_stats
-    
-    with open(output_file, 'w') as f:
-        json.dump(summary, f, indent=2)
-    
-    print(f"\nEvaluation results saved to: {output_file}")
-
-def export_to_excel(results, excel_file, detailed_results=None):
-    """Export results to Excel file"""
-    try:
-        # Convert results to DataFrame
-        results_list = list(results.values())
-        results_df = pd.DataFrame(results_list)
-        
-        # Sort by best performing metric
-        if 'gen_match' in results_df.columns and results_df['gen_match'].notna().any():
-            sort_key = 'gen_match'
-        else:
-            sort_key = 'cider'
-        
-        sorted_df = results_df.sort_values(by=sort_key, ascending=False, na_last=True)
-        
-        # Export to Excel
-        with pd.ExcelWriter(excel_file) as writer:
-            results_df.to_excel(writer, sheet_name='All Results', index=False)
-            sorted_df.to_excel(writer, sheet_name='Model Ranking', index=False)
-            
-            # Add detailed results if provided
-            if detailed_results is not None:
-                detailed_df = pd.DataFrame(detailed_results)
-                detailed_df = detailed_df.sort_values(by=["model", "video"])
-                detailed_df.to_excel(writer, sheet_name='Detailed Results', index=False)
-        
-        print(f"Exported results to Excel file: {excel_file}")
-    except ImportError:
-        print("Warning: pandas is required for Excel export. Install with 'pip install pandas openpyxl'.")
 
 def main():
-    parser = argparse.ArgumentParser(description='Method-agnostic caption evaluator')
-    parser.add_argument('caption_files', nargs='+', 
-                      help='Caption files to evaluate (JSON format from caption generation step)')
-    parser.add_argument('--output_dir', type=str, default='evaluation_results',
-                      help='Directory to save evaluation results')
-    parser.add_argument('--output_file', type=str, default=None,
-                      help='Output file name for results (auto-generated if not provided)')
-    parser.add_argument('--excel_file', type=str, default=None,
-                      help='Excel file name for results (auto-generated if not provided)')
-    parser.add_argument('--api_key', type=str, help='OpenAI API key for GPT-4o judge')
-    parser.add_argument('--no_gpt', action='store_true', help='Skip GPT-4o judge evaluation')
-    parser.add_argument('--detailed_excel', action='store_true', 
-                      help='Include detailed per-sample results in Excel (for files with ≤1000 samples)')
+    parser = argparse.ArgumentParser(description="Evaluate caption generation results")
+    
+    # Input arguments
+    parser.add_argument("files", nargs="*", help="Specific caption result files to evaluate")
+    parser.add_argument("--score_dir", type=str, help="Directory to auto-discover caption result files")
+    
+    # Output arguments
+    parser.add_argument("--output_file", type=str, help="Output JSON file path")
+    parser.add_argument("--output_dir", type=str, default="evaluation_results", 
+                        help="Output directory for auto-generated filenames")
+    
+    # GPT-4o judge arguments
+    parser.add_argument("--api_key", type=str, help="OpenAI API key for GPT-4o judge")
+    parser.add_argument("--no_gpt", action="store_true", help="Skip GPT-4o judge evaluation")
     
     args = parser.parse_args()
     
@@ -485,49 +456,92 @@ def main():
         print("Downloading required NLTK data...")
         nltk.download('punkt', quiet=True)
     
-    # Create output directory
-    output_dir = Path(args.output_dir)
-    output_dir.mkdir(exist_ok=True)
+    # Determine which files to evaluate
+    files_to_evaluate = []
     
-    print(f"{'='*80}")
-    print("METHOD-AGNOSTIC CAPTION EVALUATION")
-    print(f"{'='*80}")
-    print(f"Caption files to evaluate: {len(args.caption_files)}")
-    
-    # Determine if we should use GPT judge
-    use_gpt_judge = not args.no_gpt
-    api_key = get_openai_api_key(args.api_key) if use_gpt_judge else None
-    
-    if use_gpt_judge and not api_key:
-        print("Warning: No OpenAI API key provided. GPT-4o judge evaluation will be skipped.")
-        use_gpt_judge = False
-    elif use_gpt_judge:
-        print(f"Using GPT-4o judge evaluation")
+    if args.files:
+        # Use explicitly provided files
+        files_to_evaluate = args.files
+        print(f"Evaluating {len(files_to_evaluate)} explicitly provided files")
+    elif args.score_dir:
+        # Auto-discover files
+        files_to_evaluate = find_caption_files(args.score_dir)
+        if not files_to_evaluate:
+            print("No caption result files found for evaluation")
+            return
     else:
-        print("GPT-4o judge evaluation disabled")
+        print("Error: Please provide either specific files or --score_dir for auto-discovery")
+        return
+    
+    # Get API key
+    api_key = None
+    if not args.no_gpt:
+        api_key = get_openai_api_key(args.api_key)
+        if api_key:
+            print("Using OpenAI API key for GPT-4o judge evaluation")
+        else:
+            print("Warning: No OpenAI API key found. GPT-4o judge evaluation will be skipped.")
+    else:
+        print("GPT-4o judge evaluation disabled via --no_gpt flag")
     
     # Evaluate each file
-    results = {}
-    detailed_results = []
+    all_results = []
     
-    for caption_file in args.caption_files:
-        if not Path(caption_file).exists():
-            print(f"Warning: Caption file not found: {caption_file}")
-            continue
+    for file_path in files_to_evaluate:
+        print(f"\n{'='*50}")
+        print(f"Evaluating: {os.path.basename(file_path)}")
+        print(f"{'='*50}")
         
-        model_spec, metrics = evaluate_single_file(caption_file, api_key, use_gpt_judge)
-        
-        if metrics:
-            results[model_spec] = metrics
-            
-            # Collect detailed results if requested
-            if args.detailed_excel:
-                caption_data = load_caption_file(caption_file)
-                if caption_data['total_samples'] <= 1000:
-                    for item in caption_data["captions"]:
-                        if item["error"] is None and item.get("reference") and item.get("caption"):
-                            detailed_entry = {
-                                "video": item["video"],
-                                "question": item["question"],
-                                "model": model_spec,
-                                "reference": item["reference"],
+        results = evaluate_caption_file(file_path, api_key)
+        if results:
+            all_results.append(results)
+        else:
+            print(f"Skipping {file_path} due to evaluation errors")
+    
+    if not all_results:
+        print("No results to save. Exiting.")
+        return
+    
+    # Print summary results
+    print(f"\n{'='*60}")
+    print("EVALUATION RESULTS SUMMARY")
+    print(f"{'='*60}")
+    
+    for result in all_results:
+        print(f"\nModel: {result['model']}")
+        if result['checkpoint']:
+            print(f"  Checkpoint: {result['checkpoint']}")
+        print(f"  Valid samples: {result['valid_samples']}/{result['total_samples']}")
+        print(f"  SPICE: {result['spice']:.4f}")
+        print(f"  CIDEr: {result['cider']:.4f}")
+        print(f"  BLEU-2: {result['bleu2']:.4f}")
+        print(f"  ROUGE-L: {result['rouge_l']:.4f}")
+        print(f"  METEOR: {result['meteor']:.4f}")
+        if result['gen_match'] is not None:
+            print(f"  GPT-4o Judge: {result['gen_match']:.4f}")
+    
+    # Determine output file path
+    if args.output_file:
+        output_file = args.output_file
+    else:
+        # Auto-generate filename
+        os.makedirs(args.output_dir, exist_ok=True)
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        model_count = len(all_results)
+        output_file = os.path.join(args.output_dir, f"caption_evaluation_{model_count}models_{timestamp}.json")
+    
+    # Save results to JSON
+    with open(output_file, 'w', encoding='utf-8') as f:
+        json.dump({
+            "evaluation_timestamp": datetime.now().isoformat(),
+            "evaluated_files": len(files_to_evaluate),
+            "total_models": len(all_results),
+            "gpt_judge_enabled": api_key is not None and not args.no_gpt,
+            "results": all_results
+        }, f, indent=2, ensure_ascii=False)
+    
+    print(f"\nSaved evaluation results to: {output_file}")
+
+
+if __name__ == "__main__":
+    main()

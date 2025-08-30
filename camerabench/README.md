@@ -12,6 +12,14 @@ Compute metrics from the standardized files using evaluation scripts that work w
 
 To use another method (e.g., SfMs), simply implement your own Script 1 in the standardized format—Script 2 remains unchanged.
 
+## Data Download
+
+Download the videos from the following HuggingFace [repo](https://huggingface.co/datasets/chancharikm/cambench_train_videos) into the directory `data/videos`. You can simply use our script:
+
+```python
+python data_download.py
+```
+
 ## 1. Binary Classification Evaluation
 
 Below, we show how to run evaluation for the 7B Qwen-2.5-VL model reported in our paper.
@@ -147,57 +155,66 @@ python vqa_and_retrieval_evaluation.py scores/vqa_retrieval_scores_model1_*.json
 
 ---
 
-## 3. Captioning Evaluation
+## 3. Caption Generation and Evaluation
 
 ### Caption Generation
 ```bash
-# Generate captions using VLM models
-python caption_generation.py --models 'qwen2.5-vl-7b:chancharikm/qwen2.5-vl-7b-cam-motion' 'gpt-4o' --input data/caption_data.json --output_dir captions --sample_size 100
+# Generate captions using VQA models for all samples
+python caption_generation_vlm_scores.py --model 'qwen2.5-vl-7b' --checkpoint 'chancharikm/qwen2.5-vl-7b-cam-motion' --data_dir data --output_dir scores/
 
-# Generate captions for single model (backwards compatibility)
-python caption_generation.py --model 'qwen2.5-vl-7b' --checkpoint 'chancharikm/qwen2.5-vl-7b-cam-motion' --input data/caption_data.json --output_dir captions --sample_size 100
+# Generate captions for a limited number of samples
+python caption_generation_vlm_scores.py --model 'qwen2.5-vl-7b' --checkpoint 'chancharikm/qwen2.5-vl-7b-cam-motion' --data_dir data --sample_size 10 --output_dir scores/
 ```
 
 ### Evaluation
 ```bash
-# Evaluate all caption files with GPT-4o judge
-python caption_evaluation.py captions/*_captions_*.json --api_key YOUR_OPENAI_API_KEY --output_dir evaluation_results
+# Auto-discover and evaluate all caption files in a specific directory
+python caption_evaluation.py --score_dir scores/ --output_dir evaluation_results
 
-# Evaluate without GPT-4o judge (faster, but fewer metrics)
-python caption_evaluation.py captions/*_captions_*.json --no_gpt --output_dir evaluation_results
+# Evaluate with GPT-4o judge (requires OpenAI API key)
+python caption_evaluation.py --score_dir scores/ --api_key YOUR_OPENAI_API_KEY --output_dir evaluation_results
 
-# Generate detailed Excel report
-python caption_evaluation.py captions/*_captions_*.json --detailed_excel --output_dir evaluation_results
+# Skip GPT-4o judge evaluation
+python caption_evaluation.py --score_dir scores/ --no_gpt --output_dir evaluation_results
+
+# Evaluate specific caption files explicitly
+python caption_evaluation.py scores/caption_results_qwen2.5-vl-7b_*.json --output_file caption_comparison.json
+
+
 ```
 
-**Required Output Format for Custom Methods:**
+**Auto-Discovery:** When no caption files are provided, automatically finds `caption_results_*.json` files in the specified directory.
+
+**Required Output Format for Custom Methods:** 
 ```json
 {
   "metadata": {
-    "method_type": "Your_Caption_Method",
-    "model_name": "your_model_name",
+    "method_type": "Your_Method_Name",
+    "model_name": "your_model_name", 
     "checkpoint": "optional_checkpoint_path",
-    "generation_timestamp": "2025-01-XX"
+    "generation_timestamp": "2025-01-XX",
+    "total_samples": 1000,
+    "successful_samples": 995,
+    "failed_samples": 5
   },
   "captions": [
     {
       "sample_id": "0",
-      "video": "path/to/video.mp4",
+      "video_path": "path/to/video.mp4",
       "question": "Describe the camera motion in this video.",
-      "method": "your_method_identifier",
-      "caption": "The camera pans smoothly from left to right",
-      "reference": "Smooth left-to-right panning motion",
-      "error": null
+      "reference_answer": "The camera pans left while moving forward",
+      "method": "your_method_identifier", 
+      "generated_caption": "The camera is panning to the left and moving forward smoothly",
+      "error": null 
     }
   ],
-  "total_samples": 100,
-  "successful_samples": 98,
-  "failed_samples": 2
+  "total_samples": 1000,
+  "successful_samples": 995,
+  "failed_samples": 5
 }
 ```
 
 ---
-
 ## Using Custom Methods
 
 To evaluate your own method (classical CV, different LMMs, human evaluation, etc.):
@@ -206,7 +223,7 @@ To evaluate your own method (classical CV, different LMMs, human evaluation, etc
 2. **Keep the evaluation scripts (Script 2) unchanged** - they work with any method
 3. **Ensure your output includes**:
    - All required fields for each sample (`sample_id`, `error`, etc.)
-   - Correct data types (scores as floats, captions as strings, and errors as strings or nulls)
+   - Correct data types (scores as floats, captions as strings, and caught exceptions/errors as strings or nulls)
    - The `metadata` section with `model_name`, `method_type`, and optional `checkpoint`
    - Unique identifiers are automatically generated from `model_name`, `checkpoint`, and `split_name`
 4. **File naming conventions for auto-discovery**:

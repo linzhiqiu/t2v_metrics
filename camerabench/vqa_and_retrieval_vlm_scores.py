@@ -5,6 +5,7 @@ This script is specific to VQAScore/LMM evaluation and outputs scores in a stand
 """
 
 import json
+import os
 import argparse
 from pathlib import Path
 import numpy as np
@@ -50,7 +51,7 @@ def load_data_by_skill(data_dir, specific_skill=None):
     
     return skill_data
 
-def generate_vqa_retrieval_scores(samples, model, question_template="{}", method_name=""):
+def generate_vqa_retrieval_scores(samples, model, video_base_path, question_template="{}", method_name=""):
     """Generate VQA and retrieval scores for samples"""
     results = []
     
@@ -68,7 +69,6 @@ def generate_vqa_retrieval_scores(samples, model, question_template="{}", method
         
         # Create result entry with metadata
         result_entry = {
-            "sample_id": sample.get('sample_id', str(i)),
             "pos_video": pos_video,
             "neg_video": neg_video,
             "pos_question": pos_question,
@@ -79,22 +79,57 @@ def generate_vqa_retrieval_scores(samples, model, question_template="{}", method
             "error": None
         }
         
+        # Construct full video paths
+        full_pos_video_path = os.path.join(video_base_path, pos_video)
+        full_neg_video_path = os.path.join(video_base_path, neg_video)
+        
+        # Check if video files exist
+        if not os.path.exists(full_pos_video_path):
+            print(f"Warning: Video not found: {full_pos_video_path}")
+            result_entry["error"] = f"Video file not found: {full_pos_video_path}"
+            # Default scores for missing files
+            default_scores = {
+                "pos_text_pos_image": 0.0,
+                "pos_text_neg_image": 0.0,
+                "neg_text_pos_image": 0.0,
+                "neg_text_neg_image": 0.0
+            }
+            result_entry["yes_scores"] = default_scores.copy()
+            result_entry["no_scores"] = default_scores.copy()
+            results.append(result_entry)
+            continue
+        
+        if not os.path.exists(full_neg_video_path):
+            print(f"Warning: Video not found: {full_neg_video_path}")
+            result_entry["error"] = f"Video file not found: {full_neg_video_path}"
+            # Default scores for missing files
+            default_scores = {
+                "pos_text_pos_image": 0.0,
+                "pos_text_neg_image": 0.0,
+                "neg_text_pos_image": 0.0,
+                "neg_text_neg_image": 0.0
+            }
+            result_entry["yes_scores"] = default_scores.copy()
+            result_entry["no_scores"] = default_scores.copy()
+            results.append(result_entry)
+            continue
+        
         try:
             # Use question_template and answer_template like original scripts
             yes_kwargs = {"question_template": question_template, "answer_template": "Yes"}
             no_kwargs = {"question_template": question_template, "answer_template": "No"}
             
             # Compute scores for all 4 combinations with "Yes" answer
-            yes_pos_text_pos_image = model(images=[pos_video], texts=[pos_question], **yes_kwargs)[0].detach().cpu().item()
-            yes_pos_text_neg_image = model(images=[neg_video], texts=[pos_question], **yes_kwargs)[0].detach().cpu().item()
-            yes_neg_text_pos_image = model(images=[pos_video], texts=[neg_question], **yes_kwargs)[0].detach().cpu().item()
-            yes_neg_text_neg_image = model(images=[neg_video], texts=[neg_question], **yes_kwargs)[0].detach().cpu().item()
+            yes_pos_text_pos_image = model(images=[full_pos_video_path], texts=[pos_question], **yes_kwargs)[0].detach().cpu().item()
+            yes_pos_text_neg_image = model(images=[full_neg_video_path], texts=[pos_question], **yes_kwargs)[0].detach().cpu().item()
+            yes_neg_text_pos_image = model(images=[full_pos_video_path], texts=[neg_question], **yes_kwargs)[0].detach().cpu().item()
+            yes_neg_text_neg_image = model(images=[full_neg_video_path], texts=[neg_question], **yes_kwargs)[0].detach().cpu().item()
             
             # Compute scores for all 4 combinations with "No" answer
-            no_pos_text_pos_image = model(images=[pos_video], texts=[pos_question], **no_kwargs)[0].detach().cpu().item()
-            no_pos_text_neg_image = model(images=[neg_video], texts=[pos_question], **no_kwargs)[0].detach().cpu().item()
-            no_neg_text_pos_image = model(images=[pos_video], texts=[neg_question], **no_kwargs)[0].detach().cpu().item()
-            no_neg_text_neg_image = model(images=[neg_video], texts=[neg_question], **no_kwargs)[0].detach().cpu().item()
+            no_pos_text_pos_image = model(images=[full_pos_video_path], texts=[pos_question], **no_kwargs)[0].detach().cpu().item()
+            no_pos_text_neg_image = model(images=[full_neg_video_path], texts=[pos_question], **no_kwargs)[0].detach().cpu().item()
+            no_neg_text_pos_image = model(images=[full_pos_video_path], texts=[neg_question], **no_kwargs)[0].detach().cpu().item()
+            no_neg_text_neg_image = model(images=[full_neg_video_path], texts=[neg_question], **no_kwargs)[0].detach().cpu().item()
             
             # Store scores in structured format
             result_entry["yes_scores"] = {
@@ -180,6 +215,8 @@ def main():
                       help='Checkpoint name for qwen2.5-vl models (e.g., chancharikm/qwen2.5-vl-7b-cam-motion)')
     parser.add_argument('--data_dir', type=str, default='data',
                       help='Directory containing exported data')
+    parser.add_argument('--video_dir', type=str, default='data/videos',
+                      help='Base directory containing video files')
     parser.add_argument('--skill', type=str, default=None,
                       help='Specific skill to evaluate (e.g., "Motion & Steadiness")')
     parser.add_argument('--question_template', type=str, 
@@ -240,7 +277,7 @@ def main():
             print(f"Total samples for skill '{skill_name}': {len(all_samples)}")
             
             # Generate scores for combined tasks
-            results = generate_vqa_retrieval_scores(all_samples, model, args.question_template, method_name)
+            results = generate_vqa_retrieval_scores(all_samples, model, args.video_dir, args.question_template, method_name)
             
             # Create metadata
             metadata = {
@@ -249,6 +286,7 @@ def main():
                 "skill_name": skill_name,
                 "task_names": task_names,
                 "combined_tasks": True,
+                "video_dir": args.video_dir,
                 "question_template": args.question_template,
                 "generation_timestamp": datetime.now().isoformat(),
                 "method_type": "VQAScore_LMM"
@@ -271,7 +309,7 @@ def main():
                     continue
                 
                 # Generate scores for this task
-                results = generate_vqa_retrieval_scores(task_samples, model, args.question_template, method_name)
+                results = generate_vqa_retrieval_scores(task_samples, model, args.video_dir, args.question_template, method_name)
                 
                 # Create metadata
                 metadata = {
@@ -280,6 +318,7 @@ def main():
                     "skill_name": skill_name,
                     "task_name": task_name,
                     "combined_tasks": False,
+                    "video_dir": args.video_dir,
                     "question_template": args.question_template,
                     "generation_timestamp": datetime.now().isoformat(),
                     "method_type": "VQAScore_LMM"

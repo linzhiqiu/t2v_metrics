@@ -201,7 +201,7 @@ scores = clip_flant5_score.batch_forward(dataset=dataset, batch_size=16) # (n_sa
 ```
 
 ### Check all supported models
-We currently support running VQAScore with CLIP-FlanT5, LLaVA-1.5, and InstructBLIP as well as SOTA interleaved and video LMMs like LLaVA-OneVision, Qwen2.5-VL, and GPT-4o. For ablation, we also include CLIPScore, BLIPv2Score, PickScore, HPSv2Score, and ImageReward:
+We currently support running VQAScore with CLIP-FlanT5, LLaVA-1.5, and InstructBLIP as well as SOTA video LMMs like LLaVA-OneVision, Qwen2.5-VL, and GPT-4o. For ablation, we also include CLIPScore, BLIPv2Score, PickScore, HPSv2Score, and ImageReward:
 ```python
 llava_score = t2v_metrics.VQAScore(model='llava-v1.5-13b')
 instructblip_score = t2v_metrics.VQAScore(model='instructblip-flant5-xxl')
@@ -286,23 +286,30 @@ score_func = t2v_metrics.get_score_model(model="gpt-4o", device="cuda", api_key=
 
 We now support video-text alignment scores, including video-CLIPScore (InternVideo2, Unmasked Teacher, and more) and video-VQAScore (LLaVA-OneVision, Qwen2.5-VL, and more). 
 
-For single-image and CLIP-like models, video frames are concatenated. For all other native interleaved-image/video models (we recommend Qwen2.5-VL at the time of writing), video frames are passed directly to the model.
+For single-image and CLIP-like models, video frames are concatenated. For all other native video models (we recommend Qwen2.5-VL at the time of writing), video frames are passed directly to the model.
 
 ```python
 import t2v_metrics
 
+import t2v_metrics
+
 ### For a single (video, text) pair:
 qwen_score = t2v_metrics.VQAScore(model='qwen2.5-vl-7b') 
-video = "videos/baby.mp4" # a video path in string format
+video = "videos/baby.mp4"
 text = "a baby crying"
-score = qwen_score(images=[video], texts=[text], num_frames=8) 
+score = qwen_score(images=[video], texts=[text]) 
 
-### Alternatively, if you want to calculate the pairwise similarity scores 
-### between M videos and N texts, run the following to return a M x N score tensor.
+# For Qwen models, specify fps:
+# score = qwen_score(images=[video], texts=[text], fps=8.0) 
+
+# For other models like LLaVA, use num_frames
+# llava_score = t2v_metrics.VQAScore(model='llava-onevision-qwen2-7b-ov')
+# score = llava_score(images=[video], texts=[text], num_frames=8)
+
+### Pairwise similarity scores between M videos and N texts:
 videos = ["videos/baby.mp4", "video/ducks.mp4"]
-texts = ["a baby crying",
-         "a group of ducks standing in the water"]
-score = qwen_score(images=videos, texts=texts, num_frames=8) # scores[i][j] is the score between video i and text j
+texts = ["a baby crying", "a group of ducks standing in the water"]
+score = qwen_score(images=videos, texts=texts, fps=8.0)  # M x N score tensor
 ```
 
 ### Text generation (VQA)

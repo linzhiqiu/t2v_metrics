@@ -1,16 +1,13 @@
 #!/usr/bin/env python3
-"""
-Method-specific script to generate captions using various models.
-This script is specific to model implementations and outputs captions in a standardized format.
-"""
-
+import t2v_metrics
 import json
 import os
 import argparse
-import t2v_metrics
-from tqdm import tqdm
-from datetime import datetime
 import time
+from datetime import datetime
+from tqdm import tqdm
+from typing import List, Dict, Any, Tuple
+
 
 def parse_model_spec(model_spec):
     """
@@ -28,210 +25,237 @@ def parse_model_spec(model_spec):
     else:
         return model_spec.strip(), None
 
-def process_videos_with_model(model_spec, videos, questions):
+
+def load_caption_data(data_path: str) -> List[Dict[str, Any]]:
+    """Load caption data from JSON file."""
+    try:
+        with open(data_path, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+        return data
+    except Exception as e:
+        print(f"Error loading caption data from {data_path}: {e}")
+        return []
+
+
+def generate_captions_for_model(model_name: str, checkpoint: str, data: List[Dict[str, Any]], 
+                               sample_size: int = None) -> Dict[str, Any]:
     """
-    Process all videos with a single model instance.
+    Generate captions using a single model.
     
     Args:
-        model_spec: Model specification string (model_name or model_name:checkpoint)
-        videos: List of video paths
-        questions: List of questions corresponding to videos
+        model_name: Name of the model to use
+        checkpoint: Checkpoint path (can be None)
+        data: List of caption data items
+        sample_size: Number of samples to process (None for all)
         
     Returns:
-        List of result entries with metadata
+        Dictionary with metadata and caption results
     """
-    model_name, checkpoint_name = parse_model_spec(model_spec)
-    
     print(f"\nLoading model: {model_name}")
-    if checkpoint_name:
-        print(f"Using checkpoint: {checkpoint_name}")
+    if checkpoint:
+        print(f"Using checkpoint: {checkpoint}")
     
-    results = []
-    method_name = f"{model_name}" + (f"_{checkpoint_name}" if checkpoint_name else "")
+    # Sample data if requested
+    if sample_size and len(data) > sample_size:
+        sampled_data = data[:sample_size]
+        print(f"Using first {sample_size} out of {len(data)} samples")
+    else:
+        sampled_data = data
+        print(f"Using all {len(data)} samples")
     
     try:
-        # Initialize the model once
+        # Initialize the model
         if 'gemini' in model_name:
             score_model = t2v_metrics.get_score_model(model=model_name, api_key='api_key')
         elif 'gpt' in model_name:
             score_model = t2v_metrics.get_score_model(model=model_name, api_key='api_key')
         else:
             # For other models, pass checkpoint parameter if provided
-            if checkpoint_name:
-                score_model = t2v_metrics.VQAScore(model=model_name, checkpoint=checkpoint_name)
+            if checkpoint:
+                score_model = t2v_metrics.VQAScore(model=model_name, checkpoint=checkpoint)
             else:
                 score_model = t2v_metrics.VQAScore(model=model_name)
         
-        # Process all videos with this model
-        for i, (video, question) in enumerate(tqdm(zip(videos, questions), total=len(videos), desc=f"Processing with {model_name}")):
-            result_entry = {
-                "sample_id": str(i),
-                "video": video,
-                "question": question,
-                "method": method_name,
-                "caption": None,
-                "error": None
-            }
+        # Generate captions for all samples
+        captions = []
+        successful_samples = 0
+        failed_samples = 0
+        
+        for i, item in enumerate(tqdm(sampled_data, desc=f"Generating captions with {model_name}")):
+            video_path = item.get("video", "")
+            question = item.get("question", "")
+            reference_answer = item.get("answer", item.get("reference", ""))
             
             try:
                 # Generate the caption
-                response = score_model.model.generate(images=[video], texts=[question])
+                response = score_model.model.generate(images=[video_path], texts=[question])
                 caption = response[0] if isinstance(response, list) else response
-                result_entry["caption"] = caption
+                
+                captions.append({
+                    "sample_id": str(i),
+                    "video_path": video_path,
+                    "question": question,
+                    "reference_answer": reference_answer,
+                    "method": model_name,
+                    "generated_caption": caption,
+                    "error": None
+                })
+                successful_samples += 1
+                
             except Exception as e:
-                error_msg = f"Error processing video {i}: {str(e)}"
+                error_msg = f"Error processing sample {i}: {str(e)}"
                 print(error_msg)
-                result_entry["error"] = str(e)
-                result_entry["caption"] = ""  # Empty caption for failed samples
                 
-            results.append(result_entry)
-                
-        return results
+                captions.append({
+                    "sample_id": str(i),
+                    "video_path": video_path,
+                    "question": question,
+                    "reference_answer": reference_answer,
+                    "method": model_name,
+                    "generated_caption": "",
+                    "error": str(e)
+                })
+                failed_samples += 1
+        
+        # Prepare metadata
+        metadata = {
+            "method_type": "VLM_Caption_Generation",
+            "model_name": model_name,
+            "checkpoint": checkpoint,
+            "generation_timestamp": datetime.now().isoformat(),
+            "total_samples": len(sampled_data),
+            "successful_samples": successful_samples,
+            "failed_samples": failed_samples
+        }
+        
+        return {
+            "metadata": metadata,
+            "captions": captions,
+            "total_samples": len(sampled_data),
+            "successful_samples": successful_samples,
+            "failed_samples": failed_samples
+        }
         
     except Exception as e:
         print(f"Fatal error with model {model_name}: {str(e)}")
-        # Return error entries for all videos if model initialization fails
-        for i, (video, question) in enumerate(zip(videos, questions)):
-            results.append({
+        
+        # Return error structure
+        error_captions = []
+        for i, item in enumerate(sampled_data):
+            error_captions.append({
                 "sample_id": str(i),
-                "video": video,
-                "question": question,
-                "method": method_name,
-                "caption": "",
-                "error": f"Model initialization failed: {str(e)}"
+                "video_path": item.get("video", ""),
+                "question": item.get("question", ""),
+                "reference_answer": item.get("answer", item.get("reference", "")),
+                "method": model_name,
+                "generated_caption": "",
+                "error": f"Model loading error: {str(e)}"
             })
-        return results
+        
+        metadata = {
+            "method_type": "VLM_Caption_Generation", 
+            "model_name": model_name,
+            "checkpoint": checkpoint,
+            "generation_timestamp": datetime.now().isoformat(),
+            "total_samples": len(sampled_data),
+            "successful_samples": 0,
+            "failed_samples": len(sampled_data)
+        }
+        
+        return {
+            "metadata": metadata,
+            "captions": error_captions,
+            "total_samples": len(sampled_data),
+            "successful_samples": 0,
+            "failed_samples": len(sampled_data)
+        }
 
-def save_captions(results, output_file, metadata=None):
-    """Save captions to JSON file with metadata"""
-    output_data = {
-        "metadata": metadata or {},
-        "captions": results,
-        "total_samples": len(results),
-        "successful_samples": len([r for r in results if r["error"] is None]),
-        "failed_samples": len([r for r in results if r["error"] is not None])
-    }
-    
-    with open(output_file, 'w') as f:
-        json.dump(output_data, f, indent=2)
-    
-    print(f"Captions saved to: {output_file}")
-    print(f"Total samples: {output_data['total_samples']}")
-    print(f"Successful: {output_data['successful_samples']}")
-    print(f"Failed: {output_data['failed_samples']}")
 
-def generate_output_filename(model_spec):
-    """Generate output filename with model, checkpoint, and timestamp"""
-    model_name, checkpoint_name = parse_model_spec(model_spec)
-    
+def create_output_filename(model_name: str, checkpoint: str, output_dir: str) -> str:
+    """Create standardized output filename for caption results."""
     # Clean model name for filename
-    clean_model = model_name.replace('/', '_').replace('\\', '_').replace(':', '_')
+    clean_model_name = model_name.replace("/", "_").replace(":", "_")
     
-    # Generate timestamp
+    # Create base filename
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     
-    # Build filename components
-    filename_parts = ["captions", clean_model]
+    if checkpoint:
+        # Clean checkpoint name
+        clean_checkpoint = os.path.basename(checkpoint).replace("/", "_").replace(":", "_")
+        filename = f"caption_results_{clean_model_name}_{clean_checkpoint}_{timestamp}.json"
+    else:
+        filename = f"caption_results_{clean_model_name}_{timestamp}.json"
     
-    if checkpoint_name:
-        clean_checkpoint = checkpoint_name.replace('/', '_').replace('\\', '_').replace(':', '_')
-        filename_parts.append(clean_checkpoint)
-    
-    filename_parts.append(timestamp)
-    
-    return "_".join(filename_parts) + ".json"
+    return os.path.join(output_dir, filename)
+
 
 def main():
-    parser = argparse.ArgumentParser(description="Generate captions using different models")
-    parser.add_argument("--input", type=str, default="~/test_caption.json", 
-                        help="Path to input JSON file")
-    parser.add_argument("--output_dir", type=str, default="captions", 
-                        help="Directory to save caption files")
-    parser.add_argument("--sample_size", type=int, default=100, 
-                        help="Number of items to sample")
-    parser.add_argument("--models", type=str, nargs='+', 
-                        default=["qwen2.5-vl-7b"],
-                        help="List of model specifications. Format: model_name or model_name:checkpoint")
+    parser = argparse.ArgumentParser(description="Generate captions using vision-language models")
     
-    # Backwards compatibility for single model
-    parser.add_argument("--model", type=str, 
-                        help="Single model name (for backwards compatibility)")
-    parser.add_argument("--checkpoint", type=str, 
-                        help="Single model checkpoint (for backwards compatibility)")
+    # Required arguments
+    parser.add_argument("--model", type=str, required=True,
+                        help="Model name to use for caption generation")
+    parser.add_argument("--data_dir", type=str, default="data",
+                        help="Directory containing caption_data.json")
+    parser.add_argument("--output_dir", type=str, default="scores",
+                        help="Directory to save caption generation results")
+    
+    # Optional arguments
+    parser.add_argument("--checkpoint", type=str, default=None,
+                        help="Model checkpoint path (optional)")
+    parser.add_argument("--sample_size", type=int, default=None,
+                        help="Number of samples to process (default: all)")
     
     args = parser.parse_args()
     
-    # Handle backwards compatibility for single model arguments
-    if args.model:
-        if args.checkpoint:
-            single_model_spec = f"{args.model}:{args.checkpoint}"
-        else:
-            single_model_spec = args.model
-        args.models = [single_model_spec]
-        print(f"Using single model specification: {single_model_spec}")
-    
-    # Create output directory
+    # Create output directory if it doesn't exist
     os.makedirs(args.output_dir, exist_ok=True)
     
-    # Expand the tilde in the path
-    input_path = os.path.expanduser(args.input)
+    # Determine caption data file path
+    caption_data_path = os.path.join(args.data_dir, "caption_data.json")
     
-    # Read the input JSON file
-    with open(input_path, 'r') as f:
-        data = json.load(f)
+    # Load caption data
+    print(f"Loading caption data from: {caption_data_path}")
+    data = load_caption_data(caption_data_path)
     
-    # Take the first n samples
-    if len(data) > args.sample_size:
-        sampled_data = data[:args.sample_size]
-        print(f"Selected the first {args.sample_size} out of {len(data)} items")
-    else:
-        sampled_data = data
-        print(f"Using all {len(data)} items (requested {args.sample_size})")
+    if not data:
+        print("Error: No caption data loaded. Exiting.")
+        return
     
-    # Extract videos, questions, and references
-    videos = [item["video"] for item in sampled_data]
-    questions = [item["question"] for item in sampled_data]
-    references = [item.get("answer", item.get("reference", "")) for item in sampled_data]
+    print(f"Loaded {len(data)} caption samples")
     
-    # Process each model separately
-    total_models = len(args.models)
-    for model_idx, model_spec in enumerate(args.models, 1):
-        print(f"\n{'='*60}")
-        print(f"Processing Model {model_idx}/{total_models}: {model_spec}")
-        print(f"{'='*60}")
-        
-        start_time = time.time()
-        
-        # Process all videos with current model
-        results = process_videos_with_model(model_spec, videos, questions)
-        
-        # Add reference captions to results for completeness
-        for i, (result, reference) in enumerate(zip(results, references)):
-            result["reference"] = reference
-        
-        model_name, checkpoint_name = parse_model_spec(model_spec)
-        
-        # Create metadata
-        metadata = {
-            "model_name": model_name,
-            "checkpoint": checkpoint_name,
-            "model_spec": model_spec,
-            "input_file": input_path,
-            "sample_size": args.sample_size,
-            "generation_timestamp": datetime.now().isoformat(),
-            "method_type": "Caption_Generation"
-        }
-        
-        # Generate output filename and save
-        output_filename = generate_output_filename(model_spec)
-        output_path = os.path.join(args.output_dir, output_filename)
-        
-        save_captions(results, output_path, metadata)
-        
-        end_time = time.time()
-        print(f"Completed model {model_spec} in {end_time - start_time:.2f} seconds")
+    # Generate captions
+    print(f"\nGenerating captions with model: {args.model}")
+    if args.checkpoint:
+        print(f"Using checkpoint: {args.checkpoint}")
+    if args.sample_size:
+        print(f"Processing {args.sample_size} samples")
     
-    print(f"\nProcessed {len(videos)} videos with {total_models} models.")
+    start_time = time.time()
+    
+    results = generate_captions_for_model(
+        model_name=args.model,
+        checkpoint=args.checkpoint,
+        data=data,
+        sample_size=args.sample_size
+    )
+    
+    end_time = time.time()
+    
+    # Create output filename
+    output_file = create_output_filename(args.model, args.checkpoint, args.output_dir)
+    
+    # Save results
+    with open(output_file, 'w', encoding='utf-8') as f:
+        json.dump(results, f, indent=2, ensure_ascii=False)
+    
+    print(f"\nCaption generation completed in {end_time - start_time:.2f} seconds")
+    print(f"Results saved to: {output_file}")
+    print(f"Successfully generated captions for {results['successful_samples']}/{results['total_samples']} samples")
+    
+    if results['failed_samples'] > 0:
+        print(f"Failed samples: {results['failed_samples']}")
+
 
 if __name__ == "__main__":
     main()

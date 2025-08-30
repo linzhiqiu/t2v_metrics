@@ -21,7 +21,7 @@ def load_jsonl_data(file_path):
             data.append(json.loads(line.strip()))
     return data
 
-def generate_vqa_scores(data, model_name, checkpoint_name=None, question_template="{} Please only answer Yes or No.", answer_template="Yes"):
+def generate_vqa_scores(data, model_name, video_base_path, checkpoint_name=None, question_template="{} Please only answer Yes or No.", answer_template="Yes"):
     """Generate VQA scores for all samples using the specified model"""
     print(f"Initializing VQAScore model: {model_name}")
     
@@ -40,7 +40,6 @@ def generate_vqa_scores(data, model_name, checkpoint_name=None, question_templat
         
         # Create result entry with metadata
         result_entry = {
-            "sample_id": item.get('sample_id', f"{len(results)}"),  # Use provided ID or generate one
             "video_path": video_path,
             "question": question,
             "ground_truth_label": label,
@@ -49,10 +48,13 @@ def generate_vqa_scores(data, model_name, checkpoint_name=None, question_templat
             "error": None
         }
         
+        # Construct full video path
+        full_video_path = os.path.join(video_base_path, video_path)
+        
         # Check if video file exists
-        if not os.path.exists(video_path):
-            print(f"Warning: Video not found: {video_path}")
-            result_entry["error"] = f"Video file not found: {video_path}"
+        if not os.path.exists(full_video_path):
+            print(f"Warning: Video not found: {full_video_path}")
+            result_entry["error"] = f"Video file not found: {full_video_path}"
             result_entry["score"] = 0.0  # Default score for missing files
             results.append(result_entry)
             continue
@@ -64,11 +66,11 @@ def generate_vqa_scores(data, model_name, checkpoint_name=None, question_templat
                 "answer_template": answer_template
             }
             
-            score = vqa_scorer(images=[video_path], texts=[question], **score_kwargs)
+            score = vqa_scorer(images=[full_video_path], texts=[question], **score_kwargs)
             result_entry["score"] = float(score[0].detach().cpu().item())  # Convert tensor to Python float
             
         except Exception as e:
-            print(f"Error processing {video_path}: {e}")
+            print(f"Error processing {full_video_path}: {e}")
             result_entry["error"] = str(e)
             result_entry["score"] = 0.0  # Default score for failed samples
         
@@ -103,7 +105,7 @@ def generate_output_filename(model_name, checkpoint_name, split_name):
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     
     # Build filename components
-    filename_parts = ["vqa_scores", clean_model]
+    filename_parts = ["classification_scores", clean_model]
     
     if checkpoint_name:
         clean_checkpoint = checkpoint_name.replace('/', '_').replace('\\', '_').replace(':', '_')
@@ -121,6 +123,8 @@ def main():
                       help='Checkpoint name for qwen2.5-vl models (e.g., chancharikm/qwen2.5-vl-7b-cam-motion)')
     parser.add_argument('--data_dir', type=str, default='data/binary_classification',
                       help='Directory containing JSONL files')
+    parser.add_argument('--video_dir', type=str, default='data/videos',
+                      help='Base directory containing video files')
     parser.add_argument('--splits', type=str, nargs='+', default=None,
                       help='Specific split names to evaluate (without .jsonl extension). If not specified, processes all splits.')
     parser.add_argument('--question_template', type=str, default="{} Please only answer Yes or No.",
@@ -179,6 +183,7 @@ def main():
         results = generate_vqa_scores(
             data, 
             args.model, 
+            args.video_dir,
             args.checkpoint,
             args.question_template,
             args.answer_template
@@ -190,6 +195,7 @@ def main():
             "checkpoint": args.checkpoint,
             "split_name": split_name,
             "data_file": str(jsonl_file),
+            "video_dir": args.video_dir,
             "question_template": args.question_template,
             "answer_template": args.answer_template,
             "generation_timestamp": datetime.now().isoformat(),

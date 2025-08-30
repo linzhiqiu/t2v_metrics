@@ -215,3 +215,6 @@ cython_debug/
 # *.mp4
 # *.mov
 # *.avi
+
+# CameraBench Scores:
+camerabench/scores
