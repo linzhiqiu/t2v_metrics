@@ -370,6 +370,15 @@ def evaluate_caption_file(file_path: str, api_key: str = None) -> Dict[str, Any]
     if checkpoint:
         print(f"  Checkpoint: {checkpoint}")
     
+    # Calculate statistics from the captions data
+    total_samples = len(captions)
+    failed_samples = sum(1 for caption in captions if caption.get('error') is not None)
+    successful_samples = total_samples - failed_samples
+    
+    print(f"  Total samples: {total_samples}")
+    print(f"  Successful samples: {successful_samples}")
+    print(f"  Failed samples: {failed_samples}")
+    
     # Initialize score lists
     spice_scores = []
     cider_scores = []
@@ -418,7 +427,7 @@ def evaluate_caption_file(file_path: str, api_key: str = None) -> Dict[str, Any]
         "model": model_name,
         "checkpoint": checkpoint,
         "file_path": file_path,
-        "total_samples": len(captions),
+        "total_samples": total_samples,
         "valid_samples": valid_samples,
         "spice": float(np.mean(spice_scores)) if spice_scores else 0.0,
         "cider": float(np.mean(cider_scores)) if cider_scores else 0.0,

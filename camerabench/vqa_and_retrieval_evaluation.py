@@ -183,9 +183,15 @@ def evaluate_single_file(score_file, mode='both'):
     if task_name:
         print(f"Task: {task_name}")
     print(f"Split: {split_name}")
-    print(f"Total samples in file: {score_data['total_samples']}")
-    print(f"Successful samples: {score_data['successful_samples']}")
-    print(f"Failed samples: {score_data['failed_samples']}")
+    
+    # Calculate statistics from the scores data
+    total_samples = len(score_data["scores"])
+    failed_samples = sum(1 for result in score_data["scores"] if result["error"] is not None)
+    successful_samples = total_samples - failed_samples
+    
+    print(f"Total samples in file: {total_samples}")
+    print(f"Successful samples: {successful_samples}")
+    print(f"Failed samples: {failed_samples}")
     
     # Extract score matrices
     yes_scores, no_scores = extract_score_matrices(score_data)

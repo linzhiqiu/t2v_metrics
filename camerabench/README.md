@@ -71,10 +71,7 @@ python binary_classification_evaluation.py scores/vqa_scores_qwen2.5-vl-7b_*_Mov
       "score": 0.85,
       "error": null
     }
-  ],
-  "total_samples": 1000,
-  "successful_samples": 995,
-  "failed_samples": 5
+  ]
 }
 ```
 
@@ -146,10 +143,7 @@ python vqa_and_retrieval_evaluation.py scores/vqa_retrieval_scores_model1_*.json
       },
       "error": null
     }
-  ],
-  "total_samples": 500,
-  "successful_samples": 498,
-  "failed_samples": 2
+  ]
 }
 ```
 
@@ -192,10 +186,7 @@ python caption_evaluation.py scores/caption_results_qwen2.5-vl-7b_*.json --outpu
     "method_type": "Your_Method_Name",
     "model_name": "your_model_name", 
     "checkpoint": "optional_checkpoint_path",
-    "generation_timestamp": "2025-01-XX",
-    "total_samples": 1000,
-    "successful_samples": 995,
-    "failed_samples": 5
+    "generation_timestamp": "2025-01-XX"
   },
   "captions": [
     {
@@ -207,10 +198,7 @@ python caption_evaluation.py scores/caption_results_qwen2.5-vl-7b_*.json --outpu
       "generated_caption": "The camera is panning to the left and moving forward smoothly",
       "error": null 
     }
-  ],
-  "total_samples": 1000,
-  "successful_samples": 995,
-  "failed_samples": 5
+  ]
 }
 ```
 
@@ -223,14 +211,15 @@ To evaluate your own method (classical CV, different LMMs, human evaluation, etc
 2. **Keep the evaluation scripts (Script 2) unchanged** - they work with any method
 3. **Ensure your output includes**:
    - All required fields for each sample (`sample_id`, `error`, etc.)
-   - Correct data types (scores as floats, captions as strings, and caught exceptions/errors as strings or nulls)
+   - Correct data types (scores as floats, captions as strings, etc.). Note that the error field is used to keep track of failed samples, so you should catch any exceptions and save them as a string in this field.
    - The `metadata` section with `model_name`, `method_type`, and optional `checkpoint`
    - Unique identifiers are automatically generated from `model_name`, `checkpoint`, and `split_name`
 4. **File naming conventions for auto-discovery**:
-   - Binary classification: `vqa_scores_*.json`
+   - Binary classification: `classification_scores_*.json`
    - VQA/Retrieval: `vqa_retrieval_scores_*.json`
+   - Caption generation: `caption_results_*.json`
 
-The evaluation scripts will automatically compute all metrics and generate timestamped output files with model and file counts included in the filename, regardless of how the scores/captions were generated.
+The evaluation scripts will automatically compute all metrics and generate timestamped output files with model and file counts included in the filename, regardless of how the scores/captions were generated. **Note:** The evaluation scripts automatically calculate sample counts (total, successful, failed) from the data, so these fields are no longer required in the output format.
 
 ---
 
@@ -238,6 +227,6 @@ The evaluation scripts will automatically compute all metrics and generate times
 All evaluation data is located in the `data/` folder with the following structure:
 - `data/binary_classification/` - Binary classification tasks
 - `data/vqa_and_retrieval/` - VQA and retrieval tasks organized by skills
-- `caption_data.json` - Samples and Prompts for caption generation
+- `data/caption_data.json` - Samples and Prompts for caption generation
 
 ---

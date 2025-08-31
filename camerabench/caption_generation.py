@@ -78,8 +78,6 @@ def generate_captions_for_model(model_name: str, checkpoint: str, data: List[Dic
         
         # Generate captions for all samples
         captions = []
-        successful_samples = 0
-        failed_samples = 0
         
         for i, item in enumerate(tqdm(sampled_data, desc=f"Generating captions with {model_name}")):
             video_path = item.get("video", "")
@@ -100,7 +98,6 @@ def generate_captions_for_model(model_name: str, checkpoint: str, data: List[Dic
                     "generated_caption": caption,
                     "error": None
                 })
-                successful_samples += 1
                 
             except Exception as e:
                 error_msg = f"Error processing sample {i}: {str(e)}"
@@ -115,25 +112,18 @@ def generate_captions_for_model(model_name: str, checkpoint: str, data: List[Dic
                     "generated_caption": "",
                     "error": str(e)
                 })
-                failed_samples += 1
         
         # Prepare metadata
         metadata = {
             "method_type": "VLM_Caption_Generation",
             "model_name": model_name,
             "checkpoint": checkpoint,
-            "generation_timestamp": datetime.now().isoformat(),
-            "total_samples": len(sampled_data),
-            "successful_samples": successful_samples,
-            "failed_samples": failed_samples
+            "generation_timestamp": datetime.now().isoformat()
         }
         
         return {
             "metadata": metadata,
-            "captions": captions,
-            "total_samples": len(sampled_data),
-            "successful_samples": successful_samples,
-            "failed_samples": failed_samples
+            "captions": captions
         }
         
     except Exception as e:
@@ -156,18 +146,12 @@ def generate_captions_for_model(model_name: str, checkpoint: str, data: List[Dic
             "method_type": "VLM_Caption_Generation", 
             "model_name": model_name,
             "checkpoint": checkpoint,
-            "generation_timestamp": datetime.now().isoformat(),
-            "total_samples": len(sampled_data),
-            "successful_samples": 0,
-            "failed_samples": len(sampled_data)
+            "generation_timestamp": datetime.now().isoformat()
         }
         
         return {
             "metadata": metadata,
-            "captions": error_captions,
-            "total_samples": len(sampled_data),
-            "successful_samples": 0,
-            "failed_samples": len(sampled_data)
+            "captions": error_captions
         }
 
 
@@ -249,12 +233,17 @@ def main():
     with open(output_file, 'w', encoding='utf-8') as f:
         json.dump(results, f, indent=2, ensure_ascii=False)
     
+    # Calculate statistics for display
+    total_samples = len(results['captions'])
+    successful_samples = sum(1 for caption in results['captions'] if caption['error'] is None)
+    failed_samples = total_samples - successful_samples
+    
     print(f"\nCaption generation completed in {end_time - start_time:.2f} seconds")
     print(f"Results saved to: {output_file}")
-    print(f"Successfully generated captions for {results['successful_samples']}/{results['total_samples']} samples")
+    print(f"Successfully generated captions for {successful_samples}/{total_samples} samples")
     
-    if results['failed_samples'] > 0:
-        print(f"Failed samples: {results['failed_samples']}")
+    if failed_samples > 0:
+        print(f"Failed samples: {failed_samples}")
 
 
 if __name__ == "__main__":

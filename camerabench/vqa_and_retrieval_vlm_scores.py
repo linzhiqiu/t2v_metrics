@@ -167,19 +167,13 @@ def save_scores(results, output_file, metadata=None):
     """Save scores to JSON file with metadata"""
     output_data = {
         "metadata": metadata or {},
-        "scores": results,
-        "total_samples": len(results),
-        "successful_samples": len([r for r in results if r["error"] is None]),
-        "failed_samples": len([r for r in results if r["error"] is not None])
+        "scores": results
     }
     
     with open(output_file, 'w') as f:
         json.dump(output_data, f, indent=2)
     
     print(f"Scores saved to: {output_file}")
-    print(f"Total samples: {output_data['total_samples']}")
-    print(f"Successful: {output_data['successful_samples']}")
-    print(f"Failed: {output_data['failed_samples']}")
 
 def generate_output_filename(model_name, checkpoint_name, skill_name, task_name=None):
     """Generate output filename with model, checkpoint, skill, task, and timestamp"""

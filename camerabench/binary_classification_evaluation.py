@@ -137,9 +137,15 @@ def evaluate_single_file(score_file, generate_plots_flag=False, output_dir=None)
     if checkpoint:
         print(f"Checkpoint: {checkpoint}")
     print(f"Split: {split_name}")
-    print(f"Total samples in file: {score_data['total_samples']}")
-    print(f"Successful samples: {score_data['successful_samples']}")
-    print(f"Failed samples: {score_data['failed_samples']}")
+    
+    # Calculate statistics from the scores data
+    total_samples = len(score_data["scores"])
+    failed_samples = sum(1 for result in score_data["scores"] if result["error"] is not None)
+    successful_samples = total_samples - failed_samples
+    
+    print(f"Total samples in file: {total_samples}")
+    print(f"Successful samples: {successful_samples}")
+    print(f"Failed samples: {failed_samples}")
     
     # Extract scores and labels
     scores, labels = extract_scores_and_labels(score_data)
