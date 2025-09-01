@@ -34,6 +34,10 @@ test.ipynb
 genai_image_800_temp.py
 gpt4_eval.txt
 vqascore_ablation.py
+plot_temp.py
+sfm_outputs/
+training.png
+training_0.png
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
