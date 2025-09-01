@@ -38,7 +38,7 @@ def load_caption_data(data_path: str) -> List[Dict[str, Any]]:
 
 
 def generate_captions_for_model(model_name: str, checkpoint: str, data: List[Dict[str, Any]], 
-                               sample_size: int = None) -> Dict[str, Any]:
+                               video_dir: str, sample_size: int = None) -> Dict[str, Any]:
     """
     Generate captions using a single model.
     
@@ -46,6 +46,7 @@ def generate_captions_for_model(model_name: str, checkpoint: str, data: List[Dic
         model_name: Name of the model to use
         checkpoint: Checkpoint path (can be None)
         data: List of caption data items
+        video_dir: Base directory for video files
         sample_size: Number of samples to process (None for all)
         
     Returns:
@@ -54,6 +55,7 @@ def generate_captions_for_model(model_name: str, checkpoint: str, data: List[Dic
     print(f"\nLoading model: {model_name}")
     if checkpoint:
         print(f"Using checkpoint: {checkpoint}")
+    print(f"Using video directory: {video_dir}")
     
     # Sample data if requested
     if sample_size and len(data) > sample_size:
@@ -81,17 +83,22 @@ def generate_captions_for_model(model_name: str, checkpoint: str, data: List[Dic
         
         for i, item in enumerate(tqdm(sampled_data, desc=f"Generating captions with {model_name}")):
             video_path = item.get("video", "")
+            
+            # Concatenate video_dir with video_path
+            full_video_path = os.path.join(video_dir, video_path) if video_path else ""
+            
             question = item.get("question", "")
             reference_answer = item.get("answer", item.get("reference", ""))
             
             try:
                 # Generate the caption
-                response = score_model.model.generate(images=[video_path], texts=[question])
+                response = score_model.model.generate(images=[full_video_path], texts=[question])
                 caption = response[0] if isinstance(response, list) else response
                 
                 captions.append({
                     "sample_id": str(i),
-                    "video_path": video_path,
+                    "video_path": video_path,  # Keep original path in output
+                    "full_video_path": full_video_path,  # Store full path for reference
                     "question": question,
                     "reference_answer": reference_answer,
                     "method": model_name,
@@ -106,6 +113,7 @@ def generate_captions_for_model(model_name: str, checkpoint: str, data: List[Dic
                 captions.append({
                     "sample_id": str(i),
                     "video_path": video_path,
+                    "full_video_path": full_video_path,
                     "question": question,
                     "reference_answer": reference_answer,
                     "method": model_name,
@@ -118,6 +126,7 @@ def generate_captions_for_model(model_name: str, checkpoint: str, data: List[Dic
             "method_type": "VLM_Caption_Generation",
             "model_name": model_name,
             "checkpoint": checkpoint,
+            "video_dir": video_dir,
             "generation_timestamp": datetime.now().isoformat()
         }
         
@@ -132,9 +141,13 @@ def generate_captions_for_model(model_name: str, checkpoint: str, data: List[Dic
         # Return error structure
         error_captions = []
         for i, item in enumerate(sampled_data):
+            video_path = item.get("video", "")
+            full_video_path = os.path.join(video_dir, video_path) if video_path else ""
+            
             error_captions.append({
                 "sample_id": str(i),
-                "video_path": item.get("video", ""),
+                "video_path": video_path,
+                "full_video_path": full_video_path,
                 "question": item.get("question", ""),
                 "reference_answer": item.get("answer", item.get("reference", "")),
                 "method": model_name,
@@ -146,6 +159,7 @@ def generate_captions_for_model(model_name: str, checkpoint: str, data: List[Dic
             "method_type": "VLM_Caption_Generation", 
             "model_name": model_name,
             "checkpoint": checkpoint,
+            "video_dir": video_dir,
             "generation_timestamp": datetime.now().isoformat()
         }
         
@@ -185,6 +199,8 @@ def main():
                         help="Directory to save caption generation results")
     
     # Optional arguments
+    parser.add_argument("--video_dir", type=str, default="data/videos",
+                        help="Base directory for video files (will be concatenated with video paths)")
     parser.add_argument("--checkpoint", type=str, default=None,
                         help="Model checkpoint path (optional)")
     parser.add_argument("--sample_size", type=int, default=None,
@@ -212,6 +228,8 @@ def main():
     print(f"\nGenerating captions with model: {args.model}")
     if args.checkpoint:
         print(f"Using checkpoint: {args.checkpoint}")
+    if args.video_dir:
+        print(f"Using video directory: {args.video_dir}")
     if args.sample_size:
         print(f"Processing {args.sample_size} samples")
     
@@ -221,6 +239,7 @@ def main():
         model_name=args.model,
         checkpoint=args.checkpoint,
         data=data,
+        video_dir=args.video_dir,
         sample_size=args.sample_size
     )
     

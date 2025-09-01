@@ -14,7 +14,7 @@ To use another method (e.g., SfMs), simply implement your own Script 1 in the st
 
 ## Data Download
 
-Download the videos from the following HuggingFace [repo](https://huggingface.co/datasets/chancharikm/cambench_train_videos) into the directory `data/videos`. You can simply use our script:
+Download the videos from the following HuggingFace [repo](https://huggingface.co/datasets/syCen/Videos4CameraBnech) into the directory `data/videos`. You can simply use our script:
 
 ```python
 python data_download.py
