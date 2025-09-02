@@ -17,7 +17,7 @@ except ImportError:
     from huggingface_hub import snapshot_download
 
 def main():
-    repo_id = "syCen/Videos4CameraBnech"
+    repo_id = "syCen/Videos4CameraBench"
     output_dir = "data/videos"
     
     print("Downloading CameraBench videos...")

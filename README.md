@@ -11,8 +11,12 @@
 Baiqi Li*, [Zhiqiu Lin*](https://linzhiqiu.github.io/), [Deepak Pathak](https://www.cs.cmu.edu/~dpathak/), Jiayao Li, Yixin Fei, Kewen Wu, Tiffany Ling, [Xide Xia*](https://scholar.google.com/citations?user=FHLTntIAAAAJ&hl=en), [Pengchuan Zhang*](https://scholar.google.com/citations?user=3VZ_E64AAAAJ&hl=en), [Graham Neubig*](https://www.phontron.com/), [Deva Ramanan*](https://www.cs.cmu.edu/~deva/) (*Co-First and co-senior authors)
 
 ## News
+<<<<<<< HEAD
 - [2025/09/02] 🚀 **VQAScore** gets a **major upgrade** with support for **20+ state-of-the-art video-language models** for [video-based VQAScore](#video-text-alignment-scores) (e.g., Qwen2.5-VL, LLaVA-Video, etc.), along with full integration of the new benchmark [CameraBench](https://linzhiqiu.github.io/papers/camerabench/) for evaluating camera-motion understanding in text-to-video models like Kling and Runway. Huge thanks to our collaborator **Chancharik Mitra** for leading this milestone update!
 - [2025/09/02] ✨ **VQAScore** has become the **go-to evaluation choice for generative models**: **GenAI-Bench** is now adopted by **Google DeepMind** (Imagen3 & Imagen4), **Bytedance Seed**, **NVIDIA**, and others. Meanwhile, our **open-source CLIP-FlanT5 models** have been downloaded over **2 million times** on Hugging Face!
+=======
+- [2025/08/25] 🔥 **VQAScore** gets new SoTA [video model additions](#video-text-alignment-scores) (e.g. LLaVA-OneVision, Qwen2.5-VL, etc.) as well as [evaluation code](https://github.com/chancharikmitra/t2v_metrics/tree/main/camerabench) for a groundbreaking new benchmark [CameraBench](https://linzhiqiu.github.io/papers/camerabench/) evaluating the camera motion understanding of both LMMs and SfMs.
+>>>>>>> 59386c15df0cc8cef993de659cb499d8f8566c02
 - [2024/08/13] 🔥 **VQAScore** is highlighted in Google's [Imagen3 report](https://arxiv.org/abs/2408.07009) as the strongest replacement of CLIPScore for automated evaluation! **GenAI-Bench** was chosen as one of the key benchmarks to showcase Imagen3's superior prompt-image alignment. Kudos to Google for this achievement! [[Paper](https://arxiv.org/abs/2408.07009)]
 - [2024/07/01] 🔥 **VQAScore** has been accepted to ECCV 2024!
 - [2024/06/20] 🔥 **GenAI-Bench** won Best Short Paper at the CVPR'24 SynData Workshop! [[Workshop Site](https://syndata4cv.github.io/)].
@@ -290,8 +294,6 @@ We now support video-text alignment scores, including video-CLIPScore (InternVid
 For single-image and CLIP-like models, video frames are concatenated. For all other native video models (we recommend Qwen2.5-VL at the time of writing), video frames are passed directly to the model.
 
 ```python
-import t2v_metrics
-
 import t2v_metrics
 
 ### For a single (video, text) pair:
