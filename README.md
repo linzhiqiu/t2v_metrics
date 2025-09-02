@@ -291,8 +291,6 @@ For single-image and CLIP-like models, video frames are concatenated. For all ot
 ```python
 import t2v_metrics
 
-import t2v_metrics
-
 ### For a single (video, text) pair:
 qwen_score = t2v_metrics.VQAScore(model='qwen2.5-vl-7b') 
 video = "videos/baby.mp4"
