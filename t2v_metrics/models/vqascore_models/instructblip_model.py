@@ -24,7 +24,7 @@ class InstructBLIPModel(VQAScoreModel):
                  cache_dir=HF_CACHE_DIR):
         assert model_name in InstructBLIP_MODELS, f"Model name {model_name} not found in InstructBLIP_MODELS"
         os.environ['TORCH_HOME'] = cache_dir
-        import timm.models.hub as timm_hub
+        import timm.models as timm_hub
         video_mode = "concat"
         allows_image = True
         # if cache_dir != timm_hub.get_cache_dir():

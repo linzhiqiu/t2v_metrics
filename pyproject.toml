@@ -44,7 +44,6 @@ dependencies = [
     # for clipscore
     "scikit-learn",
     "pycocoevalcap",
-    # "image-reward",
     "hpsv2",
     "clip @ git+https://github.com/openai/CLIP.git",
     # Video Model Additional Requirements
