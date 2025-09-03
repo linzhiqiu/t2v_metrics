@@ -91,7 +91,8 @@ dependencies = [
     "torchaudio>=2.3.1",
     "google-genai",
     "blobfile",
-    "pytorchvideo @ git+https://github.com/linzhiqiu/pytorchvideo.git"
+    "pytorchvideo @ git+https://github.com/linzhiqiu/pytorchvideo.git",
+    "diffusers"
 ] 
 
 [tool.setuptools.packages.find]

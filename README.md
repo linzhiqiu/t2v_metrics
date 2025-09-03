@@ -11,12 +11,8 @@
 Baiqi Li*, [Zhiqiu Lin*](https://linzhiqiu.github.io/), [Deepak Pathak](https://www.cs.cmu.edu/~dpathak/), Jiayao Li, Yixin Fei, Kewen Wu, Tiffany Ling, [Xide Xia*](https://scholar.google.com/citations?user=FHLTntIAAAAJ&hl=en), [Pengchuan Zhang*](https://scholar.google.com/citations?user=3VZ_E64AAAAJ&hl=en), [Graham Neubig*](https://www.phontron.com/), [Deva Ramanan*](https://www.cs.cmu.edu/~deva/) (*Co-First and co-senior authors)
 
 ## News
-<<<<<<< HEAD
-- [2025/09/02] 🚀 **VQAScore** gets a **major upgrade** with support for **20+ state-of-the-art video-language models** for [video-based VQAScore](#video-text-alignment-scores) (e.g., Qwen2.5-VL, LLaVA-Video, etc.), along with full integration of the new benchmark [CameraBench](https://linzhiqiu.github.io/papers/camerabench/) for evaluating camera-motion understanding in text-to-video models like Kling and Runway. Huge thanks to our collaborator **Chancharik Mitra** for leading this milestone update!
-- [2025/09/02] ✨ **VQAScore** has become the **go-to evaluation choice for generative models**: **GenAI-Bench** is now adopted by **Google DeepMind** (Imagen3 & Imagen4), **Bytedance Seed**, **NVIDIA**, and others. Meanwhile, our **open-source CLIP-FlanT5 models** have been downloaded over **2 million times** on Hugging Face!
-=======
-- [2025/08/25] 🔥 **VQAScore** gets new SoTA [video model additions](#video-text-alignment-scores) (e.g. LLaVA-OneVision, Qwen2.5-VL, etc.) as well as [evaluation code](https://github.com/chancharikmitra/t2v_metrics/tree/main/camerabench) for a groundbreaking new benchmark [CameraBench](https://linzhiqiu.github.io/papers/camerabench/) evaluating the camera motion understanding of both LMMs and SfMs.
->>>>>>> 59386c15df0cc8cef993de659cb499d8f8566c02
+- [2025/09/03] 🚀 **VQAScore** gets a **major upgrade** with support for **20+ state-of-the-art video-language models** for [video-based VQAScore](#video-text-alignment-scores) (e.g., Qwen2.5-VL, LLaVA-Video, etc.), along with full integration of the new benchmark [CameraBench](https://linzhiqiu.github.io/papers/camerabench/) for evaluating camera-motion understanding in text-to-video models like Kling and Runway. Huge thanks to our collaborator **Chancharik Mitra** for leading this milestone update!
+- [2025/09/03] ✨ **VQAScore** has become the **go-to evaluation choice for generative models**: **GenAI-Bench** is now adopted by **Google DeepMind** (Imagen3 & Imagen4), **Bytedance Seed**, **NVIDIA**, and others. Meanwhile, our **open-source CLIP-FlanT5 models** have been downloaded over **2 million times** on Hugging Face!
 - [2024/08/13] 🔥 **VQAScore** is highlighted in Google's [Imagen3 report](https://arxiv.org/abs/2408.07009) as the strongest replacement of CLIPScore for automated evaluation! **GenAI-Bench** was chosen as one of the key benchmarks to showcase Imagen3's superior prompt-image alignment. Kudos to Google for this achievement! [[Paper](https://arxiv.org/abs/2408.07009)]
 - [2024/07/01] 🔥 **VQAScore** has been accepted to ECCV 2024!
 - [2024/06/20] 🔥 **GenAI-Bench** won Best Short Paper at the CVPR'24 SynData Workshop! [[Workshop Site](https://syndata4cv.github.io/)].
@@ -26,88 +22,47 @@ Baiqi Li*, [Zhiqiu Lin*](https://linzhiqiu.github.io/), [Deepak Pathak](https://
 VQAScore significantly outperforms previous metrics such as CLIPScore and PickScore on compositional text prompts, and it is much simpler than prior art (e.g., ImageReward, HPSv2, TIFA, Davidsonian, VPEval, VIEScore) making use of human feedback or proprietary models like ChatGPT and GPT-4Vision. 
 
 ## Available Models:
-<table>
-<tr>
-<th><b>VQAScore Models</b></th>
-<th>ITMScore Models</th>
-<th>CLIPScore Models</th>
-</tr>
-<tr>
-<td>
-
-| Model Name              | Image | Video |
-| ----------------------- | :---: | :---: |
-| clip-flant5             |   ✔   |       |
-| llava-v1.5              |   ✔   |       |
-| sharegpt4v              |   ✔   |       |
-| llava-v1.6              |   ✔   |       |
-| instructblip-flant5     |   ✔   |       |
-| gpt-4-turbo             |   ✔   |   ✔   |
-| gpt-4o                  |   ✔   |   ✔   |
-| gpt-4.1                 |   ✔   |   ✔   |
-| llava-onevision-qwen2   |   ✔   |   ✔   |
-| mplug-owl3              |   ✔   |   ✔   |
-| paligemma               |   ✔   |       |
-| internvl2               |   ✔   |   ✔   |
-| internvl2.5             |   ✔   |   ✔   |
-| internvl3               |   ✔   |   ✔   |
-| internvideo2-chat       |   ✔   |   ✔   |
-| internlmxcomposer25     |   ✔   |   ✔   |
-| llama-3.2 (vision vars) |   ✔   |       |
-| llama-guard-3 (vision)  |   ✔   |       |
-| molmo / molmoe          |   ✔   |       |
-| gemini-1.5 / 2.5        |   ✔   |   ✔   |
-| qwen2-vl                |   ✔   |   ✔   |
-| qwen2.5-vl              |   ✔   |   ✔   |
-| llava-video             |       |   ✔   |
-| tarsier / tarsier2      |       |   ✔   |
-| perception-lm           |       |   ✔   |
-
-</td>
-<td>
-
-| Model family       | Image | Video |
-| ------------------ | :---: | :---: |
-| BLIP2-ITM          |   ✔   |       |
-| UMT (ITM)          |   ✔   |   ✔   |
-| InternVideo2 (ITM) |   ✔   |   ✔   |
 
 
-</td>
-<td>
+| Score Type | Model Family Name | Image | Video | Models |
+|------------|------------------|:-----:|:-----:|--------|
+| **VQAScore** |
+| VQAScore | CLIP-FlanT5 | ✔ | | clip-flant5-xxl, clip-flant5-xl, clip-flant5-xxl-no-system, clip-flant5-xxl-no-system-no-user |
+| VQAScore | LLaVA-1.5 | ✔ | | llava-v1.5-13b, llava-v1.5-7b |
+| VQAScore | ShareGPT4V | ✔ | | sharegpt4v-7b, sharegpt4v-13b |
+| VQAScore | LLaVA-1.6 | ✔ | | llava-v1.6-13b |
+| VQAScore | InstructBLIP-FlanT5 | ✔ | | instructblip-flant5-xxl, instructblip-flant5-xl |
+| VQAScore | GPT-4 | ✔ | ✔ | gpt-4-turbo, gpt-4o, gpt-4.1 |
+| VQAScore | LLaVA-OneVision | ✔ | ✔ | llava-onevision-qwen2-7b-si, llava-onevision-qwen2-7b-ov |
+| VQAScore | mPLUG-Owl3 | ✔ | ✔ | mplug-owl3-7b |
+| VQAScore | PaliGemma | ✔ | | paligemma-3b-mix-224, paligemma-3b-mix-448, paligemma-3b-mix-896 |
+| VQAScore | InternVL2 | ✔ | ✔ | internvl2-1b, internvl2-2b, internvl2-4b, internvl2-8b, internvl2-26b, internvl2-40b, internvl2-llama3-76b |
+| VQAScore | InternVL2.5 | ✔ | ✔ | internvl2.5-1b, internvl2.5-2b, internvl2.5-4b, internvl2.5-8b, internvl2.5-26b, internvl2.5-38b, internvl2.5-78b |
+| VQAScore | InternVL3 | ✔ | ✔ | internvl3-8b, internvl3-14b, internvl3-78b |
+| VQAScore | InternVideo2-Chat | ✔ | ✔ | internvideo2-chat-8b, internvideo2-chat-8b-hd, internvideo2-chat-8b-internlm |
+| VQAScore | InternLM-XComposer2.5 | ✔ | ✔ | internlmxcomposer25-7b |
+| VQAScore | Llama-3.2 | ✔ | | llama-3.2-1b, llama-3.2-3b, llama-3.2-1b-instruct, llama-3.2-3b-instruct, llama-3.2-11b-vision, llama-3.2-11b-vision-instruct, llama-3.2-90b-vision, llama-3.2-90b-vision-instruct |
+| VQAScore | Llama-Guard-3 | ✔ | | llama-guard-3-1b, llama-guard-3-11b-vision |
+| VQAScore | Molmo | ✔ | | molmo-72b-0924, molmo-7b-d-0924, molmo-7b-o-0924, molmoe-1b-0924 |
+| VQAScore | Gemini | ✔ | ✔ | gemini-1.5-pro, gemini-1.5-flash, gemini-2.5-pro-preview-03-25 |
+| VQAScore | Qwen2-VL | ✔ | ✔ | qwen2-vl-2b, qwen2-vl-7b, qwen2-vl-72b |
+| VQAScore | Qwen2.5-VL | ✔ | ✔ | qwen2.5-vl-3b, qwen2.5-vl-7b, qwen2.5-vl-32b, qwen2.5-vl-72b |
+| VQAScore | LLaVA-Video | | ✔ | llava-video-7b, llava-video-72B |
+| VQAScore | Tarsier | | ✔ | tarsier-recap-7b, tarsier2-7b |
+| VQAScore | Perception-LM | | ✔ | perception-lm-1b, perception-lm-3b, perception-lm-8b |
+| **ITMScore** |
+| ITMScore | BLIP2-ITM | ✔ | | blip2-itm, blip2-itm-vitL, blip2-itm-coco |
+| ITMScore | UMT-ITM | ✔ | ✔ | umt-b16-25m-itm, umt-l16-25m-itm |
+| ITMScore | InternVideo2-ITM | ✔ | ✔ | internvideo2-1b-stage2-itm |
+| **CLIPScore** |
+| CLIPScore | All OpenCLIP Models | ✔ | | openai:ViT-B-32, openai:ViT-L-14, laion2b_s32b_b82k:ViT-L-14, datacomp_xl_s13b_b90k:ViT-B-16, webli:ViT-B-16-SigLIP, metaclip_400m:ViT-B-32, ... (200+ models available - use `t2v_metrics.list_all_clipscore_models()` to see all exact model names) |
+| CLIPScore | BLIP2-ITC | ✔ | | blip2-itc, blip2-itc-vitL, blip2-itc-coco |
+| CLIPScore | HPSv2 | ✔ | | hpsv2 |
+| CLIPScore | PickScore | ✔ | | pickscore-v1 |
+| CLIPScore | UMT-CLIP | ✔ | ✔ | umt-b16-25m-clip, umt-l16-25m-clip |
+| CLIPScore | InternVideo2-CLIP | ✔ | ✔ | internvideo2-1b-stage2-clip |
+| CLIPScore | LanguageBind Video | ✔ | ✔ | languagebind-video-v1.5-ft, languagebind-video-ft, languagebind-video-v1.5, languagebind-video |
 
-| Model family                | Image | Video |
-| --------------------------- | :---: | :---: |
-| OpenAI CLIP                 |   ✔   |       |
-| YFCC15M CLIP                |   ✔   |       |
-| CC12M CLIP                  |   ✔   |       |
-| LAION-400M CLIP             |   ✔   |       |
-| LAION-2B CLIP               |   ✔   |       |
-| DataComp CLIP (S/M/L/XL/1B) |   ✔   |       |
-| CommonPool CLIP (S/M/L/XL)  |   ✔   |       |
-| MetaCLIP                    |   ✔   |       |
-| DFN (2B/5B)                 |   ✔   |       |
-| SigLIP (webli)              |   ✔   |       |
-| SigLIP2 (webli)             |   ✔   |       |
-| RoBERTa-ViT                 |   ✔   |       |
-| XLM-RoBERTa-ViT             |   ✔   |       |
-| ConvNeXt-CLIP               |   ✔   |       |
-| CoCa                        |   ✔   |       |
-| CLIPA (DataComp1B)          |   ✔   |       |
-| NLLB-CLIP                   |   ✔   |       |
-| MobileCLIP                  |   ✔   |       |
-| ViTamin                     |   ✔   |       |
-| EVA (EVA01/EVA02)           |   ✔   |       |
-| BLIP2-ITC                   |   ✔   |       |
-| HPSv2                       |   ✔   |       |
-| PickScore                   |   ✔   |       |
-| UMT (CLIP)                  |   ✔   |   ✔   |
-| InternVideo2 (CLIP)         |   ✔   |   ✔   |
-| LanguageBind (video)        |   ✔   |   ✔   |
-
-</td>
-</tr>
-</table>
 
 ## Quick start
 
@@ -157,7 +112,7 @@ scores = clip_flant5_score(images=images, texts=texts) # scores[i][j] is the sco
 ### 1. Generate Images
 To generate images using a specified model, run:
 ```bash
-python genai_bench/generate.py --output_dir ./outputs/ --gen_model runwayml/stable-diffusion-v1-5
+python -m genai_bench.generate --output_dir ./outputs/ --gen_model runwayml/stable-diffusion-v1-5
 ```
 
 The generated images will be saved in `./outputs/<model>/`. You may want to modify this script to generate images using your own models.
@@ -166,12 +121,12 @@ The generated images will be saved in `./outputs/<model>/`. You may want to modi
 
 You can evaluate your model using VQAScore based on clip-flant5-xxl:
 ```bash
-python genai_bench/evaluate.py --model clip-flant5-xxl --output_dir ./outputs --gen_model runwayml/stable-diffusion-v1-5
+python -m genai_bench.evaluate --model clip-flant5-xxl --output_dir ./outputs --gen_model runwayml/stable-diffusion-v1-5
 ```
 
 Or you can use GPT-4o based VQAScore:
 ```bash
-python genai_bench/evaluate.py --model gpt-4o --api_key INPUT_YOUR_KEY_HERE --output_dir ./outputs --gen_model runwayml/stable-diffusion-v1-5
+python -m genai_bench.evaluate --model gpt-4o --api_key INPUT_YOUR_KEY_HERE --output_dir ./outputs --gen_model runwayml/stable-diffusion-v1-5
 ```
 
 For comparative VQAScore results (based on clip-flant5-xxl and GPT-4o) against state-of-the-art models like DALLE-3 and Midjourney v6, please refer to the [VQAScore results](https://github.com/linzhiqiu/t2v_metrics/blob/main/genai_bench/model_performance_vqacore.md)!
@@ -208,13 +163,16 @@ scores = clip_flant5_score.batch_forward(dataset=dataset, batch_size=16) # (n_sa
 ### Check all supported models
 We currently support running VQAScore with CLIP-FlanT5, LLaVA-1.5, and InstructBLIP as well as SOTA video LMMs like LLaVA-OneVision, Qwen2.5-VL, and GPT-4o. For ablation, we also include CLIPScore, BLIPv2Score, PickScore, HPSv2Score, and ImageReward:
 ```python
+gpt4o_score = t2v_metrics.VQAScore(model='gpt-4o')
+internvl3_score = t2v_metrics.VQAScore(model='internvl3-8b')
+qwen2vl_score = t2v_metrics.VQAScore(model='qwen2.5-vl-7b')
 llava_score = t2v_metrics.VQAScore(model='llava-v1.5-13b')
 instructblip_score = t2v_metrics.VQAScore(model='instructblip-flant5-xxl')
 clip_score = t2v_metrics.CLIPScore(model='openai:ViT-L-14-336')
-blip_itm_score = t2v_metrics.ITMScore(model='blip2-itm') 
+blip_itm_score = t2v_metrics.ITMScore(model='blip2-itm')
 pick_score = t2v_metrics.CLIPScore(model='pickscore-v1')
-hpsv2_score = t2v_metrics.CLIPScore(model='hpsv2') 
-image_reward_score = t2v_metrics.ITMScore(model='image-reward-v1') 
+hpsv2_score = t2v_metrics.CLIPScore(model='hpsv2')
+siglip_score = t2v_metrics.CLIPScore(model='webli:ViT-B-16-SigLIP')
 ```
 You can check all supported models by running the below commands:
 

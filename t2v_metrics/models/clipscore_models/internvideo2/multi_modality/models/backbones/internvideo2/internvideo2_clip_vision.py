@@ -2,8 +2,8 @@ import logging
 import math
 import torch
 import torch.nn.functional as F
-from timm.models.layers import DropPath, to_2tuple, trunc_normal_
-from timm.models.registry import register_model
+from timm.layers import DropPath, to_2tuple, trunc_normal_
+from timm.models import register_model
 from torch import nn
 
 import torch.utils.checkpoint as checkpoint
