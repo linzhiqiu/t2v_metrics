@@ -15,6 +15,7 @@ class Score(nn.Module):
     def __init__(self,
                  model: str,
                  device: str='cuda',
+                 model_path: str=None,
                  cache_dir: str=HF_CACHE_DIR,
                  **kwargs):
         """Initialize the ScoreModel
@@ -22,11 +23,12 @@ class Score(nn.Module):
         super().__init__()
         assert model in self.list_all_models()
         self.device = device
-        self.model = self.prepare_scoremodel(model, device, cache_dir, **kwargs)
+        self.model = self.prepare_scoremodel(model, model_path, device, cache_dir, **kwargs)
     
     @abstractmethod
     def prepare_scoremodel(self,
                            model: str,
+                           model_path: str,
                            device: str,
                            cache_dir: str,
                            **kwargs):
