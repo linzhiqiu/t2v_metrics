@@ -105,7 +105,7 @@ class Qwen2VLModel(VQAScoreModel):
         self.cache_dir = cache_dir
         self.model_info = QWEN2_VL_MODELS[model_name]
         self.checkpoint = checkpoint if checkpoint else self.model_info['model']['path']
-        self.fps = fps if fps is not None else self.model_info.get('fps', 8.0)
+        self.fps = fps #if fps is not None else self.model_info.get('fps', 8.0)
         self.load_model()
 
     def load_model(self):
@@ -194,8 +194,8 @@ class Qwen2VLModel(VQAScoreModel):
             scores = outputs.scores[0]
 
             probs = torch.nn.functional.softmax(scores, dim=-1)
-            yes_token_id = self.processor.tokenizer.encode(answer)[0]
-            lm_prob = probs[0, yes_token_id].item()
+            ans_token_id = self.processor.tokenizer.encode(answer)[0]
+            lm_prob = probs[0, ans_token_id].item()
             lm_probs.append(lm_prob)
         return torch.tensor(lm_probs)
     

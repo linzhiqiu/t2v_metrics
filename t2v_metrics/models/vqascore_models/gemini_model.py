@@ -21,7 +21,8 @@ default_answer_template = 'Yes'
 GEMINI_MODELS = {
     'gemini-1.5-pro': {},
     'gemini-1.5-flash': {},
-    'gemini-2.5-pro-preview-03-25': {},
+    'gemini-2.5-flash': {},
+    'gemini-2.5-pro': {},
 }
 
 def encode_image(image_path):
@@ -68,14 +69,20 @@ class GeminiModel(VQAScoreModel):
         self.location = location or "us-central1"
         self.logprobs = logprobs
         self.api_key = api_key
-        self.vertex = vertex
+        if project_id:
+            self.vertex = True
+        else:
+            self.vertex = False
         super().__init__(model_name=model_name,
                          device=device,
                          cache_dir=cache_dir)
 
     def load_model(self):
         """Initialize the Gemini client."""
-        self.client = genai.Client(api_key=self.api_key)
+        if self.vertex:
+            self.client = genai.Client(vertexai=True, project=self.project_id, location="global")
+        else:
+            self.client = genai.Client(api_key=self.api_key)
 
     def load_images(self, paths: List[str], num_frames: int = None) -> List[dict]:
         loaded_data = []
@@ -129,7 +136,7 @@ class GeminiModel(VQAScoreModel):
                 top_p=0.95,
                 top_k=20,
                 response_logprobs=True,
-                logprobs=self.logprobs
+                logprobs=3 #self.logprobs
             )
             
             parts = []
@@ -154,24 +161,19 @@ class GeminiModel(VQAScoreModel):
                 contents=parts,
                 config=config,
             )
-            
-            # Process log probs to find probabilities for "yes" and "no"
-            first_token_logprobs = response.candidates[0].tokens[0].logprobs
-            yes_prob, no_prob = 0.0, 0.0
-            
-            # Find the token probabilities for "yes" and "no" responses
-            for token_info in first_token_logprobs:
-                token = token_info.token.lower()
-                if token in ['yes', 'y']:
-                    yes_prob = max(yes_prob, np.exp(token_info.logprob))
-                elif token in ['no', 'n']:
-                    no_prob = max(no_prob, np.exp(token_info.logprob))
-            
-            # Calculate final probability based on the expected answer
-            if answer.lower() == "yes":
-                return torch.tensor([yes_prob])
-            else:
-                return torch.tensor([1 - yes_prob]) if yes_prob > 0 else torch.tensor([no_prob])
+
+            # Get the set of chosen candidates' logprobs:
+            candidates = response.candidates[0].logprobs_result.top_candidates[0].candidates
+
+            ans_prob = 0.0
+            target_answer = answer.lower().strip()
+            for candidate in candidates:
+                cur_token = candidate.token.lower().strip()
+
+                if target_answer in cur_token:
+                    ans_prob = max(ans_prob, np.exp(candidate.log_probability))
+
+            return torch.tensor([ans_prob])
                 
         except Exception as e:
             try:  # Second try
@@ -180,7 +182,7 @@ class GeminiModel(VQAScoreModel):
                     top_p=0.95,
                     top_k=20,
                     response_logprobs=True,
-                    logprobs=self.logprobs
+                    logprobs=3 #self.logprobs
                 )
                 
                 parts = []
@@ -188,13 +190,16 @@ class GeminiModel(VQAScoreModel):
                 # Add the question
                 parts.append(question)
                 
-                # Add the visual content - same as above but for retry
+                # Add the visual content
                 if data['type'] == 'video':
+                    # For video, add the entire video as one part
                     parts.append(Part.from_bytes(data=data['data'], mime_type=data['mime_type']))
                 elif data['type'] == 'frame_list' and 'frames' in data:
+                    # For frame lists, add each frame
                     for frame in data['frames']:
                         parts.append(Part.from_bytes(data=frame, mime_type="image/jpeg"))
                 else:
+                    # For images
                     parts.append(Part.from_bytes(data=data['data'], mime_type=data['mime_type']))
                 
                 response = self.client.models.generate_content(
@@ -202,25 +207,20 @@ class GeminiModel(VQAScoreModel):
                     contents=parts,
                     config=config,
                 )
-                
-                # Process log probs to find probabilities for "yes" and "no"
-                first_token_logprobs = response.candidates[0].tokens[0].logprobs
-                yes_prob, no_prob = 0.0, 0.0
-                
-                # Find the token probabilities for "yes" and "no" responses
-                for token_info in first_token_logprobs:
-                    token = token_info.token.lower()
-                    if token in ['yes', 'y']:
-                        yes_prob = max(yes_prob, np.exp(token_info.logprob))
-                    elif token in ['no', 'n']:
-                        no_prob = max(no_prob, np.exp(token_info.logprob))
-                
-                # Calculate final probability based on the expected answer
-                if answer.lower() == "yes":
-                    return torch.tensor([yes_prob])
-                else:
-                    return torch.tensor([1 - yes_prob]) if yes_prob > 0 else torch.tensor([no_prob])
-                    
+
+                # Get the set of chosen candidates' logprobs:
+                candidates = response.candidates[0].logprobs_result.top_candidates[0].candidates
+
+                ans_prob = 0.0
+                target_answer = answer.lower().strip()
+                for candidate in candidates:
+                    cur_token = candidate.token.lower().strip()
+
+                    if target_answer in cur_token:
+                        ans_prob = max(ans_prob, np.exp(candidate.log_probability))
+                print(f'Answer Probability {ans}')
+                return torch.tensor([ans_prob])
+                        
             except Exception as retry_error:
                 print(f"Failed media: {data['path']} and question: {question} and answer: {answer}")
                 print(f"Error: {str(e)}")

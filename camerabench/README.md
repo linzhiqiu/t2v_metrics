@@ -16,6 +16,7 @@ To use another method (e.g., SfMs), simply implement your own Script 1 in the st
 
 Setup is identical to what is shown in the main `t2v_metrics` README, but it is reproduced here for convenience. Setup `t2v_metrics` either by:
 
+In the project root:
 ```
 git clone https://github.com/linzhiqiu/t2v_metrics.git
 cd t2v_metrics
@@ -27,7 +28,7 @@ conda install pip -y
 conda install ffmpeg -c conda-forge
 pip install -e .
 ```
-or 
+or from anywhere via standard package install:
 
 ```
 pip install t2v-metrics
@@ -50,10 +51,10 @@ Below, we show how to run evaluation for the 7B Qwen-2.5-VL model reported in ou
 ### Score Generation
 ```bash
 # Generate scores using VQAScore models for all splits
-python binary_classification_vlm_scores.py --model 'qwen2.5-vl-7b' --checkpoint 'chancharikm/qwen2.5-vl-7b-cam-motion-preview' --data_dir data/binary_classification --output_dir scores/
+python binary_classification_vlm_scores.py --model 'qwen2.5-vl-7b' --checkpoint 'chancharikm/qwen2.5-vl-7b-cam-motion' --data_dir data/binary_classification --output_dir scores/
 
 # Generate scores for specific splits only
-python binary_classification_vlm_scores.py --model 'qwen2.5-vl-7b' --checkpoint 'chancharikm/qwen2.5-vl-7b-cam-motion-preview' --splits Move_Down Move_Up Pan_Left Pan_Right --output_dir scores/
+python binary_classification_vlm_scores.py --model 'qwen2.5-vl-7b' --checkpoint 'chancharikm/qwen2.5-vl-7b-cam-motion' --splits Move_Down Move_Up Pan_Left Pan_Right --output_dir scores/
 ```
 
 **Available Binary Classification Splits:**
@@ -105,11 +106,11 @@ python binary_classification_evaluation.py scores/vqa_scores_qwen2.5-vl-7b_*_Mov
 ### Score Generation
 ```bash
 # Generate scores for all skills using VQAScore models
-python vqa_and_retrieval_vlm_scores.py --model 'qwen2.5-vl-7b' --checkpoint 'chancharikm/qwen2.5-vl-7b-cam-motion-preview' --data_dir data --combine_tasks --output_dir scores
+python vqa_and_retrieval_vlm_scores.py --model 'qwen2.5-vl-7b' --checkpoint 'chancharikm/qwen2.5-vl-7b-cam-motion' --data_dir data --combine_tasks --output_dir scores
 
 
 # Generate scores for a specific skill
-python vqa_and_retrieval_vlm_scores.py --model 'qwen2.5-vl-7b' --checkpoint 'chancharikm/qwen2.5-vl-7b-cam-motion-preview' --skill "has_motion" --output_dir scores
+python vqa_and_retrieval_vlm_scores.py --model 'qwen2.5-vl-7b' --checkpoint 'chancharikm/qwen2.5-vl-7b-cam-motion' --skill "has_motion" --output_dir scores
 ```
 
 **Available VQA/Retrieval Skills:** `complex_description`, `confusable_motion`, `has_motion`, `motion_and_steadiness`, `motion_direction`, `motion_speed`, `only_motion`, `scene_dynamics`, `tracking_shot`.
@@ -177,10 +178,10 @@ python vqa_and_retrieval_evaluation.py scores/vqa_retrieval_scores_model1_*.json
 ### Caption Generation
 ```bash
 # Generate captions using VQA models for all samples
-python caption_generation_vlm_scores.py --model 'qwen2.5-vl-7b' --checkpoint 'chancharikm/qwen2.5-vl-7b-cam-motion-preview' --data_dir data --output_dir scores/
+python caption_generation.py --model 'qwen2.5-vl-7b' --checkpoint 'chancharikm/qwen2.5-vl-7b-cam-motion' --data_dir data --output_dir scores/
 
 # Generate captions for a limited number of samples
-python caption_generation_vlm_scores.py --model 'qwen2.5-vl-7b' --checkpoint 'chancharikm/qwen2.5-vl-7b-cam-motion-preview' --data_dir data --sample_size 10 --output_dir scores/
+python caption_generation.py --model 'qwen2.5-vl-7b' --checkpoint 'chancharikm/qwen2.5-vl-7b-cam-motion' --data_dir data --sample_size 10 --output_dir scores/
 ```
 
 ### Evaluation

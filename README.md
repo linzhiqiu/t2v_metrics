@@ -23,46 +23,50 @@ VQAScore significantly outperforms previous metrics such as CLIPScore and PickSc
 
 ## Available Models:
 
-
-| Score Type | Model Family Name | Image | Video | Models |
-|------------|------------------|:-----:|:-----:|--------|
-| **VQAScore** |
-| VQAScore | CLIP-FlanT5 | ✔ | | clip-flant5-xxl, clip-flant5-xl, clip-flant5-xxl-no-system, clip-flant5-xxl-no-system-no-user |
-| VQAScore | LLaVA-1.5 | ✔ | | llava-v1.5-13b, llava-v1.5-7b |
-| VQAScore | ShareGPT4V | ✔ | | sharegpt4v-7b, sharegpt4v-13b |
-| VQAScore | LLaVA-1.6 | ✔ | | llava-v1.6-13b |
-| VQAScore | InstructBLIP-FlanT5 | ✔ | | instructblip-flant5-xxl, instructblip-flant5-xl |
-| VQAScore | GPT-4 | ✔ | ✔ | gpt-4-turbo, gpt-4o, gpt-4.1 |
-| VQAScore | LLaVA-OneVision | ✔ | ✔ | llava-onevision-qwen2-7b-si, llava-onevision-qwen2-7b-ov |
-| VQAScore | mPLUG-Owl3 | ✔ | ✔ | mplug-owl3-7b |
-| VQAScore | PaliGemma | ✔ | | paligemma-3b-mix-224, paligemma-3b-mix-448, paligemma-3b-mix-896 |
-| VQAScore | InternVL2 | ✔ | ✔ | internvl2-1b, internvl2-2b, internvl2-4b, internvl2-8b, internvl2-26b, internvl2-40b, internvl2-llama3-76b |
-| VQAScore | InternVL2.5 | ✔ | ✔ | internvl2.5-1b, internvl2.5-2b, internvl2.5-4b, internvl2.5-8b, internvl2.5-26b, internvl2.5-38b, internvl2.5-78b |
-| VQAScore | InternVL3 | ✔ | ✔ | internvl3-8b, internvl3-14b, internvl3-78b |
-| VQAScore | InternVideo2-Chat | ✔ | ✔ | internvideo2-chat-8b, internvideo2-chat-8b-hd, internvideo2-chat-8b-internlm |
-| VQAScore | InternLM-XComposer2.5 | ✔ | ✔ | internlmxcomposer25-7b |
-| VQAScore | Llama-3.2 | ✔ | | llama-3.2-1b, llama-3.2-3b, llama-3.2-1b-instruct, llama-3.2-3b-instruct, llama-3.2-11b-vision, llama-3.2-11b-vision-instruct, llama-3.2-90b-vision, llama-3.2-90b-vision-instruct |
-| VQAScore | Llama-Guard-3 | ✔ | | llama-guard-3-1b, llama-guard-3-11b-vision |
-| VQAScore | Molmo | ✔ | | molmo-72b-0924, molmo-7b-d-0924, molmo-7b-o-0924, molmoe-1b-0924 |
-| VQAScore | Gemini | ✔ | ✔ | gemini-1.5-pro, gemini-1.5-flash, gemini-2.5-pro-preview-03-25 |
-| VQAScore | Qwen2-VL | ✔ | ✔ | qwen2-vl-2b, qwen2-vl-7b, qwen2-vl-72b |
-| VQAScore | Qwen2.5-VL | ✔ | ✔ | qwen2.5-vl-3b, qwen2.5-vl-7b, qwen2.5-vl-32b, qwen2.5-vl-72b |
-| VQAScore | LLaVA-Video | | ✔ | llava-video-7b, llava-video-72B |
-| VQAScore | Tarsier | | ✔ | tarsier-recap-7b, tarsier2-7b |
-| VQAScore | Perception-LM | | ✔ | perception-lm-1b, perception-lm-3b, perception-lm-8b |
-| **ITMScore** |
-| ITMScore | BLIP2-ITM | ✔ | | blip2-itm, blip2-itm-vitL, blip2-itm-coco |
-| ITMScore | UMT-ITM | ✔ | ✔ | umt-b16-25m-itm, umt-l16-25m-itm |
-| ITMScore | InternVideo2-ITM | ✔ | ✔ | internvideo2-1b-stage2-itm |
-| **CLIPScore** |
-| CLIPScore | All OpenCLIP Models | ✔ | | openai:ViT-B-32, openai:ViT-L-14, laion2b_s32b_b82k:ViT-L-14, datacomp_xl_s13b_b90k:ViT-B-16, webli:ViT-B-16-SigLIP, metaclip_400m:ViT-B-32, ... (200+ models available - use `t2v_metrics.list_all_clipscore_models()` to see all exact model names) |
-| CLIPScore | BLIP2-ITC | ✔ | | blip2-itc, blip2-itc-vitL, blip2-itc-coco |
-| CLIPScore | HPSv2 | ✔ | | hpsv2 |
-| CLIPScore | PickScore | ✔ | | pickscore-v1 |
-| CLIPScore | UMT-CLIP | ✔ | ✔ | umt-b16-25m-clip, umt-l16-25m-clip |
-| CLIPScore | InternVideo2-CLIP | ✔ | ✔ | internvideo2-1b-stage2-clip |
-| CLIPScore | LanguageBind Video | ✔ | ✔ | languagebind-video-v1.5-ft, languagebind-video-ft, languagebind-video-v1.5, languagebind-video |
-
+### VQAScore
+| Model Family Name | Image | Video | Models |
+| --------------------- | :---: | :---: | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| CLIP-FlanT5 | :heavy_check_mark: | | clip-flant5-xxl, clip-flant5-xl, clip-flant5-xxl-no-system, clip-flant5-xxl-no-system-no-user |
+| LLaVA-1.5 | :heavy_check_mark: | | llava-v1.5-13b, llava-v1.5-7b |
+| ShareGPT4V | :heavy_check_mark: | | sharegpt4v-7b, sharegpt4v-13b |
+| LLaVA-1.6 | :heavy_check_mark: | | llava-v1.6-13b |
+| InstructBLIP-FlanT5 | :heavy_check_mark: | | instructblip-flant5-xxl, instructblip-flant5-xl |
+| GPT-4 | :heavy_check_mark: | :heavy_check_mark: | gpt-4-turbo, gpt-4o, gpt-4.1 |
+| LLaVA-OneVision | :heavy_check_mark: | :heavy_check_mark: | llava-onevision-qwen2-7b-si, llava-onevision-qwen2-7b-ov |
+| mPLUG-Owl3 | :heavy_check_mark: | :heavy_check_mark: | mplug-owl3-7b |
+| PaliGemma | :heavy_check_mark: | | paligemma-3b-mix-224, paligemma-3b-mix-448, paligemma-3b-mix-896 |
+| InternVL2 | :heavy_check_mark: | :heavy_check_mark: | internvl2-1b, internvl2-2b, internvl2-4b, internvl2-8b, internvl2-26b, internvl2-40b, internvl2-llama3-76b |
+| InternVL2.5 | :heavy_check_mark: | :heavy_check_mark: | internvl2.5-1b, internvl2.5-2b, internvl2.5-4b, internvl2.5-8b, internvl2.5-26b, internvl2.5-38b, internvl2.5-78b |
+| InternVL3 | :heavy_check_mark: | :heavy_check_mark: | internvl3-8b, internvl3-14b, internvl3-78b |
+| InternVideo2-Chat | :heavy_check_mark: | :heavy_check_mark: | internvideo2-chat-8b, internvideo2-chat-8b-hd, internvideo2-chat-8b-internlm |
+| InternLM-XComposer2.5 | :heavy_check_mark: | :heavy_check_mark: | internlmxcomposer25-7b |
+| Llama-3.2 | :heavy_check_mark: | | llama-3.2-1b, llama-3.2-3b, llama-3.2-1b-instruct, llama-3.2-3b-instruct, llama-3.2-11b-vision, llama-3.2-11b-vision-instruct, llama-3.2-90b-vision, llama-3.2-90b-vision-instruct |
+| Llama-Guard-3 | :heavy_check_mark: | | llama-guard-3-1b, llama-guard-3-11b-vision |
+| Molmo | :heavy_check_mark: | | molmo-72b-0924, molmo-7b-d-0924, molmo-7b-o-0924, molmoe-1b-0924 |
+| Gemini | :heavy_check_mark: | :heavy_check_mark: | gemini-1.5-pro, gemini-1.5-flash, gemini-2.5-pro-preview-03-25 |
+| Qwen2-VL | :heavy_check_mark: | :heavy_check_mark: | qwen2-vl-2b, qwen2-vl-7b, qwen2-vl-72b |
+| Qwen2.5-VL | :heavy_check_mark: | :heavy_check_mark: | qwen2.5-vl-3b, qwen2.5-vl-7b, qwen2.5-vl-32b, qwen2.5-vl-72b |
+| LLaVA-Video | | :heavy_check_mark: | llava-video-7b, llava-video-72B |
+| Tarsier | | :heavy_check_mark: | tarsier-recap-7b, tarsier2-7b |
+| Perception-LM | | :heavy_check_mark: | perception-lm-1b, perception-lm-3b, perception-lm-8b |
+---
+### ITMScore
+| Model Family Name | Image | Video | Models |
+| ----------------- | :---: | :---: | ----------------------------------------- |
+| BLIP2-ITM | :heavy_check_mark: | | blip2-itm, blip2-itm-vitL, blip2-itm-coco |
+| UMT-ITM | :heavy_check_mark: | :heavy_check_mark: | umt-b16-25m-itm, umt-l16-25m-itm |
+| InternVideo2-ITM | :heavy_check_mark: | :heavy_check_mark: | internvideo2-1b-stage2-itm |
+---
+### CLIPScore
+| Model Family Name | Image | Video | Models |
+| ------------------- | :---: | :---: | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| All OpenCLIP Models | :heavy_check_mark: | | openai\:ViT-B-32, openai\:ViT-L-14, laion2b\_s32b\_b82k\:ViT-L-14, datacomp\_xl\_s13b\_b90k\:ViT-B-16, webli\:ViT-B-16-SigLIP, metaclip\_400m\:ViT-B-32, ... (200+ models available - use `t2v_metrics.list_all_clipscore_models()` to see all exact model names) |
+| BLIP2-ITC | :heavy_check_mark: | | blip2-itc, blip2-itc-vitL, blip2-itc-coco |
+| HPSv2 | :heavy_check_mark: | | hpsv2 |
+| PickScore | :heavy_check_mark: | | pickscore-v1 |
+| UMT-CLIP | :heavy_check_mark: | :heavy_check_mark: | umt-b16-25m-clip, umt-l16-25m-clip |
+| InternVideo2-CLIP | :heavy_check_mark: | :heavy_check_mark: | internvideo2-1b-stage2-clip |
+| LanguageBind Video | :heavy_check_mark: | :heavy_check_mark: | languagebind-video-v1.5-ft, languagebind-video-ft, languagebind-video-v1.5, languagebind-video |
 
 ## Quick start
 
@@ -163,16 +167,10 @@ scores = clip_flant5_score.batch_forward(dataset=dataset, batch_size=16) # (n_sa
 ### Check all supported models
 We currently support running VQAScore with CLIP-FlanT5, LLaVA-1.5, and InstructBLIP as well as SOTA video LMMs like LLaVA-OneVision, Qwen2.5-VL, and GPT-4o. For ablation, we also include CLIPScore, BLIPv2Score, PickScore, HPSv2Score, and ImageReward:
 ```python
-gpt4o_score = t2v_metrics.VQAScore(model='gpt-4o')
+gpt4o_score = t2v_metrics.VQAScore(model='gpt-4o', api_key="YOUR_API_KEY") # Using OpenAI Key
+gemini2.5_score = t2v_metrics.VQAScore(model='gemin-2.5-pro', api_key="YOUR_API_KEY") # This is using your Gemini API key, which is the recommended method. If you would like to use your Vertex AI project, please make a request on Github.
 internvl3_score = t2v_metrics.VQAScore(model='internvl3-8b')
-qwen2vl_score = t2v_metrics.VQAScore(model='qwen2.5-vl-7b')
-llava_score = t2v_metrics.VQAScore(model='llava-v1.5-13b')
-instructblip_score = t2v_metrics.VQAScore(model='instructblip-flant5-xxl')
-clip_score = t2v_metrics.CLIPScore(model='openai:ViT-L-14-336')
-blip_itm_score = t2v_metrics.ITMScore(model='blip2-itm')
-pick_score = t2v_metrics.CLIPScore(model='pickscore-v1')
-hpsv2_score = t2v_metrics.CLIPScore(model='hpsv2')
-siglip_score = t2v_metrics.CLIPScore(model='webli:ViT-B-16-SigLIP')
+qwen25vl_score = t2v_metrics.VQAScore(model='qwen2.5-vl-7b') 
 ```
 You can check all supported models by running the below commands:
 
@@ -260,17 +258,17 @@ video = "videos/baby.mp4"
 text = "a baby crying"
 score = qwen_score(images=[video], texts=[text]) 
 
+### Pairwise similarity scores between M videos and N texts:
+videos = ["videos/baby.mp4", "videos/ducks.mp4"]
+texts = ["a baby crying", "a group of ducks standing in the water"]
+score = qwen_score(images=videos, texts=texts, fps=8.0)  # M x N score tensor
+
 # For Qwen models, specify fps:
-# score = qwen_score(images=[video], texts=[text], fps=8.0) 
+# score = qwen_score(images=[video], texts=[text], fps=8.0) # We recommend 8.0 FPS for balancing computationally reasonable inference and performance. To default to Qwen's dynamic FPS sampling, just leave fps unset.
 
 # For other models like LLaVA, use num_frames
 # llava_score = t2v_metrics.VQAScore(model='llava-onevision-qwen2-7b-ov')
-# score = llava_score(images=[video], texts=[text], num_frames=8)
-
-### Pairwise similarity scores between M videos and N texts:
-videos = ["videos/baby.mp4", "video/ducks.mp4"]
-texts = ["a baby crying", "a group of ducks standing in the water"]
-score = qwen_score(images=videos, texts=texts, fps=8.0)  # M x N score tensor
+# score = llava_score(images=[video], texts=[text], num_frames=8) # We did our best to align with the default num_frames for each model, but to be certain, please check each respective model's spec or paper for confirmation.
 ```
 
 ### Text generation (VQA)

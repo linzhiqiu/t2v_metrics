@@ -22,7 +22,6 @@ from .vqa_model import VQAScoreModel
 warnings.filterwarnings("ignore")
 
 current_path = os.path.dirname(os.path.abspath(__file__))
-print(f'current_path {current_path}')
 TARSIER_MODELS = {
     'tarsier-recap-7b': {
         'model': {

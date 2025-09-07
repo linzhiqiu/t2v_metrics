@@ -222,7 +222,7 @@ def find_score_files(score_dir):
         return []
     
     # Look for binary classification score files with the simplified pattern
-    score_files = list(score_dir.glob("vqa_scores_*.json"))
+    score_files = list(score_dir.glob("classification_scores_*.json"))
     
     # Remove duplicates and sort
     score_files = sorted(list(set(score_files)))

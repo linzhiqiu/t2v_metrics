@@ -92,7 +92,8 @@ dependencies = [
     "google-genai",
     "blobfile",
     "pytorchvideo @ git+https://github.com/linzhiqiu/pytorchvideo.git",
-    "diffusers"
+    "diffusers",
+    "nltk"
 ] 
 
 [tool.setuptools.packages.find]
