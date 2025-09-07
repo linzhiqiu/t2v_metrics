@@ -91,12 +91,9 @@ def save_scores(results, output_file, metadata=None):
     print(f"Scores saved to: {output_file}")
 
 def generate_output_filename(model_name, checkpoint_name, split_name):
-    """Generate output filename with model, checkpoint, split, and timestamp"""
+    """Generate output filename with model, checkpoint, and split names."""
     # Clean model name for filename
     clean_model = model_name.replace('/', '_').replace('\\', '_').replace(':', '_')
-    
-    # Generate timestamp
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     
     # Build filename components
     filename_parts = ["classification_scores", clean_model]
@@ -105,7 +102,7 @@ def generate_output_filename(model_name, checkpoint_name, split_name):
         clean_checkpoint = checkpoint_name.replace('/', '_').replace('\\', '_').replace(':', '_')
         filename_parts.append(clean_checkpoint)
     
-    filename_parts.extend([split_name, timestamp])
+    filename_parts.append(split_name)
     
     return "_".join(filename_parts) + ".json"
 

@@ -12,6 +12,7 @@ import numpy as np
 from sklearn.metrics import average_precision_score, precision_recall_curve, roc_auc_score, roc_curve
 import matplotlib.pyplot as plt
 from datetime import datetime
+from collections import defaultdict
 
 def load_score_file(score_file):
     """Load scores from a standardized score file"""
@@ -112,9 +113,10 @@ def generate_plots(scores, labels, output_dir, method_name, split_name):
     
     print(f"Plots saved to: {plot_path}")
 
-def evaluate_single_file(score_file, generate_plots_flag=False, output_dir=None):
+def evaluate_single_file(score_file, generate_plots_flag=False, output_dir=None, quiet=False):
     """Evaluate a single score file"""
-    print(f"\nEvaluating: {score_file}")
+    if not quiet:
+        print(f"\nEvaluating: {score_file}")
     
     # Load score data
     score_data = load_score_file(score_file)
@@ -133,38 +135,42 @@ def evaluate_single_file(score_file, generate_plots_flag=False, output_dir=None)
     else:
         unique_id = f"{model_name}_{split_name}"
     
-    print(f"Model: {model_name}")
-    if checkpoint:
-        print(f"Checkpoint: {checkpoint}")
-    print(f"Split: {split_name}")
+    if not quiet:
+        print(f"Model: {model_name}")
+        if checkpoint:
+            print(f"Checkpoint: {checkpoint}")
+        print(f"Split: {split_name}")
     
     # Calculate statistics from the scores data
     total_samples = len(score_data["scores"])
     failed_samples = sum(1 for result in score_data["scores"] if result["error"] is not None)
     successful_samples = total_samples - failed_samples
     
-    print(f"Total samples in file: {total_samples}")
-    print(f"Successful samples: {successful_samples}")
-    print(f"Failed samples: {failed_samples}")
+    if not quiet:
+        print(f"Total samples in file: {total_samples}")
+        print(f"Successful samples: {successful_samples}")
+        print(f"Failed samples: {failed_samples}")
     
     # Extract scores and labels
     scores, labels = extract_scores_and_labels(score_data)
     
     if len(scores) == 0:
-        print("No valid scores found in file")
+        if not quiet:
+            print("No valid scores found in file")
         return unique_id, None
     
     # Compute metrics
     metrics = compute_binary_classification_metrics(scores, labels)
     
     # Print results
-    print(f"Evaluation Results:")
-    print(f"  Average Precision (mAP): {metrics['average_precision']:.4f}")
-    print(f"  ROC AUC: {metrics['roc_auc']:.4f}")
-    print(f"  Valid samples used: {metrics['num_samples']}")
-    print(f"  Positive samples: {metrics['num_positive']}")
-    print(f"  Negative samples: {metrics['num_negative']}")
-    print(f"  Positive ratio: {metrics['positive_ratio']:.3f}")
+    if not quiet:
+        print(f"Evaluation Results:")
+        print(f"  Average Precision (mAP): {metrics['average_precision']:.4f}")
+        print(f"  ROC AUC: {metrics['roc_auc']:.4f}")
+        print(f"  Valid samples used: {metrics['num_samples']}")
+        print(f"  Positive samples: {metrics['num_positive']}")
+        print(f"  Negative samples: {metrics['num_negative']}")
+        print(f"  Positive ratio: {metrics['positive_ratio']:.3f}")
     
     # Generate plots if requested
     if generate_plots_flag and output_dir:
@@ -214,6 +220,64 @@ def save_evaluation_results(results, output_file):
     if overall_stats:
         print(f"Overall Average Precision: {overall_stats['mean_average_precision']:.4f}")
         print(f"Overall ROC AUC: {overall_stats['mean_roc_auc']:.4f}")
+
+def print_hierarchical_results(results):
+    """Print results organized hierarchically by model and checkpoint"""
+    valid_results = {k: v for k, v in results.items() if v is not None}
+    
+    if not valid_results:
+        print("No valid results to display")
+        return
+    
+    # Group results by model and checkpoint
+    grouped_results = defaultdict(lambda: defaultdict(list))
+    
+    for split_name, metrics in valid_results.items():
+        model_name = metrics.get("model_name", "Unknown_Model")
+        checkpoint = metrics.get("checkpoint", "")
+        
+        # Create a model key that includes checkpoint info
+        if checkpoint:
+            model_key = (model_name, checkpoint)
+        else:
+            model_key = (model_name, "")
+        
+        grouped_results[model_key]["splits"].append((split_name, metrics))
+    
+    # Print results hierarchically
+    print(f"\n{'='*80}")
+    print("EVALUATION RESULTS")
+    print(f"{'='*80}")
+    
+    for (model_name, checkpoint), group_data in grouped_results.items():
+        # Print model header
+        print(f"\n┏━━ MODEL: {model_name}")
+        if checkpoint:
+            print(f"┃   Checkpoint: {checkpoint}")
+        print(f"┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+        
+        # Print splits for this model
+        splits = group_data["splits"]
+        for i, (split_name, metrics) in enumerate(splits):
+            split_display_name = metrics.get("split_name", split_name.split("_")[-1])
+            
+            # Use different symbols for different splits
+            if i == len(splits) - 1:  # Last split
+                prefix = "   └─"
+            else:
+                prefix = "   ├─"
+            
+            print(f"{prefix} {split_display_name:25s}: mAP = {metrics['average_precision']:.4f}, AUC = {metrics['roc_auc']:.4f} "
+                  f"({metrics['num_samples']} samples, {metrics['num_positive']}+/{metrics['num_negative']}-)")
+        
+        # If multiple splits for this model, show model average
+        if len(splits) > 1:
+            model_maps = [metrics["average_precision"] for _, metrics in splits]
+            model_aucs = [metrics["roc_auc"] for _, metrics in splits]
+            total_samples = sum(metrics["num_samples"] for _, metrics in splits)
+            
+            print(f"   {'─' * 25} Model Average: mAP = {np.mean(model_maps):.4f}, AUC = {np.mean(model_aucs):.4f} "
+                  f"({total_samples} total samples)")
 
 def find_score_files(score_dir):
     """Find all binary classification score files in a directory"""
@@ -268,58 +332,54 @@ def main():
     print(f"{'='*80}")
     print(f"Score files to evaluate: {len(score_files)}")
     
-    # Evaluate each file
+    # Evaluate each file (quietly to avoid cluttering output)
     results = {}
     
-    for score_file in score_files:
+    print("\nProcessing files...")
+    for i, score_file in enumerate(score_files, 1):
         if not score_file.exists():
             print(f"Warning: Score file not found: {score_file}")
             continue
         
+        print(f"  [{i}/{len(score_files)}] {score_file.name}")
+        
         split_name, metrics = evaluate_single_file(
             score_file, 
             generate_plots_flag=args.plots,
-            output_dir=output_dir
+            output_dir=output_dir,
+            quiet=True  # Suppress detailed per-file output
         )
         
         results[split_name] = metrics
     
-    # Print summary
-    print(f"\n{'='*80}")
-    print("EVALUATION SUMMARY")
-    print(f"{'='*80}")
-    
-    valid_results = {k: v for k, v in results.items() if v is not None}
-    
-    if not valid_results:
-        print("No valid results to summarize")
-        return
-    
-    # Print individual results
-    for split_name, metrics in valid_results.items():
-        print(f"{split_name:30s}: mAP = {metrics['average_precision']:.4f}, AUC = {metrics['roc_auc']:.4f}")
+    # Print hierarchical results
+    print_hierarchical_results(results)
     
     # Print overall statistics
+    valid_results = {k: v for k, v in results.items() if v is not None}
+    
     if len(valid_results) >= 1:
         maps = [m["average_precision"] for m in valid_results.values()]
         aucs = [m["roc_auc"] for m in valid_results.values()]
         
-        print("-" * 80)
+        print(f"\n{'='*80}")
+        print("OVERALL STATISTICS")
+        print(f"{'='*80}")
         if len(valid_results) > 1:
-            print(f"{'Overall Average':30s}: mAP = {np.mean(maps):.4f} (±{np.std(maps):.4f}), AUC = {np.mean(aucs):.4f} (±{np.std(aucs):.4f})")
+            print(f"Overall Average (across all splits): mAP = {np.mean(maps):.4f} (±{np.std(maps):.4f}), AUC = {np.mean(aucs):.4f} (±{np.std(aucs):.4f})")
         else:
-            print(f"{'Overall (Single Split)':30s}: mAP = {np.mean(maps):.4f}, AUC = {np.mean(aucs):.4f}")
+            print(f"Single Split Result: mAP = {np.mean(maps):.4f}, AUC = {np.mean(aucs):.4f}")
+        print(f"Total splits evaluated: {len(valid_results)}")
     
     # Generate output filename if not provided
     if args.output_file:
         output_file = Path(args.output_file)
     else:
-        # Create a more descriptive timestamp-based filename
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        # Create a descriptive filename without timestamp
         # Include number of models/files for clarity
         num_models = len(set([m.get("model_name", "unknown") for m in valid_results.values() if m and "metadata" in m]))
         num_files = len(valid_results)
-        output_file = output_dir / f"binary_classification_evaluation_{num_models}models_{num_files}files_{timestamp}.json"
+        output_file = output_dir / f"binary_classification_evaluation_{num_models}models_{num_files}files.json"
     
     # Save results
     save_evaluation_results(valid_results, output_file)

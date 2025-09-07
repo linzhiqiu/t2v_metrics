@@ -176,13 +176,10 @@ def save_scores(results, output_file, metadata=None):
     print(f"Scores saved to: {output_file}")
 
 def generate_output_filename(model_name, checkpoint_name, skill_name, task_name=None):
-    """Generate output filename with model, checkpoint, skill, task, and timestamp"""
+    """Generate output filename with model, checkpoint, skill, and task names."""
     # Clean names for filename
     clean_model = model_name.replace('/', '_').replace('\\', '_').replace(':', '_')
     clean_skill = skill_name.replace(' ', '_').replace('/', '_').replace('\\', '_').replace(':', '_')
-    
-    # Generate timestamp
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     
     # Build filename components
     filename_parts = ["vqa_retrieval_scores", clean_model]
@@ -196,8 +193,6 @@ def generate_output_filename(model_name, checkpoint_name, skill_name, task_name=
     if task_name:
         clean_task = task_name.replace(' ', '_').replace('/', '_').replace('\\', '_').replace(':', '_')
         filename_parts.append(clean_task)
-    
-    filename_parts.append(timestamp)
     
     return "_".join(filename_parts) + ".json"
 
