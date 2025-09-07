@@ -264,7 +264,8 @@ texts = ["a baby crying", "a group of ducks standing in the water"]
 score = qwen_score(images=videos, texts=texts, fps=8.0)  # M x N score tensor
 
 # For Qwen models, specify fps:
-# score = qwen_score(images=[video], texts=[text], fps=8.0) # We recommend 8.0 FPS for balancing computationally reasonable inference and performance. To default to Qwen's dynamic FPS sampling, just leave fps unset.
+# score = qwen_score(images=[video], texts=[text], fps=8.0) # We default to 8.0 FPS for balancing computationally reasonable inference and performance. To switch to Qwen's dynamic FPS sampling, you must explicitly set it to "dynamic"
+# score = qwen_score(images=[video], texts=[text], fps="dynamic")
 
 # For other models like LLaVA, use num_frames
 # llava_score = t2v_metrics.VQAScore(model='llava-onevision-qwen2-7b-ov')

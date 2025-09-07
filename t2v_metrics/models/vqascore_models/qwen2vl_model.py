@@ -97,15 +97,13 @@ class Qwen2VLModel(VQAScoreModel):
                  model_name='qwen2.5-vl-7b',
                  device='cuda',
                  cache_dir=None,
-                 checkpoint=None,
-                 fps=None):
+                 checkpoint=None):
         assert model_name in QWEN2_VL_MODELS, f"Model {model_name} not found in QWEN2_VL_MODELS"
         self.model_name = model_name
         self.device = device
         self.cache_dir = cache_dir
         self.model_info = QWEN2_VL_MODELS[model_name]
         self.checkpoint = checkpoint if checkpoint else self.model_info['model']['path']
-        self.fps = fps #if fps is not None else self.model_info.get('fps', 8.0)
         self.load_model()
 
     def load_model(self):
@@ -135,11 +133,14 @@ class Qwen2VLModel(VQAScoreModel):
 
     def load_images(self, paths: List[str], fps: float = None) -> List[Union[torch.Tensor, List[torch.Tensor]]]:
         processed_data = []
-        fps = fps if fps is not None else self.fps
+        fps = fps if fps is not None else self.model_info.get('fps', 8.0)
         for path in paths:
             if path.lower().endswith(('.mp4', '.avi', '.mov', '.mkv')):  # Video file path
                 # video_frames = self.load_video(path, num_frames)
-                processed_data.append({"type": "video", "video": path, "max_pixels": 360*420, "fps":fps})
+                if fps == "dynamic":
+                    processed_data.append({"type": "video", "video": path, "max_pixels": 360*420})
+                else:
+                    processed_data.append({"type": "video", "video": path, "max_pixels": 360*420, "fps":fps})
             elif path.lower().endswith('.npy'):  # NumPy file
                 np_array = np.load(path)
                 if np_array.ndim == 3:  # Single image
@@ -158,7 +159,7 @@ class Qwen2VLModel(VQAScoreModel):
     def forward(self,
                 paths: List[str],
                 texts: List[str],
-                fps: float=None,
+                fps=None,
                 question_template: str = "Does this image show \"{}\"?", #"Does this image show \"{}\"? Answer the question with Yes or No",
                 answer_template: str = "Yes") -> torch.Tensor:
         assert len(paths) == len(texts), "Number of paths and texts must match"
@@ -202,7 +203,7 @@ class Qwen2VLModel(VQAScoreModel):
     def generate(self,
                 images: List[str],
                 texts: List[str],
-                fps: float=None,
+                fps=None,
                 max_new_tokens: int = 256) -> List[str]:
         assert len(images) == len(texts), "Number of paths and texts must match"
         
