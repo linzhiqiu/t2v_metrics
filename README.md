@@ -168,7 +168,7 @@ scores = clip_flant5_score.batch_forward(dataset=dataset, batch_size=16) # (n_sa
 We currently support running VQAScore with CLIP-FlanT5, LLaVA-1.5, and InstructBLIP as well as SOTA video LMMs like LLaVA-OneVision, Qwen2.5-VL, and GPT-4o. For ablation, we also include CLIPScore, BLIPv2Score, PickScore, HPSv2Score, and ImageReward:
 ```python
 gpt4o_score = t2v_metrics.VQAScore(model='gpt-4o', api_key="YOUR_API_KEY") # Using OpenAI Key
-gemini2.5_score = t2v_metrics.VQAScore(model='gemin-2.5-pro', api_key="YOUR_API_KEY") # This is using your Gemini API key, which is the recommended method. If you would like to use your Vertex AI project, please make a request on Github.
+gemini25_score = t2v_metrics.VQAScore(model='gemin-2.5-pro', api_key="YOUR_API_KEY") # This is using your Gemini API key, which is the recommended method. If you would like to use your Vertex AI project, please make a request on Github.
 internvl3_score = t2v_metrics.VQAScore(model='internvl3-8b')
 qwen25vl_score = t2v_metrics.VQAScore(model='qwen2.5-vl-7b') 
 ```
