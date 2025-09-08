@@ -93,7 +93,8 @@ dependencies = [
     "blobfile",
     "pytorchvideo @ git+https://github.com/linzhiqiu/pytorchvideo.git",
     "diffusers",
-    "nltk"
+    "nltk",
+    "rouge-score"
 ] 
 
 [tool.setuptools.packages.find]

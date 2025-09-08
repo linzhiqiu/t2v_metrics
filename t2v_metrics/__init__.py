@@ -15,7 +15,7 @@ try:
 except (FileNotFoundError, subprocess.CalledProcessError):
     raise RuntimeError(
         "ffmpeg is a required system requirement but not found. Install with:\n"
-        "conda install ffmpeg -c conda-forge\n"
+        "conda install ffmpeg=6.1.2 -c conda-forge\n"
         "or visit: https://ffmpeg.org/download.html"
     )
 
