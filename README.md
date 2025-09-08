@@ -10,6 +10,9 @@
 **GenAI-Bench: Evaluating and Improving Compositional Text-to-Visual Generation** (CVPR 2024, **Best Short Paper @ SynData Workshop**) [[Paper](https://arxiv.org/abs/2406.13743)] [[HF](https://huggingface.co/spaces/BaiqiL/GenAI-Bench-DataViewer)] <br>
 Baiqi Li*, [Zhiqiu Lin*](https://linzhiqiu.github.io/), [Deepak Pathak](https://www.cs.cmu.edu/~dpathak/), Jiayao Li, Yixin Fei, Kewen Wu, Tiffany Ling, [Xide Xia*](https://scholar.google.com/citations?user=FHLTntIAAAAJ&hl=en), [Pengchuan Zhang*](https://scholar.google.com/citations?user=3VZ_E64AAAAJ&hl=en), [Graham Neubig*](https://www.phontron.com/), [Deva Ramanan*](https://www.cs.cmu.edu/~deva/) (*Co-First and co-senior authors)
 
+**CameraBench: Towards Understanding Camera Motions in Any Video** (arXiv 2025) \[[Paper](https://arxiv.org/abs/2504.15376)] \[[Site](https://linzhiqiu.github.io/papers/camerabench/)] <br>
+[Zhiqiu Lin\*](https://linzhiqiu.github.io/), Siyuan Cen\*, Daniel Jiang, Jay Karhade, Hewei Wang, [Chancharik Mitra](https://x.com/chancharikm), Tiffany Yu Tong Ling, Yuhan Huang, Sifan Liu, Mingyu Chen, Rushikesh Zawar, Xue Bai, Yilun Du, Chuang Gan, [Deva Ramanan](https://www.cs.cmu.edu/~deva/) (\*Co-First Authors)
+
 ## News
 - [2025/09/03] 🚀 **VQAScore** gets a **major upgrade** with support for **20+ state-of-the-art video-language models** for [video-based VQAScore](#video-text-alignment-scores) (e.g., Qwen2.5-VL, LLaVA-Video, etc.), along with full integration of the new benchmark [CameraBench](https://linzhiqiu.github.io/papers/camerabench/) for evaluating camera-motion understanding in text-to-video models like Kling and Runway. Huge thanks to our collaborator **Chancharik Mitra** for leading this milestone update!
 - [2025/09/03] ✨ **VQAScore** has become the **go-to evaluation choice for generative models**: **GenAI-Bench** is now adopted by **Google DeepMind** (Imagen3 & Imagen4), **Bytedance Seed**, **NVIDIA**, and others. Meanwhile, our **open-source CLIP-FlanT5 models** have been downloaded over **2 million times** on Hugging Face!
@@ -26,7 +29,7 @@ VQAScore significantly outperforms previous metrics such as CLIPScore and PickSc
 ### VQAScore
 | Model Family Name | Image | Video | Models |
 | --------------------- | :---: | :---: | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| CLIP-FlanT5 | :heavy_check_mark: | | clip-flant5-xxl, clip-flant5-xl, clip-flant5-xxl-no-system, clip-flant5-xxl-no-system-no-user |
+| CLIP-FlanT5 | :heavy_check_mark: | | clip-flant5-xxl, clip-flant5-xl |
 | LLaVA-1.5 | :heavy_check_mark: | | llava-v1.5-13b, llava-v1.5-7b |
 | ShareGPT4V | :heavy_check_mark: | | sharegpt4v-7b, sharegpt4v-13b |
 | LLaVA-1.6 | :heavy_check_mark: | | llava-v1.6-13b |
@@ -300,19 +303,33 @@ You can easily implement your own scoring metric. For example, if you have a VQA
   Implemented **GenAI-Bench** and **GenAI-Rank** benchmarks.
 
 - **[Chancharik Mitra](https://x.com/chancharikm)**  
-  Implemented video-based **VQAScore** for:  
+  Implemented CameraBench and video-based **VQAScore** for:  
   LLaVA-OneVision, Qwen2.5-VL, InternVideo2, InternVL2, InternVL3, InternLMXC2.5, etc.
 
 ## Citation
 
-If you find this repository useful for your research, please use the following (TO UPDATE with ArXiv ID).
+If you find this repository useful for your research, please cite the following papers:
 
 ```
 @article{lin2024evaluating,
-  title={Evaluating Text-to-Visual Generation with Image-to-Text Generation},
-  author={Lin, Zhiqiu and Pathak, Deepak and Li, Baiqi and Li, Jiayao and Xia, Xide and Neubig, Graham and Zhang, Pengchuan and Ramanan, Deva},
-  journal={arXiv preprint arXiv:2404.01291},
-  year={2024}
+  title   = {Evaluating Text-to-Visual Generation with Image-to-Text Generation},
+  author  = {Lin, Zhiqiu and Pathak, Deepak and Li, Baiqi and Li, Jiayao and Xia, Xide and Neubig, Graham and Zhang, Pengchuan and Ramanan, Deva},
+  journal = {arXiv preprint arXiv:2404.01291},
+  year    = {2024}
+}
+
+@article{li2024genaibench,
+  title     = {GenAI-Bench: Evaluating and Improving Compositional Text-to-Visual Generation},
+  author    = {Li, Baiqi and Lin, Zhiqiu and Pathak, Deepak and Li, Jiayao and Fei, Yixin and Wu, Kewen and Ling, Tiffany and Xia, Xide and Zhang, Pengchuan and Neubig, Graham and Ramanan, Deva},
+  journal   = {arXiv preprint arXiv:2406.13743},
+  year      = {2024}
+}
+
+@article{camerabench,
+  title     = {Towards Understanding Camera Motions in Any Video},
+  author    = {Lin, Zhiqiu and Cen, Siyuan and Jiang, Daniel and Karhade, Jay and Wang, Hewei and Mitra, Chancharik and Ling, Yu Tong Tiffany and Huang, Yuhan and Liu, Sifan and Chen, Mingyu and Zawar, Rushikesh and Bai, Xue and Du, Yilun and Gan, Chuang and Ramanan, Deva},
+  journal   = {arXiv preprint arXiv:2504.15376},
+  year      = {2025}
 }
 ```
 
