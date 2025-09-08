@@ -19,7 +19,7 @@ Baiqi Li*, [Zhiqiu Lin*](https://linzhiqiu.github.io/), [Deepak Pathak](https://
 
 <img src="images/example.png" width=600> 
 
-VQAScore significantly outperforms previous metrics such as CLIPScore and PickScore on compositional text prompts, and it is much simpler than prior art (e.g., ImageReward, HPSv2, TIFA, Davidsonian, VPEval, VIEScore) making use of human feedback or proprietary models like ChatGPT and GPT-4Vision. 
+VQAScore significantly outperforms previous metrics such as CLIPScore and PickScore on compositional text prompts, and it is much simpler than prior art (e.g., HPSv2, TIFA, Davidsonian, VPEval, VIEScore) making use of human feedback or proprietary models like ChatGPT and GPT-4Vision. 
 
 ## Available Models:
 
@@ -165,12 +165,12 @@ scores = clip_flant5_score.batch_forward(dataset=dataset, batch_size=16) # (n_sa
 ```
 
 ### Check all supported models
-We currently support running VQAScore with CLIP-FlanT5, LLaVA-1.5, and InstructBLIP as well as SOTA video LMMs like LLaVA-OneVision, Qwen2.5-VL, and GPT-4o. For ablation, we also include CLIPScore, BLIPv2Score, PickScore, HPSv2Score, and ImageReward:
+We currently support running VQAScore with CLIP-FlanT5, LLaVA-1.5, and InstructBLIP as well as SOTA video-language models like Qwen2.5-VL, InternVL3, GPT-4o, and Gemini-2.5-pro:
 ```python
 gpt4o_score = t2v_metrics.VQAScore(model='gpt-4o', api_key="YOUR_API_KEY") # Using OpenAI Key
-gemini25_score = t2v_metrics.VQAScore(model='gemin-2.5-pro', api_key="YOUR_API_KEY") # This is using your Gemini API key, which is the recommended method. If you would like to use your Vertex AI project, please make a request on Github.
+gemini25_score = t2v_metrics.VQAScore(model='gemini-2.5-pro', api_key="YOUR_API_KEY") # This is using your Gemini API key, which is the recommended method. If you would like to use your Vertex AI project, please make a request on Github.
+qwen25vl_score = t2v_metrics.VQAScore(model='qwen2.5-vl-7b')
 internvl3_score = t2v_metrics.VQAScore(model='internvl3-8b')
-qwen25vl_score = t2v_metrics.VQAScore(model='qwen2.5-vl-7b') 
 ```
 You can check all supported models by running the below commands:
 
@@ -294,7 +294,7 @@ You can easily implement your own scoring metric. For example, if you have a VQA
 
 - **[Zhiqiu Lin](https://x.com/ZhiqiuLin)**, **[Jean de Nyandwi](https://x.com/Jeande_d)**, **[Chancharik Mitra](https://x.com/chancharikm)**  
   Implemented image-based **CLIPScore** and **VQAScore** for:  
-  CLIP-FlanT5, GPT-4o, LLaVA-1.5, InstructBLIP, OpenCLIP, HPSv2, ImageReward, PickScore.
+  CLIP-FlanT5, GPT-4o, LLaVA-1.5, InstructBLIP, OpenCLIP, HPSv2, PickScore.
 
 - **Baiqi Li**  
   Implemented **GenAI-Bench** and **GenAI-Rank** benchmarks.
