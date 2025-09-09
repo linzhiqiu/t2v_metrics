@@ -45,12 +45,15 @@ LLAVA16_MODELS = {
 
 
 class LLaVA16Model(VQAScoreModel):
+    video_mode = "concat"
+    allows_image = True
     """A wrapper for the LLaVA-1.6 models"""
     def __init__(self,
                  model_name='llava-v1.6-13b',
                  device='cuda',
                  cache_dir=HF_CACHE_DIR):
         assert model_name in LLAVA16_MODELS
+        
         super().__init__(model_name=model_name,
                          device=device,
                          cache_dir=cache_dir)
@@ -95,6 +98,8 @@ class LLaVA16Model(VQAScoreModel):
                     image: List[str]) -> torch.Tensor:
         """Load the image(s), and return a tensor (after preprocessing) put on self.device
         """
+        if any(path.startswith(("http://", "https://")) for path in image):
+            raise NotImplementedError("Web link image/video inputs are not yet supported for this model. Please use a local path, or otherwise, make a Github issue request if this feature is necessary.")
         image = [self.image_loader(x) for x in image]
         if self.image_aspect_ratio == 'pad':
             image = [expand2square(image, tuple(int(x*255) for x in self.image_processor.image_mean)) for image in image]
@@ -188,3 +193,49 @@ class LLaVA16Model(VQAScoreModel):
         for k in range(lm_prob.shape[0]):
             lm_prob[k] = (-loss_fct(shift_logits[k], shift_labels[k])).exp()
         return lm_prob
+
+    @torch.no_grad()
+    @torch.autocast(device_type='cuda', dtype=torch.bfloat16)
+    def generate(self,
+                images: List[str],
+                texts: List[str],
+                max_new_tokens: int = 256) -> List[str]:
+        assert len(images) == len(texts), "Number of images and texts must match"
+        
+        questions = texts
+        questions = [format_question(question, conversation_style=self.conversational_style) for question in questions]
+        
+        images = self.load_images(images)
+        
+        input_ids = [tokenizer_image_token(prompt, self.tokenizer, return_tensors='pt') for prompt in questions]
+        input_ids = torch.nn.utils.rnn.pad_sequence(
+            input_ids,
+            batch_first=True,
+            padding_value=self.tokenizer.pad_token_id)
+        input_ids = input_ids[:, :self.tokenizer.model_max_length]
+            
+        attention_mask = input_ids.ne(self.tokenizer.pad_token_id)
+        input_ids, attention_mask = input_ids.to(self.device), attention_mask.to(self.device)
+        input_ids, position_ids, attention_mask, past_key_values, inputs_embeds, _ = self.model.prepare_inputs_labels_for_multimodal(
+            input_ids,
+            None,
+            attention_mask,
+            None,
+            None,
+            images,
+            image_sizes=None,
+        )
+        
+        model_input_kwargs = {
+            'input_ids': input_ids,
+            'position_ids': position_ids,
+            'attention_mask': attention_mask,
+            'past_key_values': past_key_values,
+            'inputs_embeds': inputs_embeds,
+            'max_new_tokens': max_new_tokens
+        }
+        
+        outputs = self.model.generate(**model_input_kwargs)
+        generated_texts = [self.tokenizer.decode(output, skip_special_tokens=True).strip() for output in outputs]
+        
+        return generated_texts

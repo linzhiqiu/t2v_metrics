@@ -1,0 +1,81 @@
+# We use a global batch size of 2048 in stage # 3 for PLM-1B model. Please adjust batch_size as per your training setup.
+# For example, one possible configuration is batch_size=8,nodes=32,gpus_per_node=8 = 8*32*8 = 2048 global batch size.
+
+name: "plm_1b_stage2"
+dump_dir: ./plm_1b_stage2
+steps: 35000
+seed: 777
+optim:
+    lr: 4e-5
+    warmup: 120
+    lr_min_ratio: 0.01
+    clip: 1.0
+    weight_decay: 0.01
+
+distributed:
+    fsdp_type: full_shard
+    compile: false
+    model_dtype: bf16
+    matmul_allow_tf32: false
+    selective_activation_checkpointing: false
+    full_activation_checkpointing: true
+    tp_size: 1
+
+model:
+    dim: 2048
+    n_layers: 16
+    n_heads: 32
+    n_kv_heads: 8
+    vocab_size: 128256
+    ffn_dim_multiplier: 1.5
+    multiple_of: 256
+    norm_eps: 1e-05
+    rope_theta: 500000.0
+    weight_tying: true
+    rope_scale_factor: 32
+    high_freq_factor: 4
+    max_seqlen: 6144
+    freeze_language_model: false
+    freeze_vision_model: false
+    pooling_ratio: 2
+    vision_model:
+        image_size: 448
+        patch_size: 14
+        width: 1024
+        layers: 23
+        heads: 16
+        use_cls_token: true
+        use_abs_posemb: true
+        mlp_ratio: 4.0
+        ls_init_value: 0.1
+        drop_path: 0.1
+        use_ln_post: false
+        pool_type: "none"
+    mlp_init:
+        use_gaussian: true
+
+data:
+    datamix: <Please consider using data split listed in Table A1 of our paper https://arxiv.org/pdf/2504.13180. The weight of the dataset would be same as the number of samples.>
+    num_workers: 8
+    batch_size: 4
+    image_res: 448
+    max_num_tiles: 16
+    max_video_frames: 16
+    vision_input_type: thumb+tile
+    tokenizer_path: facebook/Perception-LM-1B/tokenizer.model
+    tokenizer_name: plmchat
+    conversation_format: plm_sft
+
+profiling:
+    run: false
+
+checkpoint:
+    dump:
+        every: 500
+        keep: 1
+    init_ckpt_path: <Point it to the consolidated checkpoints from PLM 1B Stage 1>
+    is_consolidated_model: True
+
+logging:
+    freq: 10
+    level: INFO  # Available choices for logging level are: [NOTSET, DEBUG, INFO, WARN, ERROR, FATAL, CRITICAL]

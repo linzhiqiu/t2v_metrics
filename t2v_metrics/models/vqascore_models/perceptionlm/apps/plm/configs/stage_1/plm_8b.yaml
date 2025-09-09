@@ -1,0 +1,78 @@
+# We use a global batch size of 512 in stage # 1 for PLM-8B model. Please adjust batch_size as per your training setup.
+# For example, one possible configuration is batch_size=16,nodes=4,gpus_per_node=8 = 16*4*8 = 512 global batch size.
+
+name: "plm_8b_stage1"
+dump_dir: ./plm_8b_stage1
+steps: 8000
+seed: 777
+optim:
+    lr: 1e-4
+    warmup: 20
+    lr_min_ratio: 0.01
+    clip: 1.0
+    weight_decay: 0.05
+
+distributed:
+    fsdp_type: full_shard
+    compile: false
+    model_dtype: bf16
+    matmul_allow_tf32: false
+    selective_activation_checkpointing: false
+    full_activation_checkpointing: true
+    tp_size: 1
+
+model:
+    dim: 4096
+    n_layers: 32
+    n_heads: 32
+    n_kv_heads: 8
+    vocab_size: 128256
+    ffn_dim_multiplier: 1.3
+    multiple_of: 1024
+    norm_eps: 1e-05
+    rope_theta: 500000.0
+    weight_tying: false
+    max_seqlen: 1280
+    freeze_language_model: true
+    freeze_vision_model: true
+    pooling_ratio: 1
+    vision_model:
+        image_size: 448
+        patch_size: 14
+        width: 1536
+        layers: 47
+        heads: 16
+        use_cls_token: false
+        use_abs_posemb: true
+        mlp_ratio: 5.833333334
+        use_ln_post: false
+        pool_type: "none"
+    mlp_init:
+        use_gaussian: true
+
+data:
+    datamix: <We use our synthetic SA-1B dataset for stage 1, https://huggingface.co/datasets/facebook/PLM-Image-Auto/tree/main/sa1b>
+    num_workers: 8
+    batch_size: 16
+    image_res: 448
+    max_num_tiles: 1
+    max_video_frames: 8
+    vision_input_type: vanilla
+    tokenizer_path: facebook/Perception-LM-8B/tokenizer.model
+    tokenizer_name: plmchat
+    conversation_format: warmup
+
+profiling:
+    run: false
+
+checkpoint:
+    dump:
+        every: 500
+        keep: 1
+    init_ckpt_path: meta-llama/Llama-3.1-8B-Instruct/original
+    vision_model_path: facebook/PE-Core-G14-448/model.pt
+    is_consolidated_model: True
+
+logging:
+    freq: 10
+    level: INFO  # Available choices for logging level are: [NOTSET, DEBUG, INFO, WARN, ERROR, FATAL, CRITICAL]

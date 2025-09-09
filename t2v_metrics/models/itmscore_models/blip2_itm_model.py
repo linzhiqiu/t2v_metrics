@@ -15,13 +15,15 @@ BLIP2_ITM_MODELS = {
 
 class BLIP2ITMScoreModel(ScoreModel):
     "A wrapper for BLIP-2 ITMScore models"
+    video_mode = "concat"
+    allows_image = True
     def __init__(self,
                  model_name='blip2-itm',
                  device='cuda',
                  cache_dir=HF_CACHE_DIR):
         assert model_name in BLIP2_ITM_MODELS, f"Model name must be one of {BLIP2_ITM_MODELS.keys()}"
         os.environ['TORCH_HOME'] = cache_dir
-        import timm.models.hub as timm_hub
+        import timm.models as timm_hub
         super().__init__(model_name=model_name,
                          device=device,
                          cache_dir=cache_dir)

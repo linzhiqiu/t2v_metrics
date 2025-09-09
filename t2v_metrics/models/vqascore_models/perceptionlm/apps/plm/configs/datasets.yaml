@@ -1,0 +1,30 @@
+dummy_image:
+    annotation: apps/plm/dummy_datasets/image/annotations.jsonl
+    root_dir: apps/plm/dummy_datasets/image/images
+
+dummy_multi_image:
+    annotation: apps/plm/dummy_datasets/multi_image/annotations.jsonl
+    root_dir: apps/plm/dummy_datasets/multi_image/images
+
+dummy_image_region:
+    annotation: apps/plm/dummy_datasets/image_region/annotations.jsonl
+    root_dir: apps/plm/dummy_datasets/image_region/images
+
+dummy_video:
+    annotation: apps/plm/dummy_datasets/video/annotations.jsonl
+    root_dir: apps/plm/dummy_datasets/video/videos
+
+dummy_text:
+    annotation: apps/plm/dummy_datasets/text/annotations.jsonl
+
+dummy_stc_RDCap:
+    annotation: apps/plm/dummy_datasets/plm_stc/RDCap.jsonl
+    root_dir: apps/plm/dummy_datasets/plm_stc/videos
+
+dummy_stc_RCap:
+    annotation: apps/plm/dummy_datasets/plm_stc/RCap.jsonl
+    root_dir: apps/plm/dummy_datasets/plm_stc/videos
+
+dummy_stc_RTLoc:
+    annotation: apps/plm/dummy_datasets/plm_stc/RTLoc.jsonl
+    root_dir: apps/plm/dummy_datasets/plm_stc/videos

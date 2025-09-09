@@ -4,7 +4,6 @@ import subprocess
 import numpy as np
 import pandas as pd
 from typing import Tuple
-import torch
 from PIL import Image
 from torch.utils.data import Dataset
 import scipy
@@ -826,7 +825,6 @@ class T2VScore(Dataset):
                     
                     # Append the PIL Image path to the list
                     current_frames.append(output_path)
-                
                 if len(current_frames) < num_frames:
                     current_frames = current_frames + [current_frames[-1]] * (num_frames - len(current_frames))
                 elif len(current_frames) > num_frames:

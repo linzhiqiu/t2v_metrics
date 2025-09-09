@@ -11,11 +11,14 @@ PICKSCORE_MODELS = ['pickscore-v1']
 
 class PickScoreModel(ScoreModel):
     "A wrapper for PickScore models"
+    video_mode = "concat"
+    allows_image = True
     def __init__(self,
                  model_name='pickscore-v1',
                  device='cuda',
                  cache_dir=HF_CACHE_DIR):
         assert model_name in PICKSCORE_MODELS
+        
         super().__init__(model_name=model_name,
                          device=device,
                          cache_dir=cache_dir)

@@ -8,6 +8,8 @@ HPSV2_MODELS = ['hpsv2']
 
 class HPSV2ScoreModel(ScoreModel):
     "A wrapper for HPSv2 models "
+    video_mode = "concat"
+    allows_image = True
     def __init__(self,
                  model_name='openai:ViT-L-14',
                  device='cuda',

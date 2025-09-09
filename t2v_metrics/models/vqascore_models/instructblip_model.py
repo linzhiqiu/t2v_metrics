@@ -24,7 +24,9 @@ class InstructBLIPModel(VQAScoreModel):
                  cache_dir=HF_CACHE_DIR):
         assert model_name in InstructBLIP_MODELS, f"Model name {model_name} not found in InstructBLIP_MODELS"
         os.environ['TORCH_HOME'] = cache_dir
-        import timm.models.hub as timm_hub
+        import timm.models as timm_hub
+        video_mode = "concat"
+        allows_image = True
         # if cache_dir != timm_hub.get_cache_dir():
         #     print(f"Warning: cache_dir {cache_dir} won't be used because "
         #            "InstructBLIP is cached using timm_hub.get_cache_dir(). "
@@ -51,6 +53,8 @@ class InstructBLIPModel(VQAScoreModel):
                     image: List[str]) -> torch.Tensor:
         """Load the image(s), and return a tensor (after preprocessing) put on self.device
         """
+        if any(path.startswith(("http://", "https://")) for path in image):
+            raise NotImplementedError("Web link image/video inputs are not yet supported for this model. Please use a local path, or otherwise, make a Github issue request if this feature is necessary.")
         image = [self.image_loader(x) for x in image]
         image = [self.image_preprocess(image) for image in image]
         assert all(x.shape == image[0].shape for x in image)
@@ -137,3 +141,73 @@ class InstructBLIPModel(VQAScoreModel):
         for k in range(lm_prob.shape[0]):
             lm_prob[k] = (-loss_fct(outputs.logits[k], labels[k])).exp()
         return lm_prob
+    
+    @torch.no_grad()
+    @torch.autocast(device_type='cuda', dtype=torch.bfloat16)
+    def generate(self,
+                images: List[str],
+                texts: List[str],
+                max_length: int = 256) -> List[str]:
+        """Forward pass of the model to generate text responses for n (image, text) pairs
+        """
+        assert len(images) == len(texts), "Number of images and texts must match"
+        questions = texts
+        
+        images = self.load_images(images)
+
+        image_feat = self.model.ln_vision(self.model.visual_encoder(images))
+        image_att = torch.ones(image_feat.size()[:-1], dtype=torch.long).to(self.device)
+        query_token = self.model.query_tokens.expand(image_feat.shape[0], -1, -1)
+        query_att = torch.ones(query_token.size()[:-1], dtype=torch.long).to(query_token.device)
+
+        question_text_Qformer = self.model.tokenizer(
+            questions,
+            padding='longest',
+            truncation=True,
+            max_length=self.model.max_txt_len,
+            return_tensors="pt",
+        ).to(query_token.device)
+        Qformer_atts = torch.cat([query_att, question_text_Qformer.attention_mask], dim=1)
+
+        query_output = self.model.Qformer.bert(
+            question_text_Qformer.input_ids,
+            attention_mask=Qformer_atts,
+            query_embeds=query_token,
+            encoder_hidden_states=image_feat,
+            encoder_attention_mask=image_att,
+            return_dict=True,
+        )
+        
+        t5_input = self.model.t5_proj(query_output.last_hidden_state[:,:query_token.size(1),:])
+        t5_att = torch.ones(t5_input.size()[:-1], dtype=torch.long).to(query_token.device)
+
+        question_text_t5 = self.model.t5_tokenizer(
+            questions,
+            padding="longest",
+            truncation=True,
+            max_length=self.model.max_txt_len,
+            return_tensors="pt",
+        ).to(query_token.device)
+        
+        encoder_atts = torch.cat([t5_att, question_text_t5.attention_mask], dim=1)
+        inputs_embeds = self.model.t5_model.encoder.embed_tokens(question_text_t5.input_ids)
+        inputs_embeds = torch.cat([t5_input, inputs_embeds], dim=1)
+
+        outputs = self.model.t5_model.generate(
+            inputs_embeds=inputs_embeds,
+            attention_mask=encoder_atts,
+            max_length=max_length,
+            num_beams=5,
+            min_length=1,
+            length_penalty=1,
+            num_return_sequences=1,
+            do_sample=False
+        )
+
+        # Decode the generated outputs
+        generated_texts = []
+        for output in outputs:
+            text = self.model.t5_tokenizer.decode(output, skip_special_tokens=True).strip()
+            generated_texts.append(text)
+
+        return generated_texts
