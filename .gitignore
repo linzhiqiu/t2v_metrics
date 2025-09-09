@@ -39,6 +39,7 @@ test.ipynb
 genai_image_800_temp.py
 gpt4_eval.txt
 vqascore_ablation.py
+plot_temp.py
 temp_better_question/
 sfm_outputs/
 training.png
