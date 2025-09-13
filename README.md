@@ -86,7 +86,19 @@ conda install ffmpeg -c conda-forge
 pip install -e . # local pip install
 ```
 
-Or you can do a standard install via `pip install t2v-metrics`.
+Or you can do a standard pip install via 
+```bash
+conda install ffmpeg -c conda-forge
+pip install t2v-metrics
+
+# Install Git-based dependencies
+pip install git+https://github.com/LLaVA-VL/LLaVA-NeXT.git
+pip install git+https://github.com/openai/CLIP.git
+pip install git+https://github.com/linzhiqiu/pytorchvideo.git
+
+# Install flash-attention (CUDA 12.2, Python 3.10)
+pip install https://github.com/Dao-AILab/flash-attention/releases/download/v2.5.8/flash_attn-2.5.8+cu122torch2.3cxx11abiFALSE-cp310-cp310-linux_x86_64.whl
+```
 
 **Note**: Certain models have additional requirements for full usability that may conflict with other model requirements. For these rare cases, please install the dependencies in the corresponding requirements.txt folder.
 

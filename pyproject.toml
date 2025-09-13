@@ -4,11 +4,10 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "t2v_metrics"
-version = "2.0"
+version = "3.0"
 description = "Evaluating Text-to-Visual Generation with Image-to-Text Generation."
 authors = [
     {name="Zhiqiu Lin", email="zl279@cornell.edu"},
-    {name="Baiqi Li", email="libaiqi123@gmail.com"},
     {name="Chancharik Mitra", email="chancharikm@gmail.com"},
 ]
 readme = "README.md"
