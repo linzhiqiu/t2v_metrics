@@ -9,15 +9,20 @@ import os
 
 from .vqa_model import VQAScoreModel
 
-default_question_template = 'Does this figure show "{}"? Please answer yes or no.'
+default_question_template = 'Does this figure show "{}"? Please answer Yes or No.'
 default_answer_template = 'Yes'
 
-GPT4V_MODELS = {
-    'gpt-4-turbo': {},
-    'gpt-4o': {},
-    'gpt-4.1': {}
-}
+# Look into incorporating reasoning efforts later!
 
+GPT4V_MODELS = {
+    'gpt-4o':            {},
+    'gpt-4.1':           {},
+    # 'gpt-5':             {},
+    # 'gpt-5.1':           {},
+    # 'gpt-5.4':           {},
+    # 'gpt-5.5':           {},
+    # 'chat-latest':       {},
+}
 def encode_image(image_path):
     with open(image_path, "rb") as image_file:
         return base64.b64encode(image_file.read()).decode('utf-8')
@@ -48,13 +53,14 @@ class GPT4VModel(VQAScoreModel):
     video_mode = "direct"
     allows_image = True
     def __init__(self,
-                 model_name='gpt-4-turbo',
-                 device='cuda',
-                 cache_dir=None,
-                 api_key=None,
-                 top_logprobs=2):
+                model_name='gpt-4-turbo',
+                device='cuda',
+                cache_dir=None,
+                api_key=None,
+                top_logprobs=2):
         assert model_name in GPT4V_MODELS
-        assert api_key is not None, "Please provide an OpenAI API key"
+        api_key = api_key or os.environ.get("OPENAI_API_KEY")
+        assert api_key is not None, "No OpenAI API key provided. Pass api_key= or set the OPENAI_API_KEY environment variable."
         self.api_key = api_key
         self.top_logprobs = top_logprobs
         super().__init__(model_name=model_name,
@@ -89,9 +95,23 @@ class GPT4VModel(VQAScoreModel):
                 })
         return loaded_data
 
-    def forward_single(self, data, question, answer):
+
+    def forward_single(self, data, question, answer, max_new_tokens=1):
+        """
+        Forward pass for a single sample with flexible token extraction.
+        
+        Args:
+            data: Image/video data dict (can be None for text-only)
+            question: Question text
+            answer: Expected answer (can be multi-token)
+            max_new_tokens: Maximum tokens to generate (1 for binary, 100+ for CoT)
+        """
         try:
-            if data['type'] == 'video':
+            # Build content based on whether we have image/video data
+            if data is None:
+                # Text-only mode
+                content = [{"type": "text", "text": question}]
+            elif data['type'] == 'video':
                 content = [
                     {"type": "text", "text": question},
                     *[{"type": "image_url", "image_url": {"url": f"data:image/jpg;base64,{frame}"}} for frame in data['frames']]
@@ -101,17 +121,24 @@ class GPT4VModel(VQAScoreModel):
                     {"type": "text", "text": question},
                     {"type": "image_url", "image_url": {"url": f"data:image/{data['type']};base64,{data['base64']}"}}
                 ]
+
+            token_limit_key = 'max_completion_tokens' if 'gpt-5' in self.model_name else 'max_tokens'
 
             completion = self.client.chat.completions.create(
                 model=self.model_name,
                 messages=[{"role": "user", "content": content}],
                 logprobs=True,
                 top_logprobs=self.top_logprobs,
+                **{token_limit_key: max_new_tokens},
             )
 
-        except:
-            try: # Second try
-                if data['type'] == 'video':
+        except Exception:
+            try:  # Second try
+                # Build content based on whether we have image/video data
+                if data is None:
+                    # Text-only mode
+                    content = [{"type": "text", "text": question}]
+                elif data['type'] == 'video':
                     content = [
                         {"type": "text", "text": question},
                         *[{"type": "image_url", "image_url": {"url": f"data:image/jpg;base64,{frame}"}} for frame in data['frames']]
@@ -121,64 +148,103 @@ class GPT4VModel(VQAScoreModel):
                         {"type": "text", "text": question},
                         {"type": "image_url", "image_url": {"url": f"data:image/{data['type']};base64,{data['base64']}"}}
                     ]
+                token_limit_key = 'max_completion_tokens' if 'gpt-5' in self.model_name else 'max_tokens'
 
                 completion = self.client.chat.completions.create(
                     model=self.model_name,
                     messages=[{"role": "user", "content": content}],
                     logprobs=True,
                     top_logprobs=self.top_logprobs,
+                    **{token_limit_key: max_new_tokens},
                 )
-                print(f'completion {completion}')
-            except Exception as e: # Old Error Handling
-                print(f"Failed image: {data['path']} and question: {question} and answer: {answer}")
+
+            except Exception as e:
+                path_info = data['path'] if data else 'text-only'
+                print(f"Failed: {path_info} and question: {question} and answer: {answer}")
                 print(f"Error: {str(e)}")
                 return torch.Tensor([0.0])
 
-                
-        is_generated = False
-        for top_logprob in completion.choices[0].logprobs.content[0].top_logprobs:
-            if answer.lower() == "yes":
-                if top_logprob.token == 'Yes' or top_logprob.token == 'yes':
-                    is_generated = True
-                    return torch.Tensor([top_logprob.logprob]).exp()
-                elif top_logprob.token == 'No' or top_logprob.token == 'no':
-                    is_generated = True
-                    return 1 - torch.Tensor([top_logprob.logprob]).exp()
-            else:
-                if top_logprob.token == answer:
-                    is_generated = True
-                    return torch.Tensor([top_logprob.logprob]).exp()
-        if not is_generated:
-            print(f"Warning: '{answer}' not included in gpt4o log probs: {data['path']} and question: {question} and answer: {answer}")
-            print(completion.choices[0].logprobs.content[0].top_logprobs)
+        # Extract generated text and logprobs
+        generated_text = completion.choices[0].message.content.strip()
+        logprobs_content = completion.choices[0].logprobs.content
+        
+        # Extract from FIRST token (Yes/No is the first generated token)
+        first_token_data = logprobs_content[0]
+        first_token_text = first_token_data.token.strip()
+        
+        # DEBUG: Print generated output and verification
+        # print(f"\n[GPT-4o] Generated: {generated_text}")
+        # print(f"[GPT-4o] Total tokens: {len(logprobs_content)}, First token: '{first_token_text}'")
+        # Extract probability from first token — scan all candidates first, then decide
+        target   = answer.lower().strip()
+        opposite = "no" if target == "yes" else "yes"
+
+        target_logprob   = None
+        opposite_logprob = None
+
+        for top_logprob in first_token_data.top_logprobs:
+            token = top_logprob.token.strip().lower()
+            if token == target:
+                target_logprob = top_logprob.logprob
+            elif token == opposite:
+                opposite_logprob = top_logprob.logprob
+
+        if target_logprob is not None:
+            return torch.Tensor([target_logprob]).exp()
+        elif opposite_logprob is not None:
+            return 1 - torch.Tensor([opposite_logprob]).exp()
+        else:
+            print(f"[GPT] Warning: neither '{target}' nor '{opposite}' in top {self.top_logprobs} logprobs")
+            print(f"[GPT] Top logprobs: {[lp.token for lp in first_token_data.top_logprobs]}")
             return torch.Tensor([0.0])
 
     def forward(self,
-                paths: List[str],
+                images: List[str],
                 texts: List[str],
                 question_template: str = default_question_template,
                 answer_template: str = default_answer_template,
-                num_frames: int = 4) -> torch.Tensor:
-        assert len(paths) == len(texts), "Number of paths and texts must match"
+                num_frames: int = 4,
+                fps: int=None,
+                max_new_tokens: int = 1,
+                temperature: float=None) -> torch.Tensor:
+        """
+        Forward pass with flexible token extraction.
+        
+        Args:
+            images: List of image/video paths (can be None for text-only)
+            texts: List of text prompts
+            question_template: Template for questions
+            answer_template: Template for answers
+            num_frames: Number of frames for videos
+            max_new_tokens: Max tokens to generate (1 for binary, 100+ for CoT)
+        
+        Returns:
+            Tensor of token probabilities
+        """
+        # Handle text-only mode
+        if images is None:
+            loaded_data = [None] * len(texts)
+        else:
+            assert len(images) == len(texts), "Number of paths and texts must match"
+            loaded_data = self.load_images(images, num_frames)
+        
         questions = [question_template.format(text) for text in texts]
         answers = [answer_template.format(text) for text in texts]
 
-        for ans in answers:
-            ans_tokens = self.tokenizer.encode(ans)
-            assert len(ans_tokens) == 1, "Currently only support single token answers"
-
-        loaded_data = self.load_images(paths, num_frames)
-
-        lm_prob = torch.zeros(len(paths))
+        lm_prob = torch.zeros(len(texts))
 
         for idx, (data, question, answer) in enumerate(zip(loaded_data, questions, answers)):
-            lm_prob[idx] = self.forward_single(data, question, answer)
+            lm_prob[idx] = self.forward_single(data, question, answer, max_new_tokens=max_new_tokens)
 
         return lm_prob
-    
+
     def generate_single(self, data, question, max_new_tokens):
         try:
-            if data['type'] == 'video':
+            # Build content based on whether we have image/video data
+            if data is None:
+                # Text-only mode
+                content = [{"type": "text", "text": question}]
+            elif data['type'] == 'video':
                 content = [
                     {"type": "text", "text": question},
                     *[{"type": "image_url", "image_url": {"url": f"data:image/jpg;base64,{frame}"}} for frame in data['frames']]
@@ -188,16 +254,22 @@ class GPT4VModel(VQAScoreModel):
                     {"type": "text", "text": question},
                     {"type": "image_url", "image_url": {"url": f"data:image/{data['type']};base64,{data['base64']}"}}
                 ]
+            
+            token_limit_key = 'max_completion_tokens' if 'gpt-5' in self.model_name else 'max_tokens'
 
             completion = self.client.chat.completions.create(
                 model=self.model_name,
                 messages=[{"role": "user", "content": content}],
-                max_tokens=max_new_tokens,
+                **{token_limit_key: max_new_tokens},
             )
 
         except:
             try:  # Second try
-                if data['type'] == 'video':
+                # Build content based on whether we have image/video data
+                if data is None:
+                    # Text-only mode
+                    content = [{"type": "text", "text": question}]
+                elif data['type'] == 'video':
                     content = [
                         {"type": "text", "text": question},
                         *[{"type": "image_url", "image_url": {"url": f"data:image/jpg;base64,{frame}"}} for frame in data['frames']]
@@ -207,14 +279,17 @@ class GPT4VModel(VQAScoreModel):
                         {"type": "text", "text": question},
                         {"type": "image_url", "image_url": {"url": f"data:image/{data['type']};base64,{data['base64']}"}}
                     ]
+                
+                token_limit_key = 'max_completion_tokens' if 'gpt-5' in self.model_name else 'max_tokens'
 
                 completion = self.client.chat.completions.create(
                     model=self.model_name,
                     messages=[{"role": "user", "content": content}],
-                    max_tokens=256,
+                    **{token_limit_key: max_new_tokens},
                 )
             except Exception as e:
-                print(f"Failed image: {data['path']} and question: {question}")
+                path_info = data['path'] if data else 'text-only'
+                print(f"Failed: {path_info} and question: {question}")
                 print(f"Error: {str(e)}")
                 return ""
 
@@ -224,12 +299,29 @@ class GPT4VModel(VQAScoreModel):
             images: List[str],
             texts: List[str],
             num_frames: int = 5,
-            max_new_tokens: int = 256) -> List[str]:
-        assert len(images) == len(texts), "Number of paths and texts must match"
+            fps: int = None,
+            max_new_tokens: int = 2048,
+            temperature: float=None) -> List[str]:
+        """
+        Generate text responses.
+        
+        Args:
+            images: List of image/video paths (can be None for text-only)
+            texts: List of text prompts
+            num_frames: Number of frames for videos
+            max_new_tokens: Max tokens to generate
+        
+        Returns:
+            List of generated text responses
+        """
+        # Handle text-only mode
+        if images is None:
+            loaded_data = [None] * len(texts)
+        else:
+            assert len(images) == len(texts), "Number of paths and texts must match"
+            loaded_data = self.load_images(images, num_frames)
         
         questions = texts
-        loaded_data = self.load_images(images, num_frames)
-
         generated_outputs = []
 
         for idx, (data, question) in enumerate(zip(loaded_data, questions)):
