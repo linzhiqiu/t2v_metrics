@@ -11,7 +11,10 @@
 Baiqi Li*, [Zhiqiu Lin*](https://linzhiqiu.github.io/), [Deepak Pathak](https://www.cs.cmu.edu/~dpathak/), Jiayao Li, Yixin Fei, Kewen Wu, Tiffany Ling, [Xide Xia*](https://scholar.google.com/citations?user=FHLTntIAAAAJ&hl=en), [Pengchuan Zhang*](https://scholar.google.com/citations?user=3VZ_E64AAAAJ&hl=en), [Graham Neubig*](https://www.phontron.com/), [Deva Ramanan*](https://www.cs.cmu.edu/~deva/) (*Co-First and co-senior authors)
 
 **CameraBench: Towards Understanding Camera Motions in Any Video** (arXiv 2025) [[Paper](https://arxiv.org/abs/2504.15376)] [[Site](https://linzhiqiu.github.io/papers/camerabench/)]  
-[Zhiqiu Lin\*](https://linzhiqiu.github.io/), Siyuan Cen\*, Daniel Jiang, Jay Karhade, Hewei Wang, [Chancharik Mitra](https://x.com/chancharikm), Tiffany Yu Tong Ling, Yuhan Huang, Sifan Liu, Mingyu Chen, Rushikesh Zawar, Xue Bai, Yilun Du, Chuang Gan, [Deva Ramanan](https://www.cs.cmu.edu/~deva/) (\*Co-First Authors)
+[Zhiqiu Lin\*](https://linzhiqiu.github.io/), Siyuan Cen\*, Daniel Jiang, Jay Karhade, Hewei Wang, [Chancharik Mitra](https://chancharikmitra.github.io/), Tiffany Yu Tong Ling, Yuhan Huang, Sifan Liu, Mingyu Chen, Rushikesh Zawar, Xue Bai, Yilun Du, Chuang Gan, [Deva Ramanan](https://www.cs.cmu.edu/~deva/) (\*Co-First Authors)
+
+**CHAI: Building a Precise Video Language with Human–AI Oversight** (CVPR 2026, **Highlight · Top 3%**) [[Paper](https://arxiv.org/abs/2604.21718)] [[Code](https://github.com/chancharikmitra/CHAI)] [[HF](https://huggingface.co/datasets/chancharikm/CHAI_testset)] [[Site](https://linzhiqiu.github.io/papers/chai/)]  
+[Zhiqiu Lin](https://linzhiqiu.github.io/)\*, [Chancharik Mitra](https://chancharikmitra.github.io/)\*, Siyuan Cen, Isaac Li, Yuhan Huang, Yu Tong Tiffany Ling, Hewei Wang, Irene Pi, Shihang Zhu, Ryan Rao, George Liu, Jiaxi Li, Ruojin Li, Yili Han, [Yilun Du](https://yilundu.github.io/), [Deva Ramanan](https://www.cs.cmu.edu/~deva/) (\*Co-First Authors)
 
 ---
 
@@ -52,9 +55,6 @@ Baiqi Li*, [Zhiqiu Lin*](https://linzhiqiu.github.io/), [Deepak Pathak](https://
 | Gemini †| ✅ | ✅ | | `gemini-2.5-flash`, `gemini-2.5-pro` |
 | Gemma 3 | ✅ | ✅ | | `gemma-3-4b-it`, `gemma-3-12b-it`, `gemma-3-27b-it` |
 | PaliGemma ‡ | ✅ | | | `paligemma-3b-mix-224`, `paligemma-3b-mix-448`, `paligemma-3b-mix-896` |
-<!-- | InternVL3 | ✅ | ✅ | | `internvl3-8b`, `internvl3-14b`, `internvl3-78b` | -->
-<!-- | InternVL3.5 | ✅ | ✅ | | `internvl3.5-1b`, ... | -->
-<!-- | Molmo2 | ✅ | ✅ | | `molmo2-4b`, `molmo2-7b`, `molmo2-8b` | -->
 | Qwen2.5-VL ★ | ✅ | ✅ | | `qwen2.5-vl-3b`, `qwen2.5-vl-7b`, `qwen2.5-vl-32b`, `qwen2.5-vl-72b` |
 | Qwen3-VL ★ | ✅ | ✅ | | `qwen3-vl-2b`, `qwen3-vl-2b-thinking`, `qwen3-vl-4b`, `qwen3-vl-4b-thinking`, `qwen3-vl-8b`, `qwen3-vl-8b-thinking`, `qwen3-vl-30b-a3b`, `qwen3-vl-30b-a3b-thinking`, `qwen3-vl-32b`, `qwen3-vl-32b-thinking`, `qwen3-vl-235b-a22b`, `qwen3-vl-235b-a22b-thinking` |
 | Qwen3.5 ★ | ✅ | ✅ | | `qwen3.5-4b`, `qwen3.5-9b`, `qwen3.5-27b` |
@@ -445,7 +445,7 @@ python -m genai_bench.evaluate --model gpt-4o --output_dir ./outputs --gen_model
 
 ## Contributions
 
-- **[Zhiqiu Lin](https://x.com/ZhiqiuLin)**, **[Jean de Nyandwi](https://x.com/Jeande_d)**, **[Chancharik Mitra](https://x.com/chancharikm)**  
+- **[Zhiqiu Lin](https://x.com/ZhiqiuLin)**, **[Jean de Nyandwi](https://x.com/Jeande_d)**, **[Chancharik Mitra](https://chancharikmitra.github.io/)**  
   Implemented image-based CLIPScore and VQAScore for: CLIP-FlanT5, GPT-4o, LLaVA-1.5, InstructBLIP, OpenCLIP, HPSv2, PickScore.
 
 - **Baiqi Li**  
@@ -478,6 +478,17 @@ python -m genai_bench.evaluate --model gpt-4o --output_dir ./outputs --gen_model
   author  = {Lin, Zhiqiu and Cen, Siyuan and Jiang, Daniel and Karhade, Jay and Wang, Hewei and Mitra, Chancharik and Ling, Yu Tong Tiffany and Huang, Yuhan and Liu, Sifan and Chen, Mingyu and Zawar, Rushikesh and Bai, Xue and Du, Yilun and Gan, Chuang and Ramanan, Deva},
   journal = {arXiv preprint arXiv:2504.15376},
   year    = {2025}
+}
+
+@inproceedings{lin2026chai,
+  title={Building a Precise Video Language with Human-AI Oversight},
+  author={Zhiqiu Lin and Chancharik Mitra and Siyuan Cen and Isaac Li
+          and Yuhan Huang and Yu Tong Tiffany Ling and Hewei Wang
+          and Irene Pi and Shihang Zhu and Ryan Rao and George Liu
+          and Jiaxi Li and Ruojin Li and Yili Han and Yilun Du
+          and Deva Ramanan},
+  booktitle={IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  year={2026}
 }
 ```
 
