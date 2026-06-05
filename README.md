@@ -11,10 +11,10 @@
 Baiqi Li*, [Zhiqiu Lin*](https://linzhiqiu.github.io/), [Deepak Pathak](https://www.cs.cmu.edu/~dpathak/), Jiayao Li, Yixin Fei, Kewen Wu, Tiffany Ling, [Xide Xia*](https://scholar.google.com/citations?user=FHLTntIAAAAJ&hl=en), [Pengchuan Zhang*](https://scholar.google.com/citations?user=3VZ_E64AAAAJ&hl=en), [Graham Neubig*](https://www.phontron.com/), [Deva Ramanan*](https://www.cs.cmu.edu/~deva/) (*Co-First and co-senior authors)
 
 **CameraBench: Towards Understanding Camera Motions in Any Video** (arXiv 2025) [[Paper](https://arxiv.org/abs/2504.15376)] [[Site](https://linzhiqiu.github.io/papers/camerabench/)]  
-[Zhiqiu Lin\*](https://linzhiqiu.github.io/), Siyuan Cen\*, Daniel Jiang, Jay Karhade, Hewei Wang, [Chancharik Mitra](https://x.com/chancharikm), Tiffany Yu Tong Ling, Yuhan Huang, Sifan Liu, Mingyu Chen, Rushikesh Zawar, Xue Bai, Yilun Du, Chuang Gan, [Deva Ramanan](https://www.cs.cmu.edu/~deva/) (\*Co-First Authors)
+[Zhiqiu Lin\*](https://linzhiqiu.github.io/), Siyuan Cen\*, Daniel Jiang, Jay Karhade, Hewei Wang, [Chancharik Mitra](https://chancharikmitra.github.io/), Tiffany Yu Tong Ling, Yuhan Huang, Sifan Liu, Mingyu Chen, Rushikesh Zawar, Xue Bai, Yilun Du, Chuang Gan, [Deva Ramanan](https://www.cs.cmu.edu/~deva/) (\*Co-First Authors)
 
 **CHAI: Building a Precise Video Language with Human–AI Oversight** (CVPR 2026, **Highlight · Top 3%**) [[Paper](https://arxiv.org/abs/2604.21718)] [[Code](https://github.com/chancharikmitra/CHAI)] [[HF](https://huggingface.co/datasets/chancharikm/CHAI_testset)] [[Site](https://linzhiqiu.github.io/papers/chai/)]  
-[Zhiqiu Lin](https://linzhiqiu.github.io/)\*, [Chancharik Mitra](https://x.com/chancharikm)\*, Siyuan Cen, Isaac Li, Yuhan Huang, Yu Tong Tiffany Ling, Hewei Wang, Irene Pi, Shihang Zhu, Ryan Rao, George Liu, Jiaxi Li, Ruojin Li, Yili Han, [Yilun Du](https://yilundu.github.io/), [Deva Ramanan](https://www.cs.cmu.edu/~deva/) (\*Co-First Authors)
+[Zhiqiu Lin](https://linzhiqiu.github.io/)\*, [Chancharik Mitra](https://chancharikmitra.github.io/)\*, Siyuan Cen, Isaac Li, Yuhan Huang, Yu Tong Tiffany Ling, Hewei Wang, Irene Pi, Shihang Zhu, Ryan Rao, George Liu, Jiaxi Li, Ruojin Li, Yili Han, [Yilun Du](https://yilundu.github.io/), [Deva Ramanan](https://www.cs.cmu.edu/~deva/) (\*Co-First Authors)
 
 ---
 
@@ -445,7 +445,7 @@ python -m genai_bench.evaluate --model gpt-4o --output_dir ./outputs --gen_model
 
 ## Contributions
 
-- **[Zhiqiu Lin](https://x.com/ZhiqiuLin)**, **[Jean de Nyandwi](https://x.com/Jeande_d)**, **[Chancharik Mitra](https://x.com/chancharikm)**  
+- **[Zhiqiu Lin](https://x.com/ZhiqiuLin)**, **[Jean de Nyandwi](https://x.com/Jeande_d)**, **[Chancharik Mitra](https://chancharikmitra.github.io/)**  
   Implemented image-based CLIPScore and VQAScore for: CLIP-FlanT5, GPT-4o, LLaVA-1.5, InstructBLIP, OpenCLIP, HPSv2, PickScore.
 
 - **Baiqi Li**  
