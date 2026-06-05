@@ -15,17 +15,21 @@ from google.genai.types import (
 
 from .vqa_model import VQAScoreModel
 
-default_question_template = '{}' #'{} Please answer yes or no.'
+import os
+
+default_question_template = 'Does this figure show "{}"? Please answer Yes or No.',
 default_answer_template = 'Yes'
 
 GEMINI_MODELS = {
-    'gemini-1.5-pro': {},
-    'gemini-1.5-flash': {},
-    'gemini-2.5-flash': {},
-    'gemini-2.5-pro': {},
-    'gemini-3.1-pro-preview': {},
-    'gemini-3-pro-preview': {},
-    'gemini-3-flash-preview': {},
+    # Still active — older stable (working VQAScore)
+    'gemini-2.5-flash':          {},
+    'gemini-2.5-pro':            {},
+
+    # Current generation (logprobs/VQAScore not supported)
+    # 'gemini-3.1-pro-preview':    {},  # Feb 2026, current flagship
+    # 'gemini-3-flash-preview': {},  #
+    # 'gemini-3.5-flash': {}
+
 }
 
 SAFETY_SETTINGS = [
@@ -85,28 +89,45 @@ class GeminiModel(VQAScoreModel):
     allows_image = True
 
     def __init__(self,
-                 model_name='gemini-2.5-pro',
-                 device='cuda',
-                 cache_dir="./cach_dir",
-                 project_id=None,
-                 location='global',
-                 logprobs=5):
+             model_name='gemini-2.5-pro',
+             device='cuda',
+             cache_dir="./cache_dir",
+             project_id=None,
+             api_key=None,
+             location=None,
+             logprobs=5):
         assert model_name in GEMINI_MODELS, \
             f"Model {model_name} not supported. Choose from {list(GEMINI_MODELS.keys())}"
-        assert project_id is not None, \
-            "project_id is required for Vertex AI"
+
+        # Resolve credentials — explicit args take priority over env vars
+        project_id = project_id or os.environ.get("GOOGLE_CLOUD_PROJECT")
+        api_key    = api_key    or os.environ.get("GEMINI_API_KEY")
+        location   = location  or os.environ.get("GOOGLE_CLOUD_LOCATION") or "global"
+
+        assert project_id is not None or api_key is not None, (
+            "No Gemini credentials provided. Either:\n"
+            "  - Pass project_id= or set GOOGLE_CLOUD_PROJECT (Vertex AI, uses ADC auth)\n"
+            "  - Pass api_key= or set GEMINI_API_KEY (Gemini Developer API)"
+        )
+
+        # If both are provided, Vertex AI takes priority
         self.project_id = project_id
-        self.location = location
-        self.logprobs = logprobs
+        self.api_key    = api_key if project_id is None else None
+        self.location   = location
+        self.logprobs   = logprobs
         super().__init__(model_name=model_name, device=device, cache_dir=cache_dir)
 
     def load_model(self):
-        """Initialize the Vertex AI Gemini client."""
-        self.client = genai.Client(
-            vertexai=True,
-            project=self.project_id,
-            location=self.location,
-        )
+        if self.project_id is not None:
+            # Vertex AI — authentication via ADC (gcloud auth application-default login)
+            self.client = genai.Client(
+                vertexai=True,
+                project=self.project_id,
+                location=self.location,
+            )
+        else:
+            # Gemini Developer API — authentication via API key from Google AI Studio
+            self.client = genai.Client(api_key=self.api_key)
 
     def load_images(self, paths: List[str], num_frames: int = None) -> List[dict]:
         loaded_data = []
@@ -213,6 +234,12 @@ class GeminiModel(VQAScoreModel):
                 num_frames: int = 4,
                 fps=None,
                 temperature: float = 1.0) -> torch.Tensor:
+
+        if self.project_id is None:
+            raise ValueError(
+                "Gemini VQAScore requires Vertex AI (logprobs not supported via "
+                "the Gemini Developer API). Provide a project_id or set GOOGLE_CLOUD_PROJECT."
+            )
 
         assert len(images) == len(texts), "Number of images and texts must match"
 

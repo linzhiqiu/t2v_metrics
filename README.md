@@ -1,82 +1,75 @@
-## **VQAScore for Evaluating Text-to-Visual Models [[Project Page]](https://linzhiqiu.github.io/papers/vqascore/)**  
+# VQAScore for Evaluating Text-to-Visual Models [[Project Page]](https://linzhiqiu.github.io/papers/vqascore/)
 
-*VQAScore allows researchers to automatically evaluate text-to-image/video/3D models using one-line of Python code!*
+*VQAScore allows researchers to automatically evaluate text-to-image/video/3D models using one line of Python code!*
 
-[[VQAScore Page](https://linzhiqiu.github.io/papers/vqascore/)] [[VQAScore Demo](https://huggingface.co/spaces/zhiqiulin/VQAScore)]  [[GenAI-Bench Page](https://linzhiqiu.github.io/papers/genai_bench/)] [[GenAI-Bench Demo](https://huggingface.co/spaces/BaiqiL/GenAI-Bench-DataViewer)] [[CLIP-FlanT5 Model Zoo](https://github.com/linzhiqiu/CLIP-FlanT5/blob/master/docs/MODEL_ZOO.md)]
+[[VQAScore Page](https://linzhiqiu.github.io/papers/vqascore/)] [[VQAScore Demo](https://huggingface.co/spaces/zhiqiulin/VQAScore)] [[GenAI-Bench Page](https://linzhiqiu.github.io/papers/genai_bench/)] [[GenAI-Bench Demo](https://huggingface.co/spaces/BaiqiL/GenAI-Bench-DataViewer)] [[CLIP-FlanT5 Model Zoo](https://github.com/linzhiqiu/CLIP-FlanT5/blob/master/docs/MODEL_ZOO.md)]
 
-**VQAScore: Evaluating Text-to-Visual Generation with Image-to-Text Generation** (ECCV 2024) [[Paper](https://arxiv.org/pdf/2404.01291)] [[HF](https://huggingface.co/zhiqiulin/clip-flant5-xxl)] <br>
+**VQAScore: Evaluating Text-to-Visual Generation with Image-to-Text Generation** (ECCV 2024) [[Paper](https://arxiv.org/pdf/2404.01291)] [[HF](https://huggingface.co/zhiqiulin/clip-flant5-xxl)]  
 [Zhiqiu Lin](https://linzhiqiu.github.io/), [Deepak Pathak](https://www.cs.cmu.edu/~dpathak/), Baiqi Li, Jiayao Li, [Xide Xia](https://scholar.google.com/citations?user=FHLTntIAAAAJ&hl=en), [Graham Neubig](https://www.phontron.com/), [Pengchuan Zhang*](https://scholar.google.com/citations?user=3VZ_E64AAAAJ&hl=en), [Deva Ramanan*](https://www.cs.cmu.edu/~deva/) (*Co-First and co-senior authors)
 
-**GenAI-Bench: Evaluating and Improving Compositional Text-to-Visual Generation** (CVPR 2024, **Best Short Paper @ SynData Workshop**) [[Paper](https://arxiv.org/abs/2406.13743)] [[HF](https://huggingface.co/spaces/BaiqiL/GenAI-Bench-DataViewer)] <br>
+**GenAI-Bench: Evaluating and Improving Compositional Text-to-Visual Generation** (CVPR 2024, **Best Short Paper @ SynData Workshop**) [[Paper](https://arxiv.org/abs/2406.13743)] [[HF](https://huggingface.co/spaces/BaiqiL/GenAI-Bench-DataViewer)]  
 Baiqi Li*, [Zhiqiu Lin*](https://linzhiqiu.github.io/), [Deepak Pathak](https://www.cs.cmu.edu/~dpathak/), Jiayao Li, Yixin Fei, Kewen Wu, Tiffany Ling, [Xide Xia*](https://scholar.google.com/citations?user=FHLTntIAAAAJ&hl=en), [Pengchuan Zhang*](https://scholar.google.com/citations?user=3VZ_E64AAAAJ&hl=en), [Graham Neubig*](https://www.phontron.com/), [Deva Ramanan*](https://www.cs.cmu.edu/~deva/) (*Co-First and co-senior authors)
 
-**CameraBench: Towards Understanding Camera Motions in Any Video** (arXiv 2025) \[[Paper](https://arxiv.org/abs/2504.15376)] \[[Site](https://linzhiqiu.github.io/papers/camerabench/)] <br>
+**CameraBench: Towards Understanding Camera Motions in Any Video** (arXiv 2025) [[Paper](https://arxiv.org/abs/2504.15376)] [[Site](https://linzhiqiu.github.io/papers/camerabench/)]  
 [Zhiqiu Lin\*](https://linzhiqiu.github.io/), Siyuan Cen\*, Daniel Jiang, Jay Karhade, Hewei Wang, [Chancharik Mitra](https://x.com/chancharikm), Tiffany Yu Tong Ling, Yuhan Huang, Sifan Liu, Mingyu Chen, Rushikesh Zawar, Xue Bai, Yilun Du, Chuang Gan, [Deva Ramanan](https://www.cs.cmu.edu/~deva/) (\*Co-First Authors)
 
+---
+
+## ⚠️ Reproducing Paper Results (Legacy Version)
+
+> **If you need to reproduce results from the original VQAScore or GenAI-Bench papers**, please use the legacy v3.0 release, which includes CLIP-FlanT5, InstructBLIP, LLaVA-1.5, and other models used in those works.
+>
+> See [`V_3.0_README.md`](V_3.0_README.md) for full documentation, or install the legacy version directly:
+> ```bash
+> pip install t2v-metrics==3.0
+> ```
+> v3.1 targets `torch>=2.7.0` and `transformers>=5.0.0` to support the latest
+> frontier models. Models using `trust_remote_code` (InternVL, Molmo2) are temporarily
+> unavailable due to transformers 5.x breaking changes and will return in a future release.
+---
+
 ## News
-- [2025/10/01] 🚀 **VQAScore** now supports **Qwen3-VL** and **Qwen3-Omni** models! Qwen3-VL-235B brings state-of-the-art vision-language understanding with both standard and thinking variants. Qwen3-Omni-30B adds groundbreaking **multimodal capabilities** including audio processing, making it the first audio-enabled model in the VQAScore framework for comprehensive image, video, and audio-text alignment evaluation. See [Audio-Visual-Text Alignment and Generation](#audio-visual-text-alignment-and-generation) for usage examples.
-- [2025/09/03] 🚀 **VQAScore** gets a **major upgrade** with support for **20+ state-of-the-art video-language models** for [video-based VQAScore](#video-text-alignment-scores) (e.g., Qwen2.5-VL, LLaVA-Video, etc.), along with full integration of the new benchmark [CameraBench](https://linzhiqiu.github.io/papers/camerabench/) for evaluating camera-motion understanding in text-to-video models like Kling and Runway. Huge thanks to our collaborator **Chancharik Mitra** for leading this milestone update!
-- [2025/09/03] ✨ **VQAScore** has become the **go-to evaluation choice for generative models**: **GenAI-Bench** is now adopted by **Google DeepMind** (Imagen3 & Imagen4), **Bytedance Seed**, **NVIDIA**, and others. Meanwhile, our **open-source CLIP-FlanT5 models** have been downloaded over **2 million times** on Hugging Face!
-- [2024/08/13] 🔥 **VQAScore** is highlighted in Google's [Imagen3 report](https://arxiv.org/abs/2408.07009) as the strongest replacement of CLIPScore for automated evaluation! **GenAI-Bench** was chosen as one of the key benchmarks to showcase Imagen3's superior prompt-image alignment. Kudos to Google for this achievement! [[Paper](https://arxiv.org/abs/2408.07009)]
-- [2024/07/01] 🔥 **VQAScore** has been accepted to ECCV 2024!
-- [2024/06/20] 🔥 **GenAI-Bench** won Best Short Paper at the CVPR'24 SynData Workshop! [[Workshop Site](https://syndata4cv.github.io/)].
 
-<img src="images/example.png" width=600> 
+- [2026/06/04] 🚀 **VQAScore v3.1** — major model refresh with support for **Gemma 3**, **Qwen3.5**, and updated **Qwen3-VL** and **Qwen3-Omni** families. Adds `forward_with_trace` for full token-level scoring transparency on open-source Qwen models. Legacy models (CLIP-FlanT5, LLaVA-1.5, InstructBLIP, etc.) are preserved in [v3.0](V_3.0_README.md) for paper reproducibility.
+- [2025/10/01] 🚀 **VQAScore** now supports **Qwen3-VL** and **Qwen3-Omni** models! Qwen3-Omni-30B adds groundbreaking **multimodal capabilities** including audio processing, making it the first audio-enabled model in the VQAScore framework.
+- [2025/09/03] 🚀 **VQAScore** gets a **major upgrade** with support for **20+ state-of-the-art video-language models** and full integration of [CameraBench](https://linzhiqiu.github.io/papers/camerabench/). Huge thanks to **Chancharik Mitra** for leading this milestone update!
+- [2025/09/03] ✨ **VQAScore** has become the **go-to evaluation choice for generative models**: **GenAI-Bench** is now adopted by **Google DeepMind** (Imagen3 & Imagen4), **Bytedance Seed**, **NVIDIA**, and others. Our open-source CLIP-FlanT5 models have been downloaded over **2 million times** on Hugging Face!
+- [2024/08/13] 🔥 **VQAScore** is highlighted in Google's [Imagen3 report](https://arxiv.org/abs/2408.07009) as the strongest replacement of CLIPScore for automated evaluation!
+- [2024/07/01] 🔥 **VQAScore** accepted to ECCV 2024!
+- [2024/06/20] 🔥 **GenAI-Bench** won Best Short Paper at the CVPR'24 SynData Workshop!
 
-VQAScore significantly outperforms previous metrics such as CLIPScore and PickScore on compositional text prompts, and it is much simpler than prior art (e.g., HPSv2, TIFA, Davidsonian, VPEval, VIEScore) making use of human feedback or proprietary models like ChatGPT and GPT-4Vision. 
+<img src="images/example.png" width=600>
 
-## Available Models:
+---
+
+## Available Models (v3.1)
 
 ### VQAScore
-| Model Family Name | Image | Video | Models |
-| --------------------- | :---: | :---: | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| CLIP-FlanT5 | :heavy_check_mark: | | clip-flant5-xxl, clip-flant5-xl |
-| LLaVA-1.5 | :heavy_check_mark: | | llava-v1.5-13b, llava-v1.5-7b |
-| ShareGPT4V | :heavy_check_mark: | | sharegpt4v-7b, sharegpt4v-13b |
-| LLaVA-1.6 | :heavy_check_mark: | | llava-v1.6-13b |
-| InstructBLIP-FlanT5 | :heavy_check_mark: | | instructblip-flant5-xxl, instructblip-flant5-xl |
-| GPT-4 | :heavy_check_mark: | :heavy_check_mark: | gpt-4-turbo, gpt-4o, gpt-4.1 |
-| LLaVA-OneVision | :heavy_check_mark: | :heavy_check_mark: | llava-onevision-qwen2-7b-si, llava-onevision-qwen2-7b-ov |
-| mPLUG-Owl3 | :heavy_check_mark: | :heavy_check_mark: | mplug-owl3-7b |
-| PaliGemma | :heavy_check_mark: | | paligemma-3b-mix-224, paligemma-3b-mix-448, paligemma-3b-mix-896 |
-| InternVL2 | :heavy_check_mark: | :heavy_check_mark: | internvl2-1b, internvl2-2b, internvl2-4b, internvl2-8b, internvl2-26b, internvl2-40b, internvl2-llama3-76b |
-| InternVL2.5 | :heavy_check_mark: | :heavy_check_mark: | internvl2.5-1b, internvl2.5-2b, internvl2.5-4b, internvl2.5-8b, internvl2.5-26b, internvl2.5-38b, internvl2.5-78b |
-| InternVL3 | :heavy_check_mark: | :heavy_check_mark: | internvl3-8b, internvl3-14b, internvl3-78b |
-| InternVideo2-Chat | :heavy_check_mark: | :heavy_check_mark: | internvideo2-chat-8b, internvideo2-chat-8b-hd, internvideo2-chat-8b-internlm |
-| InternLM-XComposer2.5 | :heavy_check_mark: | :heavy_check_mark: | internlmxcomposer25-7b |
-| Llama-3.2 | :heavy_check_mark: | | llama-3.2-1b, llama-3.2-3b, llama-3.2-1b-instruct, llama-3.2-3b-instruct, llama-3.2-11b-vision, llama-3.2-11b-vision-instruct, llama-3.2-90b-vision, llama-3.2-90b-vision-instruct |
-| Llama-Guard-3 | :heavy_check_mark: | | llama-guard-3-1b, llama-guard-3-11b-vision |
-| Molmo | :heavy_check_mark: | | molmo-72b-0924, molmo-7b-d-0924, molmo-7b-o-0924, molmoe-1b-0924 |
-| Gemini | :heavy_check_mark: | :heavy_check_mark: | gemini-1.5-pro, gemini-1.5-flash, gemini-2.5-pro |
-| Qwen2-VL | :heavy_check_mark: | :heavy_check_mark: | qwen2-vl-2b, qwen2-vl-7b, qwen2-vl-72b |
-| Qwen2.5-VL | :heavy_check_mark: | :heavy_check_mark: | qwen2.5-vl-3b, qwen2.5-vl-7b, qwen2.5-vl-32b, qwen2.5-vl-72b |
-| LLaVA-Video | | :heavy_check_mark: | llava-video-7b, llava-video-72B |
-| Tarsier | | :heavy_check_mark: | tarsier-recap-7b, tarsier2-7b |
-| Perception-LM | | :heavy_check_mark: | perception-lm-1b, perception-lm-3b, perception-lm-8b |
-| Qwen3-VL | :heavy_check_mark: | :heavy_check_mark: | qwen3-vl-235b, qwen3-vl-235b-thinking |
-| Qwen3-Omni | :heavy_check_mark: | :heavy_check_mark: | qwen3-omni-30b-captioner, qwen3-omni-30b, qwen3-omni-30b-thinking |
----
-### ITMScore
-| Model Family Name | Image | Video | Models |
-| ----------------- | :---: | :---: | ----------------------------------------- |
-| BLIP2-ITM | :heavy_check_mark: | | blip2-itm, blip2-itm-vitL, blip2-itm-coco |
-| UMT-ITM | :heavy_check_mark: | :heavy_check_mark: | umt-b16-25m-itm, umt-l16-25m-itm |
-| InternVideo2-ITM | :heavy_check_mark: | :heavy_check_mark: | internvideo2-1b-stage2-itm |
----
-### CLIPScore
-| Model Family Name | Image | Video | Models |
-| ------------------- | :---: | :---: | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| All OpenCLIP Models | :heavy_check_mark: | | openai\:ViT-B-32, openai\:ViT-L-14, laion2b\_s32b\_b82k\:ViT-L-14, datacomp\_xl\_s13b\_b90k\:ViT-B-16, webli\:ViT-B-16-SigLIP, metaclip\_400m\:ViT-B-32, ... (200+ models available - use `t2v_metrics.list_all_clipscore_models()` to see all exact model names) |
-| BLIP2-ITC | :heavy_check_mark: | | blip2-itc, blip2-itc-vitL, blip2-itc-coco |
-| HPSv2 | :heavy_check_mark: | | hpsv2 |
-| PickScore | :heavy_check_mark: | | pickscore-v1 |
-| UMT-CLIP | :heavy_check_mark: | :heavy_check_mark: | umt-b16-25m-clip, umt-l16-25m-clip |
-| InternVideo2-CLIP | :heavy_check_mark: | :heavy_check_mark: | internvideo2-1b-stage2-clip |
-| LanguageBind Video | :heavy_check_mark: | :heavy_check_mark: | languagebind-video-v1.5-ft, languagebind-video-ft, languagebind-video-v1.5, languagebind-video |
 
-## Quick start
+| Model Family | Image | Video | Audio | Models |
+|---|:---:|:---:|:---:|---|
+| GPT-4 | ✅ | ✅ | | `gpt-4o`, `gpt-4.1` |
+| Gemini †| ✅ | ✅ | | `gemini-2.5-flash`, `gemini-2.5-pro` |
+| Gemma 3 | ✅ | ✅ | | `gemma-3-4b-it`, `gemma-3-12b-it`, `gemma-3-27b-it` |
+| PaliGemma ‡ | ✅ | | | `paligemma-3b-mix-224`, `paligemma-3b-mix-448`, `paligemma-3b-mix-896` |
+<!-- | InternVL3 | ✅ | ✅ | | `internvl3-8b`, `internvl3-14b`, `internvl3-78b` | -->
+<!-- | InternVL3.5 | ✅ | ✅ | | `internvl3.5-1b`, ... | -->
+<!-- | Molmo2 | ✅ | ✅ | | `molmo2-4b`, `molmo2-7b`, `molmo2-8b` | -->
+| Qwen2.5-VL ★ | ✅ | ✅ | | `qwen2.5-vl-3b`, `qwen2.5-vl-7b`, `qwen2.5-vl-32b`, `qwen2.5-vl-72b` |
+| Qwen3-VL ★ | ✅ | ✅ | | `qwen3-vl-2b`, `qwen3-vl-2b-thinking`, `qwen3-vl-4b`, `qwen3-vl-4b-thinking`, `qwen3-vl-8b`, `qwen3-vl-8b-thinking`, `qwen3-vl-30b-a3b`, `qwen3-vl-30b-a3b-thinking`, `qwen3-vl-32b`, `qwen3-vl-32b-thinking`, `qwen3-vl-235b-a22b`, `qwen3-vl-235b-a22b-thinking` |
+| Qwen3.5 ★ | ✅ | ✅ | | `qwen3.5-4b`, `qwen3.5-9b`, `qwen3.5-27b` |
+| Qwen3-Omni ★ | ✅ | ✅ | ✅ | `qwen3-omni-30b-a3b`, `qwen3-omni-30b-a3b-captioner`, `qwen3-omni-30b-a3b-thinking` |
 
-Install the package in editable mode via:
+> **†** Gemini VQAScore requires a **Vertex AI project** (`project_id`). The standard Gemini Developer API key does not support logprobs and cannot be used for scoring. See [Gemini Usage](#gemini-vqascore-vertex-ai-required).
+>
+> **‡** PaliGemma is **image-only**. Video inputs are not supported.
+>
+> **★** Supports [`forward_with_trace`](#token-level-scoring-transparency-forward_with_trace) for full token-level scoring transparency.
+
+---
+
+## Quick Start
+
 ```bash
 git clone https://github.com/linzhiqiu/t2v_metrics
 cd t2v_metrics
@@ -84,297 +77,388 @@ cd t2v_metrics
 conda create -n t2v python=3.10 -y
 conda activate t2v
 conda install pip -y
-
 conda install ffmpeg -c conda-forge
-pip install -e . # local pip install
+
+pip install -e .
 ```
 
-Or you can do a standard pip install via 
+Or via pip:
 ```bash
-conda install ffmpeg -c conda-forge
 pip install t2v-metrics
-
-# Install Git-based dependencies
-pip install git+https://github.com/LLaVA-VL/LLaVA-NeXT.git
-pip install git+https://github.com/openai/CLIP.git
-pip install git+https://github.com/linzhiqiu/pytorchvideo.git
-
-# Install flash-attention (CUDA 12.2, Python 3.10)
-pip install https://github.com/Dao-AILab/flash-attention/releases/download/v2.5.8/flash_attn-2.5.8+cu122torch2.3cxx11abiFALSE-cp310-cp310-linux_x86_64.whl
 ```
 
-**Note**: Certain models have additional requirements for full usability that may conflict with other model requirements. For these rare cases, please install the dependencies in the corresponding requirements.txt folder.
+## Flash Attention (Optional)
 
-Now, the following Python code is all you need to compute the VQAScore for image-text alignment (higher scores indicate greater similarity):
+By default, all models use PyTorch's built-in **SDPA** (`scaled_dot_product_attention`), 
+which works out of the box on any system with no extra installation.
+
+For better performance on compatible hardware, you can optionally enable Flash Attention 2:
+
+```bash
+pip install flash-attn --no-build-isolation
+```
+
+> ⚠️ This requires ~20–30 minutes to compile and must match your CUDA + PyTorch version.
+> Pre-built wheels may be available at:
+> https://github.com/Dao-AILab/flash-attention/releases
+
+Once installed, pass `attn_implementation='flash_attention_2'` when loading any model:
+
+```python
+scorer = t2v_metrics.VQAScore(model='qwen3-vl-8b', attn_implementation='flash_attention_2')
+```
+
+<!-- For InternVL models, use `use_flash_attn=True` instead:
+
+```python
+scorer = t2v_metrics.VQAScore(model='internvl3.5-8b', use_flash_attn=True)
+``` -->
+
+> **Note:** Flash Attention requires GLIBC ≥ 2.32. If you are on an older Linux 
+> distribution, SDPA is the recommended option.
+---
+
+## Basic Usage
 
 ```python
 import t2v_metrics
-clip_flant5_score = t2v_metrics.VQAScore(model='clip-flant5-xxl') # our recommended scoring model
 
-### For a single (image, text) pair
-image = "images/0.png" # an image path in string format
-text = "someone talks on the phone angrily while another person sits happily"
-score = clip_flant5_score(images=[image], texts=[text])
+# Image scoring
+qwen_score = t2v_metrics.VQAScore(model='qwen2.5-vl-7b')
 
-### Alternatively, if you want to calculate the pairwise similarity scores 
-### between M images and N texts, run the following to return a M x N score tensor.
+image = "images/0.png"
+text  = "someone talks on the phone angrily while another person sits happily"
+score = qwen_score(images=[image], texts=[text])
+
+# Pairwise M images x N texts → (M, N) score tensor
 images = ["images/0.png", "images/1.png"]
-texts = ["someone talks on the phone angrily while another person sits happily",
-         "someone talks on the phone happily while another person sits angrily"]
-scores = clip_flant5_score(images=images, texts=texts) # scores[i][j] is the score between image i and text j
+texts  = ["someone talks on the phone angrily", "someone talks on the phone happily"]
+scores = qwen_score(images=images, texts=texts)
 ```
 
-### Notes on GPU and cache
-- **GPU usage**: By default, this code uses the first cuda device on your machine. We recommend 40GB GPUs for the largest VQAScore models such as `clip-flant5-xxl` and `llava-v1.5-13b`. If you have limited GPU memory, consider smaller models such as `clip-flant5-xl` and `llava-v1.5-7b`.
-- **Cache directory**: You can change the cache folder which saves all model checkpoints (default is `./hf_cache/`) by updating `HF_CACHE_DIR` in [t2v_metrics/constants.py](t2v_metrics/constants.py).
+---
 
-
-## Benchmarking text-to-image models on GenAI-Bench
-
-### 1. Generate Images
-To generate images using a specified model, run:
-```bash
-python -m genai_bench.generate --output_dir ./outputs/ --gen_model runwayml/stable-diffusion-v1-5
-```
-
-The generated images will be saved in `./outputs/<model>/`. You may want to modify this script to generate images using your own models.
-
-### 2. Evaluate VQAScore Performance
-
-You can evaluate your model using VQAScore based on clip-flant5-xxl:
-```bash
-python -m genai_bench.evaluate --model clip-flant5-xxl --output_dir ./outputs --gen_model runwayml/stable-diffusion-v1-5
-```
-
-Or you can use GPT-4o based VQAScore:
-```bash
-python -m genai_bench.evaluate --model gpt-4o --api_key INPUT_YOUR_KEY_HERE --output_dir ./outputs --gen_model runwayml/stable-diffusion-v1-5
-```
-
-For comparative VQAScore results (based on clip-flant5-xxl and GPT-4o) against state-of-the-art models like DALLE-3 and Midjourney v6, please refer to the [VQAScore results](https://github.com/linzhiqiu/t2v_metrics/blob/main/genai_bench/model_performance_vqacore.md)!
-
-
-## **Advanced Usage**  
-
-- [Batch processing for more image-text pairs](#batch-processing-for-more-image-text-pairs)
-- [Check all supported models](#check-all-supported-models)
-- [Customizing the question and answer template (for VQAScore)](#customizing-the-question-and-answer-template-for-vqascore)
-- [Reproducing VQAScore paper results](#reproducing-vqascore-paper-results)
-- [Reproducing GenAI-Bench paper results](#reproducing-genai-bench-paper-results)
-- [Using GPT-4o for VQAScore](#using-gpt-4o-for-vqascore)
-- [Implementing your own scoring metric](#implementing-your-own-scoring-metric)
-- [Text generation (VQA) using CLIP-FlanT5](#text-generation-vqa-using-clip-flant5)
-- [Video-text alignment scores](#video-text-alignment-scores)
-
-### Batch processing for more image-text pairs
-With a large batch of M images x N texts, you can speed up using the ``batch_forward()`` function. 
-```python
-import t2v_metrics
-clip_flant5_score = t2v_metrics.VQAScore(model='clip-flant5-xxl')
-
-# The number of images and texts per dictionary must be consistent.
-# E.g., the below example shows how to evaluate 4 generated images per text
-dataset = [
-  {'images': ["images/0/DALLE3.png", "images/0/Midjourney.jpg", "images/0/SDXL.jpg", "images/0/DeepFloyd.jpg"], 'texts': ["The brown dog chases the black dog around the tree."]},
-  {'images': ["images/1/DALLE3.png", "images/1/Midjourney.jpg", "images/1/SDXL.jpg", "images/1/DeepFloyd.jpg"], 'texts': ["Two cats sit at the window, the blue one intently watching the rain, the red one curled up asleep."]},
-  #...
-]
-scores = clip_flant5_score.batch_forward(dataset=dataset, batch_size=16) # (n_sample, 4, 1) tensor
-```
-
-### Check all supported models
-We currently support running VQAScore with CLIP-FlanT5, LLaVA-1.5, and InstructBLIP as well as SOTA video-language models like Qwen2.5-VL, InternVL3, GPT-4o, and Gemini-2.5-pro:
-```python
-gpt4o_score = t2v_metrics.VQAScore(model='gpt-4o', api_key="YOUR_API_KEY") # Using OpenAI Key
-gemini25_score = t2v_metrics.VQAScore(model='gemini-2.5-pro', api_key="YOUR_API_KEY") # This is using your Gemini API key, which is the recommended method. If you would like to use your Vertex AI project, please make a request on Github.
-qwen25vl_score = t2v_metrics.VQAScore(model='qwen2.5-vl-7b')
-qwen3vl_score = t2v_metrics.VQAScore(model='qwen3-vl-235b') 
-qwen3omni_score = t2v_metrics.VQAScore(model='qwen3-omni-30b') # Supports audio!
-internvl3_score = t2v_metrics.VQAScore(model='internvl3-8b')
-```
-You can check all supported models by running the below commands:
-
-```python
-print("VQAScore models:")
-t2v_metrics.list_all_vqascore_models()
-
-print("ITMScore models:")
-t2v_metrics.list_all_itmscore_models()
-
-print("CLIPScore models:")
-t2v_metrics.list_all_clipscore_models()
-```
-
-### Customizing the question and answer template (for VQAScore)
-The question and answer slightly affect the final score, as shown in the Appendix of our paper. We provide a simple default template for each model and do not recommend changing it for the sake of reproducibility. However, we do want to point out that the question and answer can be easily modified. For example, CLIP-FlanT5 and LLaVA-1.5 use the following template, which can be found at [t2v_metrics/models/vqascore_models/clip_t5_model.py](t2v_metrics/models/vqascore_models/clip_t5_model.py):
-
-```python
-# {} will be replaced by the caption
-default_question_template = 'Does this figure show "{}"? Please answer yes or no.'
-default_answer_template = 'Yes'
-```
-
-You can customize the template by passing the `question_template` and `answer_template` parameters into the `forward()` or `batch_forward()` functions:
-
-```python
-# Use a different question for VQAScore
-scores = clip_flant5_score(images=images,
-                           texts=texts,
-                           question_template='Is this figure showing "{}"? Please answer yes or no.',
-                           answer_template='Yes')
-```
-
-You may also compute P(caption | image) ([VisualGPTScore](https://linzhiqiu.github.io/papers/visual_gpt_score)) instead of P(answer | image, question):
-```python
-scores = clip_flant5_score(images=images,
-                           texts=texts,
-                           question_template="", # no question
-                           answer_template="{}") # this computes P(caption | image)
-```
-
-### Reproducing VQAScore paper results
-
-Our [eval.py](eval.py) allows you to easily run 10 image/vision/3D alignment benchmarks (e.g., Winoground/TIFA160/SeeTrue/StanfordT23D/T2VScore):
-```bash
-python eval.py --model clip-flant5-xxl # for VQAScore
-python eval.py --model openai:ViT-L-14 # for CLIPScore
-
-# You can optionally specify question/answer template, for example:
-python eval.py --model clip-flant5-xxl --question "Is the figure showing '{}'?" --answer "Yes"
-```
-
-### Reproducing GenAI-Bench paper results
-
-Our [genai_image_eval.py](genai_image_eval.py) and [genai_video_eval.py](genai_video_eval.py) can reproduce the GenAI-Bench results. In additional [genai_image_ranking.py](genai_image_ranking.py) can reproduce the GenAI-Rank results:
-```bash
-# GenAI-Bench
-python genai_image_eval.py --model clip-flant5-xxl
-python genai_video_eval.py --model clip-flant5-xxl
-
-# GenAI-Rank
-python genai_image_ranking.py --model clip-flant5-xxl --gen_model DALLE_3
-python genai_image_ranking.py --model clip-flant5-xxl --gen_model SDXL_Base
-```
-
-### Using GPT-4o for VQAScore!
-We implemented VQAScore using GPT-4o to achieve a new state-of-the-art performance. Please see [gpt4_eval.py](gpt4_eval.py) for an example. Here is how to use it in command line:
-```python
-api_key = # Your OpenAI key
-score_func = t2v_metrics.get_score_model(model="gpt-4o", device="cuda", api_key=openai_key, top_logprobs=20) # We find top_logprobs=20 to be sufficient for most (image, text) samples. Consider increase this number if you get errors (the API cost will not increase).
-```
-
-### Video-Text Alignment Scores
-
-We now support video-text alignment scores, including video-CLIPScore (InternVideo2, Unmasked Teacher, and more) and video-VQAScore (LLaVA-OneVision, Qwen2.5-VL, and more). 
-
-For single-image and CLIP-like models, video frames are concatenated. For all other native video models (we recommend Qwen2.5-VL at the time of writing), video frames are passed directly to the model.
+## Video-Text Scoring
 
 ```python
 import t2v_metrics
 
-### For a single (video, text) pair:
-qwen_score = t2v_metrics.VQAScore(model='qwen2.5-vl-7b') 
+qwen_score = t2v_metrics.VQAScore(model='qwen2.5-vl-7b')
+
 video = "videos/baby.mp4"
-text = "a baby crying"
-score = qwen_score(images=[video], texts=[text]) 
+text  = "a baby crying"
+score = qwen_score(images=[video], texts=[text])
 
-### Pairwise similarity scores between M videos and N texts:
+# Pairwise M videos x N texts:
 videos = ["videos/baby.mp4", "videos/ducks.mp4"]
-texts = ["a baby crying", "a group of ducks standing in the water"]
-score = qwen_score(images=videos, texts=texts, fps=8.0)  # M x N score tensor
+texts  = ["a baby crying", "a group of ducks standing in the water"]
+scores = qwen_score(images=videos, texts=texts, fps=8.0)  # M x N score tensor
 
-# For Qwen models, specify fps:
-# score = qwen_score(images=[video], texts=[text], fps=8.0) # We default to 8.0 FPS for balancing computationally reasonable inference and performance. To switch to Qwen's dynamic FPS sampling, you must explicitly set it to "dynamic"
-# score = qwen_score(images=[video], texts=[text], fps="dynamic")
-
-# For other models like LLaVA, use num_frames
-# llava_score = t2v_metrics.VQAScore(model='llava-onevision-qwen2-7b-ov')
-# score = llava_score(images=[video], texts=[text], num_frames=8) # We did our best to align with the default num_frames for each model, but to be certain, please check each respective model's spec or paper for confirmation.
+# Dynamic FPS (Qwen models only):
+score = qwen_score(images=[video], texts=[text], fps="dynamic")
 ```
 
-#### Current Gemini Usage:
+---
+
+## Model-Specific Usage
+
+### GPT-4o / GPT-4.1
 
 ```python
 import t2v_metrics
 
-### For a single (video, text) pair:
-gemini_score = t2v_metrics.VQAScore(model='gemini-3-pro-preview', project_id='your-gcp-project-id')
+# API key via argument or OPENAI_API_KEY environment variable
+gpt_score = t2v_metrics.VQAScore(model='gpt-4o')
+# or: gpt_score = t2v_metrics.VQAScore(model='gpt-4o', api_key="YOUR_KEY")
+
+score = gpt_score(images=["images/0.png"], texts=["a dog"])
+
+# Note: GPT-5 and above (gpt-5, gpt-5.4, gpt-5.5, etc.) are NOT supported
+# for VQAScore — they are reasoning models and do not expose logprobs.
+```
+
+### Gemini VQAScore (Vertex AI required)
+
+> **Important:** Gemini VQAScore requires a **Google Cloud Vertex AI project**. The standard Gemini Developer API key path does not support logprobs and will raise an error if used for scoring. The `generate()` method works with either backend.
+
+```python
+import t2v_metrics
+
+# Vertex AI — project_id via argument or GOOGLE_CLOUD_PROJECT env var
+# Authentication via ADC: run `gcloud auth application-default login` once
+gemini_score = t2v_metrics.VQAScore(model='gemini-2.5-pro', project_id='your-gcp-project-id')
+# or: set GOOGLE_CLOUD_PROJECT and GOOGLE_CLOUD_LOCATION=global, then:
+# gemini_score = t2v_metrics.VQAScore(model='gemini-2.5-pro')
+
 video = "videos/baby.mp4"
-text = "a baby crying"
+text  = "a baby crying"
 score = gemini_score(images=[video], texts=[text])
 
-### Pairwise similarity scores between M videos and N texts:
+# Pairwise:
 videos = ["videos/baby.mp4", "videos/ducks.mp4"]
-texts = ["a baby crying", "a group of ducks standing in the water"]
-scores = gemini_score(images=videos, texts=texts)  # M x N score tensor
+texts  = ["a baby crying", "a group of ducks standing in the water"]
+scores = gemini_score(images=videos, texts=texts)
 
-### Generation:
-responses = gemini_score.model.generate(images=[video], texts=["Describe what is happening in this video."])
+# Generation (works with either Vertex AI or API key):
+responses = gemini_score.model.generate(
+    images=[video],
+    texts=["Describe what is happening in this video."]
+)
 print(responses[0])
 ```
 
-### Text generation (VQA)
-To generate texts (captioning or VQA tasks) for any of our models, please use the below code:
-```python
-import t2v_metrics
-clip_flant5_score = t2v_metrics.VQAScore(model='clip-flant5-xxl')
+<!-- ### InternVL3 / InternVL3.5
 
-images = ["images/0.png", "images/0.png"] # A list of images
-texts = ["Please describe this image: ", "Does the image show 'someone talks on the phone angrily while another person sits happily'?"] # Corresponding prompts
-clip_flant5_score.model.generate(images=images, texts=prompts)
-```
-The generate method for CLIP-FlanT5 may require downgrading to 4.36.1:
-```
-pip install transformers==4.36.1
-```
-
-### Audio-Visual-Text Alignment and Generation
-
-Qwen3-Omni uniquely supports multimodal inputs including audio:
 ```python
 import t2v_metrics
 
-qwen3omni_score = t2v_metrics.VQAScore(model='qwen3-omni-30b')
+internvl_score = t2v_metrics.VQAScore(model='internvl3.5-8b')
 
-# Evaluate image + audio + text alignment
-image = "images/concert.png"
-audio = "audio/applause.wav"
-text = "a concert with enthusiastic audience"
+score = internvl_score(images=["images/0.png"], texts=["a dog"])
+score = internvl_score(images=["videos/baby.mp4"], texts=["a baby crying"])
+``` -->
 
-# Pass audio via audio_paths parameter
-score = qwen3omni_score(images=[image], texts=[text], audio_paths=[audio])
+### Gemma 3
 
-# Generate multimodal responses
-response = qwen3omni_score.model.generate(
-    images=[image], 
+```python
+import t2v_metrics
+
+# Video is supported via uniform frame sampling with interleaved timestamps
+gemma_score = t2v_metrics.VQAScore(model='gemma-3-12b-it')
+
+score = gemma_score(images=["images/0.png"], texts=["a dog"])
+score = gemma_score(images=["videos/baby.mp4"], texts=["a baby crying"], num_frames=10)
+```
+
+### PaliGemma (image-only)
+
+```python
+import t2v_metrics
+
+# PaliGemma supports images only — video inputs will raise NotImplementedError
+pali_score = t2v_metrics.VQAScore(model='paligemma-3b-mix-448')
+
+score = pali_score(images=["images/0.png"], texts=["a dog"])
+```
+<!-- 
+### Molmo2
+
+```python
+import t2v_metrics
+
+# Molmo2 supports native video — no frame extraction needed
+molmo_score = t2v_metrics.VQAScore(model='molmo2-8b')
+
+score = molmo_score(images=["images/0.png"], texts=["a dog"])
+score = molmo_score(images=["videos/baby.mp4"], texts=["a baby crying"])
+``` -->
+
+### Qwen3-Omni (Audio-Visual-Text)
+
+```python
+import t2v_metrics
+
+qwen3omni_score = t2v_metrics.VQAScore(model='qwen3-omni-30b-a3b')
+
+# Image + text
+score = qwen3omni_score(images=["images/0.png"], texts=["a dog"])
+
+# Video + text
+score = qwen3omni_score(images=["videos/baby.mp4"], texts=["a baby crying"])
+
+# Image + audio + text alignment
+score = qwen3omni_score(
+    images=["images/concert.png"],
+    texts=["a concert with enthusiastic audience"],
+    audio_paths=["audio/applause.wav"]
+)
+
+# Generation with audio output
+response, audio = qwen3omni_score.model.generate(
+    images=["images/concert.png"],
     texts=["What can you see and hear?"],
-    audio_paths=[audio],
-    speaker="Ethan"  # Voice for audio generation
+    audio_paths=["audio/applause.wav"],
+    return_audio=True,
+    speaker="Ethan"
 )
 ```
 
-### Implementing your own scoring metric
-You can easily implement your own scoring metric. For example, if you have a VQA model that you believe is more effective, you can incorporate it into the directory at [t2v_metrics/models/vqascore_models](t2v_metrics/models/vqascore_models/). For guidance, please refer to our example implementations of [LLaVA-1.5](t2v_metrics/models/vqascore_models/llava_model.py) and [InstructBLIP](t2v_metrics/models/vqascore_models/instructblip_model.py) as starting points.
+---
 
+## Token-Level Scoring Transparency (`forward_with_trace`)
+
+For supported open-source Qwen models, `forward_with_trace` returns a full trace of the scoring process including per-token probabilities and top alternatives. This is useful for debugging and understanding why a model assigns a particular score.
+
+**Supported models:** Qwen2.5-VL, Qwen3-VL, Qwen3.5, Qwen3-Omni
+
+```python
+import t2v_metrics
+
+# Qwen2.5-VL
+scorer = t2v_metrics.VQAScore(model='qwen2.5-vl-7b')
+scores, traces = scorer.model.forward_with_trace(
+    images=["images/0.png"],
+    texts=["a dog"],
+    score_position="end",  # "start" or "end"
+    debug=True             # prints token-level details to stdout
+)
+print(f"Score: {scores[0]:.4f}")
+print(f"Scored token: {traces[0]['scored_tokens_text']!r}")
+print(f"Top alternatives: {traces[0]['token_details'][0]['top_alternatives'][:3]}")
+
+# Qwen3-VL
+scorer = t2v_metrics.VQAScore(model='qwen3-vl-8b')
+scores, traces = scorer.model.forward_with_trace(
+    images=["videos/baby.mp4"],
+    texts=["a baby crying"],
+    debug=True
+)
+
+# Qwen3.5 — same interface, thinking mode disabled automatically for VQAScore
+scorer = t2v_metrics.VQAScore(model='qwen3.5-9b')
+scores, traces = scorer.model.forward_with_trace(
+    images=["images/0.png"],
+    texts=["a dog"],
+    debug=True
+)
+
+# Qwen3-Omni — also supports audio_paths
+scorer = t2v_metrics.VQAScore(model='qwen3-omni-30b-a3b')
+scores, traces = scorer.model.forward_with_trace(
+    images=["videos/baby.mp4"],
+    texts=["a baby crying"],
+    score_position="end",
+    debug=True
+)
+```
+
+The `trace` dictionary for each sample contains:
+
+```python
+{
+    'generated_text':     str,         # full decoded output
+    'generated_length':   int,         # number of generated tokens
+    'score_position':     str,         # "start" or "end"
+    'score_start_idx':    int,         # index in the score sequence
+    'scored_indices':     List[int],   # token indices that were scored
+    'scored_tokens_text': str,         # decoded text of scored tokens
+    'probability':        float,       # geometric mean probability (the VQAScore)
+    'token_details': [
+        {
+            'position':            int,
+            'expected_token_id':   int,
+            'expected_token_text': str,
+            'probability':         float,
+            'top_alternatives': [
+                {'token_id': int, 'token_text': str, 'probability': float},
+                ...  # top 5
+            ]
+        },
+        ...
+    ]
+}
+```
+
+---
+
+## Customizing the Question and Answer Template
+
+```python
+import t2v_metrics
+
+scorer = t2v_metrics.VQAScore(model='qwen2.5-vl-7b')
+
+# Custom question template
+scores = scorer(
+    images=["images/0.png"],
+    texts=["a dog"],
+    question_template='Is this figure showing "{}"? Please answer yes or no.',
+    answer_template='Yes'
+)
+
+# Compute P(caption | image) — VisualGPTScore style
+scores = scorer(
+    images=["images/0.png"],
+    texts=["a dog"],
+    question_template="",   # no question
+    answer_template="{}"    # computes P(caption | image)
+)
+```
+
+---
+
+## Batch Processing
+
+```python
+import t2v_metrics
+
+scorer = t2v_metrics.VQAScore(model='qwen2.5-vl-7b')
+
+dataset = [
+    {'images': ["images/0/DALLE3.png", "images/0/Midjourney.jpg"], 'texts': ["The brown dog chases the black dog."]},
+    {'images': ["images/1/DALLE3.png", "images/1/Midjourney.jpg"], 'texts': ["Two cats sit at the window."]},
+]
+scores = scorer.batch_forward(dataset=dataset, batch_size=16)  # (n_sample, 2, 1) tensor
+```
+
+---
+
+## Text Generation
+
+```python
+import t2v_metrics
+
+scorer = t2v_metrics.VQAScore(model='qwen2.5-vl-7b')
+
+responses = scorer.model.generate(
+    images=["images/0.png", "videos/baby.mp4"],
+    texts=["Describe this image.", "What is happening in this video?"]
+)
+print(responses[0])
+print(responses[1])
+```
+
+---
+
+## Benchmarking on GenAI-Bench
+
+```bash
+# Generate images
+python -m genai_bench.generate --output_dir ./outputs/ --gen_model runwayml/stable-diffusion-v1-5
+
+# Evaluate with VQAScore
+python -m genai_bench.evaluate --model qwen2.5-vl-7b --output_dir ./outputs --gen_model runwayml/stable-diffusion-v1-5
+
+# Or with GPT-4o
+python -m genai_bench.evaluate --model gpt-4o --output_dir ./outputs --gen_model runwayml/stable-diffusion-v1-5
+```
+
+---
+
+## Notes on GPU and Cache
+
+- **GPU**: Most models require 40GB+ GPUs. For limited VRAM, use smaller variants (e.g., `qwen3-vl-2b`).
+- **Cache**: Change the default cache directory (`./hf_cache/`) by updating `HF_CACHE_DIR` in `t2v_metrics/constants.py`.
+- **Gemini**: Newer Gemini 3.x models (e.g., `gemini-3.1-pro-preview`) are only available on the `global` Vertex AI endpoint. Set `GOOGLE_CLOUD_LOCATION=global`.
+
+---
 
 ## Contributions
 
 - **[Zhiqiu Lin](https://x.com/ZhiqiuLin)**, **[Jean de Nyandwi](https://x.com/Jeande_d)**, **[Chancharik Mitra](https://x.com/chancharikm)**  
-  Implemented image-based **CLIPScore** and **VQAScore** for:  
-  CLIP-FlanT5, GPT-4o, LLaVA-1.5, InstructBLIP, OpenCLIP, HPSv2, PickScore.
+  Implemented image-based CLIPScore and VQAScore for: CLIP-FlanT5, GPT-4o, LLaVA-1.5, InstructBLIP, OpenCLIP, HPSv2, PickScore.
 
 - **Baiqi Li**  
-  Implemented **GenAI-Bench** and **GenAI-Rank** benchmarks.
+  Implemented GenAI-Bench and GenAI-Rank benchmarks.
 
 - **[Chancharik Mitra](https://x.com/chancharikm)**  
-  Implemented CameraBench and video-based **VQAScore** for:  
-  LLaVA-OneVision, Qwen2.5-VL, InternVideo2, InternVL2, InternVL3, InternLMXC2.5, etc.
+  Implemented CameraBench and video-based VQAScore for: LLaVA-OneVision, Qwen2.5-VL, InternVideo2, InternVL2, InternLMXC2.5, Gemma 3, Qwen3-VL, Qwen3.5, Qwen3-Omni, Gemini (Vertex AI), and the v3.1 codebase modernization.
+
+---
 
 ## Citation
 
-If you find this repository useful for your research, please cite the following papers:
-
-```
+```bibtex
 @article{lin2024evaluating,
   title   = {Evaluating Text-to-Visual Generation with Image-to-Text Generation},
   author  = {Lin, Zhiqiu and Pathak, Deepak and Li, Baiqi and Li, Jiayao and Xia, Xide and Neubig, Graham and Zhang, Pengchuan and Ramanan, Deva},
@@ -383,19 +467,22 @@ If you find this repository useful for your research, please cite the following 
 }
 
 @article{li2024genaibench,
-  title     = {GenAI-Bench: Evaluating and Improving Compositional Text-to-Visual Generation},
-  author    = {Li, Baiqi and Lin, Zhiqiu and Pathak, Deepak and Li, Jiayao and Fei, Yixin and Wu, Kewen and Ling, Tiffany and Xia, Xide and Zhang, Pengchuan and Neubig, Graham and Ramanan, Deva},
-  journal   = {arXiv preprint arXiv:2406.13743},
-  year      = {2024}
+  title   = {GenAI-Bench: Evaluating and Improving Compositional Text-to-Visual Generation},
+  author  = {Li, Baiqi and Lin, Zhiqiu and Pathak, Deepak and Li, Jiayao and Fei, Yixin and Wu, Kewen and Ling, Tiffany and Xia, Xide and Zhang, Pengchuan and Neubig, Graham and Ramanan, Deva},
+  journal = {arXiv preprint arXiv:2406.13743},
+  year    = {2024}
 }
 
 @article{camerabench,
-  title     = {Towards Understanding Camera Motions in Any Video},
-  author    = {Lin, Zhiqiu and Cen, Siyuan and Jiang, Daniel and Karhade, Jay and Wang, Hewei and Mitra, Chancharik and Ling, Yu Tong Tiffany and Huang, Yuhan and Liu, Sifan and Chen, Mingyu and Zawar, Rushikesh and Bai, Xue and Du, Yilun and Gan, Chuang and Ramanan, Deva},
-  journal   = {arXiv preprint arXiv:2504.15376},
-  year      = {2025}
+  title   = {Towards Understanding Camera Motions in Any Video},
+  author  = {Lin, Zhiqiu and Cen, Siyuan and Jiang, Daniel and Karhade, Jay and Wang, Hewei and Mitra, Chancharik and Ling, Yu Tong Tiffany and Huang, Yuhan and Liu, Sifan and Chen, Mingyu and Zawar, Rushikesh and Bai, Xue and Du, Yilun and Gan, Chuang and Ramanan, Deva},
+  journal = {arXiv preprint arXiv:2504.15376},
+  year    = {2025}
 }
 ```
 
+---
+
 ## Acknowledgements
-This repository is inspired from the [Perceptual Metric (LPIPS)](https://github.com/richzhang/PerceptualSimilarity) repository by Richard Zhang for automatic evaluation of image quality.
+
+This repository is inspired by the [Perceptual Metric (LPIPS)](https://github.com/richzhang/PerceptualSimilarity) repository by Richard Zhang.

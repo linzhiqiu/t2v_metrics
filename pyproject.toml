@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "t2v_metrics"
-version = "2.1"
+version = "3.1"
 description = "Evaluating Text-to-Visual Generation with Image-to-Text Generation."
 authors = [
     {name="Zhiqiu Lin", email="zl279@cornell.edu"},
@@ -16,87 +16,72 @@ classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: Apache Software License",
 ]
+
+
 dependencies = [
-    "torch==2.6.0",
-    #"torchvision==0.20.1",
-    "torchvision==0.21.0",
-    "torchaudio==2.6.0",
-    "xformers",
-    "ftfy>=6.1.1",
-    "tqdm>=4.64.1",
-    "gdown>=4.7.1",
+    # Core ML
+    "torch>=2.7.0",
+    "torchvision>=0.22.0",
+    "torchaudio>=2.7.0",
+    "transformers>=4.52.0",
+    "accelerate>=0.30.0",
+    "tokenizers>=0.19.0",
     "huggingface-hub>=0.19.4",
-    "matplotlib>=3.6.2",
-    "numpy==1.26.4",
-    "open-clip-torch>=2.23.0",
-    "openai",
-    "opencv-python>=4.11.0.86",
-    "opencv-python-headless",
-    "pandas>=2.1.4",
-    "scipy>=1.11.4",
-    "sentencepiece>=0.1.99",
-    "transformers",
-    "datasets>=2.15.0",
-    "tokenizers",
-    "omegaconf",
-    "iopath",
-    "fairscale",
-    # for clipscore
-    "scikit-learn",
-    "pycocoevalcap",
-    "hpsv2",
-    "clip @ git+https://github.com/openai/CLIP.git",
-    # Video Model Additional Requirements
-    "llava @ git+https://github.com/LLaVA-VL/LLaVA-NeXT.git",
-    "fire==0.4.0",
-    "tiktoken>=0.7.0",
-    "peft==0.5.0",
-    "matplotlib-inline",
-    "decord",
-    "easydict",
-    "protobuf",
-    "pytz",
-    "av",
-    "icecream",
-    "markdown2",
-    "pydantic",
-    "accelerate",
-    "shortuuid",
-    "bitsandbytes",
-    "requests",
-    "httpx==0.24.0",
-    "uvicorn",
-    "einops-exts",
+    "timm>=1.0.15",
     "einops",
-    "PyYAML",
-    "wandb",
-    "torchcodec==0.2",
-    "moviepy",
-    "apex==0.9.10dev",
-    "deepspeed",
-    "fvcore==0.1.5.post20221221",
-    "imageio==2.31.1",
-    "librosa==0.10.1",
-    "Pillow==10.0.0",
-    "psutil==5.9.5",
-    "soundfile==0.12.1",
-    "termcolor==2.4.0",
+    "bitsandbytes",
+
+    # Qwen models
     "qwen-vl-utils[decord]",
     "qwen-omni-utils[decord]",
-    "flash-attn @ https://github.com/Dao-AILab/flash-attention/releases/download/v2.5.8/flash_attn-2.5.8+cu122torch2.3cxx11abiFALSE-cp310-cp310-linux_x86_64.whl",
-    "func_timeout",
-    "timm>=1.0.15",
-    "torch>=2.3.1",
-    "gitpython",
-    "torchvision>=0.18.1",
-    "torchaudio>=2.3.1",
+
+    # API models
+    "openai>=1.0.0",
+    "tiktoken>=0.7.0",
     "google-genai",
-    "blobfile",
+
+    # Vision / Video
+    "opencv-python-headless>=4.11.0.86",
+    "decord",
+    "av",
+    "moviepy",
     "pytorchvideo @ git+https://github.com/linzhiqiu/pytorchvideo.git",
-    "diffusers",
+    "imageio>=2.31.1",
+
+    # Audio
+    "soundfile>=0.12.1",
+    "librosa>=0.10.1",
+
+    # Data / Utilities
+    "numpy>=1.26.4",
+    "Pillow>=10.0.0",
+    "scipy>=1.11.4",
+    "pandas>=2.1.4",
+    "sentencepiece>=0.1.99",
+    "protobuf",
+    "tqdm>=4.64.1",
+    "requests",
+    "pydantic",
+    "gitpython",
+    "PyYAML",
+    "ftfy>=6.1.1",
+    "matplotlib>=3.6.2",
+    "gdown>=4.7.1",
+    "datasets>=2.15.0",
+    "psutil>=5.9.5",
+    "termcolor>=2.4.0",
+    "httpx>=0.24.0",
+    "pytz",
+    "func_timeout",
     "nltk",
-    "rouge-score"
-] 
+    "rouge-score",
+
+    # Evaluation scripts
+    "pycocoevalcap",
+
+    # NOTE: flash-attn must be installed manually to match your CUDA + PyTorch version:
+    # pip install flash-attn --no-build-isolation
+]
 
 [tool.setuptools.packages.find]
 where = ["."]

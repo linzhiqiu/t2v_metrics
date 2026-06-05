@@ -14,6 +14,8 @@ PALIGEMMA_MODELS = {
         },
         'model': {
             'path': 'google/paligemma-3b-mix-224',
+            'torch_dtype': torch.bfloat16,
+            'attn_implementation': 'sdpa',
         },
     },
     'paligemma-3b-mix-448': {
@@ -22,6 +24,8 @@ PALIGEMMA_MODELS = {
         },
         'model': {
             'path': 'google/paligemma-3b-mix-448',
+            'torch_dtype': torch.bfloat16,
+            'attn_implementation': 'sdpa',
         },
     },
     'paligemma-3b-mix-896': {
@@ -30,13 +34,16 @@ PALIGEMMA_MODELS = {
         },
         'model': {
             'path': 'google/paligemma-3b-mix-896',
+            'torch_dtype': torch.bfloat16,
+            'attn_implementation': 'sdpa',
         },
-    }
+    },
 }
 
 class PaliGemmaModel(VQAScoreModel):
     video_mode = "concat" # Paligemma's pytorch port does not have video inference natively
     allows_image = True
+    allows_video = False  # add this
     def __init__(self,
                  model_name='paligemma-3b-mix-448',
                  device='cuda',
@@ -82,7 +89,7 @@ class PaliGemmaModel(VQAScoreModel):
     def forward(self,
                 paths: List[str],
                 texts: List[str],
-                question_template: str = "Does this figure show \"{}\"? Please answer yes or no.",
+                question_template: str = "Does this figure show \"{}\"? Please answer Yes or No.",
                 answer_template: str = "Yes") -> torch.Tensor:
         assert len(paths) == len(texts), "Number of paths and texts must match"
 
@@ -110,7 +117,7 @@ class PaliGemmaModel(VQAScoreModel):
     def generate(self,
             images: List[str],
             texts: List[str],
-            max_new_tokens: int = 256) -> List[str]:
+            max_new_tokens: int = 2048) -> List[str]:
         assert len(images) == len(texts), "Number of paths and texts must match"
 
         processed_data = self.load_images(images)
