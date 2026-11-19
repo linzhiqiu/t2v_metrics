@@ -34,20 +34,20 @@ def get_image_type(image_path):
 
 def extract_frames(video_path, num_frames):
     video = cv2.VideoCapture(video_path)
-    total_frames = int(video.get(cv2.CAP_PROP_FRAME_COUNT))
-    step = total_frames // num_frames
-    frames = []
-    
-    for i in range(num_frames):
-        video.set(cv2.CAP_PROP_POS_FRAMES, i * step)
-        ret, frame = video.read()
-        if ret:
-            _, buffer = cv2.imencode('.jpg', frame)
-            base64_frame = base64.b64encode(buffer).decode('utf-8')
-            frames.append(base64_frame)
-    
-    video.release()
-    return frames
+    try:
+        total_frames = int(video.get(cv2.CAP_PROP_FRAME_COUNT))
+        count = min(num_frames, total_frames)
+        frames = []
+        for index in np.linspace(0, total_frames - 1, count, dtype=int):
+            video.set(cv2.CAP_PROP_POS_FRAMES, int(index))
+            ret, frame = video.read()
+            if ret:
+                _, buffer = cv2.imencode('.jpg', frame)
+                frames.append(base64.b64encode(buffer).decode('utf-8'))
+        return frames
+    finally:
+        video.release()
+
 
 class GPT4VModel(VQAScoreModel):
     video_mode = "direct"
